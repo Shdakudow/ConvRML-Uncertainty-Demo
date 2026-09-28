@@ -1,0 +1,64 @@
+{
+  "count": 20,
+  "ids": [
+    35894,
+    24193,
+    22857,
+    53050,
+    14420,
+    68127,
+    77172,
+    89459,
+    70083,
+    36001,
+    6207,
+    49696,
+    53077,
+    82931,
+    85406,
+    58845,
+    56242,
+    40931,
+    41815,
+    15453
+  ],
+  "quantiles": [
+    0.05,
+    0.25,
+    0.5,
+    0.75,
+    0.95
+  ],
+  "resolution": 256,
+  "widthMax": 0.16207198798656464,
+  "errorMax": 0.08297417161815779,
+  "calibrationTarget": 0.9,
+  "calibrationCount": 2048,
+  "aggregate": {
+    "fixed": {
+      "psnr_db": 37.71709531651594,
+      "ssim": 0.9357738476395607,
+      "coverage": 0.898478032430013,
+      "width": 0.030151325424667447
+    },
+    "conditioned": {
+      "psnr_db": 37.803865091958144,
+      "ssim": 0.9499301602244377,
+      "coverage": 0.8983272705078125,
+      "width": 0.029369344705250114
+    },
+    "ensemble": {
+      "psnr_db": 37.034393255519085,
+      "ssim": 0.9500191192030907,
+      "coverage": 0.8983369089762371,
+      "width": 0.030944199863821267
+    },
+    "mc": {
+      "psnr_db": 36.77849030197359,
+      "ssim": 0.920764763712883,
+      "coverage": 0.8973422597249349,
+      "width": 0.0371149243125692
+    }
+  },
+  "notes": "First 20 shared test images, no cherry-picking. Full precision metrics; float16 display arrays. RGB values are normalized to [0,1]; predictions are not clipped for metrics. MC: new reproducible 30-draw inference, seed 20260928. Quantile curves are raw, uncalibrated; interval maps use previously fitted empirical 90% factors. Fixed head has only native .025/.975 endpoints; optional linear interpolation is an assumption, not learned quantiles."
+}
