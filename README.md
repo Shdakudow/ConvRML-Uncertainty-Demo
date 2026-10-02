@@ -1,30 +1,24 @@
-# ConvRML uncertainty demo
+# ConvRML: reconstruction error and uncertainty
 
-Interactive comparison of fixed-head ConvRML, q-conditioned ConvRML, deep ensemble, and MC dropout on 20 held-out image pairs.
+Public demo: https://shdakudow.github.io/ConvRML-Uncertainty-Demo/
 
-Open `index.html` locally, or visit the GitHub Pages deployment. No model server or GPU is required. The site loads saved inference for each example.
+Compare four methods on the first 20 held-out test images from each camera: fixed-head ConvRML (im2im-style), q-conditioned ConvRML, five-member Gaussian-NLL deep ensemble, and MSE-trained MC dropout with 30 inference draws.
 
-## Features
+The three aligned rows show reconstruction, mean RGB absolute error `|ground truth - reconstruction|`, and mean RGB interval width `upper bound - lower bound`. Both heatmaps share one scale within each camera, across all four models and all examples. Click a pixel for numerical comparison; use the next/random buttons and shared zoom.
 
-- Four reconstructions in a compact aligned view, with uncertainty and difference maps.
-- Full images at quantiles 0.05, 0.25, 0.50, 0.75, and 0.95.
-- Click a pixel to see its RGB values and magnified neighborhood across all quantiles.
-- Shared zoom, example navigation, and comparison against ground truth or another model.
+## Exact experiments shown
 
-## Scientific interpretation
+| Camera | Backbone checkpoint | Fixed-head training | Train / validation / test |
+|---|---:|---:|---|
+| RML | Epoch 45 | 10 additional epochs | 60,000 / 5,000 / 5,000 |
+| DiffuserCam | Epoch 40 | 10 additional epochs | 60,000 / 5,000 / 5,000 |
 
-The fixed-head model uses 50 reconstruction-backbone epochs followed by 50 fresh quantile-head epochs. The other models use 50 epochs per model/member. Training budgets differ.
+These are the latest complete comparisons exported for this release, not the pending epoch-50 results. The calibration factors target 90% empirical coverage using 2,048 separate images. This demo does not show RCPS intervals. Uncertainty width describes a range; it is not expected to equal the observed absolute error. RGB channels are averaged after taking absolute differences.
 
-Fixed-head native outputs are only q=0.025 and 0.975. Its five requested quantiles are unavailable by default; optional linear interpolation is explicitly labeled as assumed.
-
-Quantile images and curves are raw, uncalibrated predictions. Interval-width maps use empirical 90% calibration fitted on 2,048 separate images. Coverage is not a per-image guarantee. The 20 displayed examples are the first shared test entries, not a representative substitute for the 1,000-image benchmark.
-
-Ensemble quantiles come from a five-component Gaussian mixture. MC quantiles use 30 reproducible stochastic draws. Q-conditioned quantiles are queried directly. RGB display arrays use float16 precision; metrics were computed before conversion. These are marginal quantile images, not joint posterior samples.
-
-## Provenance
-
-The reconstruction architecture is based on [ConvRML](https://github.com/lakabuli/ConvRML). This repository contains a research visualization and exported predictions, not an official release of that project. See `data/protocol.json` and `README.txt` for experiment details.
+Each camera's data/protocol.json records provenance, calibration factors, and full-test aggregate metrics. The per-image UI metrics describe the selected example. MC dropout uses fresh reproducible draws for this export. Arrays are float32; images are clipped to [0,1] only for display. Pixel inspection reports unclipped saved values. The heatmap scale saturates at the pooled 99.5th percentile of error and width maps. Camera scales differ and are labeled.
 
 ## Hosting
 
-GitHub Pages can serve the repository root on the `main` branch. `.nojekyll` enables static-file publishing. Keep the `data/` folder alongside `index.html`, `app.js`, and `style.css`.
+GitHub Pages serves the repository root on main. No model server is required: example buttons load saved responses. Keep index.html, app.js, dataset.js, style.css and data/ together to open the viewer locally. The previous quantile explorer is retained in Git history at ba23277d830eea88ac7142e20a0e25b9f735aaa1.
+
+Architecture reference: https://github.com/lakabuli/ConvRML/. This is an independent research visualization, not an official project release.
