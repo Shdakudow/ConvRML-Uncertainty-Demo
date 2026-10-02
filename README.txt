@@ -1,3 +1,6 @@
-Four-model lensless reconstruction demo. Each camera contains the first 20 held-out test images in manifest order, with no quality selection. RML uses the completed epoch-50 backbone checkpoints; DiffuserCam uses epoch 50. Fixed uncertainty heads are each trained for 10 additional epochs. Both studies now show completed epoch-50 empirical intervals. RCPS will update automatically after its export finishes. Calibration: empirical 90%, using 2,048 separate images; all four models share the same evaluation protocol. Error maps show mean RGB absolute error; uncertainty maps show mean RGB UB-LB. Both maps use the same scale within each camera, fixed across all models and samples. Camera scales may differ. See data/{rml,diffuser}/protocol.json for provenance and the full 5,000-image aggregate metrics. No quantile interpolation or distribution curves. The original viewer is retained in Git history at ba23277d830eea88ac7142e20a0e25b9f735aaa1.
+Four models: reconstruction, |ground truth - reconstruction| and UB - LB. Twenty test examples per camera; shared heatmap scales; clickable pixel comparison.
 
-Learning curves: full 5,000-image PSNR, SSIM, width and coverage at every five-epoch checkpoint; empirical and RCPS results are separate.
+RML: backbone epoch 50, fixed head 10 epochs, RCPS (Hoeffding–Bentkus) calibration.
+DiffuserCam: backbone epoch 50, fixed head 10 epochs, Empirical calibration.
+
+RCPS uses alpha=0.10 and delta=0.05, fitted on 2,048 separate calibration images. Target coverage is 90%; measured test coverage may be higher. It is not a per-image guarantee. Current per-camera provenance and 5,000-image aggregate metrics are in data/{camera}/protocol.json. No test-set tuning.

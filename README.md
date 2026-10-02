@@ -1,28 +1,10 @@
-# ConvRML: reconstruction error and uncertainty
+# ConvRML reconstruction and uncertainty demo
 
-Public demo: https://shdakudow.github.io/ConvRML-Uncertainty-Demo/
+Four models: reconstruction, |ground truth - reconstruction| and UB - LB. Twenty test examples per camera; shared heatmap scales; clickable pixel comparison.
 
-Compare four methods on the first 20 held-out test images from each camera: fixed-head ConvRML (im2im-style), q-conditioned ConvRML, five-member Gaussian-NLL deep ensemble, and MSE-trained MC dropout with 30 inference draws.
+RML: backbone epoch 50, fixed head 10 epochs, RCPS (Hoeffding–Bentkus) calibration.
+DiffuserCam: backbone epoch 50, fixed head 10 epochs, Empirical calibration.
 
-The three aligned rows show reconstruction, mean RGB absolute error `|ground truth - reconstruction|`, and mean RGB interval width `upper bound - lower bound`. Both heatmaps share one scale within each camera, across all four models and all examples. Click a pixel for numerical comparison; use the next/random buttons and shared zoom.
+RCPS uses alpha=0.10 and delta=0.05, fitted on 2,048 separate calibration images. Target coverage is 90%; measured test coverage may be higher. It is not a per-image guarantee. Current per-camera provenance and 5,000-image aggregate metrics are in data/{camera}/protocol.json. No test-set tuning.
 
-## Exact experiments shown
-
-| Camera | Backbone checkpoint | Fixed-head training | Train / validation / test |
-|---|---:|---:|---|
-| RML | Epoch 50 | 10 additional epochs | 60,000 / 5,000 / 5,000 |
-| DiffuserCam | Epoch 50 | 10 additional epochs | 60,000 / 5,000 / 5,000 |
-
-Both cameras now show completed epoch-50 results with empirical calibration. Final RCPS intervals will replace these after calibration and export finish. The calibration factors target 90% empirical coverage using 2,048 separate images. This demo does not show RCPS intervals. Uncertainty width describes a range; it is not expected to equal the observed absolute error. RGB channels are averaged after taking absolute differences.
-
-Each camera's data/protocol.json records provenance, calibration factors, and full-test aggregate metrics. The per-image UI metrics describe the selected example. MC dropout uses fresh reproducible draws for this export. Arrays are float32; images are clipped to [0,1] only for display. Pixel inspection reports unclipped saved values. The heatmap scale saturates at the pooled 99.5th percentile of error and width maps. Camera scales differ and are labeled.
-
-## Hosting
-
-GitHub Pages serves the repository root on main. No model server is required: example buttons load saved responses. Keep index.html, app.js, dataset.js, style.css and data/ together to open the viewer locally. The previous quantile explorer is retained in Git history at ba23277d830eea88ac7142e20a0e25b9f735aaa1.
-
-Architecture reference: https://github.com/lakabuli/ConvRML/. This is an independent research visualization, not an official project release.
-
-## Learning curves
-
-Four charts show full-test PSNR, SSIM, interval width and coverage against backbone epoch (5–50, every five epochs). These use all 5,000 test images per checkpoint. The calibration selector separates empirical results from completed RCPS checkpoints. Missing RCPS points are not inferred. Fixed heads receive 10 additional epochs per frozen backbone, and ensembles train five members, so equal backbone epochs are not equal compute budgets. Hover or focus a point for its value, or expand the exact-values table.
+https://shdakudow.github.io/ConvRML-Uncertainty-Demo/
