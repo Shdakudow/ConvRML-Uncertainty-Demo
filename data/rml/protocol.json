@@ -1,6 +1,6 @@
 {
   "study": "RML",
-  "epoch": 45,
+  "epoch": 50,
   "headEpochs": 10,
   "trainCount": 60000,
   "count": 20,
@@ -28,57 +28,59 @@
   ],
   "resolution": 256,
   "encoding": "float32",
-  "mapMax": 0.12613879144191742,
+  "mapMax": 0.12806344032287598,
   "calibrationTarget": 0.9,
   "calibrationCount": 2048,
+  "calibrationMethod": "Empirical",
+  "calibrationDelta": null,
   "aggregate": {
     "ensemble": {
-      "psnr": 38.6867022607627,
-      "ssim": 0.9626006785035134,
-      "mae": 0.006507958901429084,
-      "coverage": 0.8992765617430211,
-      "width": 0.025164408000186086,
-      "native_coverage": 0.9508546646296978,
-      "native_signed_width": 0.03090982965696603,
+      "psnr": 38.8186100345899,
+      "ssim": 0.963849371957779,
+      "mae": 0.006398823535707197,
+      "coverage": 0.8995381776094437,
+      "width": 0.02502611123174429,
+      "native_coverage": 0.9453675909399987,
+      "native_signed_width": 0.029852356930077074,
       "native_crossing_fraction": 0.0
     },
     "mc": {
-      "psnr": 38.574227905605014,
-      "ssim": 0.944816573369503,
-      "mae": 0.007333635054179467,
-      "coverage": 0.8979670793712139,
-      "width": 0.029723864542320372,
-      "native_coverage": 0.7134476630032063,
-      "native_signed_width": 0.014933307170681656,
+      "psnr": 38.65591191156149,
+      "ssim": 0.945247823035717,
+      "mae": 0.007261541051836684,
+      "coverage": 0.8981368319928646,
+      "width": 0.029460366352461277,
+      "native_coverage": 0.7090769352316857,
+      "native_signed_width": 0.014728443199023604,
       "native_crossing_fraction": 0.0
     },
     "fixed": {
-      "psnr": 39.56827923518611,
-      "ssim": 0.9632490955233574,
-      "mae": 0.0063596907790517436,
-      "coverage": 0.9007144773840904,
-      "width": 0.023933215238992125,
-      "native_coverage": 0.905907981467247,
-      "native_signed_width": 0.024395593299530446,
-      "native_crossing_fraction": 0.00032606405557835386
+      "psnr": 39.62519651700336,
+      "ssim": 0.963712777864933,
+      "mae": 0.006302898734249175,
+      "coverage": 0.900494243812561,
+      "width": 0.024761254646535964,
+      "native_coverage": 0.8855831545293331,
+      "native_signed_width": 0.023140389087796212,
+      "native_crossing_fraction": 0.001085091175954767
     },
     "conditioned": {
-      "psnr": 39.46394082900497,
-      "ssim": 0.9601690153479576,
-      "mae": 0.006385905273538083,
-      "coverage": 0.900196243005991,
-      "width": 0.023937025618739425,
-      "native_coverage": 0.9123860337197781,
-      "native_signed_width": 0.02504644703520462,
-      "native_crossing_fraction": 2.1057129370092298e-07
+      "psnr": 39.77086693352627,
+      "ssim": 0.9661999325752259,
+      "mae": 0.006066301614348776,
+      "coverage": 0.9002282861590385,
+      "width": 0.024144022901915013,
+      "native_coverage": 0.8947614991128444,
+      "native_signed_width": 0.023478563470439986,
+      "native_crossing_fraction": 2.8076172266082724e-07
     }
   },
   "factors": {
-    "ensemble": 0.8141231536865234,
-    "mc": 1.990440845489502,
-    "fixed": 0.9810084700584412,
-    "conditioned": 0.9555284380912781
+    "ensemble": 0.8383294939994812,
+    "mc": 2.0002362728118896,
+    "fixed": 1.0698884725570679,
+    "conditioned": 1.0283417701721191
   },
   "manifest_sha256": "ef41a0325df23ef8ab3dc7c34b7a374f0f7d927f9323b9046ae39819c9f6b1d6",
-  "notes": "First 20 test images in manifest order; no selection by quality. 60,000 train / 5,000 validation / 5,000 test, with 2,048 separate calibration images. Exact epoch-45 weights; fixed head trained for 10 additional epochs. Empirical calibration. Ensemble: five Gaussian-NLL members; MC dropout: 30 fresh reproducible draws, seed 20261002 + method index. Both maps share their pooled 99.5th-percentile scale. Float32 arrays; full-precision metrics. Error is averaged after taking channelwise absolute differences. Width is upper minus lower, averaged over RGB. MC per-example metrics can differ from the original evaluation because these are fresh draws."
+  "notes": "First 20 test images in manifest order; no selection by quality. 60,000 train / 5,000 validation / 5,000 test, with 2,048 separate calibration images. Exact epoch-50 weights; fixed head trained for 10 additional epochs. EMPIRICAL calibration, target 90% average coverage; measured coverage need not equal 90%. RCPS uses delta=0.05 and assumes independent calibration images; not a per-image coverage guarantee. Ensemble: five Gaussian-NLL members; MC dropout: 30 fresh reproducible draws, seed 20261002 + method index. Both maps share their pooled 99.5th-percentile scale. Float32 arrays; full-precision metrics. Error is averaged after taking channelwise absolute differences. Width is upper minus lower, averaged over RGB. MC per-example metrics can differ from the original evaluation because these are fresh draws."
 }

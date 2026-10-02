@@ -1,2 +1,3 @@
 rml: 20 examples, 4 models, encoding, width, MAE and PSNR verified
 diffuser: 20 examples, 4 models, encoding, width, MAE and PSNR verified
+Epoch-50 empirical release: all 40 examples checked for finite arrays, nonnegative widths, matching MAE and width. Learning curves: 80 empirical checkpoint reports and 8 separate RCPS reports, 5000 test images each.

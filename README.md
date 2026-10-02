@@ -10,10 +10,10 @@ The three aligned rows show reconstruction, mean RGB absolute error `|ground tru
 
 | Camera | Backbone checkpoint | Fixed-head training | Train / validation / test |
 |---|---:|---:|---|
-| RML | Epoch 45 | 10 additional epochs | 60,000 / 5,000 / 5,000 |
-| DiffuserCam | Epoch 40 | 10 additional epochs | 60,000 / 5,000 / 5,000 |
+| RML | Epoch 50 | 10 additional epochs | 60,000 / 5,000 / 5,000 |
+| DiffuserCam | Epoch 50 | 10 additional epochs | 60,000 / 5,000 / 5,000 |
 
-These are the latest complete comparisons exported for this release, not the pending epoch-50 results. The calibration factors target 90% empirical coverage using 2,048 separate images. This demo does not show RCPS intervals. Uncertainty width describes a range; it is not expected to equal the observed absolute error. RGB channels are averaged after taking absolute differences.
+Both cameras now show completed epoch-50 results with empirical calibration. Final RCPS intervals will replace these after calibration and export finish. The calibration factors target 90% empirical coverage using 2,048 separate images. This demo does not show RCPS intervals. Uncertainty width describes a range; it is not expected to equal the observed absolute error. RGB channels are averaged after taking absolute differences.
 
 Each camera's data/protocol.json records provenance, calibration factors, and full-test aggregate metrics. The per-image UI metrics describe the selected example. MC dropout uses fresh reproducible draws for this export. Arrays are float32; images are clipped to [0,1] only for display. Pixel inspection reports unclipped saved values. The heatmap scale saturates at the pooled 99.5th percentile of error and width maps. Camera scales differ and are labeled.
 
@@ -22,3 +22,7 @@ Each camera's data/protocol.json records provenance, calibration factors, and fu
 GitHub Pages serves the repository root on main. No model server is required: example buttons load saved responses. Keep index.html, app.js, dataset.js, style.css and data/ together to open the viewer locally. The previous quantile explorer is retained in Git history at ba23277d830eea88ac7142e20a0e25b9f735aaa1.
 
 Architecture reference: https://github.com/lakabuli/ConvRML/. This is an independent research visualization, not an official project release.
+
+## Learning curves
+
+Four charts show full-test PSNR, SSIM, interval width and coverage against backbone epoch (5–50, every five epochs). These use all 5,000 test images per checkpoint. The calibration selector separates empirical results from completed RCPS checkpoints. Missing RCPS points are not inferred. Fixed heads receive 10 additional epochs per frozen backbone, and ensembles train five members, so equal backbone epochs are not equal compute budgets. Hover or focus a point for its value, or expand the exact-values table.
