@@ -1,6 +1,6 @@
 # ConvRML reconstruction and uncertainty demo
 
-Four models: reconstruction, |ground truth - reconstruction| and UB - LB. Twenty test examples per camera; shared heatmap scales; clickable pixel comparison.
+Four models: reconstruction, |ground truth - reconstruction| and UB - LB. Test examples selected in manifest order; shared heatmap scales; clickable pixel comparison.
 
 RML: backbone epoch 50, fixed head 10 epochs, RCPS (Hoeffding–Bentkus) calibration.
 DiffuserCam: backbone epoch 50, fixed head 10 epochs, RCPS (Hoeffding–Bentkus) calibration.
