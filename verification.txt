@@ -4,3 +4,4 @@ Epoch-50 empirical release: all 40 examples checked for finite arrays, nonnegati
 Automatic final export: rml, epoch 50, RCPS alpha=.10 delta=.05; 20 examples, all four models, float32 arrays, width and error metrics checked.
 Automatic final export: diffuser, epoch 50, RCPS alpha=.10 delta=.05; 20 examples, all four models, float32 arrays, width and error metrics checked.
 Automatic final export: rml, epoch 50, RCPS alpha=.10 delta=.05; 50 examples, all four models, float32 arrays, width and error metrics checked.
+Automatic final export: diffuser, epoch 50, RCPS alpha=.10 delta=.05; 50 examples, all four models, float32 arrays, width and error metrics checked.
