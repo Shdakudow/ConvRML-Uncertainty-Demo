@@ -16,3 +16,14 @@ Binary packing and byte shuffling checked by exact round-trip equality.
 Browser checks passed for old/new RML and DiffuserCam: load, next image,
 channel selection, pixel inspection, four model rows; new bounds/width agree.
 Browser assets versioned to prevent stale manifest/decoder combinations.
+
+2026-10-11 QUTCC quantile-search refinement
+Two calibration searches, frozen epoch 25, both cameras, all 5,000 test images.
+Five selector tests passed, including no certification on invalid risks and
+fixed-sequence stopping at first failure even if a later candidate passes.
+Browser checks passed for both camera pages and both QUTCC calibration modes.
+Other three models retain identical displayed metrics across the mode switch.
+All 100 exported QUTCC examples checked against source float32 arrays;
+coverage and width recomputed from published bounds match the reports.
+Asymmetric default minimizes calibration width with simultaneous HB bounds.
+Equal-tail fixed-sequence results are reported separately. No test-label q selection.
