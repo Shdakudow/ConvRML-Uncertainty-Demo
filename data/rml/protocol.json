@@ -59,7 +59,7 @@
     57118
   ],
   "resolution": 256,
-  "encoding": "float32",
+  "encoding": "float32-shuffled",
   "mapMax": 0.13609080016613007,
   "calibrationTarget": 0.9,
   "calibrationCount": 2048,

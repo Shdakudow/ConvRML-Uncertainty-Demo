@@ -5,3 +5,14 @@ Automatic final export: rml, epoch 50, RCPS alpha=.10 delta=.05; 20 examples, al
 Automatic final export: diffuser, epoch 50, RCPS alpha=.10 delta=.05; 20 examples, all four models, float32 arrays, width and error metrics checked.
 Automatic final export: rml, epoch 50, RCPS alpha=.10 delta=.05; 50 examples, all four models, float32 arrays, width and error metrics checked.
 Automatic final export: diffuser, epoch 50, RCPS alpha=.10 delta=.05; 50 examples, all four models, float32 arrays, width and error metrics checked.
+
+2026-10-11 corrected epoch-25 comparison
+Eight inference/calibration Slurm tasks 198901_0..7 completed with exit 0.
+All four methods use immutable epoch-25 checkpoints for both cameras.
+2,048 calibration images, first 50 test examples per camera, no test tuning.
+Export validation: finite arrays, ordered bounds, identical sample IDs/targets,
+recomputed per-image coverage/width agree with float32 source arrays.
+Binary packing and byte shuffling checked by exact round-trip equality.
+Browser checks passed for old/new RML and DiffuserCam: load, next image,
+channel selection, pixel inspection, four model rows; new bounds/width agree.
+Browser assets versioned to prevent stale manifest/decoder combinations.
