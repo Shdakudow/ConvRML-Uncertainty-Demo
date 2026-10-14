@@ -20,7 +20,7 @@ def main():
   baseline=arrays['im2im']; count=len(baseline['target']);maps=[]
   for m in METHODS:
    r=reports[m];v=arrays[m]
-   assert r['epoch']==25 and r['count']==count==50 and r['calibration_count']==2048
+   assert r['epoch']==reports['im2im']['epoch'] and r['count']==count==50 and r['calibration_count']==2048
    assert r['manifest_sha256']==reports['im2im']['manifest_sha256']
    assert [x['id'] for x in r['per_image']]==[x['id'] for x in reports['im2im']['per_image']]
    assert np.array_equal(v['target'],baseline['target']) and np.array_equal(v['measurement'],baseline['measurement'])
@@ -42,10 +42,10 @@ def main():
    zipped=gzip.compress(raw,compresslevel=6,mtime=0)
    assert gzip.decompress(zipped)==raw
    (out/f'example_{i:02d}.js.gz').write_bytes(zipped)
-  meta=dict(study='RML' if camera=='rml' else 'DiffuserCam',epoch=25,count=count,ids=[r['id'] for r in reports['im2im']['per_image']],encoding='float32-shuffled',metricClipping='[0,1]',trainCount=60000,
+  meta=dict(study='RML' if camera=='rml' else 'DiffuserCam',epoch=reports['im2im']['epoch'],count=count,ids=[r['id'] for r in reports['im2im']['per_image']],encoding='float32-shuffled',metricClipping='[0,1]',trainCount=60000,
     mapMax=float(np.quantile(np.concatenate(maps),.995)),aggregate={m:r['aggregate'] for m,r in reports.items()},
     factors={m:r['factors']['rcps_hb'] for m,r in reports.items()},calibrationCount=2048,calibrationMethod='RCPS (Hoeffding–Bentkus), separate lower/upper scaling',alpha=.1,delta=.05,
-    history={m:[x for x in reports[m]['validation_history'][m] if x['epoch']<=25] for m in METHODS if m!='ensemble10'},
+    history={m:[x for x in reports[m]['validation_history'][m] if x['epoch']<=reports['im2im']['epoch']] for m in METHODS if m!='ensemble10'},
     notes=reports['im2im']['notes'],manifest_sha256=reports['im2im']['manifest_sha256'])
   (out/'manifest.js').write_text('window.DATASET='+json.dumps(meta,separators=(',',':'))+';')
   (out/'protocol.json').write_text(json.dumps({**meta,'reports':reports},indent=2))

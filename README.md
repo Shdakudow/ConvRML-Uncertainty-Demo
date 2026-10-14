@@ -9,19 +9,23 @@ RCPS uses alpha=0.10 and delta=0.05, fitted on 2,048 separate calibration images
 
 https://shdakudow.github.io/ConvRML-Uncertainty-Demo/
 
-## Corrected experiment: epoch 25
+## Latest corrected experiment
 
-[Open the new comparison](https://shdakudow.github.io/ConvRML-Uncertainty-Demo/corrected-epoch25/). Both cameras use the same saved epoch for end-to-end im2im, all-block FiLM QUTCC, ten-member ensemble, and all-block MC dropout (p=0.1, 30 passes). Each camera shows 50 held-out examples with reconstruction, absolute error, RCPS interval width, and clickable lower/upper bounds. Calibration uses 2,048 separate images. These sample averages are not full-test estimates.
+[Open the updated comparison](https://shdakudow.github.io/ConvRML-Uncertainty-Demo/corrected-latest/).
+RML uses epoch 40; DiffuserCam uses epoch 35. Within each camera, all four methods
+use the same saved epoch. There are 50 test examples per camera, with independent
+RCPS calibration on 2,048 images (alpha=0.10, delta=0.05).
 
-The earlier demo remains available at the repository root. Its example assets now use lossless gzip transport to reduce storage; the underlying predictions and metrics are unchanged. Both pages require a modern browser with DecompressionStream support and HTTP(S) hosting. See corrected-epoch25/README.txt for the complete interim protocol.
+Compare end-to-end im2im, sampled-q pinball QUTCC with 48 FiLM sites, ten-member
+NLL ensemble, and MC dropout (p=0.1, 30 draws). QUTCC bounds use q=.05/.95 then
+separate RCPS scale factors. No learned-q head is included. The current refresh
+uses checkpoint-specific scale calibration, not the earlier quantile-grid search.
 
-## QUTCC quantile-search refinement
+Reconstruction, absolute error, interval width, lower/upper images, clipped
+metrics, and linked pixel inspection use saved float32 outputs. Sample averages
+cover these 50 cases only; reconstruction learning curves use 5,000 validation
+images. See corrected-latest/README.txt for details.
 
-The epoch-25 page now defaults to learned lower/upper quantile queries selected
-on the calibration set, instead of fixing q=0.05/0.95 and scaling their distances.
-Its selector restores the previous fixed-q view for a direct visual comparison.
-A separate table compares fixed-q scaling, equal-tail quantile search, and
-asymmetric quantile search on all 5,000 test images. The three other models are
-unchanged. Both quantile searches control the 90% target with an image-level
-risk procedure; the asymmetric search accounts for all candidate endpoints.
-Weights are frozen, and reconstruction accuracy is not being improved by calibration.
+The legacy 50-epoch experiment remains at the repository root. The earlier
+epoch-25 comparison is archived in Git commit 34262cb; its old URL redirects to
+the latest comparison. Training checkpoints are not hosted in this repository.
