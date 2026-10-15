@@ -107,6 +107,41 @@
             "upper": 1.071958
           }
         }
+      },
+      "ensemble10": {
+        "epoch": 50,
+        "full_test_count": 5000,
+        "full_test_aggregate": {
+          "psnr": 31.112702057266237,
+          "ssim": 0.8505410811007023,
+          "mae": 0.01715109838536009,
+          "coverage": 0.924284234726429,
+          "width": 0.07006891723237932,
+          "native_crossing": 0.0
+        },
+        "aggregate": {
+          "psnr": 31.357136268615722,
+          "ssim": 0.8528418135643006,
+          "mae": 0.016631999490782617,
+          "coverage": 0.923745950460434,
+          "width": 0.06773385094478726,
+          "native_crossing": 0.0
+        },
+        "manifest_sha256": "957c0ce3d9cd7364fdb0341860a6e3219b9201cb6dff4e4857e5d6ae5c19e556",
+        "calibration_sha256": "f8b07201a887547415b1edb3a73287eaf94c52c50a6df9043a99a2512181964f",
+        "calibration_count": 2048,
+        "alpha": 0.1,
+        "delta": 0.05,
+        "factors": {
+          "empirical": {
+            "lower": 0.8602028489112854,
+            "upper": 0.9312314391136169
+          },
+          "rcps_hb": {
+            "lower": 0.923933,
+            "upper": 1.032274
+          }
+        }
       }
     }
   },
