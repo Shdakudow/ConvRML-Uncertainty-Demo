@@ -7,7 +7,8 @@ import functools, http.server, json, os, subprocess, sys, threading, time
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
-OUT=Path.home()/'Downloads/ConvRML_Epoch50_Demo'
+AUTO=Path.home()/'.local/share/convrml-epoch50-auto'
+OUT=AUTO/'results'
 ASSETS=OUT/'assets'
 OUT.mkdir(parents=True,exist_ok=True)
 SSH=['ssh','-i',str(Path.home()/'.ssh/id_ed25519'),'-o','BatchMode=yes','-o','ConnectTimeout=20','jy2228@unicorn-login-02.coecis.cornell.edu']
@@ -36,9 +37,10 @@ def check_browser(base):
  return result
 
 def main(require_all=False,once=False):
+ force='--force' in sys.argv or (OUT/'force_publish_once').exists()
  saved=OUT/'auto_published.json'
  previous=json.loads(saved.read_text()) if saved.exists() else {}
- if once and len(previous.get('ready',[]))==8 and '--force' not in sys.argv:return True
+ if once and len(previous.get('ready',[]))==8 and not force:return True
  head=run(['git','rev-parse','HEAD'])
  remote='''import json,pathlib,subprocess
 root=pathlib.Path.home()/'ConvRML/results/corrected_demo_epoch50_20261011'
@@ -63,7 +65,7 @@ print(json.dumps(dict(ready=ready,queue=q)))
   if 'DependencyNeverSatisfied' in info['queue']:raise RuntimeError('Failed training dependency; no publication')
   time.sleep(45)
  else:raise TimeoutError('24-hour export wait exceeded')
- if once and sorted(info['ready'])==sorted(previous.get('ready',[])) and '--force' not in sys.argv:
+ if once and sorted(info['ready'])==sorted(previous.get('ready',[])) and not force:
   status('monitoring',ready=info['ready'],url=previous.get('url'));return len(info['ready'])==8
  if not all(c+'/im2im' in info['ready'] for c in ['rml','diffuser']):return False
  for camera in ['rml','diffuser']:
@@ -123,6 +125,7 @@ print(json.dumps(dict(ready=ready,queue=q)))
  status('complete' if len(info['ready'])==8 else 'published_monitoring_pending_models',ready=info['ready'],commit=commit,asset_commit=asset_commit,url='https://shdakudow.github.io/ConvRML-Uncertainty-Demo/corrected-epoch50/')
 
  saved.write_text(json.dumps(dict(ready=info['ready'],commit=commit,asset_commit=asset_commit,url='https://shdakudow.github.io/ConvRML-Uncertainty-Demo/corrected-epoch50/'),indent=2))
+ (OUT/'force_publish_once').unlink(missing_ok=True)
  return len(info['ready'])==8
 
 if __name__=='__main__':
@@ -148,7 +151,8 @@ if __name__=='__main__':
    path=Path.home()/'Library/LaunchAgents/edu.cornell.convrml.adaptive20-demo.plist'
    expiry=(datetime.datetime.now(datetime.timezone.utc)+datetime.timedelta(days=30)).isoformat()
    (OUT/'automation_expires.json').write_text(json.dumps(dict(expires=expiry)))
-   path.write_bytes(plistlib.dumps(dict(Label='edu.cornell.convrml.adaptive20-demo',ProgramArguments=[sys.executable,str(Path(__file__).resolve()),'--once','--reuse-assets'],WorkingDirectory=str(ROOT),EnvironmentVariables=dict(PATH='/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin'),StartInterval=300,RunAtLoad=True,StandardOutPath=str(OUT/'automation.log'),StandardErrorPath=str(OUT/'automation.error.log'))))
+   path.write_bytes(plistlib.dumps(dict(Label='edu.cornell.convrml.adaptive20-demo',ProgramArguments=[str(AUTO/'venv/bin/python'),str(Path(__file__).resolve()),'--once','--reuse-assets'],WorkingDirectory=str(ROOT),EnvironmentVariables=dict(PATH='/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin'),StartInterval=300,RunAtLoad=True,StandardOutPath=str(OUT/'automation.log'),StandardErrorPath=str(OUT/'automation.error.log'))))
+   subprocess.run(['/bin/launchctl','bootout','gui/'+str(os.getuid())+'/edu.cornell.convrml.adaptive20-demo'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
    run(['/bin/launchctl','bootstrap','gui/'+str(os.getuid()),str(path)])
    print('Installed automatic publisher:',path);sys.exit(0)
   if '--once' in sys.argv:

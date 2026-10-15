@@ -3,7 +3,9 @@ Completed corrected experiment, epoch 50.
 Models: end-to-end im2im, 10-member Gaussian-NLL ensemble, and MC dropout
 (p=0.1, 30 stochastic passes, all-block dropout). A camera can initially show
 only the finished exports; its manifest explicitly lists pending methods.
-Adaptive QUTCC is a separate ongoing experiment and is not shown here.
+Adaptive QUTCC is marked Unavailable until its exact epoch-20 checkpoint has
+been calibrated and exported. Each camera updates independently. Its epoch-20
+results are explicitly labeled against epoch-50 baselines (unequal budgets).
 
 60,000 training images; 5,000 validation; 5,000 test; 2,048 independent
 calibration images. The page shows the first 50 manifest test examples per
@@ -38,3 +40,15 @@ on a dedicated asset branch, preserving older demos within Pages size limits.
 See assets.json for the commit, and each camera's protocol.json for the fitted
 scales, calibration audit, sample IDs, manifest hashes and checkpoint provenance.
 The browser displays saved inference; it does not run model training/inference.
+
+Automatic update (requested October 15, 2026):
+- RML epoch-20 inference job 288596 depends on training job 278657.
+- DiffuserCam epoch-20 inference job 288597 depends on training job 278682.
+- Both passed the GPU inference smoke gate (job 288595).
+- New QUTCC exports use results/adaptive_q20_demo_20261015 on Unicorn.
+- A user LaunchAgent checks every 300 seconds while the Mac is awake/online.
+  It retries on later checks/reboot and expires after 30 days; once all eight
+  camera/model exports are published, further checks exit without network work.
+- Publisher status, logs and last published readiness are in
+  ~/.local/share/convrml-epoch50-auto/results/ (also linked from
+  ~/Downloads/ConvRML_Epoch50_Demo/).
