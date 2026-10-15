@@ -1,4 +1,4 @@
-"""Frozen milestone demo: independent calibration, first 50 manifest test cases."""
+"""Native image-adaptive QUTCC bounds; no post-hoc calibration or scale fitting."""
 import argparse, gc, json, sys, time
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -9,7 +9,6 @@ from baselines.mc_dropout import dropout_inference
 from scripts.corrected_comparison_study import ROOT, load_model, paths, write
 from scripts.formal_rml_train import Pairs
 from scripts.training_records import manifest_digest
-from scripts.asymmetric_rcps import select_asymmetric_factors
 
 from scripts.train_constrained_adaptive50 import load_checkpoint
 ADAPTIVE_ROOT=Path('results/adaptive_q_coverage90_scratch50_20261014')
@@ -36,44 +35,29 @@ def main():
     a = p.parse_args(); camera = ['rml', 'diffuser'][a.task]; method = 'adaptive_qutcc'
     if a.epoch!=20 and not a.smoke:raise ValueError('Only the exact epoch-20 milestone may be exported')
     if not 1 <= a.count <= 5000: raise ValueError('Invalid count')
-    out = Path('results/adaptive_q20_demo_20261015')/camera/method
+    out = Path('results/adaptive_q20_native_demo_20261015')/camera/method
     out.mkdir(parents=True, exist_ok=True)
     if not a.smoke and (out/'report.json').exists(): print('Already complete', out); return
     torch.set_num_threads(2); torch.manual_seed(20261011+a.task)
     predict, provenance = predictor(camera, method, a.epoch)
-    data, caldir = paths(camera); cal = np.load(caldir/'pairs.npy', mmap_mode='r')
+    data, _ = paths(camera)
     def run(b):
         y, x = b[:, 0].cuda(), b[:, 1].cuda()
         with torch.autocast('cuda', dtype=torch.bfloat16): r, lo, hi = predict(y)
         if not all(torch.isfinite(t).all() for t in [r, lo, hi]): raise ValueError('Nonfinite output')
         return x, r, lo, hi
     if a.smoke:
-        dataset=Pairs('test',data);x,r,lo,hi=run(torch.stack([dataset[0],dataset[1]]))
+        dataset=Pairs('val',data);x,r,lo,hi=run(torch.stack([dataset[0],dataset[1]]))
         assert (lo<=r).all() and (r<=hi).all() and np.all(predict.quantiles[:,0]<predict.quantiles[:,1])
         print(json.dumps(dict(smoke=True,camera=camera,epoch=a.epoch,shape=list(r.shape),q=predict.quantiles.tolist())),flush=True)
         return
-    t = time.monotonic()
-    files = [out/'lower_scores.tmp.npy', out/'upper_scores.tmp.npy']
-    scores = [np.lib.format.open_memmap(f, mode='w+', dtype=np.float32, shape=(len(cal), *cal.shape[2:])) for f in files]
-    for i in range(0, len(cal), 4):
-        x, r, lo, hi = run(torch.from_numpy(np.array(cal[i:i+4], copy=True)).float()/255)
-        scores[0][i:i+len(x)] = ((r-x)/(r-lo).clamp_min(1e-6)).cpu().numpy()
-        scores[1][i:i+len(x)] = ((x-r)/(hi-r).clamp_min(1e-6)).cpu().numpy()
-        if i % 256 == 0: print(camera, method, 'calibration', i, '/', len(cal), flush=True)
-    for s in scores: s.flush()
-    factors, audit, _ = select_asymmetric_factors(*scores)
-    del scores, s; gc.collect()
-    for f in files: f.unlink()
-    cal_seconds = time.monotonic()-t
-    print(camera, method, 'calibration complete', factors, flush=True)
     dataset = Pairs('test', data); records = json.loads((data/'manifest.json').read_text())['test'][:a.count]
     arrays = {k: [] for k in ['measurement', 'target', 'prediction', 'lower', 'upper']}; rows = []
     t = time.monotonic()
     for i in range(0, a.count, 4):
         b = torch.stack([dataset[j] for j in range(i, min(i+4, a.count))])
-        x, r, lo, hi = run(b); f = factors['rcps_hb']
-        lower = (r-f['lower']*(r-lo).clamp_min(1e-6)).clamp(0,1)
-        upper = (r+f['upper']*(hi-r).clamp_min(1e-6)).clamp(0,1)
+        x, r, lo, hi = run(b)
+        lower, upper = lo, hi
         prediction = r.clamp(0,1)
         for key, v in zip(arrays, [b[:,0], x, prediction, lower, upper]): arrays[key].append(v.cpu().numpy())
         for j in range(len(x)):
@@ -87,13 +71,13 @@ def main():
     history = {}
     for arm in [r['arm'] for r in provenance]:
         history[arm] = predict.history
-    report = dict(camera=camera, method=method, epoch=a.epoch, count=a.count, calibration_count=len(cal),
-        alpha=.1, delta=.05, factors=factors, calibration=audit, per_image=rows,
+    report = dict(camera=camera, method=method, epoch=a.epoch, count=a.count, calibration_count=0, calibration_used=False, interval_method="native_learned_image_quantiles",
+        alpha=.1, delta=None, factors=None, calibration=None, per_image=rows,
         aggregate={k:float(np.mean([r[k] for r in rows])) for k in ['psnr','ssim','mae','coverage','width','native_crossing']},
         provenance=provenance, validation_history=history, manifest_sha256=manifest_digest(data),
-        calibration_sha256=manifest_digest(caldir), gpu=torch.cuda.get_device_name(),
-        calibration_seconds=cal_seconds, inference_seconds=inference_seconds,
-        notes='New image-adaptive QUTCC trained jointly from random initialization, exact epoch 20. Same first 50 held-out test images as the epoch-50 baselines; unequal training budgets are explicitly labeled. Learned image-specific q endpoints are followed by independent RCPS lower/upper scaling, alpha=.10 delta=.05, 2048 calibration images. Prediction is q=.5. Clipped [0,1]. No test-based q tuning. Not a full-test aggregate.')
+        calibration_sha256=None, gpu=torch.cuda.get_device_name(),
+        calibration_seconds=0, inference_seconds=inference_seconds,
+        notes='New image-adaptive QUTCC trained jointly from random initialization, exact epoch 20. Same first 50 held-out test images as the epoch-50 baselines; unequal training budgets are explicitly labeled. Native learned image-specific q endpoints; no RCPS, no fitted scales, no calibration images. Alpha=.10 is a training target, not a coverage guarantee. Prediction is q=.5. Clipped [0,1]. No test-based q tuning. Not a full-test aggregate.')
     write(out/'report.json', report); print('COMPLETE', camera, method, flush=True)
 
 if __name__ == '__main__': main()

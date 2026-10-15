@@ -47,12 +47,13 @@ root=pathlib.Path.home()/'ConvRML/results/corrected_demo_epoch50_20261011'
 ready=[]
 for camera in ['rml','diffuser']:
  for method in ['im2im','ensemble10','ensemble5','mc_010','adaptive_qutcc']:
-  p=(pathlib.Path.home()/'ConvRML/results/adaptive_q20_demo_20261015' if method=='adaptive_qutcc' else pathlib.Path.home()/'ConvRML/results/ensemble_size_comparison_20261015' if method=='ensemble5' else root)/camera/method
+  p=(pathlib.Path.home()/'ConvRML/results/adaptive_q20_native_demo_20261015' if method=='adaptive_qutcc' else pathlib.Path.home()/'ConvRML/results/ensemble_size_comparison_20261015' if method=='ensemble5' else root)/camera/method
   if (p/'report.json').exists() and (p/'examples.npz').exists():
    r=json.loads((p/'report.json').read_text())
-   assert r['epoch']==(20 if method=='adaptive_qutcc' else 50) and r['count']==50 and r['calibration_count']==2048
+   assert r['epoch']==(20 if method=='adaptive_qutcc' else 50) and r['count']==50 and r['calibration_count']==(0 if method=='adaptive_qutcc' else 2048)
+   if method=='adaptive_qutcc':assert r['calibration_used'] is False and r['factors'] is None
    ready.append(camera+'/'+method)
-q=subprocess.run(['/usr/local/slurm/current/bin/squeue','-j','288027,288028,288596,288597','-h','-o','%i %T %R'],text=True,capture_output=True).stdout
+q=subprocess.run(['/usr/local/slurm/current/bin/squeue','-u','jy2228','-h','-o','%i %j %T %R'],text=True,capture_output=True).stdout
 curve_root=pathlib.Path.home()/'ConvRML/results/ensemble10_validation_curves_20261015'
 curves={c:[json.loads(p.read_text()) for p in sorted((curve_root/c).glob('epoch_*.json'))] for c in ['rml','diffuser']}
 curve_count=sum(len(v) for v in curves.values())
@@ -90,7 +91,7 @@ print(json.dumps(dict(ready=ready,queue=q,curves=curves,curve_count=curve_count,
    dest=OUT/camera/method;dest.mkdir(parents=True,exist_ok=True)
    for name in ['report.json','examples.npz']:
     run(['rsync','-az','-e','ssh -i '+str(Path.home()/'.ssh/id_ed25519')+' -o BatchMode=yes',
-      'jy2228@unicorn-login-02.coecis.cornell.edu:ConvRML/results/'+('adaptive_q20_demo_20261015' if method=='adaptive_qutcc' else 'ensemble_size_comparison_20261015' if method=='ensemble5' else 'corrected_demo_epoch50_20261011')+'/'+camera+'/'+method+'/'+name,str(dest)+'/'],timeout=600)
+      'jy2228@unicorn-login-02.coecis.cornell.edu:ConvRML/results/'+('adaptive_q20_native_demo_20261015' if method=='adaptive_qutcc' else 'ensemble_size_comparison_20261015' if method=='ensemble5' else 'corrected_demo_epoch50_20261011')+'/'+camera+'/'+method+'/'+name,str(dest)+'/'],timeout=600)
  for camera,rows in info['curves'].items():
   if rows:
    assert [row['epoch'] for row in rows]==list(range(5,51,5))
@@ -146,7 +147,7 @@ print(json.dumps(dict(ready=ready,queue=q,curves=curves,curve_count=curve_count,
   (OUT/'remote_asset_validation.txt').write_text(check_browser('http://127.0.0.1:8775/'))
  finally:server.shutdown();server.server_close()
  run(['git','diff','--check'])
- run(['git','add','--','corrected-epoch50','tools/build_epoch50_demo.py','tools/verify_epoch50_browser.py','tools/publish_epoch50_demo.py','tools/export_adaptive_q20_demo.py','tools/submit_adaptive_q20_demo.py','tools/evaluate_ensemble_learning_curve.py','tools/submit_ensemble_learning_curve.py','tools/export_corrected_milestone.py','tools/export_ensemble_size_comparison.py','tools/submit_ensemble_size_comparison.py','tools/submit_ensemble5_learning_curve.py'])
+ run(['git','add','--','corrected-epoch50','tools/build_epoch50_demo.py','tools/verify_epoch50_browser.py','tools/publish_epoch50_demo.py','tools/export_adaptive_q20_demo.py','tools/submit_adaptive_q20_demo.py','tools/evaluate_ensemble_learning_curve.py','tools/submit_ensemble_learning_curve.py','tools/export_corrected_milestone.py','tools/export_ensemble_size_comparison.py','tools/submit_ensemble_size_comparison.py','tools/submit_ensemble5_learning_curve.py','tools/resume_native_qutcc.py','tools/submit_adaptive_q20_demo.py'])
  if run(['git','diff','--cached','--name-only']):run(['git','commit','-m','Update completed baselines and adaptive-QUTCC epoch-20 demo availability'])
  commit=run(['git','rev-parse','HEAD'])
  run(['git','push','origin','main'],timeout=600)

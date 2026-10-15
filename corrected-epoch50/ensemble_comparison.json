@@ -1,6 +1,42 @@
 {
   "cameras": {
-    "rml": {},
+    "rml": {
+      "ensemble5": {
+        "epoch": 50,
+        "full_test_count": 5000,
+        "full_test_aggregate": {
+          "psnr": 38.788512029647826,
+          "ssim": 0.9631803379178047,
+          "mae": 0.00625948271608213,
+          "coverage": 0.9341899380326271,
+          "width": 0.026146125898556784,
+          "native_crossing": 0.0
+        },
+        "aggregate": {
+          "psnr": 38.65812328338623,
+          "ssim": 0.9583620476722717,
+          "mae": 0.006408950741169974,
+          "coverage": 0.9315061616897583,
+          "width": 0.026413134913891554,
+          "native_crossing": 0.0
+        },
+        "manifest_sha256": "ef41a0325df23ef8ab3dc7c34b7a374f0f7d927f9323b9046ae39819c9f6b1d6",
+        "calibration_sha256": "4cdddb9b60bda8edaf8f3163dd614d1b746f18c5bc88aa4e8f8ebeaf23355ced",
+        "calibration_count": 2048,
+        "alpha": 0.1,
+        "delta": 0.05,
+        "factors": {
+          "empirical": {
+            "lower": 0.796413004398346,
+            "upper": 0.8418890237808228
+          },
+          "rcps_hb": {
+            "lower": 0.859493,
+            "upper": 0.915068
+          }
+        }
+      }
+    },
     "diffuser": {}
   },
   "difference": "five minus ten",
