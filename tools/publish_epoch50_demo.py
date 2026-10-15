@@ -12,7 +12,7 @@ ASSETS=OUT/'assets'
 OUT.mkdir(parents=True,exist_ok=True)
 SSH=['ssh','-i',str(Path.home()/'.ssh/id_ed25519'),'-o','BatchMode=yes','-o','ConnectTimeout=20','jy2228@unicorn-login-02.coecis.cornell.edu']
 REMOTE='https://github.com/Shdakudow/ConvRML-Uncertainty-Demo.git'
-METHODS=['im2im','ensemble10','mc_010']
+METHODS=['im2im','ensemble10','mc_010','adaptive_qutcc']
 
 def run(args,**kw):
  return subprocess.check_output(args,cwd=ROOT,text=True,**kw).strip()
@@ -35,19 +35,22 @@ def check_browser(base):
  result=run([sys.executable,'tools/verify_epoch50_browser.py',base,'--expected-epochs','--screenshot'],timeout=600)
  return result
 
-def main(require_all=False):
+def main(require_all=False,once=False):
+ saved=OUT/'auto_published.json'
+ previous=json.loads(saved.read_text()) if saved.exists() else {}
+ if once and len(previous.get('ready',[]))==8 and '--force' not in sys.argv:return True
  head=run(['git','rev-parse','HEAD'])
  remote='''import json,pathlib,subprocess
 root=pathlib.Path.home()/'ConvRML/results/corrected_demo_epoch50_20261011'
 ready=[]
 for camera in ['rml','diffuser']:
- for method in ['im2im','ensemble10','mc_010']:
-  p=root/camera/method
+ for method in ['im2im','ensemble10','mc_010','adaptive_qutcc']:
+  p=(pathlib.Path.home()/'ConvRML/results/adaptive_q20_demo_20261015' if method=='adaptive_qutcc' else root)/camera/method
   if (p/'report.json').exists() and (p/'examples.npz').exists():
    r=json.loads((p/'report.json').read_text())
-   assert r['epoch']==50 and r['count']==50 and r['calibration_count']==2048
+   assert r['epoch']==(20 if method=='adaptive_qutcc' else 50) and r['count']==50 and r['calibration_count']==2048
    ready.append(camera+'/'+method)
-q=subprocess.run(['/usr/local/slurm/current/bin/squeue','-j','288027,288028','-h','-o','%i %T %R'],text=True,capture_output=True).stdout
+q=subprocess.run(['/usr/local/slurm/current/bin/squeue','-j','288027,288028,288596,288597','-h','-o','%i %T %R'],text=True,capture_output=True).stdout
 print(json.dumps(dict(ready=ready,queue=q)))
 '''
  for _ in range(1440):
@@ -55,18 +58,21 @@ print(json.dumps(dict(ready=ready,queue=q)))
   except (ValueError,subprocess.SubprocessError) as exc:
    status('connection_retry',error=str(exc));time.sleep(45);continue
   status('waiting_for_exports',**info)
-  if len(info['ready']) >= (6 if require_all else 5):break
+  if once or len(info['ready']) >= (8 if require_all else 5):break
   if not info['queue'].strip():raise RuntimeError('Exports incomplete and no inference jobs remain')
   if 'DependencyNeverSatisfied' in info['queue']:raise RuntimeError('Failed training dependency; no publication')
   time.sleep(45)
  else:raise TimeoutError('24-hour export wait exceeded')
+ if once and sorted(info['ready'])==sorted(previous.get('ready',[])) and '--force' not in sys.argv:
+  status('monitoring',ready=info['ready'],url=previous.get('url'));return len(info['ready'])==8
+ if not all(c+'/im2im' in info['ready'] for c in ['rml','diffuser']):return False
  for camera in ['rml','diffuser']:
   for method in METHODS:
    if camera+'/'+method not in info['ready']:continue
    dest=OUT/camera/method;dest.mkdir(parents=True,exist_ok=True)
    for name in ['report.json','examples.npz']:
     run(['rsync','-az','-e','ssh -i '+str(Path.home()/'.ssh/id_ed25519')+' -o BatchMode=yes',
-      'jy2228@unicorn-login-02.coecis.cornell.edu:ConvRML/results/corrected_demo_epoch50_20261011/'+camera+'/'+method+'/'+name,str(dest)+'/'],timeout=600)
+      'jy2228@unicorn-login-02.coecis.cornell.edu:ConvRML/results/'+('adaptive_q20_demo_20261015' if method=='adaptive_qutcc' else 'corrected_demo_epoch50_20261011')+'/'+camera+'/'+method+'/'+name,str(dest)+'/'],timeout=600)
  status('building')
  reusable='--reuse-assets' in sys.argv
  for camera in ['rml','diffuser']:
@@ -100,8 +106,8 @@ print(json.dumps(dict(ready=ready,queue=q)))
   (OUT/'remote_asset_validation.txt').write_text(check_browser('http://127.0.0.1:8775/'))
  finally:server.shutdown();server.server_close()
  run(['git','diff','--check'])
- run(['git','add','--','corrected-epoch50','tools/build_epoch50_demo.py','tools/verify_epoch50_browser.py','tools/publish_epoch50_demo.py'])
- run(['git','commit','-m','Add separate epoch-50 im2im, ensemble and MC dropout comparison with RCPS'])
+ run(['git','add','--','corrected-epoch50','tools/build_epoch50_demo.py','tools/verify_epoch50_browser.py','tools/publish_epoch50_demo.py','tools/export_adaptive_q20_demo.py','tools/submit_adaptive_q20_demo.py'])
+ if run(['git','diff','--cached','--name-only']):run(['git','commit','-m','Update completed baselines and adaptive-QUTCC epoch-20 demo availability'])
  commit=run(['git','rev-parse','HEAD'])
  run(['git','push','origin','main'],timeout=600)
  status('waiting_for_pages',commit=commit,asset_commit=asset_commit)
@@ -114,9 +120,10 @@ print(json.dumps(dict(ready=ready,queue=q)))
   time.sleep(15)
  else:raise TimeoutError('Pages deployment not confirmed')
  (OUT/'live_validation.txt').write_text(check_browser('https://shdakudow.github.io/ConvRML-Uncertainty-Demo/'))
- status('complete' if len(info['ready'])==6 else 'published_waiting_for_diffuser_mc',ready=info['ready'],commit=commit,asset_commit=asset_commit,url='https://shdakudow.github.io/ConvRML-Uncertainty-Demo/corrected-epoch50/')
+ status('complete' if len(info['ready'])==8 else 'published_monitoring_pending_models',ready=info['ready'],commit=commit,asset_commit=asset_commit,url='https://shdakudow.github.io/ConvRML-Uncertainty-Demo/corrected-epoch50/')
 
- return len(info['ready'])==6
+ saved.write_text(json.dumps(dict(ready=info['ready'],commit=commit,asset_commit=asset_commit,url='https://shdakudow.github.io/ConvRML-Uncertainty-Demo/corrected-epoch50/'),indent=2))
+ return len(info['ready'])==8
 
 if __name__=='__main__':
  try:
@@ -132,5 +139,22 @@ if __name__=='__main__':
    command=run(['ps','-p',str(old),'-o','command='])
    if 'python' not in command.lower() or 'tools/publish_epoch50_demo.py' not in command:raise RuntimeError('Refusing to stop unrelated process')
    os.kill(old,signal.SIGTERM)
-  if not main():main(require_all=True)
+  import fcntl
+  lock=(OUT/'publisher.lock').open('w')
+  try:fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+  except BlockingIOError:sys.exit(0)
+  if '--install-agent' in sys.argv:
+   import plistlib,datetime
+   path=Path.home()/'Library/LaunchAgents/edu.cornell.convrml.adaptive20-demo.plist'
+   expiry=(datetime.datetime.now(datetime.timezone.utc)+datetime.timedelta(days=30)).isoformat()
+   (OUT/'automation_expires.json').write_text(json.dumps(dict(expires=expiry)))
+   path.write_bytes(plistlib.dumps(dict(Label='edu.cornell.convrml.adaptive20-demo',ProgramArguments=[sys.executable,str(Path(__file__).resolve()),'--once','--reuse-assets'],WorkingDirectory=str(ROOT),EnvironmentVariables=dict(PATH='/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin'),StartInterval=300,RunAtLoad=True,StandardOutPath=str(OUT/'automation.log'),StandardErrorPath=str(OUT/'automation.error.log'))))
+   run(['/bin/launchctl','bootstrap','gui/'+str(os.getuid()),str(path)])
+   print('Installed automatic publisher:',path);sys.exit(0)
+  if '--once' in sys.argv:
+   import datetime
+   expiry=OUT/'automation_expires.json'
+   if expiry.exists() and datetime.datetime.now(datetime.timezone.utc)>datetime.datetime.fromisoformat(json.loads(expiry.read_text())['expires']):sys.exit(0)
+   main(once=True)
+  elif not main():main(require_all=True)
  except Exception as e:status('failed',error=repr(e));raise

@@ -43,7 +43,8 @@ try:
    time.sleep(.2)
   assert state.startswith('2 / 50'),state
   js("document.getElementById('channel').value='1';document.getElementById('channel').dispatchEvent(new Event('change'));document.getElementById('target').dispatchEvent(new MouseEvent('click',{clientX:100,clientY:100,bubbles:true}))")
-  assert js("document.querySelectorAll('#pixelRows tr').length")==js('DATASET.methods.length')
+  assert js("document.querySelectorAll('#pixelRows tr').length")==4
+  assert js("document.getElementById('provenance').textContent.includes(DATASET.methods.includes('adaptive_qutcc')?'QUTCC epoch 20':'QUTCC unavailable')")
   if path.startswith('corrected'):
    if js("!!document.getElementById('qMode')"):
     before=js("({qwidth:example.models.conditioned.metrics.width,others:['im2im','ensemble10','mc_010'].map(k=>example.models[k].metrics.width)})")
