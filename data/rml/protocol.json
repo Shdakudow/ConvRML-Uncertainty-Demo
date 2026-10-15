@@ -4,7 +4,14 @@
     "ensemble10",
     "mc_010"
   ],
-  "pendingMethods": [],
+  "epochs": {
+    "im2im": 50,
+    "ensemble10": 50,
+    "mc_010": 50
+  },
+  "pendingMethods": [
+    "adaptive_qutcc"
+  ],
   "study": "RML",
   "epoch": 50,
   "count": 50,
@@ -1894,7 +1901,7 @@
       }
     ]
   },
-  "notes": "Epoch 50; 60,000 training images, 5,000 validation, 5,000 test, 2,048 independent calibration. First 50 test images shown without quality selection. RCPS alpha=.10 delta=.05; separate lower/upper factors. Clipped float32 metrics. MC p=.10, 30 draws fixed for continuity, not claimed validation-optimal. No adaptive QUTCC on this page.",
+  "notes": "Epoch 50; 60,000 training images, 5,000 validation, 5,000 test, 2,048 independent calibration. First 50 test images shown without quality selection. RCPS alpha=.10 delta=.05; separate lower/upper factors. Clipped float32 metrics. MC p=.10, 30 draws fixed for continuity, not claimed validation-optimal. Adaptive QUTCC, when available, uses epoch 20: unequal training budgets, explicitly labeled. Its q endpoints are learned per image before separate RCPS scale calibration.",
   "manifest_sha256": "ef41a0325df23ef8ab3dc7c34b7a374f0f7d927f9323b9046ae39819c9f6b1d6",
   "reports": {
     "im2im": {
