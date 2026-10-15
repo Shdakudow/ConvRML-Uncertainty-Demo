@@ -1,0 +1,136 @@
+"""Wait for frozen epoch-50 exports, verify the demo, and publish it separately.
+
+Does not modify existing demos. Exact float32 assets live on a dedicated branch
+of the same public repository; the page pins the immutable asset commit.
+"""
+import functools, http.server, json, os, subprocess, sys, threading, time
+from pathlib import Path
+
+ROOT=Path(__file__).resolve().parents[1]
+OUT=Path.home()/'Downloads/ConvRML_Epoch50_Demo'
+ASSETS=OUT/'assets'
+OUT.mkdir(parents=True,exist_ok=True)
+SSH=['ssh','-i',str(Path.home()/'.ssh/id_ed25519'),'-o','BatchMode=yes','-o','ConnectTimeout=20','jy2228@unicorn-login-02.coecis.cornell.edu']
+REMOTE='https://github.com/Shdakudow/ConvRML-Uncertainty-Demo.git'
+METHODS=['im2im','ensemble10','mc_010']
+
+def run(args,**kw):
+ return subprocess.check_output(args,cwd=ROOT,text=True,**kw).strip()
+
+def status(stage,**kw):
+ row=dict(stage=stage,time=time.strftime('%Y-%m-%d %H:%M:%S'),**kw)
+ (OUT/'status.json').write_text(json.dumps(row,indent=2));print(json.dumps(row),flush=True)
+
+class Handler(http.server.SimpleHTTPRequestHandler):
+ def translate_path(self,path):
+  if path.startswith('/epoch50-assets/'):
+   rel=path.split('?',1)[0][len('/epoch50-assets/'):]
+   p=(ASSETS/rel).resolve()
+   if not p.is_relative_to(ASSETS.resolve()):return '/dev/null'
+   return str(p)
+  return super().translate_path(path)
+ def log_message(self,*args):pass
+
+def check_browser(base):
+ result=run([sys.executable,'tools/verify_epoch50_browser.py',base,'--expected-epochs','--screenshot'],timeout=600)
+ return result
+
+def main(require_all=False):
+ head=run(['git','rev-parse','HEAD'])
+ remote='''import json,pathlib,subprocess
+root=pathlib.Path.home()/'ConvRML/results/corrected_demo_epoch50_20261011'
+ready=[]
+for camera in ['rml','diffuser']:
+ for method in ['im2im','ensemble10','mc_010']:
+  p=root/camera/method
+  if (p/'report.json').exists() and (p/'examples.npz').exists():
+   r=json.loads((p/'report.json').read_text())
+   assert r['epoch']==50 and r['count']==50 and r['calibration_count']==2048
+   ready.append(camera+'/'+method)
+q=subprocess.run(['/usr/local/slurm/current/bin/squeue','-j','288027,288028','-h','-o','%i %T %R'],text=True,capture_output=True).stdout
+print(json.dumps(dict(ready=ready,queue=q)))
+'''
+ for _ in range(1440):
+  try:info=json.loads(run(SSH+['python3 -'],input=remote,timeout=60))
+  except (ValueError,subprocess.SubprocessError) as exc:
+   status('connection_retry',error=str(exc));time.sleep(45);continue
+  status('waiting_for_exports',**info)
+  if len(info['ready']) >= (6 if require_all else 5):break
+  if not info['queue'].strip():raise RuntimeError('Exports incomplete and no inference jobs remain')
+  if 'DependencyNeverSatisfied' in info['queue']:raise RuntimeError('Failed training dependency; no publication')
+  time.sleep(45)
+ else:raise TimeoutError('24-hour export wait exceeded')
+ for camera in ['rml','diffuser']:
+  for method in METHODS:
+   if camera+'/'+method not in info['ready']:continue
+   dest=OUT/camera/method;dest.mkdir(parents=True,exist_ok=True)
+   for name in ['report.json','examples.npz']:
+    run(['rsync','-az','-e','ssh -i '+str(Path.home()/'.ssh/id_ed25519')+' -o BatchMode=yes',
+      'jy2228@unicorn-login-02.coecis.cornell.edu:ConvRML/results/corrected_demo_epoch50_20261011/'+camera+'/'+method+'/'+name,str(dest)+'/'],timeout=600)
+ status('building')
+ reusable='--reuse-assets' in sys.argv
+ for camera in ['rml','diffuser']:
+  p=ASSETS/'data'/camera/'protocol.json'
+  methods=[m for m in METHODS if camera+'/'+m in info['ready']]
+  reusable=reusable and p.exists() and json.loads(p.read_text()).get('methods')==methods and len(list(p.parent.glob('example_*.bin.gz')))==50
+ if not reusable:
+  for camera in ['rml','diffuser']:
+   methods=[m for m in METHODS if camera+'/'+m in info['ready']]
+   run([sys.executable,'tools/build_epoch50_demo.py',str(OUT),'--output',str(ASSETS/'data'),'--camera',camera,'--methods',','.join(methods)],timeout=600)
+  run([sys.executable,'tools/pack_demo_assets.py',str(ASSETS)],timeout=600)
+ run(['node','--check','corrected-epoch50/app.js'])
+ config=ROOT/'corrected-epoch50/assets.json'
+ config.write_text(json.dumps({'base':'http://127.0.0.1:8775/epoch50-assets'}))
+ server=http.server.ThreadingHTTPServer(('127.0.0.1',8775),functools.partial(Handler,directory=str(ROOT)))
+ threading.Thread(target=server.serve_forever,daemon=True).start()
+ try:
+  status('browser_validation')
+  (OUT/'browser_validation.txt').write_text(check_browser('http://127.0.0.1:8775/'))
+  if run(['git','rev-parse','HEAD'])!=head:raise RuntimeError('Main repository changed; review before publishing')
+  status('publishing_assets')
+  if not (ASSETS/'.git').exists():
+   run(['git','init','-b','epoch50-assets-20261015',str(ASSETS)])
+  run(['git','-C',str(ASSETS),'add','data'])
+  if run(['git','-C',str(ASSETS),'diff','--cached','--name-only']):
+   run(['git','-C',str(ASSETS),'commit','-m','Frozen epoch-50 float32 demo assets and independent RCPS reports'])
+  asset_commit=run(['git','-C',str(ASSETS),'rev-parse','HEAD'])
+  run(['git','-C',str(ASSETS),'push',REMOTE,'HEAD:refs/heads/epoch50-assets-20261015'],timeout=1800)
+  config.write_text(json.dumps(dict(base='https://raw.githubusercontent.com/Shdakudow/ConvRML-Uncertainty-Demo/'+asset_commit,commit=asset_commit),indent=2)+'\n')
+  # Test actual cross-origin asset requests before publishing the page.
+  (OUT/'remote_asset_validation.txt').write_text(check_browser('http://127.0.0.1:8775/'))
+ finally:server.shutdown();server.server_close()
+ run(['git','diff','--check'])
+ run(['git','add','--','corrected-epoch50','tools/build_epoch50_demo.py','tools/verify_epoch50_browser.py','tools/publish_epoch50_demo.py'])
+ run(['git','commit','-m','Add separate epoch-50 im2im, ensemble and MC dropout comparison with RCPS'])
+ commit=run(['git','rev-parse','HEAD'])
+ run(['git','push','origin','main'],timeout=600)
+ status('waiting_for_pages',commit=commit,asset_commit=asset_commit)
+ for _ in range(120):
+  runs=json.loads(run(['gh','run','list','--limit','10','--json','headSha,status,conclusion,databaseId']))
+  matching=[r for r in runs if r['headSha']==commit]
+  if matching and all(r['status']=='completed' for r in matching):
+   if any(r['conclusion']!='success' for r in matching):raise RuntimeError('Pages deployment failed')
+   break
+  time.sleep(15)
+ else:raise TimeoutError('Pages deployment not confirmed')
+ (OUT/'live_validation.txt').write_text(check_browser('https://shdakudow.github.io/ConvRML-Uncertainty-Demo/'))
+ status('complete' if len(info['ready'])==6 else 'published_waiting_for_diffuser_mc',ready=info['ready'],commit=commit,asset_commit=asset_commit,url='https://shdakudow.github.io/ConvRML-Uncertainty-Demo/corrected-epoch50/')
+
+ return len(info['ready'])==6
+
+if __name__=='__main__':
+ try:
+  if '--verify-only' in sys.argv:
+   server=http.server.ThreadingHTTPServer(('127.0.0.1',8775),functools.partial(Handler,directory=str(ROOT)))
+   threading.Thread(target=server.serve_forever,daemon=True).start()
+   try:print(check_browser('http://127.0.0.1:8775/'))
+   finally:server.shutdown();server.server_close()
+   sys.exit(0)
+  if '--replace-pid' in sys.argv:
+   import signal
+   old=int(sys.argv[sys.argv.index('--replace-pid')+1])
+   command=run(['ps','-p',str(old),'-o','command='])
+   if 'python' not in command.lower() or 'tools/publish_epoch50_demo.py' not in command:raise RuntimeError('Refusing to stop unrelated process')
+   os.kill(old,signal.SIGTERM)
+  if not main():main(require_all=True)
+ except Exception as e:status('failed',error=repr(e));raise
