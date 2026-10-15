@@ -4,7 +4,2629 @@
   "members": 10,
   "validation_count": 5000,
   "cameras": {
-    "rml": [],
-    "diffuser": []
+    "rml": [
+      {
+        "camera": "rml",
+        "epoch": 5,
+        "members": 10,
+        "split": "val",
+        "manifest_sha256": "ef41a0325df23ef8ab3dc7c34b7a374f0f7d927f9323b9046ae39819c9f6b1d6",
+        "validation": {
+          "psnr": 35.503961738586426,
+          "ssim": 0.9299202060699463,
+          "mse": 0.0004086383340356406,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "mean of 10 raw member predictions, clipped after averaging"
+        },
+        "provenance": [
+          {
+            "arm": "ensemble_00",
+            "epoch": 5,
+            "seeds": {
+              "initialization": 20261006,
+              "training": 20271006,
+              "data": 20281006,
+              "quantile": 20291006
+            },
+            "training_hours": 3.2236902723263485
+          },
+          {
+            "arm": "ensemble_01",
+            "epoch": 5,
+            "seeds": {
+              "initialization": 20261007,
+              "training": 20271007,
+              "data": 20281007,
+              "quantile": 20291007
+            },
+            "training_hours": 3.542736671660916
+          },
+          {
+            "arm": "ensemble_02",
+            "epoch": 5,
+            "seeds": {
+              "initialization": 20261008,
+              "training": 20271008,
+              "data": 20281008,
+              "quantile": 20291008
+            },
+            "training_hours": 3.6362592633747006
+          },
+          {
+            "arm": "ensemble_03",
+            "epoch": 5,
+            "seeds": {
+              "initialization": 20261009,
+              "training": 20271009,
+              "data": 20281009,
+              "quantile": 20291009
+            },
+            "training_hours": 3.88387860347685
+          },
+          {
+            "arm": "ensemble_04",
+            "epoch": 5,
+            "seeds": {
+              "initialization": 20261010,
+              "training": 20271010,
+              "data": 20281010,
+              "quantile": 20291010
+            },
+            "training_hours": 3.852935820763426
+          },
+          {
+            "arm": "ensemble_05",
+            "epoch": 5,
+            "seeds": {
+              "initialization": 20261011,
+              "training": 20271011,
+              "data": 20281011,
+              "quantile": 20291011
+            },
+            "training_hours": 2.9498809877087155
+          },
+          {
+            "arm": "ensemble_06",
+            "epoch": 5,
+            "seeds": {
+              "initialization": 20261012,
+              "training": 20271012,
+              "data": 20281012,
+              "quantile": 20291012
+            },
+            "training_hours": 4.02446870062552
+          },
+          {
+            "arm": "ensemble_07",
+            "epoch": 5,
+            "seeds": {
+              "initialization": 20261013,
+              "training": 20271013,
+              "data": 20281013,
+              "quantile": 20291013
+            },
+            "training_hours": 3.2853490253936757
+          },
+          {
+            "arm": "ensemble_08",
+            "epoch": 5,
+            "seeds": {
+              "initialization": 20261014,
+              "training": 20271014,
+              "data": 20281014,
+              "quantile": 20291014
+            },
+            "training_hours": 3.7970281955997276
+          },
+          {
+            "arm": "ensemble_09",
+            "epoch": 5,
+            "seeds": {
+              "initialization": 20261015,
+              "training": 20271015,
+              "data": 20281015,
+              "quantile": 20291015
+            },
+            "training_hours": 3.939505951784829
+          }
+        ],
+        "seconds": 309.8154763057828,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "calibration_used": false,
+        "note": "PSNR/SSIM computed per image after averaging predictions, then averaged over the full validation set. No retraining; no averaging of member metrics."
+      },
+      {
+        "camera": "rml",
+        "epoch": 10,
+        "members": 10,
+        "split": "val",
+        "manifest_sha256": "ef41a0325df23ef8ab3dc7c34b7a374f0f7d927f9323b9046ae39819c9f6b1d6",
+        "validation": {
+          "psnr": 36.59977203369141,
+          "ssim": 0.9409452770709992,
+          "mse": 0.00032494949564279525,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "mean of 10 raw member predictions, clipped after averaging"
+        },
+        "provenance": [
+          {
+            "arm": "ensemble_00",
+            "epoch": 10,
+            "seeds": {
+              "initialization": 20261006,
+              "training": 20271006,
+              "data": 20281006,
+              "quantile": 20291006
+            },
+            "training_hours": 7.345444450549743
+          },
+          {
+            "arm": "ensemble_01",
+            "epoch": 10,
+            "seeds": {
+              "initialization": 20261007,
+              "training": 20271007,
+              "data": 20281007,
+              "quantile": 20291007
+            },
+            "training_hours": 7.833162637184509
+          },
+          {
+            "arm": "ensemble_02",
+            "epoch": 10,
+            "seeds": {
+              "initialization": 20261008,
+              "training": 20271008,
+              "data": 20281008,
+              "quantile": 20291008
+            },
+            "training_hours": 7.302298648849892
+          },
+          {
+            "arm": "ensemble_03",
+            "epoch": 10,
+            "seeds": {
+              "initialization": 20261009,
+              "training": 20271009,
+              "data": 20281009,
+              "quantile": 20291009
+            },
+            "training_hours": 8.565888403702218
+          },
+          {
+            "arm": "ensemble_04",
+            "epoch": 10,
+            "seeds": {
+              "initialization": 20261010,
+              "training": 20271010,
+              "data": 20281010,
+              "quantile": 20291010
+            },
+            "training_hours": 8.8723238788582
+          },
+          {
+            "arm": "ensemble_05",
+            "epoch": 10,
+            "seeds": {
+              "initialization": 20261011,
+              "training": 20271011,
+              "data": 20281011,
+              "quantile": 20291011
+            },
+            "training_hours": 7.503717434149326
+          },
+          {
+            "arm": "ensemble_06",
+            "epoch": 10,
+            "seeds": {
+              "initialization": 20261012,
+              "training": 20271012,
+              "data": 20281012,
+              "quantile": 20291012
+            },
+            "training_hours": 8.35418806079772
+          },
+          {
+            "arm": "ensemble_07",
+            "epoch": 10,
+            "seeds": {
+              "initialization": 20261013,
+              "training": 20271013,
+              "data": 20281013,
+              "quantile": 20291013
+            },
+            "training_hours": 7.3795282821705666
+          },
+          {
+            "arm": "ensemble_08",
+            "epoch": 10,
+            "seeds": {
+              "initialization": 20261014,
+              "training": 20271014,
+              "data": 20281014,
+              "quantile": 20291014
+            },
+            "training_hours": 8.982182281527345
+          },
+          {
+            "arm": "ensemble_09",
+            "epoch": 10,
+            "seeds": {
+              "initialization": 20261015,
+              "training": 20271015,
+              "data": 20281015,
+              "quantile": 20291015
+            },
+            "training_hours": 8.402209605462591
+          }
+        ],
+        "seconds": 310.1560523342341,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "calibration_used": false,
+        "note": "PSNR/SSIM computed per image after averaging predictions, then averaged over the full validation set. No retraining; no averaging of member metrics."
+      },
+      {
+        "camera": "rml",
+        "epoch": 15,
+        "members": 10,
+        "split": "val",
+        "manifest_sha256": "ef41a0325df23ef8ab3dc7c34b7a374f0f7d927f9323b9046ae39819c9f6b1d6",
+        "validation": {
+          "psnr": 37.26279340515137,
+          "ssim": 0.9502497300148011,
+          "mse": 0.0002828877400665078,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "mean of 10 raw member predictions, clipped after averaging"
+        },
+        "provenance": [
+          {
+            "arm": "ensemble_00",
+            "epoch": 15,
+            "seeds": {
+              "initialization": 20261006,
+              "training": 20271006,
+              "data": 20281006,
+              "quantile": 20291006
+            },
+            "training_hours": 12.078909714787894
+          },
+          {
+            "arm": "ensemble_01",
+            "epoch": 15,
+            "seeds": {
+              "initialization": 20261007,
+              "training": 20271007,
+              "data": 20281007,
+              "quantile": 20291007
+            },
+            "training_hours": 13.103547050168801
+          },
+          {
+            "arm": "ensemble_02",
+            "epoch": 15,
+            "seeds": {
+              "initialization": 20261008,
+              "training": 20271008,
+              "data": 20281008,
+              "quantile": 20291008
+            },
+            "training_hours": 12.798102963218568
+          },
+          {
+            "arm": "ensemble_03",
+            "epoch": 15,
+            "seeds": {
+              "initialization": 20261009,
+              "training": 20271009,
+              "data": 20281009,
+              "quantile": 20291009
+            },
+            "training_hours": 12.86448512452551
+          },
+          {
+            "arm": "ensemble_04",
+            "epoch": 15,
+            "seeds": {
+              "initialization": 20261010,
+              "training": 20271010,
+              "data": 20281010,
+              "quantile": 20291010
+            },
+            "training_hours": 13.205575951350847
+          },
+          {
+            "arm": "ensemble_05",
+            "epoch": 15,
+            "seeds": {
+              "initialization": 20261011,
+              "training": 20271011,
+              "data": 20281011,
+              "quantile": 20291011
+            },
+            "training_hours": 12.852923528050887
+          },
+          {
+            "arm": "ensemble_06",
+            "epoch": 15,
+            "seeds": {
+              "initialization": 20261012,
+              "training": 20271012,
+              "data": 20281012,
+              "quantile": 20291012
+            },
+            "training_hours": 13.141705090934508
+          },
+          {
+            "arm": "ensemble_07",
+            "epoch": 15,
+            "seeds": {
+              "initialization": 20261013,
+              "training": 20271013,
+              "data": 20281013,
+              "quantile": 20291013
+            },
+            "training_hours": 12.155989731385212
+          },
+          {
+            "arm": "ensemble_08",
+            "epoch": 15,
+            "seeds": {
+              "initialization": 20261014,
+              "training": 20271014,
+              "data": 20281014,
+              "quantile": 20291014
+            },
+            "training_hours": 15.007133687155
+          },
+          {
+            "arm": "ensemble_09",
+            "epoch": 15,
+            "seeds": {
+              "initialization": 20261015,
+              "training": 20271015,
+              "data": 20281015,
+              "quantile": 20291015
+            },
+            "training_hours": 12.537110975394349
+          }
+        ],
+        "seconds": 311.6998658198863,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "calibration_used": false,
+        "note": "PSNR/SSIM computed per image after averaging predictions, then averaged over the full validation set. No retraining; no averaging of member metrics."
+      },
+      {
+        "camera": "rml",
+        "epoch": 20,
+        "members": 10,
+        "split": "val",
+        "manifest_sha256": "ef41a0325df23ef8ab3dc7c34b7a374f0f7d927f9323b9046ae39819c9f6b1d6",
+        "validation": {
+          "psnr": 37.74999850769043,
+          "ssim": 0.9550481983661652,
+          "mse": 0.00025497196884825823,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "mean of 10 raw member predictions, clipped after averaging"
+        },
+        "provenance": [
+          {
+            "arm": "ensemble_00",
+            "epoch": 20,
+            "seeds": {
+              "initialization": 20261006,
+              "training": 20271006,
+              "data": 20281006,
+              "quantile": 20291006
+            },
+            "training_hours": 17.06159358281102
+          },
+          {
+            "arm": "ensemble_01",
+            "epoch": 20,
+            "seeds": {
+              "initialization": 20261007,
+              "training": 20271007,
+              "data": 20281007,
+              "quantile": 20291007
+            },
+            "training_hours": 17.71201051711106
+          },
+          {
+            "arm": "ensemble_02",
+            "epoch": 20,
+            "seeds": {
+              "initialization": 20261008,
+              "training": 20271008,
+              "data": 20281008,
+              "quantile": 20291008
+            },
+            "training_hours": 17.901222723435236
+          },
+          {
+            "arm": "ensemble_03",
+            "epoch": 20,
+            "seeds": {
+              "initialization": 20261009,
+              "training": 20271009,
+              "data": 20281009,
+              "quantile": 20291009
+            },
+            "training_hours": 16.49336490097184
+          },
+          {
+            "arm": "ensemble_04",
+            "epoch": 20,
+            "seeds": {
+              "initialization": 20261010,
+              "training": 20271010,
+              "data": 20281010,
+              "quantile": 20291010
+            },
+            "training_hours": 17.16240977223468
+          },
+          {
+            "arm": "ensemble_05",
+            "epoch": 20,
+            "seeds": {
+              "initialization": 20261011,
+              "training": 20271011,
+              "data": 20281011,
+              "quantile": 20291011
+            },
+            "training_hours": 17.234511967528444
+          },
+          {
+            "arm": "ensemble_06",
+            "epoch": 20,
+            "seeds": {
+              "initialization": 20261012,
+              "training": 20271012,
+              "data": 20281012,
+              "quantile": 20291012
+            },
+            "training_hours": 17.99850464221488
+          },
+          {
+            "arm": "ensemble_07",
+            "epoch": 20,
+            "seeds": {
+              "initialization": 20261013,
+              "training": 20271013,
+              "data": 20281013,
+              "quantile": 20291013
+            },
+            "training_hours": 16.320373311249924
+          },
+          {
+            "arm": "ensemble_08",
+            "epoch": 20,
+            "seeds": {
+              "initialization": 20261014,
+              "training": 20271014,
+              "data": 20281014,
+              "quantile": 20291014
+            },
+            "training_hours": 20.40813569923551
+          },
+          {
+            "arm": "ensemble_09",
+            "epoch": 20,
+            "seeds": {
+              "initialization": 20261015,
+              "training": 20271015,
+              "data": 20281015,
+              "quantile": 20291015
+            },
+            "training_hours": 16.641745336895564
+          }
+        ],
+        "seconds": 314.14417850831524,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "calibration_used": false,
+        "note": "PSNR/SSIM computed per image after averaging predictions, then averaged over the full validation set. No retraining; no averaging of member metrics."
+      },
+      {
+        "camera": "rml",
+        "epoch": 25,
+        "members": 10,
+        "split": "val",
+        "manifest_sha256": "ef41a0325df23ef8ab3dc7c34b7a374f0f7d927f9323b9046ae39819c9f6b1d6",
+        "validation": {
+          "psnr": 38.02606455688476,
+          "ssim": 0.9574458812713623,
+          "mse": 0.00024036608364549466,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "mean of 10 raw member predictions, clipped after averaging"
+        },
+        "provenance": [
+          {
+            "arm": "ensemble_00",
+            "epoch": 25,
+            "seeds": {
+              "initialization": 20261006,
+              "training": 20271006,
+              "data": 20281006,
+              "quantile": 20291006
+            },
+            "training_hours": 20.966332745118255
+          },
+          {
+            "arm": "ensemble_01",
+            "epoch": 25,
+            "seeds": {
+              "initialization": 20261007,
+              "training": 20271007,
+              "data": 20281007,
+              "quantile": 20291007
+            },
+            "training_hours": 21.27384889086903
+          },
+          {
+            "arm": "ensemble_02",
+            "epoch": 25,
+            "seeds": {
+              "initialization": 20261008,
+              "training": 20271008,
+              "data": 20281008,
+              "quantile": 20291008
+            },
+            "training_hours": 22.363199551978266
+          },
+          {
+            "arm": "ensemble_03",
+            "epoch": 25,
+            "seeds": {
+              "initialization": 20261009,
+              "training": 20271009,
+              "data": 20281009,
+              "quantile": 20291009
+            },
+            "training_hours": 20.5307821551528
+          },
+          {
+            "arm": "ensemble_04",
+            "epoch": 25,
+            "seeds": {
+              "initialization": 20261010,
+              "training": 20271010,
+              "data": 20281010,
+              "quantile": 20291010
+            },
+            "training_hours": 21.242807552247235
+          },
+          {
+            "arm": "ensemble_05",
+            "epoch": 25,
+            "seeds": {
+              "initialization": 20261011,
+              "training": 20271011,
+              "data": 20281011,
+              "quantile": 20291011
+            },
+            "training_hours": 21.37614741733343
+          },
+          {
+            "arm": "ensemble_06",
+            "epoch": 25,
+            "seeds": {
+              "initialization": 20261012,
+              "training": 20271012,
+              "data": 20281012,
+              "quantile": 20291012
+            },
+            "training_hours": 24.230648192834764
+          },
+          {
+            "arm": "ensemble_07",
+            "epoch": 25,
+            "seeds": {
+              "initialization": 20261013,
+              "training": 20271013,
+              "data": 20281013,
+              "quantile": 20291013
+            },
+            "training_hours": 19.79495089781689
+          },
+          {
+            "arm": "ensemble_08",
+            "epoch": 25,
+            "seeds": {
+              "initialization": 20261014,
+              "training": 20271014,
+              "data": 20281014,
+              "quantile": 20291014
+            },
+            "training_hours": 25.266315539266262
+          },
+          {
+            "arm": "ensemble_09",
+            "epoch": 25,
+            "seeds": {
+              "initialization": 20261015,
+              "training": 20271015,
+              "data": 20281015,
+              "quantile": 20291015
+            },
+            "training_hours": 22.085652955121187
+          }
+        ],
+        "seconds": 314.0010958989151,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "calibration_used": false,
+        "note": "PSNR/SSIM computed per image after averaging predictions, then averaged over the full validation set. No retraining; no averaging of member metrics."
+      },
+      {
+        "camera": "rml",
+        "epoch": 30,
+        "members": 10,
+        "split": "val",
+        "manifest_sha256": "ef41a0325df23ef8ab3dc7c34b7a374f0f7d927f9323b9046ae39819c9f6b1d6",
+        "validation": {
+          "psnr": 38.25790141296387,
+          "ssim": 0.9588307439804077,
+          "mse": 0.00022870896046224516,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "mean of 10 raw member predictions, clipped after averaging"
+        },
+        "provenance": [
+          {
+            "arm": "ensemble_00",
+            "epoch": 30,
+            "seeds": {
+              "initialization": 20261006,
+              "training": 20271006,
+              "data": 20281006,
+              "quantile": 20291006
+            },
+            "training_hours": 25.51668790407275
+          },
+          {
+            "arm": "ensemble_01",
+            "epoch": 30,
+            "seeds": {
+              "initialization": 20261007,
+              "training": 20271007,
+              "data": 20281007,
+              "quantile": 20291007
+            },
+            "training_hours": 25.695096162271266
+          },
+          {
+            "arm": "ensemble_02",
+            "epoch": 30,
+            "seeds": {
+              "initialization": 20261008,
+              "training": 20271008,
+              "data": 20281008,
+              "quantile": 20291008
+            },
+            "training_hours": 27.213735882845075
+          },
+          {
+            "arm": "ensemble_03",
+            "epoch": 30,
+            "seeds": {
+              "initialization": 20261009,
+              "training": 20271009,
+              "data": 20281009,
+              "quantile": 20291009
+            },
+            "training_hours": 24.101165906618117
+          },
+          {
+            "arm": "ensemble_04",
+            "epoch": 30,
+            "seeds": {
+              "initialization": 20261010,
+              "training": 20271010,
+              "data": 20281010,
+              "quantile": 20291010
+            },
+            "training_hours": 25.097123168575045
+          },
+          {
+            "arm": "ensemble_05",
+            "epoch": 30,
+            "seeds": {
+              "initialization": 20261011,
+              "training": 20271011,
+              "data": 20281011,
+              "quantile": 20291011
+            },
+            "training_hours": 25.62778122641696
+          },
+          {
+            "arm": "ensemble_06",
+            "epoch": 30,
+            "seeds": {
+              "initialization": 20261012,
+              "training": 20271012,
+              "data": 20281012,
+              "quantile": 20291012
+            },
+            "training_hours": 27.640950246810032
+          },
+          {
+            "arm": "ensemble_07",
+            "epoch": 30,
+            "seeds": {
+              "initialization": 20261013,
+              "training": 20271013,
+              "data": 20281013,
+              "quantile": 20291013
+            },
+            "training_hours": 23.28700882462398
+          },
+          {
+            "arm": "ensemble_08",
+            "epoch": 30,
+            "seeds": {
+              "initialization": 20261014,
+              "training": 20271014,
+              "data": 20281014,
+              "quantile": 20291014
+            },
+            "training_hours": 29.981724561329628
+          },
+          {
+            "arm": "ensemble_09",
+            "epoch": 30,
+            "seeds": {
+              "initialization": 20261015,
+              "training": 20271015,
+              "data": 20281015,
+              "quantile": 20291015
+            },
+            "training_hours": 26.040224740722213
+          }
+        ],
+        "seconds": 312.0713961739093,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "calibration_used": false,
+        "note": "PSNR/SSIM computed per image after averaging predictions, then averaged over the full validation set. No retraining; no averaging of member metrics."
+      },
+      {
+        "camera": "rml",
+        "epoch": 35,
+        "members": 10,
+        "split": "val",
+        "manifest_sha256": "ef41a0325df23ef8ab3dc7c34b7a374f0f7d927f9323b9046ae39819c9f6b1d6",
+        "validation": {
+          "psnr": 38.42912789306641,
+          "ssim": 0.960183868598938,
+          "mse": 0.0002207498725343612,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "mean of 10 raw member predictions, clipped after averaging"
+        },
+        "provenance": [
+          {
+            "arm": "ensemble_00",
+            "epoch": 35,
+            "seeds": {
+              "initialization": 20261006,
+              "training": 20271006,
+              "data": 20281006,
+              "quantile": 20291006
+            },
+            "training_hours": 29.744124464049012
+          },
+          {
+            "arm": "ensemble_01",
+            "epoch": 35,
+            "seeds": {
+              "initialization": 20261007,
+              "training": 20271007,
+              "data": 20281007,
+              "quantile": 20291007
+            },
+            "training_hours": 30.18164723555148
+          },
+          {
+            "arm": "ensemble_02",
+            "epoch": 35,
+            "seeds": {
+              "initialization": 20261008,
+              "training": 20271008,
+              "data": 20281008,
+              "quantile": 20291008
+            },
+            "training_hours": 31.46930878583527
+          },
+          {
+            "arm": "ensemble_03",
+            "epoch": 35,
+            "seeds": {
+              "initialization": 20261009,
+              "training": 20271009,
+              "data": 20281009,
+              "quantile": 20291009
+            },
+            "training_hours": 28.46965207801569
+          },
+          {
+            "arm": "ensemble_04",
+            "epoch": 35,
+            "seeds": {
+              "initialization": 20261010,
+              "training": 20271010,
+              "data": 20281010,
+              "quantile": 20291010
+            },
+            "training_hours": 30.40096674078955
+          },
+          {
+            "arm": "ensemble_05",
+            "epoch": 35,
+            "seeds": {
+              "initialization": 20261011,
+              "training": 20271011,
+              "data": 20281011,
+              "quantile": 20291011
+            },
+            "training_hours": 29.42220256690889
+          },
+          {
+            "arm": "ensemble_06",
+            "epoch": 35,
+            "seeds": {
+              "initialization": 20261012,
+              "training": 20271012,
+              "data": 20281012,
+              "quantile": 20291012
+            },
+            "training_hours": 32.10613557770098
+          },
+          {
+            "arm": "ensemble_07",
+            "epoch": 35,
+            "seeds": {
+              "initialization": 20261013,
+              "training": 20271013,
+              "data": 20281013,
+              "quantile": 20291013
+            },
+            "training_hours": 27.65427687483932
+          },
+          {
+            "arm": "ensemble_08",
+            "epoch": 35,
+            "seeds": {
+              "initialization": 20261014,
+              "training": 20271014,
+              "data": 20281014,
+              "quantile": 20291014
+            },
+            "training_hours": 34.24512156503718
+          },
+          {
+            "arm": "ensemble_09",
+            "epoch": 35,
+            "seeds": {
+              "initialization": 20261015,
+              "training": 20271015,
+              "data": 20281015,
+              "quantile": 20291015
+            },
+            "training_hours": 29.840578138868967
+          }
+        ],
+        "seconds": 321.2363076992333,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "calibration_used": false,
+        "note": "PSNR/SSIM computed per image after averaging predictions, then averaged over the full validation set. No retraining; no averaging of member metrics."
+      },
+      {
+        "camera": "rml",
+        "epoch": 40,
+        "members": 10,
+        "split": "val",
+        "manifest_sha256": "ef41a0325df23ef8ab3dc7c34b7a374f0f7d927f9323b9046ae39819c9f6b1d6",
+        "validation": {
+          "psnr": 38.62451657409668,
+          "ssim": 0.9616300125598908,
+          "mse": 0.00021168061966018285,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "mean of 10 raw member predictions, clipped after averaging"
+        },
+        "provenance": [
+          {
+            "arm": "ensemble_00",
+            "epoch": 40,
+            "seeds": {
+              "initialization": 20261006,
+              "training": 20271006,
+              "data": 20281006,
+              "quantile": 20291006
+            },
+            "training_hours": 33.94986614210586
+          },
+          {
+            "arm": "ensemble_01",
+            "epoch": 40,
+            "seeds": {
+              "initialization": 20261007,
+              "training": 20271007,
+              "data": 20281007,
+              "quantile": 20291007
+            },
+            "training_hours": 34.68482788530568
+          },
+          {
+            "arm": "ensemble_02",
+            "epoch": 40,
+            "seeds": {
+              "initialization": 20261008,
+              "training": 20271008,
+              "data": 20281008,
+              "quantile": 20291008
+            },
+            "training_hours": 37.10934080926874
+          },
+          {
+            "arm": "ensemble_03",
+            "epoch": 40,
+            "seeds": {
+              "initialization": 20261009,
+              "training": 20271009,
+              "data": 20281009,
+              "quantile": 20291009
+            },
+            "training_hours": 34.725718569817964
+          },
+          {
+            "arm": "ensemble_04",
+            "epoch": 40,
+            "seeds": {
+              "initialization": 20261010,
+              "training": 20271010,
+              "data": 20281010,
+              "quantile": 20291010
+            },
+            "training_hours": 34.81075487558894
+          },
+          {
+            "arm": "ensemble_05",
+            "epoch": 40,
+            "seeds": {
+              "initialization": 20261011,
+              "training": 20271011,
+              "data": 20281011,
+              "quantile": 20291011
+            },
+            "training_hours": 33.14197708609809
+          },
+          {
+            "arm": "ensemble_06",
+            "epoch": 40,
+            "seeds": {
+              "initialization": 20261012,
+              "training": 20271012,
+              "data": 20281012,
+              "quantile": 20291012
+            },
+            "training_hours": 37.40040874097625
+          },
+          {
+            "arm": "ensemble_07",
+            "epoch": 40,
+            "seeds": {
+              "initialization": 20261013,
+              "training": 20271013,
+              "data": 20281013,
+              "quantile": 20291013
+            },
+            "training_hours": 32.86806601073478
+          },
+          {
+            "arm": "ensemble_08",
+            "epoch": 40,
+            "seeds": {
+              "initialization": 20261014,
+              "training": 20271014,
+              "data": 20281014,
+              "quantile": 20291014
+            },
+            "training_hours": 39.57912641394709
+          },
+          {
+            "arm": "ensemble_09",
+            "epoch": 40,
+            "seeds": {
+              "initialization": 20261015,
+              "training": 20271015,
+              "data": 20281015,
+              "quantile": 20291015
+            },
+            "training_hours": 34.31635782545996
+          }
+        ],
+        "seconds": 308.78651846479625,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "calibration_used": false,
+        "note": "PSNR/SSIM computed per image after averaging predictions, then averaged over the full validation set. No retraining; no averaging of member metrics."
+      },
+      {
+        "camera": "rml",
+        "epoch": 45,
+        "members": 10,
+        "split": "val",
+        "manifest_sha256": "ef41a0325df23ef8ab3dc7c34b7a374f0f7d927f9323b9046ae39819c9f6b1d6",
+        "validation": {
+          "psnr": 38.760297192382815,
+          "ssim": 0.9628566890239716,
+          "mse": 0.0002054186449138797,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "mean of 10 raw member predictions, clipped after averaging"
+        },
+        "provenance": [
+          {
+            "arm": "ensemble_00",
+            "epoch": 45,
+            "seeds": {
+              "initialization": 20261006,
+              "training": 20271006,
+              "data": 20281006,
+              "quantile": 20291006
+            },
+            "training_hours": 39.26714086185489
+          },
+          {
+            "arm": "ensemble_01",
+            "epoch": 45,
+            "seeds": {
+              "initialization": 20261007,
+              "training": 20271007,
+              "data": 20281007,
+              "quantile": 20291007
+            },
+            "training_hours": 38.39346211420167
+          },
+          {
+            "arm": "ensemble_02",
+            "epoch": 45,
+            "seeds": {
+              "initialization": 20261008,
+              "training": 20271008,
+              "data": 20281008,
+              "quantile": 20291008
+            },
+            "training_hours": 41.18256663985634
+          },
+          {
+            "arm": "ensemble_03",
+            "epoch": 45,
+            "seeds": {
+              "initialization": 20261009,
+              "training": 20271009,
+              "data": 20281009,
+              "quantile": 20291009
+            },
+            "training_hours": 39.80159804715569
+          },
+          {
+            "arm": "ensemble_04",
+            "epoch": 45,
+            "seeds": {
+              "initialization": 20261010,
+              "training": 20271010,
+              "data": 20281010,
+              "quantile": 20291010
+            },
+            "training_hours": 39.79245900400496
+          },
+          {
+            "arm": "ensemble_05",
+            "epoch": 45,
+            "seeds": {
+              "initialization": 20261011,
+              "training": 20271011,
+              "data": 20281011,
+              "quantile": 20291011
+            },
+            "training_hours": 38.48156897107877
+          },
+          {
+            "arm": "ensemble_06",
+            "epoch": 45,
+            "seeds": {
+              "initialization": 20261012,
+              "training": 20271012,
+              "data": 20281012,
+              "quantile": 20291012
+            },
+            "training_hours": 42.992321969995714
+          },
+          {
+            "arm": "ensemble_07",
+            "epoch": 45,
+            "seeds": {
+              "initialization": 20261013,
+              "training": 20271013,
+              "data": 20281013,
+              "quantile": 20291013
+            },
+            "training_hours": 38.45350666115541
+          },
+          {
+            "arm": "ensemble_08",
+            "epoch": 45,
+            "seeds": {
+              "initialization": 20261014,
+              "training": 20271014,
+              "data": 20281014,
+              "quantile": 20291014
+            },
+            "training_hours": 44.45677421291934
+          },
+          {
+            "arm": "ensemble_09",
+            "epoch": 45,
+            "seeds": {
+              "initialization": 20261015,
+              "training": 20271015,
+              "data": 20281015,
+              "quantile": 20291015
+            },
+            "training_hours": 38.98997633174457
+          }
+        ],
+        "seconds": 311.68429428711534,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "calibration_used": false,
+        "note": "PSNR/SSIM computed per image after averaging predictions, then averaged over the full validation set. No retraining; no averaging of member metrics."
+      },
+      {
+        "camera": "rml",
+        "epoch": 50,
+        "members": 10,
+        "split": "val",
+        "manifest_sha256": "ef41a0325df23ef8ab3dc7c34b7a374f0f7d927f9323b9046ae39819c9f6b1d6",
+        "validation": {
+          "psnr": 38.885471087646486,
+          "ssim": 0.963690020608902,
+          "mse": 0.000199718700638914,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "mean of 10 raw member predictions, clipped after averaging"
+        },
+        "provenance": [
+          {
+            "arm": "ensemble_00",
+            "epoch": 50,
+            "seeds": {
+              "initialization": 20261006,
+              "training": 20271006,
+              "data": 20281006,
+              "quantile": 20291006
+            },
+            "training_hours": 42.995111650230115
+          },
+          {
+            "arm": "ensemble_01",
+            "epoch": 50,
+            "seeds": {
+              "initialization": 20261007,
+              "training": 20271007,
+              "data": 20281007,
+              "quantile": 20291007
+            },
+            "training_hours": 43.281971818770515
+          },
+          {
+            "arm": "ensemble_02",
+            "epoch": 50,
+            "seeds": {
+              "initialization": 20261008,
+              "training": 20271008,
+              "data": 20281008,
+              "quantile": 20291008
+            },
+            "training_hours": 45.673123414886575
+          },
+          {
+            "arm": "ensemble_03",
+            "epoch": 50,
+            "seeds": {
+              "initialization": 20261009,
+              "training": 20271009,
+              "data": 20281009,
+              "quantile": 20291009
+            },
+            "training_hours": 45.15709815737925
+          },
+          {
+            "arm": "ensemble_04",
+            "epoch": 50,
+            "seeds": {
+              "initialization": 20261010,
+              "training": 20271010,
+              "data": 20281010,
+              "quantile": 20291010
+            },
+            "training_hours": 45.166197241391274
+          },
+          {
+            "arm": "ensemble_05",
+            "epoch": 50,
+            "seeds": {
+              "initialization": 20261011,
+              "training": 20271011,
+              "data": 20281011,
+              "quantile": 20291011
+            },
+            "training_hours": 43.77434815630641
+          },
+          {
+            "arm": "ensemble_06",
+            "epoch": 50,
+            "seeds": {
+              "initialization": 20261012,
+              "training": 20271012,
+              "data": 20281012,
+              "quantile": 20291012
+            },
+            "training_hours": 47.81837681680646
+          },
+          {
+            "arm": "ensemble_07",
+            "epoch": 50,
+            "seeds": {
+              "initialization": 20261013,
+              "training": 20271013,
+              "data": 20281013,
+              "quantile": 20291013
+            },
+            "training_hours": 44.776828022938005
+          },
+          {
+            "arm": "ensemble_08",
+            "epoch": 50,
+            "seeds": {
+              "initialization": 20261014,
+              "training": 20271014,
+              "data": 20281014,
+              "quantile": 20291014
+            },
+            "training_hours": 49.399407036369084
+          },
+          {
+            "arm": "ensemble_09",
+            "epoch": 50,
+            "seeds": {
+              "initialization": 20261015,
+              "training": 20271015,
+              "data": 20281015,
+              "quantile": 20291015
+            },
+            "training_hours": 43.91215481886829
+          }
+        ],
+        "seconds": 311.2848468646407,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "calibration_used": false,
+        "note": "PSNR/SSIM computed per image after averaging predictions, then averaged over the full validation set. No retraining; no averaging of member metrics."
+      }
+    ],
+    "diffuser": [
+      {
+        "camera": "diffuser",
+        "epoch": 5,
+        "members": 10,
+        "split": "val",
+        "manifest_sha256": "957c0ce3d9cd7364fdb0341860a6e3219b9201cb6dff4e4857e5d6ae5c19e556",
+        "validation": {
+          "psnr": 28.225427882385254,
+          "ssim": 0.7812031004905701,
+          "mse": 0.0020197702929144724,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "mean of 10 raw member predictions, clipped after averaging"
+        },
+        "provenance": [
+          {
+            "arm": "ensemble_00",
+            "epoch": 5,
+            "seeds": {
+              "initialization": 20261006,
+              "training": 20271006,
+              "data": 20281006,
+              "quantile": 20291006
+            },
+            "training_hours": 2.976329552389236
+          },
+          {
+            "arm": "ensemble_01",
+            "epoch": 5,
+            "seeds": {
+              "initialization": 20261007,
+              "training": 20271007,
+              "data": 20281007,
+              "quantile": 20291007
+            },
+            "training_hours": 3.3231572152820608
+          },
+          {
+            "arm": "ensemble_02",
+            "epoch": 5,
+            "seeds": {
+              "initialization": 20261008,
+              "training": 20271008,
+              "data": 20281008,
+              "quantile": 20291008
+            },
+            "training_hours": 3.9148289252132074
+          },
+          {
+            "arm": "ensemble_03",
+            "epoch": 5,
+            "seeds": {
+              "initialization": 20261009,
+              "training": 20271009,
+              "data": 20281009,
+              "quantile": 20291009
+            },
+            "training_hours": 3.9561441931556653
+          },
+          {
+            "arm": "ensemble_04",
+            "epoch": 5,
+            "seeds": {
+              "initialization": 20261010,
+              "training": 20271010,
+              "data": 20281010,
+              "quantile": 20291010
+            },
+            "training_hours": 3.1090824704768822
+          },
+          {
+            "arm": "ensemble_05",
+            "epoch": 5,
+            "seeds": {
+              "initialization": 20261011,
+              "training": 20271011,
+              "data": 20281011,
+              "quantile": 20291011
+            },
+            "training_hours": 3.700414015352532
+          },
+          {
+            "arm": "ensemble_06",
+            "epoch": 5,
+            "seeds": {
+              "initialization": 20261012,
+              "training": 20271012,
+              "data": 20281012,
+              "quantile": 20291012
+            },
+            "training_hours": 3.9840068273965477
+          },
+          {
+            "arm": "ensemble_07",
+            "epoch": 5,
+            "seeds": {
+              "initialization": 20261013,
+              "training": 20271013,
+              "data": 20281013,
+              "quantile": 20291013
+            },
+            "training_hours": 3.0617399691770193
+          },
+          {
+            "arm": "ensemble_08",
+            "epoch": 5,
+            "seeds": {
+              "initialization": 20261014,
+              "training": 20271014,
+              "data": 20281014,
+              "quantile": 20291014
+            },
+            "training_hours": 3.8837372706034996
+          },
+          {
+            "arm": "ensemble_09",
+            "epoch": 5,
+            "seeds": {
+              "initialization": 20261015,
+              "training": 20271015,
+              "data": 20281015,
+              "quantile": 20291015
+            },
+            "training_hours": 3.336663961857848
+          }
+        ],
+        "seconds": 307.7383263334632,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "calibration_used": false,
+        "note": "PSNR/SSIM computed per image after averaging predictions, then averaged over the full validation set. No retraining; no averaging of member metrics."
+      },
+      {
+        "camera": "diffuser",
+        "epoch": 10,
+        "members": 10,
+        "split": "val",
+        "manifest_sha256": "957c0ce3d9cd7364fdb0341860a6e3219b9201cb6dff4e4857e5d6ae5c19e556",
+        "validation": {
+          "psnr": 29.317375492858886,
+          "ssim": 0.8130975313663482,
+          "mse": 0.0015879095065174625,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "mean of 10 raw member predictions, clipped after averaging"
+        },
+        "provenance": [
+          {
+            "arm": "ensemble_00",
+            "epoch": 10,
+            "seeds": {
+              "initialization": 20261006,
+              "training": 20271006,
+              "data": 20281006,
+              "quantile": 20291006
+            },
+            "training_hours": 8.336402104069352
+          },
+          {
+            "arm": "ensemble_01",
+            "epoch": 10,
+            "seeds": {
+              "initialization": 20261007,
+              "training": 20271007,
+              "data": 20281007,
+              "quantile": 20291007
+            },
+            "training_hours": 7.675916638316517
+          },
+          {
+            "arm": "ensemble_02",
+            "epoch": 10,
+            "seeds": {
+              "initialization": 20261008,
+              "training": 20271008,
+              "data": 20281008,
+              "quantile": 20291008
+            },
+            "training_hours": 8.893827425908562
+          },
+          {
+            "arm": "ensemble_03",
+            "epoch": 10,
+            "seeds": {
+              "initialization": 20261009,
+              "training": 20271009,
+              "data": 20281009,
+              "quantile": 20291009
+            },
+            "training_hours": 9.14561272215137
+          },
+          {
+            "arm": "ensemble_04",
+            "epoch": 10,
+            "seeds": {
+              "initialization": 20261010,
+              "training": 20271010,
+              "data": 20281010,
+              "quantile": 20291010
+            },
+            "training_hours": 6.8717934418356705
+          },
+          {
+            "arm": "ensemble_05",
+            "epoch": 10,
+            "seeds": {
+              "initialization": 20261011,
+              "training": 20271011,
+              "data": 20281011,
+              "quantile": 20291011
+            },
+            "training_hours": 8.098789103159863
+          },
+          {
+            "arm": "ensemble_06",
+            "epoch": 10,
+            "seeds": {
+              "initialization": 20261012,
+              "training": 20271012,
+              "data": 20281012,
+              "quantile": 20291012
+            },
+            "training_hours": 8.642690482564438
+          },
+          {
+            "arm": "ensemble_07",
+            "epoch": 10,
+            "seeds": {
+              "initialization": 20261013,
+              "training": 20271013,
+              "data": 20281013,
+              "quantile": 20291013
+            },
+            "training_hours": 6.705247645915941
+          },
+          {
+            "arm": "ensemble_08",
+            "epoch": 10,
+            "seeds": {
+              "initialization": 20261014,
+              "training": 20271014,
+              "data": 20281014,
+              "quantile": 20291014
+            },
+            "training_hours": 9.214758330584866
+          },
+          {
+            "arm": "ensemble_09",
+            "epoch": 10,
+            "seeds": {
+              "initialization": 20261015,
+              "training": 20271015,
+              "data": 20281015,
+              "quantile": 20291015
+            },
+            "training_hours": 8.007305929386412
+          }
+        ],
+        "seconds": 310.01759062800556,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "calibration_used": false,
+        "note": "PSNR/SSIM computed per image after averaging predictions, then averaged over the full validation set. No retraining; no averaging of member metrics."
+      },
+      {
+        "camera": "diffuser",
+        "epoch": 15,
+        "members": 10,
+        "split": "val",
+        "manifest_sha256": "957c0ce3d9cd7364fdb0341860a6e3219b9201cb6dff4e4857e5d6ae5c19e556",
+        "validation": {
+          "psnr": 29.894801495361328,
+          "ssim": 0.8250694313049316,
+          "mse": 0.0013994966810569167,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "mean of 10 raw member predictions, clipped after averaging"
+        },
+        "provenance": [
+          {
+            "arm": "ensemble_00",
+            "epoch": 15,
+            "seeds": {
+              "initialization": 20261006,
+              "training": 20271006,
+              "data": 20281006,
+              "quantile": 20291006
+            },
+            "training_hours": 12.24771925697368
+          },
+          {
+            "arm": "ensemble_01",
+            "epoch": 15,
+            "seeds": {
+              "initialization": 20261007,
+              "training": 20271007,
+              "data": 20281007,
+              "quantile": 20291007
+            },
+            "training_hours": 13.366934452456457
+          },
+          {
+            "arm": "ensemble_02",
+            "epoch": 15,
+            "seeds": {
+              "initialization": 20261008,
+              "training": 20271008,
+              "data": 20281008,
+              "quantile": 20291008
+            },
+            "training_hours": 14.162770843605976
+          },
+          {
+            "arm": "ensemble_03",
+            "epoch": 15,
+            "seeds": {
+              "initialization": 20261009,
+              "training": 20271009,
+              "data": 20281009,
+              "quantile": 20291009
+            },
+            "training_hours": 14.068225150399893
+          },
+          {
+            "arm": "ensemble_04",
+            "epoch": 15,
+            "seeds": {
+              "initialization": 20261010,
+              "training": 20271010,
+              "data": 20281010,
+              "quantile": 20291010
+            },
+            "training_hours": 11.656502628183441
+          },
+          {
+            "arm": "ensemble_05",
+            "epoch": 15,
+            "seeds": {
+              "initialization": 20261011,
+              "training": 20271011,
+              "data": 20281011,
+              "quantile": 20291011
+            },
+            "training_hours": 13.79335689849246
+          },
+          {
+            "arm": "ensemble_06",
+            "epoch": 15,
+            "seeds": {
+              "initialization": 20261012,
+              "training": 20271012,
+              "data": 20281012,
+              "quantile": 20291012
+            },
+            "training_hours": 13.272057655100394
+          },
+          {
+            "arm": "ensemble_07",
+            "epoch": 15,
+            "seeds": {
+              "initialization": 20261013,
+              "training": 20271013,
+              "data": 20281013,
+              "quantile": 20291013
+            },
+            "training_hours": 11.99877602841371
+          },
+          {
+            "arm": "ensemble_08",
+            "epoch": 15,
+            "seeds": {
+              "initialization": 20261014,
+              "training": 20271014,
+              "data": 20281014,
+              "quantile": 20291014
+            },
+            "training_hours": 14.421495162140765
+          },
+          {
+            "arm": "ensemble_09",
+            "epoch": 15,
+            "seeds": {
+              "initialization": 20261015,
+              "training": 20271015,
+              "data": 20281015,
+              "quantile": 20291015
+            },
+            "training_hours": 12.63130389495633
+          }
+        ],
+        "seconds": 312.1379045592621,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "calibration_used": false,
+        "note": "PSNR/SSIM computed per image after averaging predictions, then averaged over the full validation set. No retraining; no averaging of member metrics."
+      },
+      {
+        "camera": "diffuser",
+        "epoch": 20,
+        "members": 10,
+        "split": "val",
+        "manifest_sha256": "957c0ce3d9cd7364fdb0341860a6e3219b9201cb6dff4e4857e5d6ae5c19e556",
+        "validation": {
+          "psnr": 30.25768595123291,
+          "ssim": 0.8329969893932343,
+          "mse": 0.0012919455175288022,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "mean of 10 raw member predictions, clipped after averaging"
+        },
+        "provenance": [
+          {
+            "arm": "ensemble_00",
+            "epoch": 20,
+            "seeds": {
+              "initialization": 20261006,
+              "training": 20271006,
+              "data": 20281006,
+              "quantile": 20291006
+            },
+            "training_hours": 17.389746748328093
+          },
+          {
+            "arm": "ensemble_01",
+            "epoch": 20,
+            "seeds": {
+              "initialization": 20261007,
+              "training": 20271007,
+              "data": 20281007,
+              "quantile": 20291007
+            },
+            "training_hours": 18.052665217102305
+          },
+          {
+            "arm": "ensemble_02",
+            "epoch": 20,
+            "seeds": {
+              "initialization": 20261008,
+              "training": 20271008,
+              "data": 20281008,
+              "quantile": 20291008
+            },
+            "training_hours": 19.485144932173004
+          },
+          {
+            "arm": "ensemble_03",
+            "epoch": 20,
+            "seeds": {
+              "initialization": 20261009,
+              "training": 20271009,
+              "data": 20281009,
+              "quantile": 20291009
+            },
+            "training_hours": 18.662007732701895
+          },
+          {
+            "arm": "ensemble_04",
+            "epoch": 20,
+            "seeds": {
+              "initialization": 20261010,
+              "training": 20271010,
+              "data": 20281010,
+              "quantile": 20291010
+            },
+            "training_hours": 16.037441181469532
+          },
+          {
+            "arm": "ensemble_05",
+            "epoch": 20,
+            "seeds": {
+              "initialization": 20261011,
+              "training": 20271011,
+              "data": 20281011,
+              "quantile": 20291011
+            },
+            "training_hours": 17.949525959546154
+          },
+          {
+            "arm": "ensemble_06",
+            "epoch": 20,
+            "seeds": {
+              "initialization": 20261012,
+              "training": 20271012,
+              "data": 20281012,
+              "quantile": 20291012
+            },
+            "training_hours": 17.793824256014485
+          },
+          {
+            "arm": "ensemble_07",
+            "epoch": 20,
+            "seeds": {
+              "initialization": 20261013,
+              "training": 20271013,
+              "data": 20281013,
+              "quantile": 20291013
+            },
+            "training_hours": 16.473654559224595
+          },
+          {
+            "arm": "ensemble_08",
+            "epoch": 20,
+            "seeds": {
+              "initialization": 20261014,
+              "training": 20271014,
+              "data": 20281014,
+              "quantile": 20291014
+            },
+            "training_hours": 19.529476349204618
+          },
+          {
+            "arm": "ensemble_09",
+            "epoch": 20,
+            "seeds": {
+              "initialization": 20261015,
+              "training": 20271015,
+              "data": 20281015,
+              "quantile": 20291015
+            },
+            "training_hours": 18.128869893842204
+          }
+        ],
+        "seconds": 318.3078938629478,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "calibration_used": false,
+        "note": "PSNR/SSIM computed per image after averaging predictions, then averaged over the full validation set. No retraining; no averaging of member metrics."
+      },
+      {
+        "camera": "diffuser",
+        "epoch": 25,
+        "members": 10,
+        "split": "val",
+        "manifest_sha256": "957c0ce3d9cd7364fdb0341860a6e3219b9201cb6dff4e4857e5d6ae5c19e556",
+        "validation": {
+          "psnr": 30.534312588500978,
+          "ssim": 0.8371440862655639,
+          "mse": 0.0012156317132059485,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "mean of 10 raw member predictions, clipped after averaging"
+        },
+        "provenance": [
+          {
+            "arm": "ensemble_00",
+            "epoch": 25,
+            "seeds": {
+              "initialization": 20261006,
+              "training": 20271006,
+              "data": 20281006,
+              "quantile": 20291006
+            },
+            "training_hours": 20.45798095673552
+          },
+          {
+            "arm": "ensemble_01",
+            "epoch": 25,
+            "seeds": {
+              "initialization": 20261007,
+              "training": 20271007,
+              "data": 20281007,
+              "quantile": 20291007
+            },
+            "training_hours": 21.4142371229746
+          },
+          {
+            "arm": "ensemble_02",
+            "epoch": 25,
+            "seeds": {
+              "initialization": 20261008,
+              "training": 20271008,
+              "data": 20281008,
+              "quantile": 20291008
+            },
+            "training_hours": 24.076925203850486
+          },
+          {
+            "arm": "ensemble_03",
+            "epoch": 25,
+            "seeds": {
+              "initialization": 20261009,
+              "training": 20271009,
+              "data": 20281009,
+              "quantile": 20291009
+            },
+            "training_hours": 23.020847039160856
+          },
+          {
+            "arm": "ensemble_04",
+            "epoch": 25,
+            "seeds": {
+              "initialization": 20261010,
+              "training": 20271010,
+              "data": 20281010,
+              "quantile": 20291010
+            },
+            "training_hours": 20.11789239204242
+          },
+          {
+            "arm": "ensemble_05",
+            "epoch": 25,
+            "seeds": {
+              "initialization": 20261011,
+              "training": 20271011,
+              "data": 20281011,
+              "quantile": 20291011
+            },
+            "training_hours": 21.36735406520851
+          },
+          {
+            "arm": "ensemble_06",
+            "epoch": 25,
+            "seeds": {
+              "initialization": 20261012,
+              "training": 20271012,
+              "data": 20281012,
+              "quantile": 20291012
+            },
+            "training_hours": 22.05933625475746
+          },
+          {
+            "arm": "ensemble_07",
+            "epoch": 25,
+            "seeds": {
+              "initialization": 20261013,
+              "training": 20271013,
+              "data": 20281013,
+              "quantile": 20291013
+            },
+            "training_hours": 20.99561271338105
+          },
+          {
+            "arm": "ensemble_08",
+            "epoch": 25,
+            "seeds": {
+              "initialization": 20261014,
+              "training": 20271014,
+              "data": 20281014,
+              "quantile": 20291014
+            },
+            "training_hours": 23.12667067896817
+          },
+          {
+            "arm": "ensemble_09",
+            "epoch": 25,
+            "seeds": {
+              "initialization": 20261015,
+              "training": 20271015,
+              "data": 20281015,
+              "quantile": 20291015
+            },
+            "training_hours": 22.047060418497423
+          }
+        ],
+        "seconds": 310.64804619783536,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "calibration_used": false,
+        "note": "PSNR/SSIM computed per image after averaging predictions, then averaged over the full validation set. No retraining; no averaging of member metrics."
+      },
+      {
+        "camera": "diffuser",
+        "epoch": 30,
+        "members": 10,
+        "split": "val",
+        "manifest_sha256": "957c0ce3d9cd7364fdb0341860a6e3219b9201cb6dff4e4857e5d6ae5c19e556",
+        "validation": {
+          "psnr": 30.75019137573242,
+          "ssim": 0.8418625966072083,
+          "mse": 0.0011604705903446302,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "mean of 10 raw member predictions, clipped after averaging"
+        },
+        "provenance": [
+          {
+            "arm": "ensemble_00",
+            "epoch": 30,
+            "seeds": {
+              "initialization": 20261006,
+              "training": 20271006,
+              "data": 20281006,
+              "quantile": 20291006
+            },
+            "training_hours": 25.145102295524456
+          },
+          {
+            "arm": "ensemble_01",
+            "epoch": 30,
+            "seeds": {
+              "initialization": 20261007,
+              "training": 20271007,
+              "data": 20281007,
+              "quantile": 20291007
+            },
+            "training_hours": 25.885416067381684
+          },
+          {
+            "arm": "ensemble_02",
+            "epoch": 30,
+            "seeds": {
+              "initialization": 20261008,
+              "training": 20271008,
+              "data": 20281008,
+              "quantile": 20291008
+            },
+            "training_hours": 29.23894367961365
+          },
+          {
+            "arm": "ensemble_03",
+            "epoch": 30,
+            "seeds": {
+              "initialization": 20261009,
+              "training": 20271009,
+              "data": 20281009,
+              "quantile": 20291009
+            },
+            "training_hours": 27.143644977063815
+          },
+          {
+            "arm": "ensemble_04",
+            "epoch": 30,
+            "seeds": {
+              "initialization": 20261010,
+              "training": 20271010,
+              "data": 20281010,
+              "quantile": 20291010
+            },
+            "training_hours": 23.629391877269324
+          },
+          {
+            "arm": "ensemble_05",
+            "epoch": 30,
+            "seeds": {
+              "initialization": 20261011,
+              "training": 20271011,
+              "data": 20281011,
+              "quantile": 20291011
+            },
+            "training_hours": 25.873988536894288
+          },
+          {
+            "arm": "ensemble_06",
+            "epoch": 30,
+            "seeds": {
+              "initialization": 20261012,
+              "training": 20271012,
+              "data": 20281012,
+              "quantile": 20291012
+            },
+            "training_hours": 25.269428613759374
+          },
+          {
+            "arm": "ensemble_07",
+            "epoch": 30,
+            "seeds": {
+              "initialization": 20261013,
+              "training": 20271013,
+              "data": 20281013,
+              "quantile": 20291013
+            },
+            "training_hours": 24.794170389293797
+          },
+          {
+            "arm": "ensemble_08",
+            "epoch": 30,
+            "seeds": {
+              "initialization": 20261014,
+              "training": 20271014,
+              "data": 20281014,
+              "quantile": 20291014
+            },
+            "training_hours": 28.403133679500705
+          },
+          {
+            "arm": "ensemble_09",
+            "epoch": 30,
+            "seeds": {
+              "initialization": 20261015,
+              "training": 20271015,
+              "data": 20281015,
+              "quantile": 20291015
+            },
+            "training_hours": 26.695859449410182
+          }
+        ],
+        "seconds": 312.1970558753237,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "calibration_used": false,
+        "note": "PSNR/SSIM computed per image after averaging predictions, then averaged over the full validation set. No retraining; no averaging of member metrics."
+      },
+      {
+        "camera": "diffuser",
+        "epoch": 35,
+        "members": 10,
+        "split": "val",
+        "manifest_sha256": "957c0ce3d9cd7364fdb0341860a6e3219b9201cb6dff4e4857e5d6ae5c19e556",
+        "validation": {
+          "psnr": 30.892053761291503,
+          "ssim": 0.8474303317070008,
+          "mse": 0.0011237748194835148,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "mean of 10 raw member predictions, clipped after averaging"
+        },
+        "provenance": [
+          {
+            "arm": "ensemble_00",
+            "epoch": 35,
+            "seeds": {
+              "initialization": 20261006,
+              "training": 20271006,
+              "data": 20281006,
+              "quantile": 20291006
+            },
+            "training_hours": 29.419909157245254
+          },
+          {
+            "arm": "ensemble_01",
+            "epoch": 35,
+            "seeds": {
+              "initialization": 20261007,
+              "training": 20271007,
+              "data": 20281007,
+              "quantile": 20291007
+            },
+            "training_hours": 30.498884771378695
+          },
+          {
+            "arm": "ensemble_02",
+            "epoch": 35,
+            "seeds": {
+              "initialization": 20261008,
+              "training": 20271008,
+              "data": 20281008,
+              "quantile": 20291008
+            },
+            "training_hours": 33.216289784148714
+          },
+          {
+            "arm": "ensemble_03",
+            "epoch": 35,
+            "seeds": {
+              "initialization": 20261009,
+              "training": 20271009,
+              "data": 20281009,
+              "quantile": 20291009
+            },
+            "training_hours": 30.90499606381452
+          },
+          {
+            "arm": "ensemble_04",
+            "epoch": 35,
+            "seeds": {
+              "initialization": 20261010,
+              "training": 20271010,
+              "data": 20281010,
+              "quantile": 20291010
+            },
+            "training_hours": 28.14549521445499
+          },
+          {
+            "arm": "ensemble_05",
+            "epoch": 35,
+            "seeds": {
+              "initialization": 20261011,
+              "training": 20271011,
+              "data": 20281011,
+              "quantile": 20291011
+            },
+            "training_hours": 30.405541178742393
+          },
+          {
+            "arm": "ensemble_06",
+            "epoch": 35,
+            "seeds": {
+              "initialization": 20261012,
+              "training": 20271012,
+              "data": 20281012,
+              "quantile": 20291012
+            },
+            "training_hours": 30.260953909935537
+          },
+          {
+            "arm": "ensemble_07",
+            "epoch": 35,
+            "seeds": {
+              "initialization": 20261013,
+              "training": 20271013,
+              "data": 20281013,
+              "quantile": 20291013
+            },
+            "training_hours": 30.744711550327313
+          },
+          {
+            "arm": "ensemble_08",
+            "epoch": 35,
+            "seeds": {
+              "initialization": 20261014,
+              "training": 20271014,
+              "data": 20281014,
+              "quantile": 20291014
+            },
+            "training_hours": 32.31056120241885
+          },
+          {
+            "arm": "ensemble_09",
+            "epoch": 35,
+            "seeds": {
+              "initialization": 20261015,
+              "training": 20271015,
+              "data": 20281015,
+              "quantile": 20291015
+            },
+            "training_hours": 32.162298109608074
+          }
+        ],
+        "seconds": 312.5153386294842,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "calibration_used": false,
+        "note": "PSNR/SSIM computed per image after averaging predictions, then averaged over the full validation set. No retraining; no averaging of member metrics."
+      },
+      {
+        "camera": "diffuser",
+        "epoch": 40,
+        "members": 10,
+        "split": "val",
+        "manifest_sha256": "957c0ce3d9cd7364fdb0341860a6e3219b9201cb6dff4e4857e5d6ae5c19e556",
+        "validation": {
+          "psnr": 30.965700756835936,
+          "ssim": 0.8493331240177154,
+          "mse": 0.0011048207703744993,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "mean of 10 raw member predictions, clipped after averaging"
+        },
+        "provenance": [
+          {
+            "arm": "ensemble_00",
+            "epoch": 40,
+            "seeds": {
+              "initialization": 20261006,
+              "training": 20271006,
+              "data": 20281006,
+              "quantile": 20291006
+            },
+            "training_hours": 34.304334739884325
+          },
+          {
+            "arm": "ensemble_01",
+            "epoch": 40,
+            "seeds": {
+              "initialization": 20261007,
+              "training": 20271007,
+              "data": 20281007,
+              "quantile": 20291007
+            },
+            "training_hours": 34.40054917399268
+          },
+          {
+            "arm": "ensemble_02",
+            "epoch": 40,
+            "seeds": {
+              "initialization": 20261008,
+              "training": 20271008,
+              "data": 20281008,
+              "quantile": 20291008
+            },
+            "training_hours": 36.90484190634927
+          },
+          {
+            "arm": "ensemble_03",
+            "epoch": 40,
+            "seeds": {
+              "initialization": 20261009,
+              "training": 20271009,
+              "data": 20281009,
+              "quantile": 20291009
+            },
+            "training_hours": 35.02510385881408
+          },
+          {
+            "arm": "ensemble_04",
+            "epoch": 40,
+            "seeds": {
+              "initialization": 20261010,
+              "training": 20271010,
+              "data": 20281010,
+              "quantile": 20291010
+            },
+            "training_hours": 32.768965785143614
+          },
+          {
+            "arm": "ensemble_05",
+            "epoch": 40,
+            "seeds": {
+              "initialization": 20261011,
+              "training": 20271011,
+              "data": 20281011,
+              "quantile": 20291011
+            },
+            "training_hours": 34.32648652135792
+          },
+          {
+            "arm": "ensemble_06",
+            "epoch": 40,
+            "seeds": {
+              "initialization": 20261012,
+              "training": 20271012,
+              "data": 20281012,
+              "quantile": 20291012
+            },
+            "training_hours": 35.928697010564775
+          },
+          {
+            "arm": "ensemble_07",
+            "epoch": 40,
+            "seeds": {
+              "initialization": 20261013,
+              "training": 20271013,
+              "data": 20281013,
+              "quantile": 20291013
+            },
+            "training_hours": 34.65169556346165
+          },
+          {
+            "arm": "ensemble_08",
+            "epoch": 40,
+            "seeds": {
+              "initialization": 20261014,
+              "training": 20271014,
+              "data": 20281014,
+              "quantile": 20291014
+            },
+            "training_hours": 37.27216919725149
+          },
+          {
+            "arm": "ensemble_09",
+            "epoch": 40,
+            "seeds": {
+              "initialization": 20261015,
+              "training": 20271015,
+              "data": 20281015,
+              "quantile": 20291015
+            },
+            "training_hours": 38.35882354914363
+          }
+        ],
+        "seconds": 313.6456811223179,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "calibration_used": false,
+        "note": "PSNR/SSIM computed per image after averaging predictions, then averaged over the full validation set. No retraining; no averaging of member metrics."
+      },
+      {
+        "camera": "diffuser",
+        "epoch": 45,
+        "members": 10,
+        "split": "val",
+        "manifest_sha256": "957c0ce3d9cd7364fdb0341860a6e3219b9201cb6dff4e4857e5d6ae5c19e556",
+        "validation": {
+          "psnr": 31.04838056640625,
+          "ssim": 0.8498038927078247,
+          "mse": 0.0010839744227239862,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "mean of 10 raw member predictions, clipped after averaging"
+        },
+        "provenance": [
+          {
+            "arm": "ensemble_00",
+            "epoch": 45,
+            "seeds": {
+              "initialization": 20261006,
+              "training": 20271006,
+              "data": 20281006,
+              "quantile": 20291006
+            },
+            "training_hours": 39.468917673206306
+          },
+          {
+            "arm": "ensemble_01",
+            "epoch": 45,
+            "seeds": {
+              "initialization": 20261007,
+              "training": 20271007,
+              "data": 20281007,
+              "quantile": 20291007
+            },
+            "training_hours": 39.412514979956235
+          },
+          {
+            "arm": "ensemble_02",
+            "epoch": 45,
+            "seeds": {
+              "initialization": 20261008,
+              "training": 20271008,
+              "data": 20281008,
+              "quantile": 20291008
+            },
+            "training_hours": 42.04646554418047
+          },
+          {
+            "arm": "ensemble_03",
+            "epoch": 45,
+            "seeds": {
+              "initialization": 20261009,
+              "training": 20271009,
+              "data": 20281009,
+              "quantile": 20291009
+            },
+            "training_hours": 42.0718655633301
+          },
+          {
+            "arm": "ensemble_04",
+            "epoch": 45,
+            "seeds": {
+              "initialization": 20261010,
+              "training": 20271010,
+              "data": 20281010,
+              "quantile": 20291010
+            },
+            "training_hours": 37.518821189585644
+          },
+          {
+            "arm": "ensemble_05",
+            "epoch": 45,
+            "seeds": {
+              "initialization": 20261011,
+              "training": 20271011,
+              "data": 20281011,
+              "quantile": 20291011
+            },
+            "training_hours": 38.928338336673136
+          },
+          {
+            "arm": "ensemble_06",
+            "epoch": 45,
+            "seeds": {
+              "initialization": 20261012,
+              "training": 20271012,
+              "data": 20281012,
+              "quantile": 20291012
+            },
+            "training_hours": 41.36322622918577
+          },
+          {
+            "arm": "ensemble_07",
+            "epoch": 45,
+            "seeds": {
+              "initialization": 20261013,
+              "training": 20271013,
+              "data": 20281013,
+              "quantile": 20291013
+            },
+            "training_hours": 40.73816229800447
+          },
+          {
+            "arm": "ensemble_08",
+            "epoch": 45,
+            "seeds": {
+              "initialization": 20261014,
+              "training": 20271014,
+              "data": 20281014,
+              "quantile": 20291014
+            },
+            "training_hours": 43.33771883320435
+          },
+          {
+            "arm": "ensemble_09",
+            "epoch": 45,
+            "seeds": {
+              "initialization": 20261015,
+              "training": 20271015,
+              "data": 20281015,
+              "quantile": 20291015
+            },
+            "training_hours": 42.36612750121712
+          }
+        ],
+        "seconds": 310.00938666891307,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "calibration_used": false,
+        "note": "PSNR/SSIM computed per image after averaging predictions, then averaged over the full validation set. No retraining; no averaging of member metrics."
+      },
+      {
+        "camera": "diffuser",
+        "epoch": 50,
+        "members": 10,
+        "split": "val",
+        "manifest_sha256": "957c0ce3d9cd7364fdb0341860a6e3219b9201cb6dff4e4857e5d6ae5c19e556",
+        "validation": {
+          "psnr": 31.124077293395995,
+          "ssim": 0.850414742898941,
+          "mse": 0.0010650856202933938,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "mean of 10 raw member predictions, clipped after averaging"
+        },
+        "provenance": [
+          {
+            "arm": "ensemble_00",
+            "epoch": 50,
+            "seeds": {
+              "initialization": 20261006,
+              "training": 20271006,
+              "data": 20281006,
+              "quantile": 20291006
+            },
+            "training_hours": 44.20080062306402
+          },
+          {
+            "arm": "ensemble_01",
+            "epoch": 50,
+            "seeds": {
+              "initialization": 20261007,
+              "training": 20271007,
+              "data": 20281007,
+              "quantile": 20291007
+            },
+            "training_hours": 43.228133298149295
+          },
+          {
+            "arm": "ensemble_02",
+            "epoch": 50,
+            "seeds": {
+              "initialization": 20261008,
+              "training": 20271008,
+              "data": 20281008,
+              "quantile": 20291008
+            },
+            "training_hours": 46.66593147606479
+          },
+          {
+            "arm": "ensemble_03",
+            "epoch": 50,
+            "seeds": {
+              "initialization": 20261009,
+              "training": 20271009,
+              "data": 20281009,
+              "quantile": 20291009
+            },
+            "training_hours": 47.2756558141179
+          },
+          {
+            "arm": "ensemble_04",
+            "epoch": 50,
+            "seeds": {
+              "initialization": 20261010,
+              "training": 20271010,
+              "data": 20281010,
+              "quantile": 20291010
+            },
+            "training_hours": 42.804252640811015
+          },
+          {
+            "arm": "ensemble_05",
+            "epoch": 50,
+            "seeds": {
+              "initialization": 20261011,
+              "training": 20271011,
+              "data": 20281011,
+              "quantile": 20291011
+            },
+            "training_hours": 43.17906494297291
+          },
+          {
+            "arm": "ensemble_06",
+            "epoch": 50,
+            "seeds": {
+              "initialization": 20261012,
+              "training": 20271012,
+              "data": 20281012,
+              "quantile": 20291012
+            },
+            "training_hours": 45.755020748511775
+          },
+          {
+            "arm": "ensemble_07",
+            "epoch": 50,
+            "seeds": {
+              "initialization": 20261013,
+              "training": 20271013,
+              "data": 20281013,
+              "quantile": 20291013
+            },
+            "training_hours": 46.46650369505514
+          },
+          {
+            "arm": "ensemble_08",
+            "epoch": 50,
+            "seeds": {
+              "initialization": 20261014,
+              "training": 20271014,
+              "data": 20281014,
+              "quantile": 20291014
+            },
+            "training_hours": 47.16155755235215
+          },
+          {
+            "arm": "ensemble_09",
+            "epoch": 50,
+            "seeds": {
+              "initialization": 20261015,
+              "training": 20271015,
+              "data": 20281015,
+              "quantile": 20291015
+            },
+            "training_hours": 46.72285701537799
+          }
+        ],
+        "seconds": 309.2016773959622,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "calibration_used": false,
+        "note": "PSNR/SSIM computed per image after averaging predictions, then averaged over the full validation set. No retraining; no averaging of member metrics."
+      }
+    ]
   }
 }
