@@ -35,9 +35,80 @@
             "upper": 0.915068
           }
         }
+      },
+      "ensemble10": {
+        "epoch": 50,
+        "full_test_count": 5000,
+        "full_test_aggregate": {
+          "psnr": 38.85961444206238,
+          "ssim": 0.9636584936976432,
+          "mae": 0.0061871587177476615,
+          "coverage": 0.9357036656916141,
+          "width": 0.025897071553952992,
+          "native_crossing": 0.0
+        },
+        "aggregate": {
+          "psnr": 38.72427703857422,
+          "ssim": 0.9587165260314942,
+          "mae": 0.006347167419735342,
+          "coverage": 0.9323150837421417,
+          "width": 0.02614645957015455,
+          "native_crossing": 0.0
+        },
+        "manifest_sha256": "ef41a0325df23ef8ab3dc7c34b7a374f0f7d927f9323b9046ae39819c9f6b1d6",
+        "calibration_sha256": "4cdddb9b60bda8edaf8f3163dd614d1b746f18c5bc88aa4e8f8ebeaf23355ced",
+        "calibration_count": 2048,
+        "alpha": 0.1,
+        "delta": 0.05,
+        "factors": {
+          "empirical": {
+            "lower": 0.7709052562713623,
+            "upper": 0.8052294254302979
+          },
+          "rcps_hb": {
+            "lower": 0.830827,
+            "upper": 0.876101
+          }
+        }
       }
     },
-    "diffuser": {}
+    "diffuser": {
+      "ensemble5": {
+        "epoch": 50,
+        "full_test_count": 5000,
+        "full_test_aggregate": {
+          "psnr": 31.041494734573366,
+          "ssim": 0.849117071300745,
+          "mae": 0.017300108933937734,
+          "coverage": 0.9244713871061802,
+          "width": 0.07119102971991524,
+          "native_crossing": 0.0
+        },
+        "aggregate": {
+          "psnr": 31.29694232940674,
+          "ssim": 0.8518508517742157,
+          "mae": 0.01675556430593133,
+          "coverage": 0.9239543879032135,
+          "width": 0.06872365485876798,
+          "native_crossing": 0.0
+        },
+        "manifest_sha256": "957c0ce3d9cd7364fdb0341860a6e3219b9201cb6dff4e4857e5d6ae5c19e556",
+        "calibration_sha256": "f8b07201a887547415b1edb3a73287eaf94c52c50a6df9043a99a2512181964f",
+        "calibration_count": 2048,
+        "alpha": 0.1,
+        "delta": 0.05,
+        "factors": {
+          "empirical": {
+            "lower": 0.8923513293266296,
+            "upper": 0.9662601351737976
+          },
+          "rcps_hb": {
+            "lower": 0.958727,
+            "upper": 1.071958
+          }
+        }
+      }
+    }
   },
   "difference": "five minus ten",
   "members5": [
