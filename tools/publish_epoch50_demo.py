@@ -74,15 +74,15 @@ print(json.dumps(dict(ready=ready,queue=q,curves=curves,curve_count=curve_count,
   try:info=json.loads(run(SSH+['python3 -'],input=remote,timeout=60))
   except (ValueError,subprocess.SubprocessError) as exc:
    status('connection_retry',error=str(exc));time.sleep(45);continue
-  status('waiting_for_exports',**info)
-  if once or len(info['ready']) >= (8 if require_all else 5):break
+  status('waiting_for_exports',ready=info['ready'],queue=info['queue'],ensemble10_milestones=info['curve_count'],ensemble5_milestones=sum(map(len,info['curves5'].values())),comparison_count=sum(map(len,info['comparison'].values())))
+  if once or len(info['ready']) >= (10 if require_all else 5):break
   if not info['queue'].strip():raise RuntimeError('Exports incomplete and no inference jobs remain')
   if 'DependencyNeverSatisfied' in info['queue']:raise RuntimeError('Failed training dependency; no publication')
   time.sleep(45)
  else:raise TimeoutError('24-hour export wait exceeded')
  curve_hash=hashlib.sha256(json.dumps([info['curves'],info['curves5'],info['comparison']],sort_keys=True).encode()).hexdigest()
  if once and curve_hash==previous.get('curve_hash') and sorted(info['ready'])==sorted(previous.get('ready',[])) and not force:
-  status('monitoring',ready=info['ready'],ensemble_curve_milestones=info['curve_count'],url=previous.get('url'));return len(info['ready'])==8
+  status('monitoring',ready=info['ready'],ensemble_curve_milestones=info['curve_count'],url=previous.get('url'));return len(info['ready'])==10
  if not all(c+'/im2im' in info['ready'] for c in ['rml','diffuser']):return False
  for camera in ['rml','diffuser']:
   for method in METHODS:
@@ -160,11 +160,11 @@ print(json.dumps(dict(ready=ready,queue=q,curves=curves,curve_count=curve_count,
   time.sleep(15)
  else:raise TimeoutError('Pages deployment not confirmed')
  (OUT/'live_validation.txt').write_text(check_browser('https://shdakudow.github.io/ConvRML-Uncertainty-Demo/'))
- status('complete' if len(info['ready'])==8 else 'published_monitoring_pending_models',ready=info['ready'],commit=commit,asset_commit=asset_commit,url='https://shdakudow.github.io/ConvRML-Uncertainty-Demo/corrected-epoch50/')
+ status('complete' if len(info['ready'])==10 else 'published_monitoring_pending_models',ready=info['ready'],commit=commit,asset_commit=asset_commit,url='https://shdakudow.github.io/ConvRML-Uncertainty-Demo/corrected-epoch50/')
 
  saved.write_text(json.dumps(dict(curve5_count=sum(map(len,info['curves5'].values())),comparison_count=sum(map(len,info['comparison'].values())),curve_hash=curve_hash,curve_count=sum(len(v) for v in info['curves'].values()),ready=info['ready'],commit=commit,asset_commit=asset_commit,url='https://shdakudow.github.io/ConvRML-Uncertainty-Demo/corrected-epoch50/'),indent=2))
  (OUT/'force_publish_once').unlink(missing_ok=True)
- return len(info['ready'])==8
+ return len(info['ready'])==10
 
 if __name__=='__main__':
  try:
