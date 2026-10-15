@@ -3,7 +3,7 @@
 Does not modify existing demos. Exact float32 assets live on a dedicated branch
 of the same public repository; the page pins the immutable asset commit.
 """
-import functools, http.server, json, os, subprocess, sys, threading, time
+import functools, hashlib, http.server, json, math, os, subprocess, sys, threading, time
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -40,7 +40,7 @@ def main(require_all=False,once=False):
  force='--force' in sys.argv or (OUT/'force_publish_once').exists()
  saved=OUT/'auto_published.json'
  previous=json.loads(saved.read_text()) if saved.exists() else {}
- if once and len(previous.get('ready',[]))==8 and not force:return True
+ if once and len(previous.get('ready',[]))==8 and previous.get('curve_count')==20 and not force:return True
  head=run(['git','rev-parse','HEAD'])
  remote='''import json,pathlib,subprocess
 root=pathlib.Path.home()/'ConvRML/results/corrected_demo_epoch50_20261011'
@@ -53,7 +53,11 @@ for camera in ['rml','diffuser']:
    assert r['epoch']==(20 if method=='adaptive_qutcc' else 50) and r['count']==50 and r['calibration_count']==2048
    ready.append(camera+'/'+method)
 q=subprocess.run(['/usr/local/slurm/current/bin/squeue','-j','288027,288028,288596,288597','-h','-o','%i %T %R'],text=True,capture_output=True).stdout
-print(json.dumps(dict(ready=ready,queue=q)))
+curve_root=pathlib.Path.home()/'ConvRML/results/ensemble10_validation_curves_20261015'
+curves={c:[json.loads(p.read_text()) for p in sorted((curve_root/c).glob('epoch_*.json'))] for c in ['rml','diffuser']}
+curve_count=sum(len(v) for v in curves.values())
+if curve_count!=20:curves={c:[] for c in ['rml','diffuser']}
+print(json.dumps(dict(ready=ready,queue=q,curves=curves,curve_count=curve_count)))
 '''
  for _ in range(1440):
   try:info=json.loads(run(SSH+['python3 -'],input=remote,timeout=60))
@@ -65,8 +69,9 @@ print(json.dumps(dict(ready=ready,queue=q)))
   if 'DependencyNeverSatisfied' in info['queue']:raise RuntimeError('Failed training dependency; no publication')
   time.sleep(45)
  else:raise TimeoutError('24-hour export wait exceeded')
- if once and sorted(info['ready'])==sorted(previous.get('ready',[])) and not force:
-  status('monitoring',ready=info['ready'],url=previous.get('url'));return len(info['ready'])==8
+ curve_hash=hashlib.sha256(json.dumps(info['curves'],sort_keys=True).encode()).hexdigest()
+ if once and curve_hash==previous.get('curve_hash') and sorted(info['ready'])==sorted(previous.get('ready',[])) and not force:
+  status('monitoring',ready=info['ready'],ensemble_curve_milestones=info['curve_count'],url=previous.get('url'));return len(info['ready'])==8
  if not all(c+'/im2im' in info['ready'] for c in ['rml','diffuser']):return False
  for camera in ['rml','diffuser']:
   for method in METHODS:
@@ -75,6 +80,15 @@ print(json.dumps(dict(ready=ready,queue=q)))
    for name in ['report.json','examples.npz']:
     run(['rsync','-az','-e','ssh -i '+str(Path.home()/'.ssh/id_ed25519')+' -o BatchMode=yes',
       'jy2228@unicorn-login-02.coecis.cornell.edu:ConvRML/results/'+('adaptive_q20_demo_20261015' if method=='adaptive_qutcc' else 'corrected_demo_epoch50_20261011')+'/'+camera+'/'+method+'/'+name,str(dest)+'/'],timeout=600)
+ for camera,rows in info['curves'].items():
+  if rows:
+   assert [row['epoch'] for row in rows]==list(range(5,51,5))
+   manifest=json.loads((OUT/camera/'im2im/report.json').read_text())['manifest_sha256']
+   for row in rows:
+    assert row['camera']==camera and row['members']==10 and row['split']=='val'
+    assert row['manifest_sha256']==manifest and row['validation']['count']==5000 and row['validation']['clipped']
+    assert all(math.isfinite(row['validation'][k]) for k in ['psnr','ssim','mse'])
+ (ROOT/'corrected-epoch50/ensemble_curves.json').write_text(json.dumps(dict(method='ensemble10',aggregation='average member predictions before computing metrics',members=10,validation_count=5000,cameras=info['curves']),indent=2)+'\n')
  status('building')
  reusable='--reuse-assets' in sys.argv
  for camera in ['rml','diffuser']:
@@ -108,7 +122,7 @@ print(json.dumps(dict(ready=ready,queue=q)))
   (OUT/'remote_asset_validation.txt').write_text(check_browser('http://127.0.0.1:8775/'))
  finally:server.shutdown();server.server_close()
  run(['git','diff','--check'])
- run(['git','add','--','corrected-epoch50','tools/build_epoch50_demo.py','tools/verify_epoch50_browser.py','tools/publish_epoch50_demo.py','tools/export_adaptive_q20_demo.py','tools/submit_adaptive_q20_demo.py'])
+ run(['git','add','--','corrected-epoch50','tools/build_epoch50_demo.py','tools/verify_epoch50_browser.py','tools/publish_epoch50_demo.py','tools/export_adaptive_q20_demo.py','tools/submit_adaptive_q20_demo.py','tools/evaluate_ensemble_learning_curve.py','tools/submit_ensemble_learning_curve.py'])
  if run(['git','diff','--cached','--name-only']):run(['git','commit','-m','Update completed baselines and adaptive-QUTCC epoch-20 demo availability'])
  commit=run(['git','rev-parse','HEAD'])
  run(['git','push','origin','main'],timeout=600)
@@ -124,7 +138,7 @@ print(json.dumps(dict(ready=ready,queue=q)))
  (OUT/'live_validation.txt').write_text(check_browser('https://shdakudow.github.io/ConvRML-Uncertainty-Demo/'))
  status('complete' if len(info['ready'])==8 else 'published_monitoring_pending_models',ready=info['ready'],commit=commit,asset_commit=asset_commit,url='https://shdakudow.github.io/ConvRML-Uncertainty-Demo/corrected-epoch50/')
 
- saved.write_text(json.dumps(dict(ready=info['ready'],commit=commit,asset_commit=asset_commit,url='https://shdakudow.github.io/ConvRML-Uncertainty-Demo/corrected-epoch50/'),indent=2))
+ saved.write_text(json.dumps(dict(curve_hash=curve_hash,curve_count=sum(len(v) for v in info['curves'].values()),ready=info['ready'],commit=commit,asset_commit=asset_commit,url='https://shdakudow.github.io/ConvRML-Uncertainty-Demo/corrected-epoch50/'),indent=2))
  (OUT/'force_publish_once').unlink(missing_ok=True)
  return len(info['ready'])==8
 

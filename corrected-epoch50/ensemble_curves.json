@@ -1,0 +1,10 @@
+{
+  "method": "ensemble10",
+  "aggregation": "average member predictions before computing metrics",
+  "members": 10,
+  "validation_count": 5000,
+  "cameras": {
+    "rml": [],
+    "diffuser": []
+  }
+}

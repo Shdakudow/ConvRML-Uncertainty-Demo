@@ -52,3 +52,10 @@ Automatic update (requested October 15, 2026):
 - Publisher status, logs and last published readiness are in
   ~/.local/share/convrml-epoch50-auto/results/ (also linked from
   ~/Downloads/ConvRML_Epoch50_Demo/).
+
+Ensemble learning curves: evaluate all ten saved members at epochs 5,10,...,50
+on all 5,000 validation images, average raw predicted means, clip the combined
+prediction, and compute per-image PSNR/SSIM before averaging over images.
+No retraining and no averaging of individual-member PSNR/SSIM. Curve exports
+are in results/ensemble10_validation_curves_20261015 on Unicorn and publish
+automatically after all 20 camera/milestone evaluations complete.
