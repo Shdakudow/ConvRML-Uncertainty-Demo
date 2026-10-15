@@ -14,7 +14,8 @@ from scripts.asymmetric_rcps import select_asymmetric_factors
 METHODS = ['conditioned', 'im2im', 'ensemble10', 'mc_010']
 
 def predictor(camera, method, epoch):
-    arms = [f'ensemble_{i:02d}' for i in range(10)] if method == 'ensemble10' else [method]
+    members = {'ensemble5': 5, 'ensemble10': 10}.get(method)
+    arms = [f'ensemble_{i:02d}' for i in range(members)] if members else [method]
     models, provenance = [], []
     for arm in arms:
         model, ck = load_model(camera, arm, epoch)
@@ -22,13 +23,13 @@ def predictor(camera, method, epoch):
         provenance.append(dict(arm=arm, epoch=ck['epoch'], seeds=ck['seeds'],
                                training_hours=sum(r['seconds'] for r in ck['history'])/3600))
     def predict(y):
-        if method == 'ensemble10':
+        if members:
             mu = second = None
             for model in models:
                 r, v = model(y); r, v = r.float(), v.float()
                 mu = r if mu is None else mu+r
                 second = v+r.square() if second is None else second+v+r.square()
-            r = mu/10; var = (second/10-r.square()).clamp_min(0)
+            r = mu/members; var = (second/members-r.square()).clamp_min(0)
         elif method == 'mc_010':
             r = m2 = None
             with dropout_inference(models[0]):

@@ -1,0 +1,27 @@
+{
+  "cameras": {
+    "rml": {},
+    "diffuser": {}
+  },
+  "difference": "five minus ten",
+  "members5": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "members10": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "epoch": 50
+}
