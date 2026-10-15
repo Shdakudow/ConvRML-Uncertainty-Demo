@@ -1891,7 +1891,7 @@
       }
     ]
   },
-  "notes": "Epoch 50; 60,000 training images, 5,000 validation, 5,000 test, 2,048 independent calibration. First 50 test images shown without quality selection. RCPS alpha=.10 delta=.05; separate lower/upper factors. Clipped float32 metrics. MC p=.10, 30 draws fixed for continuity, not claimed validation-optimal. Adaptive QUTCC, when available, uses epoch 20: unequal training budgets, explicitly labeled. Its q endpoints are learned per image before separate RCPS scale calibration.",
+  "notes": "Epoch 50; 60,000 training images, 5,000 validation, 5,000 test, 2,048 independent calibration. First 50 test images shown without quality selection. RCPS alpha=.10 delta=.05; separate lower/upper factors. Clipped float32 metrics. MC p=.10, 30 draws fixed for continuity, not claimed validation-optimal. Adaptive QUTCC, when available, uses epoch 20: unequal training budgets, explicitly labeled. QUTCC endpoints are learned per image and evaluated natively without RCPS or calibration data. RCPS applies only to the baselines.",
   "manifest_sha256": "957c0ce3d9cd7364fdb0341860a6e3219b9201cb6dff4e4857e5d6ae5c19e556",
   "reports": {
     "im2im": {
