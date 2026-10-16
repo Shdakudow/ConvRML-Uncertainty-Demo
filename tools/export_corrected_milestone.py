@@ -22,6 +22,10 @@ def predictor(camera, method, epoch):
         models.append(model.cuda().eval())
         provenance.append(dict(arm=arm, epoch=ck['epoch'], seeds=ck['seeds'],
                                training_hours=sum(r['seconds'] for r in ck['history'])/3600))
+    if method.startswith('mc_'):
+        rates=[m.p for m in models[0].modules() if isinstance(m,torch.nn.Dropout)]
+        expected={'mc_005':.05,'mc_010':.1,'mc_020':.2}[method]
+        if len(rates)!=48 or any(abs(p-expected)>1e-8 for p in rates):raise ValueError('Unexpected dropout layout or rate')
     def predict(y):
         if members:
             mu = second = None
@@ -30,7 +34,7 @@ def predictor(camera, method, epoch):
                 mu = r if mu is None else mu+r
                 second = v+r.square() if second is None else second+v+r.square()
             r = mu/members; var = (second/members-r.square()).clamp_min(0)
-        elif method == 'mc_010':
+        elif method in ('mc_005','mc_010','mc_020'):
             r = m2 = None
             with dropout_inference(models[0]):
                 for i in range(30):
@@ -48,8 +52,8 @@ def predictor(camera, method, epoch):
 @torch.inference_mode()
 def main():
     p = argparse.ArgumentParser(); p.add_argument('--task', type=int, required=True)
-    p.add_argument('--epoch', type=int, default=25); p.add_argument('--count', type=int, default=50)
-    a = p.parse_args(); camera = ['rml', 'diffuser'][a.task//4]; method = METHODS[a.task%4]
+    p.add_argument('--method',choices=['mc_005','mc_010','mc_020']); p.add_argument('--epoch', type=int, default=25); p.add_argument('--count', type=int, default=50)
+    a = p.parse_args(); camera = ['rml', 'diffuser'][a.task//4]; method = a.method or METHODS[a.task%4]
     if not 1 <= a.count <= 5000: raise ValueError('Invalid count')
     out = Path(f'results/corrected_demo_epoch{a.epoch}_20261011')/camera/method
     out.mkdir(parents=True, exist_ok=True)
@@ -103,7 +107,7 @@ def main():
         provenance=provenance, validation_history=history, manifest_sha256=manifest_digest(data),
         calibration_sha256=manifest_digest(caldir), gpu=torch.cuda.get_device_name(),
         calibration_seconds=cal_seconds, inference_seconds=inference_seconds,
-        notes='First 50 held-out test images in manifest order; not full-test aggregates. RCPS independent lower/upper scaling, alpha=.1, delta=.05. Clipped [0,1]. QUTCC native q=.05/.95 followed by scale calibration, not quantile-query calibration. MC p=.1 and 30 passes fixed before test; final validation-selected policy is pending. Width need not equal absolute error. Image-level coverage is not guaranteed to be 90%.')
+        notes=f'First 50 held-out test images in manifest order; not full-test aggregates. RCPS independent lower/upper scaling, alpha=.1, delta=.05. Clipped [0,1]. QUTCC native q=.05/.95 followed by scale calibration, not quantile-query calibration. MC dropout rate follows the selected checkpoint ({method}); 30 stochastic passes. p=.05 selected from epoch-50 deterministic validation, not test results. Width need not equal absolute error. Image-level coverage is not guaranteed to be 90%.')
     write(out/'report.json', report); print('COMPLETE', camera, method, flush=True)
 
 if __name__ == '__main__': main()

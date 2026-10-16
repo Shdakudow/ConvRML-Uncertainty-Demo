@@ -13,7 +13,7 @@ ASSETS=OUT/'assets'
 OUT.mkdir(parents=True,exist_ok=True)
 SSH=['ssh','-i',str(Path.home()/'.ssh/id_ed25519'),'-o','BatchMode=yes','-o','ConnectTimeout=20','jy2228@unicorn-login-02.coecis.cornell.edu']
 REMOTE='https://github.com/Shdakudow/ConvRML-Uncertainty-Demo.git'
-METHODS=['im2im','ensemble10','ensemble5','mc_010','adaptive_qutcc']
+METHODS=['im2im','ensemble10','ensemble5','mc_005','adaptive_qutcc']
 
 def run(args,**kw):
  return subprocess.check_output(args,cwd=ROOT,text=True,**kw).strip()
@@ -46,7 +46,7 @@ def main(require_all=False,once=False):
 root=pathlib.Path.home()/'ConvRML/results/corrected_demo_epoch50_20261011'
 ready=[]
 for camera in ['rml','diffuser']:
- for method in ['im2im','ensemble10','ensemble5','mc_010','adaptive_qutcc']:
+ for method in ['im2im','ensemble10','ensemble5','mc_005','adaptive_qutcc']:
   p=(pathlib.Path.home()/'ConvRML/results/adaptive_q20_native_demo_20261015' if method=='adaptive_qutcc' else pathlib.Path.home()/'ConvRML/results/ensemble_size_comparison_20261015' if method=='ensemble5' else root)/camera/method
   if (p/'report.json').exists() and (p/'examples.npz').exists():
    r=json.loads((p/'report.json').read_text())
@@ -74,6 +74,7 @@ interval_root=pathlib.Path.home()/'ConvRML/results/current_interval_curves_20261
 for c in intervals:
  for p in sorted((interval_root/c).glob('*/epoch_*.json')):
   row=json.loads(p.read_text())
+  if row['method']=='mc_010':continue
   intervals[c].append({k:row[k] for k in ['camera','method','epoch','split','test_count','clipped','alpha','delta','calibration_used','interval_method','manifest_sha256','calibration_count','calibration_sha256','metrics']})
  # Existing full-test epoch-50 ensembles can be plotted immediately.
  for m,row in comparison[c].items():
@@ -177,7 +178,7 @@ print(json.dumps(dict(ready=ready,queue=q,curves=curves,curve_count=curve_count,
   (OUT/'remote_asset_validation.txt').write_text(check_browser('http://127.0.0.1:8775/'))
  finally:server.shutdown();server.server_close()
  run(['git','diff','--check'])
- run(['git','add','--','corrected-epoch50','tools/build_epoch50_demo.py','tools/verify_epoch50_browser.py','tools/publish_epoch50_demo.py','tools/export_adaptive_q20_demo.py','tools/submit_adaptive_q20_demo.py','tools/evaluate_ensemble_learning_curve.py','tools/submit_ensemble_learning_curve.py','tools/export_corrected_milestone.py','tools/export_ensemble_size_comparison.py','tools/submit_ensemble_size_comparison.py','tools/submit_ensemble5_learning_curve.py','tools/resume_native_qutcc.py','tools/submit_adaptive_q20_demo.py','tools/evaluate_interval_curves.py','tools/submit_interval_curves.py'])
+ run(['git','add','--','corrected-epoch50','tools/build_epoch50_demo.py','tools/verify_epoch50_browser.py','tools/publish_epoch50_demo.py','tools/export_adaptive_q20_demo.py','tools/submit_adaptive_q20_demo.py','tools/evaluate_ensemble_learning_curve.py','tools/submit_ensemble_learning_curve.py','tools/export_corrected_milestone.py','tools/export_ensemble_size_comparison.py','tools/submit_ensemble_size_comparison.py','tools/submit_ensemble5_learning_curve.py','tools/resume_native_qutcc.py','tools/submit_adaptive_q20_demo.py','tools/evaluate_interval_curves.py','tools/submit_interval_curves.py','tools/submit_mc005_demo.py'])
  if run(['git','diff','--cached','--name-only']):run(['git','commit','-m','Update completed baselines and adaptive-QUTCC epoch-20 demo availability'])
  commit=run(['git','rev-parse','HEAD'])
  run(['git','push','origin','main'],timeout=600)

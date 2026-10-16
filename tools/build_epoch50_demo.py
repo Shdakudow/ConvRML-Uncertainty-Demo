@@ -3,7 +3,7 @@ import argparse,base64,gzip,json
 from pathlib import Path
 import numpy as np
 
-METHODS=['im2im','ensemble10','mc_010']
+METHODS=['im2im','ensemble10','mc_005']
 def enc(a):
  a=np.asarray(a,dtype='<f4')
  if not np.isfinite(a).all():raise ValueError('Nonfinite export')
@@ -45,11 +45,11 @@ def main():
    zipped=gzip.compress(raw,compresslevel=6,mtime=0)
    assert gzip.decompress(zipped)==raw
    (out/f'example_{i:02d}.js.gz').write_bytes(zipped)
-  meta=dict(methods=METHODS,epochs={m:r['epoch'] for m,r in reports.items()},pendingMethods=[m for m in ['im2im','ensemble10','mc_010','adaptive_qutcc'] if m not in METHODS],study='RML' if camera=='rml' else 'DiffuserCam',epoch=reports['im2im']['epoch'],count=count,ids=[r['id'] for r in reports['im2im']['per_image']],encoding='float32-shuffled',metricClipping='[0,1]',trainCount=60000,
+  meta=dict(methods=METHODS,epochs={m:r['epoch'] for m,r in reports.items()},pendingMethods=[m for m in ['im2im','ensemble10','mc_005','adaptive_qutcc'] if m not in METHODS],study='RML' if camera=='rml' else 'DiffuserCam',epoch=reports['im2im']['epoch'],count=count,ids=[r['id'] for r in reports['im2im']['per_image']],encoding='float32-shuffled',metricClipping='[0,1]',trainCount=60000,
     mapMax=float(np.quantile(np.concatenate(maps),.995)),aggregate={m:r['aggregate'] for m,r in reports.items()},
     factors={m:(None if m=='adaptive_qutcc' else r['factors']['rcps_hb']) for m,r in reports.items()},calibrationCount=2048,calibrationMethod='RCPS (Hoeffding–Bentkus), separate lower/upper scaling',alpha=.1,delta=.05,
     history={m:[x for x in reports[m]['validation_history'][m] if x['epoch']<=reports['im2im']['epoch']] for m in METHODS if not m.startswith('ensemble')},
-    notes='Epoch 50; 60,000 training images, 5,000 validation, 5,000 test, 2,048 independent calibration. First 50 test images shown without quality selection. RCPS alpha=.10 delta=.05; separate lower/upper factors. Clipped float32 metrics. MC p=.10, 30 draws fixed for continuity, not claimed validation-optimal. Adaptive QUTCC, when available, uses epoch 20: unequal training budgets, explicitly labeled. QUTCC endpoints are learned per image and evaluated natively without RCPS or calibration data. RCPS applies only to the baselines.',manifest_sha256=reports['im2im']['manifest_sha256'])
+    notes='Epoch 50; 60,000 training images, 5,000 validation, 5,000 test, 2,048 independent calibration. First 50 test images shown without quality selection. RCPS alpha=.10 delta=.05; separate lower/upper factors. Clipped float32 metrics. MC p=.05 selected using deterministic validation; 30 stochastic inference draws. Adaptive QUTCC, when available, uses epoch 20: unequal training budgets, explicitly labeled. QUTCC endpoints are learned per image and evaluated natively without RCPS or calibration data. RCPS applies only to the baselines.',manifest_sha256=reports['im2im']['manifest_sha256'])
   (out/'manifest.js').write_text('window.DATASET='+json.dumps(meta,separators=(',',':'))+';')
   (out/'protocol.json').write_text(json.dumps({**meta,'reports':reports},indent=2))
   print(camera,count,'examples; sample aggregate',meta['aggregate'],flush=True)

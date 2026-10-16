@@ -13,7 +13,7 @@ from scripts.export_corrected_milestone import predictor
 from scripts.asymmetric_rcps import select_asymmetric_factors
 from scripts.train_constrained_adaptive50 import load_checkpoint
 ROOT=Path('results/current_interval_curves_20261015')
-METHODS=['im2im','ensemble5','ensemble10','mc_010','adaptive_qutcc']
+METHODS=['im2im','ensemble5','ensemble10','mc_010','adaptive_qutcc','mc_005']
 
 @torch.inference_mode()
 def main():
@@ -33,7 +33,7 @@ def main():
  common=dict(camera=a.camera,method=a.method,epoch=a.epoch,split='test',test_count=4 if a.smoke else 5000,
   clipped=True,alpha=.1,delta=None if native else .05,calibration_used=not native,
   interval_method='native_learned_image_quantiles' if native else 'rcps_hb_asymmetric',
-  manifest_sha256=manifest_digest(data),seed=seed,mc_passes=30 if a.method=='mc_010' else None)
+  manifest_sha256=manifest_digest(data),seed=seed,mc_passes=30 if a.method.startswith('mc_') else None)
  # Reuse completed full-test ensemble evaluations instead of repeating them.
  reuse=Path('results/ensemble_size_comparison_20261015')/a.camera/a.method/'report.json'
  if not a.smoke and a.epoch==50 and a.method.startswith('ensemble') and reuse.exists():

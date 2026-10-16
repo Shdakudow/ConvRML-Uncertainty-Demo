@@ -16,7 +16,7 @@ def submit(key,args):
 # One small real-data check for the RCPS path and one for native QUTCC.
 smoke=submit('smoke_job',['--job-name=interval-smoke','--array=0-1%2','--wrap',
  'if [ "$SLURM_ARRAY_TASK_ID" = 0 ]; then m=im2im; else m=adaptive_qutcc; fi; $HOME/.conda/envs/convrml/bin/python -u scripts/evaluate_interval_curves.py --camera rml --method "$m" --epoch 5 --smoke'])
-wrap='i=$SLURM_ARRAY_TASK_ID; if [ "$i" -lt 40 ]; then c=rml; else c=diffuser; fi; case $(((i / 10) % 4)) in 0) m=im2im;; 1) m=ensemble5;; 2) m=ensemble10;; 3) m=mc_010;; esac; $HOME/.conda/envs/convrml/bin/python -u scripts/evaluate_interval_curves.py --camera "$c" --method "$m" --epoch "$((5 * (i % 10 + 1)))"'
+wrap='i=$SLURM_ARRAY_TASK_ID; if [ "$i" -lt 40 ]; then c=rml; else c=diffuser; fi; case $(((i / 10) % 4)) in 0) m=im2im;; 1) m=ensemble5;; 2) m=ensemble10;; 3) m=mc_005;; esac; $HOME/.conda/envs/convrml/bin/python -u scripts/evaluate_interval_curves.py --camera "$c" --method "$m" --epoch "$((5 * (i % 10 + 1)))"'
 submit('baseline_array',['--job-name=interval-baselines','--array=0-79%2','--dependency=afterok:'+smoke,'--wrap',wrap])
 training=json.loads(Path('results/adaptive_q_coverage90_scratch50_20261014/resumed_native_jobs_20261015.json').read_text())['jobs']
 for c in ['rml','diffuser']:

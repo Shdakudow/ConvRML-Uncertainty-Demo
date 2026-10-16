@@ -45,6 +45,9 @@ try:
   js("document.getElementById('channel').value='1';document.getElementById('channel').dispatchEvent(new Event('change'));document.getElementById('target').dispatchEvent(new MouseEvent('click',{clientX:100,clientY:100,bubbles:true}))")
   assert js("document.querySelectorAll('#pixelRows tr').length")==4
   assert js("document.querySelectorAll('#ensembleDifferenceRows tr').length")==3
+  assert js("document.querySelectorAll('#intervalHistoryPlots .plot').length")==2
+  assert js("!document.getElementById('intervalHistoryPlots').innerHTML.includes('NaN')")
+  assert js("document.getElementById('intervalCurveStatus').textContent.includes('5,000 test images')")
   assert js("ENSEMBLE_KEY === (DATASET.methods.includes('ensemble5')?'ensemble5':'ensemble10')")
   assert js("document.getElementById('provenance').textContent.includes(DATASET.methods.includes('adaptive_qutcc')?'QUTCC epoch 20':'QUTCC unavailable')")
   if path.startswith('corrected'):
