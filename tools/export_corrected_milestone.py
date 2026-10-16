@@ -25,7 +25,7 @@ def predictor(camera, method, epoch):
     if method.startswith('mc_'):
         rates=[m.p for m in models[0].modules() if isinstance(m,torch.nn.Dropout)]
         expected={'mc_005':.05,'mc_010':.1,'mc_020':.2}[method]
-        if len(rates)!=48 or any(abs(p-expected)>1e-8 for p in rates):raise ValueError('Unexpected dropout layout or rate')
+        if len([p for p in rates if p>0])!=48 or any(p>0 and abs(p-expected)>1e-8 for p in rates):raise ValueError('Unexpected dropout layout or rate')
     def predict(y):
         if members:
             mu = second = None
