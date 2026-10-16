@@ -2,15 +2,16 @@
   "methods": [
     "im2im",
     "ensemble10",
-    "ensemble5"
+    "ensemble5",
+    "mc_005"
   ],
   "epochs": {
     "im2im": 50,
     "ensemble10": 50,
-    "ensemble5": 50
+    "ensemble5": 50,
+    "mc_005": 50
   },
   "pendingMethods": [
-    "mc_005",
     "adaptive_qutcc"
   ],
   "study": "RML",
@@ -71,7 +72,7 @@
   "encoding": "float32-shuffled",
   "metricClipping": "[0,1]",
   "trainCount": 60000,
-  "mapMax": 0.15795961022377014,
+  "mapMax": 0.15029042959213257,
   "aggregate": {
     "im2im": {
       "psnr": 39.536966247558595,
@@ -96,6 +97,14 @@
       "coverage": 0.9315061616897583,
       "width": 0.026413134913891554,
       "native_crossing": 0.0
+    },
+    "mc_005": {
+      "psnr": 39.13144355773926,
+      "ssim": 0.9616735136508942,
+      "mae": 0.006235036095604301,
+      "coverage": 0.9271482527256012,
+      "width": 0.02450193171389401,
+      "native_crossing": 0.0
     }
   },
   "factors": {
@@ -110,6 +119,10 @@
     "ensemble5": {
       "lower": 0.859493,
       "upper": 0.915068
+    },
+    "mc_005": {
+      "lower": 2.26468,
+      "upper": 2.397577
     }
   },
   "calibrationCount": 2048,
@@ -1001,6 +1014,888 @@
           "reconstruction": "center output"
         },
         "seconds": 3181.9327828995883,
+        "gpu": "NVIDIA RTX A6000",
+        "runtime": {
+          "version": "baseline",
+          "channels_last": false,
+          "fused_adamw": false
+        }
+      }
+    ],
+    "mc_005": [
+      {
+        "epoch": 1,
+        "loss": 0.0013942747476362758,
+        "validation": {
+          "psnr": 33.90307469329834,
+          "ssim": 0.8942660062789917,
+          "mse": 0.0005386139457754325,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 2744.0854682372883,
+        "gpu": "NVIDIA RTX 6000 Ada Generation"
+      },
+      {
+        "epoch": 2,
+        "loss": 0.0005436784705048921,
+        "validation": {
+          "psnr": 34.86248783569336,
+          "ssim": 0.8730176928758622,
+          "mse": 0.00043402608275791864,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 2907.83734208392,
+        "gpu": "NVIDIA RTX 6000 Ada Generation"
+      },
+      {
+        "epoch": 3,
+        "loss": 0.0004443778735004647,
+        "validation": {
+          "psnr": 35.507198552703855,
+          "ssim": 0.9302180309772492,
+          "mse": 0.0003762080651038559,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 2869.879014937207,
+        "gpu": "NVIDIA RTX 6000 Ada Generation"
+      },
+      {
+        "epoch": 4,
+        "loss": 0.0003916087765116875,
+        "validation": {
+          "psnr": 35.90034495239258,
+          "ssim": 0.9274457408428192,
+          "mse": 0.00034224546894693047,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 2748.1690755542368,
+        "gpu": "NVIDIA RTX 6000 Ada Generation"
+      },
+      {
+        "epoch": 5,
+        "loss": 0.00035834703390009965,
+        "validation": {
+          "psnr": 36.586672764587405,
+          "ssim": 0.9329911209344864,
+          "mse": 0.0003042506200443313,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 2828.2159196226858,
+        "gpu": "NVIDIA RTX 6000 Ada Generation"
+      },
+      {
+        "epoch": 6,
+        "loss": 0.00033446262580743376,
+        "validation": {
+          "psnr": 36.75904665222168,
+          "ssim": 0.9447021778345108,
+          "mse": 0.00029436886682742623,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 2751.941829534713,
+        "gpu": "NVIDIA RTX 6000 Ada Generation"
+      },
+      {
+        "epoch": 7,
+        "loss": 0.00031690408941158237,
+        "validation": {
+          "psnr": 36.944065267181394,
+          "ssim": 0.9361882903337478,
+          "mse": 0.00027946506028456495,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 4453.857789854519,
+        "gpu": "NVIDIA RTX A6000"
+      },
+      {
+        "epoch": 8,
+        "loss": 0.0003020554692603279,
+        "validation": {
+          "psnr": 37.35251209335327,
+          "ssim": 0.9467292158365249,
+          "mse": 0.00026017543526613734,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 4687.264275597408,
+        "gpu": "NVIDIA RTX A6000"
+      },
+      {
+        "epoch": 9,
+        "loss": 0.00029007344687846247,
+        "validation": {
+          "psnr": 37.23529051132202,
+          "ssim": 0.9280319671392441,
+          "mse": 0.00026317285624536454,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 2648.758205403574,
+        "gpu": "NVIDIA RTX 6000 Ada Generation"
+      },
+      {
+        "epoch": 10,
+        "loss": 0.00027983348763779457,
+        "validation": {
+          "psnr": 37.63415819549561,
+          "ssim": 0.9493444280147553,
+          "mse": 0.0002438332349905977,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 2876.304707628675,
+        "gpu": "NVIDIA RTX 6000 Ada Generation"
+      },
+      {
+        "epoch": 11,
+        "loss": 0.000270950937942204,
+        "validation": {
+          "psnr": 37.89204140625,
+          "ssim": 0.952749640583992,
+          "mse": 0.00023158585473065612,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 2662.7649768935516,
+        "gpu": "NVIDIA RTX 6000 Ada Generation"
+      },
+      {
+        "epoch": 12,
+        "loss": 0.0002632295280127437,
+        "validation": {
+          "psnr": 37.92182238311768,
+          "ssim": 0.9531107496500015,
+          "mse": 0.0002285686392118805,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 2797.9646197985858,
+        "gpu": "NVIDIA RTX 6000 Ada Generation"
+      },
+      {
+        "epoch": 13,
+        "loss": 0.00025565081503291367,
+        "validation": {
+          "psnr": 37.58864628448487,
+          "ssim": 0.9356080975532531,
+          "mse": 0.0002372912234510295,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 2541.057502876967,
+        "gpu": "NVIDIA RTX 6000 Ada Generation"
+      },
+      {
+        "epoch": 14,
+        "loss": 0.0002483762941046734,
+        "validation": {
+          "psnr": 37.64215841140747,
+          "ssim": 0.939394205069542,
+          "mse": 0.00024062842988205376,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 2659.040869689081,
+        "gpu": "NVIDIA RTX 6000 Ada Generation"
+      },
+      {
+        "epoch": 15,
+        "loss": 0.00024237493957931898,
+        "validation": {
+          "psnr": 38.187932080841065,
+          "ssim": 0.9528639132738114,
+          "mse": 0.00021723241257277551,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 3572.380553843919,
+        "gpu": "NVIDIA RTX A6000",
+        "runtime": {
+          "version": "baseline",
+          "channels_last": false,
+          "fused_adamw": false
+        }
+      },
+      {
+        "epoch": 16,
+        "loss": 0.00023671398801082736,
+        "validation": {
+          "psnr": 38.200003730010984,
+          "ssim": 0.9579214582681655,
+          "mse": 0.0002146408452616015,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 3575.5043346189195,
+        "gpu": "NVIDIA RTX A6000",
+        "runtime": {
+          "version": "baseline",
+          "channels_last": false,
+          "fused_adamw": false
+        }
+      },
+      {
+        "epoch": 17,
+        "loss": 0.00023199714172248301,
+        "validation": {
+          "psnr": 38.15730350494385,
+          "ssim": 0.9485212144374847,
+          "mse": 0.00021707968685877858,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 3195.6458981619217,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "runtime": {
+          "version": "baseline",
+          "channels_last": false,
+          "fused_adamw": false
+        }
+      },
+      {
+        "epoch": 18,
+        "loss": 0.000226826251400477,
+        "validation": {
+          "psnr": 38.35096990509033,
+          "ssim": 0.9512671135663986,
+          "mse": 0.00020914683212686213,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 3091.9203694998287,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "runtime": {
+          "version": "baseline",
+          "channels_last": false,
+          "fused_adamw": false
+        }
+      },
+      {
+        "epoch": 19,
+        "loss": 0.00022282384669576155,
+        "validation": {
+          "psnr": 38.31984420013428,
+          "ssim": 0.9562126224994659,
+          "mse": 0.00020833112525433535,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 3079.5475964928046,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "runtime": {
+          "version": "baseline",
+          "channels_last": false,
+          "fused_adamw": false
+        }
+      },
+      {
+        "epoch": 20,
+        "loss": 0.0002191080366775168,
+        "validation": {
+          "psnr": 38.14404174041748,
+          "ssim": 0.9491768863677978,
+          "mse": 0.00021333068876701873,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 3164.294652077835,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "runtime": {
+          "version": "baseline",
+          "channels_last": false,
+          "fused_adamw": false
+        }
+      },
+      {
+        "epoch": 21,
+        "loss": 0.00021469632280562412,
+        "validation": {
+          "psnr": 38.46985777435303,
+          "ssim": 0.9548666838645935,
+          "mse": 0.00020297635575698223,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 3452.7702907000203,
+        "gpu": "NVIDIA RTX A6000",
+        "runtime": {
+          "version": "baseline",
+          "channels_last": false,
+          "fused_adamw": false
+        }
+      },
+      {
+        "epoch": 22,
+        "loss": 0.00021041843957176145,
+        "validation": {
+          "psnr": 38.60827536926269,
+          "ssim": 0.9598210489034653,
+          "mse": 0.00019894272127494333,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 3452.485312372097,
+        "gpu": "NVIDIA RTX A6000",
+        "runtime": {
+          "version": "baseline",
+          "channels_last": false,
+          "fused_adamw": false
+        }
+      },
+      {
+        "epoch": 23,
+        "loss": 0.00020736860925392952,
+        "validation": {
+          "psnr": 38.66522354507446,
+          "ssim": 0.958339426445961,
+          "mse": 0.00019544424024643377,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 3072.399216679856,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "runtime": {
+          "version": "baseline",
+          "channels_last": false,
+          "fused_adamw": false
+        }
+      },
+      {
+        "epoch": 24,
+        "loss": 0.00020375424402445787,
+        "validation": {
+          "psnr": 38.64534396286011,
+          "ssim": 0.954825235080719,
+          "mse": 0.00019717657664332364,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 3352.5149235078134,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "runtime": {
+          "version": "baseline",
+          "channels_last": false,
+          "fused_adamw": false
+        }
+      },
+      {
+        "epoch": 25,
+        "loss": 0.0002007844576913764,
+        "validation": {
+          "psnr": 38.75636558609009,
+          "ssim": 0.9608761549949646,
+          "mse": 0.00019266980141910607,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 3045.9828093112446,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "runtime": {
+          "version": "baseline",
+          "channels_last": false,
+          "fused_adamw": false
+        }
+      },
+      {
+        "epoch": 26,
+        "loss": 0.00019770777517172367,
+        "validation": {
+          "psnr": 38.65832587966919,
+          "ssim": 0.9609843012809753,
+          "mse": 0.00019585685326164822,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 3040.09402939165,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "runtime": {
+          "version": "baseline",
+          "channels_last": false,
+          "fused_adamw": false
+        }
+      },
+      {
+        "epoch": 27,
+        "loss": 0.00019547097614598292,
+        "validation": {
+          "psnr": 38.828266205596925,
+          "ssim": 0.9601460628032684,
+          "mse": 0.0001897607625083765,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 3198.788633108139,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "runtime": {
+          "version": "baseline",
+          "channels_last": false,
+          "fused_adamw": false
+        }
+      },
+      {
+        "epoch": 28,
+        "loss": 0.00019360165772504842,
+        "validation": {
+          "psnr": 38.84758840255737,
+          "ssim": 0.9567447432994842,
+          "mse": 0.00018858121265402587,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 3256.187528095208,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "runtime": {
+          "version": "baseline",
+          "channels_last": false,
+          "fused_adamw": false
+        }
+      },
+      {
+        "epoch": 29,
+        "loss": 0.00019107510725055666,
+        "validation": {
+          "psnr": 38.746140280151366,
+          "ssim": 0.9582318310499192,
+          "mse": 0.00019220268809731352,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 3107.815109101124,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "runtime": {
+          "version": "baseline",
+          "channels_last": false,
+          "fused_adamw": false
+        }
+      },
+      {
+        "epoch": 30,
+        "loss": 0.00018816472397938924,
+        "validation": {
+          "psnr": 38.74319454040528,
+          "ssim": 0.959699595284462,
+          "mse": 0.00019142682803649223,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 3180.970475628972,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "runtime": {
+          "version": "baseline",
+          "channels_last": false,
+          "fused_adamw": false
+        }
+      },
+      {
+        "epoch": 31,
+        "loss": 0.00018652516289712365,
+        "validation": {
+          "psnr": 38.79413984222412,
+          "ssim": 0.9565106826066971,
+          "mse": 0.0001907789803790365,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 2574.6394645511173,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "runtime": {
+          "version": "baseline",
+          "channels_last": false,
+          "fused_adamw": false
+        }
+      },
+      {
+        "epoch": 32,
+        "loss": 0.00018427394416366952,
+        "validation": {
+          "psnr": 38.87244284591675,
+          "ssim": 0.952432832813263,
+          "mse": 0.00018715458826482062,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 2564.0084108593874,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "runtime": {
+          "version": "baseline",
+          "channels_last": false,
+          "fused_adamw": false
+        }
+      },
+      {
+        "epoch": 33,
+        "loss": 0.00018181924084274215,
+        "validation": {
+          "psnr": 38.247332069396975,
+          "ssim": 0.9490327054023743,
+          "mse": 0.00020790201462150435,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 2512.123083676677,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "runtime": {
+          "version": "baseline",
+          "channels_last": false,
+          "fused_adamw": false
+        }
+      },
+      {
+        "epoch": 34,
+        "loss": 0.00017971174506374154,
+        "validation": {
+          "psnr": 38.948898580932614,
+          "ssim": 0.9623448867321014,
+          "mse": 0.00018481669835819048,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 2575.346439078916,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "runtime": {
+          "version": "baseline",
+          "channels_last": false,
+          "fused_adamw": false
+        }
+      },
+      {
+        "epoch": 35,
+        "loss": 0.0001776262289211445,
+        "validation": {
+          "psnr": 39.033808110809325,
+          "ssim": 0.9592764709711075,
+          "mse": 0.0001815273664371489,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 3127.6020285133272,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "runtime": {
+          "version": "baseline",
+          "channels_last": false,
+          "fused_adamw": false
+        }
+      },
+      {
+        "epoch": 36,
+        "loss": 0.00017699992895932155,
+        "validation": {
+          "psnr": 39.08787500839233,
+          "ssim": 0.9581863384485245,
+          "mse": 0.0001806762942534988,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 3151.34135832265,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "runtime": {
+          "version": "baseline",
+          "channels_last": false,
+          "fused_adamw": false
+        }
+      },
+      {
+        "epoch": 37,
+        "loss": 0.00017490693090615726,
+        "validation": {
+          "psnr": 39.01493819046021,
+          "ssim": 0.9515269683122635,
+          "mse": 0.00018187948325612525,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 2716.4790645958856,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "runtime": {
+          "version": "baseline",
+          "channels_last": false,
+          "fused_adamw": false
+        }
+      },
+      {
+        "epoch": 38,
+        "loss": 0.00017438710241411476,
+        "validation": {
+          "psnr": 38.950123206329344,
+          "ssim": 0.9629036716461181,
+          "mse": 0.00018279104216053385,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 2704.736157569103,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "runtime": {
+          "version": "baseline",
+          "channels_last": false,
+          "fused_adamw": false
+        }
+      },
+      {
+        "epoch": 39,
+        "loss": 0.00017261717222557613,
+        "validation": {
+          "psnr": 38.973534923553466,
+          "ssim": 0.9563735403060913,
+          "mse": 0.00018192272476881045,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 2534.837725975085,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "runtime": {
+          "version": "baseline",
+          "channels_last": false,
+          "fused_adamw": false
+        }
+      },
+      {
+        "epoch": 40,
+        "loss": 0.00017092017774784836,
+        "validation": {
+          "psnr": 38.80588113632202,
+          "ssim": 0.9581166632175445,
+          "mse": 0.00018814886481122812,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 2523.8789838179946,
+        "gpu": "NVIDIA RTX 6000 Ada Generation",
+        "runtime": {
+          "version": "baseline",
+          "channels_last": false,
+          "fused_adamw": false
+        }
+      },
+      {
+        "epoch": 41,
+        "loss": 0.0001683178479839929,
+        "validation": {
+          "psnr": 39.25235880203247,
+          "ssim": 0.964926991391182,
+          "mse": 0.00017487399484743946,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 2404.990398367867,
+        "gpu": "NVIDIA H200 NVL",
+        "runtime": {
+          "version": "baseline",
+          "channels_last": false,
+          "fused_adamw": false
+        }
+      },
+      {
+        "epoch": 42,
+        "loss": 0.0001675244089982698,
+        "validation": {
+          "psnr": 39.09584601593018,
+          "ssim": 0.9647789212703705,
+          "mse": 0.00017921132907431457,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 2442.946754476987,
+        "gpu": "NVIDIA H200 NVL",
+        "runtime": {
+          "version": "baseline",
+          "channels_last": false,
+          "fused_adamw": false
+        }
+      },
+      {
+        "epoch": 43,
+        "loss": 0.00016696212859233127,
+        "validation": {
+          "psnr": 39.16395499038696,
+          "ssim": 0.960900715637207,
+          "mse": 0.00017721193408797261,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 2331.9309175731614,
+        "gpu": "NVIDIA H200 NVL",
+        "runtime": {
+          "version": "baseline",
+          "channels_last": false,
+          "fused_adamw": false
+        }
+      },
+      {
+        "epoch": 44,
+        "loss": 0.00016592059635246793,
+        "validation": {
+          "psnr": 39.231251264190675,
+          "ssim": 0.9613953882694244,
+          "mse": 0.00017509159675137197,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 2177.054104350973,
+        "gpu": "NVIDIA H200 NVL",
+        "runtime": {
+          "version": "baseline",
+          "channels_last": false,
+          "fused_adamw": false
+        }
+      },
+      {
+        "epoch": 45,
+        "loss": 0.00016547296966042875,
+        "validation": {
+          "psnr": 39.11877203292847,
+          "ssim": 0.9535646060705185,
+          "mse": 0.00017738945532764773,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 4040.337913485011,
+        "gpu": "NVIDIA RTX A6000",
+        "runtime": {
+          "version": "baseline",
+          "channels_last": false,
+          "fused_adamw": false
+        }
+      },
+      {
+        "epoch": 46,
+        "loss": 0.00016269668254475012,
+        "validation": {
+          "psnr": 39.257766899871825,
+          "ssim": 0.958048771238327,
+          "mse": 0.00017421770621294853,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 4084.887775690062,
+        "gpu": "NVIDIA RTX A6000",
+        "runtime": {
+          "version": "baseline",
+          "channels_last": false,
+          "fused_adamw": false
+        }
+      },
+      {
+        "epoch": 47,
+        "loss": 0.00016097527134403814,
+        "validation": {
+          "psnr": 39.3164585609436,
+          "ssim": 0.9634267765283585,
+          "mse": 0.00017251329801947578,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 4396.879422373138,
+        "gpu": "NVIDIA RTX A6000",
+        "runtime": {
+          "version": "baseline",
+          "channels_last": false,
+          "fused_adamw": false
+        }
+      },
+      {
+        "epoch": 48,
+        "loss": 0.00016090287409022797,
+        "validation": {
+          "psnr": 38.96543041687012,
+          "ssim": 0.9590991401910782,
+          "mse": 0.00018183487314454397,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 4513.1581807741895,
+        "gpu": "NVIDIA RTX A6000",
+        "runtime": {
+          "version": "baseline",
+          "channels_last": false,
+          "fused_adamw": false
+        }
+      },
+      {
+        "epoch": 49,
+        "loss": 0.00015986427064820723,
+        "validation": {
+          "psnr": 39.241255109405515,
+          "ssim": 0.9596700610637665,
+          "mse": 0.000174142323515116,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 4221.1547225238755,
+        "gpu": "NVIDIA RTX A6000",
+        "runtime": {
+          "version": "baseline",
+          "channels_last": false,
+          "fused_adamw": false
+        }
+      },
+      {
+        "epoch": 50,
+        "loss": 0.00015820505029129586,
+        "validation": {
+          "psnr": 39.21610760879516,
+          "ssim": 0.9655338851451873,
+          "mse": 0.00017433051928310306,
+          "count": 5000,
+          "clipped": true,
+          "reconstruction": "Gaussian mean"
+        },
+        "seconds": 4365.828858929686,
         "gpu": "NVIDIA RTX A6000",
         "runtime": {
           "version": "baseline",
@@ -61987,6 +62882,1411 @@
       "calibration_seconds": 140.6096984690521,
       "inference_seconds": 287.21937549486756,
       "notes": "Full 5000 test metrics and first 50 examples. Ensemble5 uses fixed members 00-04; ensemble10 uses 00-09. Each ensemble calibrated independently. RCPS independent lower/upper scaling, alpha=.1, delta=.05. Clipped [0,1]. QUTCC native q=.05/.95 followed by scale calibration, not quantile-query calibration. MC p=.1 and 30 passes fixed before test; final validation-selected policy is pending. Width need not equal absolute error. Image-level coverage is not guaranteed to be 90%."
+    },
+    "mc_005": {
+      "camera": "rml",
+      "method": "mc_005",
+      "epoch": 50,
+      "count": 50,
+      "calibration_count": 2048,
+      "alpha": 0.1,
+      "delta": 0.05,
+      "factors": {
+        "empirical": {
+          "lower": 2.045862913131714,
+          "upper": 2.1961188316345215
+        },
+        "rcps_hb": {
+          "lower": 2.26468,
+          "upper": 2.397577
+        }
+      },
+      "calibration": {
+        "n_images": 2048,
+        "alpha": 0.1,
+        "delta": 0.05,
+        "tail_alpha": 0.05,
+        "tail_delta": 0.025,
+        "maximum_accepted_tail_empirical_risk": 0.03857421865,
+        "tail_risks": {
+          "empirical_lower": 0.049999989569187164,
+          "rcps_hb_lower": 0.03857418894767761,
+          "empirical_upper": 0.04999999453624089,
+          "rcps_hb_upper": 0.03857414424419403
+        },
+        "total_risks": {
+          "empirical": 0.09999998410542807,
+          "rcps_hb": 0.07714833319187164
+        },
+        "confidence_policy": "Bonferroni: delta/2 per tail, joint failure <= delta",
+        "tail_hb_pvalues": {
+          "lower": 0.02248416610271146,
+          "upper": 0.02248416610271146
+        }
+      },
+      "per_image": [
+        {
+          "id": 35894,
+          "psnr": 46.749420166015625,
+          "ssim": 0.9917320013046265,
+          "mae": 0.0025649811141192913,
+          "coverage": 0.9709727168083191,
+          "width": 0.015582083724439144,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 24193,
+          "psnr": 37.17940139770508,
+          "ssim": 0.9598039388656616,
+          "mae": 0.005810592323541641,
+          "coverage": 0.933837890625,
+          "width": 0.022287240251898766,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 22857,
+          "psnr": 34.79328155517578,
+          "ssim": 0.9410446882247925,
+          "mae": 0.009135644882917404,
+          "coverage": 0.8871307373046875,
+          "width": 0.029426872730255127,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 53050,
+          "psnr": 42.18507766723633,
+          "ssim": 0.9835720062255859,
+          "mae": 0.0040100496262311935,
+          "coverage": 0.9733022451400757,
+          "width": 0.02204218879342079,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 14420,
+          "psnr": 38.46413803100586,
+          "ssim": 0.9642598032951355,
+          "mae": 0.006606324575841427,
+          "coverage": 0.9325358271598816,
+          "width": 0.027278780937194824,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 68127,
+          "psnr": 34.277671813964844,
+          "ssim": 0.9533075094223022,
+          "mae": 0.010588700883090496,
+          "coverage": 0.9410756826400757,
+          "width": 0.04621090739965439,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 77172,
+          "psnr": 44.34706115722656,
+          "ssim": 0.9825409650802612,
+          "mae": 0.0032775183208286762,
+          "coverage": 0.9391632080078125,
+          "width": 0.015802035108208656,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 89459,
+          "psnr": 32.09727478027344,
+          "ssim": 0.93804931640625,
+          "mae": 0.008820384740829468,
+          "coverage": 0.9339345693588257,
+          "width": 0.02927406132221222,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 70083,
+          "psnr": 42.255611419677734,
+          "ssim": 0.9773873090744019,
+          "mae": 0.00415599811822176,
+          "coverage": 0.9488983154296875,
+          "width": 0.021396420896053314,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 36001,
+          "psnr": 37.252506256103516,
+          "ssim": 0.9567634463310242,
+          "mae": 0.005768074654042721,
+          "coverage": 0.9075164794921875,
+          "width": 0.017835689708590508,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 6207,
+          "psnr": 46.353458404541016,
+          "ssim": 0.9909793734550476,
+          "mae": 0.0021511195227503777,
+          "coverage": 0.975921630859375,
+          "width": 0.012257064692676067,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 49696,
+          "psnr": 36.369354248046875,
+          "ssim": 0.9504801630973816,
+          "mae": 0.008058941923081875,
+          "coverage": 0.9105682373046875,
+          "width": 0.02972821518778801,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 53077,
+          "psnr": 36.025672912597656,
+          "ssim": 0.9487283229827881,
+          "mae": 0.007216851692646742,
+          "coverage": 0.8782958984375,
+          "width": 0.02207919955253601,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 82931,
+          "psnr": 40.848140716552734,
+          "ssim": 0.9767584800720215,
+          "mae": 0.0050438884645700455,
+          "coverage": 0.9501597285270691,
+          "width": 0.024606432765722275,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 85406,
+          "psnr": 36.48788070678711,
+          "ssim": 0.9612499475479126,
+          "mae": 0.006581034045666456,
+          "coverage": 0.926513671875,
+          "width": 0.02489316277205944,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 58845,
+          "psnr": 40.984519958496094,
+          "ssim": 0.9785431623458862,
+          "mae": 0.0049085458740592,
+          "coverage": 0.9726969599723816,
+          "width": 0.0283888578414917,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 56242,
+          "psnr": 39.64554214477539,
+          "ssim": 0.9703993201255798,
+          "mae": 0.005797216203063726,
+          "coverage": 0.9324493408203125,
+          "width": 0.024778250604867935,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 40931,
+          "psnr": 38.26832580566406,
+          "ssim": 0.9552429914474487,
+          "mae": 0.006217102985829115,
+          "coverage": 0.87872314453125,
+          "width": 0.019733253866434097,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 41815,
+          "psnr": 36.451377868652344,
+          "ssim": 0.9618810415267944,
+          "mae": 0.007305874954909086,
+          "coverage": 0.9293009638786316,
+          "width": 0.02984667383134365,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 15453,
+          "psnr": 36.09876251220703,
+          "ssim": 0.959662139415741,
+          "mae": 0.008010362274944782,
+          "coverage": 0.9086253046989441,
+          "width": 0.029673069715499878,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 27693,
+          "psnr": 39.499183654785156,
+          "ssim": 0.9638632535934448,
+          "mae": 0.00603504478931427,
+          "coverage": 0.9263865351676941,
+          "width": 0.026596564799547195,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 76529,
+          "psnr": 40.71635437011719,
+          "ssim": 0.9798835515975952,
+          "mae": 0.005097291432321072,
+          "coverage": 0.9535980224609375,
+          "width": 0.025233875960111618,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 50682,
+          "psnr": 43.936256408691406,
+          "ssim": 0.9858121275901794,
+          "mae": 0.002869403688237071,
+          "coverage": 0.9740142822265625,
+          "width": 0.016406718641519547,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 13030,
+          "psnr": 40.242034912109375,
+          "ssim": 0.9774702787399292,
+          "mae": 0.0030587296932935715,
+          "coverage": 0.9603118896484375,
+          "width": 0.011692921631038189,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 6731,
+          "psnr": 34.74262237548828,
+          "ssim": 0.949355959892273,
+          "mae": 0.010384260676801205,
+          "coverage": 0.9322459101676941,
+          "width": 0.04304560273885727,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 40056,
+          "psnr": 38.8594856262207,
+          "ssim": 0.9759575128555298,
+          "mae": 0.004776067100465298,
+          "coverage": 0.9111582636833191,
+          "width": 0.016806412488222122,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 79272,
+          "psnr": 36.57426452636719,
+          "ssim": 0.9586920738220215,
+          "mae": 0.008136281743645668,
+          "coverage": 0.9249929189682007,
+          "width": 0.03386007249355316,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 31338,
+          "psnr": 38.50179672241211,
+          "ssim": 0.9641376733779907,
+          "mae": 0.006039136089384556,
+          "coverage": 0.9642537832260132,
+          "width": 0.029792938381433487,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 34038,
+          "psnr": 36.41628646850586,
+          "ssim": 0.9579789638519287,
+          "mae": 0.006747404113411903,
+          "coverage": 0.9476725459098816,
+          "width": 0.02957066521048546,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 11855,
+          "psnr": 41.04457473754883,
+          "ssim": 0.9763212203979492,
+          "mae": 0.004010277800261974,
+          "coverage": 0.9454091787338257,
+          "width": 0.016676628962159157,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 27016,
+          "psnr": 44.0070915222168,
+          "ssim": 0.981996476650238,
+          "mae": 0.0026277699507772923,
+          "coverage": 0.9592692255973816,
+          "width": 0.012131033465266228,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 31863,
+          "psnr": 43.76226806640625,
+          "ssim": 0.9797689318656921,
+          "mae": 0.0034360154531896114,
+          "coverage": 0.9652150869369507,
+          "width": 0.01877962052822113,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 75958,
+          "psnr": 44.198726654052734,
+          "ssim": 0.9913372993469238,
+          "mae": 0.0033007455058395863,
+          "coverage": 0.9705454707145691,
+          "width": 0.01844935491681099,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 79939,
+          "psnr": 34.998199462890625,
+          "ssim": 0.9299033880233765,
+          "mae": 0.008076089434325695,
+          "coverage": 0.8553975820541382,
+          "width": 0.021110376343131065,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 38092,
+          "psnr": 32.23612976074219,
+          "ssim": 0.8751610517501831,
+          "mae": 0.012871968559920788,
+          "coverage": 0.8143514394760132,
+          "width": 0.030592605471611023,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 80359,
+          "psnr": 34.75718688964844,
+          "ssim": 0.9442384243011475,
+          "mae": 0.00962304137647152,
+          "coverage": 0.941925048828125,
+          "width": 0.04418807476758957,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 71215,
+          "psnr": 43.50292205810547,
+          "ssim": 0.9884979128837585,
+          "mae": 0.003078274894505739,
+          "coverage": 0.9799703359603882,
+          "width": 0.018998771905899048,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 70604,
+          "psnr": 42.623477935791016,
+          "ssim": 0.9874639511108398,
+          "mae": 0.004676269832998514,
+          "coverage": 0.9728749990463257,
+          "width": 0.028226284310221672,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 63808,
+          "psnr": 32.338157653808594,
+          "ssim": 0.9020413756370544,
+          "mae": 0.013160849921405315,
+          "coverage": 0.8378855586051941,
+          "width": 0.03665023669600487,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 32696,
+          "psnr": 35.81630325317383,
+          "ssim": 0.9385772943496704,
+          "mae": 0.008433585986495018,
+          "coverage": 0.8739725947380066,
+          "width": 0.026375120505690575,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 19348,
+          "psnr": 40.808250427246094,
+          "ssim": 0.9716305732727051,
+          "mae": 0.00445698294788599,
+          "coverage": 0.929534912109375,
+          "width": 0.01772264763712883,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 4320,
+          "psnr": 40.88727569580078,
+          "ssim": 0.9787363409996033,
+          "mae": 0.004923000931739807,
+          "coverage": 0.934814453125,
+          "width": 0.022395184263586998,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 18623,
+          "psnr": 44.06120681762695,
+          "ssim": 0.9800161719322205,
+          "mae": 0.0034510360565036535,
+          "coverage": 0.9338887929916382,
+          "width": 0.014692749828100204,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 17476,
+          "psnr": 42.78502655029297,
+          "ssim": 0.9820053577423096,
+          "mae": 0.003814900293946266,
+          "coverage": 0.9858144521713257,
+          "width": 0.02396315149962902,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 11725,
+          "psnr": 33.960968017578125,
+          "ssim": 0.9033008813858032,
+          "mae": 0.011876299977302551,
+          "coverage": 0.8083242177963257,
+          "width": 0.031426526606082916,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 80691,
+          "psnr": 33.222450256347656,
+          "ssim": 0.9100357890129089,
+          "mae": 0.01205798052251339,
+          "coverage": 0.8274282217025757,
+          "width": 0.03267785161733627,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 3828,
+          "psnr": 33.65464782714844,
+          "ssim": 0.9131350517272949,
+          "mae": 0.011460209265351295,
+          "coverage": 0.8584391474723816,
+          "width": 0.03549518436193466,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 6680,
+          "psnr": 49.93144226074219,
+          "ssim": 0.9895434379577637,
+          "mae": 0.0010574464686214924,
+          "coverage": 0.9867706298828125,
+          "width": 0.006296712439507246,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 6933,
+          "psnr": 43.169559478759766,
+          "ssim": 0.9819016456604004,
+          "mae": 0.004009199794381857,
+          "coverage": 0.911041259765625,
+          "width": 0.015530763193964958,
+          "native_crossing": 0.0
+        },
+        {
+          "id": 57118,
+          "psnr": 38.18354797363281,
+          "ssim": 0.9625257849693298,
+          "mae": 0.006177033297717571,
+          "coverage": 0.9382833242416382,
+          "width": 0.026591472327709198,
+          "native_crossing": 0.0
+        }
+      ],
+      "aggregate": {
+        "psnr": 39.13144355773926,
+        "ssim": 0.9616735136508942,
+        "mae": 0.006235036095604301,
+        "coverage": 0.9271482527256012,
+        "width": 0.02450193171389401,
+        "native_crossing": 0.0
+      },
+      "provenance": [
+        {
+          "arm": "mc_005",
+          "epoch": 50,
+          "seeds": {
+            "initialization": 20261108,
+            "training": 20271108,
+            "data": 20281108,
+            "quantile": 20291108
+          },
+          "training_hours": 43.32794585994691
+        }
+      ],
+      "validation_history": {
+        "mc_005": [
+          {
+            "epoch": 1,
+            "loss": 0.0013942747476362758,
+            "validation": {
+              "psnr": 33.90307469329834,
+              "ssim": 0.8942660062789917,
+              "mse": 0.0005386139457754325,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 2744.0854682372883,
+            "gpu": "NVIDIA RTX 6000 Ada Generation"
+          },
+          {
+            "epoch": 2,
+            "loss": 0.0005436784705048921,
+            "validation": {
+              "psnr": 34.86248783569336,
+              "ssim": 0.8730176928758622,
+              "mse": 0.00043402608275791864,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 2907.83734208392,
+            "gpu": "NVIDIA RTX 6000 Ada Generation"
+          },
+          {
+            "epoch": 3,
+            "loss": 0.0004443778735004647,
+            "validation": {
+              "psnr": 35.507198552703855,
+              "ssim": 0.9302180309772492,
+              "mse": 0.0003762080651038559,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 2869.879014937207,
+            "gpu": "NVIDIA RTX 6000 Ada Generation"
+          },
+          {
+            "epoch": 4,
+            "loss": 0.0003916087765116875,
+            "validation": {
+              "psnr": 35.90034495239258,
+              "ssim": 0.9274457408428192,
+              "mse": 0.00034224546894693047,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 2748.1690755542368,
+            "gpu": "NVIDIA RTX 6000 Ada Generation"
+          },
+          {
+            "epoch": 5,
+            "loss": 0.00035834703390009965,
+            "validation": {
+              "psnr": 36.586672764587405,
+              "ssim": 0.9329911209344864,
+              "mse": 0.0003042506200443313,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 2828.2159196226858,
+            "gpu": "NVIDIA RTX 6000 Ada Generation"
+          },
+          {
+            "epoch": 6,
+            "loss": 0.00033446262580743376,
+            "validation": {
+              "psnr": 36.75904665222168,
+              "ssim": 0.9447021778345108,
+              "mse": 0.00029436886682742623,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 2751.941829534713,
+            "gpu": "NVIDIA RTX 6000 Ada Generation"
+          },
+          {
+            "epoch": 7,
+            "loss": 0.00031690408941158237,
+            "validation": {
+              "psnr": 36.944065267181394,
+              "ssim": 0.9361882903337478,
+              "mse": 0.00027946506028456495,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 4453.857789854519,
+            "gpu": "NVIDIA RTX A6000"
+          },
+          {
+            "epoch": 8,
+            "loss": 0.0003020554692603279,
+            "validation": {
+              "psnr": 37.35251209335327,
+              "ssim": 0.9467292158365249,
+              "mse": 0.00026017543526613734,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 4687.264275597408,
+            "gpu": "NVIDIA RTX A6000"
+          },
+          {
+            "epoch": 9,
+            "loss": 0.00029007344687846247,
+            "validation": {
+              "psnr": 37.23529051132202,
+              "ssim": 0.9280319671392441,
+              "mse": 0.00026317285624536454,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 2648.758205403574,
+            "gpu": "NVIDIA RTX 6000 Ada Generation"
+          },
+          {
+            "epoch": 10,
+            "loss": 0.00027983348763779457,
+            "validation": {
+              "psnr": 37.63415819549561,
+              "ssim": 0.9493444280147553,
+              "mse": 0.0002438332349905977,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 2876.304707628675,
+            "gpu": "NVIDIA RTX 6000 Ada Generation"
+          },
+          {
+            "epoch": 11,
+            "loss": 0.000270950937942204,
+            "validation": {
+              "psnr": 37.89204140625,
+              "ssim": 0.952749640583992,
+              "mse": 0.00023158585473065612,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 2662.7649768935516,
+            "gpu": "NVIDIA RTX 6000 Ada Generation"
+          },
+          {
+            "epoch": 12,
+            "loss": 0.0002632295280127437,
+            "validation": {
+              "psnr": 37.92182238311768,
+              "ssim": 0.9531107496500015,
+              "mse": 0.0002285686392118805,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 2797.9646197985858,
+            "gpu": "NVIDIA RTX 6000 Ada Generation"
+          },
+          {
+            "epoch": 13,
+            "loss": 0.00025565081503291367,
+            "validation": {
+              "psnr": 37.58864628448487,
+              "ssim": 0.9356080975532531,
+              "mse": 0.0002372912234510295,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 2541.057502876967,
+            "gpu": "NVIDIA RTX 6000 Ada Generation"
+          },
+          {
+            "epoch": 14,
+            "loss": 0.0002483762941046734,
+            "validation": {
+              "psnr": 37.64215841140747,
+              "ssim": 0.939394205069542,
+              "mse": 0.00024062842988205376,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 2659.040869689081,
+            "gpu": "NVIDIA RTX 6000 Ada Generation"
+          },
+          {
+            "epoch": 15,
+            "loss": 0.00024237493957931898,
+            "validation": {
+              "psnr": 38.187932080841065,
+              "ssim": 0.9528639132738114,
+              "mse": 0.00021723241257277551,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 3572.380553843919,
+            "gpu": "NVIDIA RTX A6000",
+            "runtime": {
+              "version": "baseline",
+              "channels_last": false,
+              "fused_adamw": false
+            }
+          },
+          {
+            "epoch": 16,
+            "loss": 0.00023671398801082736,
+            "validation": {
+              "psnr": 38.200003730010984,
+              "ssim": 0.9579214582681655,
+              "mse": 0.0002146408452616015,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 3575.5043346189195,
+            "gpu": "NVIDIA RTX A6000",
+            "runtime": {
+              "version": "baseline",
+              "channels_last": false,
+              "fused_adamw": false
+            }
+          },
+          {
+            "epoch": 17,
+            "loss": 0.00023199714172248301,
+            "validation": {
+              "psnr": 38.15730350494385,
+              "ssim": 0.9485212144374847,
+              "mse": 0.00021707968685877858,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 3195.6458981619217,
+            "gpu": "NVIDIA RTX 6000 Ada Generation",
+            "runtime": {
+              "version": "baseline",
+              "channels_last": false,
+              "fused_adamw": false
+            }
+          },
+          {
+            "epoch": 18,
+            "loss": 0.000226826251400477,
+            "validation": {
+              "psnr": 38.35096990509033,
+              "ssim": 0.9512671135663986,
+              "mse": 0.00020914683212686213,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 3091.9203694998287,
+            "gpu": "NVIDIA RTX 6000 Ada Generation",
+            "runtime": {
+              "version": "baseline",
+              "channels_last": false,
+              "fused_adamw": false
+            }
+          },
+          {
+            "epoch": 19,
+            "loss": 0.00022282384669576155,
+            "validation": {
+              "psnr": 38.31984420013428,
+              "ssim": 0.9562126224994659,
+              "mse": 0.00020833112525433535,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 3079.5475964928046,
+            "gpu": "NVIDIA RTX 6000 Ada Generation",
+            "runtime": {
+              "version": "baseline",
+              "channels_last": false,
+              "fused_adamw": false
+            }
+          },
+          {
+            "epoch": 20,
+            "loss": 0.0002191080366775168,
+            "validation": {
+              "psnr": 38.14404174041748,
+              "ssim": 0.9491768863677978,
+              "mse": 0.00021333068876701873,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 3164.294652077835,
+            "gpu": "NVIDIA RTX 6000 Ada Generation",
+            "runtime": {
+              "version": "baseline",
+              "channels_last": false,
+              "fused_adamw": false
+            }
+          },
+          {
+            "epoch": 21,
+            "loss": 0.00021469632280562412,
+            "validation": {
+              "psnr": 38.46985777435303,
+              "ssim": 0.9548666838645935,
+              "mse": 0.00020297635575698223,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 3452.7702907000203,
+            "gpu": "NVIDIA RTX A6000",
+            "runtime": {
+              "version": "baseline",
+              "channels_last": false,
+              "fused_adamw": false
+            }
+          },
+          {
+            "epoch": 22,
+            "loss": 0.00021041843957176145,
+            "validation": {
+              "psnr": 38.60827536926269,
+              "ssim": 0.9598210489034653,
+              "mse": 0.00019894272127494333,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 3452.485312372097,
+            "gpu": "NVIDIA RTX A6000",
+            "runtime": {
+              "version": "baseline",
+              "channels_last": false,
+              "fused_adamw": false
+            }
+          },
+          {
+            "epoch": 23,
+            "loss": 0.00020736860925392952,
+            "validation": {
+              "psnr": 38.66522354507446,
+              "ssim": 0.958339426445961,
+              "mse": 0.00019544424024643377,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 3072.399216679856,
+            "gpu": "NVIDIA RTX 6000 Ada Generation",
+            "runtime": {
+              "version": "baseline",
+              "channels_last": false,
+              "fused_adamw": false
+            }
+          },
+          {
+            "epoch": 24,
+            "loss": 0.00020375424402445787,
+            "validation": {
+              "psnr": 38.64534396286011,
+              "ssim": 0.954825235080719,
+              "mse": 0.00019717657664332364,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 3352.5149235078134,
+            "gpu": "NVIDIA RTX 6000 Ada Generation",
+            "runtime": {
+              "version": "baseline",
+              "channels_last": false,
+              "fused_adamw": false
+            }
+          },
+          {
+            "epoch": 25,
+            "loss": 0.0002007844576913764,
+            "validation": {
+              "psnr": 38.75636558609009,
+              "ssim": 0.9608761549949646,
+              "mse": 0.00019266980141910607,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 3045.9828093112446,
+            "gpu": "NVIDIA RTX 6000 Ada Generation",
+            "runtime": {
+              "version": "baseline",
+              "channels_last": false,
+              "fused_adamw": false
+            }
+          },
+          {
+            "epoch": 26,
+            "loss": 0.00019770777517172367,
+            "validation": {
+              "psnr": 38.65832587966919,
+              "ssim": 0.9609843012809753,
+              "mse": 0.00019585685326164822,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 3040.09402939165,
+            "gpu": "NVIDIA RTX 6000 Ada Generation",
+            "runtime": {
+              "version": "baseline",
+              "channels_last": false,
+              "fused_adamw": false
+            }
+          },
+          {
+            "epoch": 27,
+            "loss": 0.00019547097614598292,
+            "validation": {
+              "psnr": 38.828266205596925,
+              "ssim": 0.9601460628032684,
+              "mse": 0.0001897607625083765,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 3198.788633108139,
+            "gpu": "NVIDIA RTX 6000 Ada Generation",
+            "runtime": {
+              "version": "baseline",
+              "channels_last": false,
+              "fused_adamw": false
+            }
+          },
+          {
+            "epoch": 28,
+            "loss": 0.00019360165772504842,
+            "validation": {
+              "psnr": 38.84758840255737,
+              "ssim": 0.9567447432994842,
+              "mse": 0.00018858121265402587,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 3256.187528095208,
+            "gpu": "NVIDIA RTX 6000 Ada Generation",
+            "runtime": {
+              "version": "baseline",
+              "channels_last": false,
+              "fused_adamw": false
+            }
+          },
+          {
+            "epoch": 29,
+            "loss": 0.00019107510725055666,
+            "validation": {
+              "psnr": 38.746140280151366,
+              "ssim": 0.9582318310499192,
+              "mse": 0.00019220268809731352,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 3107.815109101124,
+            "gpu": "NVIDIA RTX 6000 Ada Generation",
+            "runtime": {
+              "version": "baseline",
+              "channels_last": false,
+              "fused_adamw": false
+            }
+          },
+          {
+            "epoch": 30,
+            "loss": 0.00018816472397938924,
+            "validation": {
+              "psnr": 38.74319454040528,
+              "ssim": 0.959699595284462,
+              "mse": 0.00019142682803649223,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 3180.970475628972,
+            "gpu": "NVIDIA RTX 6000 Ada Generation",
+            "runtime": {
+              "version": "baseline",
+              "channels_last": false,
+              "fused_adamw": false
+            }
+          },
+          {
+            "epoch": 31,
+            "loss": 0.00018652516289712365,
+            "validation": {
+              "psnr": 38.79413984222412,
+              "ssim": 0.9565106826066971,
+              "mse": 0.0001907789803790365,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 2574.6394645511173,
+            "gpu": "NVIDIA RTX 6000 Ada Generation",
+            "runtime": {
+              "version": "baseline",
+              "channels_last": false,
+              "fused_adamw": false
+            }
+          },
+          {
+            "epoch": 32,
+            "loss": 0.00018427394416366952,
+            "validation": {
+              "psnr": 38.87244284591675,
+              "ssim": 0.952432832813263,
+              "mse": 0.00018715458826482062,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 2564.0084108593874,
+            "gpu": "NVIDIA RTX 6000 Ada Generation",
+            "runtime": {
+              "version": "baseline",
+              "channels_last": false,
+              "fused_adamw": false
+            }
+          },
+          {
+            "epoch": 33,
+            "loss": 0.00018181924084274215,
+            "validation": {
+              "psnr": 38.247332069396975,
+              "ssim": 0.9490327054023743,
+              "mse": 0.00020790201462150435,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 2512.123083676677,
+            "gpu": "NVIDIA RTX 6000 Ada Generation",
+            "runtime": {
+              "version": "baseline",
+              "channels_last": false,
+              "fused_adamw": false
+            }
+          },
+          {
+            "epoch": 34,
+            "loss": 0.00017971174506374154,
+            "validation": {
+              "psnr": 38.948898580932614,
+              "ssim": 0.9623448867321014,
+              "mse": 0.00018481669835819048,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 2575.346439078916,
+            "gpu": "NVIDIA RTX 6000 Ada Generation",
+            "runtime": {
+              "version": "baseline",
+              "channels_last": false,
+              "fused_adamw": false
+            }
+          },
+          {
+            "epoch": 35,
+            "loss": 0.0001776262289211445,
+            "validation": {
+              "psnr": 39.033808110809325,
+              "ssim": 0.9592764709711075,
+              "mse": 0.0001815273664371489,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 3127.6020285133272,
+            "gpu": "NVIDIA RTX 6000 Ada Generation",
+            "runtime": {
+              "version": "baseline",
+              "channels_last": false,
+              "fused_adamw": false
+            }
+          },
+          {
+            "epoch": 36,
+            "loss": 0.00017699992895932155,
+            "validation": {
+              "psnr": 39.08787500839233,
+              "ssim": 0.9581863384485245,
+              "mse": 0.0001806762942534988,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 3151.34135832265,
+            "gpu": "NVIDIA RTX 6000 Ada Generation",
+            "runtime": {
+              "version": "baseline",
+              "channels_last": false,
+              "fused_adamw": false
+            }
+          },
+          {
+            "epoch": 37,
+            "loss": 0.00017490693090615726,
+            "validation": {
+              "psnr": 39.01493819046021,
+              "ssim": 0.9515269683122635,
+              "mse": 0.00018187948325612525,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 2716.4790645958856,
+            "gpu": "NVIDIA RTX 6000 Ada Generation",
+            "runtime": {
+              "version": "baseline",
+              "channels_last": false,
+              "fused_adamw": false
+            }
+          },
+          {
+            "epoch": 38,
+            "loss": 0.00017438710241411476,
+            "validation": {
+              "psnr": 38.950123206329344,
+              "ssim": 0.9629036716461181,
+              "mse": 0.00018279104216053385,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 2704.736157569103,
+            "gpu": "NVIDIA RTX 6000 Ada Generation",
+            "runtime": {
+              "version": "baseline",
+              "channels_last": false,
+              "fused_adamw": false
+            }
+          },
+          {
+            "epoch": 39,
+            "loss": 0.00017261717222557613,
+            "validation": {
+              "psnr": 38.973534923553466,
+              "ssim": 0.9563735403060913,
+              "mse": 0.00018192272476881045,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 2534.837725975085,
+            "gpu": "NVIDIA RTX 6000 Ada Generation",
+            "runtime": {
+              "version": "baseline",
+              "channels_last": false,
+              "fused_adamw": false
+            }
+          },
+          {
+            "epoch": 40,
+            "loss": 0.00017092017774784836,
+            "validation": {
+              "psnr": 38.80588113632202,
+              "ssim": 0.9581166632175445,
+              "mse": 0.00018814886481122812,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 2523.8789838179946,
+            "gpu": "NVIDIA RTX 6000 Ada Generation",
+            "runtime": {
+              "version": "baseline",
+              "channels_last": false,
+              "fused_adamw": false
+            }
+          },
+          {
+            "epoch": 41,
+            "loss": 0.0001683178479839929,
+            "validation": {
+              "psnr": 39.25235880203247,
+              "ssim": 0.964926991391182,
+              "mse": 0.00017487399484743946,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 2404.990398367867,
+            "gpu": "NVIDIA H200 NVL",
+            "runtime": {
+              "version": "baseline",
+              "channels_last": false,
+              "fused_adamw": false
+            }
+          },
+          {
+            "epoch": 42,
+            "loss": 0.0001675244089982698,
+            "validation": {
+              "psnr": 39.09584601593018,
+              "ssim": 0.9647789212703705,
+              "mse": 0.00017921132907431457,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 2442.946754476987,
+            "gpu": "NVIDIA H200 NVL",
+            "runtime": {
+              "version": "baseline",
+              "channels_last": false,
+              "fused_adamw": false
+            }
+          },
+          {
+            "epoch": 43,
+            "loss": 0.00016696212859233127,
+            "validation": {
+              "psnr": 39.16395499038696,
+              "ssim": 0.960900715637207,
+              "mse": 0.00017721193408797261,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 2331.9309175731614,
+            "gpu": "NVIDIA H200 NVL",
+            "runtime": {
+              "version": "baseline",
+              "channels_last": false,
+              "fused_adamw": false
+            }
+          },
+          {
+            "epoch": 44,
+            "loss": 0.00016592059635246793,
+            "validation": {
+              "psnr": 39.231251264190675,
+              "ssim": 0.9613953882694244,
+              "mse": 0.00017509159675137197,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 2177.054104350973,
+            "gpu": "NVIDIA H200 NVL",
+            "runtime": {
+              "version": "baseline",
+              "channels_last": false,
+              "fused_adamw": false
+            }
+          },
+          {
+            "epoch": 45,
+            "loss": 0.00016547296966042875,
+            "validation": {
+              "psnr": 39.11877203292847,
+              "ssim": 0.9535646060705185,
+              "mse": 0.00017738945532764773,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 4040.337913485011,
+            "gpu": "NVIDIA RTX A6000",
+            "runtime": {
+              "version": "baseline",
+              "channels_last": false,
+              "fused_adamw": false
+            }
+          },
+          {
+            "epoch": 46,
+            "loss": 0.00016269668254475012,
+            "validation": {
+              "psnr": 39.257766899871825,
+              "ssim": 0.958048771238327,
+              "mse": 0.00017421770621294853,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 4084.887775690062,
+            "gpu": "NVIDIA RTX A6000",
+            "runtime": {
+              "version": "baseline",
+              "channels_last": false,
+              "fused_adamw": false
+            }
+          },
+          {
+            "epoch": 47,
+            "loss": 0.00016097527134403814,
+            "validation": {
+              "psnr": 39.3164585609436,
+              "ssim": 0.9634267765283585,
+              "mse": 0.00017251329801947578,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 4396.879422373138,
+            "gpu": "NVIDIA RTX A6000",
+            "runtime": {
+              "version": "baseline",
+              "channels_last": false,
+              "fused_adamw": false
+            }
+          },
+          {
+            "epoch": 48,
+            "loss": 0.00016090287409022797,
+            "validation": {
+              "psnr": 38.96543041687012,
+              "ssim": 0.9590991401910782,
+              "mse": 0.00018183487314454397,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 4513.1581807741895,
+            "gpu": "NVIDIA RTX A6000",
+            "runtime": {
+              "version": "baseline",
+              "channels_last": false,
+              "fused_adamw": false
+            }
+          },
+          {
+            "epoch": 49,
+            "loss": 0.00015986427064820723,
+            "validation": {
+              "psnr": 39.241255109405515,
+              "ssim": 0.9596700610637665,
+              "mse": 0.000174142323515116,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 4221.1547225238755,
+            "gpu": "NVIDIA RTX A6000",
+            "runtime": {
+              "version": "baseline",
+              "channels_last": false,
+              "fused_adamw": false
+            }
+          },
+          {
+            "epoch": 50,
+            "loss": 0.00015820505029129586,
+            "validation": {
+              "psnr": 39.21610760879516,
+              "ssim": 0.9655338851451873,
+              "mse": 0.00017433051928310306,
+              "count": 5000,
+              "clipped": true,
+              "reconstruction": "Gaussian mean"
+            },
+            "seconds": 4365.828858929686,
+            "gpu": "NVIDIA RTX A6000",
+            "runtime": {
+              "version": "baseline",
+              "channels_last": false,
+              "fused_adamw": false
+            }
+          }
+        ]
+      },
+      "manifest_sha256": "ef41a0325df23ef8ab3dc7c34b7a374f0f7d927f9323b9046ae39819c9f6b1d6",
+      "calibration_sha256": "4cdddb9b60bda8edaf8f3163dd614d1b746f18c5bc88aa4e8f8ebeaf23355ced",
+      "gpu": "NVIDIA RTX 6000 Ada Generation",
+      "calibration_seconds": 398.1098640309647,
+      "inference_seconds": 9.402302008122206,
+      "notes": "First 50 held-out test images in manifest order; not full-test aggregates. RCPS independent lower/upper scaling, alpha=.1, delta=.05. Clipped [0,1]. QUTCC native q=.05/.95 followed by scale calibration, not quantile-query calibration. MC dropout rate follows the selected checkpoint (mc_005); 30 stochastic passes. p=.05 selected from epoch-50 deterministic validation, not test results. Width need not equal absolute error. Image-level coverage is not guaranteed to be 90%."
     }
   }
 }
