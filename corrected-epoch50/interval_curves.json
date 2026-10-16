@@ -115,6 +115,28 @@
       {
         "camera": "rml",
         "method": "ensemble5",
+        "epoch": 15,
+        "split": "test",
+        "test_count": 5000,
+        "clipped": true,
+        "alpha": 0.1,
+        "delta": 0.05,
+        "calibration_used": true,
+        "interval_method": "rcps_hb_asymmetric",
+        "manifest_sha256": "ef41a0325df23ef8ab3dc7c34b7a374f0f7d927f9323b9046ae39819c9f6b1d6",
+        "calibration_count": 2048,
+        "calibration_sha256": "4cdddb9b60bda8edaf8f3163dd614d1b746f18c5bc88aa4e8f8ebeaf23355ced",
+        "metrics": {
+          "width": 0.0312593913577497,
+          "coverage": 0.9383644159793854,
+          "psnr": 37.1735294631958,
+          "ssim": 0.9512014183998108,
+          "mae": 0.0075333175281062726
+        }
+      },
+      {
+        "camera": "rml",
+        "method": "ensemble5",
         "epoch": 50,
         "split": "test",
         "test_count": 5000,
@@ -509,6 +531,28 @@
           "psnr": 26.807268597412108,
           "ssim": 0.745517223405838,
           "mae": 0.02951473744958639
+        }
+      },
+      {
+        "camera": "diffuser",
+        "method": "adaptive_qutcc",
+        "epoch": 10,
+        "split": "test",
+        "test_count": 5000,
+        "clipped": true,
+        "alpha": 0.1,
+        "delta": null,
+        "calibration_used": false,
+        "interval_method": "native_learned_image_quantiles",
+        "manifest_sha256": "957c0ce3d9cd7364fdb0341860a6e3219b9201cb6dff4e4857e5d6ae5c19e556",
+        "calibration_count": 0,
+        "calibration_sha256": null,
+        "metrics": {
+          "width": 0.09374322443306446,
+          "coverage": 0.8569411879062653,
+          "psnr": 27.83917872314453,
+          "ssim": 0.7203165549755096,
+          "mae": 0.0266761987388134
         }
       },
       {
