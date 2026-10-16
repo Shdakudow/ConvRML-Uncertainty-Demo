@@ -43,16 +43,16 @@ function renderEnsembleComparison(){
 }
 
 function renderIntervalHistory(){
- const rows=window.intervalCurves?.cameras[window.CAMERA]||[];
- const specs=[['im2im','Im2im · RCPS','#91d9cd'],['ensemble5','Ensemble 5 · RCPS','#ffcc80'],['ensemble10','Ensemble 10 · RCPS','#c4a5ff'],['mc_005','MC p=0.05 · RCPS','#72b7ff'],['adaptive_qutcc','QUTCC · native, no RCPS','#f18eaf']];
- $('intervalCurveStatus').textContent=`${rows.length}/50 checkpoint evaluations ready for this camera. Each point uses all 5,000 test images. Pending epochs have no plotted value. QUTCC is evaluated as its training progresses.`;
+ const rows=(window.intervalCurves?.cameras[window.CAMERA]||[]).filter(r=>['im2im','ensemble5','ensemble10','mc_005'].includes(r.method));
+ const specs=[['im2im','Im2im','#91d9cd'],['ensemble5','Ensemble · 5','#ffcc80'],['ensemble10','Ensemble · 10','#c4a5ff'],['mc_005','MC dropout','#72b7ff']];
+ $('intervalCurveStatus').textContent=`${rows.length}/40 checkpoint evaluations ready for this camera. Each point uses all 5,000 test images. Pending epochs have no plotted value. MC dropout uses p=0.05 and 30 passes.`;
  $('intervalHistoryPlots').innerHTML=['width','coverage'].map(metric=>{
- const series=specs.map(([key,name,color])=>({name,color,values:rows.filter(r=>r.method===key).sort((a,b)=>a.epoch-b.epoch).map(r=>[r.epoch,r.metrics[metric]*(metric==='coverage'?100:1)])})).filter(s=>s.values.length);
- if(!series.length)return `<div class="plot"><h3>${metric==='width'?'Mean interval width':'Actual test coverage'}</h3><p>Evaluation pending.</p></div>`;
- const vals=series.flatMap(s=>s.values.map(v=>v[1]));if(metric==='coverage')vals.push(90);
+ const series=specs.map(([key,name,color])=>({name,color,values:rows.filter(r=>r.method===key).sort((a,b)=>a.epoch-b.epoch).map(r=>[r.epoch,r.metrics[metric]*(metric==='coverage'?100:1)])}));
+ if(!series.some(s=>s.values.length))return `<div class="plot"><h3>${metric==='width'?'Mean interval width':'Actual test coverage'}</h3><p>Evaluation pending.</p></div>`;
+ const vals=series.flatMap(s=>s.values.map(v=>v[1]));
  const min=Math.min(...vals),max=Math.max(...vals),pad=Math.max((max-min)*.15,metric==='coverage'?.5:.001),lo=Math.max(0,min-pad),hi=Math.min(metric==='coverage'?100:1,max+pad);
  const X=x=>55+(x-5)/45*420,Y=y=>180-(y-lo)/Math.max(hi-lo,1e-6)*140;
  const title=metric==='width'?'Mean interval width · normalized intensity':'Actual test coverage (%)';
- return `<div class="plot"><h3>${title}</h3><svg viewBox="0 0 510 225" role="img" aria-label="${title} versus training epoch"><path d="M55 35V180H480" fill="none" stroke="#a4b4c4"/>${[0,.5,1].map(t=>`<text x="2" y="${Y(lo+t*(hi-lo))}" fill="#a4b4c4" font-size="11">${(lo+t*(hi-lo)).toFixed(metric==='coverage'?2:4)}</text>`).join('')}${metric==='coverage'?`<path d="M55 ${Y(90)}H480" stroke="#ffffff" stroke-dasharray="5 4"/><text x="410" y="${Y(90)-5}" fill="#ffffff" font-size="11">90% target</text>`:''}${Array.from({length:10},(_,i)=>5*(i+1)).map(x=>`<text x="${X(x)-6}" y="198" fill="#a4b4c4" font-size="11">${x}</text>`).join('')}${series.map(s=>s.values.map(([x,y],i)=>`${i&&x-s.values[i-1][0]===5?`<path d="M${X(s.values[i-1][0])} ${Y(s.values[i-1][1])}L${X(x)} ${Y(y)}" stroke="${s.color}" stroke-width="2" fill="none"/>`:''}<circle cx="${X(x)}" cy="${Y(y)}" r="4" fill="${s.color}" tabindex="0"><title>${s.name}, epoch ${x}: ${y.toFixed(metric==='coverage'?3:6)}${metric==='coverage'?'%':''}</title></circle>`).join('')).join('')}<text x="215" y="220" fill="#a4b4c4" font-size="11">Training epoch</text></svg>${series.map(s=>`<span style="color:${s.color};margin-right:12px">${s.name}</span>`).join('')}</div>`;
+ return `<div class="plot"><h3>${title}</h3><svg viewBox="0 0 510 225" role="img" aria-label="${title} versus training epoch"><path d="M55 35V180H480" fill="none" stroke="#a4b4c4"/>${[0,.5,1].map(t=>`<text x="2" y="${Y(lo+t*(hi-lo))}" fill="#a4b4c4" font-size="11">${(lo+t*(hi-lo)).toFixed(metric==='coverage'?2:4)}</text>`).join('')}${Array.from({length:10},(_,i)=>5*(i+1)).map(x=>`<text x="${X(x)-6}" y="198" fill="#a4b4c4" font-size="11">${x}</text>`).join('')}${series.map(s=>s.values.map(([x,y],i)=>`${i&&x-s.values[i-1][0]===5?`<path d="M${X(s.values[i-1][0])} ${Y(s.values[i-1][1])}L${X(x)} ${Y(y)}" stroke="${s.color}" stroke-width="2" fill="none"/>`:''}<circle cx="${X(x)}" cy="${Y(y)}" r="4" fill="${s.color}" tabindex="0"><title>${s.name}, epoch ${x}: ${y.toFixed(metric==='coverage'?3:6)}${metric==='coverage'?'%':''}</title></circle>`).join('')).join('')}<text x="215" y="220" fill="#a4b4c4" font-size="11">Training epoch</text></svg>${series.map(s=>`<span style="color:${s.color};margin-right:12px">${s.name}${s.values.length?'':' · pending'}</span>`).join('')}</div>`;
  }).join('');
 }
