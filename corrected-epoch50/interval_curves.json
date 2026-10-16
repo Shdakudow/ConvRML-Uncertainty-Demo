@@ -1021,6 +1021,72 @@
       },
       {
         "camera": "diffuser",
+        "method": "im2im",
+        "epoch": 5,
+        "split": "test",
+        "test_count": 5000,
+        "clipped": true,
+        "alpha": 0.1,
+        "delta": 0.05,
+        "calibration_used": true,
+        "interval_method": "rcps_hb_asymmetric",
+        "manifest_sha256": "957c0ce3d9cd7364fdb0341860a6e3219b9201cb6dff4e4857e5d6ae5c19e556",
+        "calibration_count": 2048,
+        "calibration_sha256": "f8b07201a887547415b1edb3a73287eaf94c52c50a6df9043a99a2512181964f",
+        "metrics": {
+          "width": 0.09383170885145664,
+          "coverage": 0.9262505087375641,
+          "psnr": 29.446012585449218,
+          "ssim": 0.8073746466636658,
+          "mae": 0.02144956922456622
+        }
+      },
+      {
+        "camera": "diffuser",
+        "method": "im2im",
+        "epoch": 10,
+        "split": "test",
+        "test_count": 5000,
+        "clipped": true,
+        "alpha": 0.1,
+        "delta": 0.05,
+        "calibration_used": true,
+        "interval_method": "rcps_hb_asymmetric",
+        "manifest_sha256": "957c0ce3d9cd7364fdb0341860a6e3219b9201cb6dff4e4857e5d6ae5c19e556",
+        "calibration_count": 2048,
+        "calibration_sha256": "f8b07201a887547415b1edb3a73287eaf94c52c50a6df9043a99a2512181964f",
+        "metrics": {
+          "width": 0.085123505833745,
+          "coverage": 0.9290355987548828,
+          "psnr": 30.258919720458984,
+          "ssim": 0.8210925982475281,
+          "mae": 0.019790561036765575
+        }
+      },
+      {
+        "camera": "diffuser",
+        "method": "im2im",
+        "epoch": 15,
+        "split": "test",
+        "test_count": 5000,
+        "clipped": true,
+        "alpha": 0.1,
+        "delta": 0.05,
+        "calibration_used": true,
+        "interval_method": "rcps_hb_asymmetric",
+        "manifest_sha256": "957c0ce3d9cd7364fdb0341860a6e3219b9201cb6dff4e4857e5d6ae5c19e556",
+        "calibration_count": 2048,
+        "calibration_sha256": "f8b07201a887547415b1edb3a73287eaf94c52c50a6df9043a99a2512181964f",
+        "metrics": {
+          "width": 0.07807171984314919,
+          "coverage": 0.927688454246521,
+          "psnr": 30.666715521240235,
+          "ssim": 0.8423097947120667,
+          "mae": 0.018213699191063644
+        }
+      },
+      {
+        "camera": "diffuser",
         "method": "mc_005",
         "epoch": 5,
         "split": "test",
