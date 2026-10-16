@@ -202,6 +202,28 @@
       {
         "camera": "rml",
         "method": "ensemble10",
+        "epoch": 40,
+        "split": "test",
+        "test_count": 5000,
+        "clipped": true,
+        "alpha": 0.1,
+        "delta": 0.05,
+        "calibration_used": true,
+        "interval_method": "rcps_hb_asymmetric",
+        "manifest_sha256": "ef41a0325df23ef8ab3dc7c34b7a374f0f7d927f9323b9046ae39819c9f6b1d6",
+        "calibration_count": 2048,
+        "calibration_sha256": "4cdddb9b60bda8edaf8f3163dd614d1b746f18c5bc88aa4e8f8ebeaf23355ced",
+        "metrics": {
+          "width": 0.0269618781067431,
+          "coverage": 0.9360432994842529,
+          "psnr": 38.59498342590332,
+          "ssim": 0.9615892984867096,
+          "mae": 0.006404723342880607
+        }
+      },
+      {
+        "camera": "rml",
+        "method": "ensemble10",
         "epoch": 45,
         "split": "test",
         "test_count": 5000,
