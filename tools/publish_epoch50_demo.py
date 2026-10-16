@@ -40,7 +40,7 @@ def main(require_all=False,once=False):
  force='--force' in sys.argv or (OUT/'force_publish_once').exists()
  saved=OUT/'auto_published.json'
  previous=json.loads(saved.read_text()) if saved.exists() else {}
- if once and len(previous.get('ready',[]))==10 and previous.get('curve_count')==20 and previous.get('curve5_count')==20 and previous.get('comparison_count')==4 and not force:return True
+ if once and len(previous.get('ready',[]))==10 and previous.get('curve_count')==20 and previous.get('curve5_count')==20 and previous.get('comparison_count')==4 and previous.get('interval_count')==100 and not force:return True
  head=run(['git','rev-parse','HEAD'])
  remote='''import json,pathlib,subprocess
 root=pathlib.Path.home()/'ConvRML/results/corrected_demo_epoch50_20261011'
@@ -69,7 +69,20 @@ for c in ['rml','diffuser']:
    report=json.loads(p.read_text())
    assert report['full_test_count']==5000 and report['epoch']==50
    comparison[c][m]={k:report[k] for k in ['epoch','full_test_count','full_test_aggregate','aggregate','manifest_sha256','calibration_sha256','calibration_count','alpha','delta','factors']}
-print(json.dumps(dict(ready=ready,queue=q,curves=curves,curve_count=curve_count,curves5=curves5,comparison=comparison)))
+intervals={c:[] for c in ['rml','diffuser']}
+interval_root=pathlib.Path.home()/'ConvRML/results/current_interval_curves_20261015/reports'
+for c in intervals:
+ for p in sorted((interval_root/c).glob('*/epoch_*.json')):
+  row=json.loads(p.read_text())
+  intervals[c].append({k:row[k] for k in ['camera','method','epoch','split','test_count','clipped','alpha','delta','calibration_used','interval_method','manifest_sha256','calibration_count','calibration_sha256','metrics']})
+ # Existing full-test epoch-50 ensembles can be plotted immediately.
+ for m,row in comparison[c].items():
+  if not any(v['method']==m and v['epoch']==50 for v in intervals[c]):
+   intervals[c].append(dict(camera=c,method=m,epoch=50,split='test',test_count=5000,clipped=True,alpha=.1,delta=.05,
+    calibration_used=True,interval_method='rcps_hb_asymmetric',manifest_sha256=row['manifest_sha256'],
+    calibration_count=row['calibration_count'],calibration_sha256=row['calibration_sha256'],metrics=row['full_test_aggregate']))
+ intervals[c].sort(key=lambda row:(row['method'],row['epoch']))
+print(json.dumps(dict(ready=ready,queue=q,curves=curves,curve_count=curve_count,curves5=curves5,comparison=comparison,intervals=intervals)))
 '''
  for _ in range(1440):
   try:info=json.loads(run(SSH+['python3 -'],input=remote,timeout=60))
@@ -81,7 +94,7 @@ print(json.dumps(dict(ready=ready,queue=q,curves=curves,curve_count=curve_count,
   if 'DependencyNeverSatisfied' in info['queue']:raise RuntimeError('Failed training dependency; no publication')
   time.sleep(45)
  else:raise TimeoutError('24-hour export wait exceeded')
- curve_hash=hashlib.sha256(json.dumps([info['curves'],info['curves5'],info['comparison']],sort_keys=True).encode()).hexdigest()
+ curve_hash=hashlib.sha256(json.dumps([info['curves'],info['curves5'],info['comparison'],info['intervals']],sort_keys=True).encode()).hexdigest()
  if once and curve_hash==previous.get('curve_hash') and sorted(info['ready'])==sorted(previous.get('ready',[])) and not force:
   status('monitoring',ready=info['ready'],ensemble_curve_milestones=info['curve_count'],url=previous.get('url'));return len(info['ready'])==10
  if not all(c+'/im2im' in info['ready'] for c in ['rml','diffuser']):return False
@@ -114,6 +127,23 @@ print(json.dumps(dict(ready=ready,queue=q,curves=curves,curve_count=curve_count,
    assert all(math.isfinite(v) for v in report['full_test_aggregate'].values())
  (ROOT/'corrected-epoch50/ensemble5_curves.json').write_text(json.dumps(dict(cameras=info['curves5']),indent=2)+'\n')
  (ROOT/'corrected-epoch50/ensemble_comparison.json').write_text(json.dumps(dict(cameras=info['comparison'],difference='five minus ten',members5=list(range(5)),members10=list(range(10)),epoch=50),indent=2)+'\n')
+ for camera,rows in info['intervals'].items():
+  baseline=json.loads((OUT/camera/'im2im/report.json').read_text())
+  seen=set()
+  for row in rows:
+   key=(row['method'],row['epoch']);assert key not in seen;seen.add(key)
+   assert row['method'] in METHODS and row['epoch'] in range(5,51,5)
+   assert row['camera']==camera and row['split']=='test' and row['test_count']==5000 and row['clipped']
+   assert row['manifest_sha256']==baseline['manifest_sha256'] and row['alpha']==.1
+   if row['method']=='adaptive_qutcc':
+    assert row['calibration_used'] is False and row['calibration_count']==0 and row['delta'] is None
+    assert row['interval_method']=='native_learned_image_quantiles'
+   else:
+    assert row['calibration_used'] and row['calibration_count']==2048 and row['delta']==.05
+    assert row['calibration_sha256']==baseline['calibration_sha256']
+   assert all(math.isfinite(row['metrics'][k]) for k in ['coverage','width','ssim','psnr'])
+   assert 0<=row['metrics']['coverage']<=1 and 0<=row['metrics']['width']<=1
+ (ROOT/'corrected-epoch50/interval_curves.json').write_text(json.dumps(dict(cameras=info['intervals'],test_count=5000,target_coverage=.9),indent=2)+'\n')
  status('building')
  reusable='--reuse-assets' in sys.argv
  for camera in ['rml','diffuser']:
@@ -147,7 +177,7 @@ print(json.dumps(dict(ready=ready,queue=q,curves=curves,curve_count=curve_count,
   (OUT/'remote_asset_validation.txt').write_text(check_browser('http://127.0.0.1:8775/'))
  finally:server.shutdown();server.server_close()
  run(['git','diff','--check'])
- run(['git','add','--','corrected-epoch50','tools/build_epoch50_demo.py','tools/verify_epoch50_browser.py','tools/publish_epoch50_demo.py','tools/export_adaptive_q20_demo.py','tools/submit_adaptive_q20_demo.py','tools/evaluate_ensemble_learning_curve.py','tools/submit_ensemble_learning_curve.py','tools/export_corrected_milestone.py','tools/export_ensemble_size_comparison.py','tools/submit_ensemble_size_comparison.py','tools/submit_ensemble5_learning_curve.py','tools/resume_native_qutcc.py','tools/submit_adaptive_q20_demo.py'])
+ run(['git','add','--','corrected-epoch50','tools/build_epoch50_demo.py','tools/verify_epoch50_browser.py','tools/publish_epoch50_demo.py','tools/export_adaptive_q20_demo.py','tools/submit_adaptive_q20_demo.py','tools/evaluate_ensemble_learning_curve.py','tools/submit_ensemble_learning_curve.py','tools/export_corrected_milestone.py','tools/export_ensemble_size_comparison.py','tools/submit_ensemble_size_comparison.py','tools/submit_ensemble5_learning_curve.py','tools/resume_native_qutcc.py','tools/submit_adaptive_q20_demo.py','tools/evaluate_interval_curves.py','tools/submit_interval_curves.py'])
  if run(['git','diff','--cached','--name-only']):run(['git','commit','-m','Update completed baselines and adaptive-QUTCC epoch-20 demo availability'])
  commit=run(['git','rev-parse','HEAD'])
  run(['git','push','origin','main'],timeout=600)
@@ -163,7 +193,7 @@ print(json.dumps(dict(ready=ready,queue=q,curves=curves,curve_count=curve_count,
  (OUT/'live_validation.txt').write_text(check_browser('https://shdakudow.github.io/ConvRML-Uncertainty-Demo/'))
  status('complete' if len(info['ready'])==10 else 'published_monitoring_pending_models',ready=info['ready'],commit=commit,asset_commit=asset_commit,url='https://shdakudow.github.io/ConvRML-Uncertainty-Demo/corrected-epoch50/')
 
- saved.write_text(json.dumps(dict(curve5_count=sum(map(len,info['curves5'].values())),comparison_count=sum(map(len,info['comparison'].values())),curve_hash=curve_hash,curve_count=sum(len(v) for v in info['curves'].values()),ready=info['ready'],commit=commit,asset_commit=asset_commit,url='https://shdakudow.github.io/ConvRML-Uncertainty-Demo/corrected-epoch50/'),indent=2))
+ saved.write_text(json.dumps(dict(interval_count=sum(map(len,info['intervals'].values())),curve5_count=sum(map(len,info['curves5'].values())),comparison_count=sum(map(len,info['comparison'].values())),curve_hash=curve_hash,curve_count=sum(len(v) for v in info['curves'].values()),ready=info['ready'],commit=commit,asset_commit=asset_commit,url='https://shdakudow.github.io/ConvRML-Uncertainty-Demo/corrected-epoch50/'),indent=2))
  (OUT/'force_publish_once').unlink(missing_ok=True)
  return len(info['ready'])==10
 

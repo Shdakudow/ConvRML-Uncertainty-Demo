@@ -8,7 +8,7 @@ window.DATASET=await response.json();
 const curvesResponse=await fetch('ensemble_curves.json',{cache:'no-store'});
 if(curvesResponse.ok){const curves=await curvesResponse.json();DATASET.history.ensemble10=curves.cameras[window.CAMERA]||[];}
 else DATASET.history.ensemble10=[];
-for(const [file,key] of [['ensemble5_curves.json','ensemble5Curves'],['ensemble_comparison.json','ensembleComparison']]){const res=await fetch(file,{cache:'no-store'});if(res.ok)window[key]=await res.json();}
+for(const [file,key] of [['ensemble5_curves.json','ensemble5Curves'],['ensemble_comparison.json','ensembleComparison'],['interval_curves.json','intervalCurves']]){const res=await fetch(file,{cache:'no-store'});if(res.ok)window[key]=await res.json();}
 DATASET.history.ensemble5=window.ensemble5Curves?.cameras[window.CAMERA]||[];
-const app=document.createElement('script');app.src='app.js?v=nativeq20261015';document.body.append(app);
+const app=document.createElement('script');app.src='app.js?v=intervals20261015';document.body.append(app);
 }catch(e){document.getElementById('status').textContent='Inference export is not yet published: '+e.message;}})();
