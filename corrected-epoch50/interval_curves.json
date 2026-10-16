@@ -136,6 +136,72 @@
       {
         "camera": "rml",
         "method": "ensemble10",
+        "epoch": 25,
+        "split": "test",
+        "test_count": 5000,
+        "clipped": true,
+        "alpha": 0.1,
+        "delta": 0.05,
+        "calibration_used": true,
+        "interval_method": "rcps_hb_asymmetric",
+        "manifest_sha256": "ef41a0325df23ef8ab3dc7c34b7a374f0f7d927f9323b9046ae39819c9f6b1d6",
+        "calibration_count": 2048,
+        "calibration_sha256": "4cdddb9b60bda8edaf8f3163dd614d1b746f18c5bc88aa4e8f8ebeaf23355ced",
+        "metrics": {
+          "width": 0.028490822952240705,
+          "coverage": 0.9359345341205597,
+          "psnr": 37.99740483245849,
+          "ssim": 0.95739890666008,
+          "mae": 0.006859018831141293
+        }
+      },
+      {
+        "camera": "rml",
+        "method": "ensemble10",
+        "epoch": 30,
+        "split": "test",
+        "test_count": 5000,
+        "clipped": true,
+        "alpha": 0.1,
+        "delta": 0.05,
+        "calibration_used": true,
+        "interval_method": "rcps_hb_asymmetric",
+        "manifest_sha256": "ef41a0325df23ef8ab3dc7c34b7a374f0f7d927f9323b9046ae39819c9f6b1d6",
+        "calibration_count": 2048,
+        "calibration_sha256": "4cdddb9b60bda8edaf8f3163dd614d1b746f18c5bc88aa4e8f8ebeaf23355ced",
+        "metrics": {
+          "width": 0.028401779667288064,
+          "coverage": 0.9360653183460236,
+          "psnr": 38.22969191741943,
+          "ssim": 0.9588133903026581,
+          "mae": 0.006699606325663627
+        }
+      },
+      {
+        "camera": "rml",
+        "method": "ensemble10",
+        "epoch": 35,
+        "split": "test",
+        "test_count": 5000,
+        "clipped": true,
+        "alpha": 0.1,
+        "delta": 0.05,
+        "calibration_used": true,
+        "interval_method": "rcps_hb_asymmetric",
+        "manifest_sha256": "ef41a0325df23ef8ab3dc7c34b7a374f0f7d927f9323b9046ae39819c9f6b1d6",
+        "calibration_count": 2048,
+        "calibration_sha256": "4cdddb9b60bda8edaf8f3163dd614d1b746f18c5bc88aa4e8f8ebeaf23355ced",
+        "metrics": {
+          "width": 0.027423397900909186,
+          "coverage": 0.9346975642681122,
+          "psnr": 38.39780108642578,
+          "ssim": 0.9601441568374633,
+          "mae": 0.006553336478956044
+        }
+      },
+      {
+        "camera": "rml",
+        "method": "ensemble10",
         "epoch": 50,
         "split": "test",
         "test_count": 5000,
@@ -220,6 +286,28 @@
           "psnr": 37.1735294631958,
           "ssim": 0.9512014183998108,
           "mae": 0.0075333175281062726
+        }
+      },
+      {
+        "camera": "rml",
+        "method": "ensemble5",
+        "epoch": 20,
+        "split": "test",
+        "test_count": 5000,
+        "clipped": true,
+        "alpha": 0.1,
+        "delta": 0.05,
+        "calibration_used": true,
+        "interval_method": "rcps_hb_asymmetric",
+        "manifest_sha256": "ef41a0325df23ef8ab3dc7c34b7a374f0f7d927f9323b9046ae39819c9f6b1d6",
+        "calibration_count": 2048,
+        "calibration_sha256": "4cdddb9b60bda8edaf8f3163dd614d1b746f18c5bc88aa4e8f8ebeaf23355ced",
+        "metrics": {
+          "width": 0.029163550132513046,
+          "coverage": 0.9353605798721314,
+          "psnr": 37.6435173828125,
+          "ssim": 0.9547445585727692,
+          "mae": 0.007148379956185818
         }
       },
       {
@@ -772,6 +860,28 @@
           "ssim": 0.9513078453063964,
           "mae": 0.006725000969879329
         }
+      },
+      {
+        "camera": "rml",
+        "method": "mc_005",
+        "epoch": 50,
+        "split": "test",
+        "test_count": 5000,
+        "clipped": true,
+        "alpha": 0.1,
+        "delta": 0.05,
+        "calibration_used": true,
+        "interval_method": "rcps_hb_asymmetric",
+        "manifest_sha256": "ef41a0325df23ef8ab3dc7c34b7a374f0f7d927f9323b9046ae39819c9f6b1d6",
+        "calibration_count": 2048,
+        "calibration_sha256": "4cdddb9b60bda8edaf8f3163dd614d1b746f18c5bc88aa4e8f8ebeaf23355ced",
+        "metrics": {
+          "width": 0.02482021684870124,
+          "coverage": 0.9335011920452118,
+          "psnr": 39.253056799316404,
+          "ssim": 0.9651113385677338,
+          "mae": 0.006122546211257577
+        }
       }
     ],
     "diffuser": [
@@ -863,6 +973,72 @@
           "coverage": 0.9244713871061802,
           "width": 0.07119102971991524,
           "native_crossing": 0.0
+        }
+      },
+      {
+        "camera": "diffuser",
+        "method": "mc_005",
+        "epoch": 5,
+        "split": "test",
+        "test_count": 5000,
+        "clipped": true,
+        "alpha": 0.1,
+        "delta": 0.05,
+        "calibration_used": true,
+        "interval_method": "rcps_hb_asymmetric",
+        "manifest_sha256": "957c0ce3d9cd7364fdb0341860a6e3219b9201cb6dff4e4857e5d6ae5c19e556",
+        "calibration_count": 2048,
+        "calibration_sha256": "f8b07201a887547415b1edb3a73287eaf94c52c50a6df9043a99a2512181964f",
+        "metrics": {
+          "width": 0.09537289692163467,
+          "coverage": 0.9231606752872467,
+          "psnr": 29.10102000579834,
+          "ssim": 0.8006129072666168,
+          "mae": 0.022501884730905294
+        }
+      },
+      {
+        "camera": "diffuser",
+        "method": "mc_005",
+        "epoch": 10,
+        "split": "test",
+        "test_count": 5000,
+        "clipped": true,
+        "alpha": 0.1,
+        "delta": 0.05,
+        "calibration_used": true,
+        "interval_method": "rcps_hb_asymmetric",
+        "manifest_sha256": "957c0ce3d9cd7364fdb0341860a6e3219b9201cb6dff4e4857e5d6ae5c19e556",
+        "calibration_count": 2048,
+        "calibration_sha256": "f8b07201a887547415b1edb3a73287eaf94c52c50a6df9043a99a2512181964f",
+        "metrics": {
+          "width": 0.0835172461271286,
+          "coverage": 0.9224096467971802,
+          "psnr": 30.070960317993165,
+          "ssim": 0.8270660131931304,
+          "mae": 0.019781620306521655
+        }
+      },
+      {
+        "camera": "diffuser",
+        "method": "mc_005",
+        "epoch": 15,
+        "split": "test",
+        "test_count": 5000,
+        "clipped": true,
+        "alpha": 0.1,
+        "delta": 0.05,
+        "calibration_used": true,
+        "interval_method": "rcps_hb_asymmetric",
+        "manifest_sha256": "957c0ce3d9cd7364fdb0341860a6e3219b9201cb6dff4e4857e5d6ae5c19e556",
+        "calibration_count": 2048,
+        "calibration_sha256": "f8b07201a887547415b1edb3a73287eaf94c52c50a6df9043a99a2512181964f",
+        "metrics": {
+          "width": 0.07892071886062622,
+          "coverage": 0.9213405547618866,
+          "psnr": 30.409364796447754,
+          "ssim": 0.8182624055862426,
+          "mae": 0.019510471272468567
         }
       }
     ]
