@@ -420,6 +420,28 @@
           "ssim": 0.9514393565177918,
           "mae": 0.007158087245188654
         }
+      },
+      {
+        "camera": "rml",
+        "method": "mc_005",
+        "epoch": 20,
+        "split": "test",
+        "test_count": 5000,
+        "clipped": true,
+        "alpha": 0.1,
+        "delta": 0.05,
+        "calibration_used": true,
+        "interval_method": "rcps_hb_asymmetric",
+        "manifest_sha256": "ef41a0325df23ef8ab3dc7c34b7a374f0f7d927f9323b9046ae39819c9f6b1d6",
+        "calibration_count": 2048,
+        "calibration_sha256": "4cdddb9b60bda8edaf8f3163dd614d1b746f18c5bc88aa4e8f8ebeaf23355ced",
+        "metrics": {
+          "width": 0.02924401087015867,
+          "coverage": 0.9310102123737335,
+          "psnr": 38.118482788085934,
+          "ssim": 0.9470440019607544,
+          "mae": 0.007231797549501062
+        }
       }
     ],
     "diffuser": [
