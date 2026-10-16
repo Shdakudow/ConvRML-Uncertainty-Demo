@@ -1152,6 +1152,28 @@
       {
         "camera": "diffuser",
         "method": "ensemble10",
+        "epoch": 45,
+        "split": "test",
+        "test_count": 5000,
+        "clipped": true,
+        "alpha": 0.1,
+        "delta": 0.05,
+        "calibration_used": true,
+        "interval_method": "rcps_hb_asymmetric",
+        "manifest_sha256": "957c0ce3d9cd7364fdb0341860a6e3219b9201cb6dff4e4857e5d6ae5c19e556",
+        "calibration_count": 2048,
+        "calibration_sha256": "f8b07201a887547415b1edb3a73287eaf94c52c50a6df9043a99a2512181964f",
+        "metrics": {
+          "width": 0.07073186591863632,
+          "coverage": 0.9249014375686645,
+          "psnr": 31.035706936645507,
+          "ssim": 0.8499724979400635,
+          "mae": 0.01727288882061839
+        }
+      },
+      {
+        "camera": "diffuser",
+        "method": "ensemble10",
         "epoch": 50,
         "split": "test",
         "test_count": 5000,
