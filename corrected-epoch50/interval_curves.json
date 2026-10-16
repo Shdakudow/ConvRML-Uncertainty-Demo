@@ -112,6 +112,50 @@
           "ssim": 0.952570368719101,
           "mae": 0.007260584021918475
         }
+      },
+      {
+        "camera": "rml",
+        "method": "im2im",
+        "epoch": 15,
+        "split": "test",
+        "test_count": 5000,
+        "clipped": true,
+        "alpha": 0.1,
+        "delta": 0.05,
+        "calibration_used": true,
+        "interval_method": "rcps_hb_asymmetric",
+        "manifest_sha256": "ef41a0325df23ef8ab3dc7c34b7a374f0f7d927f9323b9046ae39819c9f6b1d6",
+        "calibration_count": 2048,
+        "calibration_sha256": "4cdddb9b60bda8edaf8f3163dd614d1b746f18c5bc88aa4e8f8ebeaf23355ced",
+        "metrics": {
+          "width": 0.02944122171550989,
+          "coverage": 0.9311458364486694,
+          "psnr": 38.490506204223635,
+          "ssim": 0.9547142621040344,
+          "mae": 0.006915103672258556
+        }
+      },
+      {
+        "camera": "rml",
+        "method": "im2im",
+        "epoch": 20,
+        "split": "test",
+        "test_count": 5000,
+        "clipped": true,
+        "alpha": 0.1,
+        "delta": 0.05,
+        "calibration_used": true,
+        "interval_method": "rcps_hb_asymmetric",
+        "manifest_sha256": "ef41a0325df23ef8ab3dc7c34b7a374f0f7d927f9323b9046ae39819c9f6b1d6",
+        "calibration_count": 2048,
+        "calibration_sha256": "4cdddb9b60bda8edaf8f3163dd614d1b746f18c5bc88aa4e8f8ebeaf23355ced",
+        "metrics": {
+          "width": 0.027443925876915454,
+          "coverage": 0.9396968144893646,
+          "psnr": 38.81328673095703,
+          "ssim": 0.9628212519168854,
+          "mae": 0.006381631220318377
+        }
       }
     ],
     "diffuser": [
