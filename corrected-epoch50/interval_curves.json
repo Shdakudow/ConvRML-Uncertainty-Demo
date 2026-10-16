@@ -1020,6 +1020,50 @@
       {
         "camera": "diffuser",
         "method": "ensemble10",
+        "epoch": 15,
+        "split": "test",
+        "test_count": 5000,
+        "clipped": true,
+        "alpha": 0.1,
+        "delta": 0.05,
+        "calibration_used": true,
+        "interval_method": "rcps_hb_asymmetric",
+        "manifest_sha256": "957c0ce3d9cd7364fdb0341860a6e3219b9201cb6dff4e4857e5d6ae5c19e556",
+        "calibration_count": 2048,
+        "calibration_sha256": "f8b07201a887547415b1edb3a73287eaf94c52c50a6df9043a99a2512181964f",
+        "metrics": {
+          "width": 0.07948034287989139,
+          "coverage": 0.9257586543560028,
+          "psnr": 29.868414622497557,
+          "ssim": 0.8251773475646973,
+          "mae": 0.020104804913699627
+        }
+      },
+      {
+        "camera": "diffuser",
+        "method": "ensemble10",
+        "epoch": 20,
+        "split": "test",
+        "test_count": 5000,
+        "clipped": true,
+        "alpha": 0.1,
+        "delta": 0.05,
+        "calibration_used": true,
+        "interval_method": "rcps_hb_asymmetric",
+        "manifest_sha256": "957c0ce3d9cd7364fdb0341860a6e3219b9201cb6dff4e4857e5d6ae5c19e556",
+        "calibration_count": 2048,
+        "calibration_sha256": "f8b07201a887547415b1edb3a73287eaf94c52c50a6df9043a99a2512181964f",
+        "metrics": {
+          "width": 0.0764917706310749,
+          "coverage": 0.924623841381073,
+          "psnr": 30.234987074279786,
+          "ssim": 0.8331699739456176,
+          "mae": 0.01923637427687645
+        }
+      },
+      {
+        "camera": "diffuser",
+        "method": "ensemble10",
         "epoch": 50,
         "split": "test",
         "test_count": 5000,
