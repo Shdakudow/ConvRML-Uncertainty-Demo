@@ -9,3 +9,5 @@ a{color:#91d9cd}header,main,footer{max-width:1380px}
 .matrix .bound-row{display:none}.matrix.show-bounds .bound-row{display:block}
 
 .unavailable{display:flex;min-height:90px;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:#18212c;color:#a4b4c4;border:1px dashed #334152;padding:12px;text-align:center;font-size:12px}.unavailable b{color:#e6edf5}.matrix.show-bounds .unavailable.bound-row{display:flex}
+
+.plot{position:relative}.epoch-hit{cursor:crosshair;outline:none}.epoch-hit.active{fill:#ffffff0a;stroke:#a4b4c4;stroke-width:.6;stroke-dasharray:3 3}.epoch-tooltip{position:absolute;z-index:5;top:42px;right:12px;max-width:calc(100% - 24px);padding:12px;background:#10161ef5;border:1px solid #617789;border-radius:8px;box-shadow:0 5px 20px #0008;pointer-events:none;font-size:12px}.epoch-tooltip[hidden]{display:none}.epoch-tooltip td{padding:4px 8px}.epoch-tooltip td:last-child{text-align:right;font-variant-numeric:tabular-nums}.epoch-hint{font-size:11px;color:var(--muted);margin-top:10px}

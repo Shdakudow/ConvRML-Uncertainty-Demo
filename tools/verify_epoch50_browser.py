@@ -46,6 +46,21 @@ try:
   assert js("document.querySelectorAll('#pixelRows tr').length")==4
   assert js("document.querySelectorAll('#ensembleDifferenceRows tr').length")==3
   assert js("document.querySelectorAll('#intervalHistoryPlots .plot').length")==2
+  assert js("document.querySelectorAll('.epoch-hit').length") == 40
+  assert js("""(()=>{
+    for(const plot of document.querySelectorAll('.learning-plots .plot')){
+      const hit=plot.querySelector('.epoch-hit');
+      hit.dispatchEvent(new PointerEvent('pointerenter'));
+      const tip=plot.querySelector('.epoch-tooltip'),info=JSON.parse(decodeURIComponent(hit.dataset.comparison));
+      if(tip.hidden || !tip.textContent.includes('Epoch 5'))throw Error('initial tooltip: '+tip.textContent+' hidden='+tip.hidden);
+      for(const row of info.rows){if(!tip.textContent.includes(row.name)||!tip.textContent.includes(row.value===null?'Pending':row.value.toFixed(6)))throw Error('row missing '+JSON.stringify(row)+' tip='+tip.textContent);}
+      if(tip.querySelectorAll('tbody tr').length!==info.rows.length)throw Error('row count');
+      hit.focus();hit.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}));
+      if(!tip.textContent.includes('Epoch 10'))throw Error('keyboard: '+tip.textContent);
+      plot.dispatchEvent(new PointerEvent('pointerleave'));if(!tip.hidden)throw Error('leave did not hide');
+    }return true;
+  })()""")
+  print('Shared epoch comparison: hover values, pending entries, keyboard navigation verified',flush=True)
   assert js("!document.getElementById('intervalHistoryPlots').innerHTML.includes('NaN')")
   assert js("document.getElementById('intervalCurveStatus').textContent.includes('5,000 test images')")
   assert js("ENSEMBLE_KEY === (DATASET.methods.includes('ensemble5')?'ensemble5':'ensemble10')")
