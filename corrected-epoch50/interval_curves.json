@@ -47,6 +47,28 @@
       },
       {
         "camera": "rml",
+        "method": "adaptive_qutcc",
+        "epoch": 15,
+        "split": "test",
+        "test_count": 5000,
+        "clipped": true,
+        "alpha": 0.1,
+        "delta": null,
+        "calibration_used": false,
+        "interval_method": "native_learned_image_quantiles",
+        "manifest_sha256": "ef41a0325df23ef8ab3dc7c34b7a374f0f7d927f9323b9046ae39819c9f6b1d6",
+        "calibration_count": 0,
+        "calibration_sha256": null,
+        "metrics": {
+          "width": 0.03116603493988514,
+          "coverage": 0.8363965155601502,
+          "psnr": 34.54585362854004,
+          "ssim": 0.9248368367195129,
+          "mae": 0.010602381530031561
+        }
+      },
+      {
+        "camera": "rml",
         "method": "ensemble10",
         "epoch": 5,
         "split": "test",
