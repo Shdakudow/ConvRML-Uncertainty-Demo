@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Test image (intensified) 1</title><link rel="stylesheet" href="style.css?v=1"></head>
+<body><main><a href="../corrected-epoch50/">← Epoch-50 comparison</a>
+<h1>Test image (intensified) 1</h1>
+<p>Same scene, brighter or dimmer measurement. Model weights, original ground truth, and RCPS scale factors stay fixed.</p>
+<nav><label>Camera <select id="camera"><option value="rml">RML</option><option value="diffuser">DiffuserCam</option></select></label><span id="gains"></span></nav>
+<p id="status" role="status">Loading evaluation…</p><p id="difficulty" class="notice"></p>
+<section id="results" hidden>
+<div class="inputs"><figure><img id="original" alt="Original measurement"><figcaption>Original measurement · 1×</figcaption></figure><figure><img id="measurement" alt="Measurement with selected brightness"><figcaption id="measurementLabel"></figcaption></figure><figure><img id="truth" alt="Original ground truth, unchanged"><figcaption>Ground truth · unchanged</figcaption></figure></div>
+<p id="scale"></p><div class="gradient"></div><p class="muted">Error and interval-width maps share the same color scale across all methods and brightness levels for this camera. High values beyond the displayed limit saturate.</p>
+<div class="scroll"><div id="matrix"></div></div>
+<h2>Exact values for the selected brightness</h2><div class="scroll"><table><thead><tr><th>Model</th><th>PSNR (dB)</th><th>SSIM</th><th>MAE</th><th>Mean width</th><th>Coverage</th><th>Δ error vs 1×</th><th>Δ width vs 1×</th></tr></thead><tbody id="metrics"></tbody></table></div>
+<h2>Response across brightness levels</h2><div id="charts"></div>
+<details><summary>Full numeric comparison</summary><div class="scroll"><table><thead><tr><th>Gain</th><th>Model</th><th>MAE</th><th>Width</th><th>Coverage</th><th>SSIM</th></tr></thead><tbody id="allValues"></tbody></table></div></details>
+</section>
+<h2>What “harder” means here</h2><p>A variant is labeled <b>Harder than original</b> when its average MAE across Im2im, ensemble-5, ensemble-10, and MC dropout increases by more than 10% relative to the original measurement. Individual model labels use the same rule for that model. This is a descriptive threshold for this example, not an intrinsic image-difficulty score or a statistical test.</p>
+<p>This is a synthetic input-gain shift, not a physical exposure or sensor-noise simulation. Gains above 1 may clip the measurement. The ground truth is unchanged to test robustness to measurement scaling. RCPS factors were fitted on the original calibration distribution; coverage under this shift is measured, not guaranteed. One image cannot establish a general trend.</p>
+<p>All shown models use epoch-50 weights. MC dropout uses p=0.05 and 30 passes, with matched random masks across brightness levels. QUTCC is excluded because its current adaptive run has not reached epoch 50.</p>
+</main><script src="app.js?v=1"></script></body></html>
