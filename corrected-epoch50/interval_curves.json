@@ -997,6 +997,28 @@
       },
       {
         "camera": "diffuser",
+        "method": "adaptive_qutcc",
+        "epoch": 15,
+        "split": "test",
+        "test_count": 5000,
+        "clipped": true,
+        "alpha": 0.1,
+        "delta": null,
+        "calibration_used": false,
+        "interval_method": "native_learned_image_quantiles",
+        "manifest_sha256": "957c0ce3d9cd7364fdb0341860a6e3219b9201cb6dff4e4857e5d6ae5c19e556",
+        "calibration_count": 0,
+        "calibration_sha256": null,
+        "metrics": {
+          "width": 0.10033095209896564,
+          "coverage": 0.9002210431098938,
+          "psnr": 28.23253487701416,
+          "ssim": 0.7051032228946685,
+          "mae": 0.026471722880005835
+        }
+      },
+      {
+        "camera": "diffuser",
         "method": "ensemble10",
         "epoch": 5,
         "split": "test",
