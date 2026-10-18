@@ -1,0 +1,295 @@
+{
+  "protocol": "paired_brightness_v2",
+  "camera": "diffuser",
+  "image_id": 35894,
+  "example_index": 1,
+  "epoch": 50,
+  "methods": [
+    "im2im",
+    "ensemble5",
+    "ensemble10",
+    "mc_005"
+  ],
+  "rows": [
+    {
+      "target_saturated_fraction": 0.0,
+      "gain": 0.5,
+      "label": "Dimmer",
+      "saturated_fraction": 0.0,
+      "models": {
+        "im2im": {
+          "psnr": 43.59765625,
+          "ssim": 0.98663330078125,
+          "mae": 0.003994459751993418,
+          "width": 0.01913621835410595,
+          "coverage": 0.963653564453125,
+          "mae_change_percent": -42.3513401172256,
+          "width_change_percent": -31.481252994537535,
+          "harder": false
+        },
+        "mc_005": {
+          "psnr": 42.20281219482422,
+          "ssim": 0.98846036195755,
+          "mae": 0.0038743477780371904,
+          "width": 0.028642749413847923,
+          "coverage": 0.99005126953125,
+          "mae_change_percent": -35.92458459098459,
+          "width_change_percent": -32.07227061437046,
+          "harder": false
+        },
+        "ensemble5": {
+          "psnr": 42.148048400878906,
+          "ssim": 0.982523500919342,
+          "mae": 0.004667872563004494,
+          "width": 0.01719420962035656,
+          "coverage": 0.88800048828125,
+          "mae_change_percent": -36.98484036121421,
+          "width_change_percent": -37.76543283704047,
+          "harder": false
+        },
+        "ensemble10": {
+          "psnr": 42.65900421142578,
+          "ssim": 0.9829842448234558,
+          "mae": 0.004517743829637766,
+          "width": 0.0175135750323534,
+          "coverage": 0.8938395380973816,
+          "mae_change_percent": -36.56950157226454,
+          "width_change_percent": -37.17946173938693,
+          "harder": false
+        }
+      },
+      "average_mae": 0.004263605980668217,
+      "relative_mae": 0.6200389460090286,
+      "difficulty": "No >10% error increase"
+    },
+    {
+      "target_saturated_fraction": 0.0,
+      "gain": 0.75,
+      "label": "Dimmer",
+      "saturated_fraction": 0.0,
+      "models": {
+        "im2im": {
+          "psnr": 42.32865905761719,
+          "ssim": 0.9855501055717468,
+          "mae": 0.004576297011226416,
+          "width": 0.020773721858859062,
+          "coverage": 0.9500172734260559,
+          "mae_change_percent": -33.95417495667801,
+          "width_change_percent": -25.618041868570085,
+          "harder": false
+        },
+        "mc_005": {
+          "psnr": 42.955894470214844,
+          "ssim": 0.9852221012115479,
+          "mae": 0.004041556268930435,
+          "width": 0.0344398133456707,
+          "coverage": 0.9911397099494934,
+          "mae_change_percent": -33.1592279096267,
+          "width_change_percent": -18.324240203516485,
+          "harder": false
+        },
+        "ensemble5": {
+          "psnr": 40.559326171875,
+          "ssim": 0.9841416478157043,
+          "mae": 0.005451548378914595,
+          "width": 0.02099338173866272,
+          "coverage": 0.9190419316291809,
+          "mae_change_percent": -26.405404873617076,
+          "width_change_percent": -24.014301637590496,
+          "harder": false
+        },
+        "ensemble10": {
+          "psnr": 40.951019287109375,
+          "ssim": 0.9843795895576477,
+          "mae": 0.005363162606954575,
+          "width": 0.02127194218337536,
+          "coverage": 0.921295166015625,
+          "mae_change_percent": -24.699564619758853,
+          "width_change_percent": -23.69833941159001,
+          "harder": false
+        }
+      },
+      "average_mae": 0.004858141066506505,
+      "relative_mae": 0.7064997750959569,
+      "difficulty": "No >10% error increase"
+    },
+    {
+      "target_saturated_fraction": 0.0,
+      "gain": 1.0,
+      "label": "Original",
+      "saturated_fraction": 0.0,
+      "models": {
+        "im2im": {
+          "psnr": 38.77843475341797,
+          "ssim": 0.9767853617668152,
+          "mae": 0.0069289724342525005,
+          "width": 0.027928441762924194,
+          "coverage": 0.9206441044807434,
+          "mae_change_percent": 0.0,
+          "width_change_percent": 0.0,
+          "harder": false
+        },
+        "mc_005": {
+          "psnr": 39.079254150390625,
+          "ssim": 0.9772215485572815,
+          "mae": 0.00604654336348176,
+          "width": 0.04216650500893593,
+          "coverage": 0.9863433837890625,
+          "mae_change_percent": 0.0,
+          "width_change_percent": 0.0,
+          "harder": false
+        },
+        "ensemble5": {
+          "psnr": 37.47304916381836,
+          "ssim": 0.9768442511558533,
+          "mae": 0.0074075390584766865,
+          "width": 0.02762806974351406,
+          "coverage": 0.9093017578125,
+          "mae_change_percent": 0.0,
+          "width_change_percent": 0.0,
+          "harder": false
+        },
+        "ensemble10": {
+          "psnr": 37.965423583984375,
+          "ssim": 0.9776176810264587,
+          "mae": 0.007122352719306946,
+          "width": 0.027878740802407265,
+          "coverage": 0.91845703125,
+          "mae_change_percent": 0.0,
+          "width_change_percent": 0.0,
+          "harder": false
+        }
+      },
+      "average_mae": 0.006876351893879473,
+      "relative_mae": 1.0,
+      "difficulty": "Reference"
+    },
+    {
+      "target_saturated_fraction": 0.0,
+      "gain": 1.25,
+      "label": "Intensified",
+      "saturated_fraction": 0.0,
+      "models": {
+        "im2im": {
+          "psnr": 35.057376861572266,
+          "ssim": 0.9683196544647217,
+          "mae": 0.010208171792328358,
+          "width": 0.03672995790839195,
+          "coverage": 0.8933003544807434,
+          "mae_change_percent": 47.32591144201339,
+          "width_change_percent": 31.514526374872887,
+          "harder": true
+        },
+        "mc_005": {
+          "psnr": 35.92399978637695,
+          "ssim": 0.9682206511497498,
+          "mae": 0.00866218563169241,
+          "width": 0.04946794733405113,
+          "coverage": 0.9782816767692566,
+          "mae_change_percent": 43.25847200580553,
+          "width_change_percent": 17.315739883037207,
+          "harder": true
+        },
+        "ensemble5": {
+          "psnr": 34.71701431274414,
+          "ssim": 0.9694242477416992,
+          "mae": 0.009890864603221416,
+          "width": 0.03382015600800514,
+          "coverage": 0.8876444697380066,
+          "mae_change_percent": 33.52429903022893,
+          "width_change_percent": 22.412301409311187,
+          "harder": true
+        },
+        "ensemble10": {
+          "psnr": 35.03543472290039,
+          "ssim": 0.9704305529594421,
+          "mae": 0.009589283727109432,
+          "width": 0.033636048436164856,
+          "coverage": 0.8943583369255066,
+          "mae_change_percent": 34.63646220602419,
+          "width_change_percent": 20.651247036453178,
+          "harder": true
+        }
+      },
+      "average_mae": 0.009587626438587904,
+      "relative_mae": 1.3942896737326214,
+      "difficulty": "Harder than original"
+    },
+    {
+      "target_saturated_fraction": 0.0,
+      "gain": 1.5,
+      "label": "Intensified",
+      "saturated_fraction": 0.0,
+      "models": {
+        "im2im": {
+          "psnr": 30.247629165649414,
+          "ssim": 0.9534028172492981,
+          "mae": 0.016352729871869087,
+          "width": 0.04662564396858215,
+          "coverage": 0.8570149540901184,
+          "mae_change_percent": 136.00512236174342,
+          "width_change_percent": 66.94681487915675,
+          "harder": true
+        },
+        "mc_005": {
+          "psnr": 30.810699462890625,
+          "ssim": 0.9541168212890625,
+          "mae": 0.014618494547903538,
+          "width": 0.05727510154247284,
+          "coverage": 0.9196574091911316,
+          "mae_change_percent": 141.76614090278883,
+          "width_change_percent": 35.83080108331269,
+          "harder": true
+        },
+        "ensemble5": {
+          "psnr": 30.427574157714844,
+          "ssim": 0.958913266658783,
+          "mae": 0.015221193432807922,
+          "width": 0.0379004068672657,
+          "coverage": 0.8175761103630066,
+          "mae_change_percent": 105.48245932486604,
+          "width_change_percent": 37.18079916228374,
+          "harder": true
+        },
+        "ensemble10": {
+          "psnr": 30.613805770874023,
+          "ssim": 0.9600312113761902,
+          "mae": 0.014796980656683445,
+          "width": 0.038198862224817276,
+          "coverage": 0.8381093144416809,
+          "mae_change_percent": 107.75411215696282,
+          "width_change_percent": 37.017889350005696,
+          "harder": true
+        }
+      },
+      "average_mae": 0.015247349627315998,
+      "relative_mae": 2.2173602896744438,
+      "difficulty": "Harder than original"
+    }
+  ],
+  "factors": {
+    "im2im": {
+      "lower": 1.397862,
+      "upper": 1.46394
+    },
+    "mc_005": {
+      "lower": 3.64239,
+      "upper": 3.838139
+    },
+    "ensemble5": {
+      "lower": 0.958727,
+      "upper": 1.071958
+    },
+    "ensemble10": {
+      "lower": 0.923977,
+      "upper": 1.032332
+    }
+  },
+  "heatmap_max": 0.21129384636878967,
+  "seconds": 55.18462300486863,
+  "gpu": "NVIDIA RTX A6000",
+  "alpha": 0.1,
+  "delta": 0.05,
+  "mc_passes": 30,
+  "notes": "Measurement and ground truth both multiplied by the same gain and clipped to [0,1]. Frozen weights and original RCPS scales. Synthetic paired brightness augmentation, not a physical exposure/noise simulation. Shifted-distribution coverage is measured, not guaranteed. Harder is a descriptive >10% increase in mean MAE across these four methods. Ensemble sizes are correlated comparisons. One example does not establish a general trend. QUTCC has no completed epoch-50 checkpoint and is excluded. All maps share one camera-specific scale across methods and gains; top 0.5% may saturate."
+}
