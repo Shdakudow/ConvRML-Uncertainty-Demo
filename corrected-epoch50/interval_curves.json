@@ -69,6 +69,28 @@
       },
       {
         "camera": "rml",
+        "method": "adaptive_qutcc",
+        "epoch": 20,
+        "split": "test",
+        "test_count": 5000,
+        "clipped": true,
+        "alpha": 0.1,
+        "delta": null,
+        "calibration_used": false,
+        "interval_method": "native_learned_image_quantiles",
+        "manifest_sha256": "ef41a0325df23ef8ab3dc7c34b7a374f0f7d927f9323b9046ae39819c9f6b1d6",
+        "calibration_count": 0,
+        "calibration_sha256": null,
+        "metrics": {
+          "width": 0.03810284140259027,
+          "coverage": 0.8747227935314178,
+          "psnr": 35.593566873168946,
+          "ssim": 0.8922288272380828,
+          "mae": 0.01044847444370389
+        }
+      },
+      {
+        "camera": "rml",
         "method": "ensemble10",
         "epoch": 5,
         "split": "test",
@@ -1015,6 +1037,28 @@
           "psnr": 28.23253487701416,
           "ssim": 0.7051032228946685,
           "mae": 0.026471722880005835
+        }
+      },
+      {
+        "camera": "diffuser",
+        "method": "adaptive_qutcc",
+        "epoch": 20,
+        "split": "test",
+        "test_count": 5000,
+        "clipped": true,
+        "alpha": 0.1,
+        "delta": null,
+        "calibration_used": false,
+        "interval_method": "native_learned_image_quantiles",
+        "manifest_sha256": "957c0ce3d9cd7364fdb0341860a6e3219b9201cb6dff4e4857e5d6ae5c19e556",
+        "calibration_count": 0,
+        "calibration_sha256": null,
+        "metrics": {
+          "width": 0.09147945689558983,
+          "coverage": 0.8960080489635468,
+          "psnr": 28.280249697875977,
+          "ssim": 0.7729613234996796,
+          "mae": 0.024714881218969822
         }
       },
       {
