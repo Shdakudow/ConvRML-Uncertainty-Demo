@@ -1,5 +1,5 @@
 """Exercise raw-demo loading, pixel values, study switching and curve tooltips."""
-import base64,functools,http.server,json,os,signal,subprocess,sys,threading,time,urllib.request
+import base64,functools,http.server,json,os,signal,socket,subprocess,sys,tempfile,threading,time,urllib.request,shutil
 from pathlib import Path
 import websocket
 REPO=Path(__file__).resolve().parents[1]
@@ -15,10 +15,12 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 def main(base=None):
  server=None
  if not base:
-  server=http.server.ThreadingHTTPServer(('127.0.0.1',8789),functools.partial(Handler,directory=str(REPO)))
-  threading.Thread(target=server.serve_forever,daemon=True).start();base='http://127.0.0.1:8789/'
- log=open('/tmp/raw_demo_chrome.log','w');port=9341
- p=subprocess.Popen(['/Applications/Google Chrome.app/Contents/MacOS/Google Chrome','--headless=new','--disable-gpu','--window-size=1440,1100','--no-first-run','--disable-background-networking',f'--remote-debugging-port={port}',f'--remote-allow-origins=http://localhost:{port}','--user-data-dir=/tmp/raw_diffuser_demo_chrome','about:blank'],stdout=log,stderr=log,start_new_session=True)
+  server=http.server.ThreadingHTTPServer(('127.0.0.1',0),functools.partial(Handler,directory=str(REPO)))
+  threading.Thread(target=server.serve_forever,daemon=True).start();base=f'http://127.0.0.1:{server.server_address[1]}/'
+ log=open('/tmp/raw_demo_chrome.log','w')
+ with socket.socket() as available:available.bind(('127.0.0.1',0));port=available.getsockname()[1]
+ profile=tempfile.mkdtemp(prefix='raw-demo-browser-')
+ p=subprocess.Popen(['/Applications/Google Chrome.app/Contents/MacOS/Google Chrome','--headless=new','--disable-gpu','--window-size=1440,1100','--no-first-run','--disable-background-networking',f'--remote-debugging-port={port}',f'--remote-allow-origins=http://localhost:{port}','--user-data-dir='+profile,'about:blank'],stdout=log,stderr=log,start_new_session=True)
  try:
   for _ in range(100):
    try:tabs=[t for t in json.load(urllib.request.urlopen(f'http://localhost:{port}/json')) if t.get('type')=='page'];assert tabs;break
@@ -78,5 +80,5 @@ def main(base=None):
   try:os.killpg(p.pid,signal.SIGTERM);p.wait(timeout=10)
   except ProcessLookupError:pass
   if server:server.shutdown();server.server_close()
-  log.close()
+  log.close();shutil.rmtree(profile,ignore_errors=True)
 if __name__=='__main__':main(sys.argv[1] if len(sys.argv)>1 else None)
