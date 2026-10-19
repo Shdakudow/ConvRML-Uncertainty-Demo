@@ -19,12 +19,16 @@ def main():
  lock=(WORK/'publisher.lock').open('w')
  try:fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
  except BlockingIOError:return
- if (WORK/'published_final.json').exists():return
+ requested=(WORK/'epoch20_update_requested').exists()
+ if (WORK/'published_final.json').exists() and not requested:return
  expiry=WORK/'publisher_expires.json'
  if not expiry.exists():expiry.write_text(json.dumps({'expires':(datetime.datetime.now(datetime.timezone.utc)+datetime.timedelta(hours=48)).isoformat()}))
  if datetime.datetime.now(datetime.timezone.utc)>datetime.datetime.fromisoformat(json.loads(expiry.read_text())['expires']):status('expired');return
  probe="import json,pathlib; r=pathlib.Path('"+REMOTE+"/exports'); print(json.dumps({s+'/'+m:json.loads((r/s/m/'summary.json').read_text()).get('refreshed',False) for s in ['clean','corrupted'] for m in ['qutcc','im2im']}))"
  ready=json.loads(run(SSH+['python3 -'],input=probe,timeout=60))
+ if requested:
+  audit_probe="import pathlib; print((pathlib.Path('"+REMOTE+"/exports/epoch20_reference.json')).exists())"
+  if run(SSH+['python3 -'],input=audit_probe,timeout=60)!='True':status('waiting_for_epoch20_audit',ready=ready);return
  if not all(ready.values()):status('waiting_for_calibration_exports',ready=ready);return
  status('downloading',ready=ready)
  run(['rsync','-az','-e','ssh -i '+str(Path.home()/'.ssh/id_ed25519')+' -o BatchMode=yes',f'jy2228@unicorn-login-02.coecis.cornell.edu:{REMOTE}/exports/',str(ASSETS/'exports')+'/'],timeout=1200)
@@ -45,6 +49,7 @@ def main():
  if run(['git','diff','--cached','--name-only']):run(['git','commit','-m','Update raw DiffuserCam demo with refreshed calibration and fifty examples'])
  commit=run(['git','rev-parse','HEAD']);run(['git','push','origin','main'],timeout=600)
  (WORK/'published_final.json').write_text(json.dumps({'commit':commit,'asset_commit':asset_commit,'ready':ready,'url':'https://shdakudow.github.io/ConvRML-Uncertainty-Demo/raw-diffusercam/'},indent=2));status('published_final',commit=commit,asset_commit=asset_commit)
+ (WORK/'epoch20_update_requested').unlink(missing_ok=True)
 if __name__=='__main__':
  try:main()
  except Exception as e:status('retry_after_error',error=repr(e));raise

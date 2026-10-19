@@ -20,6 +20,13 @@ def build(assets,dest):
    assert s['test_count']==2000 and s['calibration_count']==3000 and s['epoch']==(50 if study=='clean' else 10)
    assert all(np.isfinite(v) for v in s['metrics']['clipped'].values())
    assert s['config']['counts']=={'train':17999,'val':2000,'test':2000,'calibration':3000}
+   reference=assets/'exports/epoch20_reference.json'
+   if study=='clean' and m=='qutcc' and reference.exists():
+    ref=json.loads(reference.read_text())
+    for row in s['evaluations']:
+     if row['epoch']==20:
+      if ref['calibrated']:row.update(status='complete',metrics=ref['metrics'],calibration=ref['calibration'],rechecked=True)
+      else:row['reference']={k:ref[k] for k in ['status','metrics','calibration','calibration_failure','calibration_trace','per_tail_target','test_count']}
    data['studies'][study][m]=s
   count=min(s['example_count'] for s in summaries.values())
   for i in range(count):

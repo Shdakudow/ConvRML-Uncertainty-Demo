@@ -60,7 +60,8 @@ def main(base=None):
    js("document.querySelector('#next').click()");print(study,wait_ready('2 / ' if study=='clean' else '3 / '),flush=True)
    assert js("Number(new URL(location.href).searchParams.get('example'))===index")
    assert js("[...document.querySelectorAll('[data-demo-route]')].every(a=>Number(new URL(a.href).searchParams.get('example'))===index)")
-   if study=='clean':assert js("document.querySelector('#calibrationRows').textContent.includes('Calibration failed')")
+   if study=='clean':
+    assert js("""(()=>{const row=data.studies.clean.qutcc.evaluations.find(r=>r.epoch===20);if(row.status==='complete')return true;const plot=document.querySelector('#intervalPlots .plot'),hit=plot.querySelector('[data-epoch=\"20\"]');hit.dispatchEvent(new PointerEvent('pointerenter'));const text=plot.querySelector('.tooltip').textContent;if(row.reference){if(!text.includes('Native, uncalibrated'))throw Error('Native reference missing label')}else{if(!plot.querySelector('svg').textContent.includes('×')||!text.includes('Calibration failed'))throw Error('Epoch-20 calibration failure marker missing')}return true})()""")
    js("document.querySelector('#matrix').scrollIntoView()")
    shot=call('Page.captureScreenshot',dict(format='png',fromSurface=True,captureBeyondViewport=False));Path(f'/tmp/raw_demo_{study}.png').write_bytes(base64.b64decode(shot['data']))
    js("document.querySelector('#historyPlots').scrollIntoView()")

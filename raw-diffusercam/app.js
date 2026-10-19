@@ -21,6 +21,7 @@ async function unpack(url){
 function renderTables(){
  $('#aggregateRows').innerHTML=METHODS.map(method=>{const s=summary(method),m=s.metrics.clipped;return `<tr><td>${NAMES[method]}</td><td>${s.epoch}</td><td>${fmt(m.psnr,3)}</td><td>${fmt(m.ssim)}</td><td>${pct(m.coverage)}</td><td>${fmt(m.width)}</td><td>${fmt(m.mae)}</td></tr>`}).join('');
  $('#calibrationRows').innerHTML=METHODS.flatMap(method=>summary(method).evaluations.map(e=>({method,...e}))).sort((a,b)=>a.epoch-b.epoch||a.method.localeCompare(b.method)).map(e=>{
+  if(e.status!=='complete'&&e.reference){const c=e.reference.calibration,m=e.reference.metrics.clipped;return `<tr class="failed"><td>${e.epoch}</td><td>${NAMES[e.method]}</td><td>Native reference · calibration failed</td><td>${fmt(c.lower_q,6)}</td><td>${fmt(c.upper_q,6)}</td><td>${pct(m.coverage)}</td><td>${fmt(m.width,6)}</td></tr>`;}
   if(e.status!=='complete')return `<tr class="failed"><td>${e.epoch}</td><td>${NAMES[e.method]}</td><td title="${escapeHTML(e.failure?.error||'Calibration failed')}">Calibration failed</td><td>—</td><td>—</td><td>Unavailable</td><td>Unavailable</td></tr>`;
   const c=e.calibration,q=e.method==='qutcc';return `<tr><td>${e.epoch}</td><td>${NAMES[e.method]}</td><td>${q?'Quantile search':'Asymmetric scales'}</td><td>${fmt(q?c.lower_q:c.scales.lower,6)}</td><td>${fmt(q?c.upper_q:c.scales.upper,6)}</td><td>${pct(e.metrics.clipped.coverage)}</td><td>${fmt(e.metrics.clipped.width,6)}</td></tr>`
  }).join('');
@@ -32,22 +33,23 @@ function renderTables(){
 }
 function makePlot(container,title,key,kind){
  const plot=document.createElement('div');plot.className='plot';const histories={};
- for(const method of METHODS){const s=summary(method);histories[method]=kind==='validation'?s.history.map(r=>({epoch:r.epoch,value:r.validation[key]})):s.evaluations.map(r=>({epoch:r.epoch,value:r.status==='complete'?r.metrics.clipped[key]:null}));
+ for(const method of METHODS){const s=summary(method);histories[method]=kind==='validation'?s.history.map(r=>({epoch:r.epoch,value:r.validation[key]})):s.evaluations.map(r=>({epoch:r.epoch,value:r.status==='complete'?r.metrics.clipped[key]:null,reference:r.reference?.metrics.clipped[key]}));
   if(kind==='validation'&&s.baseline_validation)histories[method].unshift({epoch:0,value:s.baseline_validation.validation[key]});
  }
  const epochs=[...new Set(METHODS.flatMap(m=>histories[m].map(r=>r.epoch)))].sort((a,b)=>a-b),scale=key==='coverage'?100:1;
- const values=METHODS.flatMap(m=>histories[m].filter(r=>Number.isFinite(r.value)).map(r=>r.value*scale));if(!values.length)return;
+ const values=METHODS.flatMap(m=>histories[m].flatMap(r=>[r.value,r.reference].filter(Number.isFinite).map(v=>v*scale)));if(!values.length)return;
  let lo=Math.min(...values),hi=Math.max(...values),pad=Math.max((hi-lo)*.12,key==='ssim'?.001:key==='coverage'?.025:key==='width'?.001:.05);lo-=pad;hi+=pad;
  const W=700,H=270,L=64,R=20,T=18,B=42,x=e=>L+(e-epochs[0])/Math.max(1,epochs.at(-1)-epochs[0])*(W-L-R),y=v=>H-B-(v-lo)/(hi-lo)*(H-T-B);
  let svg=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${title}">`;
  for(let i=0;i<5;i++){const v=lo+(hi-lo)*i/4;svg+=`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="#354357"/><text x="${L-8}" y="${y(v)+4}" fill="#bac7d6" font-size="12" text-anchor="end">${v.toFixed(key==='psnr'?2:3)}</text>`}
  for(const e of epochs.filter(e=>epochs.length<=12||e===0||e===1||e%5===0))svg+=`<text x="${x(e)}" y="${H-18}" fill="#bac7d6" font-size="12" text-anchor="middle">${e}</text>`;
  for(const method of METHODS){let d='';for(const r of histories[method]){if(!Number.isFinite(r.value)){d='';continue}const cmd=`${d?'L':'M'}${x(r.epoch)},${y(r.value*scale)}`;svg+=`<path d="${d+cmd}" fill="none" stroke="${COLORS[method]}" stroke-width="2"/>`;d+=cmd;svg+=`<circle cx="${x(r.epoch)}" cy="${y(r.value*scale)}" r="3" fill="${COLORS[method]}"/>`}}
+ for(const method of METHODS)for(const r of histories[method]){if(Number.isFinite(r.reference)){const px=x(r.epoch),py=y(r.reference*scale);svg+=`<path d="M${px},${py-6} l6,6 -6,6 -6,-6 Z" fill="#101722" stroke="${COLORS[method]}" stroke-width="2"><title>Epoch ${r.epoch}: uncalibrated native reference</title></path>`}else if(!Number.isFinite(r.value))svg+=`<text x="${x(r.epoch)}" y="${H-B+10}" fill="#f8b4a7" font-size="16" text-anchor="middle">×</text>`;}
  svg+='<line class="epoch-guide" hidden/>';
  for(let i=0;i<epochs.length;i++){const e=epochs[i],left=i?((x(e)+x(epochs[i-1]))/2):L,right=i<epochs.length-1?(x(e)+x(epochs[i+1]))/2:W-R;svg+=`<rect class="epoch-hit" tabindex="0" role="button" aria-label="Compare epoch ${e}" data-epoch="${e}" x="${left}" y="${T}" width="${Math.max(1,right-left)}" height="${H-T-B}"/>`}
  svg+='</svg>';plot.innerHTML=`<h3>${title}</h3><div class="legend">${METHODS.map(m=>`<span style="color:${COLORS[m]}">${NAMES[m]}</span>`).join('')}</div>${svg}<div class="tooltip" hidden></div>`;
  const tip=plot.querySelector('.tooltip'),guide=plot.querySelector('.epoch-guide');
- const show=e=>{tip.hidden=false;tip.innerHTML=`<b>Epoch ${e}</b><table>${METHODS.map(m=>{const row=histories[m].find(r=>r.epoch===e),v=row?.value;return `<tr><td style="color:${COLORS[m]}">${NAMES[m]}</td><td>${Number.isFinite(v)?(v*scale).toFixed(6)+(key==='coverage'?'%':''):'Calibration failed / unavailable'}</td></tr>`}).join('')}</table>`;guide.removeAttribute('hidden');for(const [k,v] of Object.entries({x1:x(e),x2:x(e),y1:T,y2:H-B}))guide.setAttribute(k,v)};
+ const show=e=>{tip.hidden=false;tip.innerHTML=`<b>Epoch ${e}</b><table>${METHODS.map(m=>{const row=histories[m].find(r=>r.epoch===e),v=row?.value,ref=row?.reference;return `<tr><td style="color:${COLORS[m]}">${NAMES[m]}</td><td>${Number.isFinite(v)?(v*scale).toFixed(6)+(key==='coverage'?'%':''):Number.isFinite(ref)?(ref*scale).toFixed(6)+(key==='coverage'?'%':'')+' · Native, uncalibrated':'Calibration failed · recheck pending / unavailable'}</td></tr>`}).join('')}</table>`;guide.removeAttribute('hidden');for(const [k,v] of Object.entries({x1:x(e),x2:x(e),y1:T,y2:H-B}))guide.setAttribute(k,v)};
  for(const hit of plot.querySelectorAll('.epoch-hit')){hit.onpointerenter=hit.onfocus=()=>show(Number(hit.dataset.epoch));hit.onkeydown=e=>{if(!['ArrowLeft','ArrowRight'].includes(e.key))return;e.preventDefault();const nodes=[...plot.querySelectorAll('.epoch-hit')],i=nodes.indexOf(hit),j=Math.max(0,Math.min(nodes.length-1,i+(e.key==='ArrowRight'?1:-1)));nodes[j].focus()}}
  plot.onpointerleave=()=>{tip.hidden=true;guide.setAttribute('hidden','')};container.append(plot);
 }
