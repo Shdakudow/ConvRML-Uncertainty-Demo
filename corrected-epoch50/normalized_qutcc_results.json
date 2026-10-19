@@ -1,0 +1,1876 @@
+{
+  "dataset": "Normalized DiffuserCam",
+  "method": "Paper-style ConvNeXt QUTCC",
+  "source_experiment": "qutcc_paper_style_20261018",
+  "training_epochs": 50,
+  "training_count": 60000,
+  "validation_count": 5000,
+  "test_count": 5000,
+  "calibration_count": 2048,
+  "calibration_method": "Paper Algorithm 1 adjusted empirical tail-risk quantile search; not delta-based RCPS",
+  "metric_clipping": "[0,1]",
+  "evaluations": [
+    {
+      "epoch": 5,
+      "calibration": {
+        "lower_q": 0.056640625,
+        "upper_q": 0.94140625,
+        "alpha": 0.1,
+        "per_tail_target": 0.0497802734375,
+        "n_images": 2048,
+        "tolerance": 0.001,
+        "trace": [
+          {
+            "lower_q": 0.0,
+            "upper_q": 1.0,
+            "lower_risk": 0.014910387496153513,
+            "upper_risk": 0.02176814277966817
+          },
+          {
+            "lower_q": 0.5,
+            "upper_q": 0.5,
+            "lower_risk": 0.5985788206259409,
+            "upper_risk": 0.4014209012190501
+          },
+          {
+            "lower_q": 0.25,
+            "upper_q": 0.75,
+            "lower_risk": 0.30422934889793396,
+            "upper_risk": 0.18134664744138718
+          },
+          {
+            "lower_q": 0.125,
+            "upper_q": 0.875,
+            "lower_risk": 0.12661636372407278,
+            "upper_risk": 0.09216968715190887
+          },
+          {
+            "lower_q": 0.0625,
+            "upper_q": 0.9375,
+            "lower_risk": 0.05454200009504954,
+            "upper_risk": 0.05203457921743393
+          },
+          {
+            "lower_q": 0.03125,
+            "upper_q": 0.96875,
+            "lower_risk": 0.030374522010485332,
+            "upper_risk": 0.03513911118110021
+          },
+          {
+            "lower_q": 0.046875,
+            "upper_q": 0.953125,
+            "lower_risk": 0.04133372753858566,
+            "upper_risk": 0.043202040096124016
+          },
+          {
+            "lower_q": 0.0546875,
+            "upper_q": 0.9453125,
+            "lower_risk": 0.04765689869721731,
+            "upper_risk": 0.047531016170978546
+          },
+          {
+            "lower_q": 0.05859375,
+            "upper_q": 0.94140625,
+            "lower_risk": 0.051033712923526764,
+            "upper_risk": 0.04976127793391546
+          },
+          {
+            "lower_q": 0.056640625,
+            "upper_q": 0.939453125,
+            "lower_risk": 0.04932792733112971,
+            "upper_risk": 0.05089186131954193
+          },
+          {
+            "lower_q": 0.0576171875,
+            "upper_q": 0.9404296875,
+            "lower_risk": 0.05017780512571335,
+            "upper_risk": 0.05032556007305781
+          },
+          {
+            "lower_q": 0.056640625,
+            "upper_q": 0.94140625,
+            "lower_risk": 0.04932792733112971,
+            "upper_risk": 0.04976127793391546
+          }
+        ],
+        "procedure": "paper Algorithm 1 adjusted empirical tail-risk binary search",
+        "assumption": "Quantile response should be monotone; shared weights do not strictly enforce it",
+        "calibrated_on": "calibration split only"
+      },
+      "test_count": 5000,
+      "metrics": {
+        "raw": {
+          "psnr": 28.36454396533966,
+          "ssim": 0.7721690260469913,
+          "mae": 0.024418419680627995,
+          "coverage": 0.9018820886015892,
+          "width": 0.09532800603546202,
+          "crossing": 9.969075726985466e-08
+        },
+        "clipped": {
+          "psnr": 28.372289376831056,
+          "ssim": 0.7765768716514111,
+          "mae": 0.024221933768771124,
+          "coverage": 0.9046735317349434,
+          "width": 0.09257746214037761,
+          "crossing": 1.9327799600432627e-08
+        }
+      },
+      "calibration_seconds": 763.404627786018,
+      "inference_seconds": 224.21259562531486,
+      "gpu": "NVIDIA RTX 6000 Ada Generation",
+      "notes": "No learned q selector, width loss, or median anchoring. Calibration uses raw predictions; both raw and clipped test metrics reported. Crossing is measured, never silently sorted."
+    },
+    {
+      "epoch": 10,
+      "calibration": {
+        "lower_q": 0.0263671875,
+        "upper_q": 0.916015625,
+        "alpha": 0.1,
+        "per_tail_target": 0.0497802734375,
+        "n_images": 2048,
+        "tolerance": 0.001,
+        "trace": [
+          {
+            "lower_q": 0.0,
+            "upper_q": 1.0,
+            "lower_risk": 0.02929044763247172,
+            "upper_risk": 0.007401389380296071
+          },
+          {
+            "lower_q": 0.5,
+            "upper_q": 0.5,
+            "lower_risk": 0.5464284891883532,
+            "upper_risk": 0.4535712202390035
+          },
+          {
+            "lower_q": 0.25,
+            "upper_q": 0.75,
+            "lower_risk": 0.28857379655043286,
+            "upper_risk": 0.20506349951028824
+          },
+          {
+            "lower_q": 0.125,
+            "upper_q": 0.875,
+            "lower_risk": 0.15460764368375143,
+            "upper_risk": 0.08577456573645274
+          },
+          {
+            "lower_q": 0.0625,
+            "upper_q": 0.9375,
+            "lower_risk": 0.08500488599141438,
+            "upper_risk": 0.034020476043224335
+          },
+          {
+            "lower_q": 0.03125,
+            "upper_q": 0.90625,
+            "lower_risk": 0.053865316013495125,
+            "upper_risk": 0.05771345396836599
+          },
+          {
+            "lower_q": 0.015625,
+            "upper_q": 0.921875,
+            "lower_risk": 0.04056031256914139,
+            "upper_risk": 0.04514259845018387
+          },
+          {
+            "lower_q": 0.0234375,
+            "upper_q": 0.9140625,
+            "lower_risk": 0.04697601248820623,
+            "upper_risk": 0.05127162983020147
+          },
+          {
+            "lower_q": 0.02734375,
+            "upper_q": 0.91796875,
+            "lower_risk": 0.0503637840350469,
+            "upper_risk": 0.04816526174545288
+          },
+          {
+            "lower_q": 0.025390625,
+            "upper_q": 0.916015625,
+            "lower_risk": 0.048656334479649864,
+            "upper_risk": 0.04970636715491613
+          },
+          {
+            "lower_q": 0.0263671875,
+            "upper_q": 0.9150390625,
+            "lower_risk": 0.04950674374898275,
+            "upper_risk": 0.05048620452483495
+          },
+          {
+            "lower_q": 0.0263671875,
+            "upper_q": 0.916015625,
+            "lower_risk": 0.04950674374898275,
+            "upper_risk": 0.04970636715491613
+          }
+        ],
+        "procedure": "paper Algorithm 1 adjusted empirical tail-risk binary search",
+        "assumption": "Quantile response should be monotone; shared weights do not strictly enforce it",
+        "calibrated_on": "calibration split only"
+      },
+      "test_count": 5000,
+      "metrics": {
+        "raw": {
+          "psnr": 29.614401570892333,
+          "ssim": 0.8047951437473297,
+          "mae": 0.02112619230854325,
+          "coverage": 0.9014711867153644,
+          "width": 0.08329949174355715,
+          "crossing": 1.220703125e-08
+        },
+        "clipped": {
+          "psnr": 29.631861540985106,
+          "ssim": 0.817127375394106,
+          "mae": 0.020727683490514754,
+          "coverage": 0.9085400123178959,
+          "width": 0.08056765978112816,
+          "crossing": 2.0345052689663134e-09
+        }
+      },
+      "calibration_seconds": 736.1132814036682,
+      "inference_seconds": 208.1500730002299,
+      "gpu": "NVIDIA RTX 6000 Ada Generation",
+      "notes": "No learned q selector, width loss, or median anchoring. Calibration uses raw predictions; both raw and clipped test metrics reported. Crossing is measured, never silently sorted."
+    },
+    {
+      "epoch": 15,
+      "calibration": {
+        "lower_q": 0.0419921875,
+        "upper_q": 0.9462890625,
+        "alpha": 0.1,
+        "per_tail_target": 0.0497802734375,
+        "n_images": 2048,
+        "tolerance": 0.001,
+        "trace": [
+          {
+            "lower_q": 0.0,
+            "upper_q": 1.0,
+            "lower_risk": 0.015522929529349009,
+            "upper_risk": 0.01290512333313624
+          },
+          {
+            "lower_q": 0.5,
+            "upper_q": 0.5,
+            "lower_risk": 0.5400010297695795,
+            "upper_risk": 0.45999855051438016
+          },
+          {
+            "lower_q": 0.25,
+            "upper_q": 0.75,
+            "lower_risk": 0.2970624367396037,
+            "upper_risk": 0.23581664760907492
+          },
+          {
+            "lower_q": 0.125,
+            "upper_q": 0.875,
+            "lower_risk": 0.15363311767578125,
+            "upper_risk": 0.1201930046081543
+          },
+          {
+            "lower_q": 0.0625,
+            "upper_q": 0.9375,
+            "lower_risk": 0.07301755001147588,
+            "upper_risk": 0.05726270874341329
+          },
+          {
+            "lower_q": 0.03125,
+            "upper_q": 0.96875,
+            "lower_risk": 0.03868874659140905,
+            "upper_risk": 0.03050408512353897
+          },
+          {
+            "lower_q": 0.046875,
+            "upper_q": 0.953125,
+            "lower_risk": 0.05474631736675898,
+            "upper_risk": 0.04297574609518051
+          },
+          {
+            "lower_q": 0.0390625,
+            "upper_q": 0.9453125,
+            "lower_risk": 0.04638978590567907,
+            "upper_risk": 0.049939160545667015
+          },
+          {
+            "lower_q": 0.04296875,
+            "upper_q": 0.94921875,
+            "lower_risk": 0.050495587289333344,
+            "upper_risk": 0.046403629084428154
+          },
+          {
+            "lower_q": 0.041015625,
+            "upper_q": 0.947265625,
+            "lower_risk": 0.0484206552306811,
+            "upper_risk": 0.0481585239370664
+          },
+          {
+            "lower_q": 0.0419921875,
+            "upper_q": 0.9462890625,
+            "lower_risk": 0.04945456733306249,
+            "upper_risk": 0.04904581606388092
+          },
+          {
+            "lower_q": 0.0419921875,
+            "upper_q": 0.9462890625,
+            "lower_risk": 0.04945456733306249,
+            "upper_risk": 0.04904581606388092
+          }
+        ],
+        "procedure": "paper Algorithm 1 adjusted empirical tail-risk binary search",
+        "assumption": "Quantile response should be monotone; shared weights do not strictly enforce it",
+        "calibrated_on": "calibration split only"
+      },
+      "test_count": 5000,
+      "metrics": {
+        "raw": {
+          "psnr": 30.396403865814207,
+          "ssim": 0.8265015532135963,
+          "mae": 0.019204927829839288,
+          "coverage": 0.9016879009664058,
+          "width": 0.07865903377048672,
+          "crossing": 4.374186391942203e-08
+        },
+        "clipped": {
+          "psnr": 30.403566101455688,
+          "ssim": 0.8313864867329598,
+          "mae": 0.01895000777230598,
+          "coverage": 0.9089051264047623,
+          "width": 0.07658126691495999,
+          "crossing": 3.662109375e-08
+        }
+      },
+      "calibration_seconds": 657.0309400567785,
+      "inference_seconds": 196.7935115476139,
+      "gpu": "NVIDIA RTX 6000 Ada Generation",
+      "notes": "No learned q selector, width loss, or median anchoring. Calibration uses raw predictions; both raw and clipped test metrics reported. Crossing is measured, never silently sorted."
+    },
+    {
+      "epoch": 20,
+      "calibration": {
+        "lower_q": 0.0283203125,
+        "upper_q": 0.9443359375,
+        "alpha": 0.1,
+        "per_tail_target": 0.0497802734375,
+        "n_images": 2048,
+        "tolerance": 0.001,
+        "trace": [
+          {
+            "lower_q": 0.0,
+            "upper_q": 1.0,
+            "lower_risk": 0.023196399211883545,
+            "upper_risk": 0.012594511111577352
+          },
+          {
+            "lower_q": 0.5,
+            "upper_q": 0.5,
+            "lower_risk": 0.5463893637061119,
+            "upper_risk": 0.4536102240284284
+          },
+          {
+            "lower_q": 0.25,
+            "upper_q": 0.75,
+            "lower_risk": 0.28861941397190094,
+            "upper_risk": 0.21662117540836334
+          },
+          {
+            "lower_q": 0.125,
+            "upper_q": 0.875,
+            "lower_risk": 0.1545159121354421,
+            "upper_risk": 0.10841190566619237
+          },
+          {
+            "lower_q": 0.0625,
+            "upper_q": 0.9375,
+            "lower_risk": 0.08624122540156047,
+            "upper_risk": 0.05473707367976507
+          },
+          {
+            "lower_q": 0.03125,
+            "upper_q": 0.96875,
+            "lower_risk": 0.05243943383296331,
+            "upper_risk": 0.030398346483707428
+          },
+          {
+            "lower_q": 0.015625,
+            "upper_q": 0.953125,
+            "lower_risk": 0.03677532821893692,
+            "upper_risk": 0.04208473116159439
+          },
+          {
+            "lower_q": 0.0234375,
+            "upper_q": 0.9453125,
+            "lower_risk": 0.044418523708979286,
+            "upper_risk": 0.048325384656588234
+          },
+          {
+            "lower_q": 0.02734375,
+            "upper_q": 0.94140625,
+            "lower_risk": 0.04839128255844116,
+            "upper_risk": 0.05151526629924774
+          },
+          {
+            "lower_q": 0.029296875,
+            "upper_q": 0.943359375,
+            "lower_risk": 0.05040509253740311,
+            "upper_risk": 0.04991632699966431
+          },
+          {
+            "lower_q": 0.0283203125,
+            "upper_q": 0.9443359375,
+            "lower_risk": 0.04939639816681544,
+            "upper_risk": 0.04911923656860987
+          },
+          {
+            "lower_q": 0.0283203125,
+            "upper_q": 0.9443359375,
+            "lower_risk": 0.04939639816681544,
+            "upper_risk": 0.04911923656860987
+          }
+        ],
+        "procedure": "paper Algorithm 1 adjusted empirical tail-risk binary search",
+        "assumption": "Quantile response should be monotone; shared weights do not strictly enforce it",
+        "calibrated_on": "calibration split only"
+      },
+      "test_count": 5000,
+      "metrics": {
+        "raw": {
+          "psnr": 30.934152347946167,
+          "ssim": 0.8443979607522487,
+          "mae": 0.017782773193065076,
+          "coverage": 0.9013954654991627,
+          "width": 0.07203018215997145,
+          "crossing": 1.220703125e-08
+        },
+        "clipped": {
+          "psnr": 30.939848485565186,
+          "ssim": 0.8474770793378353,
+          "mae": 0.017600099777115973,
+          "coverage": 0.9064498716711998,
+          "width": 0.07052023591473698,
+          "crossing": 3.0517578125e-09
+        }
+      },
+      "calibration_seconds": 878.0431805889821,
+      "inference_seconds": 250.79852650896646,
+      "gpu": "NVIDIA RTX 6000 Ada Generation",
+      "notes": "No learned q selector, width loss, or median anchoring. Calibration uses raw predictions; both raw and clipped test metrics reported. Crossing is measured, never silently sorted."
+    },
+    {
+      "epoch": 25,
+      "calibration": {
+        "lower_q": 0.041015625,
+        "upper_q": 0.9716796875,
+        "alpha": 0.1,
+        "per_tail_target": 0.0497802734375,
+        "n_images": 2048,
+        "tolerance": 0.001,
+        "trace": [
+          {
+            "lower_q": 0.0,
+            "upper_q": 1.0,
+            "lower_risk": 0.016704296072324116,
+            "upper_risk": 0.018648910025755566
+          },
+          {
+            "lower_q": 0.5,
+            "upper_q": 0.5,
+            "lower_risk": 0.45863765478134155,
+            "upper_risk": 0.5413619379202524
+          },
+          {
+            "lower_q": 0.25,
+            "upper_q": 0.75,
+            "lower_risk": 0.2338955799738566,
+            "upper_risk": 0.30418382833401364
+          },
+          {
+            "lower_q": 0.125,
+            "upper_q": 0.875,
+            "lower_risk": 0.12315518160661061,
+            "upper_risk": 0.1702987402677536
+          },
+          {
+            "lower_q": 0.0625,
+            "upper_q": 0.9375,
+            "lower_risk": 0.06819047033786774,
+            "upper_risk": 0.09365918238957723
+          },
+          {
+            "lower_q": 0.03125,
+            "upper_q": 0.96875,
+            "lower_risk": 0.04066556443770727,
+            "upper_risk": 0.053342064221700035
+          },
+          {
+            "lower_q": 0.046875,
+            "upper_q": 0.984375,
+            "lower_risk": 0.05436733365058899,
+            "upper_risk": 0.03405972570180893
+          },
+          {
+            "lower_q": 0.0390625,
+            "upper_q": 0.9765625,
+            "lower_risk": 0.047471873462200165,
+            "upper_risk": 0.043408957620461784
+          },
+          {
+            "lower_q": 0.04296875,
+            "upper_q": 0.97265625,
+            "lower_risk": 0.05091553678115209,
+            "upper_risk": 0.04833154628674189
+          },
+          {
+            "lower_q": 0.041015625,
+            "upper_q": 0.970703125,
+            "lower_risk": 0.04919069012006124,
+            "upper_risk": 0.050825417041778564
+          },
+          {
+            "lower_q": 0.0419921875,
+            "upper_q": 0.9716796875,
+            "lower_risk": 0.050054147839546204,
+            "upper_risk": 0.04957492649555206
+          },
+          {
+            "lower_q": 0.041015625,
+            "upper_q": 0.9716796875,
+            "lower_risk": 0.04919069012006124,
+            "upper_risk": 0.04957492649555206
+          }
+        ],
+        "procedure": "paper Algorithm 1 adjusted empirical tail-risk binary search",
+        "assumption": "Quantile response should be monotone; shared weights do not strictly enforce it",
+        "calibrated_on": "calibration split only"
+      },
+      "test_count": 5000,
+      "metrics": {
+        "raw": {
+          "psnr": 31.32797173538208,
+          "ssim": 0.8535935417592525,
+          "mae": 0.01699338922400493,
+          "coverage": 0.9011707080125809,
+          "width": 0.07006510841418058,
+          "crossing": 1.586914105246251e-07
+        },
+        "clipped": {
+          "psnr": 31.3377108543396,
+          "ssim": 0.8600375578939915,
+          "mae": 0.016637792221084236,
+          "coverage": 0.914826643383503,
+          "width": 0.06846988873342053,
+          "crossing": 3.4586588844831566e-08
+        }
+      },
+      "calibration_seconds": 635.9485747190192,
+      "inference_seconds": 190.23151085712016,
+      "gpu": "NVIDIA RTX 6000 Ada Generation",
+      "notes": "No learned q selector, width loss, or median anchoring. Calibration uses raw predictions; both raw and clipped test metrics reported. Crossing is measured, never silently sorted."
+    },
+    {
+      "epoch": 30,
+      "calibration": {
+        "lower_q": 0.0244140625,
+        "upper_q": 0.9560546875,
+        "alpha": 0.1,
+        "per_tail_target": 0.0497802734375,
+        "n_images": 2048,
+        "tolerance": 0.001,
+        "trace": [
+          {
+            "lower_q": 0.0,
+            "upper_q": 1.0,
+            "lower_risk": 0.017422286172707874,
+            "upper_risk": 0.013523990909258524
+          },
+          {
+            "lower_q": 0.5,
+            "upper_q": 0.5,
+            "lower_risk": 0.5555077145497004,
+            "upper_risk": 0.4444916894038518
+          },
+          {
+            "lower_q": 0.25,
+            "upper_q": 0.75,
+            "lower_risk": 0.32658887654542923,
+            "upper_risk": 0.22732487817605337
+          },
+          {
+            "lower_q": 0.125,
+            "upper_q": 0.875,
+            "lower_risk": 0.19252744565407434,
+            "upper_risk": 0.1210419957836469
+          },
+          {
+            "lower_q": 0.0625,
+            "upper_q": 0.9375,
+            "lower_risk": 0.1101036270459493,
+            "upper_risk": 0.06617926309506099
+          },
+          {
+            "lower_q": 0.03125,
+            "upper_q": 0.96875,
+            "lower_risk": 0.060210853815078735,
+            "upper_risk": 0.03824683527151743
+          },
+          {
+            "lower_q": 0.015625,
+            "upper_q": 0.953125,
+            "lower_risk": 0.03602124750614166,
+            "upper_risk": 0.052313158909479775
+          },
+          {
+            "lower_q": 0.0234375,
+            "upper_q": 0.9609375,
+            "lower_risk": 0.04768455276886622,
+            "upper_risk": 0.045296527445316315
+          },
+          {
+            "lower_q": 0.02734375,
+            "upper_q": 0.95703125,
+            "lower_risk": 0.05388018240531286,
+            "upper_risk": 0.048811785876750946
+          },
+          {
+            "lower_q": 0.025390625,
+            "upper_q": 0.955078125,
+            "lower_risk": 0.050760564704736076,
+            "upper_risk": 0.05056188255548477
+          },
+          {
+            "lower_q": 0.0244140625,
+            "upper_q": 0.9560546875,
+            "lower_risk": 0.049216121435165405,
+            "upper_risk": 0.04968645920356115
+          },
+          {
+            "lower_q": 0.0244140625,
+            "upper_q": 0.9560546875,
+            "lower_risk": 0.049216121435165405,
+            "upper_risk": 0.04968645920356115
+          }
+        ],
+        "procedure": "paper Algorithm 1 adjusted empirical tail-risk binary search",
+        "assumption": "Quantile response should be monotone; shared weights do not strictly enforce it",
+        "calibrated_on": "calibration split only"
+      },
+      "test_count": 5000,
+      "metrics": {
+        "raw": {
+          "psnr": 31.569793801879882,
+          "ssim": 0.8609549143433571,
+          "mae": 0.016445637103472837,
+          "coverage": 0.9010663916110992,
+          "width": 0.0653523774704896,
+          "crossing": 3.356933602844947e-08
+        },
+        "clipped": {
+          "psnr": 31.57337140636444,
+          "ssim": 0.8617401852488518,
+          "mae": 0.01627743705777684,
+          "coverage": 0.9066517163217068,
+          "width": 0.06405927694961429,
+          "crossing": 4.069010537932627e-09
+        }
+      },
+      "calibration_seconds": 731.5634222216904,
+      "inference_seconds": 202.6972983656451,
+      "gpu": "NVIDIA RTX 6000 Ada Generation",
+      "notes": "No learned q selector, width loss, or median anchoring. Calibration uses raw predictions; both raw and clipped test metrics reported. Crossing is measured, never silently sorted."
+    },
+    {
+      "epoch": 35,
+      "calibration": {
+        "lower_q": 0.01953125,
+        "upper_q": 0.958984375,
+        "alpha": 0.1,
+        "per_tail_target": 0.0497802734375,
+        "n_images": 2048,
+        "tolerance": 0.001,
+        "trace": [
+          {
+            "lower_q": 0.0,
+            "upper_q": 1.0,
+            "lower_risk": 0.014557031293710073,
+            "upper_risk": 0.010115707914034525
+          },
+          {
+            "lower_q": 0.5,
+            "upper_q": 0.5,
+            "lower_risk": 0.5938687423865,
+            "upper_risk": 0.406130813062191
+          },
+          {
+            "lower_q": 0.25,
+            "upper_q": 0.75,
+            "lower_risk": 0.3801206350326538,
+            "upper_risk": 0.21960684408744177
+          },
+          {
+            "lower_q": 0.125,
+            "upper_q": 0.875,
+            "lower_risk": 0.23937752097845078,
+            "upper_risk": 0.12564590324958166
+          },
+          {
+            "lower_q": 0.0625,
+            "upper_q": 0.9375,
+            "lower_risk": 0.144868403673172,
+            "upper_risk": 0.07079192002614339
+          },
+          {
+            "lower_q": 0.03125,
+            "upper_q": 0.96875,
+            "lower_risk": 0.07652487357457478,
+            "upper_risk": 0.03796019405126572
+          },
+          {
+            "lower_q": 0.015625,
+            "upper_q": 0.953125,
+            "lower_risk": 0.040019569297631584,
+            "upper_risk": 0.05511888116598129
+          },
+          {
+            "lower_q": 0.0234375,
+            "upper_q": 0.9609375,
+            "lower_risk": 0.05758628497521082,
+            "upper_risk": 0.046669624745845795
+          },
+          {
+            "lower_q": 0.01953125,
+            "upper_q": 0.95703125,
+            "lower_risk": 0.048527215917905174,
+            "upper_risk": 0.05094388127326965
+          },
+          {
+            "lower_q": 0.021484375,
+            "upper_q": 0.958984375,
+            "lower_risk": 0.053001162906487785,
+            "upper_risk": 0.04882200310627619
+          },
+          {
+            "lower_q": 0.0205078125,
+            "upper_q": 0.9580078125,
+            "lower_risk": 0.05074894924958547,
+            "upper_risk": 0.04988871018091837
+          },
+          {
+            "lower_q": 0.01953125,
+            "upper_q": 0.958984375,
+            "lower_risk": 0.048527215917905174,
+            "upper_risk": 0.04882200310627619
+          }
+        ],
+        "procedure": "paper Algorithm 1 adjusted empirical tail-risk binary search",
+        "assumption": "Quantile response should be monotone; shared weights do not strictly enforce it",
+        "calibrated_on": "calibration split only"
+      },
+      "test_count": 5000,
+      "metrics": {
+        "raw": {
+          "psnr": 31.768615699386597,
+          "ssim": 0.8581508280396462,
+          "mae": 0.01615751780238934,
+          "coverage": 0.903509994828701,
+          "width": 0.06823397838007658,
+          "crossing": 1.3224284157331567e-08
+        },
+        "clipped": {
+          "psnr": 31.770652641677856,
+          "ssim": 0.8578559494733811,
+          "mae": 0.01608975787620875,
+          "coverage": 0.9051606386899949,
+          "width": 0.0671621669664979,
+          "crossing": 0.0
+        }
+      },
+      "calibration_seconds": 796.6002555890009,
+      "inference_seconds": 228.7095033847727,
+      "gpu": "NVIDIA RTX 6000 Ada Generation",
+      "notes": "No learned q selector, width loss, or median anchoring. Calibration uses raw predictions; both raw and clipped test metrics reported. Crossing is measured, never silently sorted."
+    },
+    {
+      "epoch": 40,
+      "calibration": {
+        "lower_q": 0.0166015625,
+        "upper_q": 0.982421875,
+        "alpha": 0.1,
+        "per_tail_target": 0.0497802734375,
+        "n_images": 2048,
+        "tolerance": 0.001,
+        "trace": [
+          {
+            "lower_q": 0.0,
+            "upper_q": 1.0,
+            "lower_risk": 0.020086968938509624,
+            "upper_risk": 0.02225143959124883
+          },
+          {
+            "lower_q": 0.5,
+            "upper_q": 0.5,
+            "lower_risk": 0.5332058345278105,
+            "upper_risk": 0.46679355204105377
+          },
+          {
+            "lower_q": 0.25,
+            "upper_q": 0.75,
+            "lower_risk": 0.3284737442930539,
+            "upper_risk": 0.27637890726327896
+          },
+          {
+            "lower_q": 0.125,
+            "upper_q": 0.875,
+            "lower_risk": 0.2060368706782659,
+            "upper_risk": 0.17303858200709024
+          },
+          {
+            "lower_q": 0.0625,
+            "upper_q": 0.9375,
+            "lower_risk": 0.13004590819279352,
+            "upper_risk": 0.11029568562904994
+          },
+          {
+            "lower_q": 0.03125,
+            "upper_q": 0.96875,
+            "lower_risk": 0.07910022387901942,
+            "upper_risk": 0.07061457385619481
+          },
+          {
+            "lower_q": 0.015625,
+            "upper_q": 0.984375,
+            "lower_risk": 0.04740020881096522,
+            "upper_risk": 0.0450610543290774
+          },
+          {
+            "lower_q": 0.0234375,
+            "upper_q": 0.9765625,
+            "lower_risk": 0.06340726216634114,
+            "upper_risk": 0.058119731644789376
+          },
+          {
+            "lower_q": 0.01953125,
+            "upper_q": 0.98046875,
+            "lower_risk": 0.05536630004644394,
+            "upper_risk": 0.051592263082663216
+          },
+          {
+            "lower_q": 0.017578125,
+            "upper_q": 0.982421875,
+            "lower_risk": 0.05136023213466009,
+            "upper_risk": 0.04831500599781672
+          },
+          {
+            "lower_q": 0.0166015625,
+            "upper_q": 0.9814453125,
+            "lower_risk": 0.049373400708039604,
+            "upper_risk": 0.049954548478126526
+          },
+          {
+            "lower_q": 0.0166015625,
+            "upper_q": 0.982421875,
+            "lower_risk": 0.049373400708039604,
+            "upper_risk": 0.04831500599781672
+          }
+        ],
+        "procedure": "paper Algorithm 1 adjusted empirical tail-risk binary search",
+        "assumption": "Quantile response should be monotone; shared weights do not strictly enforce it",
+        "calibrated_on": "calibration split only"
+      },
+      "test_count": 5000,
+      "metrics": {
+        "raw": {
+          "psnr": 31.811727500343324,
+          "ssim": 0.8673646835446358,
+          "mae": 0.015809956426353893,
+          "coverage": 0.9040322914063931,
+          "width": 0.06533122296761722,
+          "crossing": 3.051757839784841e-08
+        },
+        "clipped": {
+          "psnr": 31.81540492076874,
+          "ssim": 0.8673098318755627,
+          "mae": 0.01566713709954056,
+          "coverage": 0.9073583585262298,
+          "width": 0.0641745421731379,
+          "crossing": 6.103515625e-09
+        }
+      },
+      "calibration_seconds": 1111.9935526221525,
+      "inference_seconds": 331.14448188315146,
+      "gpu": "NVIDIA RTX A6000",
+      "notes": "No learned q selector, width loss, or median anchoring. Calibration uses raw predictions; both raw and clipped test metrics reported. Crossing is measured, never silently sorted."
+    },
+    {
+      "epoch": 45,
+      "calibration": {
+        "lower_q": 0.0146484375,
+        "upper_q": 0.9814453125,
+        "alpha": 0.1,
+        "per_tail_target": 0.0497802734375,
+        "n_images": 2048,
+        "tolerance": 0.001,
+        "trace": [
+          {
+            "lower_q": 0.0,
+            "upper_q": 1.0,
+            "lower_risk": 0.022270627319812775,
+            "upper_risk": 0.02100060631831487
+          },
+          {
+            "lower_q": 0.5,
+            "upper_q": 0.5,
+            "lower_risk": 0.5235395481189092,
+            "upper_risk": 0.47645969440539676
+          },
+          {
+            "lower_q": 0.25,
+            "upper_q": 0.75,
+            "lower_risk": 0.32117529461781186,
+            "upper_risk": 0.2816893830895424
+          },
+          {
+            "lower_q": 0.125,
+            "upper_q": 0.875,
+            "lower_risk": 0.20228670040766397,
+            "upper_risk": 0.17438861479361853
+          },
+          {
+            "lower_q": 0.0625,
+            "upper_q": 0.9375,
+            "lower_risk": 0.12917294104894003,
+            "upper_risk": 0.10967699686686198
+          },
+          {
+            "lower_q": 0.03125,
+            "upper_q": 0.96875,
+            "lower_risk": 0.08160129934549332,
+            "upper_risk": 0.07023704548676808
+          },
+          {
+            "lower_q": 0.015625,
+            "upper_q": 0.984375,
+            "lower_risk": 0.05076628426710764,
+            "upper_risk": 0.044260660807291664
+          },
+          {
+            "lower_q": 0.0078125,
+            "upper_q": 0.9765625,
+            "lower_risk": 0.03541513035694758,
+            "upper_risk": 0.05765187988678614
+          },
+          {
+            "lower_q": 0.01171875,
+            "upper_q": 0.98046875,
+            "lower_risk": 0.04292535285154978,
+            "upper_risk": 0.050978037218252815
+          },
+          {
+            "lower_q": 0.013671875,
+            "upper_q": 0.982421875,
+            "lower_risk": 0.046819654603799186,
+            "upper_risk": 0.047609773774941765
+          },
+          {
+            "lower_q": 0.0146484375,
+            "upper_q": 0.9814453125,
+            "lower_risk": 0.04878908395767212,
+            "upper_risk": 0.0492945189277331
+          },
+          {
+            "lower_q": 0.0146484375,
+            "upper_q": 0.9814453125,
+            "lower_risk": 0.04878908395767212,
+            "upper_risk": 0.0492945189277331
+          }
+        ],
+        "procedure": "paper Algorithm 1 adjusted empirical tail-risk binary search",
+        "assumption": "Quantile response should be monotone; shared weights do not strictly enforce it",
+        "calibrated_on": "calibration split only"
+      },
+      "test_count": 5000,
+      "metrics": {
+        "raw": {
+          "psnr": 31.787921355056763,
+          "ssim": 0.8672678528904915,
+          "mae": 0.01583191431101295,
+          "coverage": 0.9038526394844055,
+          "width": 0.06676492322515697,
+          "crossing": 5.0862631178461016e-08
+        },
+        "clipped": {
+          "psnr": 31.791271426391603,
+          "ssim": 0.8671793615877629,
+          "mae": 0.015684689641481963,
+          "coverage": 0.9073626441240311,
+          "width": 0.06564906629463657,
+          "crossing": 8.138021075865254e-09
+        }
+      },
+      "calibration_seconds": 714.8265257384628,
+      "inference_seconds": 205.4571366989985,
+      "gpu": "NVIDIA RTX 6000 Ada Generation",
+      "notes": "No learned q selector, width loss, or median anchoring. Calibration uses raw predictions; both raw and clipped test metrics reported. Crossing is measured, never silently sorted."
+    },
+    {
+      "epoch": 50,
+      "calibration": {
+        "lower_q": 0.013671875,
+        "upper_q": 0.982421875,
+        "alpha": 0.1,
+        "per_tail_target": 0.0497802734375,
+        "n_images": 2048,
+        "tolerance": 0.001,
+        "trace": [
+          {
+            "lower_q": 0.0,
+            "upper_q": 1.0,
+            "lower_risk": 0.023307437698046368,
+            "upper_risk": 0.021195416649182636
+          },
+          {
+            "lower_q": 0.5,
+            "upper_q": 0.5,
+            "lower_risk": 0.5135501027107239,
+            "upper_risk": 0.48644928137461346
+          },
+          {
+            "lower_q": 0.25,
+            "upper_q": 0.75,
+            "lower_risk": 0.31644825637340546,
+            "upper_risk": 0.29286642372608185
+          },
+          {
+            "lower_q": 0.125,
+            "upper_q": 0.875,
+            "lower_risk": 0.20106109728415808,
+            "upper_risk": 0.18315806488196054
+          },
+          {
+            "lower_q": 0.0625,
+            "upper_q": 0.9375,
+            "lower_risk": 0.12986775984366736,
+            "upper_risk": 0.11563517898321152
+          },
+          {
+            "lower_q": 0.03125,
+            "upper_q": 0.96875,
+            "lower_risk": 0.0831410860021909,
+            "upper_risk": 0.07384462654590607
+          },
+          {
+            "lower_q": 0.015625,
+            "upper_q": 0.984375,
+            "lower_risk": 0.052293467024962105,
+            "upper_risk": 0.045820511877536774
+          },
+          {
+            "lower_q": 0.0078125,
+            "upper_q": 0.9765625,
+            "lower_risk": 0.03674033532540003,
+            "upper_risk": 0.06024963160355886
+          },
+          {
+            "lower_q": 0.01171875,
+            "upper_q": 0.98046875,
+            "lower_risk": 0.04436823477347692,
+            "upper_risk": 0.05304949730634689
+          },
+          {
+            "lower_q": 0.013671875,
+            "upper_q": 0.982421875,
+            "lower_risk": 0.048307220141092934,
+            "upper_risk": 0.04942521701256434
+          },
+          {
+            "lower_q": 0.0146484375,
+            "upper_q": 0.9814453125,
+            "lower_risk": 0.050295223792394005,
+            "upper_risk": 0.05124082416296005
+          },
+          {
+            "lower_q": 0.013671875,
+            "upper_q": 0.982421875,
+            "lower_risk": 0.048307220141092934,
+            "upper_risk": 0.04942521701256434
+          }
+        ],
+        "procedure": "paper Algorithm 1 adjusted empirical tail-risk binary search",
+        "assumption": "Quantile response should be monotone; shared weights do not strictly enforce it",
+        "calibrated_on": "calibration split only"
+      },
+      "test_count": 5000,
+      "metrics": {
+        "raw": {
+          "psnr": 31.772515795135497,
+          "ssim": 0.8670980134010315,
+          "mae": 0.015852226932064513,
+          "coverage": 0.9042228773713112,
+          "width": 0.06655037121586502,
+          "crossing": 4.5776367915095764e-08
+        },
+        "clipped": {
+          "psnr": 31.77622482318878,
+          "ssim": 0.8672051951289177,
+          "mae": 0.015690084094836493,
+          "coverage": 0.9078681350827217,
+          "width": 0.0653948299953714,
+          "crossing": 1.0172526162932626e-08
+        }
+      },
+      "calibration_seconds": 739.3739090729505,
+      "inference_seconds": 213.57513220561668,
+      "gpu": "NVIDIA RTX 6000 Ada Generation",
+      "notes": "No learned q selector, width loss, or median anchoring. Calibration uses raw predictions; both raw and clipped test metrics reported. Crossing is measured, never silently sorted."
+    }
+  ],
+  "validation": [
+    {
+      "epoch": 1,
+      "training_loss": 0.020615826759277842,
+      "validation": {
+        "psnr": 24.152717808532714,
+        "ssim": 0.6761846170306206,
+        "mae": 0.039300588500127194,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2677.0093504008837,
+      "lr": 1.5999600000000002e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 2,
+      "training_loss": 0.012540011036770497,
+      "validation": {
+        "psnr": 26.285744329071044,
+        "ssim": 0.7372468273997307,
+        "mae": 0.030565682271122933,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2550.110310081858,
+      "lr": 2.1999600000000005e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 3,
+      "training_loss": 0.010718247637644526,
+      "validation": {
+        "psnr": 27.376519232940673,
+        "ssim": 0.7632735745668411,
+        "mae": 0.02670641707442701,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2629.6156790498644,
+      "lr": 2.7999600000000002e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 4,
+      "training_loss": 0.009754086449490084,
+      "validation": {
+        "psnr": 27.7903451461792,
+        "ssim": 0.7651449125051498,
+        "mae": 0.025826586456038057,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2687.0395314181224,
+      "lr": 3.3999600000000006e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 5,
+      "training_loss": 0.009125366895223851,
+      "validation": {
+        "psnr": 28.394184307861327,
+        "ssim": 0.7763406816244125,
+        "mae": 0.02419052780382335,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2680.0513143939897,
+      "lr": 3.99996e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 6,
+      "training_loss": 0.008658914193106467,
+      "validation": {
+        "psnr": 28.794770944976808,
+        "ssim": 0.7866828565835953,
+        "mae": 0.022892147399671377,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2773.382535632234,
+      "lr": 4.5999600000000006e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 7,
+      "training_loss": 0.00827522462906054,
+      "validation": {
+        "psnr": 28.731237400054933,
+        "ssim": 0.7819061538934707,
+        "mae": 0.023211664199084044,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2736.642509382218,
+      "lr": 5.19996e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 8,
+      "training_loss": 0.00794140671164981,
+      "validation": {
+        "psnr": 29.41702275695801,
+        "ssim": 0.8072182805299759,
+        "mae": 0.021241860111244022,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2742.9472009940073,
+      "lr": 5.7999600000000006e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 9,
+      "training_loss": 0.007708214409109981,
+      "validation": {
+        "psnr": 29.5980735168457,
+        "ssim": 0.8045523050069809,
+        "mae": 0.02115500606317073,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2738.314887839835,
+      "lr": 6.399960000000001e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 10,
+      "training_loss": 0.007491225307866504,
+      "validation": {
+        "psnr": 29.655394884490967,
+        "ssim": 0.8171259495258332,
+        "mae": 0.020657933760806917,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2661.5486062746495,
+      "lr": 6.99996e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 11,
+      "training_loss": 0.007323635134519524,
+      "validation": {
+        "psnr": 29.695904091644287,
+        "ssim": 0.8135108613014221,
+        "mae": 0.020710910332389174,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2685.428837086074,
+      "lr": 7.59996e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 12,
+      "training_loss": 0.007156749844319226,
+      "validation": {
+        "psnr": 29.978390205383302,
+        "ssim": 0.826280381155014,
+        "mae": 0.019644477339088917,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2620.1534350677393,
+      "lr": 8.19996e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 13,
+      "training_loss": 0.007021724366294802,
+      "validation": {
+        "psnr": 29.993715683746338,
+        "ssim": 0.8146225186347962,
+        "mae": 0.020222213161550463,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2616.9904442718253,
+      "lr": 8.799960000000001e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 14,
+      "training_loss": 0.006889560592964214,
+      "validation": {
+        "psnr": 30.297364152526857,
+        "ssim": 0.8268349874019623,
+        "mae": 0.019236784249916674,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2615.1168503561057,
+      "lr": 9.399960000000001e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 15,
+      "training_loss": 0.0067614761154341976,
+      "validation": {
+        "psnr": 30.423659588623046,
+        "ssim": 0.831178626871109,
+        "mae": 0.01891291508022696,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 681.6974971101154,
+      "lr": 9.999960000000002e-05,
+      "gpu": "NVIDIA RTX A6000"
+    },
+    {
+      "epoch": 16,
+      "training_loss": 0.006636991789794168,
+      "validation": {
+        "psnr": 30.43024917831421,
+        "ssim": 0.8410996503829956,
+        "mae": 0.018706287800706923,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2819.0471108006313,
+      "lr": 9.979874353147368e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 17,
+      "training_loss": 0.0064649743860393455,
+      "validation": {
+        "psnr": 30.68145291671753,
+        "ssim": 0.8350842776298523,
+        "mae": 0.018372597222030163,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 1406.3314426532015,
+      "lr": 9.919654088782015e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 18,
+      "training_loss": 0.006311883483754354,
+      "validation": {
+        "psnr": 30.733673097229005,
+        "ssim": 0.8460508533716202,
+        "mae": 0.017893403789401054,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2630.703671310097,
+      "lr": 9.819824064974146e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 19,
+      "training_loss": 0.006153900495620716,
+      "validation": {
+        "psnr": 30.790599694061278,
+        "ssim": 0.8282530993938446,
+        "mae": 0.018380548851937056,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2594.827453306876,
+      "lr": 9.681188054376364e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 20,
+      "training_loss": 0.006012803906974538,
+      "validation": {
+        "psnr": 30.95960213088989,
+        "ssim": 0.8472833980321884,
+        "mae": 0.017579031462967395,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2716.807697052136,
+      "lr": 9.504862272629347e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 21,
+      "training_loss": 0.005877872381490306,
+      "validation": {
+        "psnr": 31.014780848693846,
+        "ssim": 0.8407175957918167,
+        "mae": 0.017825926093198358,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2598.9921726910397,
+      "lr": 9.292266391249838e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 22,
+      "training_loss": 0.00577967475080756,
+      "validation": {
+        "psnr": 31.077195882415772,
+        "ssim": 0.8413826673030853,
+        "mae": 0.01769397841412574,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2562.4172283299267,
+      "lr": 9.045112107270354e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 23,
+      "training_loss": 0.005649681221920764,
+      "validation": {
+        "psnr": 31.147358037567138,
+        "ssim": 0.8472879722118377,
+        "mae": 0.01733451530430466,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 3434.4987705033273,
+      "lr": 8.765389361661133e-05,
+      "gpu": "NVIDIA RTX A6000"
+    },
+    {
+      "epoch": 24,
+      "training_loss": 0.0055630634932841835,
+      "validation": {
+        "psnr": 31.208734159088134,
+        "ssim": 0.8577543638467788,
+        "mae": 0.016875175186991692,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 4122.218868035823,
+      "lr": 8.455350317495506e-05,
+      "gpu": "NVIDIA RTX A6000"
+    },
+    {
+      "epoch": 25,
+      "training_loss": 0.005410798380830238,
+      "validation": {
+        "psnr": 31.345187615966797,
+        "ssim": 0.8599116421461105,
+        "mae": 0.016612735814973714,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 4082.736586170271,
+      "lr": 8.117491226857091e-05,
+      "gpu": "NVIDIA RTX A6000"
+    },
+    {
+      "epoch": 26,
+      "training_loss": 0.005323320254240147,
+      "validation": {
+        "psnr": 31.410925577545164,
+        "ssim": 0.8568003781557083,
+        "mae": 0.016642109202593566,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2531.691656317562,
+      "lr": 7.754532332485779e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 27,
+      "training_loss": 0.00520835671898191,
+      "validation": {
+        "psnr": 31.496997727203368,
+        "ssim": 0.8557471249103547,
+        "mae": 0.016518984404020012,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2486.0541784130037,
+      "lr": 7.369395965982678e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 28,
+      "training_loss": 0.00509287099615467,
+      "validation": {
+        "psnr": 31.535767543029785,
+        "ssim": 0.8583160027742386,
+        "mae": 0.016402849107421933,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2515.507737410255,
+      "lr": 6.965183018914349e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 29,
+      "training_loss": 0.005000503701223837,
+      "validation": {
+        "psnr": 31.518363329315186,
+        "ssim": 0.8581466267347336,
+        "mae": 0.016400214012060314,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2489.335564014502,
+      "lr": 6.545147976257226e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 30,
+      "training_loss": 0.004894851859666475,
+      "validation": {
+        "psnr": 31.588416290283202,
+        "ssim": 0.8616198633670807,
+        "mae": 0.01626225723940879,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2478.212417235598,
+      "lr": 6.112672713198177e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 31,
+      "training_loss": 0.004813067392178224,
+      "validation": {
+        "psnr": 31.676207829284667,
+        "ssim": 0.8630551691055298,
+        "mae": 0.016043385728448628,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2637.8394631161354,
+      "lr": 5.671239266264017e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 32,
+      "training_loss": 0.004714507556147388,
+      "validation": {
+        "psnr": 31.695608071136476,
+        "ssim": 0.8642022632360459,
+        "mae": 0.015973969668336214,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2589.611882371828,
+      "lr": 5.224401798010796e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 33,
+      "training_loss": 0.004627805368108238,
+      "validation": {
+        "psnr": 31.735567671966553,
+        "ssim": 0.8664831978082657,
+        "mae": 0.015787225777842105,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2610.3266317029484,
+      "lr": 4.775757980996718e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 34,
+      "training_loss": 0.004529642824175244,
+      "validation": {
+        "psnr": 31.71548826522827,
+        "ssim": 0.86648500893116,
+        "mae": 0.01585603044219315,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2640.094519217033,
+      "lr": 4.3289200314380783e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 35,
+      "training_loss": 0.004469719257950783,
+      "validation": {
+        "psnr": 31.788019889068604,
+        "ssim": 0.8577209039688111,
+        "mae": 0.016077360297739506,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2942.022969260812,
+      "lr": 3.887485625768268e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 36,
+      "training_loss": 0.004402673302564653,
+      "validation": {
+        "psnr": 31.784926734161377,
+        "ssim": 0.8663446377515793,
+        "mae": 0.015786300041154028,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2644.3086673449725,
+      "lr": 3.4550089342625155e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 37,
+      "training_loss": 0.004322932078221978,
+      "validation": {
+        "psnr": 31.82321388244629,
+        "ssim": 0.8682097979545593,
+        "mae": 0.01560232763895765,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2553.452886936255,
+      "lr": 3.0349720049486443e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 38,
+      "training_loss": 0.004256963783982307,
+      "validation": {
+        "psnr": 31.808264736938476,
+        "ssim": 0.8679346389532089,
+        "mae": 0.01566502227531746,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2564.026866956614,
+      "lr": 2.6307567282037782e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 39,
+      "training_loss": 0.0042023122326141065,
+      "validation": {
+        "psnr": 31.834779174804687,
+        "ssim": 0.8669056512594223,
+        "mae": 0.015678892447985707,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2590.646321233362,
+      "lr": 2.2456176077615334e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 40,
+      "training_loss": 0.004149465483339251,
+      "validation": {
+        "psnr": 31.829864483642577,
+        "ssim": 0.8671798378229141,
+        "mae": 0.015670439862646164,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2574.260980934836,
+      "lr": 1.8826555573615696e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 41,
+      "training_loss": 0.004099897980365494,
+      "validation": {
+        "psnr": 31.820534527587892,
+        "ssim": 0.8671749124288559,
+        "mae": 0.01566728744274005,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2590.5911510400474,
+      "lr": 1.5447929340154822e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 42,
+      "training_loss": 0.004061866994216689,
+      "validation": {
+        "psnr": 31.831409713745117,
+        "ssim": 0.8677542587995529,
+        "mae": 0.015627022708021104,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2582.025521684438,
+      "lr": 1.2347500089064505e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 43,
+      "training_loss": 0.004009264665223115,
+      "validation": {
+        "psnr": 31.83052924041748,
+        "ssim": 0.8674004654645919,
+        "mae": 0.015639897188637404,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2557.4966326784343,
+      "lr": 9.550230653651616e-06,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 44,
+      "training_loss": 0.003993859677746271,
+      "validation": {
+        "psnr": 31.80944833984375,
+        "ssim": 0.867606049156189,
+        "mae": 0.01565562651138753,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2615.2540050819516,
+      "lr": 7.0786430026423e-06,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 45,
+      "training_loss": 0.003961043838294184,
+      "validation": {
+        "psnr": 31.808175825500488,
+        "ssim": 0.8670872995376587,
+        "mae": 0.01568509014826268,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2574.8759472686797,
+      "lr": 4.952636906532539e-06,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 46,
+      "training_loss": 0.003953520782209671,
+      "validation": {
+        "psnr": 31.803371448516845,
+        "ssim": 0.8674149802446366,
+        "mae": 0.015661238230671733,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2884.8759249327704,
+      "lr": 3.1893297163367887e-06,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 47,
+      "training_loss": 0.003937481704539823,
+      "validation": {
+        "psnr": 31.795596673583983,
+        "ssim": 0.8672117905616761,
+        "mae": 0.015682553363218905,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2653.1094832341187,
+      "lr": 1.8029185447427008e-06,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 48,
+      "training_loss": 0.00391859078234423,
+      "validation": {
+        "psnr": 31.79438538208008,
+        "ssim": 0.8671914489507675,
+        "mae": 0.015684998694434762,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2675.2031866782345,
+      "lr": 8.045659593073792e-07,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 49,
+      "training_loss": 0.003918965467363644,
+      "validation": {
+        "psnr": 31.794015350341798,
+        "ssim": 0.8671037293672562,
+        "mae": 0.01569058280158788,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2681.5275021973066,
+      "lr": 2.0231010802694463e-07,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 50,
+      "training_loss": 0.003914797733092564,
+      "validation": {
+        "psnr": 31.79317886428833,
+        "ssim": 0.8671190006494522,
+        "mae": 0.01568983134450391,
+        "count": 5000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 2688.2919721850194,
+      "lr": 1.0000008951916284e-09,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    }
+  ]
+}

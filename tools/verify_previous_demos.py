@@ -69,6 +69,13 @@ def main(base=None):
     if page=='corrected-epoch50/':
      assert js("document.querySelectorAll('#intervalHistoryPlots .plot').length")==2
      assert js("document.querySelector('#factorRows').closest('details')!==null")
+     if camera=='diffuser':
+      assert js("document.querySelector('#normalizedResults').dataset.ready==='true'")
+      assert js("document.querySelector('#normalizedResults').textContent.includes('0.86721') && document.querySelector('#normalizedResults').textContent.includes('90.79%') && document.querySelector('#normalizedResults').textContent.includes('0.01367188')")
+      assert js("document.querySelectorAll('#normalizedResults .plot').length")==4
+      assert js("document.querySelectorAll('#normalizedResults > .table-wrap tbody tr').length")==1
+     else:assert js("document.querySelector('#normalizedResults').hidden")
+
     js("window.scrollTo(0,0)")
     shot=call('Page.captureScreenshot',dict(format='png',fromSurface=True,captureBeyondViewport=False))
     Path('/tmp/previous_demo_'+(page.strip('/') or 'legacy')+'_'+camera+'.png').write_bytes(base64.b64decode(shot['data']))
