@@ -1,0 +1,556 @@
+{
+  "study": "corrupted",
+  "method": "qutcc",
+  "epoch": 10,
+  "config": {
+    "protocol": "raw_measurement_corruptions_pilot_20261018_v1",
+    "camera": "raw",
+    "method": "qutcc",
+    "epochs": 10,
+    "seed": 202610182,
+    "initialization": "independent_copy_of_matched_paper_style_epoch30",
+    "parent": {
+      "path": "/home/jy2228/ConvRML/experiments/qutcc_paper_style_20261018/results/raw/qutcc/checkpoints/epoch_030.pt",
+      "sha256": "18edc6bd3325096a8ec49d0fcda5e16204fdda66fd6db10482d00d3ae6281d39",
+      "epoch": 30,
+      "protocol": "paper_qutcc_convnext_uniform_pinball_20261018_v1"
+    },
+    "corruptions": "fixed reviewed PNG inputs from dataset/manifest.json; targets unchanged; OOD noises held out",
+    "dataset_identity": {
+      "/home/jy2228/ConvRML/experiments/dlmd_raw_adaptive_size_20261016/data/split.json": "155670232c27b3201582f5a1b67fb4196e8123e40f388d9c951df4418f7144fb",
+      "/home/jy2228/ConvRML/experiments/raw_diffuser_corruptions_20261018/protocol.json": "f3f1beeb4e5863b703bde25068323ea3d49a2c544c08ae20941c76493ba1b064",
+      "/home/jy2228/ConvRML/experiments/raw_diffuser_corruptions_20261018/dataset/manifest.json": "6c12f47c779ff5fc475cf99a32f06a4a23e3eec176a953892623fbe31a46ae1f"
+    },
+    "source_sha256": "56effc208a9494f4b47fe3739de31ad1ddc336ca36ea14c9d6b3c57483c124dc",
+    "counts": {
+      "train": 17999,
+      "val": 2000,
+      "test": 2000,
+      "calibration": 3000
+    },
+    "effective_batch": 4,
+    "microbatch": 1,
+    "precision": "float32",
+    "optimizer": "Adam",
+    "betas": [
+      0.9,
+      0.99
+    ],
+    "weight_decay": 0.0,
+    "peak_lr": 1e-05,
+    "initial_scheduled_lr": 1e-05,
+    "schedule": "constant 1e-5 for ten-epoch adaptation pilot, fresh Adam moments",
+    "quantiles": "independent U(0,1) per image",
+    "loss": "pinball only",
+    "film_sites": 48,
+    "calibration": "separate Algorithm 1 q search; alpha=.10",
+    "normalization": "existing RGB [0,1] dataset; ImageNet input normalization inside existing ConvNeXt",
+    "deviations": [
+      "ConvNeXtV2 Base + FPN replaces attention U-Net as explicitly requested",
+      "lensless datasets and existing splits",
+      "RGB channels",
+      "internal pad-to-32 and crop for raw image shape",
+      "microbatch accumulation implements effective batch four"
+    ],
+    "test_used": false,
+    "calibration_used": false
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "training_loss": 0.02253357179125537,
+      "validation": {
+        "psnr": 20.851009112358092,
+        "ssim": 0.6891105510890484,
+        "mae": 0.05659252600534819,
+        "count": 2000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 1538.2641375213861,
+      "lr": 1e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 2,
+      "training_loss": 0.01966181676524859,
+      "validation": {
+        "psnr": 21.233143756866454,
+        "ssim": 0.6947576470375061,
+        "mae": 0.05373556895530782,
+        "count": 2000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 1555.1015697997063,
+      "lr": 1e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 3,
+      "training_loss": 0.01858997838043632,
+      "validation": {
+        "psnr": 21.38095208120346,
+        "ssim": 0.6997426119446755,
+        "mae": 0.05242929095064756,
+        "count": 2000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 1542.2283235443756,
+      "lr": 1e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 4,
+      "training_loss": 0.017759026420857468,
+      "validation": {
+        "psnr": 21.521800453186035,
+        "ssim": 0.7010343559384346,
+        "mae": 0.05157682824041694,
+        "count": 2000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 1529.711054123938,
+      "lr": 1e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 5,
+      "training_loss": 0.017172530509970384,
+      "validation": {
+        "psnr": 21.53318514442444,
+        "ssim": 0.707035354629159,
+        "mae": 0.050755703579401595,
+        "count": 2000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 1550.9081914965063,
+      "lr": 1e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 6,
+      "training_loss": 0.016753402761114086,
+      "validation": {
+        "psnr": 21.563300214290617,
+        "ssim": 0.7044423321038484,
+        "mae": 0.05061864768527448,
+        "count": 2000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 1523.8949842699803,
+      "lr": 1e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 7,
+      "training_loss": 0.016105746083211595,
+      "validation": {
+        "psnr": 21.647176703453063,
+        "ssim": 0.704421003550291,
+        "mae": 0.050376585544552654,
+        "count": 2000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 1521.2343468479812,
+      "lr": 1e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 8,
+      "training_loss": 0.015712448962354703,
+      "validation": {
+        "psnr": 21.659740730285645,
+        "ssim": 0.7066410602480173,
+        "mae": 0.05017684120358899,
+        "count": 2000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 1516.0326234130189,
+      "lr": 1e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 9,
+      "training_loss": 0.015392656209714002,
+      "validation": {
+        "psnr": 21.677701209545134,
+        "ssim": 0.7081122058331967,
+        "mae": 0.049899002162157556,
+        "count": 2000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 1513.2052549120272,
+      "lr": 1e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 10,
+      "training_loss": 0.014985135377794586,
+      "validation": {
+        "psnr": 21.686344034671784,
+        "ssim": 0.7087741519957781,
+        "mae": 0.049811298294807786,
+        "count": 2000,
+        "clipped": true,
+        "reconstruction": "median q=0.5"
+      },
+      "segment_seconds": 1638.9303839780623,
+      "lr": 1e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    }
+  ],
+  "evaluations": [
+    {
+      "epoch": 5,
+      "status": "complete",
+      "metrics": {
+        "raw": {
+          "psnr": 21.535132899284363,
+          "ssim": 0.6749627481251955,
+          "mae": 0.05191052142158151,
+          "coverage": 0.9015391104668379,
+          "width": 0.2109081745930016,
+          "crossing": 5.979938277960173e-07
+        },
+        "clipped": {
+          "psnr": 21.573420334815978,
+          "ssim": 0.7068811845779419,
+          "mae": 0.05067102919623721,
+          "coverage": 0.9054897082597018,
+          "width": 0.20072996110422536,
+          "crossing": 4.179526758889551e-07
+        }
+      },
+      "calibration": {
+        "lower_q": 0.048828125,
+        "upper_q": 0.951171875,
+        "alpha": 0.1,
+        "per_tail_target": 0.049850000000000005,
+        "n_images": 3000,
+        "tolerance": 0.001,
+        "trace": [
+          {
+            "lower_q": 0.0,
+            "upper_q": 1.0,
+            "lower_risk": 0.01755827417695473,
+            "upper_risk": 0.010678635116598079
+          },
+          {
+            "lower_q": 0.5,
+            "upper_q": 0.5,
+            "lower_risk": 0.45634627314814813,
+            "upper_risk": 0.543653382201646
+          },
+          {
+            "lower_q": 0.25,
+            "upper_q": 0.75,
+            "lower_risk": 0.2326284790809328,
+            "upper_risk": 0.2963754441015089
+          },
+          {
+            "lower_q": 0.125,
+            "upper_q": 0.875,
+            "lower_risk": 0.12270083419067215,
+            "upper_risk": 0.15292471107681757
+          },
+          {
+            "lower_q": 0.0625,
+            "upper_q": 0.9375,
+            "lower_risk": 0.061505689300411524,
+            "upper_risk": 0.06644975051440329
+          },
+          {
+            "lower_q": 0.03125,
+            "upper_q": 0.96875,
+            "lower_risk": 0.03579090020576132,
+            "upper_risk": 0.03128160236625514
+          },
+          {
+            "lower_q": 0.046875,
+            "upper_q": 0.953125,
+            "lower_risk": 0.0478664188957476,
+            "upper_risk": 0.04734170524691358
+          },
+          {
+            "lower_q": 0.0546875,
+            "upper_q": 0.9453125,
+            "lower_risk": 0.05451381515775034,
+            "upper_risk": 0.05658337962962963
+          },
+          {
+            "lower_q": 0.05078125,
+            "upper_q": 0.94921875,
+            "lower_risk": 0.05114315414951989,
+            "upper_risk": 0.051870939643347054
+          },
+          {
+            "lower_q": 0.048828125,
+            "upper_q": 0.951171875,
+            "lower_risk": 0.049493764574759944,
+            "upper_risk": 0.049580696159122084
+          },
+          {
+            "lower_q": 0.0498046875,
+            "upper_q": 0.9501953125,
+            "lower_risk": 0.05031571073388203,
+            "upper_risk": 0.050719506172839504
+          },
+          {
+            "lower_q": 0.048828125,
+            "upper_q": 0.951171875,
+            "lower_risk": 0.049493764574759944,
+            "upper_risk": 0.049580696159122084
+          }
+        ],
+        "procedure": "paper Algorithm 1 adjusted empirical tail-risk binary search",
+        "assumption": "Quantile response should be monotone; shared weights do not strictly enforce it",
+        "calibrated_on": "calibration split only"
+      },
+      "test_count": 2000,
+      "calibration_seconds": 2114.453002638067,
+      "inference_seconds": 176.3150490069529
+    },
+    {
+      "epoch": 10,
+      "status": "complete",
+      "metrics": {
+        "raw": {
+          "psnr": 21.68085068845749,
+          "ssim": 0.67930135852471,
+          "mae": 0.05088975503051188,
+          "coverage": 0.9016677076816559,
+          "width": 0.20234033379610628,
+          "crossing": 8.384773573197891e-07
+        },
+        "clipped": {
+          "psnr": 21.7186176366806,
+          "ssim": 0.7089095015227794,
+          "mae": 0.049742010499117896,
+          "coverage": 0.9037754021584987,
+          "width": 0.19317791333142667,
+          "crossing": 5.388374493122683e-07
+        }
+      },
+      "calibration": {
+        "lower_q": 0.0380859375,
+        "upper_q": 0.9677734375,
+        "alpha": 0.1,
+        "per_tail_target": 0.049850000000000005,
+        "n_images": 3000,
+        "tolerance": 0.001,
+        "trace": [
+          {
+            "lower_q": 0.0,
+            "upper_q": 1.0,
+            "lower_risk": 0.019133741426611797,
+            "upper_risk": 0.019128278463648833
+          },
+          {
+            "lower_q": 0.5,
+            "upper_q": 0.5,
+            "lower_risk": 0.47803026748971195,
+            "upper_risk": 0.5219693955761316
+          },
+          {
+            "lower_q": 0.25,
+            "upper_q": 0.75,
+            "lower_risk": 0.25860840706447186,
+            "upper_risk": 0.2903755426954733
+          },
+          {
+            "lower_q": 0.125,
+            "upper_q": 0.875,
+            "lower_risk": 0.14563310099451304,
+            "upper_risk": 0.1647504981138546
+          },
+          {
+            "lower_q": 0.0625,
+            "upper_q": 0.9375,
+            "lower_risk": 0.0753175848765432,
+            "upper_risk": 0.08689468449931413
+          },
+          {
+            "lower_q": 0.03125,
+            "upper_q": 0.96875,
+            "lower_risk": 0.042656370027434845,
+            "upper_risk": 0.048181068244170094
+          },
+          {
+            "lower_q": 0.046875,
+            "upper_q": 0.953125,
+            "lower_risk": 0.058177490569272974,
+            "upper_risk": 0.06698745970507544
+          },
+          {
+            "lower_q": 0.0390625,
+            "upper_q": 0.9609375,
+            "lower_risk": 0.05016709533607682,
+            "upper_risk": 0.05737188185871056
+          },
+          {
+            "lower_q": 0.03515625,
+            "upper_q": 0.96484375,
+            "lower_risk": 0.04634142232510288,
+            "upper_risk": 0.05270991598079561
+          },
+          {
+            "lower_q": 0.037109375,
+            "upper_q": 0.966796875,
+            "lower_risk": 0.048237572873799726,
+            "upper_risk": 0.05042658436213992
+          },
+          {
+            "lower_q": 0.0380859375,
+            "upper_q": 0.9677734375,
+            "lower_risk": 0.04919725308641975,
+            "upper_risk": 0.04929990826474623
+          },
+          {
+            "lower_q": 0.0380859375,
+            "upper_q": 0.9677734375,
+            "lower_risk": 0.04919725308641975,
+            "upper_risk": 0.04929990826474623
+          }
+        ],
+        "procedure": "paper Algorithm 1 adjusted empirical tail-risk binary search",
+        "assumption": "Quantile response should be monotone; shared weights do not strictly enforce it",
+        "calibrated_on": "calibration split only"
+      },
+      "test_count": 2000,
+      "calibration_seconds": 2493.337311836891,
+      "inference_seconds": 177.54373009875417
+    }
+  ],
+  "metrics": {
+    "raw": {
+      "psnr": 21.68085068845749,
+      "ssim": 0.67930135852471,
+      "mae": 0.05088975503051188,
+      "coverage": 0.9016677076816559,
+      "width": 0.20234033379610628,
+      "crossing": 8.384773573197891e-07
+    },
+    "clipped": {
+      "psnr": 21.7186176366806,
+      "ssim": 0.7089095015227794,
+      "mae": 0.049742010499117896,
+      "coverage": 0.9037754021584987,
+      "width": 0.19317791333142667,
+      "crossing": 5.388374493122683e-07
+    }
+  },
+  "calibration": {
+    "lower_q": 0.0380859375,
+    "upper_q": 0.9677734375,
+    "alpha": 0.1,
+    "per_tail_target": 0.049850000000000005,
+    "n_images": 3000,
+    "tolerance": 0.001,
+    "trace": [
+      {
+        "lower_q": 0.0,
+        "upper_q": 1.0,
+        "lower_risk": 0.019133741426611797,
+        "upper_risk": 0.019128278463648833
+      },
+      {
+        "lower_q": 0.5,
+        "upper_q": 0.5,
+        "lower_risk": 0.47803026748971195,
+        "upper_risk": 0.5219693955761316
+      },
+      {
+        "lower_q": 0.25,
+        "upper_q": 0.75,
+        "lower_risk": 0.25860840706447186,
+        "upper_risk": 0.2903755426954733
+      },
+      {
+        "lower_q": 0.125,
+        "upper_q": 0.875,
+        "lower_risk": 0.14563310099451304,
+        "upper_risk": 0.1647504981138546
+      },
+      {
+        "lower_q": 0.0625,
+        "upper_q": 0.9375,
+        "lower_risk": 0.0753175848765432,
+        "upper_risk": 0.08689468449931413
+      },
+      {
+        "lower_q": 0.03125,
+        "upper_q": 0.96875,
+        "lower_risk": 0.042656370027434845,
+        "upper_risk": 0.048181068244170094
+      },
+      {
+        "lower_q": 0.046875,
+        "upper_q": 0.953125,
+        "lower_risk": 0.058177490569272974,
+        "upper_risk": 0.06698745970507544
+      },
+      {
+        "lower_q": 0.0390625,
+        "upper_q": 0.9609375,
+        "lower_risk": 0.05016709533607682,
+        "upper_risk": 0.05737188185871056
+      },
+      {
+        "lower_q": 0.03515625,
+        "upper_q": 0.96484375,
+        "lower_risk": 0.04634142232510288,
+        "upper_risk": 0.05270991598079561
+      },
+      {
+        "lower_q": 0.037109375,
+        "upper_q": 0.966796875,
+        "lower_risk": 0.048237572873799726,
+        "upper_risk": 0.05042658436213992
+      },
+      {
+        "lower_q": 0.0380859375,
+        "upper_q": 0.9677734375,
+        "lower_risk": 0.04919725308641975,
+        "upper_risk": 0.04929990826474623
+      },
+      {
+        "lower_q": 0.0380859375,
+        "upper_q": 0.9677734375,
+        "lower_risk": 0.04919725308641975,
+        "upper_risk": 0.04929990826474623
+      }
+    ],
+    "procedure": "paper Algorithm 1 adjusted empirical tail-risk binary search",
+    "assumption": "Quantile response should be monotone; shared weights do not strictly enforce it",
+    "calibrated_on": "calibration split only"
+  },
+  "test_count": 2000,
+  "calibration_count": 3000,
+  "example_count": 10,
+  "refreshed": false,
+  "source_report_sha256": "b2fe65095cd4e929f26ed1df9f17494ecc1bb72703ea34af7ca475b886a1d8d4",
+  "baseline_validation": {
+    "parent": {
+      "path": "/home/jy2228/ConvRML/experiments/qutcc_paper_style_20261018/results/raw/qutcc/checkpoints/epoch_030.pt",
+      "sha256": "18edc6bd3325096a8ec49d0fcda5e16204fdda66fd6db10482d00d3ae6281d39",
+      "epoch": 30,
+      "protocol": "paper_qutcc_convnext_uniform_pinball_20261018_v1"
+    },
+    "validation": {
+      "psnr": 17.270353730678558,
+      "ssim": 0.5333525620386935,
+      "mae": 0.10799626589228865,
+      "count": 2000,
+      "clipped": true,
+      "reconstruction": "median q=0.5"
+    }
+  }
+}

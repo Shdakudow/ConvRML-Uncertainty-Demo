@@ -1,0 +1,337 @@
+{
+  "study": "corrupted",
+  "method": "im2im",
+  "epoch": 10,
+  "config": {
+    "protocol": "raw_measurement_corruptions_pilot_20261018_v1",
+    "camera": "raw",
+    "method": "im2im",
+    "epochs": 10,
+    "seed": 202610182,
+    "initialization": "independent_copy_of_matched_paper_style_epoch30",
+    "parent": {
+      "path": "/home/jy2228/ConvRML/experiments/qutcc_paper_style_20261018/results/raw/im2im/checkpoints/epoch_030.pt",
+      "sha256": "2fbc22707cb4490aa1935e6a2e19a838e13da28b3d83f7c0999012e3fb2f312e",
+      "epoch": 30,
+      "protocol": "paper_qutcc_convnext_uniform_pinball_20261018_v1"
+    },
+    "corruptions": "fixed reviewed PNG inputs from dataset/manifest.json; targets unchanged; OOD noises held out",
+    "dataset_identity": {
+      "/home/jy2228/ConvRML/experiments/dlmd_raw_adaptive_size_20261016/data/split.json": "155670232c27b3201582f5a1b67fb4196e8123e40f388d9c951df4418f7144fb",
+      "/home/jy2228/ConvRML/experiments/raw_diffuser_corruptions_20261018/protocol.json": "f3f1beeb4e5863b703bde25068323ea3d49a2c544c08ae20941c76493ba1b064",
+      "/home/jy2228/ConvRML/experiments/raw_diffuser_corruptions_20261018/dataset/manifest.json": "6c12f47c779ff5fc475cf99a32f06a4a23e3eec176a953892623fbe31a46ae1f"
+    },
+    "source_sha256": "56effc208a9494f4b47fe3739de31ad1ddc336ca36ea14c9d6b3c57483c124dc",
+    "counts": {
+      "train": 17999,
+      "val": 2000,
+      "test": 2000,
+      "calibration": 3000
+    },
+    "effective_batch": 4,
+    "microbatch": 1,
+    "precision": "float32",
+    "optimizer": "Adam",
+    "betas": [
+      0.9,
+      0.99
+    ],
+    "weight_decay": 0.0,
+    "peak_lr": 1e-05,
+    "initial_scheduled_lr": 1e-05,
+    "schedule": "constant 1e-5 for ten-epoch adaptation pilot, fresh Adam moments",
+    "quantiles": [
+      0.05,
+      0.95
+    ],
+    "loss": "MSE center + pinball .05 + pinball .95",
+    "film_sites": 0,
+    "calibration": "separate asymmetric endpoint scales",
+    "normalization": "existing RGB [0,1] dataset; ImageNet input normalization inside existing ConvNeXt",
+    "deviations": [
+      "ConvNeXtV2 Base + FPN replaces attention U-Net as explicitly requested",
+      "lensless datasets and existing splits",
+      "RGB channels",
+      "internal pad-to-32 and crop for raw image shape",
+      "microbatch accumulation implements effective batch four"
+    ],
+    "test_used": false,
+    "calibration_used": false
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "training_loss": 0.030933178826813075,
+      "validation": {
+        "psnr": 21.10344548034668,
+        "ssim": 0.6715759501829743,
+        "mae": 0.0583713307363214,
+        "count": 2000,
+        "clipped": true,
+        "reconstruction": "MSE center"
+      },
+      "segment_seconds": 1298.1178412181325,
+      "lr": 1e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 2,
+      "training_loss": 0.025455996251809134,
+      "validation": {
+        "psnr": 21.46157368898392,
+        "ssim": 0.6787286233082414,
+        "mae": 0.054857968083000745,
+        "count": 2000,
+        "clipped": true,
+        "reconstruction": "MSE center"
+      },
+      "segment_seconds": 1283.917486357037,
+      "lr": 1e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 3,
+      "training_loss": 0.023275339862713507,
+      "validation": {
+        "psnr": 21.61197827577591,
+        "ssim": 0.6776963322460652,
+        "mae": 0.053698717607418074,
+        "count": 2000,
+        "clipped": true,
+        "reconstruction": "MSE center"
+      },
+      "segment_seconds": 1281.4089840189554,
+      "lr": 1e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 4,
+      "training_loss": 0.021537825691054134,
+      "validation": {
+        "psnr": 21.714332589149475,
+        "ssim": 0.684477544106543,
+        "mae": 0.05264065774087794,
+        "count": 2000,
+        "clipped": true,
+        "reconstruction": "MSE center"
+      },
+      "segment_seconds": 1281.3634441420436,
+      "lr": 1e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 5,
+      "training_loss": 0.020119139671415095,
+      "validation": {
+        "psnr": 21.73864001607895,
+        "ssim": 0.6916335642933845,
+        "mae": 0.051911734635708855,
+        "count": 2000,
+        "clipped": true,
+        "reconstruction": "MSE center"
+      },
+      "segment_seconds": 1283.9798866068013,
+      "lr": 1e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 6,
+      "training_loss": 0.018994686192735817,
+      "validation": {
+        "psnr": 21.77079647731781,
+        "ssim": 0.6841975528374314,
+        "mae": 0.051919215604430066,
+        "count": 2000,
+        "clipped": true,
+        "reconstruction": "MSE center"
+      },
+      "segment_seconds": 1281.829349107109,
+      "lr": 1e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 7,
+      "training_loss": 0.01808997782090674,
+      "validation": {
+        "psnr": 21.796881368637084,
+        "ssim": 0.6889449715167284,
+        "mae": 0.05158637054089923,
+        "count": 2000,
+        "clipped": true,
+        "reconstruction": "MSE center"
+      },
+      "segment_seconds": 1270.2660160949454,
+      "lr": 1e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 8,
+      "training_loss": 0.017339982809726318,
+      "validation": {
+        "psnr": 21.82583591938019,
+        "ssim": 0.6912768706008792,
+        "mae": 0.05116393258143216,
+        "count": 2000,
+        "clipped": true,
+        "reconstruction": "MSE center"
+      },
+      "segment_seconds": 1268.1118856901303,
+      "lr": 1e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 9,
+      "training_loss": 0.016701630903375852,
+      "validation": {
+        "psnr": 21.81574592781067,
+        "ssim": 0.6912074935212731,
+        "mae": 0.05119493231852539,
+        "count": 2000,
+        "clipped": true,
+        "reconstruction": "MSE center"
+      },
+      "segment_seconds": 1269.5442849267274,
+      "lr": 1e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    },
+    {
+      "epoch": 10,
+      "training_loss": 0.01614575278750196,
+      "validation": {
+        "psnr": 21.828214758872985,
+        "ssim": 0.6930731226950884,
+        "mae": 0.05090606581361499,
+        "count": 2000,
+        "clipped": true,
+        "reconstruction": "MSE center"
+      },
+      "segment_seconds": 1265.3887603618205,
+      "lr": 1e-05,
+      "gpu": "NVIDIA RTX 6000 Ada Generation"
+    }
+  ],
+  "evaluations": [
+    {
+      "epoch": 5,
+      "status": "complete",
+      "metrics": {
+        "raw": {
+          "psnr": 21.76195600271225,
+          "ssim": 0.6772629978880286,
+          "mae": 0.05279757591173984,
+          "coverage": 0.9019172860085964,
+          "width": 0.19741703718248754,
+          "crossing": 0.0
+        },
+        "clipped": {
+          "psnr": 21.793813625335694,
+          "ssim": 0.6915474349334836,
+          "mae": 0.051589182305149736,
+          "coverage": 0.904055780172348,
+          "width": 0.18768372156005353,
+          "crossing": 0.0
+        }
+      },
+      "calibration": {
+        "scales": {
+          "lower": 1.033033033033033,
+          "upper": 1.1591591591591592
+        },
+        "alpha": 0.1,
+        "per_tail_target": 0.049850000000000005,
+        "n_images": 3000,
+        "procedure": "paper asymmetric Im2im adjusted empirical tail-risk scale search",
+        "calibrated_on": "calibration split only"
+      },
+      "test_count": 2000,
+      "calibration_seconds": 115.45864632294979,
+      "inference_seconds": 78.74882798397448
+    },
+    {
+      "epoch": 10,
+      "status": "complete",
+      "metrics": {
+        "raw": {
+          "psnr": 21.864834530830382,
+          "ssim": 0.6823898111768066,
+          "mae": 0.05168339063692838,
+          "coverage": 0.9011432063281536,
+          "width": 0.19037091760803013,
+          "crossing": 0.0
+        },
+        "clipped": {
+          "psnr": 21.89739829301834,
+          "ssim": 0.6933306921496988,
+          "mae": 0.05050377705600113,
+          "coverage": 0.9021796463876963,
+          "width": 0.17942416004417464,
+          "crossing": 0.0
+        }
+      },
+      "calibration": {
+        "scales": {
+          "lower": 1.1951951951951951,
+          "upper": 1.2432432432432432
+        },
+        "alpha": 0.1,
+        "per_tail_target": 0.049850000000000005,
+        "n_images": 3000,
+        "procedure": "paper asymmetric Im2im adjusted empirical tail-risk scale search",
+        "calibrated_on": "calibration split only"
+      },
+      "test_count": 2000,
+      "calibration_seconds": 112.60144229978323,
+      "inference_seconds": 54.42057879641652
+    }
+  ],
+  "metrics": {
+    "raw": {
+      "psnr": 21.864834530830382,
+      "ssim": 0.6823898111768066,
+      "mae": 0.05168339063692838,
+      "coverage": 0.9011432063281536,
+      "width": 0.19037091760803013,
+      "crossing": 0.0
+    },
+    "clipped": {
+      "psnr": 21.89739829301834,
+      "ssim": 0.6933306921496988,
+      "mae": 0.05050377705600113,
+      "coverage": 0.9021796463876963,
+      "width": 0.17942416004417464,
+      "crossing": 0.0
+    }
+  },
+  "calibration": {
+    "scales": {
+      "lower": 1.1951951951951951,
+      "upper": 1.2432432432432432
+    },
+    "alpha": 0.1,
+    "per_tail_target": 0.049850000000000005,
+    "n_images": 3000,
+    "procedure": "paper asymmetric Im2im adjusted empirical tail-risk scale search",
+    "calibrated_on": "calibration split only"
+  },
+  "test_count": 2000,
+  "calibration_count": 3000,
+  "example_count": 10,
+  "refreshed": false,
+  "source_report_sha256": "df6fd19d64e446a94ca1325a61582d370537fc8c7c14fd42faafd5b7d883f6f1",
+  "baseline_validation": {
+    "parent": {
+      "path": "/home/jy2228/ConvRML/experiments/qutcc_paper_style_20261018/results/raw/im2im/checkpoints/epoch_030.pt",
+      "sha256": "2fbc22707cb4490aa1935e6a2e19a838e13da28b3d83f7c0999012e3fb2f312e",
+      "epoch": 30,
+      "protocol": "paper_qutcc_convnext_uniform_pinball_20261018_v1"
+    },
+    "validation": {
+      "psnr": 17.49119046831131,
+      "ssim": 0.5289222762188874,
+      "mae": 0.1052590577827068,
+      "count": 2000,
+      "clipped": true,
+      "reconstruction": "MSE center"
+    }
+  }
+}
