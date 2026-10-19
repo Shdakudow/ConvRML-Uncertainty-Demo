@@ -47,15 +47,21 @@ def main(base=None):
     time.sleep(.2)
    raise RuntimeError('Loading timeout: '+text)
   print(wait_ready('1 / '),flush=True)
+  assert js("!document.querySelector('#pixelInspector').open && !document.querySelector('#calibrationDetails').open")
   for study in ['clean','corrupted']:
    if study=='corrupted':js("document.querySelector('#study').value='corrupted';document.querySelector('#study').dispatchEvent(new Event('change'))");wait_ready('2 / ')
    assert js("document.querySelectorAll('#historyPlots .plot').length")==2
    assert js("document.querySelectorAll('#intervalPlots .plot').length")==2
    assert js("document.querySelectorAll('#aggregateRows tr').length")==2
    assert js("document.querySelectorAll('#matrix canvas').length")==10
+   assert js("[...document.querySelectorAll('#matrix canvas')].filter(c=>c.getBoundingClientRect().width>0).length")==6
+   js("document.querySelector('#showBounds').click()")
+   assert js("[...document.querySelectorAll('#matrix canvas')].filter(c=>c.getBoundingClientRect().width>0).length")==10
+   js("document.querySelector('#showBounds').click()")
    assert js("document.querySelector('#measurement').width===480 && document.querySelector('#measurement').height===270")
    assert js("""(()=>{for(const plot of document.querySelectorAll('.plot')){const hit=plot.querySelector('.epoch-hit');hit.dispatchEvent(new PointerEvent('pointerenter'));const tip=plot.querySelector('.tooltip');if(tip.hidden||!tip.textContent.includes('QUTCC')||!tip.textContent.includes('Im2im')||!tip.textContent.includes('Epoch'))throw Error('hover comparison missing');hit.focus();hit.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}));if(tip.hidden)throw Error('keyboard tooltip hidden');plot.dispatchEvent(new PointerEvent('pointerleave'));if(!tip.hidden)throw Error('tooltip failed to hide')}return true})()""")
    js("document.querySelector('#target').dispatchEvent(new MouseEvent('click',{clientX:850,clientY:480,bubbles:true}))")
+   assert js("document.querySelector('#pixelInspector').open")
    assert js("""(()=>{const row=document.querySelector('#pixelRows tr'),cells=[...row.querySelectorAll('td')].slice(1).map(n=>Number(n.textContent)),N=example.width*example.height,k=point.y*example.width+point.x,m=example.models.qutcc,mean=a=>[0,1,2].reduce((s,c)=>s+a[c*N+k],0)/3,truth=[0,1,2].reduce((s,c)=>s+example.target[c*N+k]/255,0)/3,mae=[0,1,2].reduce((s,c)=>s+Math.abs(example.target[c*N+k]/255-m.prediction[c*N+k]),0)/3,expected=[mean(m.prediction),mean(m.lower),mean(m.upper),mae,mean(m.upper)-mean(m.lower)];return cells.every((v,i)=>Math.abs(v-expected[i])<.000001)})()""")
    js("document.querySelector('#next').click()");print(study,wait_ready('2 / ' if study=='clean' else '3 / '),flush=True)
    assert js("Number(new URL(location.href).searchParams.get('example'))===index")
