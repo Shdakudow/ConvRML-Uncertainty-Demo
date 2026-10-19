@@ -5,6 +5,8 @@ import numpy as np
 PROJECT=Path.home()/'ConvRML'
 SOURCE={'clean':PROJECT/'experiments/qutcc_paper_style_20261018','corrupted':PROJECT/'experiments/raw_diffuser_corruptions_20261018'}
 EPOCH={'clean':50,'corrupted':10}
+EXPORT_VARIANT=None
+REUSE_EVALUATION=False
 ROOT=PROJECT/'experiments/raw_diffuser_demo_20261019'
 
 def write(path,obj):
@@ -71,11 +73,13 @@ def refresh(study,method):
   if study=='corrupted':(work/'TRAINING_APPROVED').write_text('User authorized calibration and demo exports on 2026-10-19.\n')
   evaluation.ROOT=work;evaluation.TASKS=[('raw',method)]
   # Native original protocol and data identity are checked inside evaluation.run.
-  evaluation.run(argparse.Namespace(task=0,epoch=epoch))
-  report_path=work/'results/raw'/method/'evaluation'/f'epoch_{epoch:03d}'/'report.json'
+  report_path=(source if REUSE_EVALUATION else work/'results/raw'/method)/'evaluation'/f'epoch_{epoch:03d}'/'report.json'
+  if REUSE_EVALUATION and not report_path.exists():
+   print('Calibration unavailable at this milestone; no calibrated examples exported.',flush=True);return
+  if not REUSE_EVALUATION:evaluation.run(argparse.Namespace(task=0,epoch=epoch))
   report=json.loads(report_path.read_text());ck=torch.load(cp,map_location='cpu',weights_only=False)
   assert ck['config']['dataset_identity']==identity('raw');model=Model(method);model.load_state_dict(ck['model'],strict=True);model=model.cuda().eval();del ck
-  fitted=report['calibration'];test=Pairs('raw','test');out=ROOT/'exports'/study/method;rows=[]
+  fitted=report['calibration'];test=Pairs('raw','test');out=ROOT/'exports'/(EXPORT_VARIANT or study)/method;rows=[]
   with torch.inference_mode():
    for index,pair in enumerate(DataLoader(Subset(test,range(50)),batch_size=1,num_workers=2)):
     y,x=pair[:,0].cuda(),pair[:,1].cuda()
@@ -91,13 +95,16 @@ def refresh(study,method):
     for key in metrics:assert abs(metrics[key]-report['per_image'][index]['clipped'][key])<2e-5,(index,key)
     arrays={key:a[0].cpu().numpy() for key,a in [('measurement',y),('target',x),('prediction',prediction),('lower',lower),('upper',upper)]}
     pack(out/f'example_{index:02d}.bin.gz',index,test.rows[index]['id'],arrays,metrics,fitted);rows.append(metrics)
-  summary=summarize(study,method);summary.update(example_count=50,refreshed=True,metrics=report['metrics'],calibration=fitted,refresh_report_sha256=sha(report_path),gpu=torch.cuda.get_device_name(),example_metrics=rows)
+  summary=summarize(study,method);summary.update(asset_study=EXPORT_VARIANT or study,example_count=50,refreshed=True,metrics=report['metrics'],calibration=fitted,refresh_report_sha256=sha(report_path),gpu=torch.cuda.get_device_name(),example_metrics=rows)
   # Update the final milestone with the independently refreshed calibration/test results.
   for row in summary['evaluations']:
    if row['epoch']==epoch:row.update(metrics=report['metrics'],calibration=fitted,refreshed=True)
   write(out/'summary.json',summary);print(json.dumps({'study':study,'method':method,'status':'complete','examples':50,'metrics':report['metrics']}),flush=True)
 
 if __name__=='__main__':
- p=argparse.ArgumentParser();p.add_argument('--snapshot',action='store_true');p.add_argument('--study',choices=SOURCE);p.add_argument('--method',choices=['qutcc','im2im']);a=p.parse_args()
+ p=argparse.ArgumentParser();p.add_argument('--snapshot',action='store_true');p.add_argument('--study',choices=SOURCE);p.add_argument('--method',choices=['qutcc','im2im']);p.add_argument('--epoch',type=int);p.add_argument('--source-extension');p.add_argument('--output-variant');p.add_argument('--reuse-evaluation',action='store_true');a=p.parse_args()
+ if a.epoch:EPOCH[a.study]=a.epoch
+ if a.source_extension:SOURCE[a.study]=PROJECT/'experiments'/a.source_extension
+ EXPORT_VARIANT=a.output_variant;REUSE_EVALUATION=a.reuse_evaluation
  if a.snapshot:snapshot()
  else:refresh(a.study,a.method)
