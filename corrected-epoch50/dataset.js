@@ -16,5 +16,5 @@ if(window.CAMERA==='diffuser'){
  window.paperStyleQutcc=await result.json();
  DATASET.history.paper_qutcc=window.paperStyleQutcc.validation;
 }
-const app=document.createElement('script');app.src='app.js?v=normalizedcurves20261019';document.body.append(app);
+const app=document.createElement('script');app.src='app.js?v=inlinecurves20261019';document.body.append(app);
 }catch(e){document.getElementById('status').textContent='Inference export is not yet published: '+e.message;}})();
