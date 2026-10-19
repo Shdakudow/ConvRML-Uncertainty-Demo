@@ -39,6 +39,8 @@ def main():
  status('browser_validation',asset_commit=asset_commit)
  (WORK/'final_browser_validation.txt').write_text(run([BROWSER_PYTHON,'tools/verify_raw_demo.py'],timeout=600))
  run(['git','diff','--check'])
+ staged=set(run(['git','diff','--cached','--name-only']).splitlines())
+ assert staged.issubset({'raw-diffusercam/data.json','raw-diffusercam/assets.json'}),'Unrelated staged changes; publication deferred'
  run(['git','add','--','raw-diffusercam/data.json','raw-diffusercam/assets.json'])
  if run(['git','diff','--cached','--name-only']):run(['git','commit','-m','Update raw DiffuserCam demo with refreshed calibration and fifty examples'])
  commit=run(['git','rev-parse','HEAD']);run(['git','push','origin','main'],timeout=600)
