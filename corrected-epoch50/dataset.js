@@ -10,5 +10,11 @@ if(curvesResponse.ok){const curves=await curvesResponse.json();DATASET.history.e
 else DATASET.history.ensemble10=[];
 for(const [file,key] of [['ensemble5_curves.json','ensemble5Curves'],['ensemble_comparison.json','ensembleComparison'],['interval_curves.json','intervalCurves']]){const res=await fetch(file,{cache:'no-store'});if(res.ok)window[key]=await res.json();}
 DATASET.history.ensemble5=window.ensemble5Curves?.cameras[window.CAMERA]||[];
-const app=document.createElement('script');app.src='app.js?v=pairednav20261017';document.body.append(app);
+if(window.CAMERA==='diffuser'){
+ const result=await fetch('normalized_qutcc_results.json',{cache:'no-store'});
+ if(!result.ok)throw Error('Normalized QUTCC results HTTP '+result.status);
+ window.paperStyleQutcc=await result.json();
+ DATASET.history.paper_qutcc=window.paperStyleQutcc.validation;
+}
+const app=document.createElement('script');app.src='app.js?v=normalizedcurves20261019';document.body.append(app);
 }catch(e){document.getElementById('status').textContent='Inference export is not yet published: '+e.message;}})();

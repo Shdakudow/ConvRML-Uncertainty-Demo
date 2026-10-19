@@ -73,6 +73,10 @@ def main(base=None):
       assert js("document.querySelector('#normalizedResults').dataset.ready==='true'")
       assert js("document.querySelector('#normalizedResults').textContent.includes('0.86721') && document.querySelector('#normalizedResults').textContent.includes('90.79%') && document.querySelector('#normalizedResults').textContent.includes('0.01367188')")
       assert js("document.querySelectorAll('#normalizedResults .plot').length")==4
+      assert js("[...document.querySelectorAll('#normalizedResults .plot')].every(p=>p.getBoundingClientRect().height>0 && !p.closest('details'))")
+      assert js("document.querySelector('#intervalHistoryPlots').textContent.includes('QUTCC · paper-style') && document.querySelector('#historyPlots').textContent.includes('QUTCC · paper-style')")
+      assert js("(()=>{for(const id of ['intervalHistoryPlots','historyPlots']){for(const plot of document.querySelectorAll('#'+id+' .plot')){const hit=plot.querySelector('.epoch-hit:last-of-type'),info=JSON.parse(decodeURIComponent(hit.dataset.comparison));if(!info.rows.some(r=>r.name==='QUTCC · paper-style'&&r.value!==null))return false;hit.dispatchEvent(new PointerEvent('pointerenter'));if(!plot.querySelector('.epoch-tooltip').textContent.includes('QUTCC · paper-style'))return false}}return true})()")
+
       assert js("document.querySelectorAll('#normalizedResults > .table-wrap tbody tr').length")==1
      else:assert js("document.querySelector('#normalizedResults').hidden")
 
