@@ -78,11 +78,11 @@ def main(base=None):
      if camera=='diffuser':
       assert js("!document.querySelector('#normalizedResults')")
       assert js("document.querySelector('#intervalHistoryPlots').getBoundingClientRect().height>0 && document.querySelector('#historyPlots').getBoundingClientRect().height>0")
-      assert js("document.querySelector('#intervalHistoryPlots').textContent.includes('QUTCC · paper-style') && document.querySelector('#historyPlots').textContent.includes('QUTCC · paper-style')")
-      assert js("(()=>{for(const id of ['intervalHistoryPlots','historyPlots']){for(const plot of document.querySelectorAll('#'+id+' .plot')){const hit=plot.querySelector('.epoch-hit:last-of-type'),info=JSON.parse(decodeURIComponent(hit.dataset.comparison));if(!info.rows.some(r=>r.name==='QUTCC · paper-style'&&r.value!==null))return false;hit.dispatchEvent(new PointerEvent('pointerenter'));if(!plot.querySelector('.epoch-tooltip').textContent.includes('QUTCC · paper-style'))return false}}return true})()")
+      assert js("document.querySelector('#intervalHistoryPlots').textContent.includes('QUTCC') && document.querySelector('#historyPlots').textContent.includes('QUTCC')")
+      assert js("(()=>{for(const id of ['intervalHistoryPlots','historyPlots']){for(const plot of document.querySelectorAll('#'+id+' .plot')){const hit=plot.querySelector('.epoch-hit:last-of-type'),info=JSON.parse(decodeURIComponent(hit.dataset.comparison));if(!info.rows.some(r=>r.name==='QUTCC'&&r.value!==null))return false;hit.dispatchEvent(new PointerEvent('pointerenter'));if(!plot.querySelector('.epoch-tooltip').textContent.includes('QUTCC'))return false}}return true})()")
 
       assert js("!document.querySelector('#historyPlots').textContent.includes('QUTCC adaptive · reference')")
-      assert js("(()=>{const p=[...document.querySelectorAll('#intervalHistoryPlots .plot')],metrics=['width','coverage'];return p.every((plot,i)=>{const hit=plot.querySelector('.epoch-hit:last-of-type'),v=JSON.parse(decodeURIComponent(hit.dataset.comparison)).rows.find(r=>r.name==='QUTCC · paper-style').value,expected=paperStyleQutcc.evaluations.at(-1).metrics.clipped[metrics[i]]*(i===1?100:1);return Math.abs(v-expected)<1e-10})})()")
+      assert js("(()=>{const p=[...document.querySelectorAll('#intervalHistoryPlots .plot')],metrics=['width','coverage'];return p.every((plot,i)=>{const hit=plot.querySelector('.epoch-hit:last-of-type'),v=JSON.parse(decodeURIComponent(hit.dataset.comparison)).rows.find(r=>r.name==='QUTCC').value,expected=paperStyleQutcc.evaluations.at(-1).metrics.clipped[metrics[i]]*(i===1?100:1);return Math.abs(v-expected)<1e-10})})()")
 
     js("window.scrollTo(0,0)")
     shot=call('Page.captureScreenshot',dict(format='png',fromSurface=True,captureBeyondViewport=False))

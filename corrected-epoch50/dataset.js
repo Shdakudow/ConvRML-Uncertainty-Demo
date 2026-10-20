@@ -28,5 +28,5 @@ if(overlayResponse.ok){
   window.paperStyleQutcc=window.paperStyleQutcc||{validation:q.validation_history,evaluations:q.evaluations};
  }
 }
-const app=document.createElement('script');app.src='app.js?v=paper50images20261019';document.body.append(app);
+const app=document.createElement('script');app.src='app.js?v=qutccname20261019';document.body.append(app);
 }catch(e){document.getElementById('status').textContent='Inference export is not yet published: '+e.message;}})();
