@@ -95,6 +95,10 @@ def main(base=None):
     js("window.scrollTo(0,0)")
     shot=call('Page.captureScreenshot',dict(format='png',fromSurface=True,captureBeyondViewport=False))
     Path('/tmp/previous_demo_'+(page.strip('/') or 'legacy')+'_'+camera+'.png').write_bytes(base64.b64decode(shot['data']))
+    if page=='corrected-epoch50/':
+     js("document.querySelector('#analysisPlots').scrollIntoView()")
+     shot=call('Page.captureScreenshot',dict(format='png',fromSurface=True,captureBeyondViewport=False))
+     Path('/tmp/exp2_metric_curves_'+camera+'.png').write_bytes(base64.b64decode(shot['data']))
     print(page or 'legacy',camera,state,'controls, curves, pixel inspector and bounds passed',flush=True)
   assert not errors,errors
  finally:
