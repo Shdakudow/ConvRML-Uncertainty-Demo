@@ -16,5 +16,17 @@ if(window.CAMERA==='diffuser'){
  window.paperStyleQutcc=await result.json();
  DATASET.history.paper_qutcc=window.paperStyleQutcc.validation;
 }
-const app=document.createElement('script');app.src='app.js?v=inlinecurves20261019';document.body.append(app);
+const overlayResponse=await fetch('paper_qutcc_assets.json',{cache:'no-store'});
+if(overlayResponse.ok){
+ const overlays=await overlayResponse.json();window.paperQutccAssets=overlays.cameras[window.CAMERA];
+ if(window.paperQutccAssets){
+  const q=window.paperQutccAssets;
+  if(q.epoch!==50 || JSON.stringify(q.ids)!==JSON.stringify(DATASET.ids))throw Error('QUTCC sample IDs or epoch do not match');
+  DATASET.methods=DATASET.methods.filter(k=>k!=='adaptive_qutcc').concat('paper_qutcc');
+  DATASET.epochs.paper_qutcc=50;DATASET.aggregate.paper_qutcc=q.aggregate;
+  DATASET.history.paper_qutcc=q.validation_history;
+  window.paperStyleQutcc=window.paperStyleQutcc||{validation:q.validation_history,evaluations:q.evaluations};
+ }
+}
+const app=document.createElement('script');app.src='app.js?v=paper50images20261019';document.body.append(app);
 }catch(e){document.getElementById('status').textContent='Inference export is not yet published: '+e.message;}})();

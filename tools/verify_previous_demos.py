@@ -69,6 +69,12 @@ def main(base=None):
     if page=='corrected-epoch50/':
      assert js("document.querySelectorAll('#intervalHistoryPlots .plot').length")==2
      assert js("document.querySelector('#factorRows').closest('details')!==null")
+     if js("!!window.paperQutccAssets"):
+      assert js("QUTCC_KEY==='paper_qutcc' && epochOf(QUTCC_KEY)===50 && !example.models.adaptive_qutcc")
+      assert js("document.querySelector('#paper_qutcc-prediction').getBoundingClientRect().width>0")
+      assert js("(()=>{const m=example.models.paper_qutcc,k=point.y*256+point.x;return Math.abs(m.widthRGB[k]-(m.upper[k]-m.lower[k]))<1e-7 && Math.abs(m.metrics.ssim-paperQutccAssets.per_image[current].ssim)<1e-7})()")
+      assert js("document.querySelector('#provenance').textContent.includes('all displayed models at epoch 50')")
+
      if camera=='diffuser':
       assert js("!document.querySelector('#normalizedResults')")
       assert js("document.querySelector('#intervalHistoryPlots').getBoundingClientRect().height>0 && document.querySelector('#historyPlots').getBoundingClientRect().height>0")
