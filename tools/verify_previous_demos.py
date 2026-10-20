@@ -69,7 +69,10 @@ def main(base=None):
     if page=='corrected-epoch50/':
      assert js("document.querySelectorAll('#intervalHistoryPlots .plot').length")==2
      assert js("document.querySelectorAll('#analysisPlots .plot').length")==3
-     assert js("/50 fixed test images|5,000 images per model/.test(document.querySelector('#analysisStatus').textContent)")
+     assert js("document.querySelectorAll('#analysisPlots .epoch-hit').length")==30
+     assert js("(()=>{for(const plot of document.querySelectorAll('#analysisPlots .plot')){const hit=plot.querySelector('.epoch-hit');hit.dispatchEvent(new PointerEvent('pointerenter'));const tip=plot.querySelector('.epoch-tooltip');if(tip.hidden||!tip.textContent.includes('Epoch 5')||tip.querySelectorAll('tbody tr').length!==4)return false;for(const circle of plot.querySelectorAll('circle')){if(!Number.isFinite(Number(circle.getAttribute('cy'))))return false}}return true})()")
+
+     assert js("document.querySelector('#analysisStatus').textContent.includes('40 full-test milestone')")
      assert js("(()=>{const expected=analysisMetrics.per_image[CAMERA].im2im.find(r=>String(r.id)===String(example.id)),text=document.querySelector('#im2im-metrics').textContent;return text.includes(expected.lpips.toFixed(5))&&text.includes(expected.pearson.toFixed(5))&&text.includes(expected.spearman.toFixed(5))})()")
      assert js("document.querySelector('#aggregateRows tr').querySelectorAll('td').length")==8
 
