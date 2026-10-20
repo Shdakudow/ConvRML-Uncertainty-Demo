@@ -68,6 +68,11 @@ def main(base=None):
      js("document.querySelector('#boundsToggle').click()")
     if page=='corrected-epoch50/':
      assert js("document.querySelectorAll('#intervalHistoryPlots .plot').length")==2
+     assert js("document.querySelectorAll('#analysisPlots .plot').length")==3
+     assert js("/50 fixed test images|5,000 images per model/.test(document.querySelector('#analysisStatus').textContent)")
+     assert js("(()=>{const expected=analysisMetrics.per_image[CAMERA].im2im.find(r=>String(r.id)===String(example.id)),text=document.querySelector('#im2im-metrics').textContent;return text.includes(expected.lpips.toFixed(5))&&text.includes(expected.pearson.toFixed(5))&&text.includes(expected.spearman.toFixed(5))})()")
+     assert js("document.querySelector('#aggregateRows tr').querySelectorAll('td').length")==8
+
      assert js("document.querySelector('#factorRows').closest('details')!==null")
      if js("!!window.paperQutccAssets"):
       assert js("QUTCC_KEY==='paper_qutcc' && epochOf(QUTCC_KEY)===50 && !example.models.adaptive_qutcc")
