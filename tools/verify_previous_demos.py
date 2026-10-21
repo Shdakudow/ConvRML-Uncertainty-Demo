@@ -72,7 +72,7 @@ def main(base=None):
      assert js("document.querySelectorAll('#analysisPlots .epoch-hit').length")==30
      assert js("(()=>{for(const plot of document.querySelectorAll('#analysisPlots .plot')){const hit=plot.querySelector('.epoch-hit');hit.dispatchEvent(new PointerEvent('pointerenter'));const tip=plot.querySelector('.epoch-tooltip');if(tip.hidden||!tip.textContent.includes('Epoch 5')||tip.querySelectorAll('tbody tr').length!==4)return false;for(const circle of plot.querySelectorAll('circle')){if(!Number.isFinite(Number(circle.getAttribute('cy'))))return false}}return true})()")
 
-     assert js("document.querySelector('#analysisStatus').textContent.includes('40 full-test milestone')")
+     assert js("document.querySelector('#analysisStatus').textContent.includes('/40 milestones')")
      assert js("(()=>{const expected=analysisMetrics.per_image[CAMERA].im2im.find(r=>String(r.id)===String(example.id)),text=document.querySelector('#im2im-metrics').textContent;return text.includes(expected.lpips.toFixed(5))&&text.includes(expected.pearson.toFixed(5))&&text.includes(expected.spearman.toFixed(5))})()")
      assert js("document.querySelector('#aggregateRows tr').querySelectorAll('td').length")==8
 
@@ -81,7 +81,7 @@ def main(base=None):
       assert js("QUTCC_KEY==='paper_qutcc' && epochOf(QUTCC_KEY)===50 && !example.models.adaptive_qutcc")
       assert js("document.querySelector('#paper_qutcc-prediction').getBoundingClientRect().width>0")
       assert js("(()=>{const m=example.models.paper_qutcc,k=point.y*256+point.x;return Math.abs(m.widthRGB[k]-(m.upper[k]-m.lower[k]))<1e-7 && Math.abs(m.metrics.ssim-paperQutccAssets.per_image[current].ssim)<1e-7})()")
-      assert js("document.querySelector('#provenance').textContent.includes('all displayed models at epoch 50')")
+      assert js("!document.querySelector('#provenance') && !document.querySelector('#paperStyleNotice')")
 
      if camera=='diffuser':
       assert js("!document.querySelector('#normalizedResults')")

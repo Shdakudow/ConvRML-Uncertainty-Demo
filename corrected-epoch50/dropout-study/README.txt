@@ -2,7 +2,7 @@ Exp2 MC dropout rate comparison
 ==============================
 
 Open corrected-epoch50/ and choose RML or Normalized DiffuserCam.
-The "MC dropout · which rate works best?" section is beneath the epoch curves.
+The "MC dropout · rate comparison" section is beneath the epoch curves.
 
 Curves: epoch-50 models trained separately at p=0.05, 0.10 and 0.20.
 Each is evaluated with dropout active on the same 5,000 validation images,

@@ -30,5 +30,6 @@ if(overlayResponse.ok){
 }
 const metricResponse=await fetch('analysis_metrics.json',{cache:'no-store'});
 if(metricResponse.ok)window.analysisMetrics=await metricResponse.json();
-const app=document.createElement('script');app.src='app.js?v=metriccurves20261020';document.body.append(app);
+window.exampleCategories=await (await fetch('../example-categories.json',{cache:'no-store'})).json();
+const app=document.createElement('script');app.src='app.js?v=20261021browse';document.body.append(app);
 }catch(e){document.getElementById('status').textContent='Inference export is not yet published: '+e.message;}})();

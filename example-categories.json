@@ -1,0 +1,1789 @@
+{
+  "difficulty_protocol": "Relative thirds of the displayed images, ranked by reference reconstruction SSIM (lower is harder). These are browsing groups, not full-test subsets or intrinsic scene labels.",
+  "legacy": {
+    "rml": {
+      "reference": "Fixed head",
+      "entries": [
+        {
+          "index": 0,
+          "id": 35894,
+          "reference_ssim": 0.9908360242843628
+        },
+        {
+          "index": 1,
+          "id": 24193,
+          "reference_ssim": 0.9614036083221436
+        },
+        {
+          "index": 2,
+          "id": 22857,
+          "reference_ssim": 0.9447885751724243
+        },
+        {
+          "index": 3,
+          "id": 53050,
+          "reference_ssim": 0.9849726557731628
+        },
+        {
+          "index": 4,
+          "id": 14420,
+          "reference_ssim": 0.9616096019744873
+        },
+        {
+          "index": 5,
+          "id": 68127,
+          "reference_ssim": 0.9597184658050537
+        },
+        {
+          "index": 6,
+          "id": 77172,
+          "reference_ssim": 0.9833986759185791
+        },
+        {
+          "index": 7,
+          "id": 89459,
+          "reference_ssim": 0.9388977885246277
+        },
+        {
+          "index": 8,
+          "id": 70083,
+          "reference_ssim": 0.9728302955627441
+        },
+        {
+          "index": 9,
+          "id": 36001,
+          "reference_ssim": 0.9567736387252808
+        },
+        {
+          "index": 10,
+          "id": 6207,
+          "reference_ssim": 0.9907268285751343
+        },
+        {
+          "index": 11,
+          "id": 49696,
+          "reference_ssim": 0.9543005228042603
+        },
+        {
+          "index": 12,
+          "id": 53077,
+          "reference_ssim": 0.9474300146102905
+        },
+        {
+          "index": 13,
+          "id": 82931,
+          "reference_ssim": 0.9757711291313171
+        },
+        {
+          "index": 14,
+          "id": 85406,
+          "reference_ssim": 0.9614619612693787
+        },
+        {
+          "index": 15,
+          "id": 58845,
+          "reference_ssim": 0.9773070216178894
+        },
+        {
+          "index": 16,
+          "id": 56242,
+          "reference_ssim": 0.9717969298362732
+        },
+        {
+          "index": 17,
+          "id": 40931,
+          "reference_ssim": 0.9478185176849365
+        },
+        {
+          "index": 18,
+          "id": 41815,
+          "reference_ssim": 0.9613316059112549
+        },
+        {
+          "index": 19,
+          "id": 15453,
+          "reference_ssim": 0.9629278182983398
+        },
+        {
+          "index": 20,
+          "id": 27693,
+          "reference_ssim": 0.964326798915863
+        },
+        {
+          "index": 21,
+          "id": 76529,
+          "reference_ssim": 0.9811487197875977
+        },
+        {
+          "index": 22,
+          "id": 50682,
+          "reference_ssim": 0.9822987914085388
+        },
+        {
+          "index": 23,
+          "id": 13030,
+          "reference_ssim": 0.9797919988632202
+        },
+        {
+          "index": 24,
+          "id": 6731,
+          "reference_ssim": 0.9492180347442627
+        },
+        {
+          "index": 25,
+          "id": 40056,
+          "reference_ssim": 0.9714182615280151
+        },
+        {
+          "index": 26,
+          "id": 79272,
+          "reference_ssim": 0.9629275798797607
+        },
+        {
+          "index": 27,
+          "id": 31338,
+          "reference_ssim": 0.9713029861450195
+        },
+        {
+          "index": 28,
+          "id": 34038,
+          "reference_ssim": 0.9630500674247742
+        },
+        {
+          "index": 29,
+          "id": 11855,
+          "reference_ssim": 0.9763264656066895
+        },
+        {
+          "index": 30,
+          "id": 27016,
+          "reference_ssim": 0.9802795648574829
+        },
+        {
+          "index": 31,
+          "id": 31863,
+          "reference_ssim": 0.9824020266532898
+        },
+        {
+          "index": 32,
+          "id": 75958,
+          "reference_ssim": 0.9907549619674683
+        },
+        {
+          "index": 33,
+          "id": 79939,
+          "reference_ssim": 0.9312554597854614
+        },
+        {
+          "index": 34,
+          "id": 38092,
+          "reference_ssim": 0.8832848072052002
+        },
+        {
+          "index": 35,
+          "id": 80359,
+          "reference_ssim": 0.9448128938674927
+        },
+        {
+          "index": 36,
+          "id": 71215,
+          "reference_ssim": 0.9883652925491333
+        },
+        {
+          "index": 37,
+          "id": 70604,
+          "reference_ssim": 0.9862281084060669
+        },
+        {
+          "index": 38,
+          "id": 63808,
+          "reference_ssim": 0.9039248824119568
+        },
+        {
+          "index": 39,
+          "id": 32696,
+          "reference_ssim": 0.9393521547317505
+        },
+        {
+          "index": 40,
+          "id": 19348,
+          "reference_ssim": 0.9729234576225281
+        },
+        {
+          "index": 41,
+          "id": 4320,
+          "reference_ssim": 0.9762312769889832
+        },
+        {
+          "index": 42,
+          "id": 18623,
+          "reference_ssim": 0.978437602519989
+        },
+        {
+          "index": 43,
+          "id": 17476,
+          "reference_ssim": 0.9819375276565552
+        },
+        {
+          "index": 44,
+          "id": 11725,
+          "reference_ssim": 0.9049229621887207
+        },
+        {
+          "index": 45,
+          "id": 80691,
+          "reference_ssim": 0.9110742807388306
+        },
+        {
+          "index": 46,
+          "id": 3828,
+          "reference_ssim": 0.9142837524414062
+        },
+        {
+          "index": 47,
+          "id": 6680,
+          "reference_ssim": 0.9845761060714722
+        },
+        {
+          "index": 48,
+          "id": 6933,
+          "reference_ssim": 0.9826397895812988
+        },
+        {
+          "index": 49,
+          "id": 57118,
+          "reference_ssim": 0.9647848010063171
+        }
+      ]
+    },
+    "diffuser": {
+      "reference": "Fixed head",
+      "entries": [
+        {
+          "index": 0,
+          "id": 35894,
+          "reference_ssim": 0.9793934226036072
+        },
+        {
+          "index": 1,
+          "id": 24193,
+          "reference_ssim": 0.8170336484909058
+        },
+        {
+          "index": 2,
+          "id": 22857,
+          "reference_ssim": 0.7497382164001465
+        },
+        {
+          "index": 3,
+          "id": 53050,
+          "reference_ssim": 0.9169523119926453
+        },
+        {
+          "index": 4,
+          "id": 14420,
+          "reference_ssim": 0.8437468409538269
+        },
+        {
+          "index": 5,
+          "id": 68127,
+          "reference_ssim": 0.785608172416687
+        },
+        {
+          "index": 6,
+          "id": 77172,
+          "reference_ssim": 0.9053934812545776
+        },
+        {
+          "index": 7,
+          "id": 89459,
+          "reference_ssim": 0.8452222347259521
+        },
+        {
+          "index": 8,
+          "id": 70083,
+          "reference_ssim": 0.8865430355072021
+        },
+        {
+          "index": 9,
+          "id": 36001,
+          "reference_ssim": 0.8829822540283203
+        },
+        {
+          "index": 10,
+          "id": 6207,
+          "reference_ssim": 0.9514681696891785
+        },
+        {
+          "index": 11,
+          "id": 49696,
+          "reference_ssim": 0.7815789580345154
+        },
+        {
+          "index": 12,
+          "id": 53077,
+          "reference_ssim": 0.7882594466209412
+        },
+        {
+          "index": 13,
+          "id": 82931,
+          "reference_ssim": 0.8904118537902832
+        },
+        {
+          "index": 14,
+          "id": 85406,
+          "reference_ssim": 0.8211358785629272
+        },
+        {
+          "index": 15,
+          "id": 58845,
+          "reference_ssim": 0.8939339518547058
+        },
+        {
+          "index": 16,
+          "id": 56242,
+          "reference_ssim": 0.8909510374069214
+        },
+        {
+          "index": 17,
+          "id": 40931,
+          "reference_ssim": 0.8341240882873535
+        },
+        {
+          "index": 18,
+          "id": 41815,
+          "reference_ssim": 0.8454242944717407
+        },
+        {
+          "index": 19,
+          "id": 15453,
+          "reference_ssim": 0.8061580657958984
+        },
+        {
+          "index": 20,
+          "id": 27693,
+          "reference_ssim": 0.8450874090194702
+        },
+        {
+          "index": 21,
+          "id": 76529,
+          "reference_ssim": 0.8969077467918396
+        },
+        {
+          "index": 22,
+          "id": 50682,
+          "reference_ssim": 0.9353432655334473
+        },
+        {
+          "index": 23,
+          "id": 13030,
+          "reference_ssim": 0.9082276225090027
+        },
+        {
+          "index": 24,
+          "id": 6731,
+          "reference_ssim": 0.7466968894004822
+        },
+        {
+          "index": 25,
+          "id": 40056,
+          "reference_ssim": 0.9235164523124695
+        },
+        {
+          "index": 26,
+          "id": 79272,
+          "reference_ssim": 0.834735095500946
+        },
+        {
+          "index": 27,
+          "id": 31338,
+          "reference_ssim": 0.8665361404418945
+        },
+        {
+          "index": 28,
+          "id": 34038,
+          "reference_ssim": 0.8548746109008789
+        },
+        {
+          "index": 29,
+          "id": 11855,
+          "reference_ssim": 0.8489431738853455
+        },
+        {
+          "index": 30,
+          "id": 27016,
+          "reference_ssim": 0.9026615023612976
+        },
+        {
+          "index": 31,
+          "id": 31863,
+          "reference_ssim": 0.861935555934906
+        },
+        {
+          "index": 32,
+          "id": 75958,
+          "reference_ssim": 0.954747200012207
+        },
+        {
+          "index": 33,
+          "id": 79939,
+          "reference_ssim": 0.8337230682373047
+        },
+        {
+          "index": 34,
+          "id": 38092,
+          "reference_ssim": 0.7404918670654297
+        },
+        {
+          "index": 35,
+          "id": 80359,
+          "reference_ssim": 0.8582910299301147
+        },
+        {
+          "index": 36,
+          "id": 71215,
+          "reference_ssim": 0.953558087348938
+        },
+        {
+          "index": 37,
+          "id": 70604,
+          "reference_ssim": 0.9551031589508057
+        },
+        {
+          "index": 38,
+          "id": 63808,
+          "reference_ssim": 0.7405754923820496
+        },
+        {
+          "index": 39,
+          "id": 32696,
+          "reference_ssim": 0.8270838260650635
+        },
+        {
+          "index": 40,
+          "id": 19348,
+          "reference_ssim": 0.8777796626091003
+        },
+        {
+          "index": 41,
+          "id": 4320,
+          "reference_ssim": 0.9160014986991882
+        },
+        {
+          "index": 42,
+          "id": 18623,
+          "reference_ssim": 0.9109298586845398
+        },
+        {
+          "index": 43,
+          "id": 17476,
+          "reference_ssim": 0.9272278547286987
+        },
+        {
+          "index": 44,
+          "id": 11725,
+          "reference_ssim": 0.7554799318313599
+        },
+        {
+          "index": 45,
+          "id": 80691,
+          "reference_ssim": 0.7401511073112488
+        },
+        {
+          "index": 46,
+          "id": 3828,
+          "reference_ssim": 0.7458796501159668
+        },
+        {
+          "index": 47,
+          "id": 6680,
+          "reference_ssim": 0.9487740993499756
+        },
+        {
+          "index": 48,
+          "id": 6933,
+          "reference_ssim": 0.8952598571777344
+        },
+        {
+          "index": 49,
+          "id": 57118,
+          "reference_ssim": 0.8616670370101929
+        }
+      ]
+    }
+  },
+  "exp2": {
+    "rml": {
+      "reference": "Im2im",
+      "entries": [
+        {
+          "index": 0,
+          "id": 35894,
+          "reference_ssim": 0.9922224879264832
+        },
+        {
+          "index": 1,
+          "id": 24193,
+          "reference_ssim": 0.9634155631065369
+        },
+        {
+          "index": 2,
+          "id": 22857,
+          "reference_ssim": 0.9454948306083679
+        },
+        {
+          "index": 3,
+          "id": 53050,
+          "reference_ssim": 0.9863306283950806
+        },
+        {
+          "index": 4,
+          "id": 14420,
+          "reference_ssim": 0.9701154232025146
+        },
+        {
+          "index": 5,
+          "id": 68127,
+          "reference_ssim": 0.9588562250137329
+        },
+        {
+          "index": 6,
+          "id": 77172,
+          "reference_ssim": 0.9859811663627625
+        },
+        {
+          "index": 7,
+          "id": 89459,
+          "reference_ssim": 0.9413843154907227
+        },
+        {
+          "index": 8,
+          "id": 70083,
+          "reference_ssim": 0.9815523028373718
+        },
+        {
+          "index": 9,
+          "id": 36001,
+          "reference_ssim": 0.962675929069519
+        },
+        {
+          "index": 10,
+          "id": 6207,
+          "reference_ssim": 0.9928402304649353
+        },
+        {
+          "index": 11,
+          "id": 49696,
+          "reference_ssim": 0.9554073214530945
+        },
+        {
+          "index": 12,
+          "id": 53077,
+          "reference_ssim": 0.9520430564880371
+        },
+        {
+          "index": 13,
+          "id": 82931,
+          "reference_ssim": 0.978041410446167
+        },
+        {
+          "index": 14,
+          "id": 85406,
+          "reference_ssim": 0.9646185636520386
+        },
+        {
+          "index": 15,
+          "id": 58845,
+          "reference_ssim": 0.9808852076530457
+        },
+        {
+          "index": 16,
+          "id": 56242,
+          "reference_ssim": 0.9737094640731812
+        },
+        {
+          "index": 17,
+          "id": 40931,
+          "reference_ssim": 0.9587626457214355
+        },
+        {
+          "index": 18,
+          "id": 41815,
+          "reference_ssim": 0.9638473987579346
+        },
+        {
+          "index": 19,
+          "id": 15453,
+          "reference_ssim": 0.9647127985954285
+        },
+        {
+          "index": 20,
+          "id": 27693,
+          "reference_ssim": 0.9671730995178223
+        },
+        {
+          "index": 21,
+          "id": 76529,
+          "reference_ssim": 0.9820131063461304
+        },
+        {
+          "index": 22,
+          "id": 50682,
+          "reference_ssim": 0.9866470098495483
+        },
+        {
+          "index": 23,
+          "id": 13030,
+          "reference_ssim": 0.9823819994926453
+        },
+        {
+          "index": 24,
+          "id": 6731,
+          "reference_ssim": 0.9545316696166992
+        },
+        {
+          "index": 25,
+          "id": 40056,
+          "reference_ssim": 0.9770832061767578
+        },
+        {
+          "index": 26,
+          "id": 79272,
+          "reference_ssim": 0.9635227918624878
+        },
+        {
+          "index": 27,
+          "id": 31338,
+          "reference_ssim": 0.9741291403770447
+        },
+        {
+          "index": 28,
+          "id": 34038,
+          "reference_ssim": 0.9600458145141602
+        },
+        {
+          "index": 29,
+          "id": 11855,
+          "reference_ssim": 0.9797147512435913
+        },
+        {
+          "index": 30,
+          "id": 27016,
+          "reference_ssim": 0.9832109212875366
+        },
+        {
+          "index": 31,
+          "id": 31863,
+          "reference_ssim": 0.9839650392532349
+        },
+        {
+          "index": 32,
+          "id": 75958,
+          "reference_ssim": 0.9926285743713379
+        },
+        {
+          "index": 33,
+          "id": 79939,
+          "reference_ssim": 0.9329508543014526
+        },
+        {
+          "index": 34,
+          "id": 38092,
+          "reference_ssim": 0.8755361437797546
+        },
+        {
+          "index": 35,
+          "id": 80359,
+          "reference_ssim": 0.9499268531799316
+        },
+        {
+          "index": 36,
+          "id": 71215,
+          "reference_ssim": 0.99005526304245
+        },
+        {
+          "index": 37,
+          "id": 70604,
+          "reference_ssim": 0.9896697998046875
+        },
+        {
+          "index": 38,
+          "id": 63808,
+          "reference_ssim": 0.9062312841415405
+        },
+        {
+          "index": 39,
+          "id": 32696,
+          "reference_ssim": 0.9388744831085205
+        },
+        {
+          "index": 40,
+          "id": 19348,
+          "reference_ssim": 0.9761303663253784
+        },
+        {
+          "index": 41,
+          "id": 4320,
+          "reference_ssim": 0.9815542101860046
+        },
+        {
+          "index": 42,
+          "id": 18623,
+          "reference_ssim": 0.9811599254608154
+        },
+        {
+          "index": 43,
+          "id": 17476,
+          "reference_ssim": 0.9843460917472839
+        },
+        {
+          "index": 44,
+          "id": 11725,
+          "reference_ssim": 0.9048190116882324
+        },
+        {
+          "index": 45,
+          "id": 80691,
+          "reference_ssim": 0.9117697477340698
+        },
+        {
+          "index": 46,
+          "id": 3828,
+          "reference_ssim": 0.9148843288421631
+        },
+        {
+          "index": 47,
+          "id": 6680,
+          "reference_ssim": 0.9919885993003845
+        },
+        {
+          "index": 48,
+          "id": 6933,
+          "reference_ssim": 0.9843668937683105
+        },
+        {
+          "index": 49,
+          "id": 57118,
+          "reference_ssim": 0.9674410820007324
+        }
+      ]
+    },
+    "diffuser": {
+      "reference": "Im2im",
+      "entries": [
+        {
+          "index": 0,
+          "id": 35894,
+          "reference_ssim": 0.9767765998840332
+        },
+        {
+          "index": 1,
+          "id": 24193,
+          "reference_ssim": 0.8226558566093445
+        },
+        {
+          "index": 2,
+          "id": 22857,
+          "reference_ssim": 0.7582416534423828
+        },
+        {
+          "index": 3,
+          "id": 53050,
+          "reference_ssim": 0.9152050018310547
+        },
+        {
+          "index": 4,
+          "id": 14420,
+          "reference_ssim": 0.8340126276016235
+        },
+        {
+          "index": 5,
+          "id": 68127,
+          "reference_ssim": 0.7734432220458984
+        },
+        {
+          "index": 6,
+          "id": 77172,
+          "reference_ssim": 0.906794548034668
+        },
+        {
+          "index": 7,
+          "id": 89459,
+          "reference_ssim": 0.8469253778457642
+        },
+        {
+          "index": 8,
+          "id": 70083,
+          "reference_ssim": 0.8866255283355713
+        },
+        {
+          "index": 9,
+          "id": 36001,
+          "reference_ssim": 0.8708888292312622
+        },
+        {
+          "index": 10,
+          "id": 6207,
+          "reference_ssim": 0.9517350196838379
+        },
+        {
+          "index": 11,
+          "id": 49696,
+          "reference_ssim": 0.763564944267273
+        },
+        {
+          "index": 12,
+          "id": 53077,
+          "reference_ssim": 0.791987419128418
+        },
+        {
+          "index": 13,
+          "id": 82931,
+          "reference_ssim": 0.8915969729423523
+        },
+        {
+          "index": 14,
+          "id": 85406,
+          "reference_ssim": 0.817333459854126
+        },
+        {
+          "index": 15,
+          "id": 58845,
+          "reference_ssim": 0.8845455646514893
+        },
+        {
+          "index": 16,
+          "id": 56242,
+          "reference_ssim": 0.8825230002403259
+        },
+        {
+          "index": 17,
+          "id": 40931,
+          "reference_ssim": 0.8404383659362793
+        },
+        {
+          "index": 18,
+          "id": 41815,
+          "reference_ssim": 0.8372935056686401
+        },
+        {
+          "index": 19,
+          "id": 15453,
+          "reference_ssim": 0.8067983388900757
+        },
+        {
+          "index": 20,
+          "id": 27693,
+          "reference_ssim": 0.8440119624137878
+        },
+        {
+          "index": 21,
+          "id": 76529,
+          "reference_ssim": 0.8847198486328125
+        },
+        {
+          "index": 22,
+          "id": 50682,
+          "reference_ssim": 0.9537878036499023
+        },
+        {
+          "index": 23,
+          "id": 13030,
+          "reference_ssim": 0.9135609865188599
+        },
+        {
+          "index": 24,
+          "id": 6731,
+          "reference_ssim": 0.7332894206047058
+        },
+        {
+          "index": 25,
+          "id": 40056,
+          "reference_ssim": 0.9200696349143982
+        },
+        {
+          "index": 26,
+          "id": 79272,
+          "reference_ssim": 0.8282508850097656
+        },
+        {
+          "index": 27,
+          "id": 31338,
+          "reference_ssim": 0.8515676856040955
+        },
+        {
+          "index": 28,
+          "id": 34038,
+          "reference_ssim": 0.8433289527893066
+        },
+        {
+          "index": 29,
+          "id": 11855,
+          "reference_ssim": 0.8725428581237793
+        },
+        {
+          "index": 30,
+          "id": 27016,
+          "reference_ssim": 0.8983339071273804
+        },
+        {
+          "index": 31,
+          "id": 31863,
+          "reference_ssim": 0.8607868552207947
+        },
+        {
+          "index": 32,
+          "id": 75958,
+          "reference_ssim": 0.9492624998092651
+        },
+        {
+          "index": 33,
+          "id": 79939,
+          "reference_ssim": 0.8306969404220581
+        },
+        {
+          "index": 34,
+          "id": 38092,
+          "reference_ssim": 0.734881579875946
+        },
+        {
+          "index": 35,
+          "id": 80359,
+          "reference_ssim": 0.8551238775253296
+        },
+        {
+          "index": 36,
+          "id": 71215,
+          "reference_ssim": 0.9284960627555847
+        },
+        {
+          "index": 37,
+          "id": 70604,
+          "reference_ssim": 0.9470657110214233
+        },
+        {
+          "index": 38,
+          "id": 63808,
+          "reference_ssim": 0.7392765879631042
+        },
+        {
+          "index": 39,
+          "id": 32696,
+          "reference_ssim": 0.8178972601890564
+        },
+        {
+          "index": 40,
+          "id": 19348,
+          "reference_ssim": 0.8868235349655151
+        },
+        {
+          "index": 41,
+          "id": 4320,
+          "reference_ssim": 0.9093236327171326
+        },
+        {
+          "index": 42,
+          "id": 18623,
+          "reference_ssim": 0.9104796648025513
+        },
+        {
+          "index": 43,
+          "id": 17476,
+          "reference_ssim": 0.9272186756134033
+        },
+        {
+          "index": 44,
+          "id": 11725,
+          "reference_ssim": 0.7466694712638855
+        },
+        {
+          "index": 45,
+          "id": 80691,
+          "reference_ssim": 0.7317479848861694
+        },
+        {
+          "index": 46,
+          "id": 3828,
+          "reference_ssim": 0.7280057668685913
+        },
+        {
+          "index": 47,
+          "id": 6680,
+          "reference_ssim": 0.9316043853759766
+        },
+        {
+          "index": 48,
+          "id": 6933,
+          "reference_ssim": 0.8964123725891113
+        },
+        {
+          "index": 49,
+          "id": 57118,
+          "reference_ssim": 0.8541113138198853
+        }
+      ]
+    }
+  },
+  "raw": {
+    "clean": {
+      "reference": "Im2im",
+      "entries": [
+        {
+          "index": 0,
+          "id": "test_im307.png",
+          "reference_ssim": 0.8250929713249207
+        },
+        {
+          "index": 1,
+          "id": "train_im12840.png",
+          "reference_ssim": 0.7912696003913879
+        },
+        {
+          "index": 2,
+          "id": "test_im324.png",
+          "reference_ssim": 0.7285928726196289
+        },
+        {
+          "index": 3,
+          "id": "test_im356.png",
+          "reference_ssim": 0.7407246828079224
+        },
+        {
+          "index": 4,
+          "id": "train_im12923.png",
+          "reference_ssim": 0.7655733823776245
+        },
+        {
+          "index": 5,
+          "id": "train_im24262.png",
+          "reference_ssim": 0.910884439945221
+        },
+        {
+          "index": 6,
+          "id": "test_im528.png",
+          "reference_ssim": 0.8054807186126709
+        },
+        {
+          "index": 7,
+          "id": "train_im23670.png",
+          "reference_ssim": 0.8641800880432129
+        },
+        {
+          "index": 8,
+          "id": "test_im634.png",
+          "reference_ssim": 0.8170122504234314
+        },
+        {
+          "index": 9,
+          "id": "train_im9437.png",
+          "reference_ssim": 0.7169864177703857
+        },
+        {
+          "index": 10,
+          "id": "train_im15464.png",
+          "reference_ssim": 0.8463941812515259
+        },
+        {
+          "index": 11,
+          "id": "train_im3751.png",
+          "reference_ssim": 0.8068041205406189
+        },
+        {
+          "index": 12,
+          "id": "train_im24583.png",
+          "reference_ssim": 0.8560600876808167
+        },
+        {
+          "index": 13,
+          "id": "train_im4225.png",
+          "reference_ssim": 0.5972989201545715
+        },
+        {
+          "index": 14,
+          "id": "train_im23340.png",
+          "reference_ssim": 0.8748241662979126
+        },
+        {
+          "index": 15,
+          "id": "train_im2041.png",
+          "reference_ssim": 0.8004592061042786
+        },
+        {
+          "index": 16,
+          "id": "train_im5003.png",
+          "reference_ssim": 0.7523060441017151
+        },
+        {
+          "index": 17,
+          "id": "test_im8.png",
+          "reference_ssim": 0.9546939134597778
+        },
+        {
+          "index": 18,
+          "id": "test_im811.png",
+          "reference_ssim": 0.8452025651931763
+        },
+        {
+          "index": 19,
+          "id": "train_im4217.png",
+          "reference_ssim": 0.6449987292289734
+        },
+        {
+          "index": 20,
+          "id": "train_im6300.png",
+          "reference_ssim": 0.8350359797477722
+        },
+        {
+          "index": 21,
+          "id": "train_im15490.png",
+          "reference_ssim": 0.7940964102745056
+        },
+        {
+          "index": 22,
+          "id": "train_im20882.png",
+          "reference_ssim": 0.849307656288147
+        },
+        {
+          "index": 23,
+          "id": "test_im290.png",
+          "reference_ssim": 0.8748309016227722
+        },
+        {
+          "index": 24,
+          "id": "train_im9334.png",
+          "reference_ssim": 0.9397698640823364
+        },
+        {
+          "index": 25,
+          "id": "train_im14519.png",
+          "reference_ssim": 0.7566683292388916
+        },
+        {
+          "index": 26,
+          "id": "train_im13152.png",
+          "reference_ssim": 0.8712449073791504
+        },
+        {
+          "index": 27,
+          "id": "train_im15717.png",
+          "reference_ssim": 0.8398462533950806
+        },
+        {
+          "index": 28,
+          "id": "train_im18084.png",
+          "reference_ssim": 0.7689894437789917
+        },
+        {
+          "index": 29,
+          "id": "train_im10749.png",
+          "reference_ssim": 0.8166631460189819
+        },
+        {
+          "index": 30,
+          "id": "test_im913.png",
+          "reference_ssim": 0.8576470613479614
+        },
+        {
+          "index": 31,
+          "id": "test_im720.png",
+          "reference_ssim": 0.8763440251350403
+        },
+        {
+          "index": 32,
+          "id": "test_im150.png",
+          "reference_ssim": 0.8127467632293701
+        },
+        {
+          "index": 33,
+          "id": "train_im7713.png",
+          "reference_ssim": 0.8487107753753662
+        },
+        {
+          "index": 34,
+          "id": "test_im877.png",
+          "reference_ssim": 0.88808274269104
+        },
+        {
+          "index": 35,
+          "id": "test_im153.png",
+          "reference_ssim": 0.7750370502471924
+        },
+        {
+          "index": 36,
+          "id": "test_im357.png",
+          "reference_ssim": 0.8871220946311951
+        },
+        {
+          "index": 37,
+          "id": "train_im14612.png",
+          "reference_ssim": 0.825870931148529
+        },
+        {
+          "index": 38,
+          "id": "test_im341.png",
+          "reference_ssim": 0.8178467154502869
+        },
+        {
+          "index": 39,
+          "id": "train_im18855.png",
+          "reference_ssim": 0.8339069485664368
+        },
+        {
+          "index": 40,
+          "id": "test_im425.png",
+          "reference_ssim": 0.6954669952392578
+        },
+        {
+          "index": 41,
+          "id": "train_im6372.png",
+          "reference_ssim": 0.8167855143547058
+        },
+        {
+          "index": 42,
+          "id": "train_im21464.png",
+          "reference_ssim": 0.9111706614494324
+        },
+        {
+          "index": 43,
+          "id": "test_im315.png",
+          "reference_ssim": 0.8730258941650391
+        },
+        {
+          "index": 44,
+          "id": "test_im998.png",
+          "reference_ssim": 0.9225968718528748
+        },
+        {
+          "index": 45,
+          "id": "train_im7747.png",
+          "reference_ssim": 0.7881527543067932
+        },
+        {
+          "index": 46,
+          "id": "train_im23005.png",
+          "reference_ssim": 0.88642418384552
+        },
+        {
+          "index": 47,
+          "id": "train_im6114.png",
+          "reference_ssim": 0.823085606098175
+        },
+        {
+          "index": 48,
+          "id": "test_im246.png",
+          "reference_ssim": 0.8579678535461426
+        },
+        {
+          "index": 49,
+          "id": "test_im656.png",
+          "reference_ssim": 0.8432222604751587
+        }
+      ]
+    },
+    "corrupted": {
+      "reference": "Im2im",
+      "entries": [
+        {
+          "index": 0,
+          "id": "test_im307.png",
+          "reference_ssim": 0.817959725856781,
+          "corruption": "Unmodified",
+          "operations": [
+            "Unmodified"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 1,
+          "id": "train_im12840.png",
+          "reference_ssim": 0.3991203308105469,
+          "corruption": "Missing pixels",
+          "operations": [
+            "Missing pixels"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 2,
+          "id": "test_im324.png",
+          "reference_ssim": 0.6441720128059387,
+          "corruption": "Intensity change",
+          "operations": [
+            "Intensity change"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 3,
+          "id": "test_im356.png",
+          "reference_ssim": 0.6407915353775024,
+          "corruption": "Gaussian noise",
+          "operations": [
+            "Gaussian noise"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 4,
+          "id": "train_im12923.png",
+          "reference_ssim": 0.2049010545015335,
+          "corruption": "Missing pixels",
+          "operations": [
+            "Missing pixels"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 5,
+          "id": "train_im24262.png",
+          "reference_ssim": 0.8533315658569336,
+          "corruption": "Gaussian noise",
+          "operations": [
+            "Gaussian noise"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 6,
+          "id": "test_im528.png",
+          "reference_ssim": 0.8053044676780701,
+          "corruption": "Unmodified",
+          "operations": [
+            "Unmodified"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 7,
+          "id": "train_im23670.png",
+          "reference_ssim": 0.8490627408027649,
+          "corruption": "Reduced resolution",
+          "operations": [
+            "Reduced resolution"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 8,
+          "id": "test_im634.png",
+          "reference_ssim": 0.6959055662155151,
+          "corruption": "Intensity change",
+          "operations": [
+            "Intensity change"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 9,
+          "id": "train_im9437.png",
+          "reference_ssim": 0.4650290608406067,
+          "corruption": "Crop / resize",
+          "operations": [
+            "Crop / resize"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 10,
+          "id": "train_im15464.png",
+          "reference_ssim": 0.749342679977417,
+          "corruption": "Gaussian noise",
+          "operations": [
+            "Gaussian noise"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 11,
+          "id": "train_im3751.png",
+          "reference_ssim": 0.6877231001853943,
+          "corruption": "Intensity change",
+          "operations": [
+            "Intensity change"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 12,
+          "id": "train_im24583.png",
+          "reference_ssim": 0.7109581828117371,
+          "corruption": "Gaussian noise",
+          "operations": [
+            "Gaussian noise"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 13,
+          "id": "train_im4225.png",
+          "reference_ssim": 0.5364621877670288,
+          "corruption": "Reduced resolution",
+          "operations": [
+            "Reduced resolution"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 14,
+          "id": "train_im23340.png",
+          "reference_ssim": 0.8067237138748169,
+          "corruption": "Intensity change",
+          "operations": [
+            "Intensity change"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 15,
+          "id": "train_im2041.png",
+          "reference_ssim": 0.5703067779541016,
+          "corruption": "Poisson noise",
+          "operations": [
+            "Poisson noise"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 16,
+          "id": "train_im5003.png",
+          "reference_ssim": 0.6315250992774963,
+          "corruption": "Gaussian noise",
+          "operations": [
+            "Gaussian noise"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 17,
+          "id": "test_im8.png",
+          "reference_ssim": 0.9451784491539001,
+          "corruption": "Reduced resolution",
+          "operations": [
+            "Reduced resolution"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 18,
+          "id": "test_im811.png",
+          "reference_ssim": 0.71583491563797,
+          "corruption": "Intensity change",
+          "operations": [
+            "Intensity change"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 19,
+          "id": "train_im4217.png",
+          "reference_ssim": 0.44853249192237854,
+          "corruption": "Poisson noise",
+          "operations": [
+            "Poisson noise"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 20,
+          "id": "train_im6300.png",
+          "reference_ssim": 0.7393689155578613,
+          "corruption": "Intensity change",
+          "operations": [
+            "Intensity change"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 21,
+          "id": "train_im15490.png",
+          "reference_ssim": 0.7853501439094543,
+          "corruption": "Unmodified",
+          "operations": [
+            "Unmodified"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 22,
+          "id": "train_im20882.png",
+          "reference_ssim": 0.759249210357666,
+          "corruption": "Intensity change",
+          "operations": [
+            "Intensity change"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 23,
+          "id": "test_im290.png",
+          "reference_ssim": 0.8672347068786621,
+          "corruption": "Unmodified",
+          "operations": [
+            "Unmodified"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 24,
+          "id": "train_im9334.png",
+          "reference_ssim": 0.9149629473686218,
+          "corruption": "Crop / resize",
+          "operations": [
+            "Crop / resize"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 25,
+          "id": "train_im14519.png",
+          "reference_ssim": 0.6521257162094116,
+          "corruption": "Gaussian noise",
+          "operations": [
+            "Gaussian noise"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 26,
+          "id": "train_im13152.png",
+          "reference_ssim": 0.7718808054924011,
+          "corruption": "Local patch rotation",
+          "operations": [
+            "Local patch rotation"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 27,
+          "id": "train_im15717.png",
+          "reference_ssim": 0.6198505163192749,
+          "corruption": "Poisson noise",
+          "operations": [
+            "Poisson noise"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 28,
+          "id": "train_im18084.png",
+          "reference_ssim": 0.3306173086166382,
+          "corruption": "Missing pixels",
+          "operations": [
+            "Missing pixels"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 29,
+          "id": "train_im10749.png",
+          "reference_ssim": 0.7223564386367798,
+          "corruption": "Intensity change",
+          "operations": [
+            "Intensity change"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 30,
+          "id": "test_im913.png",
+          "reference_ssim": 0.7719182968139648,
+          "corruption": "Gaussian noise",
+          "operations": [
+            "Gaussian noise"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 31,
+          "id": "test_im720.png",
+          "reference_ssim": 0.8806775808334351,
+          "corruption": "Unmodified",
+          "operations": [
+            "Unmodified"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 32,
+          "id": "test_im150.png",
+          "reference_ssim": 0.6345401406288147,
+          "corruption": "Poisson noise",
+          "operations": [
+            "Poisson noise"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 33,
+          "id": "train_im7713.png",
+          "reference_ssim": 0.6922121047973633,
+          "corruption": "Crop / resize",
+          "operations": [
+            "Crop / resize"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 34,
+          "id": "test_im877.png",
+          "reference_ssim": 0.5991164445877075,
+          "corruption": "Poisson noise",
+          "operations": [
+            "Poisson noise"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 35,
+          "id": "test_im153.png",
+          "reference_ssim": 0.6783518195152283,
+          "corruption": "Gaussian noise",
+          "operations": [
+            "Gaussian noise"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 36,
+          "id": "test_im357.png",
+          "reference_ssim": 0.19907322525978088,
+          "corruption": "Missing pixels",
+          "operations": [
+            "Missing pixels"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 37,
+          "id": "train_im14612.png",
+          "reference_ssim": 0.7188072204589844,
+          "corruption": "Gaussian noise",
+          "operations": [
+            "Gaussian noise"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 38,
+          "id": "test_im341.png",
+          "reference_ssim": 0.6723470687866211,
+          "corruption": "Gaussian noise",
+          "operations": [
+            "Gaussian noise"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 39,
+          "id": "train_im18855.png",
+          "reference_ssim": 0.5908747911453247,
+          "corruption": "Crop / resize",
+          "operations": [
+            "Crop / resize"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 40,
+          "id": "test_im425.png",
+          "reference_ssim": 0.5369526147842407,
+          "corruption": "Rotation",
+          "operations": [
+            "Rotation"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 41,
+          "id": "train_im6372.png",
+          "reference_ssim": 0.729345440864563,
+          "corruption": "Local patch rotation",
+          "operations": [
+            "Local patch rotation"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 42,
+          "id": "train_im21464.png",
+          "reference_ssim": 0.7725091576576233,
+          "corruption": "Crop / resize",
+          "operations": [
+            "Crop / resize"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 43,
+          "id": "test_im315.png",
+          "reference_ssim": 0.6752737760543823,
+          "corruption": "Crop / resize",
+          "operations": [
+            "Crop / resize"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 44,
+          "id": "test_im998.png",
+          "reference_ssim": 0.7285297513008118,
+          "corruption": "Crop / resize",
+          "operations": [
+            "Crop / resize"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 45,
+          "id": "train_im7747.png",
+          "reference_ssim": 0.779855489730835,
+          "corruption": "Unmodified",
+          "operations": [
+            "Unmodified"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 46,
+          "id": "train_im23005.png",
+          "reference_ssim": 0.88069748878479,
+          "corruption": "Unmodified",
+          "operations": [
+            "Unmodified"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 47,
+          "id": "train_im6114.png",
+          "reference_ssim": 0.8080581426620483,
+          "corruption": "Unmodified",
+          "operations": [
+            "Unmodified"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 48,
+          "id": "test_im246.png",
+          "reference_ssim": 0.8523702621459961,
+          "corruption": "Unmodified",
+          "operations": [
+            "Unmodified"
+          ],
+          "severity": "moderate"
+        },
+        {
+          "index": 49,
+          "id": "test_im656.png",
+          "reference_ssim": 0.5281547904014587,
+          "corruption": "Missing pixels",
+          "operations": [
+            "Missing pixels"
+          ],
+          "severity": "moderate"
+        }
+      ]
+    }
+  }
+}

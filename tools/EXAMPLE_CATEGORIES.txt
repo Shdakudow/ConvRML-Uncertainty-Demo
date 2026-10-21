@@ -1,0 +1,27 @@
+Image browsing categories
+=========================
+
+Easy, medium and hard are relative thirds of the displayed examples ranked by
+one reference model's clipped SSIM. Lower SSIM means harder. All models receive
+the same label for a given example. The reference is Im2im in Exp2/Exp3 and
+the fixed-head model in the legacy experiment. These are descriptive browsing
+groups, not independent difficulty annotations or physical camera properties.
+Their definition is available by hovering the Difficulty selector or badge.
+
+The category filters affect image selection, Previous/Next and Random only.
+They do not change reported test averages or learning curves. The URL stores
+the current difficulty/modification filters; image indices retain their original
+manifest positions. Raw difficulty follows the currently published Im2im
+example metrics if the automatic publisher later updates its checkpoint.
+
+Corrupted raw labels come from the reviewed dataset/manifest.json on Unicorn.
+The current mixed dataset selects one operation per image (including identity).
+It does not apply hybrid transformations. Hybrid is supported for a future
+manifest row containing multiple operations, but no current image is mislabeled
+as hybrid. "Unmodified" means no additional synthetic modification to the
+original raw camera measurement. Severity is stored independently of difficulty.
+
+example-categories.json contains 300 reference scores/IDs and 50 modification
+labels. tools/build_example_categories.py reproduces it from saved exported
+binary headers plus a JSON containing the original Exp2 per-image metrics
+and corruption-manifest test rows. No inference or training is needed.

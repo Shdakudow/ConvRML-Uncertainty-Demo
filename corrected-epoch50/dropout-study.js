@@ -13,16 +13,16 @@
     const data = await response.json();
     const study = data.cameras[camera];
     host.innerHTML = `
-      <h2>MC dropout · which rate works best?</h2>
-      <p>Epoch 50 · 5,000 validation images · dropout active. <b>p = 0.05 has the highest SSIM among the three tested rates for both cameras.</b></p>
-      <p class="muted">Each line averages 30, 60 or 100 stochastic passes. Hover or focus a point for exact values. Axes are zoomed to show small differences.</p>
+      <h2>MC dropout · rate comparison</h2>
+      <p>Epoch 50 · 5,000 validation images · <b>Best tested SSIM: p = 0.05.</b></p>
+      <p class="muted">30 / 60 / 100 stochastic passes · hover for values · focused axes.</p>
       <div class="dropout-legend">${Object.keys(colors).map(n => `<span style="color:${colors[n]}">● ${n} passes</span>`).join('')}</div>
       <div class="dropout-plots"></div>
       <label>Exact validation values · passes <select id="dropoutPasses"><option>30</option><option>60</option><option selected>100</option></select></label>
       <div class="table-wrap"><table><thead><tr><th>Dropout p</th><th>SSIM ↑</th><th>PSNR (dB) ↑</th><th>MAE ↓</th></tr></thead><tbody id="dropoutRateValues"></tbody></table></div>
       <details><summary>Protocol &amp; source results</summary><p>${data.trend_protocol}</p><p>Training uses dropout in 36 encoder and 12 decoder sites, with MSE reconstruction loss. Timing is omitted because runs used different GPU models. The main four-model demo retains its 30-pass MC inference.</p><p>${study.rates.map(r => `<a href="dropout-study/sources/${camera}_${r.arm}.json">p = ${r.dropout_probability} source JSON</a>`).join(' · ')} · <a href="dropout-study/data.json">All plot data</a> · <a href="dropout-study/validation_trend.csv">CSV</a></p></details>
       <h3>Matched test examples · p = 0.05 and 0.10</h3>
-      <p class="muted">First eight test examples, 30 passes per prediction. These images illustrate the differences; the curves above use validation data. No saved p = 0.20 test images are available.</p>
+      <p class="muted">Eight test examples · 30 passes · saved p = 0.05 and 0.10 predictions.</p>
       <div class="dropout-controls"><button id="dropoutPrevious" type="button">← Previous</button><label>Example <select id="dropoutExample"></select></label><button id="dropoutNext" type="button">Next →</button><label><input id="dropoutMaps" type="checkbox"> Show error &amp; uncertainty</label></div>
       <p id="dropoutExampleName" class="muted"></p>
       <div id="dropoutExampleImages" class="dropout-examples"></div>
