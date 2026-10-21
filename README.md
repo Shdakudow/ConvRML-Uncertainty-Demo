@@ -1,5 +1,14 @@
 # ConvRML reconstruction and uncertainty demo
 
+## Named captures · Sensor12
+
+[Open the separate named-captures tab](https://shdakudow.github.io/ConvRML-Uncertainty-Demo/named-captures/).
+It shows all ten named TIFF captures reconstructed by **Exp3 clean raw QUTCC and Im2im at epoch 50**, using the explicit Sensor12 (`TIFF / 4095`) input assumption. The lower/upper bound checkbox applies to both models. Images, interval widths, original filenames and selection links are preserved; no models run in the browser. Exp2 outputs and Sensor16 outputs are not included in this tab.
+
+These external captures have no matched ground truth. SSIM, PSNR and actual coverage are unavailable. Saved calibration parameters are reused, and bounds/predictions are clipped to [0,1]. Heatmaps use one shared scale across both models and all ten captures. `tools/build_named_captures.py` rebuilds the small static asset subset from the existing local inference report; `tools/verify_named_captures.py` checks the tab in a browser.
+
+## Earlier benchmark demos
+
 Four models: reconstruction, |ground truth - reconstruction| and UB - LB. Test examples selected in manifest order; shared heatmap scales; clickable pixel comparison.
 
 RML: backbone epoch 50, fixed head 10 epochs, RCPS (Hoeffding–Bentkus) calibration.

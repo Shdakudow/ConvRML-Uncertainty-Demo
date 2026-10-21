@@ -1,0 +1,490 @@
+{
+  "title": "Named captures \u00b7 Sensor12",
+  "count": 10,
+  "experiment": 3,
+  "epoch": 50,
+  "native_shape": [
+    270,
+    480,
+    3
+  ],
+  "preprocessing": "TIFF / 4095; 4\u00d74 area downsample; round to 8-bit-equivalent values; no per-image contrast stretching or rotation",
+  "sensor_range_status": "12-bit acquisition is an assumption, not confirmed by the 16-bit TIFF container",
+  "ground_truth_available": false,
+  "clipping": "Reconstruction and calibrated bounds clipped to [0,1]",
+  "heatmap": {
+    "min": 0,
+    "max": 0.44349968433380127,
+    "units": "normalized intensity",
+    "definition": "Mean over RGB of clipped upper \u2212 lower",
+    "saturation": "99.5th percentile across these two models and all ten captures",
+    "crossing_color": "#e320c9",
+    "gradient": "linear-gradient(90deg, #000004, #210c4a, #57106e, #8a226a, #bc3754, #e45a31, #f98e09, #f9cb35, #fcffa4)"
+  },
+  "models": {
+    "qutcc": {
+      "label": "QUTCC",
+      "epoch": 50,
+      "checkpoint_sha256": "297750d72e1b3c754ff23b4cbe3e8edc41e9f41800d3fa21d13b7418653edb0a",
+      "calibration": {
+        "lower_q": 0.0048828125,
+        "upper_q": 0.9814453125,
+        "alpha": 0.1,
+        "per_tail_target": 0.049850000000000005,
+        "n_images": 3000,
+        "tolerance": 0.001,
+        "trace": [
+          {
+            "lower_q": 0.0,
+            "upper_q": 1.0,
+            "lower_risk": 0.04373706275720165,
+            "upper_risk": 0.023792829218106996
+          },
+          {
+            "lower_q": 0.5,
+            "upper_q": 0.5,
+            "lower_risk": 0.5112521982167353,
+            "upper_risk": 0.48874722736625514
+          },
+          {
+            "lower_q": 0.25,
+            "upper_q": 0.75,
+            "lower_risk": 0.3112454903978052,
+            "upper_risk": 0.29359484653635115
+          },
+          {
+            "lower_q": 0.125,
+            "upper_q": 0.875,
+            "lower_risk": 0.20292507458847736,
+            "upper_risk": 0.18320155692729767
+          },
+          {
+            "lower_q": 0.0625,
+            "upper_q": 0.9375,
+            "lower_risk": 0.12753840020576132,
+            "upper_risk": 0.11265353652263374
+          },
+          {
+            "lower_q": 0.03125,
+            "upper_q": 0.96875,
+            "lower_risk": 0.08388473508230453,
+            "upper_risk": 0.0678467524005487
+          },
+          {
+            "lower_q": 0.015625,
+            "upper_q": 0.984375,
+            "lower_risk": 0.06275248885459533,
+            "upper_risk": 0.04424006858710562
+          },
+          {
+            "lower_q": 0.0078125,
+            "upper_q": 0.9765625,
+            "lower_risk": 0.05289763717421125,
+            "upper_risk": 0.05591492884087791
+          },
+          {
+            "lower_q": 0.00390625,
+            "upper_q": 0.98046875,
+            "lower_risk": 0.0482187037037037,
+            "upper_risk": 0.05001825102880658
+          },
+          {
+            "lower_q": 0.005859375,
+            "upper_q": 0.982421875,
+            "lower_risk": 0.050535589849108366,
+            "upper_risk": 0.047110423525377226
+          },
+          {
+            "lower_q": 0.0048828125,
+            "upper_q": 0.9814453125,
+            "lower_risk": 0.04937201474622771,
+            "upper_risk": 0.04856070987654321
+          },
+          {
+            "lower_q": 0.0048828125,
+            "upper_q": 0.9814453125,
+            "lower_risk": 0.04937201474622771,
+            "upper_risk": 0.04856070987654321
+          }
+        ],
+        "procedure": "paper Algorithm 1 adjusted empirical tail-risk binary search",
+        "assumption": "Quantile response should be monotone; shared weights do not strictly enforce it",
+        "calibrated_on": "calibration split only"
+      },
+      "calibration_kind": "paper Algorithm 1 quantile search",
+      "inference_device": "mps",
+      "precision": "float32"
+    },
+    "im2im": {
+      "label": "Im2im",
+      "epoch": 50,
+      "checkpoint_sha256": "360551a7db56ca66c6aae29a0be975cad9a5165ccaa8ff2f76b887e906d35406",
+      "calibration": {
+        "scales": {
+          "lower": 1.5435435435435436,
+          "upper": 1.5915915915915915
+        },
+        "alpha": 0.1,
+        "per_tail_target": 0.049850000000000005,
+        "n_images": 3000,
+        "procedure": "paper asymmetric Im2im adjusted empirical tail-risk scale search",
+        "calibrated_on": "calibration split only"
+      },
+      "calibration_kind": "paper adjusted empirical asymmetric scale search",
+      "inference_device": "mps",
+      "precision": "float32"
+    }
+  },
+  "examples": [
+    {
+      "id": "hand",
+      "name": "hand.tiff",
+      "measurement": "assets/hand/measurement.png",
+      "models": {
+        "qutcc": {
+          "images": {
+            "reconstruction": "assets/hand/qutcc_reconstruction.png",
+            "lower_bound": "assets/hand/qutcc_lower_bound.png",
+            "upper_bound": "assets/hand/qutcc_upper_bound.png",
+            "uncertainty": "assets/hand/qutcc_uncertainty.png"
+          },
+          "metrics": {
+            "width_clipped": 0.03860188648104668,
+            "width_raw": 0.03872000426054001,
+            "crossing_clipped": 0.0,
+            "seconds": 0.20194983300000002
+          }
+        },
+        "im2im": {
+          "images": {
+            "reconstruction": "assets/hand/im2im_reconstruction.png",
+            "lower_bound": "assets/hand/im2im_lower_bound.png",
+            "upper_bound": "assets/hand/im2im_upper_bound.png",
+            "uncertainty": "assets/hand/im2im_uncertainty.png"
+          },
+          "metrics": {
+            "width_clipped": 0.04046379029750824,
+            "width_raw": 0.04064721241593361,
+            "crossing_clipped": 0.0,
+            "seconds": 0.05928258299999989
+          }
+        }
+      }
+    },
+    {
+      "id": "plant",
+      "name": "plant.tiff",
+      "measurement": "assets/plant/measurement.png",
+      "models": {
+        "qutcc": {
+          "images": {
+            "reconstruction": "assets/plant/qutcc_reconstruction.png",
+            "lower_bound": "assets/plant/qutcc_lower_bound.png",
+            "upper_bound": "assets/plant/qutcc_upper_bound.png",
+            "uncertainty": "assets/plant/qutcc_uncertainty.png"
+          },
+          "metrics": {
+            "width_clipped": 0.07162777334451675,
+            "width_raw": 0.07175649702548981,
+            "crossing_clipped": 0.0,
+            "seconds": 0.20174512499999953
+          }
+        },
+        "im2im": {
+          "images": {
+            "reconstruction": "assets/plant/im2im_reconstruction.png",
+            "lower_bound": "assets/plant/im2im_lower_bound.png",
+            "upper_bound": "assets/plant/im2im_upper_bound.png",
+            "uncertainty": "assets/plant/im2im_uncertainty.png"
+          },
+          "metrics": {
+            "width_clipped": 0.06966272741556168,
+            "width_raw": 0.06985302269458771,
+            "crossing_clipped": 0.0,
+            "seconds": 0.05912279100000006
+          }
+        }
+      }
+    },
+    {
+      "id": "toy_alligator",
+      "name": "toy_alligator.tiff",
+      "measurement": "assets/toy_alligator/measurement.png",
+      "models": {
+        "qutcc": {
+          "images": {
+            "reconstruction": "assets/toy_alligator/qutcc_reconstruction.png",
+            "lower_bound": "assets/toy_alligator/qutcc_lower_bound.png",
+            "upper_bound": "assets/toy_alligator/qutcc_upper_bound.png",
+            "uncertainty": "assets/toy_alligator/qutcc_uncertainty.png"
+          },
+          "metrics": {
+            "width_clipped": 0.03804368898272514,
+            "width_raw": 0.03830575942993164,
+            "crossing_clipped": 0.0,
+            "seconds": 0.2019822919999994
+          }
+        },
+        "im2im": {
+          "images": {
+            "reconstruction": "assets/toy_alligator/im2im_reconstruction.png",
+            "lower_bound": "assets/toy_alligator/im2im_lower_bound.png",
+            "upper_bound": "assets/toy_alligator/im2im_upper_bound.png",
+            "uncertainty": "assets/toy_alligator/im2im_uncertainty.png"
+          },
+          "metrics": {
+            "width_clipped": 0.04065561667084694,
+            "width_raw": 0.041106730699539185,
+            "crossing_clipped": 0.0,
+            "seconds": 0.06004837500000004
+          }
+        }
+      }
+    },
+    {
+      "id": "toy_duck1",
+      "name": "toy_duck1.tiff",
+      "measurement": "assets/toy_duck1/measurement.png",
+      "models": {
+        "qutcc": {
+          "images": {
+            "reconstruction": "assets/toy_duck1/qutcc_reconstruction.png",
+            "lower_bound": "assets/toy_duck1/qutcc_lower_bound.png",
+            "upper_bound": "assets/toy_duck1/qutcc_upper_bound.png",
+            "uncertainty": "assets/toy_duck1/qutcc_uncertainty.png"
+          },
+          "metrics": {
+            "width_clipped": 0.04960060492157936,
+            "width_raw": 0.05008600279688835,
+            "crossing_clipped": 0.0,
+            "seconds": 0.2018981670000004
+          }
+        },
+        "im2im": {
+          "images": {
+            "reconstruction": "assets/toy_duck1/im2im_reconstruction.png",
+            "lower_bound": "assets/toy_duck1/im2im_lower_bound.png",
+            "upper_bound": "assets/toy_duck1/im2im_upper_bound.png",
+            "uncertainty": "assets/toy_duck1/im2im_uncertainty.png"
+          },
+          "metrics": {
+            "width_clipped": 0.04806196689605713,
+            "width_raw": 0.048617541790008545,
+            "crossing_clipped": 0.0,
+            "seconds": 0.059915709000000206
+          }
+        }
+      }
+    },
+    {
+      "id": "toy_duck2",
+      "name": "toy_duck2.tiff",
+      "measurement": "assets/toy_duck2/measurement.png",
+      "models": {
+        "qutcc": {
+          "images": {
+            "reconstruction": "assets/toy_duck2/qutcc_reconstruction.png",
+            "lower_bound": "assets/toy_duck2/qutcc_lower_bound.png",
+            "upper_bound": "assets/toy_duck2/qutcc_upper_bound.png",
+            "uncertainty": "assets/toy_duck2/qutcc_uncertainty.png"
+          },
+          "metrics": {
+            "width_clipped": 0.07220154255628586,
+            "width_raw": 0.07279297709465027,
+            "crossing_clipped": 0.0,
+            "seconds": 0.2018992500000003
+          }
+        },
+        "im2im": {
+          "images": {
+            "reconstruction": "assets/toy_duck2/im2im_reconstruction.png",
+            "lower_bound": "assets/toy_duck2/im2im_lower_bound.png",
+            "upper_bound": "assets/toy_duck2/im2im_upper_bound.png",
+            "uncertainty": "assets/toy_duck2/im2im_uncertainty.png"
+          },
+          "metrics": {
+            "width_clipped": 0.07451462000608444,
+            "width_raw": 0.0759168192744255,
+            "crossing_clipped": 0.0,
+            "seconds": 0.05947316700000016
+          }
+        }
+      }
+    },
+    {
+      "id": "toy_duck_and_watch",
+      "name": "toy_duck_and_watch.tiff",
+      "measurement": "assets/toy_duck_and_watch/measurement.png",
+      "models": {
+        "qutcc": {
+          "images": {
+            "reconstruction": "assets/toy_duck_and_watch/qutcc_reconstruction.png",
+            "lower_bound": "assets/toy_duck_and_watch/qutcc_lower_bound.png",
+            "upper_bound": "assets/toy_duck_and_watch/qutcc_upper_bound.png",
+            "uncertainty": "assets/toy_duck_and_watch/qutcc_uncertainty.png"
+          },
+          "metrics": {
+            "width_clipped": 0.106314517557621,
+            "width_raw": 0.10661327838897705,
+            "crossing_clipped": 0.0,
+            "seconds": 0.20160287499999985
+          }
+        },
+        "im2im": {
+          "images": {
+            "reconstruction": "assets/toy_duck_and_watch/im2im_reconstruction.png",
+            "lower_bound": "assets/toy_duck_and_watch/im2im_lower_bound.png",
+            "upper_bound": "assets/toy_duck_and_watch/im2im_upper_bound.png",
+            "uncertainty": "assets/toy_duck_and_watch/im2im_uncertainty.png"
+          },
+          "metrics": {
+            "width_clipped": 0.09971954673528671,
+            "width_raw": 0.10079331696033478,
+            "crossing_clipped": 0.0,
+            "seconds": 0.05982708300000006
+          }
+        }
+      }
+    },
+    {
+      "id": "toy_duck_withhat",
+      "name": "toy_duck_withhat.tiff",
+      "measurement": "assets/toy_duck_withhat/measurement.png",
+      "models": {
+        "qutcc": {
+          "images": {
+            "reconstruction": "assets/toy_duck_withhat/qutcc_reconstruction.png",
+            "lower_bound": "assets/toy_duck_withhat/qutcc_lower_bound.png",
+            "upper_bound": "assets/toy_duck_withhat/qutcc_upper_bound.png",
+            "uncertainty": "assets/toy_duck_withhat/qutcc_uncertainty.png"
+          },
+          "metrics": {
+            "width_clipped": 0.07704014331102371,
+            "width_raw": 0.07733844965696335,
+            "crossing_clipped": 0.0,
+            "seconds": 0.20236541600000013
+          }
+        },
+        "im2im": {
+          "images": {
+            "reconstruction": "assets/toy_duck_withhat/im2im_reconstruction.png",
+            "lower_bound": "assets/toy_duck_withhat/im2im_lower_bound.png",
+            "upper_bound": "assets/toy_duck_withhat/im2im_upper_bound.png",
+            "uncertainty": "assets/toy_duck_withhat/im2im_uncertainty.png"
+          },
+          "metrics": {
+            "width_clipped": 0.07605686038732529,
+            "width_raw": 0.0765436515212059,
+            "crossing_clipped": 0.0,
+            "seconds": 0.059181916
+          }
+        }
+      }
+    },
+    {
+      "id": "toy_fish",
+      "name": "toy_fish.tiff",
+      "measurement": "assets/toy_fish/measurement.png",
+      "models": {
+        "qutcc": {
+          "images": {
+            "reconstruction": "assets/toy_fish/qutcc_reconstruction.png",
+            "lower_bound": "assets/toy_fish/qutcc_lower_bound.png",
+            "upper_bound": "assets/toy_fish/qutcc_upper_bound.png",
+            "uncertainty": "assets/toy_fish/qutcc_uncertainty.png"
+          },
+          "metrics": {
+            "width_clipped": 0.08285408467054367,
+            "width_raw": 0.08472242206335068,
+            "crossing_clipped": 0.0,
+            "seconds": 0.20157900000000062
+          }
+        },
+        "im2im": {
+          "images": {
+            "reconstruction": "assets/toy_fish/im2im_reconstruction.png",
+            "lower_bound": "assets/toy_fish/im2im_lower_bound.png",
+            "upper_bound": "assets/toy_fish/im2im_upper_bound.png",
+            "uncertainty": "assets/toy_fish/im2im_uncertainty.png"
+          },
+          "metrics": {
+            "width_clipped": 0.07910485565662384,
+            "width_raw": 0.08109695464372635,
+            "crossing_clipped": 0.0,
+            "seconds": 0.058988458999999605
+          }
+        }
+      }
+    },
+    {
+      "id": "toy_ladyduck",
+      "name": "toy_ladyduck.tiff",
+      "measurement": "assets/toy_ladyduck/measurement.png",
+      "models": {
+        "qutcc": {
+          "images": {
+            "reconstruction": "assets/toy_ladyduck/qutcc_reconstruction.png",
+            "lower_bound": "assets/toy_ladyduck/qutcc_lower_bound.png",
+            "upper_bound": "assets/toy_ladyduck/qutcc_upper_bound.png",
+            "uncertainty": "assets/toy_ladyduck/qutcc_uncertainty.png"
+          },
+          "metrics": {
+            "width_clipped": 0.04333885759115219,
+            "width_raw": 0.04354630410671234,
+            "crossing_clipped": 0.0,
+            "seconds": 0.20161879099999958
+          }
+        },
+        "im2im": {
+          "images": {
+            "reconstruction": "assets/toy_ladyduck/im2im_reconstruction.png",
+            "lower_bound": "assets/toy_ladyduck/im2im_lower_bound.png",
+            "upper_bound": "assets/toy_ladyduck/im2im_upper_bound.png",
+            "uncertainty": "assets/toy_ladyduck/im2im_uncertainty.png"
+          },
+          "metrics": {
+            "width_clipped": 0.0430668480694294,
+            "width_raw": 0.04352525994181633,
+            "crossing_clipped": 0.0,
+            "seconds": 0.05924258399999971
+          }
+        }
+      }
+    },
+    {
+      "id": "toy_seahorse",
+      "name": "toy_seahorse.tiff",
+      "measurement": "assets/toy_seahorse/measurement.png",
+      "models": {
+        "qutcc": {
+          "images": {
+            "reconstruction": "assets/toy_seahorse/qutcc_reconstruction.png",
+            "lower_bound": "assets/toy_seahorse/qutcc_lower_bound.png",
+            "upper_bound": "assets/toy_seahorse/qutcc_upper_bound.png",
+            "uncertainty": "assets/toy_seahorse/qutcc_uncertainty.png"
+          },
+          "metrics": {
+            "width_clipped": 0.03642580285668373,
+            "width_raw": 0.03653436154127121,
+            "crossing_clipped": 0.0,
+            "seconds": 0.21507383299999994
+          }
+        },
+        "im2im": {
+          "images": {
+            "reconstruction": "assets/toy_seahorse/im2im_reconstruction.png",
+            "lower_bound": "assets/toy_seahorse/im2im_lower_bound.png",
+            "upper_bound": "assets/toy_seahorse/im2im_upper_bound.png",
+            "uncertainty": "assets/toy_seahorse/im2im_uncertainty.png"
+          },
+          "metrics": {
+            "width_clipped": 0.03663807734847069,
+            "width_raw": 0.03681403398513794,
+            "crossing_clipped": 0.0,
+            "seconds": 0.05931387499999996
+          }
+        }
+      }
+    }
+  ]
+}
