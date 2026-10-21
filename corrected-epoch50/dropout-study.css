@@ -1,0 +1,19 @@
+#dropoutRateStudy{margin-top:28px;border-top:1px solid var(--line);padding-top:12px}
+.dropout-plots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:16px 0}
+.dropout-plots figure{margin:0;min-width:0;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px}
+.dropout-plots figcaption{font-weight:650;text-align:center}
+.dropout-plots svg{width:100%;display:block;overflow:visible}
+.dropout-plots svg text{fill:var(--muted);font:11px system-ui,sans-serif}
+.dropout-plots circle{cursor:crosshair;stroke:var(--bg);stroke-width:1px}
+.dropout-plots circle:focus{outline:2px solid white;outline-offset:3px}
+.dropout-tooltip{font-size:12px;color:var(--muted);min-height:54px;padding:4px}
+.dropout-legend{display:flex;gap:22px;flex-wrap:wrap;font-size:14px}
+.dropout-best{background:#244039}
+.dropout-controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.dropout-controls select{max-width:240px}
+.dropout-examples{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.dropout-examples figure,.dropout-map-row figure{margin:0;min-width:0;text-align:center}
+.dropout-examples img,.dropout-map-row img{display:block;width:100%;height:auto;border-radius:6px}
+.dropout-examples small{display:block;color:var(--muted);font-size:12px}
+.dropout-map-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;max-width:520px;margin:16px auto}
+@media(max-width:720px){.dropout-plots{grid-template-columns:1fr}.dropout-examples{grid-template-columns:repeat(2,minmax(0,1fr))}.dropout-controls select{max-width:180px}}

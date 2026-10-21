@@ -1,0 +1,32 @@
+{
+  "camera": "rml",
+  "arm": "mc_005",
+  "dropout_probability": 0.05,
+  "epoch": 50,
+  "validation_count": 5000,
+  "manifest_sha256": "ef41a0325df23ef8ab3dc7c34b7a374f0f7d927f9323b9046ae39819c9f6b1d6",
+  "clipped": true,
+  "results": {
+    "30": {
+      "ssim": 0.9651470611095428,
+      "psnr": 39.25438067550659,
+      "mae": 0.006091107437945903,
+      "inference_seconds": 1493.424025694374
+    },
+    "60": {
+      "ssim": 0.9652568292856216,
+      "psnr": 39.266513205718994,
+      "mae": 0.006080482805101201,
+      "inference_seconds": 2978.382438732777
+    },
+    "100": {
+      "ssim": 0.9653028763532638,
+      "psnr": 39.27161250228882,
+      "mae": 0.006076079129287973,
+      "inference_seconds": 4936.197639581747
+    }
+  },
+  "selection_split": "val",
+  "test_used": false,
+  "gpu": "NVIDIA RTX 6000 Ada Generation"
+}

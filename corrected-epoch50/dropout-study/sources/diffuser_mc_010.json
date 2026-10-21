@@ -1,0 +1,32 @@
+{
+  "camera": "diffuser",
+  "arm": "mc_010",
+  "dropout_probability": 0.1,
+  "epoch": 50,
+  "validation_count": 5000,
+  "manifest_sha256": "957c0ce3d9cd7364fdb0341860a6e3219b9201cb6dff4e4857e5d6ae5c19e556",
+  "clipped": true,
+  "results": {
+    "30": {
+      "ssim": 0.8464970255374908,
+      "psnr": 31.199365003204345,
+      "mae": 0.017429690841026604,
+      "inference_seconds": 2572.0632905215025
+    },
+    "60": {
+      "ssim": 0.8467649173736572,
+      "psnr": 31.20671551437378,
+      "mae": 0.017411611339449882,
+      "inference_seconds": 5134.1462820619345
+    },
+    "100": {
+      "ssim": 0.8468617146492005,
+      "psnr": 31.20967215042114,
+      "mae": 0.017404587175697088,
+      "inference_seconds": 8522.19060930796
+    }
+  },
+  "selection_split": "val",
+  "test_used": false,
+  "gpu": "NVIDIA RTX A6000"
+}

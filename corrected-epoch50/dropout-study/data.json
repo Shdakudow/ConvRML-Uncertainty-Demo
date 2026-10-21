@@ -1,0 +1,799 @@
+{
+  "epoch": 50,
+  "validation_count": 5000,
+  "cameras": {
+    "rml": {
+      "rates": [
+        {
+          "camera": "rml",
+          "arm": "mc_005",
+          "dropout_probability": 0.05,
+          "epoch": 50,
+          "validation_count": 5000,
+          "manifest_sha256": "ef41a0325df23ef8ab3dc7c34b7a374f0f7d927f9323b9046ae39819c9f6b1d6",
+          "clipped": true,
+          "results": {
+            "30": {
+              "ssim": 0.9651470611095428,
+              "psnr": 39.25438067550659,
+              "mae": 0.006091107437945903,
+              "inference_seconds": 1493.424025694374
+            },
+            "60": {
+              "ssim": 0.9652568292856216,
+              "psnr": 39.266513205718994,
+              "mae": 0.006080482805101201,
+              "inference_seconds": 2978.382438732777
+            },
+            "100": {
+              "ssim": 0.9653028763532638,
+              "psnr": 39.27161250228882,
+              "mae": 0.006076079129287973,
+              "inference_seconds": 4936.197639581747
+            }
+          },
+          "selection_split": "val",
+          "test_used": false,
+          "gpu": "NVIDIA RTX 6000 Ada Generation"
+        },
+        {
+          "camera": "rml",
+          "arm": "mc_010",
+          "dropout_probability": 0.1,
+          "epoch": 50,
+          "validation_count": 5000,
+          "manifest_sha256": "ef41a0325df23ef8ab3dc7c34b7a374f0f7d927f9323b9046ae39819c9f6b1d6",
+          "clipped": true,
+          "results": {
+            "30": {
+              "ssim": 0.959698374581337,
+              "psnr": 39.06859639968872,
+              "mae": 0.006376176306977868,
+              "inference_seconds": 1320.0513187153265
+            },
+            "60": {
+              "ssim": 0.9599162756443024,
+              "psnr": 39.08609381027222,
+              "mae": 0.006359822748648002,
+              "inference_seconds": 2635.1334270145744
+            },
+            "100": {
+              "ssim": 0.9600046922683716,
+              "psnr": 39.09333331756592,
+              "mae": 0.006353147604782134,
+              "inference_seconds": 4386.9665062325075
+            }
+          },
+          "selection_split": "val",
+          "test_used": false,
+          "gpu": "NVIDIA H200 NVL"
+        },
+        {
+          "camera": "rml",
+          "arm": "mc_020",
+          "dropout_probability": 0.2,
+          "epoch": 50,
+          "validation_count": 5000,
+          "manifest_sha256": "ef41a0325df23ef8ab3dc7c34b7a374f0f7d927f9323b9046ae39819c9f6b1d6",
+          "clipped": true,
+          "results": {
+            "30": {
+              "ssim": 0.9588701468467712,
+              "psnr": 38.661351323699954,
+              "mae": 0.006567616798030212,
+              "inference_seconds": 1292.7258999217302
+            },
+            "60": {
+              "ssim": 0.9591597935438156,
+              "psnr": 38.68820891418457,
+              "mae": 0.006542423527594656,
+              "inference_seconds": 2578.2866204865277
+            },
+            "100": {
+              "ssim": 0.9592768296718598,
+              "psnr": 38.698725605010985,
+              "mae": 0.006532537198625505,
+              "inference_seconds": 4290.473362185992
+            }
+          },
+          "selection_split": "val",
+          "test_used": false,
+          "gpu": "NVIDIA H200 NVL"
+        }
+      ],
+      "selected_p": 0.05,
+      "selection": "Highest clipped validation SSIM at 100 passes; ties choose lower p",
+      "map_max": 0.12077741324901581,
+      "examples": [
+        {
+          "id": 35894,
+          "models": {
+            "mc_005": {
+              "prediction": "images/rml/00_mc_005_prediction.png",
+              "metrics": {
+                "id": 35894,
+                "psnr": 46.749420166015625,
+                "ssim": 0.9917320013046265,
+                "mae": 0.0025649811141192913,
+                "coverage": 0.9709727168083191,
+                "width": 0.015582083724439144,
+                "native_crossing": 0.0
+              },
+              "error": "images/rml/00_mc_005_error.png",
+              "width": "images/rml/00_mc_005_width.png"
+            },
+            "mc_010": {
+              "prediction": "images/rml/00_mc_010_prediction.png",
+              "metrics": {
+                "id": 35894,
+                "psnr": 46.38432312011719,
+                "ssim": 0.9874359965324402,
+                "mae": 0.002876449376344681,
+                "coverage": 0.9628550410270691,
+                "width": 0.015994813293218613,
+                "native_crossing": 0.0
+              },
+              "error": "images/rml/00_mc_010_error.png",
+              "width": "images/rml/00_mc_010_width.png"
+            }
+          },
+          "measurement": "images/rml/00_measurement.png",
+          "target": "images/rml/00_target.png"
+        },
+        {
+          "id": 24193,
+          "models": {
+            "mc_005": {
+              "prediction": "images/rml/01_mc_005_prediction.png",
+              "metrics": {
+                "id": 24193,
+                "psnr": 37.17940139770508,
+                "ssim": 0.9598039388656616,
+                "mae": 0.005810592323541641,
+                "coverage": 0.933837890625,
+                "width": 0.022287240251898766,
+                "native_crossing": 0.0
+              },
+              "error": "images/rml/01_mc_005_error.png",
+              "width": "images/rml/01_mc_005_width.png"
+            },
+            "mc_010": {
+              "prediction": "images/rml/01_mc_010_prediction.png",
+              "metrics": {
+                "id": 24193,
+                "psnr": 36.9328727722168,
+                "ssim": 0.9530388712882996,
+                "mae": 0.0062276870012283325,
+                "coverage": 0.9140879511833191,
+                "width": 0.02251289412379265,
+                "native_crossing": 0.0
+              },
+              "error": "images/rml/01_mc_010_error.png",
+              "width": "images/rml/01_mc_010_width.png"
+            }
+          },
+          "measurement": "images/rml/01_measurement.png",
+          "target": "images/rml/01_target.png"
+        },
+        {
+          "id": 22857,
+          "models": {
+            "mc_005": {
+              "prediction": "images/rml/02_mc_005_prediction.png",
+              "metrics": {
+                "id": 22857,
+                "psnr": 34.79328155517578,
+                "ssim": 0.9410446882247925,
+                "mae": 0.009135644882917404,
+                "coverage": 0.8871307373046875,
+                "width": 0.029426872730255127,
+                "native_crossing": 0.0
+              },
+              "error": "images/rml/02_mc_005_error.png",
+              "width": "images/rml/02_mc_005_width.png"
+            },
+            "mc_010": {
+              "prediction": "images/rml/02_mc_010_prediction.png",
+              "metrics": {
+                "id": 22857,
+                "psnr": 34.50632858276367,
+                "ssim": 0.9332920908927917,
+                "mae": 0.009609361179172993,
+                "coverage": 0.8604075312614441,
+                "width": 0.028756648302078247,
+                "native_crossing": 0.0
+              },
+              "error": "images/rml/02_mc_010_error.png",
+              "width": "images/rml/02_mc_010_width.png"
+            }
+          },
+          "measurement": "images/rml/02_measurement.png",
+          "target": "images/rml/02_target.png"
+        },
+        {
+          "id": 53050,
+          "models": {
+            "mc_005": {
+              "prediction": "images/rml/03_mc_005_prediction.png",
+              "metrics": {
+                "id": 53050,
+                "psnr": 42.18507766723633,
+                "ssim": 0.9835720062255859,
+                "mae": 0.0040100496262311935,
+                "coverage": 0.9733022451400757,
+                "width": 0.02204218879342079,
+                "native_crossing": 0.0
+              },
+              "error": "images/rml/03_mc_005_error.png",
+              "width": "images/rml/03_mc_005_width.png"
+            },
+            "mc_010": {
+              "prediction": "images/rml/03_mc_010_prediction.png",
+              "metrics": {
+                "id": 53050,
+                "psnr": 41.77265548706055,
+                "ssim": 0.9805752038955688,
+                "mae": 0.0043581402860581875,
+                "coverage": 0.9705861806869507,
+                "width": 0.02233455702662468,
+                "native_crossing": 0.0
+              },
+              "error": "images/rml/03_mc_010_error.png",
+              "width": "images/rml/03_mc_010_width.png"
+            }
+          },
+          "measurement": "images/rml/03_measurement.png",
+          "target": "images/rml/03_target.png"
+        },
+        {
+          "id": 14420,
+          "models": {
+            "mc_005": {
+              "prediction": "images/rml/04_mc_005_prediction.png",
+              "metrics": {
+                "id": 14420,
+                "psnr": 38.46413803100586,
+                "ssim": 0.9642598032951355,
+                "mae": 0.006606324575841427,
+                "coverage": 0.9325358271598816,
+                "width": 0.027278780937194824,
+                "native_crossing": 0.0
+              },
+              "error": "images/rml/04_mc_005_error.png",
+              "width": "images/rml/04_mc_005_width.png"
+            },
+            "mc_010": {
+              "prediction": "images/rml/04_mc_010_prediction.png",
+              "metrics": {
+                "id": 14420,
+                "psnr": 39.62712097167969,
+                "ssim": 0.9615122675895691,
+                "mae": 0.005889257416129112,
+                "coverage": 0.9451802968978882,
+                "width": 0.026936158537864685,
+                "native_crossing": 0.0
+              },
+              "error": "images/rml/04_mc_010_error.png",
+              "width": "images/rml/04_mc_010_width.png"
+            }
+          },
+          "measurement": "images/rml/04_measurement.png",
+          "target": "images/rml/04_target.png"
+        },
+        {
+          "id": 68127,
+          "models": {
+            "mc_005": {
+              "prediction": "images/rml/05_mc_005_prediction.png",
+              "metrics": {
+                "id": 68127,
+                "psnr": 34.277671813964844,
+                "ssim": 0.9533075094223022,
+                "mae": 0.010588700883090496,
+                "coverage": 0.9410756826400757,
+                "width": 0.04621090739965439,
+                "native_crossing": 0.0
+              },
+              "error": "images/rml/05_mc_005_error.png",
+              "width": "images/rml/05_mc_005_width.png"
+            },
+            "mc_010": {
+              "prediction": "images/rml/05_mc_010_prediction.png",
+              "metrics": {
+                "id": 68127,
+                "psnr": 34.07215881347656,
+                "ssim": 0.9428786039352417,
+                "mae": 0.01116495206952095,
+                "coverage": 0.9322866201400757,
+                "width": 0.04610399529337883,
+                "native_crossing": 0.0
+              },
+              "error": "images/rml/05_mc_010_error.png",
+              "width": "images/rml/05_mc_010_width.png"
+            }
+          },
+          "measurement": "images/rml/05_measurement.png",
+          "target": "images/rml/05_target.png"
+        },
+        {
+          "id": 77172,
+          "models": {
+            "mc_005": {
+              "prediction": "images/rml/06_mc_005_prediction.png",
+              "metrics": {
+                "id": 77172,
+                "psnr": 44.34706115722656,
+                "ssim": 0.9825409650802612,
+                "mae": 0.0032775183208286762,
+                "coverage": 0.9391632080078125,
+                "width": 0.015802035108208656,
+                "native_crossing": 0.0
+              },
+              "error": "images/rml/06_mc_005_error.png",
+              "width": "images/rml/06_mc_005_width.png"
+            },
+            "mc_010": {
+              "prediction": "images/rml/06_mc_010_prediction.png",
+              "metrics": {
+                "id": 77172,
+                "psnr": 44.1242561340332,
+                "ssim": 0.981285572052002,
+                "mae": 0.0032241761218756437,
+                "coverage": 0.9495493769645691,
+                "width": 0.015865765511989594,
+                "native_crossing": 0.0
+              },
+              "error": "images/rml/06_mc_010_error.png",
+              "width": "images/rml/06_mc_010_width.png"
+            }
+          },
+          "measurement": "images/rml/06_measurement.png",
+          "target": "images/rml/06_target.png"
+        },
+        {
+          "id": 89459,
+          "models": {
+            "mc_005": {
+              "prediction": "images/rml/07_mc_005_prediction.png",
+              "metrics": {
+                "id": 89459,
+                "psnr": 32.09727478027344,
+                "ssim": 0.93804931640625,
+                "mae": 0.008820384740829468,
+                "coverage": 0.9339345693588257,
+                "width": 0.02927406132221222,
+                "native_crossing": 0.0
+              },
+              "error": "images/rml/07_mc_005_error.png",
+              "width": "images/rml/07_mc_005_width.png"
+            },
+            "mc_010": {
+              "prediction": "images/rml/07_mc_010_prediction.png",
+              "metrics": {
+                "id": 89459,
+                "psnr": 31.836118698120117,
+                "ssim": 0.9320418238639832,
+                "mae": 0.00958581268787384,
+                "coverage": 0.9181671142578125,
+                "width": 0.02959316223859787,
+                "native_crossing": 0.0
+              },
+              "error": "images/rml/07_mc_010_error.png",
+              "width": "images/rml/07_mc_010_width.png"
+            }
+          },
+          "measurement": "images/rml/07_measurement.png",
+          "target": "images/rml/07_target.png"
+        }
+      ],
+      "example_factors": {
+        "mc_005": {
+          "lower": 2.26468,
+          "upper": 2.397577
+        },
+        "mc_010": {
+          "lower": 1.721737,
+          "upper": 2.017299
+        }
+      }
+    },
+    "diffuser": {
+      "rates": [
+        {
+          "camera": "diffuser",
+          "arm": "mc_005",
+          "dropout_probability": 0.05,
+          "epoch": 50,
+          "validation_count": 5000,
+          "manifest_sha256": "957c0ce3d9cd7364fdb0341860a6e3219b9201cb6dff4e4857e5d6ae5c19e556",
+          "clipped": true,
+          "results": {
+            "30": {
+              "ssim": 0.8542655037045479,
+              "psnr": 31.205575731658936,
+              "mae": 0.017184764982573687,
+              "inference_seconds": 2538.9249101970345
+            },
+            "60": {
+              "ssim": 0.8544440228223801,
+              "psnr": 31.210710185241698,
+              "mae": 0.017171434371732176,
+              "inference_seconds": 5071.556954884902
+            },
+            "100": {
+              "ssim": 0.8545166828155517,
+              "psnr": 31.212778018951415,
+              "mae": 0.017165819585882126,
+              "inference_seconds": 8427.332314464264
+            }
+          },
+          "selection_split": "val",
+          "test_used": false,
+          "gpu": "NVIDIA RTX A6000"
+        },
+        {
+          "camera": "diffuser",
+          "arm": "mc_010",
+          "dropout_probability": 0.1,
+          "epoch": 50,
+          "validation_count": 5000,
+          "manifest_sha256": "957c0ce3d9cd7364fdb0341860a6e3219b9201cb6dff4e4857e5d6ae5c19e556",
+          "clipped": true,
+          "results": {
+            "30": {
+              "ssim": 0.8464970255374908,
+              "psnr": 31.199365003204345,
+              "mae": 0.017429690841026604,
+              "inference_seconds": 2572.0632905215025
+            },
+            "60": {
+              "ssim": 0.8467649173736572,
+              "psnr": 31.20671551437378,
+              "mae": 0.017411611339449882,
+              "inference_seconds": 5134.1462820619345
+            },
+            "100": {
+              "ssim": 0.8468617146492005,
+              "psnr": 31.20967215042114,
+              "mae": 0.017404587175697088,
+              "inference_seconds": 8522.19060930796
+            }
+          },
+          "selection_split": "val",
+          "test_used": false,
+          "gpu": "NVIDIA RTX A6000"
+        },
+        {
+          "camera": "diffuser",
+          "arm": "mc_020",
+          "dropout_probability": 0.2,
+          "epoch": 50,
+          "validation_count": 5000,
+          "manifest_sha256": "957c0ce3d9cd7364fdb0341860a6e3219b9201cb6dff4e4857e5d6ae5c19e556",
+          "clipped": true,
+          "results": {
+            "30": {
+              "ssim": 0.8428619954109192,
+              "psnr": 31.061783824157715,
+              "mae": 0.017721943741478025,
+              "inference_seconds": 2580.8274959996343
+            },
+            "60": {
+              "ssim": 0.8433005862236023,
+              "psnr": 31.072019784545898,
+              "mae": 0.017694316522963344,
+              "inference_seconds": 5140.956545297056
+            },
+            "100": {
+              "ssim": 0.8434694749832153,
+              "psnr": 31.0763125869751,
+              "mae": 0.017683267778344454,
+              "inference_seconds": 8531.831256063655
+            }
+          },
+          "selection_split": "val",
+          "test_used": false,
+          "gpu": "NVIDIA RTX A6000"
+        }
+      ],
+      "selected_p": 0.05,
+      "selection": "Highest clipped validation SSIM at 100 passes; ties choose lower p",
+      "map_max": 0.31284284591674805,
+      "examples": [
+        {
+          "id": 35894,
+          "models": {
+            "mc_005": {
+              "prediction": "images/diffuser/00_mc_005_prediction.png",
+              "metrics": {
+                "id": 35894,
+                "psnr": 39.076271057128906,
+                "ssim": 0.9774178266525269,
+                "mae": 0.006017089821398258,
+                "coverage": 0.9856466054916382,
+                "width": 0.04119420796632767,
+                "native_crossing": 0.0
+              },
+              "error": "images/diffuser/00_mc_005_error.png",
+              "width": "images/diffuser/00_mc_005_width.png"
+            },
+            "mc_010": {
+              "prediction": "images/diffuser/00_mc_010_prediction.png",
+              "metrics": {
+                "id": 35894,
+                "psnr": 38.3187141418457,
+                "ssim": 0.969519853591919,
+                "mae": 0.006901740096509457,
+                "coverage": 0.9836934804916382,
+                "width": 0.041187070310115814,
+                "native_crossing": 0.0
+              },
+              "error": "images/diffuser/00_mc_010_error.png",
+              "width": "images/diffuser/00_mc_010_width.png"
+            }
+          },
+          "measurement": "images/diffuser/00_measurement.png",
+          "target": "images/diffuser/00_target.png"
+        },
+        {
+          "id": 24193,
+          "models": {
+            "mc_005": {
+              "prediction": "images/diffuser/01_mc_005_prediction.png",
+              "metrics": {
+                "id": 24193,
+                "psnr": 30.47347640991211,
+                "ssim": 0.8279663920402527,
+                "mae": 0.0161491259932518,
+                "coverage": 0.9025472402572632,
+                "width": 0.058331266045570374,
+                "native_crossing": 0.0
+              },
+              "error": "images/diffuser/01_mc_005_error.png",
+              "width": "images/diffuser/01_mc_005_width.png"
+            },
+            "mc_010": {
+              "prediction": "images/diffuser/01_mc_010_prediction.png",
+              "metrics": {
+                "id": 24193,
+                "psnr": 30.52178192138672,
+                "ssim": 0.8176571726799011,
+                "mae": 0.016150277107954025,
+                "coverage": 0.9073944091796875,
+                "width": 0.06038058549165726,
+                "native_crossing": 0.0
+              },
+              "error": "images/diffuser/01_mc_010_error.png",
+              "width": "images/diffuser/01_mc_010_width.png"
+            }
+          },
+          "measurement": "images/diffuser/01_measurement.png",
+          "target": "images/diffuser/01_target.png"
+        },
+        {
+          "id": 22857,
+          "models": {
+            "mc_005": {
+              "prediction": "images/diffuser/02_mc_005_prediction.png",
+              "metrics": {
+                "id": 22857,
+                "psnr": 27.55976104736328,
+                "ssim": 0.7541780471801758,
+                "mae": 0.02521923929452896,
+                "coverage": 0.8689016103744507,
+                "width": 0.08550053089857101,
+                "native_crossing": 0.0
+              },
+              "error": "images/diffuser/02_mc_005_error.png",
+              "width": "images/diffuser/02_mc_005_width.png"
+            },
+            "mc_010": {
+              "prediction": "images/diffuser/02_mc_010_prediction.png",
+              "metrics": {
+                "id": 22857,
+                "psnr": 27.44281768798828,
+                "ssim": 0.7374861240386963,
+                "mae": 0.025582794100046158,
+                "coverage": 0.8366648554801941,
+                "width": 0.08097806572914124,
+                "native_crossing": 0.0
+              },
+              "error": "images/diffuser/02_mc_010_error.png",
+              "width": "images/diffuser/02_mc_010_width.png"
+            }
+          },
+          "measurement": "images/diffuser/02_measurement.png",
+          "target": "images/diffuser/02_target.png"
+        },
+        {
+          "id": 53050,
+          "models": {
+            "mc_005": {
+              "prediction": "images/diffuser/03_mc_005_prediction.png",
+              "metrics": {
+                "id": 53050,
+                "psnr": 31.61471939086914,
+                "ssim": 0.9145333170890808,
+                "mae": 0.013798963278532028,
+                "coverage": 0.9428049921989441,
+                "width": 0.06405892968177795,
+                "native_crossing": 0.0
+              },
+              "error": "images/diffuser/03_mc_005_error.png",
+              "width": "images/diffuser/03_mc_005_width.png"
+            },
+            "mc_010": {
+              "prediction": "images/diffuser/03_mc_010_prediction.png",
+              "metrics": {
+                "id": 53050,
+                "psnr": 31.32907485961914,
+                "ssim": 0.9092745780944824,
+                "mae": 0.014134805649518967,
+                "coverage": 0.9443003535270691,
+                "width": 0.06433723866939545,
+                "native_crossing": 0.0
+              },
+              "error": "images/diffuser/03_mc_010_error.png",
+              "width": "images/diffuser/03_mc_010_width.png"
+            }
+          },
+          "measurement": "images/diffuser/03_measurement.png",
+          "target": "images/diffuser/03_target.png"
+        },
+        {
+          "id": 14420,
+          "models": {
+            "mc_005": {
+              "prediction": "images/diffuser/04_mc_005_prediction.png",
+              "metrics": {
+                "id": 14420,
+                "psnr": 30.06463050842285,
+                "ssim": 0.8508225679397583,
+                "mae": 0.01870500110089779,
+                "coverage": 0.9474233388900757,
+                "width": 0.08814995735883713,
+                "native_crossing": 0.0
+              },
+              "error": "images/diffuser/04_mc_005_error.png",
+              "width": "images/diffuser/04_mc_005_width.png"
+            },
+            "mc_010": {
+              "prediction": "images/diffuser/04_mc_010_prediction.png",
+              "metrics": {
+                "id": 14420,
+                "psnr": 29.986780166625977,
+                "ssim": 0.8381400108337402,
+                "mae": 0.018814653158187866,
+                "coverage": 0.9365438222885132,
+                "width": 0.08637799322605133,
+                "native_crossing": 0.0
+              },
+              "error": "images/diffuser/04_mc_010_error.png",
+              "width": "images/diffuser/04_mc_010_width.png"
+            }
+          },
+          "measurement": "images/diffuser/04_measurement.png",
+          "target": "images/diffuser/04_target.png"
+        },
+        {
+          "id": 68127,
+          "models": {
+            "mc_005": {
+              "prediction": "images/diffuser/05_mc_005_prediction.png",
+              "metrics": {
+                "id": 68127,
+                "psnr": 26.126941680908203,
+                "ssim": 0.7760758399963379,
+                "mae": 0.031020721420645714,
+                "coverage": 0.9282888174057007,
+                "width": 0.13868330419063568,
+                "native_crossing": 0.0
+              },
+              "error": "images/diffuser/05_mc_005_error.png",
+              "width": "images/diffuser/05_mc_005_width.png"
+            },
+            "mc_010": {
+              "prediction": "images/diffuser/05_mc_010_prediction.png",
+              "metrics": {
+                "id": 68127,
+                "psnr": 26.077651977539062,
+                "ssim": 0.7673975825309753,
+                "mae": 0.0318065881729126,
+                "coverage": 0.9145304560661316,
+                "width": 0.1397593915462494,
+                "native_crossing": 0.0
+              },
+              "error": "images/diffuser/05_mc_010_error.png",
+              "width": "images/diffuser/05_mc_010_width.png"
+            }
+          },
+          "measurement": "images/diffuser/05_measurement.png",
+          "target": "images/diffuser/05_target.png"
+        },
+        {
+          "id": 77172,
+          "models": {
+            "mc_005": {
+              "prediction": "images/diffuser/06_mc_005_prediction.png",
+              "metrics": {
+                "id": 77172,
+                "psnr": 32.2104606628418,
+                "ssim": 0.9030383825302124,
+                "mae": 0.012323059141635895,
+                "coverage": 0.90667724609375,
+                "width": 0.04753623157739639,
+                "native_crossing": 0.0
+              },
+              "error": "images/diffuser/06_mc_005_error.png",
+              "width": "images/diffuser/06_mc_005_width.png"
+            },
+            "mc_010": {
+              "prediction": "images/diffuser/06_mc_010_prediction.png",
+              "metrics": {
+                "id": 77172,
+                "psnr": 32.842491149902344,
+                "ssim": 0.9103678464889526,
+                "mae": 0.011681810021400452,
+                "coverage": 0.9234822988510132,
+                "width": 0.04821428284049034,
+                "native_crossing": 0.0
+              },
+              "error": "images/diffuser/06_mc_010_error.png",
+              "width": "images/diffuser/06_mc_010_width.png"
+            }
+          },
+          "measurement": "images/diffuser/06_measurement.png",
+          "target": "images/diffuser/06_target.png"
+        },
+        {
+          "id": 89459,
+          "models": {
+            "mc_005": {
+              "prediction": "images/diffuser/07_mc_005_prediction.png",
+              "metrics": {
+                "id": 89459,
+                "psnr": 27.786951065063477,
+                "ssim": 0.8487884402275085,
+                "mae": 0.022529050707817078,
+                "coverage": 0.9437205195426941,
+                "width": 0.09896715730428696,
+                "native_crossing": 0.0
+              },
+              "error": "images/diffuser/07_mc_005_error.png",
+              "width": "images/diffuser/07_mc_005_width.png"
+            },
+            "mc_010": {
+              "prediction": "images/diffuser/07_mc_010_prediction.png",
+              "metrics": {
+                "id": 89459,
+                "psnr": 27.53603744506836,
+                "ssim": 0.838536262512207,
+                "mae": 0.023450877517461777,
+                "coverage": 0.9381663203239441,
+                "width": 0.09704118221998215,
+                "native_crossing": 0.0
+              },
+              "error": "images/diffuser/07_mc_010_error.png",
+              "width": "images/diffuser/07_mc_010_width.png"
+            }
+          },
+          "measurement": "images/diffuser/07_measurement.png",
+          "target": "images/diffuser/07_target.png"
+        }
+      ],
+      "example_factors": {
+        "mc_005": {
+          "lower": 3.64239,
+          "upper": 3.838139
+        },
+        "mc_010": {
+          "lower": 3.031369,
+          "upper": 3.281393
+        }
+      }
+    }
+  },
+  "example_count": 8,
+  "example_protocol": "First eight saved test images in manifest order; 30 stochastic passes, clipped [0,1]. No quality filtering. p=0.20 example arrays were not saved. Width maps use the existing per-model asymmetric RCPS calibration, alpha=0.10 and delta=0.05.",
+  "trend_protocol": "Each dropout rate was trained for 50 epochs. Validation uses 5000 images and dropout active at 30, 60 and 100 passes. Selection maximizes validation SSIM at 100 passes; test data were not used. Curves are a single trained run per rate, not repeated-seed confidence intervals."
+}

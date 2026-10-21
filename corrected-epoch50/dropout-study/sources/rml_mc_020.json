@@ -1,0 +1,32 @@
+{
+  "camera": "rml",
+  "arm": "mc_020",
+  "dropout_probability": 0.2,
+  "epoch": 50,
+  "validation_count": 5000,
+  "manifest_sha256": "ef41a0325df23ef8ab3dc7c34b7a374f0f7d927f9323b9046ae39819c9f6b1d6",
+  "clipped": true,
+  "results": {
+    "30": {
+      "ssim": 0.9588701468467712,
+      "psnr": 38.661351323699954,
+      "mae": 0.006567616798030212,
+      "inference_seconds": 1292.7258999217302
+    },
+    "60": {
+      "ssim": 0.9591597935438156,
+      "psnr": 38.68820891418457,
+      "mae": 0.006542423527594656,
+      "inference_seconds": 2578.2866204865277
+    },
+    "100": {
+      "ssim": 0.9592768296718598,
+      "psnr": 38.698725605010985,
+      "mae": 0.006532537198625505,
+      "inference_seconds": 4290.473362185992
+    }
+  },
+  "selection_split": "val",
+  "test_used": false,
+  "gpu": "NVIDIA H200 NVL"
+}
