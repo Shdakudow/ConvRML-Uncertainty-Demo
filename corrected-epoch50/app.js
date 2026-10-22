@@ -1,22 +1,22 @@
 'use strict';
-const ENSEMBLE_KEY=new URLSearchParams(location.search).get('ensemble')==='10'?'ensemble10':(DATASET.methods.includes('ensemble5')?'ensemble5':'ensemble10');
+const ENSEMBLE_KEY=window.Coverage90.active?'ensemble5':new URLSearchParams(location.search).get('ensemble')==='10'?'ensemble10':(DATASET.methods.includes('ensemble5')?'ensemble5':'ensemble10');
 const QUTCC_KEY=window.paperQutccAssets?'paper_qutcc':'adaptive_qutcc';
 const $=id=>document.getElementById(id),N=256*256,ALL_MODELS=[['im2im','Im2im · end-to-end'],[ENSEMBLE_KEY,ENSEMBLE_KEY==='ensemble5'?'Ensemble · 5':'Ensemble · 10'],['mc_005','MC dropout · p=0.05'],[QUTCC_KEY,window.paperQutccAssets?'QUTCC':'QUTCC · image-adaptive q']],MODELS=ALL_MODELS.filter(([k])=>DATASET.methods.includes(k));
 const epochOf=k=>DATASET.epochs?.[k]??(k==='adaptive_qutcc'?20:50);
-const missing=(key,bound=false)=>`<div class="unavailable ${bound?'bound-row':''}" data-method="${key}"><b>Unavailable</b><span>${key==='adaptive_qutcc'?'Waiting for epoch-20 inference':'Waiting for epoch-50 inference'}</span></div>`;
+const missing=(key,bound=false)=>`<div class="unavailable ${bound?'bound-row':''}" data-method="${key}"><b>Unavailable</b><span>${window.Coverage90.active?'Near-90% inference pending':key==='adaptive_qutcc'?'Waiting for epoch-20 inference':'Waiting for epoch-50 inference'}</span></div>`;
 let current=0,example=null,busy=false,point={x:128,y:128};const cache=new Map();
 function bytes(s){return s instanceof Uint8Array?s:Uint8Array.from(atob(s),c=>c.charCodeAt(0))}
 function decode(s){const b=bytes(s);if(DATASET.encoding==='float32-shuffled'){const n=b.length/4,raw=new Uint8Array(b.length);for(let i=0;i<n;i++)for(let c=0;c<4;c++)raw[4*i+c]=b[c*n+i];const v=new DataView(raw.buffer),out=new Float32Array(n);for(let i=0;i<n;i++)out[i]=v.getFloat32(i*4,true);return out}const v=new DataView(b.buffer);if(DATASET.encoding==='float32'){const out=new Float32Array(b.length/4);for(let i=0;i<out.length;i++)out[i]=v.getFloat32(i*4,true);return out}const out=new Float32Array(b.length/2);for(let i=0;i<out.length;i++){const h=v.getUint16(i*2,true),sign=h&32768?-1:1,e=(h>>10)&31,f=h&1023;out[i]=sign*(e===0?2**-14*f/1024:e===31?(f?NaN:Infinity):2**(e-15)*(1+f/1024))}return out}
 window.receiveExample=(i,d)=>{d.measurement=bytes(d.measurement);d.target=bytes(d.target);for(const m of Object.values(d.models)){m.mean=decode(m.mean);m.lower=decode(m.lower);m.upper=decode(m.upper);m.widthRGB=new Float32Array(3*N);m.width=new Float32Array(N);m.error=new Float32Array(N);for(let p=0;p<N;p++)for(let c=0;c<3;c++){const j=c*N+p;m.widthRGB[j]=m.upper[j]-m.lower[j];m.width[p]+=m.widthRGB[j]/3;m.error[p]+=Math.abs(m.mean[j]-d.target[j]/255)/3}}cache.set(i,d);while(cache.size>3)cache.delete(cache.keys().next().value)};
 function lock(value){busy=value;window.exampleBrowser?.setBusy(value);for(const id of ['example','previous','next','random'])$(id).disabled=value}
-async function load(i){if(busy)return;lock(true);$('status').textContent='Loading saved inference…';try{if(!cache.has(i)){const source=window.DATA_PATH;const response=await fetch(`${source}/example_${String(i).padStart(2,'0')}.bin.gz?v=epoch5020261015`);if(!response.ok)throw Error('HTTP '+response.status);const buffer=await new Response(response.body.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer(),length=new DataView(buffer).getUint32(0,true),header=JSON.parse(new TextDecoder().decode(new Uint8Array(buffer,4,length))),data=new Uint8Array(buffer,4+length);for(const a of header.arrays){let target=header.example;for(const k of a.path.slice(0,-1))target=target[k];target[a.path[a.path.length-1]]=data.subarray(a.offset,a.offset+a.length)}if(window.paperQutccAssets){
+async function load(i){if(busy)return;lock(true);$('status').textContent='Loading saved inference…';try{if(!cache.has(i)){const source=window.DATA_PATH;const response=await fetch(`${source}/example_${String(i).padStart(2,'0')}.bin.gz?v=epoch5020261015`);if(!response.ok)throw Error('HTTP '+response.status);const buffer=await new Response(response.body.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer(),length=new DataView(buffer).getUint32(0,true),header=JSON.parse(new TextDecoder().decode(new Uint8Array(buffer,4,length))),data=new Uint8Array(buffer,4+length);for(const a of header.arrays){let target=header.example;for(const k of a.path.slice(0,-1))target=target[k];target[a.path[a.path.length-1]]=data.subarray(a.offset,a.offset+a.length)}if(window.paperQutccAssets&&!window.Coverage90.active){
  const response=await fetch(`${window.paperQutccAssets.base}/example_${String(i).padStart(2,'0')}.bin.gz`);if(!response.ok)throw Error('QUTCC asset HTTP '+response.status);
  const packed=await new Response(response.body.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer(),size=new DataView(packed).getUint32(0,true),q=JSON.parse(new TextDecoder().decode(new Uint8Array(packed,4,size))),payload=new Uint8Array(packed,4+size);
  for(const a of q.arrays){let target=q.example;for(const k of a.path.slice(0,-1))target=target[k];target[a.path.at(-1)]=payload.subarray(a.offset,a.offset+a.length)}
  if(String(q.example.id)!==String(header.example.id))throw Error('QUTCC sample mismatch');
  for(const name of ['measurement','target']){const left=bytes(header.example[name]),right=q.example[name];if(left.length!==right.length||!left.every((v,j)=>v===right[j]))throw Error('QUTCC '+name+' mismatch')}
  delete header.example.models.adaptive_qutcc;header.example.models.paper_qutcc=q.example.models.paper_qutcc;
-}window.receiveExample(i,header.example)}example=cache.get(i);current=i;$('example').value=i;const q=new URLSearchParams(location.search);q.set('example',i);history.replaceState(null,'','?'+q);window.syncDemoNavigation?.();render();window.exampleBrowser?.update(i);$('status').textContent=`${i+1} / ${DATASET.count} · image ${example.id}`}catch(e){$('status').textContent='Could not load example: '+e.message}finally{lock(false)}}
+}header.example=await window.Coverage90.exp2Example(header.example,i,window.CAMERA);window.receiveExample(i,header.example)}example=cache.get(i);current=i;$('example').value=i;const q=new URLSearchParams(location.search);q.set('example',i);history.replaceState(null,'','?'+q);window.syncDemoNavigation?.();render();window.exampleBrowser?.update(i);$('status').textContent=`${i+1} / ${DATASET.count} · image ${example.id}`}catch(e){$('status').textContent='Could not load example: '+e.message}finally{lock(false)}}
 const stops=[[8,13,36],[48,54,154],[188,69,146],[250,159,105],[255,243,188]];
 const maxValue=()=>DATASET.mapMax||Math.max(DATASET.widthMax,DATASET.errorMax);
 function color(value){const t=Math.max(0,Math.min(1,value/maxValue()))*4,k=Math.min(3,Math.floor(t)),a=t-k;return stops[k].map((v,c)=>Math.round(v*(1-a)+stops[k+1][c]*a))}
@@ -28,10 +28,12 @@ function boot(){document.documentElement.style.setProperty('--models',ALL_MODELS
 
 function analysisKey(key){return key==='paper_qutcc'?'qutcc':key==='adaptive_qutcc'?null:key}
 function imageAnalysisMetrics(key){
+ if(window.Coverage90.active)return [];
  const method=analysisKey(key),row=window.analysisMetrics?.per_image?.[window.CAMERA]?.[method]?.find(r=>String(r.id)===String(example.id));
  return row?[['LPIPS',row.lpips.toFixed(5)],['Error–width Pearson',row.pearson?.toFixed(5)??'Undefined'],['Error–width Spearman',row.spearman?.toFixed(5)??'Undefined']]:[];
 }
 function renderSummary(){
+ if(window.Coverage90.active){window.Coverage90.exp2Summary();return;}
  $('aggregateRows').innerHTML=ALL_MODELS.map(([k,n])=>{
  if(!DATASET.methods.includes(k))return `<tr><td>${n}</td><td colspan="7">Unavailable</td></tr>`;
  const v=DATASET.aggregate[k],a=window.analysisMetrics?.summary?.cameras?.[window.CAMERA]?.[analysisKey(k)],extra=a?.status==='complete'?[a.lpips.mean,a.scales['0'].pearson.mean,a.scales['0'].spearman.mean].map(x=>x?.toFixed(5)??'Undefined'):['Pending','Pending','Pending'];
@@ -54,6 +56,7 @@ function renderAnalysis(){
 function renderHistory(){$('ensembleCurveStatus').textContent=`Validation milestones: Ensemble · 5 ${DATASET.history.ensemble5?.length||0}/10; Ensemble · 10 ${DATASET.history.ensemble10?.length||0}/10.`;const colors=['#91d9cd','#ffcc80','#c4a5ff','#72b7ff','#f18eaf','#ff8f70'];$('historyPlots').innerHTML=['psnr','ssim'].map(metric=>{const series=[['im2im','Im2im'],['ensemble5','Ensemble · 5'],['ensemble10','Ensemble · 10'],['mc_005','MC dropout'],['adaptive_qutcc','QUTCC adaptive · reference'],['paper_qutcc','QUTCC']].filter(([k])=>DATASET.history[k]?.length && !(window.paperStyleQutcc && k==='adaptive_qutcc')).map(([k,n],i)=>({name:n,color:colors[i],values:DATASET.history[k].filter(r=>r.epoch%5===0&&r.epoch<=DATASET.epoch).map(r=>[r.epoch,r.validation[metric]])}));const values=series.flatMap(s=>s.values.map(v=>v[1])),min=Math.min(...values),max=Math.max(...values),pad=Math.max((max-min)*.1,.001),lo=min-pad,hi=max+pad,X=x=>50+(x-5)/Math.max(5,DATASET.epoch-5)*420,Y=y=>180-(y-lo)/(hi-lo)*140;return `<div class="plot"><h3>Validation ${metric.toUpperCase()} · focused y-axis</h3><svg viewBox="0 0 500 225" role="img" aria-label="Validation ${metric}"><path d="M50 35V180H480" fill="none" stroke="#a4b4c4"/>${[0,.5,1].map(t=>`<text x="3" y="${Y(lo+t*(hi-lo))}" fill="#a4b4c4" font-size="11">${(lo+t*(hi-lo)).toFixed(metric==='ssim'?3:1)}</text>`).join('')}${Array.from({length:Math.floor(DATASET.epoch/5)},(_,i)=>(i+1)*5).map(x=>`<text x="${X(x)-6}" y="198" fill="#a4b4c4" font-size="11">${x}</text>`).join('')}${series.map(s=>`<polyline points="${s.values.map(([x,y])=>X(x)+','+Y(y)).join(' ')}" fill="none" stroke="${s.color}" stroke-width="2"/>${s.values.map(([x,y])=>`<circle cx="${X(x)}" cy="${Y(y)}" r="4" fill="${s.color}" tabindex="0"><title>${s.name}, epoch ${x}: ${y.toFixed(5)}</title></circle>`).join('')}`).join('')}<text x="215" y="220" fill="#a4b4c4" font-size="11">Training epoch</text>${epochComparisonAreas(series,metric,X)}</svg>${series.map(s=>`<span style="color:${s.color};margin-right:12px">${s.name}</span>`).join('')}</div>`}).join('')}
 
 function updateQuantileHeader(){
+ if(window.Coverage90.active){window.Coverage90.exp2Details();return;}
  if(window.paperStyleQutcc){
   const report=window.paperStyleQutcc.evaluations.at(-1),c=report.calibration;
   const details=$('factorRows').closest('details'),cal=document.createElement('p');
@@ -78,6 +81,7 @@ function updateQuantileHeader(){
 boot();
 
 function renderEnsembleComparison(){
+ if(window.Coverage90.active)return;
  const reports=window.ensembleComparison?.cameras[window.CAMERA]||{};
  const scopes=[['This image',example?.models.ensemble5?.metrics,example?.models.ensemble10?.metrics],['Displayed 50 images',DATASET.aggregate.ensemble5,DATASET.aggregate.ensemble10],['All 5,000 test images',reports.ensemble5?.full_test_aggregate,reports.ensemble10?.full_test_aggregate]];
  const signed=(x,n)=>`${x>=0?'+':''}${x.toFixed(n)}`;
@@ -89,10 +93,11 @@ function renderEnsembleComparison(){
 }
 
 function renderIntervalHistory(){
- const rows=(window.intervalCurves?.cameras[window.CAMERA]||[]).filter(r=>['im2im','ensemble5','ensemble10','mc_005'].includes(r.method));
+ let rows=(window.intervalCurves?.cameras[window.CAMERA]||[]).filter(r=>['im2im','ensemble5','ensemble10','mc_005'].includes(r.method));
  const specs=[['im2im','Im2im','#91d9cd'],['ensemble5','Ensemble · 5','#ffcc80'],['ensemble10','Ensemble · 10','#c4a5ff'],['mc_005','MC dropout','#72b7ff']];
- if(window.paperStyleQutcc){for(const r of window.paperStyleQutcc.evaluations)rows.push({method:'paper_qutcc',epoch:r.epoch,metrics:r.metrics.clipped});specs.push(['paper_qutcc','QUTCC','#ff8f70']);}
- $('intervalCurveStatus').textContent=`${rows.length}/${window.paperStyleQutcc?50:40} milestones · 5,000 test images · hover for values.`;
+ if(window.Coverage90.active){rows=window.Coverage90.exp2Curves();specs.push(['paper_qutcc','QUTCC','#ff8f70']);}
+ else if(window.paperStyleQutcc){for(const r of window.paperStyleQutcc.evaluations)rows.push({method:'paper_qutcc',epoch:r.epoch,metrics:r.metrics.clipped});specs.push(['paper_qutcc','QUTCC','#ff8f70']);}
+ $('intervalCurveStatus').textContent=window.Coverage90.active?`${rows.length} recalibrated models · latest checkpoint only · full test set`: `${rows.length}/${window.paperStyleQutcc?50:40} milestones · 5,000 test images · hover for values.`;
  $('intervalHistoryPlots').innerHTML=['width','coverage'].map(metric=>{
  const series=specs.map(([key,name,color])=>({name,color,values:rows.filter(r=>r.method===key).sort((a,b)=>a.epoch-b.epoch).map(r=>[r.epoch,r.metrics[metric]*(metric==='coverage'?100:1)])}));
  if(!series.some(s=>s.values.length))return `<div class="plot"><h3>${metric==='width'?'Mean interval width':'Actual test coverage'}</h3><p>Evaluation pending.</p></div>`;
@@ -105,7 +110,7 @@ function renderIntervalHistory(){
 }
 
 function epochComparisonAreas(series,metric,X){
- const epochs=Array.from({length:10},(_,i)=>(i+1)*5);
+ const epochs=window.Coverage90.active&&['width','coverage'].includes(metric)?[...new Set(series.flatMap(s=>s.values.map(v=>v[0])))].sort((a,b)=>a-b):Array.from({length:10},(_,i)=>(i+1)*5);
  return epochs.map(epoch=>{
   const info={epoch,metric,rows:series.map(s=>({name:s.name,color:s.color,value:s.values.find(v=>v[0]===epoch)?.[1]??null}))};
   const data=encodeURIComponent(JSON.stringify(info)).replace(/'/g,'%27');

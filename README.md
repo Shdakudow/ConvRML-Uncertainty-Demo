@@ -1,5 +1,28 @@
 # ConvRML reconstruction and uncertainty demo
 
+## Current comparison · coverage close to 90%
+
+[Experiment 2](https://shdakudow.github.io/ConvRML-Uncertainty-Demo/corrected-epoch50/)
+and [Experiment 3](https://shdakudow.github.io/ConvRML-Uncertainty-Demo/raw-diffusercam/)
+default to **Near 90%** empirical calibration. The latest frozen checkpoints use
+separate calibration images to target 90.0–90.1% coverage after clipping. Tables
+show actual calibration coverage and held-out test coverage separately. The test
+set never chooses interval parameters; test coverage may vary.
+
+The selector's **Reference** mode preserves the original RCPS/paper-style results
+and earlier milestone curves. Near-90% interval plots contain only checkpoints
+actually recalibrated under that protocol. The new image, bound, error and width
+maps use saved float32 arrays, audited against their metrics before publication.
+Training/validation curves are unchanged. Reference uncertainty–error correlation
+analyses are not presented as analyses of the new intervals.
+
+`tools/publish_coverage90.py` fetches completed evaluations, verifies and packages
+50 examples per model, publishes immutable array assets on a separate branch,
+and updates only `coverage90.json`. It never changes the reference result files.
+Run `tools/verify_coverage90.py` with the browser-test environment to check the
+local site, or pass the deployed base URL. Legacy/named-capture tabs retain their
+reference intervals.
+
 ## Named captures · Sensor12
 
 [Open the separate named-captures tab](https://shdakudow.github.io/ConvRML-Uncertainty-Demo/named-captures/).
