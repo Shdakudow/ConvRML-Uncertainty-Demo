@@ -10,10 +10,13 @@ show actual calibration coverage and held-out test coverage separately. The test
 set never chooses interval parameters; test coverage may vary.
 
 The selector's **Reference** mode preserves the original RCPS/paper-style results
-and earlier milestone curves. Near-90% interval plots contain only checkpoints
-actually recalibrated under that protocol. The new image, bound, error and width
+and its original milestone curves. Near-90% PSNR, SSIM, width and test-coverage
+curves evaluate saved checkpoints at epochs **5, 10, …, 50**, independently
+calibrating each one. Corrupted raw stops at its actual 30 adaptation epochs.
+Pending evaluations and calibration failures remain gaps. The image, bound, error and width
 maps use saved float32 arrays, audited against their metrics before publication.
-Training/validation curves are unchanged. Reference uncertainty–error correlation
+Near-90% accuracy curves use the full held-out test set, including 30-pass MC
+predictions; Reference retains the original validation curves. Reference uncertainty–error correlation
 analyses are not presented as analyses of the new intervals.
 
 `tools/publish_coverage90.py` fetches completed evaluations, verifies and packages
@@ -22,6 +25,11 @@ and updates only `coverage90.json`. It never changes the reference result files.
 Run `tools/verify_coverage90.py` with the browser-test environment to check the
 local site, or pass the deployed base URL. Legacy/named-capture tabs retain their
 reference intervals.
+
+`tools/publish_coverage90_curves.py` collects compact metrics with matching split
+identities and updates `coverage90_curves.json`. A local five-minute automation
+publishes results as the milestone jobs finish, without downloading new image
+caches. Hovering an epoch compares models' exact values and calibration coverage.
 
 ## Named captures · Sensor12
 

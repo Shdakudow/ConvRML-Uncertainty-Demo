@@ -4,12 +4,15 @@
   const root = new URL('./', document.currentScript.src);
   const active = new URLSearchParams(location.search).get('calibration') !== 'reference';
   const labels = {im2im: 'Im2im', ensemble5: 'Ensemble · 5', ensemble10: 'Ensemble · 10', mc_005: 'MC dropout', qutcc: 'QUTCC'};
-  let metadata;
+  let metadata, curves;
 
   async function init() {
     const response = await fetch(new URL('coverage90.json', root), {cache: 'no-store'});
     if (!response.ok) throw Error('Calibration metadata HTTP ' + response.status);
     metadata = await response.json();
+    const curveResponse = await fetch(new URL('coverage90_curves.json', root), {cache: 'no-store'});
+    if (!curveResponse.ok) throw Error('Calibration curves HTTP ' + curveResponse.status);
+    curves = await curveResponse.json();
     const nav = document.querySelector('main > nav');
     const label = document.createElement('label');
     label.textContent = 'Calibration ';
@@ -136,7 +139,7 @@
       return `<tr><td>${labels[method]}</td>${!c ? '<td colspan="2">Pending</td>' : method === 'qutcc' ? `<td>q=${c.lower_q.toFixed(8)}</td><td>q=${c.upper_q.toFixed(8)}</td>` : `<td>${c.scales.lower.toFixed(6)}</td><td>${c.scales.upper.toFixed(6)}</td>`}</tr>`;
     }).join('');
     const download = document.createElement('p');
-    download.innerHTML = '<a href="../coverage90.json">Download near-90% calibration and test metrics</a>';
+    download.innerHTML = '<a href="../coverage90.json">Download near-90% calibration and test metrics</a> · <a href="../coverage90_curves.json">Five-epoch curve data</a>';
     rows.closest('details').append(download);
     document.getElementById('ensembleDifferenceRows').closest('details').hidden = true;
     document.querySelector('#ensembleSize option[value="10"]').disabled = true;
@@ -151,12 +154,28 @@
     }
     const plots = document.getElementById('intervalHistoryPlots');
     const details = plots.previousElementSibling.previousElementSibling;
-    if (details.tagName === 'DETAILS') details.querySelector('p').textContent = 'Near-90% curves currently contain the latest recalibrated checkpoint only. Earlier milestones remain available in Reference mode. Each point uses independent calibration and the full held-out test set.';
+    if (details.tagName === 'DETAILS') details.querySelector('p').textContent = 'Each saved checkpoint at epochs 5, 10, …, 50 is calibrated independently and evaluated on the same full test split. Queued milestones remain pending; infeasible calibration leaves a gap. Hover to compare exact values, including calibration coverage.';
+    const accuracyDetails = document.getElementById('historyPlots').previousElementSibling.previousElementSibling;
+    if (accuracyDetails.tagName === 'DETAILS') {
+      accuracyDetails.querySelector('p').textContent = 'PSNR and SSIM use the same 5,000 held-out test images as the interval curves. MC dropout uses 30 stochastic passes; the ensemble uses five members. Every point comes from that epoch’s frozen checkpoint.';
+      accuracyDetails.previousElementSibling.textContent = 'Held-out reconstruction accuracy at each saved checkpoint. Hover for values.';
+    }
+  }
+
+  function curveRows(group) {
+    return Object.entries(curves?.groups?.[group] || {}).flatMap(([method, rows]) => rows.map(row => ({method, ...row})));
+  }
+
+  function curveStatus(group) {
+    const rows = curveRows(group), complete = rows.filter(row => row.status === 'complete').length;
+    const failed = rows.filter(row => row.status === 'failed').length;
+    return `${complete}/${rows.length} calibrated milestones · ${rows.length-complete-failed} pending${failed ? ' · '+failed+' calibration failures' : ''} · full held-out test set`;
   }
 
   function exp2Curves() {
-    return Object.entries(entries(window.CAMERA)).map(([method, entry]) => ({
-      method: method === 'qutcc' ? 'paper_qutcc' : method, epoch: entry.epoch, metrics: entry.metrics.clipped
+    return curveRows(window.CAMERA).filter(row => row.status === 'complete').map(row => ({
+      method: row.method === 'qutcc' ? 'paper_qutcc' : row.method, epoch: row.epoch,
+      metrics: row.metrics.clipped, calibration: row.calibration
     }));
   }
 
@@ -172,7 +191,8 @@
       summary.example_count = 50;
       summary.example_metrics = entry?.per_image.map(row => row.clipped);
       summary.epoch = entry?.epoch || (study === 'clean' ? 50 : 30);
-      summary.evaluations = entry ? [{epoch: entry.epoch, status: 'complete', metrics: entry.metrics, calibration: entry.calibration}] : [];
+      summary.evaluations = (curves?.groups?.[group]?.[method] || []).map(row => ({...row}));
+      summary.history = summary.history.filter(row => row.epoch <= (study === 'clean' ? 50 : 30));
     }
     return result;
   }
@@ -188,6 +208,6 @@
     return output;
   }
 
-  window.Coverage90 = {active, init, entries, status, exp2Dataset, exp2Example,
+  window.Coverage90 = {active, init, entries, status, curveRows, curveStatus, exp2Dataset, exp2Example,
                       exp2Summary, exp2Details, exp2Curves, rawDataset, rawExample};
 })();

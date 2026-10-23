@@ -5,6 +5,7 @@ An optional URL checks the deployed site; otherwise serves this checkout.
 """
 
 import base64
+import copy
 import functools
 import http.server
 import json
@@ -26,11 +27,40 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class Handler(http.server.SimpleHTTPRequestHandler):
+    curve_fixture = None
+
     def log_message(self, *args):
         pass
 
+    def do_GET(self):
+        if (
+            self.curve_fixture is not None
+            and self.path.split("?")[0] == "/coverage90_curves.json"
+        ):
+            body = json.dumps(self.curve_fixture).encode()
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Content-Length", str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
+            return
+        super().do_GET()
 
-def main(base=None):
+
+def main(base=None, fixture=False):
+    expected_curves = json.loads((ROOT / "coverage90_curves.json").read_text())
+    if fixture:
+        if base:
+            raise ValueError("Synthetic rendering fixtures may only be served locally")
+        expected_curves = copy.deepcopy(expected_curves)
+        rows = expected_curves["groups"]["rml"]["im2im"]
+        latest = rows[-1]
+        for index in (0, 1):
+            rows[index] = dict(copy.deepcopy(latest), epoch=(index + 1) * 5)
+        expected_curves["groups"]["rml"]["qutcc"][0] = dict(
+            epoch=5, status="failed", error="Synthetic test fixture"
+        )
+        Handler.curve_fixture = expected_curves
     server = None
     if base is None:
         server = http.server.ThreadingHTTPServer(
@@ -160,8 +190,27 @@ def main(base=None):
                     )
                     < 1e-7
                 )
+            expected_epochs = sorted(
+                {
+                    row["epoch"]
+                    for rows in expected_curves["groups"][camera].values()
+                    for row in rows
+                    if row["status"] == "complete"
+                }
+            )
+            actual_epochs = js(
+                "[...new Set([...document.querySelectorAll('#intervalHistoryPlots .epoch-hit')].map(e=>JSON.parse(decodeURIComponent(e.dataset.comparison)).epoch))].sort((a,b)=>a-b)"
+            )
+            assert actual_epochs == expected_epochs, (actual_epochs, expected_epochs)
+            assert js(
+                "document.querySelector('#intervalCurveStatus').textContent.includes('/40')"
+            )
+            if fixture and camera == "rml":
+                js(
+                    "[...document.querySelectorAll('#intervalHistoryPlots .epoch-hit')].find(e=>JSON.parse(decodeURIComponent(e.dataset.comparison)).epoch===5).dispatchEvent(new PointerEvent('pointerenter'))"
+                )
                 assert js(
-                    "[...document.querySelectorAll('#intervalHistoryPlots .epoch-hit')].every(e=>JSON.parse(decodeURIComponent(e.dataset.comparison)).epoch===50)"
+                    "[...document.querySelectorAll('#intervalHistoryPlots .epoch-tooltip')].some(t=>!t.hidden && t.textContent.includes('Calibration failed'))"
                 )
             js("document.querySelector('#boundsToggle').click()")
             assert js(
@@ -193,6 +242,20 @@ def main(base=None):
             assert sorted(js("Object.keys(example.models)")) == sorted(expected)
             assert js("document.querySelectorAll('#aggregateRows tr').length") == 2
             assert js("document.querySelectorAll('#intervalPlots .plot').length") == 2
+            assert js("document.querySelectorAll('#calibrationRows tr').length") == (
+                20 if study == "clean" else 12
+            )
+            failed = sum(
+                row["status"] == "failed"
+                for rows in expected_curves["groups"]["raw_" + study].values()
+                for row in rows
+            )
+            assert (
+                js(
+                    "[...document.querySelectorAll('#intervalPlots text')].filter(t=>t.textContent==='×').length"
+                )
+                == 2 * failed
+            )
             assert js(
                 "document.querySelector('#calibrationProtocol').textContent.includes('90.0–90.1%')"
             )
@@ -221,7 +284,7 @@ def main(base=None):
         screenshot("coverage90_mobile")
         assert not errors, errors
         print(
-            "PASS: Exp2 RML/DiffuserCam, raw clean/corrupted, exact saved metrics, pending models, separate calibration/test coverage, bound toggles, sample navigation, reference switching, curve provenance, mobile layout."
+            "PASS: Exp2 RML/DiffuserCam, raw clean/corrupted, exact saved metrics, five-epoch curve provenance, pending/failure distinctions, reference switching, bounds, navigation, mobile layout."
         )
         ws.close()
     finally:
@@ -238,4 +301,10 @@ def main(base=None):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1] if len(sys.argv) > 1 else None)
+    import argparse
+
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("base", nargs="?")
+    parser.add_argument("--fixture", action="store_true")
+    args = parser.parse_args()
+    main(args.base, args.fixture)

@@ -33,5 +33,5 @@ const metricResponse=await fetch('analysis_metrics.json',{cache:'no-store'});
 if(metricResponse.ok)window.analysisMetrics=await metricResponse.json();
 window.exampleCategories=await (await fetch('../example-categories.json',{cache:'no-store'})).json();
 window.Coverage90.exp2Dataset(DATASET, window.CAMERA);
-const app=document.createElement('script');app.src='app.js?v=20261022coverage';document.body.append(app);
+const app=document.createElement('script');app.src='app.js?v=20261023milestones';document.body.append(app);
 }catch(e){document.getElementById('status').textContent='Inference export is not yet published: '+e.message;}})();
