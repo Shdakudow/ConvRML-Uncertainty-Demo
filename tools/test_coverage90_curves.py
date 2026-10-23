@@ -20,13 +20,13 @@ class Curves(unittest.TestCase):
         row.update(status="failed", error="No feasible extreme quantile endpoints")
         self.assertEqual(validate(payload)["counts"]["failed"], 1)
         row["metrics"] = dict(coverage=0.9)
-        with self.assertRaises(AssertionError):
+        with self.assertRaises(ValueError):
             validate(payload)
 
     def test_duplicate_epoch_rejected(self):
         payload = empty()
         payload["groups"]["rml"]["im2im"][1]["epoch"] = 5
-        with self.assertRaises(AssertionError):
+        with self.assertRaises(ValueError):
             validate(payload)
 
     def test_full_test_count_and_calibration_provenance_required(self):
@@ -49,10 +49,10 @@ class Curves(unittest.TestCase):
         self.assertEqual(validate(payload)["counts"]["complete"], 1)
         bad = copy.deepcopy(payload)
         bad["groups"]["rml"]["im2im"][0]["test_count"] = 50
-        with self.assertRaises(AssertionError):
+        with self.assertRaises(ValueError):
             validate(bad)
         row["calibration"]["confidence_guarantee"] = True
-        with self.assertRaises(AssertionError):
+        with self.assertRaises(ValueError):
             validate(payload)
 
 

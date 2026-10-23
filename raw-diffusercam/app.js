@@ -1,85 +1,564 @@
-'use strict';
-const METHODS=['qutcc','im2im'],NAMES={qutcc:'QUTCC',im2im:'Im2im'},COLORS={qutcc:'#63dbce',im2im:'#f2b76a'};
-const $=s=>document.querySelector(s),fmt=(v,n=5)=>Number.isFinite(v)?v.toFixed(n):'Unavailable',pct=v=>Number.isFinite(v)?(100*v).toFixed(3)+'%':'Unavailable';
-let referenceData,data,assets,categories,study='clean',index=0,example=null,busy=false,point={x:240,y:135},requestSerial=0;
-const MAP_MAX=.35,CACHE=new Map();
-function escapeHTML(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function metricText(m){return `PSNR ${fmt(m.psnr,3)} dB · SSIM ${fmt(m.ssim)} · Coverage ${pct(m.coverage)} · Width ${fmt(m.width)}`}
-function stateURL(){const u=new URL(location.href);u.searchParams.set('study',study);u.searchParams.set('example',index);history.replaceState(null,'',u);window.syncDemoNavigation?.()}
-function summary(method){return data.studies[study][method]}
-function controls(disabled){window.exampleBrowser?.setBusy(disabled);for(const id of ['example','previous','next','random'])$('#'+id).disabled=disabled}
-async function unpack(url){
- const response=await fetch(url);if(!response.ok)throw Error(`Array export HTTP ${response.status}`);
- const decompressed=new Response(response.body.pipeThrough(new DecompressionStream('gzip'))),buffer=await decompressed.arrayBuffer(),view=new DataView(buffer),length=view.getUint32(0,true);
- const header=JSON.parse(new TextDecoder().decode(new Uint8Array(buffer,4,length))),start=4+length,arrays={};
- for(const d of header.arrays){const bytes=new Uint8Array(buffer,start+d.offset,d.length);let array;
-  if(d.encoding==='uint8'){array=Uint8Array.from(bytes)}else{const size=bytes.length/4,ordered=new Uint8Array(bytes.length);for(let byte=0;byte<4;byte++)for(let i=0;i<size;i++)ordered[4*i+byte]=bytes[byte*size+i];array=new Float32Array(ordered.buffer)}
-  arrays[d.name]=array;
- }
- return {...header,...arrays};
+"use strict";
+const METHODS = ["qutcc", "im2im"],
+  NAMES = { qutcc: "QUTCC", im2im: "Im2im" },
+  COLORS = { qutcc: "#63dbce", im2im: "#f2b76a" };
+const $ = (s) => document.querySelector(s),
+  fmt = (v, n = 5) => (Number.isFinite(v) ? v.toFixed(n) : "Unavailable"),
+  pct = (v) =>
+    Number.isFinite(v) ? (100 * v).toFixed(3) + "%" : "Unavailable";
+let referenceData,
+  data,
+  assets,
+  categories,
+  study = "clean",
+  index = 0,
+  example = null,
+  busy = false,
+  point = { x: 240, y: 135 },
+  requestSerial = 0;
+const MAP_MAX = 0.35,
+  CACHE = new Map();
+function escapeHTML(v) {
+  return String(v).replace(
+    /[&<>"']/g,
+    (c) =>
+      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[
+        c
+      ],
+  );
 }
-function renderTables(){
- if(window.Coverage90.active){
-  $('#curveProtocol').textContent='All four curves use the same 2,000 held-out test images at each saved five-epoch checkpoint, with a separate 3,000-image calibration split. Pending evaluations and calibration failures remain gaps. Hover to compare exact values.';
-  $('#curveDownload').hidden=false;$('#metricsDownload').href='../coverage90.json';$('#metricsDownload').textContent='Download near-90% calibration and test metrics';
-  $('#calibrationProtocol').textContent='Near-90% empirical calibration on 3,000 separate images: refine global QUTCC quantile inputs or independent Im2im endpoint scales. Target calibration coverage is 90.0–90.1%; held-out test coverage may vary. No RCPS guarantee.';
-  $('#calibrationClipping').textContent='Calibration and displayed metrics use clipped [0,1] endpoints. Endpoints are never sorted. Width and error maps share the same scale.';
- }
+function metricText(m) {
+  return `PSNR ${fmt(m.psnr, 3)} dB · SSIM ${fmt(m.ssim)} · Coverage ${pct(m.coverage)} · Width ${fmt(m.width)}`;
+}
+function stateURL() {
+  const u = new URL(location.href);
+  u.searchParams.set("study", study);
+  u.searchParams.set("example", index);
+  history.replaceState(null, "", u);
+  window.syncDemoNavigation?.();
+}
+function summary(method) {
+  return data.studies[study][method];
+}
+function controls(disabled) {
+  window.exampleBrowser?.setBusy(disabled);
+  for (const id of ["example", "previous", "next", "random"])
+    $("#" + id).disabled = disabled;
+}
+async function unpack(url) {
+  const response = await fetch(url);
+  if (!response.ok) throw Error(`Array export HTTP ${response.status}`);
+  const decompressed = new Response(
+      response.body.pipeThrough(new DecompressionStream("gzip")),
+    ),
+    buffer = await decompressed.arrayBuffer(),
+    view = new DataView(buffer),
+    length = view.getUint32(0, true);
+  const header = JSON.parse(
+      new TextDecoder().decode(new Uint8Array(buffer, 4, length)),
+    ),
+    start = 4 + length,
+    arrays = {};
+  for (const d of header.arrays) {
+    const bytes = new Uint8Array(buffer, start + d.offset, d.length);
+    let array;
+    if (d.encoding === "uint8") {
+      array = Uint8Array.from(bytes);
+    } else {
+      const size = bytes.length / 4,
+        ordered = new Uint8Array(bytes.length);
+      for (let byte = 0; byte < 4; byte++)
+        for (let i = 0; i < size; i++)
+          ordered[4 * i + byte] = bytes[byte * size + i];
+      array = new Float32Array(ordered.buffer);
+    }
+    arrays[d.name] = array;
+  }
+  return { ...header, ...arrays };
+}
+function renderTables() {
+  if (window.Coverage90.active) {
+    $("#curveProtocol").textContent =
+      "All four curves use the same 2,000 held-out test images at each saved five-epoch checkpoint, with a separate 3,000-image calibration split. Pending evaluations and calibration failures remain gaps. Hover to compare exact values.";
+    $("#curveDownload").hidden = false;
+    $("#metricsDownload").href = "../coverage90.json";
+    $("#metricsDownload").textContent =
+      "Download near-90% calibration and test metrics";
+    $("#calibrationProtocol").textContent =
+      "Near-90% empirical calibration on 3,000 separate images: refine global QUTCC quantile inputs or independent Im2im endpoint scales. Target calibration coverage is 90.0–90.1%; held-out test coverage may vary. No RCPS guarantee.";
+    $("#calibrationClipping").textContent =
+      "Calibration and displayed metrics use clipped [0,1] endpoints. Endpoints are never sorted. Width and error maps share the same scale.";
+  }
 
- $('#aggregateRows').innerHTML=METHODS.map(method=>{const s=summary(method),m=s.metrics?.clipped;if(!m)return `<tr><td>${NAMES[method]}</td><td>${s.epoch}</td><td colspan="6">Inference pending</td></tr>`;return `<tr><td>${NAMES[method]}</td><td>${s.epoch}</td><td>${fmt(m.psnr,3)}</td><td>${fmt(m.ssim)}</td><td>${pct(s.calibration?.calibration_coverage)}</td><td>${pct(m.coverage)}</td><td>${fmt(m.width)}</td><td>${fmt(m.mae)}</td></tr>`}).join('');
- $('#calibrationRows').innerHTML=METHODS.flatMap(method=>summary(method).evaluations.map(e=>({method,...e}))).sort((a,b)=>a.epoch-b.epoch||a.method.localeCompare(b.method)).map(e=>{
-  if(e.status!=='complete'&&e.reference){const c=e.reference.calibration,m=e.reference.metrics.clipped;return `<tr class="failed"><td>${e.epoch}</td><td>${NAMES[e.method]}</td><td>Native reference · calibration failed</td><td>${fmt(c.lower_q,6)}</td><td>${fmt(c.upper_q,6)}</td><td>${pct(m.coverage)}</td><td>${fmt(m.width,6)}</td></tr>`;}
-  if(e.status==='pending')return `<tr><td>${e.epoch}</td><td>${NAMES[e.method]}</td><td>Evaluation pending</td><td colspan="4">—</td></tr>`;
-  if(e.status!=='complete')return `<tr class="failed"><td>${e.epoch}</td><td>${NAMES[e.method]}</td><td title="${escapeHTML(e.failure?.error||'Calibration failed')}">Calibration failed</td><td>—</td><td>—</td><td>Unavailable</td><td>Unavailable</td></tr>`;
-  const c=e.calibration,q=e.method==='qutcc';return `<tr><td>${e.epoch}</td><td>${NAMES[e.method]}</td><td>${q?'Quantile search':'Asymmetric scales'}</td><td>${fmt(q?c.lower_q:c.scales.lower,6)}</td><td>${fmt(q?c.upper_q:c.scales.upper,6)}</td><td>${pct(e.metrics.clipped.coverage)}</td><td>${fmt(e.metrics.clipped.width,6)}</td></tr>`
- }).join('');
- const refreshed=METHODS.filter(m=>summary(m).refreshed).map(m=>NAMES[m]);
- $('#refreshStatus').textContent=window.Coverage90.active?window.Coverage90.curveStatus('raw_'+study):`Fresh calibration/export checks: ${refreshed.length?refreshed.join(', ')+' complete':'submitted; showing completed original evaluations'}. ${Math.min(...METHODS.map(m=>summary(m).example_count))} test examples currently available. Full-test metrics always cover 2,000 images.`;
- $('#settings').textContent=study==='clean'?'Original raw experiment: both models trained from random initialization for 50 epochs.':`Corruption adaptation: 30 clean-data pretraining epochs, followed by ${summary('qutcc').epoch} completed adaptation epochs on the fixed reviewed corrupted inputs. Adam moments were initialized at the start of adaptation and retained when continuing past adaptation epoch 10. Learning rate remains 0.00001. Targets and split IDs are unchanged.`;
- $('#provenance').textContent=study==='clean'?`Images: epoch ${summary('qutcc').epoch} · ${summary('qutcc').example_count} examples`:`Images: 30 clean epochs + ${summary('qutcc').epoch} adaptation epochs · ${summary('qutcc').example_count} examples`;
- const lastEpoch=Math.max(...METHODS.flatMap(m=>summary(m).history.map(r=>r.epoch)));
- $('#curveNote').textContent=study==='clean'?`Curves through epoch ${lastEpoch} · Images from epoch ${summary('qutcc').epoch}`:`Adaptation curves through ${lastEpoch} / 30 epochs · Images from adaptation epoch ${summary('qutcc').epoch}`;
+  $("#aggregateRows").innerHTML = METHODS.map((method) => {
+    const s = summary(method),
+      m = s.metrics?.clipped;
+    if (!m)
+      return `<tr><td>${NAMES[method]}</td><td>${s.epoch}</td><td colspan="6">Inference pending</td></tr>`;
+    return `<tr><td>${NAMES[method]}</td><td>${s.epoch}</td><td>${fmt(m.psnr, 3)}</td><td>${fmt(m.ssim)}</td><td>${pct(s.calibration?.calibration_coverage)}</td><td>${pct(m.coverage)}</td><td>${fmt(m.width)}</td><td>${fmt(m.mae)}</td></tr>`;
+  }).join("");
+  $("#calibrationRows").innerHTML = METHODS.flatMap((method) =>
+    summary(method).evaluations.map((e) => ({ method, ...e })),
+  )
+    .sort((a, b) => a.epoch - b.epoch || a.method.localeCompare(b.method))
+    .map((e) => {
+      if (e.status !== "complete" && e.reference) {
+        const c = e.reference.calibration,
+          m = e.reference.metrics.clipped;
+        return `<tr class="failed"><td>${e.epoch}</td><td>${NAMES[e.method]}</td><td>Native reference · calibration failed</td><td>${fmt(c.lower_q, 6)}</td><td>${fmt(c.upper_q, 6)}</td><td>${pct(m.coverage)}</td><td>${fmt(m.width, 6)}</td></tr>`;
+      }
+      if (e.status === "pending")
+        return `<tr><td>${e.epoch}</td><td>${NAMES[e.method]}</td><td>Evaluation pending</td><td colspan="4">—</td></tr>`;
+      if (e.status !== "complete")
+        return `<tr class="failed"><td>${e.epoch}</td><td>${NAMES[e.method]}</td><td title="${escapeHTML(e.failure?.error || "Calibration failed")}">Calibration failed</td><td>—</td><td>—</td><td>Unavailable</td><td>Unavailable</td></tr>`;
+      const c = e.calibration,
+        q = e.method === "qutcc";
+      return `<tr><td>${e.epoch}</td><td>${NAMES[e.method]}</td><td>${q ? "Quantile search" : "Asymmetric scales"}</td><td>${fmt(q ? c.lower_q : c.scales.lower, 6)}</td><td>${fmt(q ? c.upper_q : c.scales.upper, 6)}</td><td>${pct(e.metrics.clipped.coverage)}</td><td>${fmt(e.metrics.clipped.width, 6)}</td></tr>`;
+    })
+    .join("");
+  const refreshed = METHODS.filter((m) => summary(m).refreshed).map(
+    (m) => NAMES[m],
+  );
+  $("#refreshStatus").textContent = window.Coverage90.active
+    ? window.Coverage90.curveStatus("raw_" + study)
+    : `Fresh calibration/export checks: ${refreshed.length ? refreshed.join(", ") + " complete" : "submitted; showing completed original evaluations"}. ${Math.min(...METHODS.map((m) => summary(m).example_count))} test examples currently available. Full-test metrics always cover 2,000 images.`;
+  $("#settings").textContent =
+    study === "clean"
+      ? "Original raw experiment: both models trained from random initialization for 50 epochs."
+      : `Corruption adaptation: 30 clean-data pretraining epochs, followed by ${summary("qutcc").epoch} completed adaptation epochs on the fixed reviewed corrupted inputs. Adam moments were initialized at the start of adaptation and retained when continuing past adaptation epoch 10. Learning rate remains 0.00001. Targets and split IDs are unchanged.`;
+  $("#provenance").textContent =
+    study === "clean"
+      ? `Images: epoch ${summary("qutcc").epoch} · ${summary("qutcc").example_count} examples`
+      : `Images: 30 clean epochs + ${summary("qutcc").epoch} adaptation epochs · ${summary("qutcc").example_count} examples`;
+  const lastEpoch = Math.max(
+    ...METHODS.flatMap((m) => summary(m).history.map((r) => r.epoch)),
+  );
+  $("#curveNote").textContent =
+    study === "clean"
+      ? `Curves through epoch ${lastEpoch} · Images from epoch ${summary("qutcc").epoch}`
+      : `Adaptation curves through ${lastEpoch} / 30 epochs · Images from adaptation epoch ${summary("qutcc").epoch}`;
 }
-function makePlot(container,title,key,kind){
- const plot=document.createElement('div');plot.className='plot';const histories={};
- for(const method of METHODS){const s=summary(method);histories[method]=kind==='validation'?s.history.map(r=>({epoch:r.epoch,value:r.validation[key]})):s.evaluations.map(r=>({epoch:r.epoch,status:r.status,calibrationCoverage:r.calibration?.calibration_coverage,value:r.status==='complete'?r.metrics.clipped[key]:null,reference:r.reference?.metrics.clipped[key]}));
-  if(kind==='validation'&&s.baseline_validation)histories[method].unshift({epoch:0,value:s.baseline_validation.validation[key]});
- }
- const epochs=[...new Set(METHODS.flatMap(m=>histories[m].map(r=>r.epoch)))].sort((a,b)=>a-b),scale=key==='coverage'?100:1;
- const values=METHODS.flatMap(m=>histories[m].flatMap(r=>[r.value,r.reference].filter(Number.isFinite).map(v=>v*scale)));if(!values.length){plot.innerHTML=`<h3>${title}</h3><p>Near-90% inference pending.</p>`;container.append(plot);return;}
- let lo=Math.min(...values),hi=Math.max(...values),pad=Math.max((hi-lo)*.12,key==='ssim'?.001:key==='coverage'?.025:key==='width'?.001:.05);lo-=pad;hi+=pad;
- const W=700,H=270,L=64,R=20,T=18,B=42,x=e=>L+(e-epochs[0])/Math.max(1,epochs.at(-1)-epochs[0])*(W-L-R),y=v=>H-B-(v-lo)/(hi-lo)*(H-T-B);
- let svg=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${title}">`;
- for(let i=0;i<5;i++){const v=lo+(hi-lo)*i/4;svg+=`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="#354357"/><text x="${L-8}" y="${y(v)+4}" fill="#bac7d6" font-size="12" text-anchor="end">${v.toFixed(key==='psnr'?2:3)}</text>`}
- for(const e of epochs.filter(e=>epochs.length<=12||e===0||e===1||e%5===0))svg+=`<text x="${x(e)}" y="${H-18}" fill="#bac7d6" font-size="12" text-anchor="middle">${e}</text>`;
- for(const method of METHODS){let d='';for(const r of histories[method]){if(!Number.isFinite(r.value)){d='';continue}const cmd=`${d?'L':'M'}${x(r.epoch)},${y(r.value*scale)}`;svg+=`<path d="${d+cmd}" fill="none" stroke="${COLORS[method]}" stroke-width="2"/>`;d+=cmd;svg+=`<circle cx="${x(r.epoch)}" cy="${y(r.value*scale)}" r="3" fill="${COLORS[method]}"/>`}}
- for(const method of METHODS)for(const r of histories[method]){if(Number.isFinite(r.reference)){const px=x(r.epoch),py=y(r.reference*scale);svg+=`<path d="M${px},${py-6} l6,6 -6,6 -6,-6 Z" fill="#101722" stroke="${COLORS[method]}" stroke-width="2"><title>Epoch ${r.epoch}: uncalibrated native reference</title></path>`}else if(!Number.isFinite(r.value)&&r.status!=='pending')svg+=`<text x="${x(r.epoch)}" y="${H-B+10}" fill="#f8b4a7" font-size="16" text-anchor="middle">×</text>`;}
- svg+='<line class="epoch-guide" hidden/>';
- for(let i=0;i<epochs.length;i++){const e=epochs[i],left=i?((x(e)+x(epochs[i-1]))/2):L,right=i<epochs.length-1?(x(e)+x(epochs[i+1]))/2:W-R;svg+=`<rect class="epoch-hit" tabindex="0" role="button" aria-label="Compare epoch ${e}" data-epoch="${e}" x="${left}" y="${T}" width="${Math.max(1,right-left)}" height="${H-T-B}"/>`}
- svg+='</svg>';plot.innerHTML=`<h3>${title}</h3><div class="legend">${METHODS.map(m=>`<span style="color:${COLORS[m]}">${NAMES[m]}</span>`).join('')}</div>${svg}<div class="tooltip" hidden></div>`;
- const tip=plot.querySelector('.tooltip'),guide=plot.querySelector('.epoch-guide');
- const show=e=>{tip.hidden=false;tip.innerHTML=`<b>Epoch ${e}</b><table>${METHODS.map(m=>{const row=histories[m].find(r=>r.epoch===e),v=row?.value,ref=row?.reference;return `<tr><td style="color:${COLORS[m]}">${NAMES[m]}</td><td>${Number.isFinite(v)?(v*scale).toFixed(6)+(key==='coverage'?'%':''):Number.isFinite(ref)?(ref*scale).toFixed(6)+(key==='coverage'?'%':'')+' · Native, uncalibrated':window.Coverage90.active?(row?.status==='failed'?'Calibration failed':'Evaluation pending'):'Calibration failed · recheck pending / unavailable'}${window.Coverage90.active&&Number.isFinite(row?.calibrationCoverage)?` · cal ${(100*row.calibrationCoverage).toFixed(3)}%`:''}</td></tr>`}).join('')}</table>`;guide.removeAttribute('hidden');for(const [k,v] of Object.entries({x1:x(e),x2:x(e),y1:T,y2:H-B}))guide.setAttribute(k,v)};
- for(const hit of plot.querySelectorAll('.epoch-hit')){hit.onpointerenter=hit.onfocus=()=>show(Number(hit.dataset.epoch));hit.onkeydown=e=>{if(!['ArrowLeft','ArrowRight'].includes(e.key))return;e.preventDefault();const nodes=[...plot.querySelectorAll('.epoch-hit')],i=nodes.indexOf(hit),j=Math.max(0,Math.min(nodes.length-1,i+(e.key==='ArrowRight'?1:-1)));nodes[j].focus()}}
- plot.onpointerleave=()=>{tip.hidden=true;guide.setAttribute('hidden','')};container.append(plot);
+function makePlot(container, title, key, kind) {
+  const plot = document.createElement("div");
+  plot.className = "plot";
+  const histories = {};
+  for (const method of METHODS) {
+    const s = summary(method);
+    histories[method] =
+      kind === "validation"
+        ? s.history.map((r) => ({ epoch: r.epoch, value: r.validation[key] }))
+        : s.evaluations.map((r) => ({
+            epoch: r.epoch,
+            status: r.status,
+            calibrationCoverage: r.calibration?.calibration_coverage,
+            value: r.status === "complete" ? r.metrics.clipped[key] : null,
+            reference: r.reference?.metrics.clipped[key],
+          }));
+    if (kind === "validation" && s.baseline_validation)
+      histories[method].unshift({
+        epoch: 0,
+        value: s.baseline_validation.validation[key],
+      });
+  }
+  const epochs = [
+      ...new Set(METHODS.flatMap((m) => histories[m].map((r) => r.epoch))),
+    ].sort((a, b) => a - b),
+    scale = key === "coverage" ? 100 : 1;
+  const values = METHODS.flatMap((m) =>
+    histories[m].flatMap((r) =>
+      [r.value, r.reference].filter(Number.isFinite).map((v) => v * scale),
+    ),
+  );
+  if (!values.length) {
+    plot.innerHTML = `<h3>${title}</h3><p>Near-90% inference pending.</p>`;
+    container.append(plot);
+    return;
+  }
+  let lo = Math.min(...values),
+    hi = Math.max(...values),
+    pad = Math.max(
+      (hi - lo) * 0.12,
+      key === "ssim"
+        ? 0.001
+        : key === "coverage"
+          ? 0.025
+          : key === "width"
+            ? 0.001
+            : 0.05,
+    );
+  lo -= pad;
+  hi += pad;
+  const W = 700,
+    H = 270,
+    L = 64,
+    R = 20,
+    T = 18,
+    B = 42,
+    x = (e) =>
+      L +
+      ((e - epochs[0]) / Math.max(1, epochs.at(-1) - epochs[0])) * (W - L - R),
+    y = (v) => H - B - ((v - lo) / (hi - lo)) * (H - T - B);
+  let svg = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${title}">`;
+  for (let i = 0; i < 5; i++) {
+    const v = lo + ((hi - lo) * i) / 4;
+    svg += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="#354357"/><text x="${L - 8}" y="${y(v) + 4}" fill="#bac7d6" font-size="12" text-anchor="end">${v.toFixed(key === "psnr" ? 2 : 3)}</text>`;
+  }
+  for (const e of epochs.filter(
+    (e) => epochs.length <= 12 || e === 0 || e === 1 || e % 5 === 0,
+  ))
+    svg += `<text x="${x(e)}" y="${H - 18}" fill="#bac7d6" font-size="12" text-anchor="middle">${e}</text>`;
+  for (const method of METHODS) {
+    let d = "";
+    for (const r of histories[method]) {
+      if (!Number.isFinite(r.value)) {
+        d = "";
+        continue;
+      }
+      const cmd = `${d ? "L" : "M"}${x(r.epoch)},${y(r.value * scale)}`;
+      svg += `<path d="${d + cmd}" fill="none" stroke="${COLORS[method]}" stroke-width="2"/>`;
+      d += cmd;
+      svg += `<circle cx="${x(r.epoch)}" cy="${y(r.value * scale)}" r="3" fill="${COLORS[method]}"/>`;
+    }
+  }
+  for (const method of METHODS)
+    for (const r of histories[method]) {
+      if (Number.isFinite(r.reference)) {
+        const px = x(r.epoch),
+          py = y(r.reference * scale);
+        svg += `<path d="M${px},${py - 6} l6,6 -6,6 -6,-6 Z" fill="#101722" stroke="${COLORS[method]}" stroke-width="2"><title>Epoch ${r.epoch}: uncalibrated native reference</title></path>`;
+      } else if (!Number.isFinite(r.value) && r.status !== "pending")
+        svg += `<text x="${x(r.epoch)}" y="${H - B + 10}" fill="#f8b4a7" font-size="16" text-anchor="middle">×</text>`;
+    }
+  svg += '<line class="epoch-guide" hidden/>';
+  for (let i = 0; i < epochs.length; i++) {
+    const e = epochs[i],
+      left = i ? (x(e) + x(epochs[i - 1])) / 2 : L,
+      right = i < epochs.length - 1 ? (x(e) + x(epochs[i + 1])) / 2 : W - R;
+    svg += `<rect class="epoch-hit" tabindex="0" role="button" aria-label="Compare epoch ${e}" data-epoch="${e}" x="${left}" y="${T}" width="${Math.max(1, right - left)}" height="${H - T - B}"/>`;
+  }
+  svg += "</svg>";
+  plot.innerHTML = `<h3>${title}</h3><div class="legend">${METHODS.map((m) => `<span style="color:${COLORS[m]}">${NAMES[m]}</span>`).join("")}</div>${svg}<div class="tooltip" hidden></div>`;
+  const tip = plot.querySelector(".tooltip"),
+    guide = plot.querySelector(".epoch-guide");
+  const show = (e) => {
+    tip.hidden = false;
+    tip.innerHTML = `<b>Epoch ${e}</b><table>${METHODS.map((m) => {
+      const row = histories[m].find((r) => r.epoch === e),
+        v = row?.value,
+        ref = row?.reference;
+      return `<tr><td style="color:${COLORS[m]}">${NAMES[m]}</td><td>${Number.isFinite(v) ? (v * scale).toFixed(6) + (key === "coverage" ? "%" : "") : Number.isFinite(ref) ? (ref * scale).toFixed(6) + (key === "coverage" ? "%" : "") + " · Native, uncalibrated" : window.Coverage90.active ? (row?.status === "failed" ? "Calibration failed" : "Evaluation pending") : "Calibration failed · recheck pending / unavailable"}${window.Coverage90.active && Number.isFinite(row?.calibrationCoverage) ? ` · cal ${(100 * row.calibrationCoverage).toFixed(3)}%` : ""}</td></tr>`;
+    }).join("")}</table>`;
+    guide.removeAttribute("hidden");
+    for (const [k, v] of Object.entries({
+      x1: x(e),
+      x2: x(e),
+      y1: T,
+      y2: H - B,
+    }))
+      guide.setAttribute(k, v);
+  };
+  for (const hit of plot.querySelectorAll(".epoch-hit")) {
+    hit.onpointerenter = hit.onfocus = () => show(Number(hit.dataset.epoch));
+    hit.onkeydown = (e) => {
+      if (!["ArrowLeft", "ArrowRight"].includes(e.key)) return;
+      e.preventDefault();
+      const nodes = [...plot.querySelectorAll(".epoch-hit")],
+        i = nodes.indexOf(hit),
+        j = Math.max(
+          0,
+          Math.min(nodes.length - 1, i + (e.key === "ArrowRight" ? 1 : -1)),
+        );
+      nodes[j].focus();
+    };
+  }
+  plot.onpointerleave = () => {
+    tip.hidden = true;
+    guide.setAttribute("hidden", "");
+  };
+  container.append(plot);
 }
-function renderCurves(){for(const id of ['historyPlots','intervalPlots'])$('#'+id).innerHTML='';makePlot($('#historyPlots'),window.Coverage90.active?'Test PSNR (dB)':'Validation PSNR (dB)','psnr',window.Coverage90.active?'test':'validation');makePlot($('#historyPlots'),window.Coverage90.active?'Test SSIM':'Validation SSIM','ssim',window.Coverage90.active?'test':'validation');makePlot($('#intervalPlots'),'Mean interval width · test','width','test');makePlot($('#intervalPlots'),'Actual test coverage (%)','coverage','test')}
-function heat(v){if(v<0)return [255,50,150];let t=Math.min(1,Math.max(0,v/MAP_MAX));const stops=[[20,35,60],[34,95,157],[35,185,172],[243,203,85],[250,112,82]],i=Math.min(3,Math.floor(t*4)),f=t*4-i;return stops[i].map((a,k)=>Math.round(a+(stops[i+1][k]-a)*f))}
-function paint(canvas,kind,model){const {width:w,height:h}=example,N=w*h;canvas.width=w;canvas.height=h;const ctx=canvas.getContext('2d'),img=ctx.createImageData(w,h);let arr;
- if(kind==='measurement'||kind==='target')arr=example[kind];else arr=example.models[model][kind];
- for(let i=0;i<N;i++){let rgb;if(kind==='error'||kind==='width'){let value=0;const m=example.models[model];for(let c=0;c<3;c++){const k=c*N+i;value+=kind==='error'?Math.abs(example.target[k]/255-m.prediction[k]):m.upper[k]-m.lower[k]}rgb=heat(value/3)}else rgb=[0,1,2].map(c=>Math.max(0,Math.min(255,arr[c*N+i]*(arr instanceof Uint8Array?1:255))));for(let c=0;c<3;c++)img.data[4*i+c]=rgb[c];img.data[4*i+3]=255}ctx.putImageData(img,0,0);
- if(kind!=='measurement'){ctx.strokeStyle='#fff';ctx.lineWidth=1;ctx.strokeRect(point.x-3,point.y-3,7,7)}
- if(kind==='measurement'){canvas.onclick=null;return;}
- canvas.onclick=e=>{const r=canvas.getBoundingClientRect();point={x:Math.max(0,Math.min(w-1,Math.floor((e.clientX-r.left)/r.width*w))),y:Math.max(0,Math.min(h-1,Math.floor((e.clientY-r.top)/r.height*h)))};$('#pixelInspector').open=true;drawImages()};
+function renderCurves() {
+  for (const id of ["historyPlots", "intervalPlots"])
+    $("#" + id).innerHTML = "";
+  makePlot(
+    $("#historyPlots"),
+    window.Coverage90.active ? "Test PSNR (dB)" : "Validation PSNR (dB)",
+    "psnr",
+    window.Coverage90.active ? "test" : "validation",
+  );
+  makePlot(
+    $("#historyPlots"),
+    window.Coverage90.active ? "Test SSIM" : "Validation SSIM",
+    "ssim",
+    window.Coverage90.active ? "test" : "validation",
+  );
+  makePlot($("#intervalPlots"), "Mean interval width · test", "width", "test");
+  makePlot($("#intervalPlots"), "Actual test coverage (%)", "coverage", "test");
 }
-function renderPixel(){if(!example)return;const N=example.width*example.height,p=point.y*example.width+point.x,ch=$('#channel').value,channels=ch==='rgb'?[0,1,2]:[Number(ch)];const read=(a,byte=false)=>channels.reduce((sum,c)=>sum+a[c*N+p]/(byte?255:1),0)/channels.length,target=read(example.target,true);
- $('#pixelTitle').textContent=`Selected scene pixel (${point.x}, ${point.y})`;$('#pixelTruth').textContent=`Ground truth: ${target.toFixed(6)} · ${ch==='rgb'?'RGB average':['Red','Green','Blue'][Number(ch)]}`;
- $('#pixelRows').innerHTML=METHODS.map(method=>{const m=example.models[method];if(!m)return `<tr><td>${NAMES[method]}</td><td colspan="5">Inference pending</td></tr>`;const prediction=read(m.prediction),lower=read(m.lower),upper=read(m.upper);return `<tr><td>${NAMES[method]}</td>${[prediction,lower,upper,channels.reduce((sum,c)=>sum+Math.abs(example.target[c*N+p]/255-m.prediction[c*N+p]),0)/channels.length,upper-lower].map(v=>`<td>${v.toFixed(6)}</td>`).join('')}</tr>`}).join('');
+function heat(v) {
+  if (v < 0) return [255, 50, 150];
+  let t = Math.min(1, Math.max(0, v / MAP_MAX));
+  const stops = [
+      [20, 35, 60],
+      [34, 95, 157],
+      [35, 185, 172],
+      [243, 203, 85],
+      [250, 112, 82],
+    ],
+    i = Math.min(3, Math.floor(t * 4)),
+    f = t * 4 - i;
+  return stops[i].map((a, k) => Math.round(a + (stops[i + 1][k] - a) * f));
 }
-function drawImages(){if(!example)return;paint($('#measurement'),'measurement');paint($('#target'),'target');for(const c of document.querySelectorAll('#matrix canvas'))paint(c,c.dataset.kind,c.dataset.method);renderPixel()}
-function renderExample(){const label=categories.raw[study].entries[index];if(label&&String(label.id)!==String(example.id))throw Error('Category sample ID mismatch');window.exampleBrowser?.update(index);let html='';for(const method of METHODS){const m=example.models[method];if(!m){html+=`<div class="model-header"><h3>${NAMES[method]}</h3><p>Near-90% inference pending.</p></div>`;continue;}html+=`<div class="model-header"><h3 style="color:${COLORS[method]}">${NAMES[method]}</h3><span class="model-metrics">${metricText(m.metrics)}</span></div>`;for(const [kind,label] of [['prediction','Reconstruction'],['error','Error'],['width','Uncertainty'],['lower','Lower bound'],['upper','Upper bound']])html+=`<figure class="${['lower','upper'].includes(kind)?'bound-image':''}"><figcaption>${label}</figcaption><canvas class="image" data-kind="${kind}" data-method="${method}"></canvas></figure>`}$('#matrix').innerHTML=html;drawImages();$('#status').textContent=`${index+1} / ${Math.min(...METHODS.map(m=>summary(m).example_count))} · ID ${example.id}`}
-async function loadExample(){const serial=++requestSerial;busy=true;controls(true);$('#status').textContent='Loading exact inference arrays…';const key=study+':'+index;
- try{let item=CACHE.get(key);if(!item){const loaded=await Promise.all(METHODS.map(m=>unpack(`${assets.base}/${summary(m).asset_study||study}/${m}/example_${String(index).padStart(2,'0')}.bin.gz`)));const [a,b]=loaded;if(String(a.id)!==String(b.id)||a.target.length!==b.target.length)throw Error('Example pairing mismatch');for(const k of ['target','measurement'])for(let i=0;i<a[k].length;i++)if(a[k][i]!==b[k][i])throw Error('Input/target pairing mismatch');const shape=a.arrays.find(d=>d.name==='target').shape;item={id:a.id,width:shape[2],height:shape[1],measurement:a.measurement,target:a.target,models:Object.fromEntries(METHODS.map((m,i)=>[m,loaded[i]]))};item=await window.Coverage90.rawExample(item,index,study);if(CACHE.size>5)CACHE.delete(CACHE.keys().next().value);CACHE.set(key,item)}if(serial!==requestSerial)return;example=item;point.x=Math.min(point.x,item.width-1);point.y=Math.min(point.y,item.height-1);renderExample();stateURL()}
- catch(e){if(serial===requestSerial)$('#status').textContent='Could not load example: '+e.message;console.error(e)}finally{if(serial===requestSerial){busy=false;controls(false)}}
+function paint(canvas, kind, model) {
+  const { width: w, height: h } = example,
+    N = w * h;
+  canvas.width = w;
+  canvas.height = h;
+  const ctx = canvas.getContext("2d"),
+    img = ctx.createImageData(w, h);
+  let arr;
+  if (kind === "measurement" || kind === "target") arr = example[kind];
+  else arr = example.models[model][kind];
+  for (let i = 0; i < N; i++) {
+    let rgb;
+    if (kind === "error" || kind === "width") {
+      let value = 0;
+      const m = example.models[model];
+      for (let c = 0; c < 3; c++) {
+        const k = c * N + i;
+        value +=
+          kind === "error"
+            ? Math.abs(example.target[k] / 255 - m.prediction[k])
+            : m.upper[k] - m.lower[k];
+      }
+      rgb = heat(value / 3);
+    } else
+      rgb = [0, 1, 2].map((c) =>
+        Math.max(
+          0,
+          Math.min(255, arr[c * N + i] * (arr instanceof Uint8Array ? 1 : 255)),
+        ),
+      );
+    for (let c = 0; c < 3; c++) img.data[4 * i + c] = rgb[c];
+    img.data[4 * i + 3] = 255;
+  }
+  ctx.putImageData(img, 0, 0);
+  if (kind !== "measurement") {
+    ctx.strokeStyle = "#fff";
+    ctx.lineWidth = 1;
+    ctx.strokeRect(point.x - 3, point.y - 3, 7, 7);
+  }
+  if (kind === "measurement") {
+    canvas.onclick = null;
+    return;
+  }
+  canvas.onclick = (e) => {
+    const r = canvas.getBoundingClientRect();
+    point = {
+      x: Math.max(
+        0,
+        Math.min(w - 1, Math.floor(((e.clientX - r.left) / r.width) * w)),
+      ),
+      y: Math.max(
+        0,
+        Math.min(h - 1, Math.floor(((e.clientY - r.top) / r.height) * h)),
+      ),
+    };
+    $("#pixelInspector").open = true;
+    drawImages();
+  };
 }
-function changeStudy(){study=$('#study').value;data=window.Coverage90.rawDataset(referenceData,study);const count=Math.min(...METHODS.map(m=>summary(m).example_count));index=Math.min(index,count-1);$('#example').innerHTML=Array.from({length:count},(_,i)=>`<option value="${i}">${i+1}</option>`).join('');$('#example').value=index;renderTables();renderCurves();const group=categories.raw[study],metrics=summary('im2im').example_metrics;const entries=group.entries.slice(0,count).map(e=>({...e,reference_ssim:metrics?.[e.index]?.ssim??e.reference_ssim}));window.exampleBrowser=createExampleBrowser({entries:rankExampleDifficulty(entries),reference:group.reference,corruption:study==='corrupted',current:()=>index,onSelect:i=>{index=i;loadExample()}});if(window.exampleBrowser.initialIndex!==undefined){index=window.exampleBrowser.initialIndex;loadExample()}}
-(async()=>{try{[data,assets,categories]=await Promise.all(['data.json','assets.json','../example-categories.json'].map(async file=>{const r=await fetch(file,{cache:'no-store'});if(!r.ok)throw Error(file+' HTTP '+r.status);return r.json()}));await window.Coverage90.init();referenceData=data;const params=new URLSearchParams(location.search);study=params.get('study')==='corrupted'?'corrupted':'clean';index=Math.max(0,Number(params.get('example'))||0);$('#study').value=study;$('#study').onchange=changeStudy;$('#example').onchange=()=>{index=Number($('#example').value);loadExample()};$('#next').onclick=()=>{index=(index+1)%$('#example').options.length;$('#example').value=index;loadExample()};$('#previous').onclick=()=>{index=(index+$('#example').options.length-1)%$('#example').options.length;$('#example').value=index;loadExample()};$('#random').onclick=()=>{index=Math.floor(Math.random()*$('#example').options.length);$('#example').value=index;loadExample()};$('#channel').onchange=renderPixel;$('#showBounds').onchange=()=>$('#matrix').classList.toggle('show-bounds',$('#showBounds').checked);changeStudy()}catch(e){$('#status').textContent='Could not load results: '+e.message;console.error(e)}})();
+function renderPixel() {
+  if (!example) return;
+  const N = example.width * example.height,
+    p = point.y * example.width + point.x,
+    ch = $("#channel").value,
+    channels = ch === "rgb" ? [0, 1, 2] : [Number(ch)];
+  const read = (a, byte = false) =>
+      channels.reduce((sum, c) => sum + a[c * N + p] / (byte ? 255 : 1), 0) /
+      channels.length,
+    target = read(example.target, true);
+  $("#pixelTitle").textContent =
+    `Selected scene pixel (${point.x}, ${point.y})`;
+  $("#pixelTruth").textContent =
+    `Ground truth: ${target.toFixed(6)} · ${ch === "rgb" ? "RGB average" : ["Red", "Green", "Blue"][Number(ch)]}`;
+  $("#pixelRows").innerHTML = METHODS.map((method) => {
+    const m = example.models[method];
+    if (!m)
+      return `<tr><td>${NAMES[method]}</td><td colspan="5">Inference pending</td></tr>`;
+    const prediction = read(m.prediction),
+      lower = read(m.lower),
+      upper = read(m.upper);
+    return `<tr><td>${NAMES[method]}</td>${[prediction, lower, upper, channels.reduce((sum, c) => sum + Math.abs(example.target[c * N + p] / 255 - m.prediction[c * N + p]), 0) / channels.length, upper - lower].map((v) => `<td>${v.toFixed(6)}</td>`).join("")}</tr>`;
+  }).join("");
+}
+function drawImages() {
+  if (!example) return;
+  paint($("#measurement"), "measurement");
+  paint($("#target"), "target");
+  for (const c of document.querySelectorAll("#matrix canvas"))
+    paint(c, c.dataset.kind, c.dataset.method);
+  renderPixel();
+}
+function renderExample() {
+  const label = categories.raw[study].entries[index];
+  if (label && String(label.id) !== String(example.id))
+    throw Error("Category sample ID mismatch");
+  window.exampleBrowser?.update(index);
+  let html = "";
+  for (const method of METHODS) {
+    const m = example.models[method];
+    if (!m) {
+      html += `<div class="model-header"><h3>${NAMES[method]}</h3><p>Near-90% inference pending.</p></div>`;
+      continue;
+    }
+    html += `<div class="model-header"><h3 style="color:${COLORS[method]}">${NAMES[method]}</h3><span class="model-metrics">${metricText(m.metrics)}</span></div>`;
+    for (const [kind, label] of [
+      ["prediction", "Reconstruction"],
+      ["error", "Error"],
+      ["width", "Uncertainty"],
+      ["lower", "Lower bound"],
+      ["upper", "Upper bound"],
+    ])
+      html += `<figure class="${["lower", "upper"].includes(kind) ? "bound-image" : ""}"><figcaption>${label}</figcaption><canvas class="image" data-kind="${kind}" data-method="${method}"></canvas></figure>`;
+  }
+  $("#matrix").innerHTML = html;
+  drawImages();
+  $("#status").textContent =
+    `${index + 1} / ${Math.min(...METHODS.map((m) => summary(m).example_count))} · ID ${example.id}`;
+}
+async function loadExample() {
+  const serial = ++requestSerial;
+  busy = true;
+  controls(true);
+  $("#status").textContent = "Loading exact inference arrays…";
+  const key = study + ":" + index;
+  try {
+    let item = CACHE.get(key);
+    if (!item) {
+      const loaded = await Promise.all(
+        METHODS.map((m) =>
+          unpack(
+            `${assets.base}/${summary(m).asset_study || study}/${m}/example_${String(index).padStart(2, "0")}.bin.gz`,
+          ),
+        ),
+      );
+      const [a, b] = loaded;
+      if (String(a.id) !== String(b.id) || a.target.length !== b.target.length)
+        throw Error("Example pairing mismatch");
+      for (const k of ["target", "measurement"])
+        for (let i = 0; i < a[k].length; i++)
+          if (a[k][i] !== b[k][i]) throw Error("Input/target pairing mismatch");
+      const shape = a.arrays.find((d) => d.name === "target").shape;
+      item = {
+        id: a.id,
+        width: shape[2],
+        height: shape[1],
+        measurement: a.measurement,
+        target: a.target,
+        models: Object.fromEntries(METHODS.map((m, i) => [m, loaded[i]])),
+      };
+      item = await window.Coverage90.rawExample(item, index, study);
+      if (CACHE.size > 5) CACHE.delete(CACHE.keys().next().value);
+      CACHE.set(key, item);
+    }
+    if (serial !== requestSerial) return;
+    example = item;
+    point.x = Math.min(point.x, item.width - 1);
+    point.y = Math.min(point.y, item.height - 1);
+    renderExample();
+    stateURL();
+  } catch (e) {
+    if (serial === requestSerial)
+      $("#status").textContent = "Could not load example: " + e.message;
+    console.error(e);
+  } finally {
+    if (serial === requestSerial) {
+      busy = false;
+      controls(false);
+    }
+  }
+}
+function changeStudy() {
+  study = $("#study").value;
+  data = window.Coverage90.rawDataset(referenceData, study);
+  const count = Math.min(...METHODS.map((m) => summary(m).example_count));
+  index = Math.min(index, count - 1);
+  $("#example").innerHTML = Array.from(
+    { length: count },
+    (_, i) => `<option value="${i}">${i + 1}</option>`,
+  ).join("");
+  $("#example").value = index;
+  renderTables();
+  renderCurves();
+  const group = categories.raw[study],
+    metrics = summary("im2im").example_metrics;
+  const entries = group.entries
+    .slice(0, count)
+    .map((e) => ({
+      ...e,
+      reference_ssim: metrics?.[e.index]?.ssim ?? e.reference_ssim,
+    }));
+  window.exampleBrowser = createExampleBrowser({
+    entries: rankExampleDifficulty(entries),
+    reference: group.reference,
+    corruption: study === "corrupted",
+    current: () => index,
+    onSelect: (i) => {
+      index = i;
+      loadExample();
+    },
+  });
+  if (window.exampleBrowser.initialIndex !== undefined) {
+    index = window.exampleBrowser.initialIndex;
+    loadExample();
+  }
+}
+(async () => {
+  try {
+    [data, assets, categories] = await Promise.all(
+      ["data.json", "assets.json", "../example-categories.json"].map(
+        async (file) => {
+          const r = await fetch(file, { cache: "no-store" });
+          if (!r.ok) throw Error(file + " HTTP " + r.status);
+          return r.json();
+        },
+      ),
+    );
+    await window.Coverage90.init();
+    referenceData = data;
+    const params = new URLSearchParams(location.search);
+    study = params.get("study") === "corrupted" ? "corrupted" : "clean";
+    index = Math.max(0, Number(params.get("example")) || 0);
+    $("#study").value = study;
+    $("#study").onchange = changeStudy;
+    $("#example").onchange = () => {
+      index = Number($("#example").value);
+      loadExample();
+    };
+    $("#next").onclick = () => {
+      index = (index + 1) % $("#example").options.length;
+      $("#example").value = index;
+      loadExample();
+    };
+    $("#previous").onclick = () => {
+      index =
+        (index + $("#example").options.length - 1) %
+        $("#example").options.length;
+      $("#example").value = index;
+      loadExample();
+    };
+    $("#random").onclick = () => {
+      index = Math.floor(Math.random() * $("#example").options.length);
+      $("#example").value = index;
+      loadExample();
+    };
+    $("#channel").onchange = renderPixel;
+    $("#showBounds").onchange = () =>
+      $("#matrix").classList.toggle("show-bounds", $("#showBounds").checked);
+    changeStudy();
+  } catch (e) {
+    $("#status").textContent = "Could not load results: " + e.message;
+    console.error(e);
+  }
+})();

@@ -53,70 +53,90 @@ def empty():
     )
 
 
+def require(condition, message):
+    if not condition:
+        raise ValueError(message)
+
+
 def validate(payload):
-    assert payload["protocol"] == "tight_empirical_coverage90"
-    assert payload["target_calibration_coverage"] == [0.9, 0.901]
-    assert set(payload["groups"]) == set(METHODS)
-    counts = dict(complete=0, failed=0, pending=0, expected=112)
-    for group, methods in expected().items():
-        assert set(payload["groups"][group]) == set(methods)
+    """Reject wrong protocols, missing milestones, and incomplete test results."""
+    require(payload["protocol"] == "tight_empirical_coverage90", "Wrong curve protocol")
+    require(
+        payload["target_calibration_coverage"] == [0.9, 0.901], "Wrong coverage target"
+    )
+    layout = expected()
+    require(set(payload["groups"]) == set(layout), "Wrong experiment groups")
+    total = sum(
+        len(epochs) for methods in layout.values() for epochs in methods.values()
+    )
+    counts = dict(complete=0, failed=0, pending=0, expected=total)
+    for group, methods in layout.items():
+        require(
+            set(payload["groups"][group]) == set(methods), "Missing or unexpected model"
+        )
+        raw = group.startswith("raw_")
         for method, epochs in methods.items():
             rows = payload["groups"][group][method]
-            assert [row["epoch"] for row in rows] == epochs
+            require(
+                [row["epoch"] for row in rows] == epochs,
+                "Missing, duplicated, or unordered epochs",
+            )
             for row in rows:
-                assert row["status"] in ("complete", "failed", "pending")
-                counts[row["status"]] += 1
-                if row["status"] == "complete":
-                    assert row["test_count"] == (
-                        2000 if group.startswith("raw_") else 5000
+                status = row["status"]
+                require(
+                    status in ("complete", "failed", "pending"),
+                    "Unknown evaluation state",
+                )
+                counts[status] += 1
+                if status != "complete":
+                    require(
+                        "metrics" not in row,
+                        "Unfinished evaluations must not contain metrics",
                     )
-                    cal = row["calibration"]
-                    assert cal["calibrated_on"] == "calibration split only"
-                    assert cal["confidence_guarantee"] is False
-                    assert cal["n_images"] == (
-                        3000 if group.startswith("raw_") else 2048
+                    continue
+                require(
+                    row["test_count"] == (2000 if raw else 5000),
+                    "Wrong held-out test count",
+                )
+                calibration = row["calibration"]
+                require(
+                    calibration["calibrated_on"] == "calibration split only",
+                    "Invalid calibration split",
+                )
+                require(
+                    calibration["confidence_guarantee"] is False,
+                    "Empirical calibration is not an RCPS certificate",
+                )
+                require(
+                    calibration["n_images"] == (3000 if raw else 2048),
+                    "Wrong calibration count",
+                )
+                require(
+                    0 <= calibration["calibration_coverage"] <= 1,
+                    "Invalid calibration coverage",
+                )
+                require(len(row["report_sha256"]) == 64, "Missing source report hash")
+                for mode, metrics in row["metrics"].items():
+                    require(
+                        all(math.isfinite(value) for value in metrics.values()),
+                        "Nonfinite metrics",
                     )
-                    assert 0 <= cal["calibration_coverage"] <= 1
-                    assert len(row["report_sha256"]) == 64
-                    for mode, metrics in row["metrics"].items():
-                        assert all(math.isfinite(value) for value in metrics.values())
-                        assert 0 <= metrics["coverage"] <= 1
-                        if mode == "clipped":
-                            assert -1 <= metrics["width"] <= 1
-                else:
-                    assert "metrics" not in row
-    assert (
-        sum(counts[k] for k in ("complete", "failed", "pending")) == counts["expected"]
+                    require(0 <= metrics["coverage"] <= 1, "Invalid test coverage")
+                    if mode == "clipped":
+                        require(
+                            -1 <= metrics["width"] <= 1,
+                            "Clipped width outside the intensity range",
+                        )
+    require(
+        sum(counts[key] for key in ("complete", "failed", "pending")) == total,
+        "Incomplete curve ledger",
     )
     payload["counts"] = counts
     return payload
 
 
 def collect():
-    probe = f"""from pathlib import Path
-import hashlib,json
-root=Path({REMOTE!r});out=json.loads({json.dumps(empty())!r})
-for group,methods in out["groups"].items():
- for method,rows in methods.items():
-  latest=root/group/method/("epoch_030" if group=="raw_corrupted" else "epoch_050")/"report.json"
-  identity=json.loads(latest.read_text())["split_identity"]
-  for row in rows:
-   folder=root/group/method/("epoch_"+str(row["epoch"]).zfill(3));path=folder/"report.json"
-   if path.is_file():
-    raw=path.read_bytes();report=json.loads(raw)
-    assert report["split_identity"]==identity,(group,method,row["epoch"],"split identity mismatch")
-    req=report["request"]
-    assert req["epoch"]==row["epoch"] and req["method"]==method and req["calibration"]=="tight_empirical"
-    assert req["test_used_for_calibration"] is False and req["endpoint_clipping"]==[0,1]
-    assert len(report["per_image"])==report["test_count"]
-    row.update(status="complete",metrics=report["metrics"],calibration=report["calibration"],test_count=report["test_count"],report_sha256=hashlib.sha256(raw).hexdigest())
-   else:
-    failure=folder/"failure.json"
-    if failure.exists():
-     error=json.loads(failure.read_text())
-     if error.get("status")=="calibration_infeasible":row.update(status="failed",error=error["error"])
-print(json.dumps(out,allow_nan=False))
-"""
+    """Use the cluster helper so collection shares the same report checks as scheduling."""
     command = [
         "ssh",
         "-o",
@@ -126,11 +146,16 @@ print(json.dumps(out,allow_nan=False))
         "-o",
         "ConnectTimeout=20",
         "jy2228@unicorn-login-02.coecis.cornell.edu",
-        "python3 -c " + shlex.quote(probe),
+        shlex.join(
+            [
+                "/home/jy2228/.conda/envs/convrml/bin/python",
+                str(Path(REMOTE).parent / "coverage90_cluster.py"),
+                "curves",
+            ]
+        ),
     ]
-    return validate(
-        json.loads(subprocess.check_output(command, text=True, timeout=120))
-    )
+    response = subprocess.check_output(command, input="{}", text=True, timeout=120)
+    return validate(json.loads(response))
 
 
 def main():
