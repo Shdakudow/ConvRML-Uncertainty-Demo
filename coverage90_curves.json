@@ -730,7 +730,116 @@
         },
         {
           "epoch": 25,
-          "status": "pending"
+          "status": "complete",
+          "metrics": {
+            "raw": {
+              "psnr": 38.862867276382445,
+              "ssim": 0.9584740780591965,
+              "mae": 0.006724897037155461,
+              "coverage": 0.8803269942045212,
+              "width": 0.025067378066759557,
+              "crossing": 9.358724268167862e-07
+            },
+            "clipped": {
+              "psnr": 38.881972300338745,
+              "ssim": 0.9583086804509163,
+              "mae": 0.006535014770185808,
+              "coverage": 0.8997827288866043,
+              "width": 0.02370641189715825,
+              "crossing": 6.754557536623906e-07
+            }
+          },
+          "calibration": {
+            "lower_q": 0.0368828125,
+            "upper_q": 0.9144765625,
+            "lower_risk": 0.04979288578033447,
+            "upper_risk": 0.049533744653066,
+            "coverage_lower_bound": 0.9006733695665995,
+            "target_coverage": 0.9,
+            "coverage_tolerance": 0.001,
+            "within_tolerance": true,
+            "trace": [
+              {
+                "lower_q": 0.0361328125,
+                "upper_q": 0.9384765625,
+                "lower_risk": 0.04869477947552999,
+                "upper_risk": 0.036550454795360565
+              },
+              {
+                "lower_q": 0.0371328125,
+                "upper_q": 0.9374765625,
+                "lower_risk": 0.05015997836987177,
+                "upper_risk": 0.03709422051906586
+              },
+              {
+                "lower_q": 0.0366328125,
+                "upper_q": 0.9354765625,
+                "lower_risk": 0.04942587514718374,
+                "upper_risk": 0.03818426777919134
+              },
+              {
+                "lower_q": 0.0368828125,
+                "upper_q": 0.9314765625,
+                "lower_risk": 0.04979288578033447,
+                "upper_risk": 0.04035817335049311
+              },
+              {
+                "lower_q": 0.0368828125,
+                "upper_q": 0.9234765625,
+                "lower_risk": 0.04979288578033447,
+                "upper_risk": 0.044697217643260956
+              },
+              {
+                "lower_q": 0.0368828125,
+                "upper_q": 0.9074765625,
+                "lower_risk": 0.04979288578033447,
+                "upper_risk": 0.05325011412302653
+              },
+              {
+                "lower_q": 0.0368828125,
+                "upper_q": 0.9154765625,
+                "lower_risk": 0.04979288578033447,
+                "upper_risk": 0.0489968458811442
+              },
+              {
+                "lower_q": 0.0368828125,
+                "upper_q": 0.9114765625,
+                "lower_risk": 0.04979288578033447,
+                "upper_risk": 0.051128730177879333
+              },
+              {
+                "lower_q": 0.0368828125,
+                "upper_q": 0.9134765625,
+                "lower_risk": 0.04979288578033447,
+                "upper_risk": 0.05006535351276398
+              },
+              {
+                "lower_q": 0.0368828125,
+                "upper_q": 0.9144765625,
+                "lower_risk": 0.04979288578033447,
+                "upper_risk": 0.049533744653066
+              },
+              {
+                "lower_q": 0.0368828125,
+                "upper_q": 0.9144765625,
+                "lower_risk": 0.04979288578033447,
+                "upper_risk": 0.049533744653066
+              }
+            ],
+            "calibrated_on": "calibration split only",
+            "procedure": "tight empirical equal-tail q search; not RCPS",
+            "calibration_coverage": 0.9006733695665995,
+            "calibration_crossing": 4.2965014775594074e-07,
+            "n_images": 2048,
+            "delta": null,
+            "confidence_guarantee": false,
+            "endpoint_clipping": [
+              0,
+              1
+            ]
+          },
+          "test_count": 5000,
+          "report_sha256": "80997640349c742ec4820f570d0b2be79bea2ce0c3abc435caea3e7c78ce81e0"
         },
         {
           "epoch": 30,
@@ -1649,7 +1758,86 @@
         },
         {
           "epoch": 25,
-          "status": "pending"
+          "status": "complete",
+          "metrics": {
+            "raw": {
+              "psnr": 31.32796810283661,
+              "ssim": 0.8535897569715977,
+              "mae": 0.01699342805813067,
+              "coverage": 0.881022476887703,
+              "width": 0.06533873360995203,
+              "crossing": 3.102620541540091e-07
+            },
+            "clipped": {
+              "psnr": 31.33771022377014,
+              "ssim": 0.860037194430828,
+              "mae": 0.016637766043725424,
+              "coverage": 0.9011209281980992,
+              "width": 0.06375504003521056,
+              "crossing": 5.289713717502309e-08
+            }
+          },
+          "calibration": {
+            "lower_q": 0.041515625,
+            "upper_q": 0.9566796875,
+            "lower_risk": 0.04962907483180364,
+            "upper_risk": 0.049586787819862366,
+            "coverage_lower_bound": 0.900784137348334,
+            "target_coverage": 0.9,
+            "coverage_tolerance": 0.001,
+            "within_tolerance": true,
+            "trace": [
+              {
+                "lower_q": 0.041015625,
+                "upper_q": 0.9716796875,
+                "lower_risk": 0.049186982214450836,
+                "upper_risk": 0.036357998847961426
+              },
+              {
+                "lower_q": 0.042015625,
+                "upper_q": 0.9706796875,
+                "lower_risk": 0.050070568919181824,
+                "upper_risk": 0.037225283682346344
+              },
+              {
+                "lower_q": 0.041515625,
+                "upper_q": 0.9686796875,
+                "lower_risk": 0.04962907483180364,
+                "upper_risk": 0.03897106150786082
+              },
+              {
+                "lower_q": 0.041515625,
+                "upper_q": 0.9646796875,
+                "lower_risk": 0.04962907483180364,
+                "upper_risk": 0.042494840919971466
+              },
+              {
+                "lower_q": 0.041515625,
+                "upper_q": 0.9566796875,
+                "lower_risk": 0.04962907483180364,
+                "upper_risk": 0.049586787819862366
+              },
+              {
+                "lower_q": 0.041515625,
+                "upper_q": 0.9566796875,
+                "lower_risk": 0.04962907483180364,
+                "upper_risk": 0.049586787819862366
+              }
+            ],
+            "calibrated_on": "calibration split only",
+            "procedure": "tight empirical equal-tail q search; not RCPS",
+            "calibration_coverage": 0.900784137348334,
+            "calibration_crossing": 2.483526865641276e-08,
+            "n_images": 2048,
+            "delta": null,
+            "confidence_guarantee": false,
+            "endpoint_clipping": [
+              0,
+              1
+            ]
+          },
+          "test_count": 5000,
+          "report_sha256": "4d527f24dd666ccc3ac09586244acf1d52bfc7636e304fcecb6ad184247f6c64"
         },
         {
           "epoch": 30,
@@ -1944,7 +2132,50 @@
         },
         {
           "epoch": 25,
-          "status": "pending"
+          "status": "complete",
+          "metrics": {
+            "raw": {
+              "psnr": 26.355006551265717,
+              "ssim": 0.8223998485654592,
+              "mae": 0.02762920072232373,
+              "coverage": 0.8969529797285796,
+              "width": 0.10230967295728624,
+              "crossing": 0.0
+            },
+            "clipped": {
+              "psnr": 26.356254219055177,
+              "ssim": 0.8231146508455276,
+              "mae": 0.027559280057554134,
+              "coverage": 0.8972936041504145,
+              "width": 0.10104417029488831,
+              "crossing": 0.0
+            }
+          },
+          "calibration": {
+            "scales": {
+              "lower": 1.0899449252547129,
+              "upper": 1.1619662398959463
+            },
+            "tail_risks": {
+              "lower": 0.04999980366941015,
+              "upper": 0.049999843964334705
+            },
+            "calibration_coverage": 0.9000003523662552,
+            "procedure": "tight empirical asymmetric order-statistic scales; not RCPS",
+            "target_coverage": 0.9,
+            "n_images": 3000,
+            "coverage_tolerance": 0.001,
+            "within_tolerance": true,
+            "calibrated_on": "calibration split only",
+            "delta": null,
+            "confidence_guarantee": false,
+            "endpoint_clipping": [
+              0,
+              1
+            ]
+          },
+          "test_count": 2000,
+          "report_sha256": "a1b3117015ae82ebb932c5f753800e27f92dd3b1f0b8cc78b76fa6c14d4951a1"
         },
         {
           "epoch": 30,
@@ -2249,7 +2480,86 @@
         },
         {
           "epoch": 25,
-          "status": "pending"
+          "status": "complete",
+          "metrics": {
+            "raw": {
+              "psnr": 25.97901937532425,
+              "ssim": 0.8167563170194626,
+              "mae": 0.02830141261324752,
+              "coverage": 0.8964672802984714,
+              "width": 0.10934932882990687,
+              "crossing": 2.3148148102336563e-08
+            },
+            "clipped": {
+              "psnr": 25.98159182548523,
+              "ssim": 0.8171922995746136,
+              "mae": 0.028166856275871396,
+              "coverage": 0.897416434019804,
+              "width": 0.10810610983800142,
+              "crossing": 7.716049367445521e-09
+            }
+          },
+          "calibration": {
+            "lower_q": 0.016125,
+            "upper_q": 0.9359999999999999,
+            "lower_risk": 0.04988163665980796,
+            "upper_risk": 0.04979599708504801,
+            "coverage_lower_bound": 0.9003223662551441,
+            "target_coverage": 0.9,
+            "coverage_tolerance": 0.001,
+            "within_tolerance": true,
+            "trace": [
+              {
+                "lower_q": 0.015625,
+                "upper_q": 0.9375,
+                "lower_risk": 0.049374026920438956,
+                "upper_risk": 0.04845473251028807
+              },
+              {
+                "lower_q": 0.016625,
+                "upper_q": 0.9365,
+                "lower_risk": 0.05039268347050754,
+                "upper_risk": 0.04934715449245542
+              },
+              {
+                "lower_q": 0.016125,
+                "upper_q": 0.9345,
+                "lower_risk": 0.04988163665980796,
+                "upper_risk": 0.05114808641975309
+              },
+              {
+                "lower_q": 0.016125,
+                "upper_q": 0.9355,
+                "lower_risk": 0.04988163665980796,
+                "upper_risk": 0.05024558384773663
+              },
+              {
+                "lower_q": 0.016125,
+                "upper_q": 0.9359999999999999,
+                "lower_risk": 0.04988163665980796,
+                "upper_risk": 0.04979599708504801
+              },
+              {
+                "lower_q": 0.016125,
+                "upper_q": 0.9359999999999999,
+                "lower_risk": 0.04988163665980796,
+                "upper_risk": 0.04979599708504801
+              }
+            ],
+            "calibrated_on": "calibration split only",
+            "procedure": "tight empirical equal-tail q search; not RCPS",
+            "calibration_coverage": 0.9003223662551441,
+            "calibration_crossing": 6.001371742112483e-09,
+            "n_images": 3000,
+            "delta": null,
+            "confidence_guarantee": false,
+            "endpoint_clipping": [
+              0,
+              1
+            ]
+          },
+          "test_count": 2000,
+          "report_sha256": "753c3f281cd01e5003763aaa0d18271670d1d6dd98350071dd3ab30287dcc5f4"
         },
         {
           "epoch": 30,
@@ -2550,7 +2860,50 @@
         },
         {
           "epoch": 25,
-          "status": "pending"
+          "status": "complete",
+          "metrics": {
+            "raw": {
+              "psnr": 21.716023976802827,
+              "ssim": 0.682336275242269,
+              "mae": 0.052076554183848205,
+              "coverage": 0.8989015862047672,
+              "width": 0.18464675629045815,
+              "crossing": 0.0
+            },
+            "clipped": {
+              "psnr": 21.748803864002227,
+              "ssim": 0.6930897481888533,
+              "mae": 0.05089818503218703,
+              "coverage": 0.8993273480683566,
+              "width": 0.17138162322202696,
+              "crossing": 0.0
+            }
+          },
+          "calibration": {
+            "scales": {
+              "lower": 1.4268340366675147,
+              "upper": 1.4875571609074996
+            },
+            "tail_risks": {
+              "lower": 0.04999986539780521,
+              "upper": 0.04999990569272977
+            },
+            "calibration_coverage": 0.9000002289094651,
+            "procedure": "tight empirical asymmetric order-statistic scales; not RCPS",
+            "target_coverage": 0.9,
+            "n_images": 3000,
+            "coverage_tolerance": 0.001,
+            "within_tolerance": true,
+            "calibrated_on": "calibration split only",
+            "delta": null,
+            "confidence_guarantee": false,
+            "endpoint_clipping": [
+              0,
+              1
+            ]
+          },
+          "test_count": 2000,
+          "report_sha256": "0d060047ccec07798f313b8294fb13c179ce98354576a4fc2fe2b7a5eb3c7d78"
         },
         {
           "epoch": 30,
@@ -2988,10 +3341,10 @@
     }
   },
   "counts": {
-    "complete": 40,
+    "complete": 45,
     "failed": 1,
-    "pending": 71,
+    "pending": 66,
     "expected": 112
   },
-  "updated_at": "2026-10-23T14:26:35.558281+00:00"
+  "updated_at": "2026-10-23T15:27:45.814662+00:00"
 }
