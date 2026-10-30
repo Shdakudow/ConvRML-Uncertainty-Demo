@@ -15,7 +15,7 @@
   if(camera==='rml'||camera==='diffuser')state.set('camera',camera);
   for(const a of document.querySelectorAll('[data-demo-route]')){
    const target=new URL(routes[a.dataset.demoRoute],root);
-   for(const key of ['camera','ensemble','example','gain','study','capture','bounds','calibration'])if(state.has(key))target.searchParams.set(key,state.get(key));
+   for(const key of ['camera','ensemble','example','gain','study','capture','bounds'])if(state.has(key))target.searchParams.set(key,state.get(key));
    a.href=target.href;
   }
  }

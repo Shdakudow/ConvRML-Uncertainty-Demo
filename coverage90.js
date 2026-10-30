@@ -2,8 +2,7 @@
 (() => {
   "use strict";
   const root = new URL("./", document.currentScript.src);
-  const active =
-    new URLSearchParams(location.search).get("calibration") !== "reference";
+  const active = true;
   const labels = {
     im2im: "Im2im",
     ensemble5: "Ensemble · 5",
@@ -14,6 +13,12 @@
   let metadata, curves;
 
   async function init() {
+    const url = new URL(location.href);
+    if (url.searchParams.has("calibration")) {
+      url.searchParams.delete("calibration");
+      history.replaceState(null, "", url);
+      window.syncDemoNavigation?.();
+    }
     const response = await fetch(new URL("coverage90.json", root), {
       cache: "no-store",
     });
@@ -27,19 +32,9 @@
       throw Error("Calibration curves HTTP " + curveResponse.status);
     curves = await curveResponse.json();
     const nav = document.querySelector("main > nav");
-    const label = document.createElement("label");
-    label.textContent = "Calibration ";
-    const select = document.createElement("select");
-    select.id = "calibrationMode";
-    select.innerHTML =
-      '<option value="tight90">Near 90%</option><option value="reference">Reference</option>';
-    select.value = active ? "tight90" : "reference";
-    select.onchange = () => {
-      const url = new URL(location.href);
-      url.searchParams.set("calibration", select.value);
-      location.href = url.href;
-    };
-    label.append(select);
+    const label = document.createElement("span");
+    label.id = "calibrationLabel";
+    label.textContent = "Calibration · Near 90%";
     nav.prepend(label);
     const status = document.createElement("p");
     status.id = "calibrationStatus";
@@ -57,12 +52,8 @@
         !entries(group)[method].calibration.within_tolerance,
     );
     const node = document.getElementById("calibrationStatus");
-    node.textContent = active
-      ? `Near 90% · empirical calibration · ${count}/${methods.length} models ready · actual test coverage shown below${outside.length ? " · Outside target band: " + outside.map((method) => labels[method]).join(", ") : ""}`
-      : "Reference calibration · original results";
-    node.title = active
-      ? "Target: 90.0–90.1% on the calibration split. No RCPS confidence guarantee. Test coverage may vary. Missing models remain unavailable until inference finishes."
-      : "Original RCPS-HB baseline and paper-style QUTCC results are preserved.";
+    node.textContent = `Near 90% · empirical calibration · ${count}/${methods.length} models ready · actual test coverage shown below${outside.length ? " · Outside target band: " + outside.map((method) => labels[method]).join(", ") : ""}`;
+    node.title = "Target: 90.0–90.1% on the calibration split. No RCPS confidence guarantee. Test coverage may vary. Missing models remain unavailable until inference finishes.";
   }
 
   async function unpack(entry, index) {
@@ -113,7 +104,6 @@
 
   function exp2Dataset(dataset, group) {
     status(group, ["im2im", "ensemble5", "mc_005", "qutcc"]);
-    if (!active) return;
     const ready = entries(group);
     dataset.methods = [];
     dataset.aggregate = {};
@@ -136,7 +126,6 @@
   }
 
   async function exp2Example(reference, index, group) {
-    if (!active) return reference;
     const output = { ...reference, models: {} };
     await Promise.all(
       Object.entries(entries(group)).map(async ([method, entry]) => {
@@ -266,7 +255,6 @@
   function rawDataset(data, study) {
     const group = "raw_" + study;
     status(group, ["qutcc", "im2im"]);
-    if (!active) return data;
     const result = structuredClone(data);
     for (const method of ["qutcc", "im2im"]) {
       const entry = entries(group)[method],
@@ -287,7 +275,6 @@
   }
 
   async function rawExample(reference, index, study) {
-    if (!active) return reference;
     const output = { ...reference, models: {} };
     await Promise.all(
       Object.entries(entries("raw_" + study)).map(async ([method, entry]) => {

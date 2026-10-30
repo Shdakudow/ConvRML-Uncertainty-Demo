@@ -1,4 +1,4 @@
-"""Browser checks for near-90% overlays, reference switching, and exact metrics.
+"""Browser checks for near-90% overlays, old calibration bookmark normalization, and exact metrics.
 
 Uses the existing Chrome/CDP fallback when the in-app browser cannot connect.
 An optional URL checks the deployed site; otherwise serves this checkout.
@@ -142,7 +142,7 @@ def main(base=None, fixture=False):
 
         def ready():
             wait(
-                "!!document.querySelector('#calibrationMode') && !document.querySelector('#example').disabled && /[0-9]+ \/ [0-9]+/.test(document.querySelector('#status').textContent)"
+                "!!document.querySelector('#calibrationLabel') && !document.querySelector('#example').disabled && /[0-9]+ \/ [0-9]+/.test(document.querySelector('#status').textContent)"
             )
 
         def screenshot(name):
@@ -165,7 +165,7 @@ def main(base=None, fixture=False):
             )
             ready()
             assert js(
-                "Coverage90.active && document.querySelector('#calibrationMode').value==='tight90'"
+                "Coverage90.active && !document.querySelector('#calibrationMode') && document.querySelector('#calibrationLabel').textContent.includes('Near 90%')"
             )
             expected = metadata["groups"].get(camera, {})
             methods = {
@@ -221,18 +221,12 @@ def main(base=None, fixture=False):
             assert js("current") == 1
             js("window.scrollTo(0,0)")
             screenshot("coverage90_" + camera)
-            # Reference remains an entirely separate, fully populated view.
-            js(
-                "document.querySelector('#calibrationMode').value='reference';document.querySelector('#calibrationMode').dispatchEvent(new Event('change'))"
-            )
+            # Old calibration bookmarks use the current calibrated comparison.
+            call("Page.navigate", dict(url=base + "corrected-epoch50/?camera=" + camera + "&calibration=reference"))
             ready()
-            assert js(
-                "!Coverage90.active && new URL(location.href).searchParams.get('calibration')==='reference'"
-            )
-            assert js("DATASET.methods.length") >= 4
-            assert js(
-                "[...document.querySelectorAll('[data-demo-route]')].every(a=>new URL(a.href).searchParams.get('calibration')==='reference')"
-            )
+            assert js("Coverage90.active && !new URL(location.href).searchParams.has('calibration')")
+            assert sorted(js("Object.keys(example.models)")) == sorted(methods)
+            assert js("[...document.querySelectorAll('[data-demo-route]')].every(a=>!new URL(a.href).searchParams.has('calibration'))")
 
         for study in ["clean"]:
             call("Page.navigate", dict(url=base + "raw-diffusercam/?study=" + study))
@@ -281,7 +275,7 @@ def main(base=None, fixture=False):
         screenshot("coverage90_mobile")
         assert not errors, errors
         print(
-            "PASS: Exp2 RML/DiffuserCam, clean raw, exact saved metrics, five-epoch curve provenance, pending/failure distinctions, reference switching, bounds, navigation, mobile layout."
+            "PASS: Exp2 RML/DiffuserCam, clean raw, exact saved metrics, five-epoch curve provenance, pending/failure distinctions, old calibration bookmark normalization, bounds, navigation, mobile layout."
         )
         ws.close()
     finally:

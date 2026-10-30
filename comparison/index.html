@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="../comparison/style.css?v=20261030">
   <script defer src="../simple-demo.js?v=20261019"></script>
   <script src="../example-browser.js?v=20261021browse"></script>
-  <script src="../coverage90.js?v=20261023milestones"></script>
+  <script src="../coverage90.js?v=20261030near90only"></script>
 </head>
 <body>
 <header>
@@ -105,7 +105,7 @@
 
     <h2>Reconstruction accuracy</h2>
     <p class="muted">PSNR and SSIM at each saved checkpoint.</p>
-    <details><summary>Accuracy details</summary><p>Reference curves show validation accuracy; near-90% curves show full-test accuracy.</p></details>
+    <details><summary>Accuracy details</summary><p>Accuracy curves use the full held-out test split at each saved checkpoint.</p></details>
     <p id="ensembleCurveStatus" class="notice"></p>
     <div id="historyPlots" class="learning-plots"></div>
 
