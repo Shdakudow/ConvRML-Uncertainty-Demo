@@ -1,0 +1,3411 @@
+{
+  "scope": "The 50 displayed examples per study/method, not all 2000 test images",
+  "lpips": "LPIPS-AlexNet v0.1; TorchMetrics normalize=True; clipped RGB [0,1]",
+  "correlations": "Per-image Pearson and Spearman between unsmoothed RGB-average absolute-error and interval-width maps; average rank for ties; constant maps are null",
+  "modes": {
+    "tight90": {
+      "clean": {
+        "qutcc": {
+          "epoch": 50,
+          "base": "https://raw.githubusercontent.com/Shdakudow/ConvRML-Uncertainty-Demo/e97bb5b4b323f50f3ea991549294624263eb5413/raw_clean/qutcc",
+          "count": 50,
+          "per_image": [
+            {
+              "index": 0,
+              "id": "test_im307.png",
+              "lpips": 0.27601680159568787,
+              "pearson": 0.6457491250854916,
+              "spearman": 0.858370137944988,
+              "asset_sha256": "e6f7ad83a42075997e25968e20fd2ebf419f080cd558bc0994872bc399486204"
+            },
+            {
+              "index": 1,
+              "id": "train_im12840.png",
+              "lpips": 0.247308149933815,
+              "pearson": 0.6426357383623575,
+              "spearman": 0.8753066230301262,
+              "asset_sha256": "a29251fd37e22357a084e5a9237965c4ce6417723fd449a4bf60c936b180bbc3"
+            },
+            {
+              "index": 2,
+              "id": "test_im324.png",
+              "lpips": 0.3209027051925659,
+              "pearson": 0.6131048011839919,
+              "spearman": 0.8132776102172597,
+              "asset_sha256": "d2268072f09165d15abbec7271458b5f9455b5dc8afeba80831f046799dd4715"
+            },
+            {
+              "index": 3,
+              "id": "test_im356.png",
+              "lpips": 0.27765634655952454,
+              "pearson": 0.6312750098167781,
+              "spearman": 0.8363186986456147,
+              "asset_sha256": "1be4149e40cca63ff757b12ae6b716e6fb35a088c5ada7b14802d833f2edd07d"
+            },
+            {
+              "index": 4,
+              "id": "train_im12923.png",
+              "lpips": 0.23189444839954376,
+              "pearson": 0.6198851537689689,
+              "spearman": 0.7912933545597519,
+              "asset_sha256": "de80b87a2dbbe6fd60efe06e061419dd522350a4a6200c69f31d181787013bb5"
+            },
+            {
+              "index": 5,
+              "id": "train_im24262.png",
+              "lpips": 0.08574257045984268,
+              "pearson": 0.6729619195049263,
+              "spearman": 0.8108221214422675,
+              "asset_sha256": "2f9f37bff16b4e1e9c49404ac094af579a88771c5e3f9cbed34bb9a50c9c4dcc"
+            },
+            {
+              "index": 6,
+              "id": "test_im528.png",
+              "lpips": 0.22757560014724731,
+              "pearson": 0.7244851136097233,
+              "spearman": 0.8635170035152037,
+              "asset_sha256": "ed0259e2d9c5aa81fc739ff896240e0a5cad85a5ca09750cdc03ab031a907737"
+            },
+            {
+              "index": 7,
+              "id": "train_im23670.png",
+              "lpips": 0.18773573637008667,
+              "pearson": 0.6789964290696224,
+              "spearman": 0.8529190721073252,
+              "asset_sha256": "c8dac2ee93f496da3fa1dfc4973dd8960eede1e002b596b8091fc603e9f995de"
+            },
+            {
+              "index": 8,
+              "id": "test_im634.png",
+              "lpips": 0.1926368772983551,
+              "pearson": 0.6792806555565545,
+              "spearman": 0.877969144480576,
+              "asset_sha256": "44a0c15061c24010ee87810b4aea4a343d053fc81a3a05b6933f387e5665c4f5"
+            },
+            {
+              "index": 9,
+              "id": "train_im9437.png",
+              "lpips": 0.4247831404209137,
+              "pearson": 0.6313706337421058,
+              "spearman": 0.8195429988462658,
+              "asset_sha256": "764336441e15c53375a61417cc3a511e73f03f1f169935660e584598d78fada7"
+            },
+            {
+              "index": 10,
+              "id": "train_im15464.png",
+              "lpips": 0.19578731060028076,
+              "pearson": 0.6193096070606243,
+              "spearman": 0.8587552989524722,
+              "asset_sha256": "7110a39099056ffb3622e74f8ca1b4fbeb5c206cd8a424c28a787262447bfc7e"
+            },
+            {
+              "index": 11,
+              "id": "train_im3751.png",
+              "lpips": 0.21127358078956604,
+              "pearson": 0.6447936709749985,
+              "spearman": 0.8445544158041443,
+              "asset_sha256": "8df2cef2ce6bdd00dbcd9481e1d2e6543b3db5600fb0c27c210a784f41162344"
+            },
+            {
+              "index": 12,
+              "id": "train_im24583.png",
+              "lpips": 0.2312678098678589,
+              "pearson": 0.7168100843155727,
+              "spearman": 0.879405688344377,
+              "asset_sha256": "6b7913b797a0578dc13cc20abcf75f7aa7783e1142fcdb82abe5a740878f8bc9"
+            },
+            {
+              "index": 13,
+              "id": "train_im4225.png",
+              "lpips": 0.4440026581287384,
+              "pearson": 0.6412332557174584,
+              "spearman": 0.7550431484253454,
+              "asset_sha256": "07d961d672af58906fb632f1c46cb7b1cc093424bd1e063997dd1c2b87673da4"
+            },
+            {
+              "index": 14,
+              "id": "train_im23340.png",
+              "lpips": 0.19483491778373718,
+              "pearson": 0.6322508091499546,
+              "spearman": 0.8855567244996964,
+              "asset_sha256": "8059dec7270f44f46598bf4df868e2f001c8f177d7f01011870c93f873c294f9"
+            },
+            {
+              "index": 15,
+              "id": "train_im2041.png",
+              "lpips": 0.3350536823272705,
+              "pearson": 0.6189841311009466,
+              "spearman": 0.7290210484613701,
+              "asset_sha256": "f9079e1b87a34e02841d7a2a5ad9a61e549ce1fb07816c6514708be57d7e8021"
+            },
+            {
+              "index": 16,
+              "id": "train_im5003.png",
+              "lpips": 0.2639658451080322,
+              "pearson": 0.6207684643320939,
+              "spearman": 0.8513906555484352,
+              "asset_sha256": "cc6462dace0fd5ad8d92e8731f1cba8320edcdc76090dcb95310adda3f917985"
+            },
+            {
+              "index": 17,
+              "id": "test_im8.png",
+              "lpips": 0.14874106645584106,
+              "pearson": 0.6899954668748489,
+              "spearman": 0.853807903402162,
+              "asset_sha256": "7954544a3d414a1757a6acfbeb15f7f9fa1445d479a6ca64664f48ff127ce0b4"
+            },
+            {
+              "index": 18,
+              "id": "test_im811.png",
+              "lpips": 0.13730308413505554,
+              "pearson": 0.6949048138393574,
+              "spearman": 0.8673662743713202,
+              "asset_sha256": "093fae7767d67e6c5aa5b962403f266d1ca550007cc5e583134b11521a943163"
+            },
+            {
+              "index": 19,
+              "id": "train_im4217.png",
+              "lpips": 0.5544732809066772,
+              "pearson": 0.6194128600136505,
+              "spearman": 0.8079241414569827,
+              "asset_sha256": "f236665a3c0882040cafd1463ee1a64c383c78e658cbff29ba6c175d569e9cc4"
+            },
+            {
+              "index": 20,
+              "id": "train_im6300.png",
+              "lpips": 0.19842728972434998,
+              "pearson": 0.7129260539475746,
+              "spearman": 0.9101502734065587,
+              "asset_sha256": "8ee168fee05f45d53945101419d7f14b0ed90c714e2cbdae36137c0a91f2870e"
+            },
+            {
+              "index": 21,
+              "id": "train_im15490.png",
+              "lpips": 0.3046841025352478,
+              "pearson": 0.6497144180965378,
+              "spearman": 0.8476507935906238,
+              "asset_sha256": "3b845f88ac1c886fd554b93c68ee12911c33d9368b4d378038c3344efd86352a"
+            },
+            {
+              "index": 22,
+              "id": "train_im20882.png",
+              "lpips": 0.16123643517494202,
+              "pearson": 0.6681170202066711,
+              "spearman": 0.8760194620553261,
+              "asset_sha256": "6639355bd915d844fa1a0a238dae939648a87ea7c7fcb537fdef0270b0cd00a9"
+            },
+            {
+              "index": 23,
+              "id": "test_im290.png",
+              "lpips": 0.177358016371727,
+              "pearson": 0.6938900802636392,
+              "spearman": 0.843966857406361,
+              "asset_sha256": "e5a340f518cdfc082302eb80f70852dd15c2e2db446b4957ffb717bfd37f0b91"
+            },
+            {
+              "index": 24,
+              "id": "train_im9334.png",
+              "lpips": 0.17486974596977234,
+              "pearson": 0.6822101253486272,
+              "spearman": 0.8356341984183622,
+              "asset_sha256": "b322b5bd2ae2201dd7f0c711f141270e41e644f8461e6d0ab57c231d9fe07bb5"
+            },
+            {
+              "index": 25,
+              "id": "train_im14519.png",
+              "lpips": 0.3190772235393524,
+              "pearson": 0.6498141608891792,
+              "spearman": 0.8545644924884811,
+              "asset_sha256": "27085e794bd73f8020aa2f41f30bf1788b156d50a1ce79bf1979780596961413"
+            },
+            {
+              "index": 26,
+              "id": "train_im13152.png",
+              "lpips": 0.16196197271347046,
+              "pearson": 0.6609670563524945,
+              "spearman": 0.8521359012326505,
+              "asset_sha256": "9febfa7e98b5849f9abb30f5322809fa98093f5c564b5b0be9ef1242c8567692"
+            },
+            {
+              "index": 27,
+              "id": "train_im15717.png",
+              "lpips": 0.21526359021663666,
+              "pearson": 0.6428230726139675,
+              "spearman": 0.8161916990992903,
+              "asset_sha256": "2cd5f50046c7a1319faebacb01b1139926b94d58a9cf3dee3f79f7e4bad05011"
+            },
+            {
+              "index": 28,
+              "id": "train_im18084.png",
+              "lpips": 0.2477797418832779,
+              "pearson": 0.6451280374614133,
+              "spearman": 0.8521976061639841,
+              "asset_sha256": "11b3601f4c69d67fcee07c545b655847302c57892e07bf5618822c9732bad0a8"
+            },
+            {
+              "index": 29,
+              "id": "train_im10749.png",
+              "lpips": 0.2568042576313019,
+              "pearson": 0.6137392541379981,
+              "spearman": 0.8157333391552405,
+              "asset_sha256": "c260ee715db45c912f7dcc8d2ca45f80bc6aab14da127a50ee2705b9b8345182"
+            },
+            {
+              "index": 30,
+              "id": "test_im913.png",
+              "lpips": 0.21324265003204346,
+              "pearson": 0.6178420694885318,
+              "spearman": 0.8211960170185433,
+              "asset_sha256": "5f8870753d992d35e2d5bca7397a66d0906f8ac7287e25854d8c2ad71413a663"
+            },
+            {
+              "index": 31,
+              "id": "test_im720.png",
+              "lpips": 0.13316237926483154,
+              "pearson": 0.6992309786723139,
+              "spearman": 0.8965497927608009,
+              "asset_sha256": "f2dc175d364e6949c5e9588ef44a0e88d886b03855c7e154b77c6ee6e34fc4f9"
+            },
+            {
+              "index": 32,
+              "id": "test_im150.png",
+              "lpips": 0.2291060984134674,
+              "pearson": 0.6746162547352331,
+              "spearman": 0.862007923715648,
+              "asset_sha256": "67206d4303cf1b1e993166005d24fbe1e469db40883ffb0a93cd4fa0e87aa77f"
+            },
+            {
+              "index": 33,
+              "id": "train_im7713.png",
+              "lpips": 0.2099214792251587,
+              "pearson": 0.63988573480771,
+              "spearman": 0.844398723809875,
+              "asset_sha256": "51110d6052848e85a769329bca4ce9e83f404677768ddad5894912a633ffc37f"
+            },
+            {
+              "index": 34,
+              "id": "test_im877.png",
+              "lpips": 0.1524963080883026,
+              "pearson": 0.694939847131705,
+              "spearman": 0.8439306215489969,
+              "asset_sha256": "9ae927b10f77c730ba6c1cddccb61f334d8deaff0a294a8347387793a4744c8e"
+            },
+            {
+              "index": 35,
+              "id": "test_im153.png",
+              "lpips": 0.27446138858795166,
+              "pearson": 0.6571319329629157,
+              "spearman": 0.8339141760419312,
+              "asset_sha256": "c75a031856b398a03c919ead96f458b9c64f6fb52a241d7470eca982fefeeb4a"
+            },
+            {
+              "index": 36,
+              "id": "test_im357.png",
+              "lpips": 0.15387804806232452,
+              "pearson": 0.7584897417952516,
+              "spearman": 0.9001942663799224,
+              "asset_sha256": "12a49bca8e06a174fea44dbbe5e301332290e250eacdd99d0f05e6b7727f2148"
+            },
+            {
+              "index": 37,
+              "id": "train_im14612.png",
+              "lpips": 0.1629183441400528,
+              "pearson": 0.6519443069874358,
+              "spearman": 0.8775132291185119,
+              "asset_sha256": "380ad9eb306eac43de3e8ca918fdb9a552e07ccf8044b5da1c331739be9be981"
+            },
+            {
+              "index": 38,
+              "id": "test_im341.png",
+              "lpips": 0.18098771572113037,
+              "pearson": 0.6786757509404322,
+              "spearman": 0.8991614998555503,
+              "asset_sha256": "bea008c5be436dc949d4043612361f486c411fefa69c22cfb60bf3c946fcbb52"
+            },
+            {
+              "index": 39,
+              "id": "train_im18855.png",
+              "lpips": 0.25192925333976746,
+              "pearson": 0.6388911731200514,
+              "spearman": 0.8607221561784991,
+              "asset_sha256": "0c7ae2154f935d85ebd6892fd4ced02ca3522cda74ec3d1bed9fbaa5ef42357e"
+            },
+            {
+              "index": 40,
+              "id": "test_im425.png",
+              "lpips": 0.33208346366882324,
+              "pearson": 0.5759127991055453,
+              "spearman": 0.817872616418133,
+              "asset_sha256": "ee09b3ac09f9cdb37ec79b91663800a0d8f4ae5d19c8ed1915cfd2b646ea86a0"
+            },
+            {
+              "index": 41,
+              "id": "train_im6372.png",
+              "lpips": 0.27567148208618164,
+              "pearson": 0.6783995776935324,
+              "spearman": 0.8477204801087301,
+              "asset_sha256": "aabbbe37e575787368629d971933644a21288030e60fb5bac82edf54819064f2"
+            },
+            {
+              "index": 42,
+              "id": "train_im21464.png",
+              "lpips": 0.11464519798755646,
+              "pearson": 0.6842256989847677,
+              "spearman": 0.8642506452587093,
+              "asset_sha256": "f7a083ea94a9d6635b4f8c19d64e6f42b36a6aa3b932649a64f471d3f0ca9bfa"
+            },
+            {
+              "index": 43,
+              "id": "test_im315.png",
+              "lpips": 0.1844380497932434,
+              "pearson": 0.7002551955509291,
+              "spearman": 0.8624004217736727,
+              "asset_sha256": "485e9cc3a7a886ae0f5de05f12c9144b15b9345c88691bfb5b001be14412de63"
+            },
+            {
+              "index": 44,
+              "id": "test_im998.png",
+              "lpips": 0.15818750858306885,
+              "pearson": 0.6598178645657771,
+              "spearman": 0.8601241008553441,
+              "asset_sha256": "8fef77dd309dfd93154bc1d41374e904449db1fc744024d68880ec4a6c94b01f"
+            },
+            {
+              "index": 45,
+              "id": "train_im7747.png",
+              "lpips": 0.2543284296989441,
+              "pearson": 0.6383037430333064,
+              "spearman": 0.8162785514156533,
+              "asset_sha256": "89110545f50a518897faa5df212c185f09946ec57bd994f3f4c0797363ca81d1"
+            },
+            {
+              "index": 46,
+              "id": "train_im23005.png",
+              "lpips": 0.163859024643898,
+              "pearson": 0.7171395805321409,
+              "spearman": 0.8486464218674491,
+              "asset_sha256": "a2beb650bd9c43b808bc01881f729cb3eea522c4f682dad2d1ede3d35de8665f"
+            },
+            {
+              "index": 47,
+              "id": "train_im6114.png",
+              "lpips": 0.22747698426246643,
+              "pearson": 0.6337146781406516,
+              "spearman": 0.8547892395428285,
+              "asset_sha256": "6233c946305fb1bb23403f8b41054fa1d2d6bcbb33c222fc7230c42ba0cc5840"
+            },
+            {
+              "index": 48,
+              "id": "test_im246.png",
+              "lpips": 0.2361934632062912,
+              "pearson": 0.7017452985513617,
+              "spearman": 0.8717373820902052,
+              "asset_sha256": "e1bce3181953895aed1552ea9d8c1864c2edf0b8924d4df84a342fb1880621c0"
+            },
+            {
+              "index": 49,
+              "id": "test_im656.png",
+              "lpips": 0.28243890404701233,
+              "pearson": 0.7034014759550974,
+              "spearman": 0.8712053627994847,
+              "asset_sha256": "256b6f2f6f380b662d595f7e94311264178ce16d4f92b474a8c7d402633d2c55"
+            }
+          ],
+          "summary": {
+            "lpips": {
+              "mean": 0.2319568832218647,
+              "std": 0.08472165399683708,
+              "n_valid": 50
+            },
+            "pearson": {
+              "mean": 0.6612420145030563,
+              "std": 0.03603641273337119,
+              "n_valid": 50
+            },
+            "spearman": {
+              "mean": 0.847820406312621,
+              "std": 0.03364970411266857,
+              "n_valid": 50
+            }
+          }
+        },
+        "im2im": {
+          "epoch": 50,
+          "base": "https://raw.githubusercontent.com/Shdakudow/ConvRML-Uncertainty-Demo/e97bb5b4b323f50f3ea991549294624263eb5413/raw_clean/im2im",
+          "count": 50,
+          "per_image": [
+            {
+              "index": 0,
+              "id": "test_im307.png",
+              "lpips": 0.25348204374313354,
+              "pearson": 0.6601147888383598,
+              "spearman": 0.8551441876232181,
+              "asset_sha256": "5c9872400f67612fd05a58d96628c08db67ae2fbdf7266ac620668d1a284e6a1"
+            },
+            {
+              "index": 1,
+              "id": "train_im12840.png",
+              "lpips": 0.2249084711074829,
+              "pearson": 0.6213110328529496,
+              "spearman": 0.8576199788777918,
+              "asset_sha256": "720566b8821aefefd61c2828aca96c3545d3a89b2a7da552931165ac9bbd791a"
+            },
+            {
+              "index": 2,
+              "id": "test_im324.png",
+              "lpips": 0.2991047501564026,
+              "pearson": 0.5828006566664208,
+              "spearman": 0.8051331476329807,
+              "asset_sha256": "50242d4a44d5319d269e956d90db77a6c4747bb0238ef3fbee2ef6a0afb73060"
+            },
+            {
+              "index": 3,
+              "id": "test_im356.png",
+              "lpips": 0.26862001419067383,
+              "pearson": 0.5952781924673813,
+              "spearman": 0.8210299972095598,
+              "asset_sha256": "ca15aa2f9cf017b89fed56bd9f26f5d4e5661684045685ebf3b6d2d25e608cce"
+            },
+            {
+              "index": 4,
+              "id": "train_im12923.png",
+              "lpips": 0.22524255514144897,
+              "pearson": 0.6291234122037993,
+              "spearman": 0.8048376016304642,
+              "asset_sha256": "e5e73c12315cfdf7ad0223bb8b56ccd8fc77da9fc71d0a4308a7b27c9efa172c"
+            },
+            {
+              "index": 5,
+              "id": "train_im24262.png",
+              "lpips": 0.09010591357946396,
+              "pearson": 0.6456066632280296,
+              "spearman": 0.8743070858954278,
+              "asset_sha256": "c51eb082408bbc7af0406fc4dbfccecd66de5a34b5e6d7f6794d528c2e8154b4"
+            },
+            {
+              "index": 6,
+              "id": "test_im528.png",
+              "lpips": 0.21445688605308533,
+              "pearson": 0.6979735560766152,
+              "spearman": 0.8815617484033861,
+              "asset_sha256": "d46d356372869b51eb6a91e797ec2a4393931bcc10fe75d3e98588d224f44b47"
+            },
+            {
+              "index": 7,
+              "id": "train_im23670.png",
+              "lpips": 0.16314920783042908,
+              "pearson": 0.6415477889514578,
+              "spearman": 0.8625920907572552,
+              "asset_sha256": "15992847b7f68f5820d6a31b6a5470074d9818086e5ef37904076adb7606e15f"
+            },
+            {
+              "index": 8,
+              "id": "test_im634.png",
+              "lpips": 0.1856103241443634,
+              "pearson": 0.6712047597589144,
+              "spearman": 0.8851891987023757,
+              "asset_sha256": "e29619373b06927b45ecc1ffcdf9081beefe352cd53e60d699e7afe0b4ff1056"
+            },
+            {
+              "index": 9,
+              "id": "train_im9437.png",
+              "lpips": 0.4028903841972351,
+              "pearson": 0.6080540218951657,
+              "spearman": 0.8129021326133924,
+              "asset_sha256": "779439f8ab6b410f3913c91e9a2d5e288ce28cf7f742d04ddbd482b65dea7edb"
+            },
+            {
+              "index": 10,
+              "id": "train_im15464.png",
+              "lpips": 0.1851128339767456,
+              "pearson": 0.6254774010550022,
+              "spearman": 0.8452813940316565,
+              "asset_sha256": "c8726a10b0dc116d3776f90087c43e38b4358a0af7f94a4a87d6075208e463b8"
+            },
+            {
+              "index": 11,
+              "id": "train_im3751.png",
+              "lpips": 0.20705091953277588,
+              "pearson": 0.6351190826896133,
+              "spearman": 0.8378547768525944,
+              "asset_sha256": "fdca40e6c390d6f147b3650e4438ae05b2fd454af115bae45018dd246d28e366"
+            },
+            {
+              "index": 12,
+              "id": "train_im24583.png",
+              "lpips": 0.23362235724925995,
+              "pearson": 0.6992495838006293,
+              "spearman": 0.8775832290710665,
+              "asset_sha256": "84eeede597e826bb94b29e42ce619fab82a2acf9649a354b4b22a9814af39c2e"
+            },
+            {
+              "index": 13,
+              "id": "train_im4225.png",
+              "lpips": 0.4343535006046295,
+              "pearson": 0.6132703175897374,
+              "spearman": 0.7510180092832264,
+              "asset_sha256": "260180ba41f7b1cdee9843f185ac373095cbf49da9a50bbb69a246d06f075796"
+            },
+            {
+              "index": 14,
+              "id": "train_im23340.png",
+              "lpips": 0.1800042688846588,
+              "pearson": 0.631921792039451,
+              "spearman": 0.8878566563263209,
+              "asset_sha256": "9a94e1f07e7f95aafa889e149f0b85e28340e184b29a5841fc0c6e56cd498de7"
+            },
+            {
+              "index": 15,
+              "id": "train_im2041.png",
+              "lpips": 0.32910677790641785,
+              "pearson": 0.6013360053556837,
+              "spearman": 0.7574549937864384,
+              "asset_sha256": "ca81f5833fd7221521977808db0e8724b72b1c498da724087f77bf5e4cbee92d"
+            },
+            {
+              "index": 16,
+              "id": "train_im5003.png",
+              "lpips": 0.2480102926492691,
+              "pearson": 0.5741033043669528,
+              "spearman": 0.836451140556916,
+              "asset_sha256": "4ef5612f2f5954d70b1a0142aead4585f26b109ae5f4067b3dc76093f4fe83bd"
+            },
+            {
+              "index": 17,
+              "id": "test_im8.png",
+              "lpips": 0.11752746999263763,
+              "pearson": 0.6686284783217329,
+              "spearman": 0.8151137831874085,
+              "asset_sha256": "d0762152510469a284406d122a7cc513feec957bdbf021f3bcf96756c27af559"
+            },
+            {
+              "index": 18,
+              "id": "test_im811.png",
+              "lpips": 0.1447339653968811,
+              "pearson": 0.6866898108812283,
+              "spearman": 0.8617383210837484,
+              "asset_sha256": "79cd5af59af85a6c70631e6d07fc4400cb7d9e6208c748adf8f0019ae593e7ed"
+            },
+            {
+              "index": 19,
+              "id": "train_im4217.png",
+              "lpips": 0.5549339652061462,
+              "pearson": 0.5962857197822956,
+              "spearman": 0.7949832658841804,
+              "asset_sha256": "39f136911741470d4a22384c30b6d310c30bc34d88939f9fa74c269e07a4bc16"
+            },
+            {
+              "index": 20,
+              "id": "train_im6300.png",
+              "lpips": 0.18482106924057007,
+              "pearson": 0.6851271467174023,
+              "spearman": 0.9168544601129472,
+              "asset_sha256": "4819c7601a922bc2f82c9328c43a893397d920420f6cd9f49416159810c33ddd"
+            },
+            {
+              "index": 21,
+              "id": "train_im15490.png",
+              "lpips": 0.28831177949905396,
+              "pearson": 0.6369326030547541,
+              "spearman": 0.8713408802780046,
+              "asset_sha256": "72d91a968bc9b3a3261a927cfe53b4dc3a4dc9d61fcfe5be3ac902483ac90463"
+            },
+            {
+              "index": 22,
+              "id": "train_im20882.png",
+              "lpips": 0.16117048263549805,
+              "pearson": 0.6549525806155132,
+              "spearman": 0.8668847047268008,
+              "asset_sha256": "46d8a515d84e05a8095dd1617de7dbf7b4e63522dfe22533b13149cfdf720146"
+            },
+            {
+              "index": 23,
+              "id": "test_im290.png",
+              "lpips": 0.17196732759475708,
+              "pearson": 0.6763357123390948,
+              "spearman": 0.8308513143390741,
+              "asset_sha256": "1ef13a32a0bd9125901dee25f89af6609d3ad79d8cc02572fb3c3d6efa0ba661"
+            },
+            {
+              "index": 24,
+              "id": "train_im9334.png",
+              "lpips": 0.1716916263103485,
+              "pearson": 0.6781587145675475,
+              "spearman": 0.8039562940301577,
+              "asset_sha256": "c183e6efcfdfca6030e54a4aaaeaf5152d8ea86bf4c41a5ae24ce20ae0c09005"
+            },
+            {
+              "index": 25,
+              "id": "train_im14519.png",
+              "lpips": 0.29062333703041077,
+              "pearson": 0.6494951508155562,
+              "spearman": 0.8594969656927808,
+              "asset_sha256": "d5acd0ea82335bcb76661626bd3de600096ead689da43e3eb61f750926650ca8"
+            },
+            {
+              "index": 26,
+              "id": "train_im13152.png",
+              "lpips": 0.15418344736099243,
+              "pearson": 0.650006735610934,
+              "spearman": 0.8506925489825377,
+              "asset_sha256": "250a1f5a31e2ab7b41f42a3b69a62697491d294e4abfbbecf317848d08b4bc3f"
+            },
+            {
+              "index": 27,
+              "id": "train_im15717.png",
+              "lpips": 0.22521771490573883,
+              "pearson": 0.6207321450695787,
+              "spearman": 0.804151992231184,
+              "asset_sha256": "9c4a3f56b04be31b9f96f2990b04b1d24c8f1387eb2c1edc36c1efad3db7fabb"
+            },
+            {
+              "index": 28,
+              "id": "train_im18084.png",
+              "lpips": 0.242778941988945,
+              "pearson": 0.6393106008687042,
+              "spearman": 0.8699168439599476,
+              "asset_sha256": "1d14d72b27094d3600c68d03218982d4f67636d9b77749cf8258674e716eca46"
+            },
+            {
+              "index": 29,
+              "id": "train_im10749.png",
+              "lpips": 0.2516186833381653,
+              "pearson": 0.6425396815660702,
+              "spearman": 0.8315542677894083,
+              "asset_sha256": "49a7ed8f715f7c52333d77bd588660afd989067908c46f2a53295de39c28e422"
+            },
+            {
+              "index": 30,
+              "id": "test_im913.png",
+              "lpips": 0.21473756432533264,
+              "pearson": 0.6150918092239122,
+              "spearman": 0.825971912884737,
+              "asset_sha256": "f9ff45b0b5cdd50b21b36588d8b7e01a479bb003b2e989d109f3d0cdcad6eb65"
+            },
+            {
+              "index": 31,
+              "id": "test_im720.png",
+              "lpips": 0.13175863027572632,
+              "pearson": 0.6978995033702728,
+              "spearman": 0.9276763416541652,
+              "asset_sha256": "cab3f119555b2cf971bd0dfad0d7b115175e02ed8c99aeeb415f4d4ea14d6a39"
+            },
+            {
+              "index": 32,
+              "id": "test_im150.png",
+              "lpips": 0.216168612241745,
+              "pearson": 0.6592387012547165,
+              "spearman": 0.855893397109141,
+              "asset_sha256": "24a797ff49d6d777a96205fd098593623e212eaf75788b4f127717834fb2ce46"
+            },
+            {
+              "index": 33,
+              "id": "train_im7713.png",
+              "lpips": 0.20368824899196625,
+              "pearson": 0.6430589427813227,
+              "spearman": 0.8446473635625541,
+              "asset_sha256": "aeebdd35354f9cd1d07368e34c7278e3d9801ac6977d3292e4185f5ff4c6ea1f"
+            },
+            {
+              "index": 34,
+              "id": "test_im877.png",
+              "lpips": 0.1413276493549347,
+              "pearson": 0.681129752034066,
+              "spearman": 0.8441751432433329,
+              "asset_sha256": "b861cb578194ea9df4a80d09cf4050f8d61f73fc0a552a989fff52598e6c8148"
+            },
+            {
+              "index": 35,
+              "id": "test_im153.png",
+              "lpips": 0.26253780722618103,
+              "pearson": 0.6461106646697657,
+              "spearman": 0.8329930945547861,
+              "asset_sha256": "8f940800cd9ec9b00cf27d8701ea8b4823589b24e91abe812c730e8044bdfc0a"
+            },
+            {
+              "index": 36,
+              "id": "test_im357.png",
+              "lpips": 0.14206722378730774,
+              "pearson": 0.7411093728627599,
+              "spearman": 0.8899527784259055,
+              "asset_sha256": "3895c04557f26efcd63f7347d1a7ff799163349801edfdcdec04c56ebfb7b5c2"
+            },
+            {
+              "index": 37,
+              "id": "train_im14612.png",
+              "lpips": 0.1644497513771057,
+              "pearson": 0.653376713178307,
+              "spearman": 0.8849378626062395,
+              "asset_sha256": "df3eb129bee4f8488f01a7fe2fb0540fe9f519cef3947ddf97d296976473f332"
+            },
+            {
+              "index": 38,
+              "id": "test_im341.png",
+              "lpips": 0.18487702310085297,
+              "pearson": 0.6564909823441245,
+              "spearman": 0.8866058095963723,
+              "asset_sha256": "0ea993c77468b33184d6cf4ccd27bce12f4d8b71432f49290bb5c42c63b7ab04"
+            },
+            {
+              "index": 39,
+              "id": "train_im18855.png",
+              "lpips": 0.2473025619983673,
+              "pearson": 0.62378630101171,
+              "spearman": 0.8730829709757778,
+              "asset_sha256": "9f39f726fbdeb24831aed21548e514853f0530e49f038b220913a5e9c8362b57"
+            },
+            {
+              "index": 40,
+              "id": "test_im425.png",
+              "lpips": 0.3153485953807831,
+              "pearson": 0.5954332615546154,
+              "spearman": 0.8227185195568288,
+              "asset_sha256": "ced39459f0fb074de497419076e0cd502181f3b653e2e85c4ea91618b2d68f81"
+            },
+            {
+              "index": 41,
+              "id": "train_im6372.png",
+              "lpips": 0.26956242322921753,
+              "pearson": 0.655450074554214,
+              "spearman": 0.8406995367676096,
+              "asset_sha256": "83782280205243c3f430fd675947ad8e0e940e6d5efb2ebe2e366a5c034de4ab"
+            },
+            {
+              "index": 42,
+              "id": "train_im21464.png",
+              "lpips": 0.1136893630027771,
+              "pearson": 0.7027079900163873,
+              "spearman": 0.8680219014354535,
+              "asset_sha256": "795b1e957a8feb19f49319bba93e287bcdaeb32b5121e129493e84ac666700fb"
+            },
+            {
+              "index": 43,
+              "id": "test_im315.png",
+              "lpips": 0.17109368741512299,
+              "pearson": 0.6961398033412701,
+              "spearman": 0.874816475234397,
+              "asset_sha256": "dcd5c28c555d3432d3204534bd67f99b23df103a80c3f4c6788f73cb9fd42b1c"
+            },
+            {
+              "index": 44,
+              "id": "test_im998.png",
+              "lpips": 0.1506580412387848,
+              "pearson": 0.6900469290071997,
+              "spearman": 0.8513867582345717,
+              "asset_sha256": "bcc5675ed0b767ac437b42031502fcc0a749d284248898cc6630539a5e8271c8"
+            },
+            {
+              "index": 45,
+              "id": "train_im7747.png",
+              "lpips": 0.2413688451051712,
+              "pearson": 0.622223284674498,
+              "spearman": 0.8015490605801706,
+              "asset_sha256": "efa996cf87335d9f1d52cdc5e6917027a98b43713dd46f54b2641230c9793254"
+            },
+            {
+              "index": 46,
+              "id": "train_im23005.png",
+              "lpips": 0.16147257387638092,
+              "pearson": 0.7141467040915186,
+              "spearman": 0.8610725075790122,
+              "asset_sha256": "1ef116d8fc9696c9b65ab4fce3070fb1b2141eeff394d0c730dfccc05a8d2751"
+            },
+            {
+              "index": 47,
+              "id": "train_im6114.png",
+              "lpips": 0.21945072710514069,
+              "pearson": 0.6294075255061733,
+              "spearman": 0.8517106810665657,
+              "asset_sha256": "a9c3127ee8ad1740236c2efee59ae2aa5202fe6f6f0d9fd11ca0f1c0deca1c86"
+            },
+            {
+              "index": 48,
+              "id": "test_im246.png",
+              "lpips": 0.23439820110797882,
+              "pearson": 0.7013541550138642,
+              "spearman": 0.8761503693980696,
+              "asset_sha256": "3536c7d8d950a65d9cc7f02292d58a79b5736d71bb4d4da7a3ec9da4f19146d0"
+            },
+            {
+              "index": 49,
+              "id": "test_im656.png",
+              "lpips": 0.27111250162124634,
+              "pearson": 0.6922070414096924,
+              "spearman": 0.8722049427033705,
+              "asset_sha256": "b20ab8874b83014fbbb499412bf68d0484ecd77416ab94f59b39159444cff4b6"
+            }
+          ],
+          "summary": {
+            "lpips": {
+              "mean": 0.22322962686419487,
+              "std": 0.08283083515879883,
+              "n_valid": 50
+            },
+            "pearson": {
+              "mean": 0.6507019390389392,
+              "std": 0.03686217966455387,
+              "n_valid": 50
+            },
+            "spearman": {
+              "mean": 0.8483524087744263,
+              "std": 0.03527850491827796,
+              "n_valid": 50
+            }
+          }
+        }
+      },
+      "corrupted": {
+        "qutcc": {
+          "epoch": 30,
+          "base": "https://raw.githubusercontent.com/Shdakudow/ConvRML-Uncertainty-Demo/e97bb5b4b323f50f3ea991549294624263eb5413/raw_corrupted/qutcc",
+          "count": 50,
+          "per_image": [
+            {
+              "index": 0,
+              "id": "test_im307.png",
+              "lpips": 0.2996984124183655,
+              "pearson": 0.6518066092437671,
+              "spearman": 0.8523325993845081,
+              "asset_sha256": "55af2ee5995511d5cbb9ca354b9db5cc43cd9adf868253a4138a41b7780e5562"
+            },
+            {
+              "index": 1,
+              "id": "train_im12840.png",
+              "lpips": 0.6737174987792969,
+              "pearson": 0.6653479385191517,
+              "spearman": 0.8265384297334625,
+              "asset_sha256": "29dab58e84475d1444546500fcf97445ac5a85eea070a023b1f9c1971c8c24e9"
+            },
+            {
+              "index": 2,
+              "id": "test_im324.png",
+              "lpips": 0.43912699818611145,
+              "pearson": 0.6313501714380332,
+              "spearman": 0.7749887844872732,
+              "asset_sha256": "8c8a38aa03051736cdc64a8999ff25d5414e0e05acc0a2ca8d8d4d83bbe00612"
+            },
+            {
+              "index": 3,
+              "id": "test_im356.png",
+              "lpips": 0.391376256942749,
+              "pearson": 0.6157467891270196,
+              "spearman": 0.8252259210840729,
+              "asset_sha256": "404cafebf5709c4cc9976f802fbb11f10f74c4ec44f09fdf2eb249aa789f928e"
+            },
+            {
+              "index": 4,
+              "id": "train_im12923.png",
+              "lpips": 0.8249041438102722,
+              "pearson": 0.5603901251056114,
+              "spearman": 0.6256457017013414,
+              "asset_sha256": "f28858449bd7068c28a8ae812d541782f3659a25509ad79e2444be89e569ead0"
+            },
+            {
+              "index": 5,
+              "id": "train_im24262.png",
+              "lpips": 0.1334782838821411,
+              "pearson": 0.6468906453012917,
+              "spearman": 0.5781077453278048,
+              "asset_sha256": "e008b13a65a62529ec3114e1a517a003669e7fea2f421d899d56f634e777ee97"
+            },
+            {
+              "index": 6,
+              "id": "test_im528.png",
+              "lpips": 0.2542632818222046,
+              "pearson": 0.7259436742631346,
+              "spearman": 0.8606106628773156,
+              "asset_sha256": "4f1a4ef3a481d15a67f260bcafeae35341d7ba77402fb41851af447e5e5c0d9c"
+            },
+            {
+              "index": 7,
+              "id": "train_im23670.png",
+              "lpips": 0.2112918645143509,
+              "pearson": 0.6707790989796444,
+              "spearman": 0.8724951262712398,
+              "asset_sha256": "92f4144bebc4c1eec6611482b5577a3680405866971b7034669e41d064b43157"
+            },
+            {
+              "index": 8,
+              "id": "test_im634.png",
+              "lpips": 0.2781602144241333,
+              "pearson": 0.696501155821958,
+              "spearman": 0.8737684068297443,
+              "asset_sha256": "e139334b2a3550721759a4bbe36c20c4ab4cd4b8aa15a56cb03705d6ded01666"
+            },
+            {
+              "index": 9,
+              "id": "train_im9437.png",
+              "lpips": 0.7024971842765808,
+              "pearson": 0.6154619994078074,
+              "spearman": 0.786276466354251,
+              "asset_sha256": "514dd2cce91b12c700f78ba251548ed3c051a62bad439f1878d67757ff76593e"
+            },
+            {
+              "index": 10,
+              "id": "train_im15464.png",
+              "lpips": 0.2560751140117645,
+              "pearson": 0.6498048113909574,
+              "spearman": 0.8217184538171599,
+              "asset_sha256": "a4d3384674a6fab60fea055b6a034dbf745fa046ce007232455f00e2eadd3f68"
+            },
+            {
+              "index": 11,
+              "id": "train_im3751.png",
+              "lpips": 0.324815034866333,
+              "pearson": 0.6217160369455372,
+              "spearman": 0.8046631444227403,
+              "asset_sha256": "a3a9dee5a5d29781869ddb603c01292196b0b25e4f38ab558fc5687ff90405f5"
+            },
+            {
+              "index": 12,
+              "id": "train_im24583.png",
+              "lpips": 0.29997724294662476,
+              "pearson": 0.671732577409577,
+              "spearman": 0.8338795611892016,
+              "asset_sha256": "bf6064a87a27f6a82c6b4b670478eaf17217c802692f42458aea833a4176c744"
+            },
+            {
+              "index": 13,
+              "id": "train_im4225.png",
+              "lpips": 0.5414787530899048,
+              "pearson": 0.6390668088487546,
+              "spearman": 0.7596421644820982,
+              "asset_sha256": "e64af139c479c92436ced196d9465e0052d6e75a4f46b5813224cf85e1372fc0"
+            },
+            {
+              "index": 14,
+              "id": "train_im23340.png",
+              "lpips": 0.25630301237106323,
+              "pearson": 0.639387519826727,
+              "spearman": 0.8551116036175223,
+              "asset_sha256": "3da30988e432deae80f0fada4e135f73af3efe220147901a482dec6161bc754b"
+            },
+            {
+              "index": 15,
+              "id": "train_im2041.png",
+              "lpips": 0.5389532446861267,
+              "pearson": 0.5359062271078918,
+              "spearman": 0.6951396054930897,
+              "asset_sha256": "fbe63b5039aca14c3adc065f46fea2c4d23ab089da92261f67a2cda93b235b52"
+            },
+            {
+              "index": 16,
+              "id": "train_im5003.png",
+              "lpips": 0.33855846524238586,
+              "pearson": 0.6001505399262871,
+              "spearman": 0.8268734667753344,
+              "asset_sha256": "4f7ee26d76f1b3e032c3aca860c2a8f9abd4040b9542f35b652892680afcbd65"
+            },
+            {
+              "index": 17,
+              "id": "test_im8.png",
+              "lpips": 0.20277924835681915,
+              "pearson": 0.630971270656012,
+              "spearman": 0.8177872635947742,
+              "asset_sha256": "4f79648a6107c3d1ccc2c583fcddf4b830bef6a3db11dd741e225c51a1aba033"
+            },
+            {
+              "index": 18,
+              "id": "test_im811.png",
+              "lpips": 0.22478100657463074,
+              "pearson": 0.6374470980718863,
+              "spearman": 0.8531474247874461,
+              "asset_sha256": "4dc9192c2213607f513a88893f829704855d6a448538aaddf0688cb26d7602a9"
+            },
+            {
+              "index": 19,
+              "id": "train_im4217.png",
+              "lpips": 0.67415851354599,
+              "pearson": 0.5835114283753774,
+              "spearman": 0.7884815626825358,
+              "asset_sha256": "dc8d0ad0887a30659050556d9566a4632bb698a124ce509848f4a59c74dccaee"
+            },
+            {
+              "index": 20,
+              "id": "train_im6300.png",
+              "lpips": 0.2758145034313202,
+              "pearson": 0.5180576921365724,
+              "spearman": 0.8860736733165194,
+              "asset_sha256": "be41b5ef712b8911d7ec2e135c0037b3cd3a3d6c042a8af94d76a0681ae20d41"
+            },
+            {
+              "index": 21,
+              "id": "train_im15490.png",
+              "lpips": 0.3397890627384186,
+              "pearson": 0.6500951935119286,
+              "spearman": 0.8433732590565753,
+              "asset_sha256": "bad09c99d33e717493e07031416ee16e0ad9ad9ce710bc56f1453a73f022cb06"
+            },
+            {
+              "index": 22,
+              "id": "train_im20882.png",
+              "lpips": 0.25050482153892517,
+              "pearson": 0.6516614992649039,
+              "spearman": 0.8568340250600126,
+              "asset_sha256": "2cb4350a8275389629574c3c5ffa18055d117787d3cd3dd4956d5c6d72e8c0cf"
+            },
+            {
+              "index": 23,
+              "id": "test_im290.png",
+              "lpips": 0.20127975940704346,
+              "pearson": 0.682065080642517,
+              "spearman": 0.8376995806658338,
+              "asset_sha256": "308642e549438b604bf877eff4bc6af1cfc354220d905735299069cca4500488"
+            },
+            {
+              "index": 24,
+              "id": "train_im9334.png",
+              "lpips": 0.18026699125766754,
+              "pearson": 0.6110528994218074,
+              "spearman": 0.5582301363261676,
+              "asset_sha256": "96a831a56e53cdb456f99a859d8dcf7fecd2f7fb914f57184d41e32823fd6cf4"
+            },
+            {
+              "index": 25,
+              "id": "train_im14519.png",
+              "lpips": 0.39349448680877686,
+              "pearson": 0.6391333137921419,
+              "spearman": 0.8214739329705572,
+              "asset_sha256": "af918afb801fa98cddd630153f75ec4687e4c5dcbdb7bf08a931e61771395521"
+            },
+            {
+              "index": 26,
+              "id": "train_im13152.png",
+              "lpips": 0.2620724141597748,
+              "pearson": 0.6701473429546816,
+              "spearman": 0.8451020053994251,
+              "asset_sha256": "2a5daeb67019cbbc4bc062fa1285c1a1c1e4d584ab16d302f42932c1ec66aa67"
+            },
+            {
+              "index": 27,
+              "id": "train_im15717.png",
+              "lpips": 0.4230324327945709,
+              "pearson": 0.5931768766383865,
+              "spearman": 0.7930405954320782,
+              "asset_sha256": "b9fccc200ca847217c49dcbae4795657d197a82f13df2f78efdfad5c87688ca6"
+            },
+            {
+              "index": 28,
+              "id": "train_im18084.png",
+              "lpips": 0.705259382724762,
+              "pearson": 0.5676522029057254,
+              "spearman": 0.7623938002149152,
+              "asset_sha256": "5a365362eca4b3edf679b4bb08ee44287d946cc2c76c68f402d5be0e62a12b41"
+            },
+            {
+              "index": 29,
+              "id": "train_im10749.png",
+              "lpips": 0.3838319182395935,
+              "pearson": 0.7113195092864527,
+              "spearman": 0.8344054921917416,
+              "asset_sha256": "287cf72d629e7db2c8d3bbec5adaada7cbf2ccc7a395a1510f4bb4f2754ef6e6"
+            },
+            {
+              "index": 30,
+              "id": "test_im913.png",
+              "lpips": 0.2709697186946869,
+              "pearson": 0.6405357723126721,
+              "spearman": 0.8093805353136854,
+              "asset_sha256": "47f5a0979b632b236013a5599c434fe5581824684bb6064dc243e74222b26af3"
+            },
+            {
+              "index": 31,
+              "id": "test_im720.png",
+              "lpips": 0.13658370077610016,
+              "pearson": 0.6958580577940291,
+              "spearman": 0.8538493325967352,
+              "asset_sha256": "3c2d1b7746ab07b9a936b9063c6fd37431e288dfaf77fa0a35e563553c7940e3"
+            },
+            {
+              "index": 32,
+              "id": "test_im150.png",
+              "lpips": 0.3736344873905182,
+              "pearson": 0.656606283304707,
+              "spearman": 0.8468606807131466,
+              "asset_sha256": "79287df23855217f65bc8b8025b15e614de6354c93941ded778208b6e9a2dc18"
+            },
+            {
+              "index": 33,
+              "id": "train_im7713.png",
+              "lpips": 0.4351937472820282,
+              "pearson": 0.6247448598770259,
+              "spearman": 0.8177507380787422,
+              "asset_sha256": "1ebdab80c0e6989f58b797cb46f94b0e6277fe086d9e06e18256baa9d21f9b2d"
+            },
+            {
+              "index": 34,
+              "id": "test_im877.png",
+              "lpips": 0.33410200476646423,
+              "pearson": 0.6321793861027216,
+              "spearman": 0.853649484410399,
+              "asset_sha256": "136ff8d3db320d160d49eb614083a1faf8ffafd9da64742f80ca4c413b3bae7e"
+            },
+            {
+              "index": 35,
+              "id": "test_im153.png",
+              "lpips": 0.3297225832939148,
+              "pearson": 0.6183797357560312,
+              "spearman": 0.8153351918026112,
+              "asset_sha256": "f66e1764185020ed7c337376fa53a213041d367c28ddd762355605c7ff05bda4"
+            },
+            {
+              "index": 36,
+              "id": "test_im357.png",
+              "lpips": 0.8188295960426331,
+              "pearson": 0.5366067826857098,
+              "spearman": 0.7590801938114249,
+              "asset_sha256": "f4b4a9e5bf96bdf37d3a182b696adbae5b8e0b5b8fd970c7eb4f52ce06d9b9ed"
+            },
+            {
+              "index": 37,
+              "id": "train_im14612.png",
+              "lpips": 0.2511265277862549,
+              "pearson": 0.5960801486013887,
+              "spearman": 0.8385160258936877,
+              "asset_sha256": "f7e662f2a107900809372882cc9fc35156f7d259bc8a2d68a69b2cca1b328a51"
+            },
+            {
+              "index": 38,
+              "id": "test_im341.png",
+              "lpips": 0.2774363160133362,
+              "pearson": 0.6255951698308884,
+              "spearman": 0.857711586469681,
+              "asset_sha256": "33f1f769df1a3a7efa1100a886cbad9d8eca2d980a7c6394fbc258f54dd29c0a"
+            },
+            {
+              "index": 39,
+              "id": "train_im18855.png",
+              "lpips": 0.5882928371429443,
+              "pearson": 0.5935334540121104,
+              "spearman": 0.8156074588661801,
+              "asset_sha256": "0034b7309fb6f0cf8d4a90d1eca56b1754cc8675f798b957c4fca6811c096c76"
+            },
+            {
+              "index": 40,
+              "id": "test_im425.png",
+              "lpips": 0.5323258638381958,
+              "pearson": 0.5378392335839144,
+              "spearman": 0.7964409652528321,
+              "asset_sha256": "2d8e56ba3234a64db6bdfda56ab0959426721d35c74e0c67ee41e23fd3d76a5f"
+            },
+            {
+              "index": 41,
+              "id": "train_im6372.png",
+              "lpips": 0.37398189306259155,
+              "pearson": 0.6602317194378242,
+              "spearman": 0.8402214910977496,
+              "asset_sha256": "6e29435947678a18ecc2a91f7ad763e7797ca85c3b67734a676843f2b75bd23c"
+            },
+            {
+              "index": 42,
+              "id": "train_im21464.png",
+              "lpips": 0.38520848751068115,
+              "pearson": 0.5105557258255415,
+              "spearman": 0.7669659977524251,
+              "asset_sha256": "b2a56c4ea79d23f2c4e212df8fd031e16d2e6a0120b994d34da1203572a0e6f3"
+            },
+            {
+              "index": 43,
+              "id": "test_im315.png",
+              "lpips": 0.3885650038719177,
+              "pearson": 0.6542705493081331,
+              "spearman": 0.887877245970689,
+              "asset_sha256": "11d3fa27745c110a15c8abe63040bb1a4b014cdbb264ffe7bdb0c9e0968fded9"
+            },
+            {
+              "index": 44,
+              "id": "test_im998.png",
+              "lpips": 0.36530473828315735,
+              "pearson": 0.5498889891983341,
+              "spearman": 0.7910770078893675,
+              "asset_sha256": "5753d9bbe79c4acd3cc9912d21488237d764cb455d5a0bf168a4983d0a7a5198"
+            },
+            {
+              "index": 45,
+              "id": "train_im7747.png",
+              "lpips": 0.282626748085022,
+              "pearson": 0.6239997152476494,
+              "spearman": 0.8148239039828415,
+              "asset_sha256": "ecb2927c639522c03268d8f0360e1bcd055c597871cbcd927e5b1170178b0d6f"
+            },
+            {
+              "index": 46,
+              "id": "train_im23005.png",
+              "lpips": 0.1793128401041031,
+              "pearson": 0.7085045788134626,
+              "spearman": 0.8515952372308465,
+              "asset_sha256": "696db929ef6ce1523f3f8807d3d67f3b30f7d560ea504e2b54f3532758765a3f"
+            },
+            {
+              "index": 47,
+              "id": "train_im6114.png",
+              "lpips": 0.2502977252006531,
+              "pearson": 0.6165465892421467,
+              "spearman": 0.846895784842487,
+              "asset_sha256": "93e645fda8a1be4f1055e3b1fb21d066071de5fab1ce1f501e07450068e652a4"
+            },
+            {
+              "index": 48,
+              "id": "test_im246.png",
+              "lpips": 0.24915608763694763,
+              "pearson": 0.7023564789354504,
+              "spearman": 0.8753446822003558,
+              "asset_sha256": "18b68fb5627fb525b42d17b02314319463152cd5e128ce034df86c42ba092b9f"
+            },
+            {
+              "index": 49,
+              "id": "test_im656.png",
+              "lpips": 0.5430794954299927,
+              "pearson": 0.6547167092167805,
+              "spearman": 0.8519636982986081,
+              "asset_sha256": "9e8968fd25ba66ecea5471031229f5705a539bbc7f6f437e425b4f3220ad2e0b"
+            }
+          ],
+          "summary": {
+            "lpips": {
+              "mean": 0.3729497990012169,
+              "std": 0.17000202545008242,
+              "n_valid": 50
+            },
+            "pearson": {
+              "mean": 0.6284660815081613,
+              "std": 0.050251076446267584,
+              "n_valid": 50
+            },
+            "spearman": {
+              "mean": 0.8112401567604249,
+              "std": 0.06793282371754285,
+              "n_valid": 50
+            }
+          }
+        },
+        "im2im": {
+          "epoch": 30,
+          "base": "https://raw.githubusercontent.com/Shdakudow/ConvRML-Uncertainty-Demo/e97bb5b4b323f50f3ea991549294624263eb5413/raw_corrupted/im2im",
+          "count": 50,
+          "per_image": [
+            {
+              "index": 0,
+              "id": "test_im307.png",
+              "lpips": 0.27634739875793457,
+              "pearson": 0.6610386443209579,
+              "spearman": 0.8599958515361134,
+              "asset_sha256": "6fa5ebb4e5f72c9227ab00bd7e0c88e3bdc08dbe29316580abedf74a849f4f4a"
+            },
+            {
+              "index": 1,
+              "id": "train_im12840.png",
+              "lpips": 0.7301415205001831,
+              "pearson": 0.6157243066962385,
+              "spearman": 0.8032745011144171,
+              "asset_sha256": "ed6b408256b790838360adea3cf25a106fde303e1d68119ffdebe76c11e3d28a"
+            },
+            {
+              "index": 2,
+              "id": "test_im324.png",
+              "lpips": 0.4324200749397278,
+              "pearson": 0.6237573834429404,
+              "spearman": 0.7850519187767657,
+              "asset_sha256": "5b6ddfe98e8f0883efdd9896d7d6dd9d3fc958b18c837cb9213ca8aff720fdf1"
+            },
+            {
+              "index": 3,
+              "id": "test_im356.png",
+              "lpips": 0.3882055878639221,
+              "pearson": 0.577207185732914,
+              "spearman": 0.8178297413060108,
+              "asset_sha256": "ab66549b1700ec3d51f79e1bab93afccd1c99308750dfcc13b36c1a8cc28b0b3"
+            },
+            {
+              "index": 4,
+              "id": "train_im12923.png",
+              "lpips": 0.8875628113746643,
+              "pearson": 0.5040014125580845,
+              "spearman": 0.6270536273779538,
+              "asset_sha256": "8bd1f5143dcd5c317503a922758e3e3f92c8e51a23a963d8f783cd6d16deece3"
+            },
+            {
+              "index": 5,
+              "id": "train_im24262.png",
+              "lpips": 0.12966501712799072,
+              "pearson": 0.6592138376209804,
+              "spearman": 0.7803704584544375,
+              "asset_sha256": "cf2eb378f61356422a4e418a0ddad6e481e98bb85e919cece88bda8b43ac2b35"
+            },
+            {
+              "index": 6,
+              "id": "test_im528.png",
+              "lpips": 0.2380288541316986,
+              "pearson": 0.7332212629783752,
+              "spearman": 0.8894304928906357,
+              "asset_sha256": "4fdbad62897e8190ee3128fc5f5e1725c7c1444759dfc02f0b90b9a7f7dd251d"
+            },
+            {
+              "index": 7,
+              "id": "train_im23670.png",
+              "lpips": 0.20743489265441895,
+              "pearson": 0.7259450564296114,
+              "spearman": 0.9000584896126349,
+              "asset_sha256": "11c8172af12d7e493cbea6b96a6c5ee0662679c734ca20be9c6d8a8a0341bdce"
+            },
+            {
+              "index": 8,
+              "id": "test_im634.png",
+              "lpips": 0.2787143588066101,
+              "pearson": 0.6759004083725999,
+              "spearman": 0.8772731414993284,
+              "asset_sha256": "362e4619a9b2bf15fb1babfe4c7c8aedbace4b174d04a69b6fbc74af1ca7f23b"
+            },
+            {
+              "index": 9,
+              "id": "train_im9437.png",
+              "lpips": 0.6929624676704407,
+              "pearson": 0.6189118781859417,
+              "spearman": 0.7826472273339904,
+              "asset_sha256": "8f2fe0ea94b5d324b13ea2655c2bf17e25f3bc04aa360b08a584dbe5e71596aa"
+            },
+            {
+              "index": 10,
+              "id": "train_im15464.png",
+              "lpips": 0.2544769048690796,
+              "pearson": 0.6273467526117198,
+              "spearman": 0.8339918042768543,
+              "asset_sha256": "596278778f1b1e63377a096be867f914f143fa17cc501093cf849fe18829445c"
+            },
+            {
+              "index": 11,
+              "id": "train_im3751.png",
+              "lpips": 0.31527942419052124,
+              "pearson": 0.6605477158933377,
+              "spearman": 0.8338069298757881,
+              "asset_sha256": "6cbd6a7040ec39d3ce8041a35bb327a503355e3bff8e7abad85d36fa5d2cae07"
+            },
+            {
+              "index": 12,
+              "id": "train_im24583.png",
+              "lpips": 0.3081077039241791,
+              "pearson": 0.6466001189258702,
+              "spearman": 0.8289201297813736,
+              "asset_sha256": "e9c391b75dd8072dd6f7ae180c4a5cf493777ab41473f6ae899c95a2cd44cf82"
+            },
+            {
+              "index": 13,
+              "id": "train_im4225.png",
+              "lpips": 0.5336952209472656,
+              "pearson": 0.6317224664197121,
+              "spearman": 0.7714385824383112,
+              "asset_sha256": "d85d24eb69b8003c4067a76bfebf4c132e6fd1da4c5a4322267ed9018a3183bd"
+            },
+            {
+              "index": 14,
+              "id": "train_im23340.png",
+              "lpips": 0.24634163081645966,
+              "pearson": 0.650871955942054,
+              "spearman": 0.8979923870480314,
+              "asset_sha256": "c94fae81aae50f0af30d437093c8df452110d60a4eaf3885bf8202785734f711"
+            },
+            {
+              "index": 15,
+              "id": "train_im2041.png",
+              "lpips": 0.554663896560669,
+              "pearson": 0.5771953024700583,
+              "spearman": 0.7719891240529847,
+              "asset_sha256": "7d39d5a49c130f2bb95e25fbf2287a86b3a1b9ecb1fc9f9b066d3870a72ea771"
+            },
+            {
+              "index": 16,
+              "id": "train_im5003.png",
+              "lpips": 0.3482833504676819,
+              "pearson": 0.6170341661982323,
+              "spearman": 0.845725328647375,
+              "asset_sha256": "254fb6f177a771cd433fd49290f075a49a410146d142723b73a105923db1a2b2"
+            },
+            {
+              "index": 17,
+              "id": "test_im8.png",
+              "lpips": 0.17582757771015167,
+              "pearson": 0.6186423901817368,
+              "spearman": 0.7877498441020264,
+              "asset_sha256": "cba398823c44858e6fdb5578f21afc95d56b2eda5640596a829a87432278a329"
+            },
+            {
+              "index": 18,
+              "id": "test_im811.png",
+              "lpips": 0.2478334754705429,
+              "pearson": 0.5926367888372237,
+              "spearman": 0.8595532753793248,
+              "asset_sha256": "3627dd596ebb59e666afeb2c6d40d02f7e5fdad718c3706d5c4410bf0e8afe83"
+            },
+            {
+              "index": 19,
+              "id": "train_im4217.png",
+              "lpips": 0.7106466293334961,
+              "pearson": 0.5607364018763817,
+              "spearman": 0.7743799052025052,
+              "asset_sha256": "ef338fcbac16bfe872864fcaceda6190a9b6cfc27db3a923e0417fb1f932ea94"
+            },
+            {
+              "index": 20,
+              "id": "train_im6300.png",
+              "lpips": 0.2969067692756653,
+              "pearson": 0.569543920405617,
+              "spearman": 0.8932109465085378,
+              "asset_sha256": "a88226038e30c3c2fa960fcc12db4c5b09c49585044fb40aed7e800e637caf5c"
+            },
+            {
+              "index": 21,
+              "id": "train_im15490.png",
+              "lpips": 0.30996203422546387,
+              "pearson": 0.6667516331014769,
+              "spearman": 0.8789718240765609,
+              "asset_sha256": "0d5e6870f96b2dd41c1bcc84da355c4945b58d980970d9d8e84538466fb5b843"
+            },
+            {
+              "index": 22,
+              "id": "train_im20882.png",
+              "lpips": 0.25633177161216736,
+              "pearson": 0.6760006250761373,
+              "spearman": 0.8856686810439766,
+              "asset_sha256": "e8317480e60a2aa5c4c2c3fa330e165782ab83bc9fdb35f069af5c2a7cb7dbc7"
+            },
+            {
+              "index": 23,
+              "id": "test_im290.png",
+              "lpips": 0.19431476294994354,
+              "pearson": 0.663546646232893,
+              "spearman": 0.8170423604584317,
+              "asset_sha256": "ac3ff89c1d384400f0a0a2ba070a135a9a5f346eeb45ddafbd2f5cf19decd37a"
+            },
+            {
+              "index": 24,
+              "id": "train_im9334.png",
+              "lpips": 0.18737944960594177,
+              "pearson": 0.680249698265516,
+              "spearman": 0.8063156065294442,
+              "asset_sha256": "dd79fddb8a99d5ed5fc0758f5962ca2626481b2a9ba8414a78f197c57ad95ef6"
+            },
+            {
+              "index": 25,
+              "id": "train_im14519.png",
+              "lpips": 0.38469448685646057,
+              "pearson": 0.6271341291114111,
+              "spearman": 0.82671355237896,
+              "asset_sha256": "d71abee0ead3bf5cda98ede1992f5871c541808b686d431856ee734efbc98438"
+            },
+            {
+              "index": 26,
+              "id": "train_im13152.png",
+              "lpips": 0.2677394449710846,
+              "pearson": 0.6480799078843926,
+              "spearman": 0.8570386063323281,
+              "asset_sha256": "382b41d95412c917e68a79660218ecbb2781de001029c3d91a33377be7fd6594"
+            },
+            {
+              "index": 27,
+              "id": "train_im15717.png",
+              "lpips": 0.4154067039489746,
+              "pearson": 0.5776512278183258,
+              "spearman": 0.790489933611736,
+              "asset_sha256": "1c7648c1ae5eb83f411f0cb2a2ad5b9f180446d8a9426250f843b75ee991d0a7"
+            },
+            {
+              "index": 28,
+              "id": "train_im18084.png",
+              "lpips": 0.7650365829467773,
+              "pearson": 0.5633839770867077,
+              "spearman": 0.7859970019744087,
+              "asset_sha256": "36d5ea9989801892869e32ac39f5b441e5bea8ed9d9167ce1a7d6a6d5ee43c23"
+            },
+            {
+              "index": 29,
+              "id": "train_im10749.png",
+              "lpips": 0.39329150319099426,
+              "pearson": 0.6744596809902268,
+              "spearman": 0.8254727296407465,
+              "asset_sha256": "0a038b39c5a558a90dfdfe9bc1d19ea6fba731e7a5822122eb8ef94514f2a45b"
+            },
+            {
+              "index": 30,
+              "id": "test_im913.png",
+              "lpips": 0.2809295654296875,
+              "pearson": 0.6362717018863322,
+              "spearman": 0.8333843694998089,
+              "asset_sha256": "59312bb527950b8ef7d4b162952033ad816b7d733cafbd82d7346c3dc7702c5b"
+            },
+            {
+              "index": 31,
+              "id": "test_im720.png",
+              "lpips": 0.13661082088947296,
+              "pearson": 0.7005613590187296,
+              "spearman": 0.9050877220996048,
+              "asset_sha256": "5a359671c681c72ce4e140eed2eb23f506f70691312831737f2647b7ef0ee209"
+            },
+            {
+              "index": 32,
+              "id": "test_im150.png",
+              "lpips": 0.38283491134643555,
+              "pearson": 0.6612353757080869,
+              "spearman": 0.8541087290768861,
+              "asset_sha256": "41b8f33c3763409079b5a2c1f7c490615890ff17bfd4809ba76cedb9b1113bb4"
+            },
+            {
+              "index": 33,
+              "id": "train_im7713.png",
+              "lpips": 0.445506751537323,
+              "pearson": 0.6232150324543202,
+              "spearman": 0.8281284110382846,
+              "asset_sha256": "15d3714b26b115dc5b0206f14456b40033a755ef3a3fb6670f9cd10f444f655d"
+            },
+            {
+              "index": 34,
+              "id": "test_im877.png",
+              "lpips": 0.3450215756893158,
+              "pearson": 0.6718585631659028,
+              "spearman": 0.8610822587394455,
+              "asset_sha256": "b56246cd2eb2261930215d95379c6dc4df2899e3244ddf650711dfb347b661d5"
+            },
+            {
+              "index": 35,
+              "id": "test_im153.png",
+              "lpips": 0.3281390964984894,
+              "pearson": 0.6259376005928627,
+              "spearman": 0.8283968909048983,
+              "asset_sha256": "fbf9aca3555ffabd2c75c5c89c02f9db9d346e780e377c7d7445024dbf227fdc"
+            },
+            {
+              "index": 36,
+              "id": "test_im357.png",
+              "lpips": 0.8563525080680847,
+              "pearson": 0.5937619519247717,
+              "spearman": 0.8296087560711765,
+              "asset_sha256": "7fd195fcfa21653776236a57aab97987942d8506b335ce7ddd93824a66d518e7"
+            },
+            {
+              "index": 37,
+              "id": "train_im14612.png",
+              "lpips": 0.26908767223358154,
+              "pearson": 0.6245012483145522,
+              "spearman": 0.8722994733593727,
+              "asset_sha256": "cb00a91955aa54af377ea41321e5012d33e613f88c6992640ab971010cffecce"
+            },
+            {
+              "index": 38,
+              "id": "test_im341.png",
+              "lpips": 0.27925941348075867,
+              "pearson": 0.6328696902911042,
+              "spearman": 0.8733802583068959,
+              "asset_sha256": "c7ae92130447b6522a060389a9f5a46e83bfb16d1c45eaa73b1c386baee80bc1"
+            },
+            {
+              "index": 39,
+              "id": "train_im18855.png",
+              "lpips": 0.5723410248756409,
+              "pearson": 0.6394005974164649,
+              "spearman": 0.8596046280382281,
+              "asset_sha256": "a050b9a921514757d4ab6e738eb74490edb90dea46adef6bee6289fefc59e079"
+            },
+            {
+              "index": 40,
+              "id": "test_im425.png",
+              "lpips": 0.5442194938659668,
+              "pearson": 0.5634785137930078,
+              "spearman": 0.8197334825691295,
+              "asset_sha256": "d1eac753b0681767c68e324e48c7f2fb1297433d7f3233f200a27d2c8c078b7c"
+            },
+            {
+              "index": 41,
+              "id": "train_im6372.png",
+              "lpips": 0.36288344860076904,
+              "pearson": 0.661696824108486,
+              "spearman": 0.8516728000362825,
+              "asset_sha256": "43afa60b6929270cf59e58b63f6b854811417fbfb7e3d7b0b868fac85c519aa6"
+            },
+            {
+              "index": 42,
+              "id": "train_im21464.png",
+              "lpips": 0.39498740434646606,
+              "pearson": 0.5618900061529664,
+              "spearman": 0.8654578549550349,
+              "asset_sha256": "14c0bdd29a178c3e4b881797103a1c49a6015eae374bcc0fa286d8f7ae7bb28a"
+            },
+            {
+              "index": 43,
+              "id": "test_im315.png",
+              "lpips": 0.40830960869789124,
+              "pearson": 0.6874744130438033,
+              "spearman": 0.8883076748280865,
+              "asset_sha256": "0285a281b6b172d4a3f514188cbb2dde6b0ad94e36d90c732cb71b867a439bc6"
+            },
+            {
+              "index": 44,
+              "id": "test_im998.png",
+              "lpips": 0.36124926805496216,
+              "pearson": 0.5521602411210762,
+              "spearman": 0.861292958424838,
+              "asset_sha256": "258d2dc8358461ebba7901e725708b3bd2cdcb3a04b434155f7d313bad113d8b"
+            },
+            {
+              "index": 45,
+              "id": "train_im7747.png",
+              "lpips": 0.27068614959716797,
+              "pearson": 0.6175355113216214,
+              "spearman": 0.8070218941580143,
+              "asset_sha256": "76ffdc983b67f43665bcebed5579fcaadb213f6ccff3e1826ae2c1a61e9ed514"
+            },
+            {
+              "index": 46,
+              "id": "train_im23005.png",
+              "lpips": 0.16754961013793945,
+              "pearson": 0.7354764047266592,
+              "spearman": 0.8600954373524268,
+              "asset_sha256": "d1a9d446ac3a3363084836ba7abc9552fda31bf97994e6ca46574f56fdce18a9"
+            },
+            {
+              "index": 47,
+              "id": "train_im6114.png",
+              "lpips": 0.2451319545507431,
+              "pearson": 0.6376631904811854,
+              "spearman": 0.8515600018093797,
+              "asset_sha256": "8449123b1a2593d5194b0625453eafd9e2f57fd4d70f6c16cdbaa11103701b62"
+            },
+            {
+              "index": 48,
+              "id": "test_im246.png",
+              "lpips": 0.2529953122138977,
+              "pearson": 0.7092205703716847,
+              "spearman": 0.8784691483621667,
+              "asset_sha256": "538816e14f81200371a1a6d0401f63cc2d326d6a81f6c87e6a1dbc7ecb21a7b5"
+            },
+            {
+              "index": 49,
+              "id": "test_im656.png",
+              "lpips": 0.6087808012962341,
+              "pearson": 0.6673887016238857,
+              "spearman": 0.8408103938040844,
+              "asset_sha256": "74ec4a6c3f19def4201c2251bbc81de0db2e04e262679c5a337e117c16e736f5"
+            }
+          ],
+          "summary": {
+            "lpips": {
+              "mean": 0.37881157398223875,
+              "std": 0.1831997982811364,
+              "n_valid": 50
+            },
+            "pearson": {
+              "mean": 0.6345730875837036,
+              "std": 0.049123242448260745,
+              "n_valid": 50
+            },
+            "spearman": {
+              "mean": 0.8352991429339207,
+              "std": 0.047582088191512814,
+              "n_valid": 50
+            }
+          }
+        }
+      }
+    },
+    "reference": {
+      "clean": {
+        "qutcc": {
+          "epoch": 50,
+          "base": "https://raw.githubusercontent.com/Shdakudow/ConvRML-Uncertainty-Demo/d4df974cb47709abc80d82529c85a058d8140934/exports/clean/qutcc",
+          "count": 50,
+          "per_image": [
+            {
+              "index": 0,
+              "id": "test_im307.png",
+              "lpips": 0.2760303318500519,
+              "pearson": 0.6457622256743182,
+              "spearman": 0.8583578050173711,
+              "asset_sha256": "441e6ab67c7b15b8e58dc3e23682db0b50a9116db4c256daa64778a39c34044c"
+            },
+            {
+              "index": 1,
+              "id": "train_im12840.png",
+              "lpips": 0.2473093718290329,
+              "pearson": 0.6429696020112717,
+              "spearman": 0.8753746288351297,
+              "asset_sha256": "6c2bbdc5bb79cfb5e8a4cc141e44b652ed1e6c926aeba51f646bc272180974ab"
+            },
+            {
+              "index": 2,
+              "id": "test_im324.png",
+              "lpips": 0.3209160566329956,
+              "pearson": 0.6133918582924833,
+              "spearman": 0.8133749297637105,
+              "asset_sha256": "9eaac04571ec760f8e9c52dd52c15225c7f8d2acdf391950e32e0e132d9c6b60"
+            },
+            {
+              "index": 3,
+              "id": "test_im356.png",
+              "lpips": 0.27767255902290344,
+              "pearson": 0.6315041719541705,
+              "spearman": 0.836295861564696,
+              "asset_sha256": "c70628bdce4be25492c99e47996e78372e15f684b48302803dad44bcaefb837d"
+            },
+            {
+              "index": 4,
+              "id": "train_im12923.png",
+              "lpips": 0.23189806938171387,
+              "pearson": 0.6196402628506547,
+              "spearman": 0.7909196965799798,
+              "asset_sha256": "13389b045d5670ff65dcec79755702a0ab71568c7c10d37ad187f01c113a3681"
+            },
+            {
+              "index": 5,
+              "id": "train_im24262.png",
+              "lpips": 0.08574425429105759,
+              "pearson": 0.6742143977818941,
+              "spearman": 0.8102378404157767,
+              "asset_sha256": "65ea322f0796ecd6ebc1cb96dcefa9d2a750885d69c26fce67ed624fc7de7ff9"
+            },
+            {
+              "index": 6,
+              "id": "test_im528.png",
+              "lpips": 0.22758127748966217,
+              "pearson": 0.7247069977148018,
+              "spearman": 0.8634794742857064,
+              "asset_sha256": "4e448f17d84e7f10d32d6db04af306aaa1da94aac4afd93263374b552e38333c"
+            },
+            {
+              "index": 7,
+              "id": "train_im23670.png",
+              "lpips": 0.1877315640449524,
+              "pearson": 0.6793922794143641,
+              "spearman": 0.8529547364055211,
+              "asset_sha256": "b46aa2490c25c3a11b2e9520a410a2c046eb3bec0ef02af8ef3166d2c0840e2a"
+            },
+            {
+              "index": 8,
+              "id": "test_im634.png",
+              "lpips": 0.19264112412929535,
+              "pearson": 0.6796910841379413,
+              "spearman": 0.8780515202813103,
+              "asset_sha256": "db71e35aa8804fc69326050cbc996818804dce98f67a08368ec25ce2221460d8"
+            },
+            {
+              "index": 9,
+              "id": "train_im9437.png",
+              "lpips": 0.42476600408554077,
+              "pearson": 0.631670751358276,
+              "spearman": 0.8195618874297338,
+              "asset_sha256": "1e8a2726c7ab86fa47c6d5905483c7fa219f3cf99858ee7d84b51ec25fca4d67"
+            },
+            {
+              "index": 10,
+              "id": "train_im15464.png",
+              "lpips": 0.19579103589057922,
+              "pearson": 0.6195963393081627,
+              "spearman": 0.8587488196555627,
+              "asset_sha256": "9d7dcb9799697f865a074b504a7b7fb597166e1edd26e035a43662864c3f3cdd"
+            },
+            {
+              "index": 11,
+              "id": "train_im3751.png",
+              "lpips": 0.2112794667482376,
+              "pearson": 0.6451627892140992,
+              "spearman": 0.8446291916137928,
+              "asset_sha256": "faf6446923abd66a66075310752fd86dcf748a3dd96b3d44339fc3625eea7702"
+            },
+            {
+              "index": 12,
+              "id": "train_im24583.png",
+              "lpips": 0.23126107454299927,
+              "pearson": 0.7169459666066149,
+              "spearman": 0.8793989137076808,
+              "asset_sha256": "0d79b968cd730ed11df67c72e51018e2deac489b50ad837a5ef35de09e7d8125"
+            },
+            {
+              "index": 13,
+              "id": "train_im4225.png",
+              "lpips": 0.44401219487190247,
+              "pearson": 0.6416851126210994,
+              "spearman": 0.7554096194924165,
+              "asset_sha256": "2d16321e85d2cfe3a46f81aff73c183bac6c2be122988bc5a99688d6ce088ba9"
+            },
+            {
+              "index": 14,
+              "id": "train_im23340.png",
+              "lpips": 0.19482240080833435,
+              "pearson": 0.6324442075593478,
+              "spearman": 0.8853590689476666,
+              "asset_sha256": "b37139d7d1ca8af8104771ea266383a58a8d8482c99d42f7b942703246681619"
+            },
+            {
+              "index": 15,
+              "id": "train_im2041.png",
+              "lpips": 0.3350520133972168,
+              "pearson": 0.6192877300168929,
+              "spearman": 0.7290750242923302,
+              "asset_sha256": "f2c220842897986b3de2ff7c8db2ccb1fa0c7564a2ac5ecf3684378cfbc1d270"
+            },
+            {
+              "index": 16,
+              "id": "train_im5003.png",
+              "lpips": 0.2639615535736084,
+              "pearson": 0.6212121896884979,
+              "spearman": 0.8515386446988363,
+              "asset_sha256": "0a9710d061e16a79713263fdd939f6173633ccdf148ce53343b1a593af80b66e"
+            },
+            {
+              "index": 17,
+              "id": "test_im8.png",
+              "lpips": 0.1487322300672531,
+              "pearson": 0.6898886255771086,
+              "spearman": 0.8538007759763484,
+              "asset_sha256": "a81016aa6d6dba6fec1d845b34adaa0d53e26df58171f11e04a8efb24b066be2"
+            },
+            {
+              "index": 18,
+              "id": "test_im811.png",
+              "lpips": 0.1372988224029541,
+              "pearson": 0.6946351070207951,
+              "spearman": 0.8672990734068762,
+              "asset_sha256": "4435c663aef641b4558ece704f1898e68ea1074649e53e6b3304bda2b14ef1f0"
+            },
+            {
+              "index": 19,
+              "id": "train_im4217.png",
+              "lpips": 0.5544987320899963,
+              "pearson": 0.6194936327264704,
+              "spearman": 0.8078632679755403,
+              "asset_sha256": "fec69353a4cb659ce9cf445771c6a69802e191bce8b6469196bb58477ef79411"
+            },
+            {
+              "index": 20,
+              "id": "train_im6300.png",
+              "lpips": 0.1984328329563141,
+              "pearson": 0.7131136873304385,
+              "spearman": 0.9102464902881235,
+              "asset_sha256": "9f7bd232f0f975360323c8c2565e69926c784c072f88893e8b8fe88caf71d3be"
+            },
+            {
+              "index": 21,
+              "id": "train_im15490.png",
+              "lpips": 0.3046948313713074,
+              "pearson": 0.6500788981201595,
+              "spearman": 0.8476403417517139,
+              "asset_sha256": "eb7dddf591fcec9be6d0735e7d997d72426d9dbf8924e6263b73f4416effac89"
+            },
+            {
+              "index": 22,
+              "id": "train_im20882.png",
+              "lpips": 0.1612408459186554,
+              "pearson": 0.6683734653263731,
+              "spearman": 0.8760596800242729,
+              "asset_sha256": "3c7991e49246e949abefae533d5e0c2efe4133b8734944d856654094cb6e33f9"
+            },
+            {
+              "index": 23,
+              "id": "test_im290.png",
+              "lpips": 0.17736658453941345,
+              "pearson": 0.694191996302171,
+              "spearman": 0.844125881730832,
+              "asset_sha256": "219f68fc7c34bc60484778f46f7694e897788cd66969a723ecfb6163360f4b57"
+            },
+            {
+              "index": 24,
+              "id": "train_im9334.png",
+              "lpips": 0.17486868798732758,
+              "pearson": 0.6822686927659778,
+              "spearman": 0.8354649887348693,
+              "asset_sha256": "b9af78427065427bac93827e47a9a8af9a99e39345556a975a8999f712576c45"
+            },
+            {
+              "index": 25,
+              "id": "train_im14519.png",
+              "lpips": 0.3190750479698181,
+              "pearson": 0.6500954390460186,
+              "spearman": 0.8546891205271728,
+              "asset_sha256": "9cc1a21d78416dc452a4236573538fa8b66fb619cebb346a75e4b6e2396c655d"
+            },
+            {
+              "index": 26,
+              "id": "train_im13152.png",
+              "lpips": 0.1619638353586197,
+              "pearson": 0.661053723903317,
+              "spearman": 0.8521391537341698,
+              "asset_sha256": "668420d5992b08acad0da2c171caf5727d4618041d1add8aa7dce0ef3c5a772b"
+            },
+            {
+              "index": 27,
+              "id": "train_im15717.png",
+              "lpips": 0.21527600288391113,
+              "pearson": 0.6428791393939117,
+              "spearman": 0.8161044581944817,
+              "asset_sha256": "df830000adadc16d696e22cc40ee4da1a2fab5368ce7d9e2f14db9ebc5801134"
+            },
+            {
+              "index": 28,
+              "id": "train_im18084.png",
+              "lpips": 0.2477935552597046,
+              "pearson": 0.6454174673021285,
+              "spearman": 0.8522534471321562,
+              "asset_sha256": "62f9825979e596cecd7f2d8920f0c9f9fc8b261281c7cdf91bdbfc45cd629e02"
+            },
+            {
+              "index": 29,
+              "id": "train_im10749.png",
+              "lpips": 0.2567988634109497,
+              "pearson": 0.6137331223275235,
+              "spearman": 0.815658948362198,
+              "asset_sha256": "02d00287e757efd4db05331203afaaa97b079e88735283a5bd518dd9e0598e88"
+            },
+            {
+              "index": 30,
+              "id": "test_im913.png",
+              "lpips": 0.21324123442173004,
+              "pearson": 0.6177945707707551,
+              "spearman": 0.8211206057926177,
+              "asset_sha256": "bc8cad466c45ef5bab5ad536abad0cc2c5dc838b4b3c005b04c4c34555f8ef43"
+            },
+            {
+              "index": 31,
+              "id": "test_im720.png",
+              "lpips": 0.1331728994846344,
+              "pearson": 0.699397332941764,
+              "spearman": 0.8962951747100185,
+              "asset_sha256": "424a20c598d3141fb58114cac03512a5483dc59a0830d972ad79cfc1eeb3ce4c"
+            },
+            {
+              "index": 32,
+              "id": "test_im150.png",
+              "lpips": 0.2291136533021927,
+              "pearson": 0.6746515529518229,
+              "spearman": 0.8617394990221086,
+              "asset_sha256": "8147120985de93d961de2e17019fb7ad9cdfd6ca22d9f9c01580ee81eed49c57"
+            },
+            {
+              "index": 33,
+              "id": "train_im7713.png",
+              "lpips": 0.2099257856607437,
+              "pearson": 0.6400051018713665,
+              "spearman": 0.8443922742581652,
+              "asset_sha256": "3f8de53d63d62ab2a9e525270853afa59aa2a2999b79987a057863761bd5b17b"
+            },
+            {
+              "index": 34,
+              "id": "test_im877.png",
+              "lpips": 0.15250763297080994,
+              "pearson": 0.6950730770440916,
+              "spearman": 0.8439664897903333,
+              "asset_sha256": "5e06e88c0d2a15db4a272e2e4420690dbb566b3c284238517a035e6478e86246"
+            },
+            {
+              "index": 35,
+              "id": "test_im153.png",
+              "lpips": 0.2744672894477844,
+              "pearson": 0.6573962735050076,
+              "spearman": 0.833981868792938,
+              "asset_sha256": "759b094ddb58fc7a8a9c968e9d01241c5b867692ebebe7b585d5efe5bca357a8"
+            },
+            {
+              "index": 36,
+              "id": "test_im357.png",
+              "lpips": 0.15386947989463806,
+              "pearson": 0.7584653387529664,
+              "spearman": 0.900038391700389,
+              "asset_sha256": "3be1932d2e4a6507f2d2052f13edf1eb1e05e20b0dd913c608e5ec273a928758"
+            },
+            {
+              "index": 37,
+              "id": "train_im14612.png",
+              "lpips": 0.16291846334934235,
+              "pearson": 0.6517473669773128,
+              "spearman": 0.8774170054801615,
+              "asset_sha256": "500da855b6c8e49d7f37ee8015c12dc4d80f5536a02aa15ade3839ba236bda90"
+            },
+            {
+              "index": 38,
+              "id": "test_im341.png",
+              "lpips": 0.18097805976867676,
+              "pearson": 0.6786559192976144,
+              "spearman": 0.8990405195867073,
+              "asset_sha256": "937b929c92f4de43741d28b6cdc71dc3e997f24ef4a285a22d79b2250725a0c2"
+            },
+            {
+              "index": 39,
+              "id": "train_im18855.png",
+              "lpips": 0.25192123651504517,
+              "pearson": 0.6391336160099016,
+              "spearman": 0.8607309573202837,
+              "asset_sha256": "5507c1962f9b82d186b7a428474520a1ecaf6cce85a7d5242955bf1f95489206"
+            },
+            {
+              "index": 40,
+              "id": "test_im425.png",
+              "lpips": 0.33208006620407104,
+              "pearson": 0.5762215545167535,
+              "spearman": 0.8180027494175887,
+              "asset_sha256": "704a69d65c7716f7dd5dc267dd22b2c6387085272b811940d224372b07adcd86"
+            },
+            {
+              "index": 41,
+              "id": "train_im6372.png",
+              "lpips": 0.27566561102867126,
+              "pearson": 0.6784557363258659,
+              "spearman": 0.8478047233251462,
+              "asset_sha256": "1dd7233ccc44ace5af22b7e02570d74ef1c7e835f457616fc99e3204a7251177"
+            },
+            {
+              "index": 42,
+              "id": "train_im21464.png",
+              "lpips": 0.11464985460042953,
+              "pearson": 0.6842791899948711,
+              "spearman": 0.8641671061932462,
+              "asset_sha256": "dbb5153697dc500edd7c73b4daad923ca3a0aac67d481f2e33ee94e0b0902961"
+            },
+            {
+              "index": 43,
+              "id": "test_im315.png",
+              "lpips": 0.18445053696632385,
+              "pearson": 0.7004412906355519,
+              "spearman": 0.8621796538556379,
+              "asset_sha256": "2290dd5b92f52fa7a7073cc0692e7a7cebcc96a9d66d5802f87c57a9d8cd7594"
+            },
+            {
+              "index": 44,
+              "id": "test_im998.png",
+              "lpips": 0.15819023549556732,
+              "pearson": 0.6601380010302724,
+              "spearman": 0.860115940251283,
+              "asset_sha256": "f794e1be8fd860dfd95c7941a4c1add421a8af9f7b19102f1915032a5654bb85"
+            },
+            {
+              "index": 45,
+              "id": "train_im7747.png",
+              "lpips": 0.25434771180152893,
+              "pearson": 0.6383817246754291,
+              "spearman": 0.8162549333867385,
+              "asset_sha256": "9f549c8a522d473aa1334c6081210407f3c499091a44f428327651f3a6084111"
+            },
+            {
+              "index": 46,
+              "id": "train_im23005.png",
+              "lpips": 0.16385924816131592,
+              "pearson": 0.7173073983092101,
+              "spearman": 0.8485578136634299,
+              "asset_sha256": "fec5e0ea8162f3dde3dc8c8e3bc952c321d8c5e7d7bf925e87899ef073f702eb"
+            },
+            {
+              "index": 47,
+              "id": "train_im6114.png",
+              "lpips": 0.22748538851737976,
+              "pearson": 0.634018934343226,
+              "spearman": 0.854866614287574,
+              "asset_sha256": "f2866ab3da27c989da90d3dcaa4dba7683c83638a957cca2e2ea6d89b4e2f17e"
+            },
+            {
+              "index": 48,
+              "id": "test_im246.png",
+              "lpips": 0.23618820309638977,
+              "pearson": 0.7015647584789804,
+              "spearman": 0.8714494315264615,
+              "asset_sha256": "3f617a4da8bfb5790429820f461d4c87861c92b1f31a699d03d3b483bac6d5ac"
+            },
+            {
+              "index": 49,
+              "id": "test_im656.png",
+              "lpips": 0.2824323773384094,
+              "pearson": 0.7035274111526428,
+              "spearman": 0.8712854834578845,
+              "asset_sha256": "46e068c1bcd21cc48109699eb6e592b8c31319362f26b83f2f7e967062f7feaf"
+            }
+          ],
+          "summary": {
+            "lpips": {
+              "mean": 0.23195952385663987,
+              "std": 0.08472330547755422,
+              "n_valid": 50
+            },
+            "pearson": {
+              "mean": 0.6614231422586537,
+              "std": 0.0360031053031841,
+              "n_valid": 50
+            },
+            "spearman": {
+              "mean": 0.8477904105328937,
+              "std": 0.03362992953831372,
+              "n_valid": 50
+            }
+          }
+        },
+        "im2im": {
+          "epoch": 50,
+          "base": "https://raw.githubusercontent.com/Shdakudow/ConvRML-Uncertainty-Demo/d4df974cb47709abc80d82529c85a058d8140934/exports/clean/im2im",
+          "count": 50,
+          "per_image": [
+            {
+              "index": 0,
+              "id": "test_im307.png",
+              "lpips": 0.253472238779068,
+              "pearson": 0.6601177740495126,
+              "spearman": 0.8551600628691476,
+              "asset_sha256": "b8eb32b3551a12817524c827debf5bdf0115004514ed189141bd9274e0407876"
+            },
+            {
+              "index": 1,
+              "id": "train_im12840.png",
+              "lpips": 0.22491051256656647,
+              "pearson": 0.6213198712633039,
+              "spearman": 0.8576195687364673,
+              "asset_sha256": "fbb48b2fcc26d7370ed650dba867e83b8553990f073be39be400de087ba790b6"
+            },
+            {
+              "index": 2,
+              "id": "test_im324.png",
+              "lpips": 0.29909512400627136,
+              "pearson": 0.5827998701090937,
+              "spearman": 0.8051419025725673,
+              "asset_sha256": "6f2c29b886e7cced3ba871e6d048a25c1ef3e3dc0d7a5f5a291139826e9bdc60"
+            },
+            {
+              "index": 3,
+              "id": "test_im356.png",
+              "lpips": 0.26861727237701416,
+              "pearson": 0.5953239240726524,
+              "spearman": 0.8210508723439918,
+              "asset_sha256": "57a6033c244a6ac6f057da586630035df9c3b17e8689229f8b0e7e1606a54fee"
+            },
+            {
+              "index": 4,
+              "id": "train_im12923.png",
+              "lpips": 0.22523149847984314,
+              "pearson": 0.6290932929969507,
+              "spearman": 0.8048196155031174,
+              "asset_sha256": "ab1772232134fbbe298518ef6386c653004cdae5b9bf7300f6690a2ccc636257"
+            },
+            {
+              "index": 5,
+              "id": "train_im24262.png",
+              "lpips": 0.09009924530982971,
+              "pearson": 0.6457268927417276,
+              "spearman": 0.8741370812723102,
+              "asset_sha256": "91c39dc094e062ade4033487b5dd757a29fc601fe3c419db83a18da6e40096c2"
+            },
+            {
+              "index": 6,
+              "id": "test_im528.png",
+              "lpips": 0.21444736421108246,
+              "pearson": 0.6980405720395324,
+              "spearman": 0.8815986683476636,
+              "asset_sha256": "43b7edbcb0d8e10c9c0cac6f93ec6f8615ece46eac24faccf3e5563924b387a9"
+            },
+            {
+              "index": 7,
+              "id": "train_im23670.png",
+              "lpips": 0.16315805912017822,
+              "pearson": 0.6415994210848126,
+              "spearman": 0.862665284216012,
+              "asset_sha256": "86164c72084100a35173d72f4ef4cdc3280aea8ee5e0df7a490bcdefb5dfd1aa"
+            },
+            {
+              "index": 8,
+              "id": "test_im634.png",
+              "lpips": 0.1855967938899994,
+              "pearson": 0.6712593969830486,
+              "spearman": 0.8852074734081173,
+              "asset_sha256": "a1faeffbd59ce0b5d6e2930ea590dfccf29637c664830edd1cb9ce44b317449a"
+            },
+            {
+              "index": 9,
+              "id": "train_im9437.png",
+              "lpips": 0.40289822220802307,
+              "pearson": 0.6080581448390743,
+              "spearman": 0.8129127079744204,
+              "asset_sha256": "e12d4fce8a0a0ccf159d9640d288f45b323d984e370dcc0c5fa1c517a632eb5c"
+            },
+            {
+              "index": 10,
+              "id": "train_im15464.png",
+              "lpips": 0.1851159781217575,
+              "pearson": 0.625511404248231,
+              "spearman": 0.845316953525894,
+              "asset_sha256": "201e5f98a49f80c04d00ace66170567d187a6781f4485d17f2b60394a1bee73c"
+            },
+            {
+              "index": 11,
+              "id": "train_im3751.png",
+              "lpips": 0.20704196393489838,
+              "pearson": 0.6351414854244726,
+              "spearman": 0.837875803039121,
+              "asset_sha256": "20bf681d5e8d5c3f1297d2fb08b032ca9d389b29c0edda6fdfb485d193050253"
+            },
+            {
+              "index": 12,
+              "id": "train_im24583.png",
+              "lpips": 0.23360812664031982,
+              "pearson": 0.6992458860864538,
+              "spearman": 0.8775922636744146,
+              "asset_sha256": "5bc72eb15db3c9b95f3cd037cb1f48d78d494264dd16ea77c76db8fb55874ab8"
+            },
+            {
+              "index": 13,
+              "id": "train_im4225.png",
+              "lpips": 0.4343714118003845,
+              "pearson": 0.6133273182268904,
+              "spearman": 0.7510683857715239,
+              "asset_sha256": "8c8d2141da5784b61ec7fab217b5b8bdfb004073059901066ad84fa94b2ecc42"
+            },
+            {
+              "index": 14,
+              "id": "train_im23340.png",
+              "lpips": 0.17999149858951569,
+              "pearson": 0.6319325106149503,
+              "spearman": 0.8878596796413157,
+              "asset_sha256": "95384b8535dc2fe8bf2d391a74a1fbeec4d61612d5ac1095fa7185136f3038e1"
+            },
+            {
+              "index": 15,
+              "id": "train_im2041.png",
+              "lpips": 0.32909178733825684,
+              "pearson": 0.6013259244889716,
+              "spearman": 0.7574841685503203,
+              "asset_sha256": "b83f20270c30990cc82261181ffbfee25fff9d7acea75404c74d2ed3556bde38"
+            },
+            {
+              "index": 16,
+              "id": "train_im5003.png",
+              "lpips": 0.248026043176651,
+              "pearson": 0.5741707262497515,
+              "spearman": 0.8364657339155881,
+              "asset_sha256": "ebe9844afbb593e5b54a7c30c3c504b6b079272c0ad4d095c7e6910164a28185"
+            },
+            {
+              "index": 17,
+              "id": "test_im8.png",
+              "lpips": 0.11749991774559021,
+              "pearson": 0.6686058047227054,
+              "spearman": 0.8151042206859762,
+              "asset_sha256": "8923bebf09f39b96dbd8ba5323060625b7b5df59987447ecac1d752b56685134"
+            },
+            {
+              "index": 18,
+              "id": "test_im811.png",
+              "lpips": 0.14473466575145721,
+              "pearson": 0.6866907995165661,
+              "spearman": 0.8617343185794668,
+              "asset_sha256": "f87b8f82dad5d0aee58bd12d53ece414c49c759450cd854c2c076a59b4d74ac7"
+            },
+            {
+              "index": 19,
+              "id": "train_im4217.png",
+              "lpips": 0.5549400448799133,
+              "pearson": 0.5963038605299836,
+              "spearman": 0.794983301470651,
+              "asset_sha256": "daf8eef6d2f294a46e1b9293bfb762b984ee50abffd839c3b9dbf2890cd2544d"
+            },
+            {
+              "index": 20,
+              "id": "train_im6300.png",
+              "lpips": 0.1848258227109909,
+              "pearson": 0.6851452769886268,
+              "spearman": 0.9168799349510071,
+              "asset_sha256": "7714d4895010f61968d378c9ca37221702b6e6c50fefaf85e03b92b296b72635"
+            },
+            {
+              "index": 21,
+              "id": "train_im15490.png",
+              "lpips": 0.2883266508579254,
+              "pearson": 0.6370348487712616,
+              "spearman": 0.8713330676799451,
+              "asset_sha256": "e611ad030b5e5bd494445d877d1229c98c06bcfdc8e86ad182b1a6542e039334"
+            },
+            {
+              "index": 22,
+              "id": "train_im20882.png",
+              "lpips": 0.16116581857204437,
+              "pearson": 0.654968102116348,
+              "spearman": 0.8669221430827105,
+              "asset_sha256": "af10834ba9d91a1b5c5c0685e6b5a7c3c4dab65eeef969beef67c4a9e3efc467"
+            },
+            {
+              "index": 23,
+              "id": "test_im290.png",
+              "lpips": 0.1719358265399933,
+              "pearson": 0.676359811719738,
+              "spearman": 0.8308805716357226,
+              "asset_sha256": "c82cf939600a647cd7a4af95e184f7dfe03f5c915dd04ff61b21fed0e17df463"
+            },
+            {
+              "index": 24,
+              "id": "train_im9334.png",
+              "lpips": 0.17169126868247986,
+              "pearson": 0.6781953790882592,
+              "spearman": 0.8040010127770608,
+              "asset_sha256": "6bbf71a5424a07faba61bfd1e03cf0b2e78f38da82aab396a1859f0a54bac08d"
+            },
+            {
+              "index": 25,
+              "id": "train_im14519.png",
+              "lpips": 0.29062458872795105,
+              "pearson": 0.6495325973689856,
+              "spearman": 0.85952435920579,
+              "asset_sha256": "fccc5fe99e4c4574ab0605144c894e55f8eb5a44eeea8a90b1bf5c85ff3c05ef"
+            },
+            {
+              "index": 26,
+              "id": "train_im13152.png",
+              "lpips": 0.1541929394006729,
+              "pearson": 0.6500231125420992,
+              "spearman": 0.8506752546310062,
+              "asset_sha256": "79227d82f6be13bd39c46f3e3577ce8b8f9511b8b0fb71308572026adbaecc51"
+            },
+            {
+              "index": 27,
+              "id": "train_im15717.png",
+              "lpips": 0.22522422671318054,
+              "pearson": 0.6207322914480049,
+              "spearman": 0.8041451866231824,
+              "asset_sha256": "4eca6965a46ef33c65c7a2555f774f3fa1eac90e8da4540d8c278ee829291fe2"
+            },
+            {
+              "index": 28,
+              "id": "train_im18084.png",
+              "lpips": 0.24276967346668243,
+              "pearson": 0.6393620504910921,
+              "spearman": 0.869930173651604,
+              "asset_sha256": "76de24e3824f45b83f4ed4f21c52b378c03acaf624e23a2702195175d4fb4ce5"
+            },
+            {
+              "index": 29,
+              "id": "train_im10749.png",
+              "lpips": 0.2516354024410248,
+              "pearson": 0.6425216804936869,
+              "spearman": 0.8315582212764093,
+              "asset_sha256": "b0834ba639ba3ec64fb2e3652701b43ee9e03cde1dda507390bacad39a140777"
+            },
+            {
+              "index": 30,
+              "id": "test_im913.png",
+              "lpips": 0.214731365442276,
+              "pearson": 0.6150981333921388,
+              "spearman": 0.8259848957048477,
+              "asset_sha256": "b1b660c99cbb888fb92037a9807edde71f5537b5351aa5bbdd184bf8742b737f"
+            },
+            {
+              "index": 31,
+              "id": "test_im720.png",
+              "lpips": 0.13174599409103394,
+              "pearson": 0.6979330241430146,
+              "spearman": 0.9276952888638864,
+              "asset_sha256": "318aa23229fb6a8d5b3e97a134166932fdf86faddb04548533a08fa12dd552d2"
+            },
+            {
+              "index": 32,
+              "id": "test_im150.png",
+              "lpips": 0.21617081761360168,
+              "pearson": 0.659260313909365,
+              "spearman": 0.8559007817925556,
+              "asset_sha256": "3437b17100f0b69e027a404b2668cb6ec8b0a623a3a0f9989aee18c71fd1e9e9"
+            },
+            {
+              "index": 33,
+              "id": "train_im7713.png",
+              "lpips": 0.20369601249694824,
+              "pearson": 0.643072871956021,
+              "spearman": 0.8446413520507434,
+              "asset_sha256": "48f28eea71dc6a222b810d3a7ab7ce38dbd4a1394756d4ac6acef7b82eea3ead"
+            },
+            {
+              "index": 34,
+              "id": "test_im877.png",
+              "lpips": 0.14134325087070465,
+              "pearson": 0.6811305832167159,
+              "spearman": 0.8442313856607802,
+              "asset_sha256": "0e7636d2dd9090c1a4715ef68a8fab259f2c08d35b2240dd8821c54b9db24340"
+            },
+            {
+              "index": 35,
+              "id": "test_im153.png",
+              "lpips": 0.26253655552864075,
+              "pearson": 0.6461420754686202,
+              "spearman": 0.833005399828351,
+              "asset_sha256": "e823f5b71412b2884a72bc5ff605f9b4919c1f69e7cb4ab81c33f5e05afc3f5c"
+            },
+            {
+              "index": 36,
+              "id": "test_im357.png",
+              "lpips": 0.14207498729228973,
+              "pearson": 0.7411036412119285,
+              "spearman": 0.8899121674841286,
+              "asset_sha256": "0d1cfbcfc7bd9518ef018e7733c37f1095445ba26e49700f35b66e14fd3fdf42"
+            },
+            {
+              "index": 37,
+              "id": "train_im14612.png",
+              "lpips": 0.16445808112621307,
+              "pearson": 0.6533959103744789,
+              "spearman": 0.8849440176842762,
+              "asset_sha256": "0b9b7798692155c712e75e868f8b7041e1bfb9eb50fe51b0cdce489919f8af08"
+            },
+            {
+              "index": 38,
+              "id": "test_im341.png",
+              "lpips": 0.18488654494285583,
+              "pearson": 0.6565038764544378,
+              "spearman": 0.8866092534863954,
+              "asset_sha256": "f86ca3d86ecbd764ad2c67daf0afa8821a1dacf44c9416db6aefe613af3442a6"
+            },
+            {
+              "index": 39,
+              "id": "train_im18855.png",
+              "lpips": 0.24729105830192566,
+              "pearson": 0.6238281296453533,
+              "spearman": 0.8731030658117565,
+              "asset_sha256": "c0a4cbdf07e8313cb062f6b1da7ce1f8ca0584033f1d8d1e4d600ac72421c530"
+            },
+            {
+              "index": 40,
+              "id": "test_im425.png",
+              "lpips": 0.3153635859489441,
+              "pearson": 0.5954409498853508,
+              "spearman": 0.8227276736911372,
+              "asset_sha256": "7192755b4a52a540bebce6bd3d2109cedd6720edbf597442b861abcb9b5debdf"
+            },
+            {
+              "index": 41,
+              "id": "train_im6372.png",
+              "lpips": 0.26956263184547424,
+              "pearson": 0.6554469078523923,
+              "spearman": 0.8407036584397694,
+              "asset_sha256": "f3ae9f2fcfc9d89363b38f368d6e54a4289fd084d44f367c9cd9ee6bd6d71184"
+            },
+            {
+              "index": 42,
+              "id": "train_im21464.png",
+              "lpips": 0.11369284987449646,
+              "pearson": 0.702740826367561,
+              "spearman": 0.8679794931163597,
+              "asset_sha256": "34ff8172c7d5ff0a487da9695fed34b660cb325b14a27f5dcbc49fa63302d7c5"
+            },
+            {
+              "index": 43,
+              "id": "test_im315.png",
+              "lpips": 0.17110636830329895,
+              "pearson": 0.6961492498142923,
+              "spearman": 0.8748381741784821,
+              "asset_sha256": "bd7b69082ac9dc1a95f50483815f4672b5a87f8ba7fd1533158b989830001d0a"
+            },
+            {
+              "index": 44,
+              "id": "test_im998.png",
+              "lpips": 0.15065941214561462,
+              "pearson": 0.6900764061146529,
+              "spearman": 0.8514125545489444,
+              "asset_sha256": "144ce9a82c8db70110acfa4bbdfcdad295e30f26e8d4fdecf5f0a3f233e6bab7"
+            },
+            {
+              "index": 45,
+              "id": "train_im7747.png",
+              "lpips": 0.24137277901172638,
+              "pearson": 0.622228997857151,
+              "spearman": 0.8015677483035618,
+              "asset_sha256": "19f1ed9c22fa36cff17314bb988b3a9a8dae1860da3c085aee6e7e06609579dc"
+            },
+            {
+              "index": 46,
+              "id": "train_im23005.png",
+              "lpips": 0.16148439049720764,
+              "pearson": 0.7141679695177532,
+              "spearman": 0.861087722900485,
+              "asset_sha256": "a642c9040aa0de0521a108592063090be1b9dc2e0a4bfcfe7db6c085c1a6f2da"
+            },
+            {
+              "index": 47,
+              "id": "train_im6114.png",
+              "lpips": 0.2194455862045288,
+              "pearson": 0.6294236227176506,
+              "spearman": 0.8517131446117213,
+              "asset_sha256": "c4101efe0c1f936746c2b6a1dc11e8324b39c2c6ba26c9dd69003182490a060b"
+            },
+            {
+              "index": 48,
+              "id": "test_im246.png",
+              "lpips": 0.2343941479921341,
+              "pearson": 0.7014173148279504,
+              "spearman": 0.8761883577575903,
+              "asset_sha256": "beeacba59027a4b21e02fc1701cde7e2891ea449a841c024b4596e86a476de5c"
+            },
+            {
+              "index": 49,
+              "id": "test_im656.png",
+              "lpips": 0.2711066007614136,
+              "pearson": 0.6921820405687693,
+              "spearman": 0.8722063710987566,
+              "asset_sha256": "528db998b975d6a1435d6f2c6034d059c81c99ce00b6377d03c02b94103336dc"
+            }
+          ],
+          "summary": {
+            "lpips": {
+              "mean": 0.2232292601466179,
+              "std": 0.08283294885982051,
+              "n_valid": 50
+            },
+            "pearson": {
+              "mean": 0.6507242575322476,
+              "std": 0.036860718165836553,
+              "n_valid": 50
+            },
+            "spearman": {
+              "mean": 0.848362009972541,
+              "std": 0.03527354729178106,
+              "n_valid": 50
+            }
+          }
+        }
+      },
+      "corrupted": {
+        "qutcc": {
+          "epoch": 10,
+          "base": "https://raw.githubusercontent.com/Shdakudow/ConvRML-Uncertainty-Demo/d4df974cb47709abc80d82529c85a058d8140934/exports/corrupted/qutcc",
+          "count": 50,
+          "per_image": [
+            {
+              "index": 0,
+              "id": "test_im307.png",
+              "lpips": 0.2973763942718506,
+              "pearson": 0.6552598468980892,
+              "spearman": 0.8599609779557885,
+              "asset_sha256": "7c6891cbfed917d4df0050824a9c7f6ce3c0e19d18272c749a26458f2ac97fd1"
+            },
+            {
+              "index": 1,
+              "id": "train_im12840.png",
+              "lpips": 0.664928674697876,
+              "pearson": 0.6375728441229296,
+              "spearman": 0.8153468472100596,
+              "asset_sha256": "bb0eb8fbb7bc4a414b29dd2992e4da202c5a236be3f470342c89d1a73ff272ff"
+            },
+            {
+              "index": 2,
+              "id": "test_im324.png",
+              "lpips": 0.46104398369789124,
+              "pearson": 0.6348813367894993,
+              "spearman": 0.7902728189784305,
+              "asset_sha256": "ad1d4fc1a4edd33fab6d75898f227f70f1c3744f14ef11ef8ef704754e87572a"
+            },
+            {
+              "index": 3,
+              "id": "test_im356.png",
+              "lpips": 0.3956873118877411,
+              "pearson": 0.6333520167569517,
+              "spearman": 0.8378763620555437,
+              "asset_sha256": "a303d38731a15e79431eb3209845ab3fb31d75d3498e1527759fcbe7c7ca285d"
+            },
+            {
+              "index": 4,
+              "id": "train_im12923.png",
+              "lpips": 0.8195565342903137,
+              "pearson": 0.5415131870497555,
+              "spearman": 0.6307680435940121,
+              "asset_sha256": "4c00cb00a3fce03760cd0fe21f93bbce5183298cadde60ac8cbf1130829b7acd"
+            },
+            {
+              "index": 5,
+              "id": "train_im24262.png",
+              "lpips": 0.13166272640228271,
+              "pearson": 0.654773241526302,
+              "spearman": 0.6520995145539589,
+              "asset_sha256": "3ae53fa85049c742e22a889e4d316c9a2b480da129b4996ee3cfa0d402ae423e"
+            },
+            {
+              "index": 6,
+              "id": "test_im528.png",
+              "lpips": 0.25912901759147644,
+              "pearson": 0.7448018077012131,
+              "spearman": 0.8509479521414707,
+              "asset_sha256": "c2e954c0d1d11ed67b186300e35be6a77b7e85b2793ee42503fdd9be9e2df8bb"
+            },
+            {
+              "index": 7,
+              "id": "train_im23670.png",
+              "lpips": 0.2156507670879364,
+              "pearson": 0.7064493344549373,
+              "spearman": 0.8588674044841345,
+              "asset_sha256": "be8c46876dc181aa428d15f408789e233fdef3b80da0c5a5f1a7b27af472885d"
+            },
+            {
+              "index": 8,
+              "id": "test_im634.png",
+              "lpips": 0.2846775949001312,
+              "pearson": 0.7247221668857299,
+              "spearman": 0.8823305033302524,
+              "asset_sha256": "ef047c51af3479370c8eb14be7608e834cd62d23a270f6a7da0a1de4c60775fd"
+            },
+            {
+              "index": 9,
+              "id": "train_im9437.png",
+              "lpips": 0.7165332436561584,
+              "pearson": 0.5991767309119145,
+              "spearman": 0.7791193881815417,
+              "asset_sha256": "4b5cf2d9d232cb12d672c96d8a5837fd4b27866a7d86784de6f9506715b574c0"
+            },
+            {
+              "index": 10,
+              "id": "train_im15464.png",
+              "lpips": 0.2437589168548584,
+              "pearson": 0.6554219408171834,
+              "spearman": 0.8284954046233987,
+              "asset_sha256": "a05b7e3dbf15af2d1bcb75f483d6bb311d4d38bd56afc7867f351c19ec60c4e4"
+            },
+            {
+              "index": 11,
+              "id": "train_im3751.png",
+              "lpips": 0.32819652557373047,
+              "pearson": 0.6388607099652198,
+              "spearman": 0.811606200298214,
+              "asset_sha256": "3ed2d531689d81e053c909f3d55003f6ff7ea72eecf62b051514ee5a80ce73e8"
+            },
+            {
+              "index": 12,
+              "id": "train_im24583.png",
+              "lpips": 0.2982996106147766,
+              "pearson": 0.685294533871599,
+              "spearman": 0.8479911796433298,
+              "asset_sha256": "1e7cba05bbe1bf3061215c53509c8f8550f29865be8c796558a857d428ceb42f"
+            },
+            {
+              "index": 13,
+              "id": "train_im4225.png",
+              "lpips": 0.5587766170501709,
+              "pearson": 0.6388634102205589,
+              "spearman": 0.7678010630615437,
+              "asset_sha256": "b94819e78868e0de97927f92b56f58b43c18c7da814a874c0f3f8e9c4958ea42"
+            },
+            {
+              "index": 14,
+              "id": "train_im23340.png",
+              "lpips": 0.2554088532924652,
+              "pearson": 0.6607003630479451,
+              "spearman": 0.8613282370267695,
+              "asset_sha256": "16f56f5fa2850bfd7671f4c9980a52d5f1b52570c577a2f4fc902bcae27dcdb2"
+            },
+            {
+              "index": 15,
+              "id": "train_im2041.png",
+              "lpips": 0.5397977828979492,
+              "pearson": 0.5899126132645829,
+              "spearman": 0.6988648141366098,
+              "asset_sha256": "e0a2894c0a46891c7a5b646cce4f82b213e28562c3110bf2285e14c86b193848"
+            },
+            {
+              "index": 16,
+              "id": "train_im5003.png",
+              "lpips": 0.3260849416255951,
+              "pearson": 0.6309951092015533,
+              "spearman": 0.8397781405485518,
+              "asset_sha256": "66b0f6ca541467d00c04d0e64dae2850e3bf13c3459b1728a75566421b4277b4"
+            },
+            {
+              "index": 17,
+              "id": "test_im8.png",
+              "lpips": 0.19014792144298553,
+              "pearson": 0.6235788447913149,
+              "spearman": 0.828386699853244,
+              "asset_sha256": "9a1ff53c8e1d866317745d835a1afb52c933176bfa3a55b1810372b6ccec529d"
+            },
+            {
+              "index": 18,
+              "id": "test_im811.png",
+              "lpips": 0.24474108219146729,
+              "pearson": 0.6162762785062775,
+              "spearman": 0.8461656375386941,
+              "asset_sha256": "fe395ab4c2d4ece356d2b21a289af6219d9e6be1dfc90d62594ff5c042c21bbf"
+            },
+            {
+              "index": 19,
+              "id": "train_im4217.png",
+              "lpips": 0.7045494914054871,
+              "pearson": 0.5893910106539545,
+              "spearman": 0.7893959523317574,
+              "asset_sha256": "b83ab72d01ca708bba7592e903768792cfe15d5b67a199c39579fa65e3a439fd"
+            },
+            {
+              "index": 20,
+              "id": "train_im6300.png",
+              "lpips": 0.2895585596561432,
+              "pearson": 0.5549877039801527,
+              "spearman": 0.8828783260493057,
+              "asset_sha256": "80cf5bb04f89e067fec5d2bde362a279794cb14b8609ee6ae7cc10c33eac624a"
+            },
+            {
+              "index": 21,
+              "id": "train_im15490.png",
+              "lpips": 0.3472592234611511,
+              "pearson": 0.6599222749631267,
+              "spearman": 0.8501569038134715,
+              "asset_sha256": "ee5f822294f492d82ddc06362185f554cb3f370074eb19fe3766c2932ad5c81e"
+            },
+            {
+              "index": 22,
+              "id": "train_im20882.png",
+              "lpips": 0.26039159297943115,
+              "pearson": 0.6648622606653314,
+              "spearman": 0.8623510736868193,
+              "asset_sha256": "2470dba67175d91f3bcc0c02a55b6e288449582b4819f65004442b8ed81529a2"
+            },
+            {
+              "index": 23,
+              "id": "test_im290.png",
+              "lpips": 0.1986536681652069,
+              "pearson": 0.6798034751502955,
+              "spearman": 0.8355313211290707,
+              "asset_sha256": "18373a21bc0ea9d2aec28833d51b995ef26ba97d9fcd539930170cb6391f00b9"
+            },
+            {
+              "index": 24,
+              "id": "train_im9334.png",
+              "lpips": 0.1804407685995102,
+              "pearson": 0.6192180721946403,
+              "spearman": 0.6857164295676867,
+              "asset_sha256": "3c1453fbb1222a2e9c15777fdc66a8ed4f2b02e0321081bfa7b6f06ee773b686"
+            },
+            {
+              "index": 25,
+              "id": "train_im14519.png",
+              "lpips": 0.3879108428955078,
+              "pearson": 0.6460832673701443,
+              "spearman": 0.8240003112822039,
+              "asset_sha256": "59bd3a9eca86d1e39e9cd9a3b8fe5494bccd998090f50096da472dee61e117b9"
+            },
+            {
+              "index": 26,
+              "id": "train_im13152.png",
+              "lpips": 0.2692647874355316,
+              "pearson": 0.676330829670427,
+              "spearman": 0.8413276429237405,
+              "asset_sha256": "f012f194bf4071f2ff71c67ab82056123439c2502905b7454222840d687f656b"
+            },
+            {
+              "index": 27,
+              "id": "train_im15717.png",
+              "lpips": 0.4331522583961487,
+              "pearson": 0.6035258566858297,
+              "spearman": 0.8027606874270691,
+              "asset_sha256": "0c65f706a72c14146d47f21a0a0333b5a653c544f24a2e84002c1cd670fd9a9d"
+            },
+            {
+              "index": 28,
+              "id": "train_im18084.png",
+              "lpips": 0.7118253707885742,
+              "pearson": 0.5723469517843993,
+              "spearman": 0.7836345788305633,
+              "asset_sha256": "d7630e16499c4ee5b34695ed21538cd0abe49c8b47c8b877221148a803d1b5e9"
+            },
+            {
+              "index": 29,
+              "id": "train_im10749.png",
+              "lpips": 0.4133002460002899,
+              "pearson": 0.7550106559981996,
+              "spearman": 0.8583302581488413,
+              "asset_sha256": "c44415ab687a2c4e6e86d4d97bd9e78e0b3d729b6f16b85cf93cef581f234d19"
+            },
+            {
+              "index": 30,
+              "id": "test_im913.png",
+              "lpips": 0.2654525637626648,
+              "pearson": 0.6666724123391248,
+              "spearman": 0.8191035622495314,
+              "asset_sha256": "88ccff75c8dca7ae594430eeab4123e603c8a168ca42335dbc3721c6a68b5e81"
+            },
+            {
+              "index": 31,
+              "id": "test_im720.png",
+              "lpips": 0.13673502206802368,
+              "pearson": 0.7115645080500661,
+              "spearman": 0.8511227978319938,
+              "asset_sha256": "8b5d8c80d2a542faf08ecbb12ba0718f6c9209e7455c18f8961e3b7506cadabc"
+            },
+            {
+              "index": 32,
+              "id": "test_im150.png",
+              "lpips": 0.39139583706855774,
+              "pearson": 0.6596962795306901,
+              "spearman": 0.8522325954498051,
+              "asset_sha256": "98dc76245f156ca1628abbdf0dccecd5f577951c64bf3412996b7c43e2f32e40"
+            },
+            {
+              "index": 33,
+              "id": "train_im7713.png",
+              "lpips": 0.4485095739364624,
+              "pearson": 0.6280725379682803,
+              "spearman": 0.8082476548253319,
+              "asset_sha256": "75065f3da5443563275999aeb9d2af1065b80235df9af752b8259f16e7953a1a"
+            },
+            {
+              "index": 34,
+              "id": "test_im877.png",
+              "lpips": 0.34207332134246826,
+              "pearson": 0.6647111774714684,
+              "spearman": 0.8498522544021218,
+              "asset_sha256": "37eb0bd166a0fd8ae2bf9a882978aeb0888af9b2117e45ebcbaf93409930b65b"
+            },
+            {
+              "index": 35,
+              "id": "test_im153.png",
+              "lpips": 0.32228168845176697,
+              "pearson": 0.6397308562751011,
+              "spearman": 0.8216361703049231,
+              "asset_sha256": "5e653a4fe6d7fd6414d1e685892231cf5faccf3e262096a0286edf930962d366"
+            },
+            {
+              "index": 36,
+              "id": "test_im357.png",
+              "lpips": 0.828657865524292,
+              "pearson": 0.5417722799447174,
+              "spearman": 0.7566704679229562,
+              "asset_sha256": "3655d78b0d2889641cebb46ed40524f2e5c1c0eb523e6032fcd193733639cc65"
+            },
+            {
+              "index": 37,
+              "id": "train_im14612.png",
+              "lpips": 0.2507532238960266,
+              "pearson": 0.6317704270656193,
+              "spearman": 0.8496314086637534,
+              "asset_sha256": "383cb9beab20e3c4317683b862f9047e9ec494ab62a6692a7d68342bffa99fec"
+            },
+            {
+              "index": 38,
+              "id": "test_im341.png",
+              "lpips": 0.28528451919555664,
+              "pearson": 0.6386557847827707,
+              "spearman": 0.8739703022786748,
+              "asset_sha256": "1bdee52762b7dcb1fc8c29b71e67559c879fbd3b0b1488093aedbc81d5aee7b8"
+            },
+            {
+              "index": 39,
+              "id": "train_im18855.png",
+              "lpips": 0.5900434255599976,
+              "pearson": 0.6073050461254934,
+              "spearman": 0.8392973018068858,
+              "asset_sha256": "9299d978cf509242cef0457b3aee60eb29460b35eedb91150824d648d204df7d"
+            },
+            {
+              "index": 40,
+              "id": "test_im425.png",
+              "lpips": 0.5895005464553833,
+              "pearson": 0.5605983156895571,
+              "spearman": 0.8161522847720226,
+              "asset_sha256": "4bf9f52c5a44dd064aae398b58cd406e06056114869f22292ab25827dc50fef6"
+            },
+            {
+              "index": 41,
+              "id": "train_im6372.png",
+              "lpips": 0.37540504336357117,
+              "pearson": 0.6625339677588443,
+              "spearman": 0.8471909182237592,
+              "asset_sha256": "c9ba02cc487b11b30e5aad5403f7a6b1f98e20292c74fe89629c72fb2098b43c"
+            },
+            {
+              "index": 42,
+              "id": "train_im21464.png",
+              "lpips": 0.3903881907463074,
+              "pearson": 0.5074763024651917,
+              "spearman": 0.7395873906724942,
+              "asset_sha256": "1c5d25ee3626bf0c65e4d7678cb5a0dbbb22067f4dab99f565d9b50b5721b8ba"
+            },
+            {
+              "index": 43,
+              "id": "test_im315.png",
+              "lpips": 0.4138014316558838,
+              "pearson": 0.6218753505794296,
+              "spearman": 0.849012928021995,
+              "asset_sha256": "9b53d9dd7d4b55e6d55abd49171f61d941e1e8186f2ac2abc824a2745bd986ff"
+            },
+            {
+              "index": 44,
+              "id": "test_im998.png",
+              "lpips": 0.39165446162223816,
+              "pearson": 0.5341325637071545,
+              "spearman": 0.7877449388178409,
+              "asset_sha256": "f9c80ecd17895f721943ceaf99b1a49789617bdb4c0d7495c15478e6d20b3e9a"
+            },
+            {
+              "index": 45,
+              "id": "train_im7747.png",
+              "lpips": 0.2934146821498871,
+              "pearson": 0.63008149430529,
+              "spearman": 0.8094440505022462,
+              "asset_sha256": "2ea46afa1650d30e5d841175dde65f42555f3e3dca730f683cf96c689779ac12"
+            },
+            {
+              "index": 46,
+              "id": "train_im23005.png",
+              "lpips": 0.1738227903842926,
+              "pearson": 0.7097344335164509,
+              "spearman": 0.8620069554083273,
+              "asset_sha256": "d1d661533a087c52034c489dd0b72c15ec37b3e23a38fed5efd2df66c8e6b9f2"
+            },
+            {
+              "index": 47,
+              "id": "train_im6114.png",
+              "lpips": 0.25289052724838257,
+              "pearson": 0.6294597709833841,
+              "spearman": 0.8510559964680716,
+              "asset_sha256": "a13159204d8b0a7bb38b834cf14596477be7b7a1b4f603a09aef4f6a6fdf40e6"
+            },
+            {
+              "index": 48,
+              "id": "test_im246.png",
+              "lpips": 0.24648848176002502,
+              "pearson": 0.7129118614495853,
+              "spearman": 0.8724238654368865,
+              "asset_sha256": "77d70aba97894497c645f32f83964e66b33bde8995eaf7f1eedfaeac503d9dec"
+            },
+            {
+              "index": 49,
+              "id": "test_im656.png",
+              "lpips": 0.5687375068664551,
+              "pearson": 0.6639441174948517,
+              "spearman": 0.8497970179490998,
+              "asset_sha256": "ea9779f11ba40c25bfca918b35cb4d093e972d9e1490ebf6b3fb4208609c83da"
+            }
+          ],
+          "summary": {
+            "lpips": {
+              "mean": 0.3797011202573776,
+              "std": 0.17422424056363034,
+              "n_valid": 50
+            },
+            "pearson": {
+              "mean": 0.6383317632680625,
+              "std": 0.05261549256710652,
+              "n_valid": 50
+            },
+            "spearman": {
+              "mean": 0.818205430728296,
+              "std": 0.055151287362025514,
+              "n_valid": 50
+            }
+          }
+        },
+        "im2im": {
+          "epoch": 10,
+          "base": "https://raw.githubusercontent.com/Shdakudow/ConvRML-Uncertainty-Demo/d4df974cb47709abc80d82529c85a058d8140934/exports/corrupted/im2im",
+          "count": 50,
+          "per_image": [
+            {
+              "index": 0,
+              "id": "test_im307.png",
+              "lpips": 0.2780505418777466,
+              "pearson": 0.6646229628091733,
+              "spearman": 0.8605469871735729,
+              "asset_sha256": "c5eca0b5261ccd8feb19e82ba12b7fb0a904d5c6bd4f3e7b23f835707d328dba"
+            },
+            {
+              "index": 1,
+              "id": "train_im12840.png",
+              "lpips": 0.7261602878570557,
+              "pearson": 0.6215515340125009,
+              "spearman": 0.8188246336596813,
+              "asset_sha256": "fa18066f1cf64ec9b11aae2218aab698df65995014a4995ada7dfd95daddf6e6"
+            },
+            {
+              "index": 2,
+              "id": "test_im324.png",
+              "lpips": 0.44751277565956116,
+              "pearson": 0.6287875644624515,
+              "spearman": 0.7914764203008078,
+              "asset_sha256": "f5e44bb46574027ef67ae31a09eff2df24afce0c2b150c0c0b3b25ec45bc5b74"
+            },
+            {
+              "index": 3,
+              "id": "test_im356.png",
+              "lpips": 0.39491724967956543,
+              "pearson": 0.6164026004222289,
+              "spearman": 0.8297277600410333,
+              "asset_sha256": "475bebdf5e3c80e4d7700dc325df5d641c8c2c80d879a4c3278136f8192fbc9c"
+            },
+            {
+              "index": 4,
+              "id": "train_im12923.png",
+              "lpips": 0.9009529948234558,
+              "pearson": 0.551252227836322,
+              "spearman": 0.6689297427590801,
+              "asset_sha256": "51743ee47839d5e55dee25e869bb545bc1c0682d7a174b11de74af2c4cdd1c42"
+            },
+            {
+              "index": 5,
+              "id": "train_im24262.png",
+              "lpips": 0.12641996145248413,
+              "pearson": 0.7078239582268622,
+              "spearman": 0.7681574942982641,
+              "asset_sha256": "bcda38f8e599f2b9e915e9779ba498c49ad138223979e065794cf2d0aa00744b"
+            },
+            {
+              "index": 6,
+              "id": "test_im528.png",
+              "lpips": 0.23939049243927002,
+              "pearson": 0.7388919332409034,
+              "spearman": 0.8705484133437331,
+              "asset_sha256": "603e3a14b96d9c8a5bd72c773cd95a78514b349d6c4dc174d2a99ad8598ac796"
+            },
+            {
+              "index": 7,
+              "id": "train_im23670.png",
+              "lpips": 0.20573130249977112,
+              "pearson": 0.7204659944867015,
+              "spearman": 0.8630798344188173,
+              "asset_sha256": "fce42dc4935868e271a1a27b6bf1841db3eb5c12224c81251718520bcfb10440"
+            },
+            {
+              "index": 8,
+              "id": "test_im634.png",
+              "lpips": 0.27586010098457336,
+              "pearson": 0.6877057024514178,
+              "spearman": 0.8790739258248359,
+              "asset_sha256": "6031f96c0896c09f41d580dfdb89d0cbd2891b27232c66e22b4bee6b121f1eda"
+            },
+            {
+              "index": 9,
+              "id": "train_im9437.png",
+              "lpips": 0.7226293087005615,
+              "pearson": 0.6191850064175257,
+              "spearman": 0.7762457036570156,
+              "asset_sha256": "d2a4d9f602f3804cc2e62e61308ad8c46a91e60100645d7dc22d0deb23aac81b"
+            },
+            {
+              "index": 10,
+              "id": "train_im15464.png",
+              "lpips": 0.25430184602737427,
+              "pearson": 0.6357958500267804,
+              "spearman": 0.8295304202048404,
+              "asset_sha256": "c798571d1afbc53d945a7dc55473749bb6f4f44be894600f0ca22b7b7f9fced2"
+            },
+            {
+              "index": 11,
+              "id": "train_im3751.png",
+              "lpips": 0.3214491903781891,
+              "pearson": 0.6806747817745402,
+              "spearman": 0.8387666405070517,
+              "asset_sha256": "a89a256e07321bf54b26e01e411afd0f593700fe3860500c306f5c53a5d53a9d"
+            },
+            {
+              "index": 12,
+              "id": "train_im24583.png",
+              "lpips": 0.31510764360427856,
+              "pearson": 0.67058128279992,
+              "spearman": 0.8415734897799051,
+              "asset_sha256": "dc253464b15409fb9e5bc041aecdd0f5d90c61488b1416e6837d9601e38a2966"
+            },
+            {
+              "index": 13,
+              "id": "train_im4225.png",
+              "lpips": 0.534684956073761,
+              "pearson": 0.6352115142154563,
+              "spearman": 0.7671065201990054,
+              "asset_sha256": "b509ba4b31d43de4efc3d2661a780db8b52fdf0c4897d408b02891be1318ed4a"
+            },
+            {
+              "index": 14,
+              "id": "train_im23340.png",
+              "lpips": 0.24511031806468964,
+              "pearson": 0.654809889909264,
+              "spearman": 0.8883610436425098,
+              "asset_sha256": "72eee43e6cd2f889dfc63c127770e75a6de36f55b047f24439be64ff71857617"
+            },
+            {
+              "index": 15,
+              "id": "train_im2041.png",
+              "lpips": 0.5534155964851379,
+              "pearson": 0.6219175694817517,
+              "spearman": 0.741585835163921,
+              "asset_sha256": "bfea7a94404f2cd1823f0645f673e5c192816d82b7b335737e7c65ca5c906e88"
+            },
+            {
+              "index": 16,
+              "id": "train_im5003.png",
+              "lpips": 0.3346977233886719,
+              "pearson": 0.6359095417940304,
+              "spearman": 0.8473540844398543,
+              "asset_sha256": "7d5768f2d76e38b0b31409ec2f6c5375e3f9497cf1e33e222f27c6d506247e43"
+            },
+            {
+              "index": 17,
+              "id": "test_im8.png",
+              "lpips": 0.18549127876758575,
+              "pearson": 0.6209360849973691,
+              "spearman": 0.7955559882556227,
+              "asset_sha256": "f23b35021acc431524a1de1e2bde56bbaa8ebb3e9d8f294dd6469b5df90868d9"
+            },
+            {
+              "index": 18,
+              "id": "test_im811.png",
+              "lpips": 0.25528666377067566,
+              "pearson": 0.5666311114449862,
+              "spearman": 0.8439098932873301,
+              "asset_sha256": "42b62bfbf3b17658e0c33b5099821594fc8ee0d022a27f8e9b745eb6054a6f9e"
+            },
+            {
+              "index": 19,
+              "id": "train_im4217.png",
+              "lpips": 0.7305057644844055,
+              "pearson": 0.566330718400085,
+              "spearman": 0.775331937875105,
+              "asset_sha256": "9997094cf4c18525492ce6c5a8fb19ea6daacc74095ed76afbae44b0e86f49e7"
+            },
+            {
+              "index": 20,
+              "id": "train_im6300.png",
+              "lpips": 0.30259737372398376,
+              "pearson": 0.5728156682735097,
+              "spearman": 0.8990706165291596,
+              "asset_sha256": "19322636573db16e2474afb4815c50288ba45dd52d917c2b5ed133571cccc63e"
+            },
+            {
+              "index": 21,
+              "id": "train_im15490.png",
+              "lpips": 0.3173033595085144,
+              "pearson": 0.6853147087013023,
+              "spearman": 0.8762370957163599,
+              "asset_sha256": "d464fdecb61bfe3b53e41e8cbcd38ea4773bdb3fb68f4de28be566a4e95fe9ed"
+            },
+            {
+              "index": 22,
+              "id": "train_im20882.png",
+              "lpips": 0.2566671073436737,
+              "pearson": 0.6812824142159504,
+              "spearman": 0.8839842465391179,
+              "asset_sha256": "4208e3446050bc189198a62d2e946ed8f35dfd5f44c58f53548643c1ef8e14da"
+            },
+            {
+              "index": 23,
+              "id": "test_im290.png",
+              "lpips": 0.1897226721048355,
+              "pearson": 0.6885157636574035,
+              "spearman": 0.8249901867422462,
+              "asset_sha256": "b1c5764f927b7b87b42551d06925fb6138b436d78c33fe89ed9bfb62ab34a831"
+            },
+            {
+              "index": 24,
+              "id": "train_im9334.png",
+              "lpips": 0.18050110340118408,
+              "pearson": 0.6480369215888362,
+              "spearman": 0.5728396749569461,
+              "asset_sha256": "37c2622e40c00e23723bcee608c051ce2ad362dfa044d66f8fd58b662b51fc7c"
+            },
+            {
+              "index": 25,
+              "id": "train_im14519.png",
+              "lpips": 0.38139522075653076,
+              "pearson": 0.6384307552770587,
+              "spearman": 0.8288026938437038,
+              "asset_sha256": "ed5c5d3a25299a75a46b9d676f2980dcead71711b537900b3c3490cc3f26e9c1"
+            },
+            {
+              "index": 26,
+              "id": "train_im13152.png",
+              "lpips": 0.2676668167114258,
+              "pearson": 0.6782135981140403,
+              "spearman": 0.8656612328836996,
+              "asset_sha256": "a75b570e9bf73b2d02086fbafc624cd03b047e1fb79766e36219cbb2957ff13c"
+            },
+            {
+              "index": 27,
+              "id": "train_im15717.png",
+              "lpips": 0.4340583086013794,
+              "pearson": 0.6078205795481292,
+              "spearman": 0.8006838932388777,
+              "asset_sha256": "535b0da5f65a71de6c09615dc10f79a3bb2f4d60ed3f6d68e507a1d15bae3a47"
+            },
+            {
+              "index": 28,
+              "id": "train_im18084.png",
+              "lpips": 0.7768706679344177,
+              "pearson": 0.5867079341663279,
+              "spearman": 0.8059905149322358,
+              "asset_sha256": "c3a4f3577339cb28fec7833b472f14d594f8717c8debdf570feaac55ac93f6f6"
+            },
+            {
+              "index": 29,
+              "id": "train_im10749.png",
+              "lpips": 0.4057561159133911,
+              "pearson": 0.7024658847410481,
+              "spearman": 0.8392328175550982,
+              "asset_sha256": "cc74ab35266e6897b4ba640591ead682b9a6edbf69c46747b98917ed337e656d"
+            },
+            {
+              "index": 30,
+              "id": "test_im913.png",
+              "lpips": 0.2848535180091858,
+              "pearson": 0.6698401200757227,
+              "spearman": 0.8367474725114437,
+              "asset_sha256": "b578dc37a8a55fbdc931b28b3ae84ac4515d060f9efceaa01a422245c58806ad"
+            },
+            {
+              "index": 31,
+              "id": "test_im720.png",
+              "lpips": 0.13734382390975952,
+              "pearson": 0.7214542616903713,
+              "spearman": 0.8903293405701105,
+              "asset_sha256": "13a8e7718d1e0bc0d19ea919aedc686d3a19ae8d99c16e16236f62fbc90c3ac5"
+            },
+            {
+              "index": 32,
+              "id": "test_im150.png",
+              "lpips": 0.3988956809043884,
+              "pearson": 0.6915214346332897,
+              "spearman": 0.86002270177187,
+              "asset_sha256": "5b188745ad026a5b75491e36a9a26212af142bbbc243a93e224acefb9717a027"
+            },
+            {
+              "index": 33,
+              "id": "train_im7713.png",
+              "lpips": 0.4644949436187744,
+              "pearson": 0.6740771508935736,
+              "spearman": 0.8324791687363831,
+              "asset_sha256": "06b94320ca45835b8cbce9a7866ed0133fce2d8104943282303cf0c299120b0a"
+            },
+            {
+              "index": 34,
+              "id": "test_im877.png",
+              "lpips": 0.35976260900497437,
+              "pearson": 0.7203815999530033,
+              "spearman": 0.8734604351806899,
+              "asset_sha256": "50d2256f70973cb47deb4cac62f95be5b4aeacdb86943beade8d5c94ae98f3ed"
+            },
+            {
+              "index": 35,
+              "id": "test_im153.png",
+              "lpips": 0.3158711791038513,
+              "pearson": 0.6447856163256598,
+              "spearman": 0.8313011656345085,
+              "asset_sha256": "541ffc722d8a0a2efed46833e9fe8661d1a4ff61111e4c92dde243f8e72047d3"
+            },
+            {
+              "index": 36,
+              "id": "test_im357.png",
+              "lpips": 0.8756963610649109,
+              "pearson": 0.619662713305441,
+              "spearman": 0.8449382556706408,
+              "asset_sha256": "ff3a47ff782ed267dc275d0de36b60efed43023b6916d5b8ffb90011713d51fa"
+            },
+            {
+              "index": 37,
+              "id": "train_im14612.png",
+              "lpips": 0.25926560163497925,
+              "pearson": 0.6654686820201187,
+              "spearman": 0.8811878786273263,
+              "asset_sha256": "a40d30a9aee2d36a74e2df2dd006448612f0eb60f17b6b09a01ae9b5b974502c"
+            },
+            {
+              "index": 38,
+              "id": "test_im341.png",
+              "lpips": 0.278525173664093,
+              "pearson": 0.6689132434217603,
+              "spearman": 0.8794862888642091,
+              "asset_sha256": "6eef898a8869a4524d0b3e31e2041ff466e18acc059ae1b87b31a42df14e2b18"
+            },
+            {
+              "index": 39,
+              "id": "train_im18855.png",
+              "lpips": 0.6073949337005615,
+              "pearson": 0.6255615865506243,
+              "spearman": 0.8590125712875284,
+              "asset_sha256": "48ccf3e9af1e162fd7447f4c4753e6d44ba45f7221ea76a816c62a8fa8e5d62c"
+            },
+            {
+              "index": 40,
+              "id": "test_im425.png",
+              "lpips": 0.5783305764198303,
+              "pearson": 0.5719701211790365,
+              "spearman": 0.8219947664052432,
+              "asset_sha256": "d8f8699c9b03a50f3adadb17d52421e2eeaad354302e3ba3562d41783ee1fa05"
+            },
+            {
+              "index": 41,
+              "id": "train_im6372.png",
+              "lpips": 0.3687046468257904,
+              "pearson": 0.6991614624601994,
+              "spearman": 0.8571608700043664,
+              "asset_sha256": "2575ebddc4e8afc125de6a32ac707578843e6f4800b56cc3eff6469363a19e6d"
+            },
+            {
+              "index": 42,
+              "id": "train_im21464.png",
+              "lpips": 0.40575191378593445,
+              "pearson": 0.6094727029370501,
+              "spearman": 0.85175753058661,
+              "asset_sha256": "3400973e4ccc291a11cf47e866a48c2fa6029708ac404ec363fa3919c2095e70"
+            },
+            {
+              "index": 43,
+              "id": "test_im315.png",
+              "lpips": 0.42684948444366455,
+              "pearson": 0.6942733626858097,
+              "spearman": 0.882898392368357,
+              "asset_sha256": "24a088d429af8e243a64148052b77aacefd1a31738aa00ad3dd957e3941d9c0e"
+            },
+            {
+              "index": 44,
+              "id": "test_im998.png",
+              "lpips": 0.3746225833892822,
+              "pearson": 0.5685973409876237,
+              "spearman": 0.8587224728077473,
+              "asset_sha256": "b0520bdcd3643abd03b22d7fdaca786eb2e62dc664cc73b994570213e83cdfb6"
+            },
+            {
+              "index": 45,
+              "id": "train_im7747.png",
+              "lpips": 0.26439398527145386,
+              "pearson": 0.6382810826911478,
+              "spearman": 0.8130254944999235,
+              "asset_sha256": "4fae4ed8b0f9d7fd6aa274a388639df0be0755e23687ede52d87c05893393d67"
+            },
+            {
+              "index": 46,
+              "id": "train_im23005.png",
+              "lpips": 0.1624482274055481,
+              "pearson": 0.7328569194125351,
+              "spearman": 0.8598498818198439,
+              "asset_sha256": "fcf39d6d7765c90c9d3cfe8128342a68aa3c35b75c7d53198d0d3507de243161"
+            },
+            {
+              "index": 47,
+              "id": "train_im6114.png",
+              "lpips": 0.23748669028282166,
+              "pearson": 0.6330336534466855,
+              "spearman": 0.8536070994291072,
+              "asset_sha256": "24f3c38c0c021ff6780079e04bb291e7558d3972ff16b7fecbb8a74a4c92df6b"
+            },
+            {
+              "index": 48,
+              "id": "test_im246.png",
+              "lpips": 0.2525193989276886,
+              "pearson": 0.7111018806498657,
+              "spearman": 0.8770308280839907,
+              "asset_sha256": "be9c9079ebe4334e29b7c90e5465717c9addedc2ea9520e3ad2418e585ce87a4"
+            },
+            {
+              "index": 49,
+              "id": "test_im656.png",
+              "lpips": 0.6171252727508545,
+              "pearson": 0.6717645010314607,
+              "spearman": 0.8389862783307993,
+              "asset_sha256": "e092dfb8fc6f030ed17409b39089c5b37403df7716210c02d8912cc8511f5067"
+            }
+          ],
+          "summary": {
+            "lpips": {
+              "mean": 0.38461102694272997,
+              "std": 0.1894664340251963,
+              "n_valid": 50
+            },
+            "pearson": {
+              "mean": 0.6513454298768971,
+              "std": 0.0474771595868811,
+              "n_valid": 50
+            },
+            "spearman": {
+              "mean": 0.8319435726992025,
+              "std": 0.0566630971125785,
+              "n_valid": 50
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -39,6 +39,20 @@ identities and updates `coverage90_curves.json`. A local five-minute automation
 publishes results as the milestone jobs finish, without downloading new image
 caches. Hovering an epoch compares models' exact values and calibration coverage.
 
+## Raw DiffuserCam analysis metrics
+
+The [raw comparison](https://shdakudow.github.io/ConvRML-Uncertainty-Demo/raw-diffusercam/)
+shows LPIPS, Pearson r and Spearman rho beside each model, plus averages over the
+50 displayed examples. The separate full-test table still covers 2,000 images.
+Correlations compare unsmoothed RGB-average interval width with absolute error
+within each image. LPIPS uses pretrained AlexNet on clipped RGB images.
+
+Clean/corrupted studies and Near-90%/Reference modes have separate analysis
+records tied to their exact immutable array exports and checkpoint epochs. A
+changed export displays unavailable scores until its analysis is rebuilt.
+`tools/build_raw_analysis.py` regenerates these records from the local asset Git
+repositories and verifies every packed array checksum; no training is needed.
+
 ## Named captures · Sensor12
 
 [Open the separate named-captures tab](https://shdakudow.github.io/ConvRML-Uncertainty-Demo/named-captures/).
