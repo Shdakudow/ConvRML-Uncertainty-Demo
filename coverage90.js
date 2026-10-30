@@ -275,12 +275,12 @@
       summary.calibration = entry?.calibration || null;
       summary.example_count = 50;
       summary.example_metrics = entry?.per_image.map((row) => row.clipped);
-      summary.epoch = entry?.epoch || (study === "clean" ? 50 : 30);
+      summary.epoch = entry?.epoch || 50;
       summary.evaluations = (curves?.groups?.[group]?.[method] || []).map(
         (row) => ({ ...row }),
       );
       summary.history = summary.history.filter(
-        (row) => row.epoch <= (study === "clean" ? 50 : 30),
+        (row) => row.epoch <= 50,
       );
     }
     return result;

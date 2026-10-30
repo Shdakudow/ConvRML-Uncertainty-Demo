@@ -7,6 +7,6 @@ RCPS uses alpha=0.10 and delta=0.05, fitted on 2,048 separate calibration images
 
 Raw DiffuserCam comparison (2026-10-19)
 Public page: https://shdakudow.github.io/ConvRML-Uncertainty-Demo/raw-diffusercam/
-Original raw QUTCC/Im2im at epoch 50, plus the reviewed corrupted-input study after 10 adaptation epochs from epoch-30 parents.
+Original raw QUTCC/Im2im at epoch 50.
 Includes reconstruction, absolute error, calibrated interval width, bounds, pixel inspector, full-test coverage and five-epoch calibration curves.
 Paper-style quantile calibration and asymmetric Im2im scale calibration are labeled separately from earlier RCPS experiments.

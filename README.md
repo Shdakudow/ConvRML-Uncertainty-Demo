@@ -20,7 +20,7 @@ set never chooses interval parameters; test coverage may vary.
 The selector's **Reference** mode preserves the original RCPS/paper-style results
 and its original milestone curves. Near-90% PSNR, SSIM, width and test-coverage
 curves evaluate saved checkpoints at epochs **5, 10, …, 50**, independently
-calibrating each one. Corrupted raw stops at its actual 30 adaptation epochs.
+calibrating each one.
 Pending evaluations and calibration failures remain gaps. The image, bound, error and width
 maps use saved float32 arrays, audited against their metrics before publication.
 Near-90% accuracy curves use the full held-out test set, including 30-pass MC
@@ -54,7 +54,7 @@ coverage and width. Missing full-test evaluations remain marked pending.
 Correlations compare unsmoothed RGB-average interval width with absolute error
 within each image. LPIPS uses pretrained AlexNet on clipped RGB images.
 
-Clean/corrupted studies and Near-90%/Reference modes have separate analysis
+Near-90%/Reference modes have separate analysis
 records tied to their exact immutable array exports and checkpoint epochs. A
 changed export displays unavailable scores until its analysis is rebuilt.
 `tools/build_raw_analysis.py` regenerates per-image analysis from the local asset

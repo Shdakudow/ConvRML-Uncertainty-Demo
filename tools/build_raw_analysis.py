@@ -91,7 +91,7 @@ def build(cache):
     )
     for mode in ("tight90", "reference"):
         result["modes"][mode] = {}
-        for study in ("clean", "corrupted"):
+        for study in ("clean",):
             result["modes"][mode][study] = {}
             for method in ("qutcc", "im2im"):
                 if mode == "tight90":

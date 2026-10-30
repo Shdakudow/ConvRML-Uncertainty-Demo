@@ -78,6 +78,7 @@ root=Path({REMOTE!r});ready=[]
 for path in sorted(root.glob("*/*/epoch_*/report.json")):
  if not (path.parent/"examples.npz").is_file():continue
  relative=path.relative_to(root);group,method=relative.parts[:2]
+ if group not in {{"rml", "diffuser", "raw_clean"}}:continue
  ready.append(dict(group=group,method=method,folder=str(path.parent),sha256=hashlib.sha256(path.read_bytes()).hexdigest()))
 print(json.dumps(ready))
 """
@@ -196,7 +197,7 @@ print(json.dumps(ready))
             json.dumps(
                 dict(
                     completed=count,
-                    expected=12,
+                    expected=10,
                     asset_commit=commit,
                     updated_at=metadata["updated_at"],
                 ),
@@ -204,7 +205,7 @@ print(json.dumps(ready))
             )
             + "\n"
         )
-        print("Near-90% publication", count, "/12 ready", flush=True)
+        print("Near-90% publication", count, "/10 ready", flush=True)
 
 
 if __name__ == "__main__":

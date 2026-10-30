@@ -3,8 +3,8 @@ import argparse,gzip,hashlib,json,struct,sys,time
 from pathlib import Path
 import numpy as np
 PROJECT=Path.home()/'ConvRML'
-SOURCE={'clean':PROJECT/'experiments/qutcc_paper_style_20261018','corrupted':PROJECT/'experiments/raw_diffuser_corruptions_20261018'}
-EPOCH={'clean':50,'corrupted':10}
+SOURCE={'clean':PROJECT/'experiments/qutcc_paper_style_20261018'}
+EPOCH={'clean':50}
 EXPORT_VARIANT=None
 REUSE_EVALUATION=False
 ROOT=PROJECT/'experiments/raw_diffuser_demo_20261019'
@@ -70,7 +70,6 @@ def refresh(study,method):
   epoch=EPOCH[study];source=SOURCE[study]/'results/raw'/method;work=ROOT/'refresh'/study/method
   cp=work/'results/raw'/method/'checkpoints'/f'epoch_{epoch:03d}.pt';cp.parent.mkdir(parents=True,exist_ok=True)
   if not cp.exists():cp.symlink_to(source/'checkpoints'/cp.name)
-  if study=='corrupted':(work/'TRAINING_APPROVED').write_text('User authorized calibration and demo exports on 2026-10-19.\n')
   evaluation.ROOT=work;evaluation.TASKS=[('raw',method)]
   # Native original protocol and data identity are checked inside evaluation.run.
   report_path=(source if REUSE_EVALUATION else work/'results/raw'/method)/'evaluation'/f'epoch_{epoch:03d}'/'report.json'

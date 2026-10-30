@@ -1,4 +1,4 @@
-"""Check difficulty groups and actual corruption labels in all three experiments."""
+"""Check difficulty groups and browsing categories in all three experiments."""
 
 import base64
 import functools
@@ -136,25 +136,10 @@ def main(base=None):
                     js("window.scrollTo(0,0)");screenshot('simplified_exp2')
                     assert js("document.querySelectorAll('#historyPlots .plot').length")>=2
                     assert js("document.querySelectorAll('#intervalHistoryPlots .plot').length")==2
-        call('Page.navigate',dict(url=base+'raw-diffusercam/?study=corrupted&example=1'))
+        call('Page.navigate',dict(url=base+'raw-diffusercam/?example=1'))
         ready()
-        assert js("document.querySelector('#exampleCategory').textContent").endswith('Missing pixels')
-        assert js("document.querySelectorAll('#corruptionFilter option').length")==10
-        assert not js("[...document.querySelectorAll('#corruptionFilter option')].some(o=>o.textContent==='Hybrid')")
-        manifest=expected['raw']['corrupted']['entries']
-        for corruption in sorted(set(e['corruption'] for e in manifest)):
-            js("document.querySelector('#corruptionFilter').value="+json.dumps(corruption)+";document.querySelector('#corruptionFilter').dispatchEvent(new Event('change'))")
-            ready()
-            count=sum(e['corruption']==corruption for e in manifest)
-            assert js("document.querySelectorAll('#example option').length")==count
-            assert js("document.querySelector('#exampleCategory').textContent").endswith(corruption)
-            displayed=int(js("document.querySelector('#example').value"))
-            assert manifest[displayed]['corruption']==corruption
-            assert manifest[displayed]['id'] in js("document.querySelector('#status').textContent")
-        js("window.scrollTo(0,0)");screenshot('simplified_corrupted_raw')
-        js("document.querySelector('#study').value='clean';document.querySelector('#study').dispatchEvent(new Event('change'))")
-        ready()
-        assert not js("!!document.querySelector('#corruptionFilter')")
+        assert not js("!!document.querySelector('#study')")
+        assert js("document.querySelectorAll('#example option').length")==50
         js("document.querySelector('#difficultyFilter').value='easy';document.querySelector('#difficultyFilter').dispatchEvent(new Event('change'))")
         ready()
         assert js("document.querySelector('#exampleCategory').dataset.difficulty")=='easy'
@@ -163,7 +148,7 @@ def main(base=None):
         assert js("document.documentElement.scrollWidth <= innerWidth+1")
         screenshot('simplified_raw_mobile')
         assert not errors,errors
-        print('PASS: Exp1/Exp2 both cameras, shared relative difficulty groups, filtered navigation, nine saved corruption types, exact IDs/counts, clean/corrupted switching, preserved plots, mobile layout.')
+        print('PASS: Exp1/Exp2 both cameras, shared relative difficulty groups, filtered navigation, clean raw examples, exact IDs/counts, preserved plots, mobile layout.')
         ws.close()
     finally:
         try:

@@ -234,7 +234,7 @@ def main(base=None, fixture=False):
                 "[...document.querySelectorAll('[data-demo-route]')].every(a=>new URL(a.href).searchParams.get('calibration')==='reference')"
             )
 
-        for study in ["clean", "corrupted"]:
+        for study in ["clean"]:
             call("Page.navigate", dict(url=base + "raw-diffusercam/?study=" + study))
             ready()
             assert js("Coverage90.active")
@@ -242,9 +242,7 @@ def main(base=None, fixture=False):
             assert sorted(js("Object.keys(example.models)")) == sorted(expected)
             assert js("document.querySelectorAll('#aggregateRows tr').length") == 2
             assert js("document.querySelectorAll('#intervalPlots .plot').length") == 2
-            assert js("document.querySelectorAll('#calibrationRows tr').length") == (
-                20 if study == "clean" else 12
-            )
+            assert js("document.querySelectorAll('#calibrationRows tr').length") == 20
             failed = sum(
                 row["status"] == "failed"
                 for rows in expected_curves["groups"]["raw_" + study].values()
@@ -272,8 +270,7 @@ def main(base=None, fixture=False):
             js("document.querySelector('#next').click()")
             ready()
             assert js("index") == 1
-            if study == "corrupted":
-                assert js("!!document.querySelector('#corruptionFilter')")
+            assert not js("!!document.querySelector('#study')")
             js("window.scrollTo(0,0)")
             screenshot("coverage90_raw_" + study)
         call(
@@ -284,7 +281,7 @@ def main(base=None, fixture=False):
         screenshot("coverage90_mobile")
         assert not errors, errors
         print(
-            "PASS: Exp2 RML/DiffuserCam, raw clean/corrupted, exact saved metrics, five-epoch curve provenance, pending/failure distinctions, reference switching, bounds, navigation, mobile layout."
+            "PASS: Exp2 RML/DiffuserCam, clean raw, exact saved metrics, five-epoch curve provenance, pending/failure distinctions, reference switching, bounds, navigation, mobile layout."
         )
         ws.close()
     finally:

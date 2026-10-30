@@ -10,11 +10,13 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def collect(results):
     modes = {
-        mode: {study: {} for study in ("clean", "corrupted")}
+        mode: {study: {} for study in ("clean",)}
         for mode in ("tight90", "reference")
     }
     for path in sorted(results.glob("*.json")):
         if path.name.endswith(".progress.json"):
+            continue
+        if path.name.startswith("corrupted_"):
             continue
         report = json.loads(path.read_text())
         if report.get("passed") is not True:

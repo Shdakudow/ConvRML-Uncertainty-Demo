@@ -1,4 +1,4 @@
-"""Publish refreshed calibration and fifty examples once all four exports finish.
+"""Publish refreshed calibration and fifty examples once both clean exports finish.
 
 Run as a short-lived local LaunchAgent. Does not submit training or change legacy
 metrics. Stops after successful publication or after 48 hours.
@@ -24,7 +24,7 @@ def main():
  expiry=WORK/'publisher_expires.json'
  if not expiry.exists():expiry.write_text(json.dumps({'expires':(datetime.datetime.now(datetime.timezone.utc)+datetime.timedelta(hours=48)).isoformat()}))
  if datetime.datetime.now(datetime.timezone.utc)>datetime.datetime.fromisoformat(json.loads(expiry.read_text())['expires']):status('expired');return
- probe="import json,pathlib; r=pathlib.Path('"+REMOTE+"/exports'); print(json.dumps({s+'/'+m:json.loads((r/s/m/'summary.json').read_text()).get('refreshed',False) for s in ['clean','corrupted'] for m in ['qutcc','im2im']}))"
+ probe="import json,pathlib; r=pathlib.Path('"+REMOTE+"/exports'); print(json.dumps({s+'/'+m:json.loads((r/s/m/'summary.json').read_text()).get('refreshed',False) for s in ['clean'] for m in ['qutcc','im2im']}))"
  ready=json.loads(run(SSH+['python3 -'],input=probe,timeout=60))
  if requested:
   audit_probe="import pathlib; print((pathlib.Path('"+REMOTE+"/exports/epoch20_reference.json')).exists())"

@@ -2,7 +2,7 @@
 import argparse,gzip,hashlib,json,struct
 from pathlib import Path
 import numpy as np
-STUDIES=('clean','corrupted');METHODS=('qutcc','im2im')
+STUDIES=('clean',);METHODS=('qutcc','im2im')
 def decode(path):
  raw=gzip.decompress(path.read_bytes());n=struct.unpack_from('<I',raw)[0];meta=json.loads(raw[4:4+n]);start=4+n;arrays={}
  for d in meta['arrays']:
@@ -17,7 +17,7 @@ def build(assets,dest):
  for study in STUDIES:
   data['studies'][study]={};summaries={m:json.loads((assets/'exports'/study/m/'summary.json').read_text()) for m in METHODS}
   for m,s in summaries.items():
-   assert s['test_count']==2000 and s['calibration_count']==3000 and s['epoch']==(50 if study=='clean' else 10)
+   assert s['test_count']==2000 and s['calibration_count']==3000 and s['epoch']==50
    assert all(np.isfinite(v) for v in s['metrics']['clipped'].values())
    assert s['config']['counts']=={'train':17999,'val':2000,'test':2000,'calibration':3000}
    reference=assets/'exports/epoch20_reference.json'

@@ -10,9 +10,9 @@ class Curves(unittest.TestCase):
     def test_all_expected_checkpoints_are_explicit(self):
         payload = validate(empty())
         self.assertEqual(
-            payload["counts"], dict(complete=0, failed=0, pending=112, expected=112)
+            payload["counts"], dict(complete=0, failed=0, pending=100, expected=100)
         )
-        self.assertEqual(len(payload["groups"]["raw_corrupted"]["qutcc"]), 6)
+        self.assertEqual(len(payload["groups"]["raw_clean"]["qutcc"]), 10)
 
     def test_failed_calibration_has_no_invented_test_metric(self):
         payload = empty()

@@ -25,14 +25,13 @@ METHODS = {
     "rml": ["im2im", "ensemble5", "mc_005", "qutcc"],
     "diffuser": ["im2im", "ensemble5", "mc_005", "qutcc"],
     "raw_clean": ["im2im", "qutcc"],
-    "raw_corrupted": ["im2im", "qutcc"],
 }
 
 
 def expected():
     return {
         group: {
-            method: list(range(5, (30 if group == "raw_corrupted" else 50) + 1, 5))
+            method: list(range(5, 51, 5))
             for method in methods
         }
         for group, methods in METHODS.items()

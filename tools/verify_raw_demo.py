@@ -50,8 +50,7 @@ def main(base=None):
    raise RuntimeError('Loading timeout: '+text)
   print(wait_ready('1 / '),flush=True)
   assert js("!document.querySelector('#pixelInspector').open && !document.querySelector('#calibrationDetails').open")
-  for study in ['clean','corrupted']:
-   if study=='corrupted':js("document.querySelector('#study').value='corrupted';document.querySelector('#study').dispatchEvent(new Event('change'))");wait_ready('2 / ')
+  for study in ['clean']:
    assert js("document.querySelectorAll('#historyPlots .plot').length")==2
    assert js("document.querySelectorAll('#intervalPlots .plot').length")==2
    assert js("document.querySelectorAll('#aggregateRows tr').length")==2

@@ -57,7 +57,8 @@ function renderImageMetrics() {
 }
 function stateURL() {
   const u = new URL(location.href);
-  u.searchParams.set("study", study);
+  u.searchParams.delete("study");
+  u.searchParams.delete("modification");
   u.searchParams.set("example", index);
   history.replaceState(null, "", u);
   window.syncDemoNavigation?.();
@@ -156,20 +157,14 @@ function renderTables() {
     ? window.Coverage90.curveStatus("raw_" + study)
     : `Fresh calibration/export checks: ${refreshed.length ? refreshed.join(", ") + " complete" : "submitted; showing completed original evaluations"}. ${Math.min(...METHODS.map((m) => summary(m).example_count))} test examples currently available. Full-test metrics always cover 2,000 images.`;
   $("#settings").textContent =
-    study === "clean"
-      ? "Original raw experiment: both models trained from random initialization for 50 epochs."
-      : `Corruption adaptation: 30 clean-data pretraining epochs, followed by ${summary("qutcc").epoch} completed adaptation epochs on the fixed reviewed corrupted inputs. Adam moments were initialized at the start of adaptation and retained when continuing past adaptation epoch 10. Learning rate remains 0.00001. Targets and split IDs are unchanged.`;
+    "Original raw experiment: both models trained from random initialization for 50 epochs.";
   $("#provenance").textContent =
-    study === "clean"
-      ? `Images: epoch ${summary("qutcc").epoch} · ${summary("qutcc").example_count} examples`
-      : `Images: 30 clean epochs + ${summary("qutcc").epoch} adaptation epochs · ${summary("qutcc").example_count} examples`;
+    `Images: epoch ${summary("qutcc").epoch} · ${summary("qutcc").example_count} examples`;
   const lastEpoch = Math.max(
     ...METHODS.flatMap((m) => summary(m).history.map((r) => r.epoch)),
   );
   $("#curveNote").textContent =
-    study === "clean"
-      ? `Curves through epoch ${lastEpoch} · Images from epoch ${summary("qutcc").epoch}`
-      : `Adaptation curves through ${lastEpoch} / 30 epochs · Images from adaptation epoch ${summary("qutcc").epoch}`;
+    `Curves through epoch ${lastEpoch} · Images from epoch ${summary("qutcc").epoch}`;
 }
 function makePlot(container, title, key, kind) {
   const plot = document.createElement("div");
@@ -513,8 +508,7 @@ async function loadExample() {
     }
   }
 }
-function changeStudy() {
-  study = $("#study").value;
+function initializeExamples() {
   data = window.Coverage90.rawDataset(referenceData, study);
   const count = Math.min(...METHODS.map((m) => summary(m).example_count));
   index = Math.min(index, count - 1);
@@ -536,7 +530,6 @@ function changeStudy() {
   window.exampleBrowser = createExampleBrowser({
     entries: rankExampleDifficulty(entries),
     reference: group.reference,
-    corruption: study === "corrupted",
     current: () => index,
     onSelect: (i) => {
       index = i;
@@ -569,10 +562,7 @@ function changeStudy() {
     await window.Coverage90.init();
     referenceData = data;
     const params = new URLSearchParams(location.search);
-    study = params.get("study") === "corrupted" ? "corrupted" : "clean";
     index = Math.max(0, Number(params.get("example")) || 0);
-    $("#study").value = study;
-    $("#study").onchange = changeStudy;
     $("#example").onchange = () => {
       index = Number($("#example").value);
       loadExample();
@@ -597,7 +587,7 @@ function changeStudy() {
     $("#channel").onchange = renderPixel;
     $("#showBounds").onchange = () =>
       $("#matrix").classList.toggle("show-bounds", $("#showBounds").checked);
-    changeStudy();
+    initializeExamples();
   } catch (e) {
     $("#status").textContent = "Could not load results: " + e.message;
     console.error(e);
