@@ -48,16 +48,22 @@ Near-90% values from the exact immutable exports. They are per-image scores, not
 5,000-image test means.
 
 The [raw comparison](https://shdakudow.github.io/ConvRML-Uncertainty-Demo/raw-diffusercam/)
-shows LPIPS, Pearson r and Spearman rho beside each model, plus averages over the
-50 displayed examples. The separate full-test table still covers 2,000 images.
+shows per-image metrics in one comparison table. Its aggregate table includes
+LPIPS, Pearson r and Spearman rho over the same 2,000 test images as PSNR, SSIM,
+coverage and width. Missing full-test evaluations remain marked pending.
 Correlations compare unsmoothed RGB-average interval width with absolute error
 within each image. LPIPS uses pretrained AlexNet on clipped RGB images.
 
 Clean/corrupted studies and Near-90%/Reference modes have separate analysis
 records tied to their exact immutable array exports and checkpoint epochs. A
 changed export displays unavailable scores until its analysis is rebuilt.
-`tools/build_raw_analysis.py` regenerates these records from the local asset Git
-repositories and verifies every packed array checksum; no training is needed.
+`tools/build_raw_analysis.py` regenerates per-image analysis from the local asset
+Git repositories and verifies every packed array checksum.
+`tools/collect_raw_full_analysis.py` collects full-test inference-only reports;
+`tools/evaluate_raw_full_analysis.py` produces those reports from explicit frozen
+checkpoint/calibration tasks, checking the first 50 saved image metrics before
+evaluating the full split. Checkpoints and calibration remain frozen; no training
+is needed.
 
 ## Named captures · Sensor12
 

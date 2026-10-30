@@ -11,6 +11,7 @@ let referenceData,
   assets,
   categories,
   analysisMetrics,
+  fullAnalysisMetrics,
   study = "clean",
   index = 0,
   example = null,
@@ -28,12 +29,9 @@ function escapeHTML(v) {
       ],
   );
 }
-function metricText(m) {
-  return `PSNR ${fmt(m.psnr, 3)} dB · SSIM ${fmt(m.ssim)} · Coverage ${pct(m.coverage)} · Width ${fmt(m.width)}`;
-}
-function analysisRecord(method) {
+function analysisRecord(method, source = analysisMetrics) {
   const mode = window.Coverage90.active ? "tight90" : "reference";
-  const record = analysisMetrics?.modes?.[mode]?.[study]?.[method];
+  const record = source?.modes?.[mode]?.[study]?.[method];
   const expectedBase = window.Coverage90.active
     ? window.Coverage90.entries("raw_" + study)[method]?.base
     : `${assets.base}/${summary(method).asset_study || study}/${method}`;
@@ -42,21 +40,20 @@ function analysisRecord(method) {
     ? record
     : null;
 }
-function renderAnalysisSummary() {
-  $("#analysisRows").innerHTML = METHODS.map((method) => {
-    const record = analysisRecord(method);
-    const scores = ["lpips", "pearson", "spearman"].map((key) => {
-      const metric = record?.summary[key];
-      return `<td title="${metric?.n_valid ?? 0} valid images">${fmt(metric?.mean)}</td>`;
-    });
-    return `<tr><td>${NAMES[method]}</td><td>${record?.count ?? "Unavailable"}</td>${scores.join("")}</tr>`;
-  }).join("");
-}
-function imageAnalysisText(method) {
+function imageAnalysisMetrics(method) {
   const row = analysisRecord(method)?.per_image[index];
   if (!row || String(row.id) !== String(example.id))
-    return "LPIPS / correlations unavailable for this export";
-  return `LPIPS ${fmt(row.lpips)} · Pearson ${fmt(row.pearson)} · Spearman ${fmt(row.spearman)}`;
+    return null;
+  return row;
+}
+function renderImageMetrics() {
+  $("#imageMetricRows").innerHTML = METHODS.map((method) => {
+    const metrics = example.models[method]?.metrics;
+    const analysis = imageAnalysisMetrics(method);
+    if (!metrics)
+      return `<tr><td>${NAMES[method]}</td><td colspan="9">Inference pending</td></tr>`;
+    return `<tr><td>${NAMES[method]}</td><td>${summary(method).epoch}</td><td>${fmt(metrics.psnr, 3)}</td><td>${fmt(metrics.ssim)}</td><td>${pct(metrics.coverage)}</td><td>${fmt(metrics.width)}</td><td>${fmt(metrics.mae)}</td>${["lpips", "pearson", "spearman"].map((key) => `<td>${fmt(analysis?.[key])}</td>`).join("")}</tr>`;
+  }).join("");
 }
 function stateURL() {
   const u = new URL(location.href);
@@ -122,10 +119,17 @@ function renderTables() {
     const s = summary(method),
       m = s.metrics?.clipped;
     if (!m)
-      return `<tr><td>${NAMES[method]}</td><td>${s.epoch}</td><td colspan="6">Inference pending</td></tr>`;
-    return `<tr><td>${NAMES[method]}</td><td>${s.epoch}</td><td>${fmt(m.psnr, 3)}</td><td>${fmt(m.ssim)}</td><td>${pct(s.calibration?.calibration_coverage)}</td><td>${pct(m.coverage)}</td><td>${fmt(m.width)}</td><td>${fmt(m.mae)}</td></tr>`;
+      return `<tr><td>${NAMES[method]}</td><td>${s.epoch}</td><td colspan="9">Inference pending</td></tr>`;
+    const record = analysisRecord(method, fullAnalysisMetrics);
+    const valid = record?.count === s.test_count;
+    const extra = ["lpips", "pearson", "spearman"].map((key) => valid
+      ? `<td title="${record.n_valid[key]} valid images">${fmt(record.metrics[key])}</td>`
+      : "<td>Pending</td>").join("");
+    return `<tr><td>${NAMES[method]}</td><td>${s.epoch}</td><td>${fmt(m.psnr, 3)}</td><td>${fmt(m.ssim)}</td><td>${pct(s.calibration?.calibration_coverage)}</td><td>${pct(m.coverage)}</td><td>${fmt(m.width)}</td><td>${fmt(m.mae)}</td>${extra}</tr>`;
   }).join("");
-  renderAnalysisSummary();
+  const ready = METHODS.filter((method) => analysisRecord(method, fullAnalysisMetrics)?.count === summary(method).test_count).length;
+  $("#fullAnalysisStatus").hidden = ready === METHODS.length;
+  $("#fullAnalysisStatus").textContent = `LPIPS/correlations: ${ready}/${METHODS.length} models evaluated on the same 2,000 test images.`;
   $("#calibrationRows").innerHTML = METHODS.flatMap((method) =>
     summary(method).evaluations.map((e) => ({ method, ...e })),
   )
@@ -441,7 +445,7 @@ function renderExample() {
       html += `<div class="model-header"><h3>${NAMES[method]}</h3><p>Near-90% inference pending.</p></div>`;
       continue;
     }
-    html += `<div class="model-header"><h3 style="color:${COLORS[method]}">${NAMES[method]}</h3><span class="model-metrics">${metricText(m.metrics)}</span><span class="model-analysis">${imageAnalysisText(method)}</span></div>`;
+    html += `<div class="model-header"><h3 style="color:${COLORS[method]}">${NAMES[method]}</h3></div>`;
     for (const [kind, label] of [
       ["prediction", "Reconstruction"],
       ["error", "Error"],
@@ -452,6 +456,7 @@ function renderExample() {
       html += `<figure class="${["lower", "upper"].includes(kind) ? "bound-image" : ""}"><figcaption>${label}</figcaption><canvas class="image" data-kind="${kind}" data-method="${method}"></canvas></figure>`;
   }
   $("#matrix").innerHTML = html;
+  renderImageMetrics();
   drawImages();
   $("#status").textContent =
     `${index + 1} / ${Math.min(...METHODS.map((m) => summary(m).example_count))} · ID ${example.id}`;
@@ -556,6 +561,9 @@ function changeStudy() {
     );
     // Missing supplemental analysis must not prevent browsing existing results.
     analysisMetrics = await fetch("analysis_metrics.json", { cache: "no-store" })
+      .then((response) => response.ok ? response.json() : undefined)
+      .catch(() => undefined);
+    fullAnalysisMetrics = await fetch("full_analysis_metrics.json", { cache: "no-store" })
       .then((response) => response.ok ? response.json() : undefined)
       .catch(() => undefined);
     await window.Coverage90.init();

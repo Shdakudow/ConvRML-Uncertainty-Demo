@@ -1,0 +1,728 @@
+{
+  "count": 2000,
+  "definition": "Mean image-wise LPIPS-AlexNet, Pearson and Spearman over the full 2000-image test split; correlations use unsmoothed RGB-average maps; outputs clipped [0,1]",
+  "training_performed": false,
+  "calibration_refitted": false,
+  "modes": {
+    "tight90": {
+      "clean": {
+        "im2im": {
+          "study": "clean",
+          "method": "im2im",
+          "epoch": 50,
+          "base": "https://raw.githubusercontent.com/Shdakudow/ConvRML-Uncertainty-Demo/e97bb5b4b323f50f3ea991549294624263eb5413/raw_clean/im2im",
+          "count": 2000,
+          "metrics": {
+            "psnr": 26.328145385742186,
+            "ssim": 0.8250934246629477,
+            "mae": 0.027135609644930808,
+            "coverage": 0.8974716807603836,
+            "width": 0.09475195244885981,
+            "lpips": 0.22520718520879746,
+            "pearson": 0.6571974503270455,
+            "spearman": 0.8515434408723115
+          },
+          "n_valid": {
+            "psnr": 2000,
+            "ssim": 2000,
+            "mae": 2000,
+            "coverage": 2000,
+            "width": 2000,
+            "lpips": 2000,
+            "pearson": 2000,
+            "spearman": 2000
+          },
+          "provenance": {
+            "checkpoint": "/home/jy2228/ConvRML/experiments/qutcc_paper_style_20261018/results/raw/im2im/checkpoints/epoch_050.pt",
+            "epoch": 50,
+            "protocol": "paper_qutcc_convnext_uniform_pinball_20261018_v1",
+            "source_sha256": "c8b613d6d14ee7bc928877966df51f64b360956f7f48fbf4be3acd48862b5111",
+            "dataset_identity": {
+              "/home/jy2228/ConvRML/experiments/dlmd_raw_adaptive_size_20261016/data/split.json": "155670232c27b3201582f5a1b67fb4196e8123e40f388d9c951df4418f7144fb"
+            }
+          },
+          "calibration": {
+            "scales": {
+              "lower": 1.5386910807510503,
+              "upper": 1.584936580596036
+            },
+            "tail_risks": {
+              "lower": 0.049999872256515775,
+              "upper": 0.04999989969135803
+            },
+            "calibration_coverage": 0.9000002280521262,
+            "procedure": "tight empirical asymmetric order-statistic scales; not RCPS",
+            "target_coverage": 0.9,
+            "n_images": 3000,
+            "coverage_tolerance": 0.001,
+            "within_tolerance": true,
+            "calibrated_on": "calibration split only",
+            "delta": null,
+            "confidence_guarantee": false,
+            "endpoint_clipping": [
+              0,
+              1
+            ]
+          },
+          "calibration_refitted": false,
+          "training_performed": false,
+          "first_50_reproduced": true,
+          "seconds": 239.899685008917,
+          "gpu": "NVIDIA RTX A6000",
+          "test_ids_sha256": "ede99affdede56d2144913f8c95a15c06e3a361689c4a68df0814767669fbf62",
+          "report_sha256": "6af22869513a767dc418a6673817d273f84850e223c4bd0452c029dcc4233f6a"
+        },
+        "qutcc": {
+          "study": "clean",
+          "method": "qutcc",
+          "epoch": 50,
+          "base": "https://raw.githubusercontent.com/Shdakudow/ConvRML-Uncertainty-Demo/e97bb5b4b323f50f3ea991549294624263eb5413/raw_clean/qutcc",
+          "count": 2000,
+          "metrics": {
+            "psnr": 26.397677769660948,
+            "ssim": 0.828012294024229,
+            "mae": 0.026587544165551664,
+            "coverage": 0.8979767201691866,
+            "width": 0.10305355403618888,
+            "lpips": 0.2354249988384545,
+            "pearson": 0.66180479547941,
+            "spearman": 0.8490862457786871
+          },
+          "n_valid": {
+            "psnr": 2000,
+            "ssim": 2000,
+            "mae": 2000,
+            "coverage": 2000,
+            "width": 2000,
+            "lpips": 2000,
+            "pearson": 2000,
+            "spearman": 2000
+          },
+          "provenance": {
+            "checkpoint": "/home/jy2228/ConvRML/experiments/qutcc_paper_style_20261018/results/raw/qutcc/checkpoints/epoch_050.pt",
+            "epoch": 50,
+            "protocol": "paper_qutcc_convnext_uniform_pinball_20261018_v1",
+            "source_sha256": "c8b613d6d14ee7bc928877966df51f64b360956f7f48fbf4be3acd48862b5111",
+            "dataset_identity": {
+              "/home/jy2228/ConvRML/experiments/dlmd_raw_adaptive_size_20261016/data/split.json": "155670232c27b3201582f5a1b67fb4196e8123e40f388d9c951df4418f7144fb"
+            }
+          },
+          "calibration": {
+            "lower_q": 0.0053828125000000004,
+            "upper_q": 0.9801953125,
+            "lower_risk": 0.04970596364883402,
+            "upper_risk": 0.04971959190672154,
+            "coverage_lower_bound": 0.9005744444444443,
+            "target_coverage": 0.9,
+            "coverage_tolerance": 0.001,
+            "within_tolerance": true,
+            "trace": [
+              {
+                "lower_q": 0.0048828125,
+                "upper_q": 0.9814453125,
+                "lower_risk": 0.04911711848422497,
+                "upper_risk": 0.0478992609739369
+              },
+              {
+                "lower_q": 0.0058828125,
+                "upper_q": 0.9804453125,
+                "lower_risk": 0.05029735253772291,
+                "upper_risk": 0.04935430898491084
+              },
+              {
+                "lower_q": 0.0053828125000000004,
+                "upper_q": 0.9784453125,
+                "lower_risk": 0.04970596364883402,
+                "upper_risk": 0.05228718792866941
+              },
+              {
+                "lower_q": 0.0053828125000000004,
+                "upper_q": 0.9794453125,
+                "lower_risk": 0.04970596364883402,
+                "upper_risk": 0.05081685356652949
+              },
+              {
+                "lower_q": 0.0053828125000000004,
+                "upper_q": 0.9799453124999999,
+                "lower_risk": 0.04970596364883402,
+                "upper_risk": 0.050084838820301784
+              },
+              {
+                "lower_q": 0.0053828125000000004,
+                "upper_q": 0.9801953125,
+                "lower_risk": 0.04970596364883402,
+                "upper_risk": 0.04971959190672154
+              },
+              {
+                "lower_q": 0.0053828125000000004,
+                "upper_q": 0.9801953125,
+                "lower_risk": 0.04970596364883402,
+                "upper_risk": 0.04971959190672154
+              }
+            ],
+            "calibrated_on": "calibration split only",
+            "procedure": "tight empirical equal-tail q search; not RCPS",
+            "calibration_coverage": 0.9005744444444445,
+            "calibration_crossing": 1.54320987654321e-08,
+            "n_images": 3000,
+            "delta": null,
+            "confidence_guarantee": false,
+            "endpoint_clipping": [
+              0,
+              1
+            ]
+          },
+          "calibration_refitted": false,
+          "training_performed": false,
+          "first_50_reproduced": true,
+          "seconds": 468.45717259682715,
+          "gpu": "NVIDIA RTX 6000 Ada Generation",
+          "test_ids_sha256": "ede99affdede56d2144913f8c95a15c06e3a361689c4a68df0814767669fbf62",
+          "report_sha256": "1e1b289edabc3c1ed62ea325427cf86a0e9af96e9bf87730d417745abc6a2b46"
+        }
+      },
+      "corrupted": {
+        "im2im": {
+          "study": "corrupted",
+          "method": "im2im",
+          "epoch": 30,
+          "base": "https://raw.githubusercontent.com/Shdakudow/ConvRML-Uncertainty-Demo/e97bb5b4b323f50f3ea991549294624263eb5413/raw_corrupted/im2im",
+          "count": 2000,
+          "metrics": {
+            "psnr": 21.689723824501037,
+            "ssim": 0.6877214485555887,
+            "mae": 0.05128451221541036,
+            "coverage": 0.8991554857492446,
+            "width": 0.17105529670091346,
+            "lpips": 0.3851399935372174,
+            "pearson": 0.6463721406882587,
+            "spearman": 0.8367056104101043
+          },
+          "n_valid": {
+            "psnr": 2000,
+            "ssim": 2000,
+            "mae": 2000,
+            "coverage": 2000,
+            "width": 2000,
+            "lpips": 2000,
+            "pearson": 2000,
+            "spearman": 2000
+          },
+          "provenance": {
+            "checkpoint": "/home/jy2228/ConvRML/experiments/raw_corrupted_continue30_20261019/results/raw/im2im/checkpoints/epoch_030.pt",
+            "epoch": 30,
+            "protocol": "raw_corrupted_resume10_to30_20261019_v1",
+            "source_sha256": "91dd6f5a7f4bfc5e210454c8caf66931b9dde5667a8c51a5398f7db4db8fa41e",
+            "dataset_identity": {
+              "/home/jy2228/ConvRML/experiments/dlmd_raw_adaptive_size_20261016/data/split.json": "155670232c27b3201582f5a1b67fb4196e8123e40f388d9c951df4418f7144fb",
+              "/home/jy2228/ConvRML/experiments/raw_diffuser_corruptions_20261018/protocol.json": "f3f1beeb4e5863b703bde25068323ea3d49a2c544c08ae20941c76493ba1b064",
+              "/home/jy2228/ConvRML/experiments/raw_diffuser_corruptions_20261018/dataset/manifest.json": "6c12f47c779ff5fc475cf99a32f06a4a23e3eec176a953892623fbe31a46ae1f"
+            }
+          },
+          "calibration": {
+            "scales": {
+              "lower": 1.4273156426565947,
+              "upper": 1.4758829840484395
+            },
+            "tail_risks": {
+              "lower": 0.04999986796982167,
+              "upper": 0.049999897976680384
+            },
+            "calibration_coverage": 0.9000002340534979,
+            "procedure": "tight empirical asymmetric order-statistic scales; not RCPS",
+            "target_coverage": 0.9,
+            "n_images": 3000,
+            "coverage_tolerance": 0.001,
+            "within_tolerance": true,
+            "calibrated_on": "calibration split only",
+            "delta": null,
+            "confidence_guarantee": false,
+            "endpoint_clipping": [
+              0,
+              1
+            ]
+          },
+          "calibration_refitted": false,
+          "training_performed": false,
+          "first_50_reproduced": true,
+          "seconds": 132.26509516965598,
+          "gpu": "NVIDIA RTX 6000 Ada Generation",
+          "test_ids_sha256": "ede99affdede56d2144913f8c95a15c06e3a361689c4a68df0814767669fbf62",
+          "report_sha256": "9f8ebb6284d7dc482ae0e192228afb21d2092b7f88bfba3bb16ecb9f482ea3d9"
+        },
+        "qutcc": {
+          "study": "corrupted",
+          "method": "qutcc",
+          "epoch": 30,
+          "base": "https://raw.githubusercontent.com/Shdakudow/ConvRML-Uncertainty-Demo/e97bb5b4b323f50f3ea991549294624263eb5413/raw_corrupted/qutcc",
+          "count": 2000,
+          "metrics": {
+            "psnr": 21.648165894508363,
+            "ssim": 0.7026477936506271,
+            "mae": 0.05009848009236157,
+            "coverage": 0.8994600264281034,
+            "width": 0.1889376613018103,
+            "lpips": 0.3812901612687856,
+            "pearson": 0.636156505719429,
+            "spearman": 0.8176395390638082
+          },
+          "n_valid": {
+            "psnr": 2000,
+            "ssim": 2000,
+            "mae": 2000,
+            "coverage": 2000,
+            "width": 2000,
+            "lpips": 2000,
+            "pearson": 2000,
+            "spearman": 2000
+          },
+          "provenance": {
+            "checkpoint": "/home/jy2228/ConvRML/experiments/raw_corrupted_continue30_20261019/results/raw/qutcc/checkpoints/epoch_030.pt",
+            "epoch": 30,
+            "protocol": "raw_corrupted_resume10_to30_20261019_v1",
+            "source_sha256": "91dd6f5a7f4bfc5e210454c8caf66931b9dde5667a8c51a5398f7db4db8fa41e",
+            "dataset_identity": {
+              "/home/jy2228/ConvRML/experiments/dlmd_raw_adaptive_size_20261016/data/split.json": "155670232c27b3201582f5a1b67fb4196e8123e40f388d9c951df4418f7144fb",
+              "/home/jy2228/ConvRML/experiments/raw_diffuser_corruptions_20261018/protocol.json": "f3f1beeb4e5863b703bde25068323ea3d49a2c544c08ae20941c76493ba1b064",
+              "/home/jy2228/ConvRML/experiments/raw_diffuser_corruptions_20261018/dataset/manifest.json": "6c12f47c779ff5fc475cf99a32f06a4a23e3eec176a953892623fbe31a46ae1f"
+            }
+          },
+          "calibration": {
+            "lower_q": 0.0095390625,
+            "upper_q": 0.9784921875,
+            "lower_risk": 0.049769931412894375,
+            "upper_risk": 0.04962066015089163,
+            "coverage_lower_bound": 0.9006094084362141,
+            "target_coverage": 0.9,
+            "coverage_tolerance": 0.001,
+            "within_tolerance": true,
+            "trace": [
+              {
+                "lower_q": 0.0087890625,
+                "upper_q": 0.9794921875,
+                "lower_risk": 0.04884350823045267,
+                "upper_risk": 0.04830565500685871
+              },
+              {
+                "lower_q": 0.009789062500000001,
+                "upper_q": 0.9784921875,
+                "lower_risk": 0.050080384087791495,
+                "upper_risk": 0.04962066015089163
+              },
+              {
+                "lower_q": 0.0092890625,
+                "upper_q": 0.9784921875,
+                "lower_risk": 0.049460124314128946,
+                "upper_risk": 0.04962066015089163
+              },
+              {
+                "lower_q": 0.0095390625,
+                "upper_q": 0.9784921875,
+                "lower_risk": 0.049769931412894375,
+                "upper_risk": 0.04962066015089163
+              },
+              {
+                "lower_q": 0.0095390625,
+                "upper_q": 0.9784921875,
+                "lower_risk": 0.049769931412894375,
+                "upper_risk": 0.04962066015089163
+              }
+            ],
+            "calibrated_on": "calibration split only",
+            "procedure": "tight empirical equal-tail q search; not RCPS",
+            "calibration_coverage": 0.9006094238683128,
+            "calibration_crossing": 4.766803840877915e-07,
+            "n_images": 3000,
+            "delta": null,
+            "confidence_guarantee": false,
+            "endpoint_clipping": [
+              0,
+              1
+            ]
+          },
+          "calibration_refitted": false,
+          "training_performed": false,
+          "first_50_reproduced": true,
+          "seconds": 387.6694812690839,
+          "gpu": "NVIDIA RTX A6000",
+          "test_ids_sha256": "ede99affdede56d2144913f8c95a15c06e3a361689c4a68df0814767669fbf62",
+          "report_sha256": "d398edc1590f69a16759c3c8a2518505bc6aa1404116ba28921700349bdbd6c8"
+        }
+      }
+    },
+    "reference": {
+      "clean": {
+        "im2im": {
+          "study": "clean",
+          "method": "im2im",
+          "epoch": 50,
+          "base": "https://raw.githubusercontent.com/Shdakudow/ConvRML-Uncertainty-Demo/d4df974cb47709abc80d82529c85a058d8140934/exports/clean/im2im",
+          "count": 2000,
+          "metrics": {
+            "psnr": 26.328145385742186,
+            "ssim": 0.8250934246629477,
+            "mae": 0.027135609644930808,
+            "coverage": 0.8983252105265855,
+            "width": 0.09508841302851215,
+            "lpips": 0.22520718520879746,
+            "pearson": 0.6572158914934556,
+            "spearman": 0.8515464070958071
+          },
+          "n_valid": {
+            "psnr": 2000,
+            "ssim": 2000,
+            "mae": 2000,
+            "coverage": 2000,
+            "width": 2000,
+            "lpips": 2000,
+            "pearson": 2000,
+            "spearman": 2000
+          },
+          "provenance": {
+            "checkpoint": "/home/jy2228/ConvRML/experiments/qutcc_paper_style_20261018/results/raw/im2im/checkpoints/epoch_050.pt",
+            "epoch": 50,
+            "protocol": "paper_qutcc_convnext_uniform_pinball_20261018_v1",
+            "source_sha256": "c8b613d6d14ee7bc928877966df51f64b360956f7f48fbf4be3acd48862b5111",
+            "dataset_identity": {
+              "/home/jy2228/ConvRML/experiments/dlmd_raw_adaptive_size_20261016/data/split.json": "155670232c27b3201582f5a1b67fb4196e8123e40f388d9c951df4418f7144fb"
+            }
+          },
+          "calibration": {
+            "scales": {
+              "lower": 1.5435435435435436,
+              "upper": 1.5915915915915915
+            },
+            "alpha": 0.1,
+            "per_tail_target": 0.049850000000000005,
+            "n_images": 3000,
+            "procedure": "paper asymmetric Im2im adjusted empirical tail-risk scale search",
+            "calibrated_on": "calibration split only"
+          },
+          "calibration_refitted": false,
+          "training_performed": false,
+          "first_50_reproduced": true,
+          "seconds": 239.90940489713103,
+          "gpu": "NVIDIA RTX A6000",
+          "test_ids_sha256": "ede99affdede56d2144913f8c95a15c06e3a361689c4a68df0814767669fbf62",
+          "report_sha256": "6af22869513a767dc418a6673817d273f84850e223c4bd0452c029dcc4233f6a"
+        },
+        "qutcc": {
+          "study": "clean",
+          "method": "qutcc",
+          "epoch": 50,
+          "base": "https://raw.githubusercontent.com/Shdakudow/ConvRML-Uncertainty-Demo/d4df974cb47709abc80d82529c85a058d8140934/exports/clean/qutcc",
+          "count": 2000,
+          "metrics": {
+            "psnr": 26.397677769660948,
+            "ssim": 0.828012294024229,
+            "mae": 0.026587544165551664,
+            "coverage": 0.9003982434868812,
+            "width": 0.10407124938396738,
+            "lpips": 0.2354249988384545,
+            "pearson": 0.661973899394732,
+            "spearman": 0.8490488409776906
+          },
+          "n_valid": {
+            "psnr": 2000,
+            "ssim": 2000,
+            "mae": 2000,
+            "coverage": 2000,
+            "width": 2000,
+            "lpips": 2000,
+            "pearson": 2000,
+            "spearman": 2000
+          },
+          "provenance": {
+            "checkpoint": "/home/jy2228/ConvRML/experiments/qutcc_paper_style_20261018/results/raw/qutcc/checkpoints/epoch_050.pt",
+            "epoch": 50,
+            "protocol": "paper_qutcc_convnext_uniform_pinball_20261018_v1",
+            "source_sha256": "c8b613d6d14ee7bc928877966df51f64b360956f7f48fbf4be3acd48862b5111",
+            "dataset_identity": {
+              "/home/jy2228/ConvRML/experiments/dlmd_raw_adaptive_size_20261016/data/split.json": "155670232c27b3201582f5a1b67fb4196e8123e40f388d9c951df4418f7144fb"
+            }
+          },
+          "calibration": {
+            "lower_q": 0.0048828125,
+            "upper_q": 0.9814453125,
+            "alpha": 0.1,
+            "per_tail_target": 0.049850000000000005,
+            "n_images": 3000,
+            "tolerance": 0.001,
+            "trace": [
+              {
+                "lower_q": 0.0,
+                "upper_q": 1.0,
+                "lower_risk": 0.04373706275720165,
+                "upper_risk": 0.023792795781893004
+              },
+              {
+                "lower_q": 0.5,
+                "upper_q": 0.5,
+                "lower_risk": 0.5112516658093278,
+                "upper_risk": 0.4887477494855967
+              },
+              {
+                "lower_q": 0.25,
+                "upper_q": 0.75,
+                "lower_risk": 0.31124579561042526,
+                "upper_risk": 0.29359484653635115
+              },
+              {
+                "lower_q": 0.125,
+                "upper_q": 0.875,
+                "lower_risk": 0.20292608196159123,
+                "upper_risk": 0.18320176011659808
+              },
+              {
+                "lower_q": 0.0625,
+                "upper_q": 0.9375,
+                "lower_risk": 0.1275377494855967,
+                "upper_risk": 0.11265375085733882
+              },
+              {
+                "lower_q": 0.03125,
+                "upper_q": 0.96875,
+                "lower_risk": 0.08388473508230453,
+                "upper_risk": 0.06784680469821673
+              },
+              {
+                "lower_q": 0.015625,
+                "upper_q": 0.984375,
+                "lower_risk": 0.06275243741426612,
+                "upper_risk": 0.04423999914266118
+              },
+              {
+                "lower_q": 0.0078125,
+                "upper_q": 0.9765625,
+                "lower_risk": 0.05289763717421125,
+                "upper_risk": 0.05591466563786008
+              },
+              {
+                "lower_q": 0.00390625,
+                "upper_q": 0.98046875,
+                "lower_risk": 0.0482187037037037,
+                "upper_risk": 0.05001819444444444
+              },
+              {
+                "lower_q": 0.005859375,
+                "upper_q": 0.982421875,
+                "lower_risk": 0.050535589849108366,
+                "upper_risk": 0.04711078446502057
+              },
+              {
+                "lower_q": 0.0048828125,
+                "upper_q": 0.9814453125,
+                "lower_risk": 0.04937162122770919,
+                "upper_risk": 0.048560920781893
+              },
+              {
+                "lower_q": 0.0048828125,
+                "upper_q": 0.9814453125,
+                "lower_risk": 0.04937162122770919,
+                "upper_risk": 0.048560920781893
+              }
+            ],
+            "procedure": "paper Algorithm 1 adjusted empirical tail-risk binary search",
+            "assumption": "Quantile response should be monotone; shared weights do not strictly enforce it",
+            "calibrated_on": "calibration split only"
+          },
+          "calibration_refitted": false,
+          "training_performed": false,
+          "first_50_reproduced": true,
+          "seconds": 468.47166699776426,
+          "gpu": "NVIDIA RTX 6000 Ada Generation",
+          "test_ids_sha256": "ede99affdede56d2144913f8c95a15c06e3a361689c4a68df0814767669fbf62",
+          "report_sha256": "1e1b289edabc3c1ed62ea325427cf86a0e9af96e9bf87730d417745abc6a2b46"
+        }
+      },
+      "corrupted": {
+        "im2im": {
+          "study": "corrupted",
+          "method": "im2im",
+          "epoch": 10,
+          "base": "https://raw.githubusercontent.com/Shdakudow/ConvRML-Uncertainty-Demo/d4df974cb47709abc80d82529c85a058d8140934/exports/corrupted/im2im",
+          "count": 2000,
+          "metrics": {
+            "psnr": 21.897399143695832,
+            "ssim": 0.693322390474379,
+            "mae": 0.05050372069166042,
+            "coverage": 0.9021626720875502,
+            "width": 0.1794274440505542,
+            "lpips": 0.39064993272256104,
+            "pearson": 0.6617124416291236,
+            "spearman": 0.8397750511571538
+          },
+          "n_valid": {
+            "psnr": 2000,
+            "ssim": 2000,
+            "mae": 2000,
+            "coverage": 2000,
+            "width": 2000,
+            "lpips": 2000,
+            "pearson": 2000,
+            "spearman": 2000
+          },
+          "provenance": {
+            "checkpoint": "/home/jy2228/ConvRML/experiments/raw_diffuser_corruptions_20261018/results/raw/im2im/checkpoints/epoch_010.pt",
+            "epoch": 10,
+            "protocol": "raw_measurement_corruptions_pilot_20261018_v1",
+            "source_sha256": "56effc208a9494f4b47fe3739de31ad1ddc336ca36ea14c9d6b3c57483c124dc",
+            "dataset_identity": {
+              "/home/jy2228/ConvRML/experiments/dlmd_raw_adaptive_size_20261016/data/split.json": "155670232c27b3201582f5a1b67fb4196e8123e40f388d9c951df4418f7144fb",
+              "/home/jy2228/ConvRML/experiments/raw_diffuser_corruptions_20261018/protocol.json": "f3f1beeb4e5863b703bde25068323ea3d49a2c544c08ae20941c76493ba1b064",
+              "/home/jy2228/ConvRML/experiments/raw_diffuser_corruptions_20261018/dataset/manifest.json": "6c12f47c779ff5fc475cf99a32f06a4a23e3eec176a953892623fbe31a46ae1f"
+            }
+          },
+          "calibration": {
+            "scales": {
+              "lower": 1.1951951951951951,
+              "upper": 1.2432432432432432
+            },
+            "alpha": 0.1,
+            "per_tail_target": 0.049850000000000005,
+            "n_images": 3000,
+            "procedure": "paper asymmetric Im2im adjusted empirical tail-risk scale search",
+            "calibrated_on": "calibration split only"
+          },
+          "calibration_refitted": false,
+          "training_performed": false,
+          "first_50_reproduced": true,
+          "seconds": 218.49918844096828,
+          "gpu": "NVIDIA RTX A6000",
+          "test_ids_sha256": "ede99affdede56d2144913f8c95a15c06e3a361689c4a68df0814767669fbf62",
+          "report_sha256": "cdac7953505c1e296403ef08e27c7da14f99ad8e05e9966fc6c2487d9a09af59"
+        },
+        "qutcc": {
+          "study": "corrupted",
+          "method": "qutcc",
+          "epoch": 10,
+          "base": "https://raw.githubusercontent.com/Shdakudow/ConvRML-Uncertainty-Demo/d4df974cb47709abc80d82529c85a058d8140934/exports/corrupted/qutcc",
+          "count": 2000,
+          "metrics": {
+            "psnr": 21.7186176366806,
+            "ssim": 0.7089095015227794,
+            "mae": 0.049742010499117896,
+            "coverage": 0.9037754021584987,
+            "width": 0.19317791333142667,
+            "lpips": 0.38836127393040804,
+            "pearson": 0.6456539309093186,
+            "spearman": 0.8259210009793917
+          },
+          "n_valid": {
+            "psnr": 2000,
+            "ssim": 2000,
+            "mae": 2000,
+            "coverage": 2000,
+            "width": 2000,
+            "lpips": 2000,
+            "pearson": 2000,
+            "spearman": 2000
+          },
+          "provenance": {
+            "checkpoint": "/home/jy2228/ConvRML/experiments/raw_diffuser_corruptions_20261018/results/raw/qutcc/checkpoints/epoch_010.pt",
+            "epoch": 10,
+            "protocol": "raw_measurement_corruptions_pilot_20261018_v1",
+            "source_sha256": "56effc208a9494f4b47fe3739de31ad1ddc336ca36ea14c9d6b3c57483c124dc",
+            "dataset_identity": {
+              "/home/jy2228/ConvRML/experiments/dlmd_raw_adaptive_size_20261016/data/split.json": "155670232c27b3201582f5a1b67fb4196e8123e40f388d9c951df4418f7144fb",
+              "/home/jy2228/ConvRML/experiments/raw_diffuser_corruptions_20261018/protocol.json": "f3f1beeb4e5863b703bde25068323ea3d49a2c544c08ae20941c76493ba1b064",
+              "/home/jy2228/ConvRML/experiments/raw_diffuser_corruptions_20261018/dataset/manifest.json": "6c12f47c779ff5fc475cf99a32f06a4a23e3eec176a953892623fbe31a46ae1f"
+            }
+          },
+          "calibration": {
+            "lower_q": 0.0380859375,
+            "upper_q": 0.9677734375,
+            "alpha": 0.1,
+            "per_tail_target": 0.049850000000000005,
+            "n_images": 3000,
+            "tolerance": 0.001,
+            "trace": [
+              {
+                "lower_q": 0.0,
+                "upper_q": 1.0,
+                "lower_risk": 0.01913301868998628,
+                "upper_risk": 0.019124797668038408
+              },
+              {
+                "lower_q": 0.5,
+                "upper_q": 0.5,
+                "lower_risk": 0.4780302014746228,
+                "upper_risk": 0.5219694607338821
+              },
+              {
+                "lower_q": 0.25,
+                "upper_q": 0.75,
+                "lower_risk": 0.2585941426611797,
+                "upper_risk": 0.2903631670096022
+              },
+              {
+                "lower_q": 0.125,
+                "upper_q": 0.875,
+                "lower_risk": 0.14561754458161866,
+                "upper_risk": 0.1647365749314129
+              },
+              {
+                "lower_q": 0.0625,
+                "upper_q": 0.9375,
+                "lower_risk": 0.07530921810699588,
+                "upper_risk": 0.08688370799039781
+              },
+              {
+                "lower_q": 0.03125,
+                "upper_q": 0.96875,
+                "lower_risk": 0.042652505144032925,
+                "upper_risk": 0.048173820301783264
+              },
+              {
+                "lower_q": 0.046875,
+                "upper_q": 0.953125,
+                "lower_risk": 0.058171975308641974,
+                "upper_risk": 0.0669785262345679
+              },
+              {
+                "lower_q": 0.0390625,
+                "upper_q": 0.9609375,
+                "lower_risk": 0.05016212191358025,
+                "upper_risk": 0.05736361539780521
+              },
+              {
+                "lower_q": 0.03515625,
+                "upper_q": 0.96484375,
+                "lower_risk": 0.04633718964334705,
+                "upper_risk": 0.05270244770233196
+              },
+              {
+                "lower_q": 0.037109375,
+                "upper_q": 0.966796875,
+                "lower_risk": 0.04823306069958848,
+                "upper_risk": 0.0504192566872428
+              },
+              {
+                "lower_q": 0.0380859375,
+                "upper_q": 0.9677734375,
+                "lower_risk": 0.04919297325102881,
+                "upper_risk": 0.04929298525377229
+              },
+              {
+                "lower_q": 0.0380859375,
+                "upper_q": 0.9677734375,
+                "lower_risk": 0.04919297325102881,
+                "upper_risk": 0.04929298525377229
+              }
+            ],
+            "procedure": "paper Algorithm 1 adjusted empirical tail-risk binary search",
+            "assumption": "Quantile response should be monotone; shared weights do not strictly enforce it",
+            "calibrated_on": "calibration split only"
+          },
+          "calibration_refitted": false,
+          "training_performed": false,
+          "first_50_reproduced": true,
+          "seconds": 270.3188050710596,
+          "gpu": "NVIDIA RTX 6000 Ada Generation",
+          "test_ids_sha256": "ede99affdede56d2144913f8c95a15c06e3a361689c4a68df0814767669fbf62",
+          "report_sha256": "006f4d3fec299a6b0e6de0106a2975f22cbc7725bfefa45db13e0f7ef2d35699"
+        }
+      }
+    }
+  }
+}
