@@ -68,12 +68,16 @@ window.CAMERA =
       cache: "no-store",
     });
     if (metricResponse.ok) window.analysisMetrics = await metricResponse.json();
+    window.calibratedCorrelations = await fetch("calibrated_correlations.json", {
+      cache: "no-store",
+    }).then((response) => response.ok ? response.json() : undefined)
+      .catch(() => undefined);
     window.exampleCategories = await (
       await fetch("../example-categories.json", { cache: "no-store" })
     ).json();
     window.Coverage90.exp2Dataset(DATASET, window.CAMERA);
     const app = document.createElement("script");
-    app.src = "app.js?v=20261030paths";
+    app.src = "app.js?v=20261030correlations";
     document.body.append(app);
   } catch (e) {
     document.getElementById("status").textContent =

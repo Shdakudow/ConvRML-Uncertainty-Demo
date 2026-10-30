@@ -446,7 +446,19 @@ function analysisKey(key) {
       : key;
 }
 function imageAnalysisMetrics(key) {
-  if (window.Coverage90.active) return [];
+  if (window.Coverage90.active) {
+    const method = analysisKey(key);
+    const entry = window.Coverage90.entries(window.CAMERA)[method];
+    const record = window.calibratedCorrelations?.groups?.[window.CAMERA]?.[method];
+    if (record?.base !== entry?.base || record?.epoch !== entry?.epoch) return [];
+    const row = record?.per_image.find((r) => String(r.id) === String(example.id));
+    return row
+      ? [
+          ["Error–width Pearson", row.pearson?.toFixed(5) ?? "Undefined"],
+          ["Error–width Spearman", row.spearman?.toFixed(5) ?? "Undefined"],
+        ]
+      : [];
+  }
   const method = analysisKey(key),
     row = window.analysisMetrics?.per_image?.[window.CAMERA]?.[method]?.find(
       (r) => String(r.id) === String(example.id),

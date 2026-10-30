@@ -41,6 +41,12 @@ caches. Hovering an epoch compares models' exact values and calibration coverage
 
 ## Raw DiffuserCam analysis metrics
 
+Experiment 2 also shows per-image Pearson and Spearman in its calibrated
+four-model comparison for RML and normalized DiffuserCam. These values use the
+selected saved interval maps; `tools/build_exp2_correlations.py` regenerates the
+Near-90% values from the exact immutable exports. They are per-image scores, not
+5,000-image test means.
+
 The [raw comparison](https://shdakudow.github.io/ConvRML-Uncertainty-Demo/raw-diffusercam/)
 shows LPIPS, Pearson r and Spearman rho beside each model, plus averages over the
 50 displayed examples. The separate full-test table still covers 2,000 images.
