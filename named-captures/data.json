@@ -19,7 +19,7 @@
     "definition": "Mean over RGB of clipped upper \u2212 lower",
     "saturation": "fixed 0\u20131 scale shared across the demo",
     "crossing_color": "#e320c9",
-    "gradient": "linear-gradient(90deg, #000004, #210c4a, #57106e, #8a226a, #bc3754, #e45a31, #f98e09, #f9cb35, #fcffa4)"
+    "gradient": "linear-gradient(90deg, #14233c, #225f9d, #23b9ac, #f3cb55, #fa7052)"
   },
   "models": {
     "qutcc": {

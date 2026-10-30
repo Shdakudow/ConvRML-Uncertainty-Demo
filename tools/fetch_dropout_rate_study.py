@@ -14,7 +14,11 @@ import io, json, tarfile
 from pathlib import Path
 import numpy as np
 from PIL import Image
-from matplotlib import colormaps
+def colorize(values):
+ stops=np.array([[20,35,60],[34,95,157],[35,185,172],[243,203,85],[250,112,82]])
+ values=np.clip(values,0,1)
+ rgb=np.stack([np.interp(values,np.linspace(0,1,5),stops[:,c]) for c in range(3)],axis=-1)
+ return np.floor(rgb+.5).astype('uint8')
 root=Path('/home/jy2228/ConvRML/results')
 payload={}
 study={'epoch':50,'validation_count':5000,'cameras':{},'example_count':8,
@@ -56,7 +60,7 @@ for camera in ['rml','diffuser']:
    entry={'prediction':name,'metrics':saved[arm]['per_image'][i]}
    for key in ['error','width']:
     name=f'{prefix}_{arm}_{key}.png'
-    png(name,np.round(colormaps['magma'](np.clip(maps[arm][key][i]/max(scale,1e-9),0,1))[...,:3]*255).astype('uint8'))
+    png(name,colorize(maps[arm][key][i]/max(scale,1e-9)))
     entry[key]=name
    example['models'][arm]=entry
   examples.append(example)

@@ -3,7 +3,7 @@
   "method": "qutcc",
   "epoch": 50,
   "frames": 280,
-  "fps": 20,
+  "fps": 20.0,
   "fps_status": "Presentation rate; acquisition frame rate unverified",
   "mean_interval_width": 0.15573122179632176,
   "std_interval_width": 0.025252860762267043,
@@ -105,11 +105,16 @@
   "calibration_refitted": false,
   "device": "NVIDIA RTX 6000 Ada Generation",
   "precision": "float32",
-  "seconds": 34.44047214370221,
+  "seconds": 35.5377824800089,
   "heatmap_range": [
     0,
-    1
+    1.0
   ],
+  "heatmap_palette": "raw DiffuserCam blue-to-red",
+  "display_rotation_degrees": 180,
+  "reference_metrics": "/home/jy2228/ConvRML/experiments/video_uncertainty_20261030/outputs",
+  "original_metric_values_retained": true,
+  "replay_max_width_difference": 0.0,
   "interval_definition": "RGB pixel mean of clip(upper,0,1) - clip(lower,0,1)",
   "per_frame": [
     {
@@ -3472,10 +3477,5 @@
       "prediction_frame_change": 0.02604544907808304,
       "width_frame_change": 0.038839545078370084
     }
-  ],
-  "display_rotation_degrees": 180,
-  "original_metric_values_retained": true,
-  "presentation_source": "/Users/shdakudow/.local/share/convrml-video-study-20261030/outputs/video4/qutcc",
-  "presentation_transform": "Original 0\u20131 exports; rotate each image panel 180 degrees; present all frames at 20 fps; labels remain upright",
-  "export_seconds": 3.311726583
+  ]
 }

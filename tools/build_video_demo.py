@@ -9,11 +9,11 @@ import shutil
 import matplotlib
 
 matplotlib.use("Agg")
-from matplotlib import colormaps, pyplot as plt
+from matplotlib import pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
-from matplotlib.colors import to_hex
 import numpy as np
 from PIL import Image, ImageDraw
+from heatmap_colors import CSS_GRADIENT
 
 REPO = Path(__file__).resolve().parents[1]
 METHODS = {"qutcc": "QUTCC", "im2im": "Im2im"}
@@ -53,12 +53,20 @@ def main():
                 )
                 assert not report["calibration_refitted"]
                 assert (
+                    report.get("heatmap_palette") == "raw DiffuserCam blue-to-red"
+                ), "Rebuild video colors from float widths before changing their legend"
+                assert (
                     report["heatmap_range"][0] == 0
                     and 0 < report["heatmap_range"][1] <= 1
                 )
                 maximum = report["heatmap_range"][1]
                 rows = report["per_frame"]
                 values = np.array([row["mean_interval_width"] for row in rows])
+                cumulative = np.cumsum(values) / np.arange(1, len(values) + 1)
+                display_rows = [
+                    dict(row, cumulative_mean_interval_width=float(value))
+                    for row, value in zip(rows, cumulative)
+                ]
                 assert abs(values.mean() - report["mean_interval_width"]) < 1e-12
                 for path in source.iterdir():
                     if path.suffix not in (".mp4", ".png", ".json", ".csv"):
@@ -96,10 +104,11 @@ def main():
                 poster.save(args.local / name / method / "stacked_poster.png")
                 models[method] = dict(
                     report,
-                    video=f"assets/{name}/{method}/reconstruction_uncertainty.mp4?v=20261030display3",
-                    poster=f"assets/{name}/{method}/stacked_poster.png?v=20261030display3",
+                    per_frame=display_rows,
+                    video=f"assets/{name}/{method}/reconstruction_uncertainty.mp4?v=20261030bluered",
+                    poster=f"assets/{name}/{method}/stacked_poster.png?v=20261030bluered",
                 )
-                combined.extend(dict(model=label, **row) for row in rows)
+                combined.extend(dict(model=label, **row) for row in display_rows)
                 overall.append(
                     dict(
                         video=name,
@@ -126,13 +135,14 @@ def main():
                         color=COLORS[method],
                         label=label,
                         linewidth=1.4,
+                        alpha=0.4,
                     )
-                    axis.axhline(
-                        report["mean_interval_width"],
+                    axis.plot(
+                        np.arange(1, len(values) + 1),
+                        cumulative,
                         color=COLORS[method],
-                        linestyle="--",
-                        linewidth=1.2,
-                        label=f'{label} mean = {values.mean():.5f}; CV = {report["coefficient_of_variation"]:.2%}',
+                        linewidth=2.5,
+                        label=f"{label} cumulative average",
                     )
                     axis.set_ylabel("Mean interval width")
                     axis.grid(alpha=0.2)
@@ -145,9 +155,10 @@ def main():
             axes[0].set_title(f"{name} - fixed 0-{args.plot_max:g} plot scale")
             axes[1].set_title("Detail: width variation over time")
             axes[1].set_xlabel("Frame (source order)")
-            axes[1].legend(fontsize=8, loc="best")
+            axes[0].legend(fontsize=8, loc="upper right")
+            axes[1].legend(fontsize=8, loc="upper right")
             figure.suptitle(
-                f"DiffuserCam {name}: calibrated intervals, epoch 50\nSolid = frame mean; dashed = video mean. No paired ground truth."
+                f"DiffuserCam {name}: calibrated intervals, epoch 50\nThin = frame mean; thick = cumulative average. No paired ground truth."
             )
             plot = destination / "assets" / name / "width_plot.png"
             figure.savefig(plot, dpi=160)
@@ -169,8 +180,8 @@ def main():
                     frames=frames,
                     fps=fps,
                     models=models,
-                    csv=f"assets/{name}/frame_metrics.csv?v=20261030display3",
-                    plot=str(plot.relative_to(destination)) + "?v=20261030display3",
+                    csv=f"assets/{name}/frame_metrics.csv?v=20261030bluered",
+                    plot=str(plot.relative_to(destination)) + "?v=20261030bluered",
                 )
             )
     manifest = json.loads((args.source.parent / "drive_manifest.json").read_text())
@@ -181,11 +192,7 @@ def main():
         heatmap_range=report["heatmap_range"],
         width_plot_range=[0, args.plot_max],
         display_rotation_degrees=report.get("display_rotation_degrees", 0),
-        heatmap_gradient="linear-gradient(90deg, "
-        + ", ".join(
-            to_hex(colormaps["inferno"](value)) for value in np.linspace(0, 1, 9)
-        )
-        + ")",
+        heatmap_gradient=CSS_GRADIENT,
         notes=[
             "External DiffuserCam videos 1, 4, 6, 7, and 10. All 1,580 TIFF frames are used in original numerical order; the supplied reconstruction GIFs are references, not ground truth.",
             "Video TIFFs are uint8: fixed division by 255, 4x4 area downsample to RGB 270x480, then rounding to the training loader’s uint8-equivalent inputs. No per-frame stretching, automatic exposure normalization, input rotation, or background subtraction.",

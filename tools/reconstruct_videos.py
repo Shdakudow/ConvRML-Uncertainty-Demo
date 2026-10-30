@@ -15,10 +15,10 @@ import sys
 import time
 
 import imageio_ffmpeg
-from matplotlib import colormaps
 import numpy as np
 from PIL import Image, ImageDraw
 import torch
+from heatmap_colors import colorize
 
 
 def sha256(path):
@@ -164,7 +164,6 @@ def main():
             out / "reconstruction_uncertainty.mp4", 480, 588, args.fps
         ),
     }
-    cmap = colormaps["inferno"]
     rows = []
     previous_prediction = None
     previous_width = None
@@ -203,10 +202,7 @@ def main():
                 width = upper.astype(np.float64) - lower.astype(np.float64)
                 width_map = width.mean(axis=0)
                 crossing = np.any(lower > upper, axis=0)
-                heatmap = np.rint(
-                    cmap((width_map / args.heatmap_max).clip(0, 1))[..., :3] * 255
-                ).astype(np.uint8)
-                heatmap[crossing] = [227, 32, 201]
+                heatmap = colorize(width_map / args.heatmap_max, crossing)
                 rgb = (
                     np.rint(prediction.transpose(1, 2, 0) * 255)
                     .clip(0, 255)
@@ -306,6 +302,7 @@ def main():
         precision="float32",
         seconds=time.monotonic() - started,
         heatmap_range=[0, args.heatmap_max],
+        heatmap_palette="raw DiffuserCam blue-to-red",
         display_rotation_degrees=args.rotation,
         reference_metrics=str(args.reference) if args.reference else None,
         original_metric_values_retained=reference is not None,

@@ -183,13 +183,7 @@ async function load(i) {
     lock(false);
   }
 }
-const stops = [
-  [8, 13, 36],
-  [48, 54, 154],
-  [188, 69, 146],
-  [250, 159, 105],
-  [255, 243, 188],
-];
+const stops = [[20,35,60],[34,95,157],[35,185,172],[243,203,85],[250,112,82]];
 const maxValue = () => 1; // Fixed normalized-intensity heatmap scale.
 function color(value) {
   const t = Math.max(0, Math.min(1, value / maxValue())) * 4,
@@ -549,7 +543,7 @@ function renderAnalysis() {
   ]
     .map(
       (s) =>
-        `<img loading="lazy" src="analysis/${window.CAMERA}_${s}${s === "smoothing" ? "" : "_scale01"}.png?v=20261030scale01" alt="${window.CAMERA}: ${s.replaceAll("_", " ")}" style="display:block;width:100%;height:auto;margin:14px 0">`,
+        `<img loading="lazy" src="analysis/${window.CAMERA}_${s}${s === "smoothing" ? "" : "_scale01"}.png?v=20261030bluered" alt="${window.CAMERA}: ${s.replaceAll("_", " ")}" style="display:block;width:100%;height:auto;margin:14px 0">`,
     )
     .join("");
 }

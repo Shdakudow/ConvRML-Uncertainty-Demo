@@ -44,7 +44,7 @@
       const value = example.models[model];
       const label = data.models[model].label;
       assign(model + "Prediction", value.images.reconstruction, `${label} reconstruction: ${example.name}`);
-      assign(model + "Width", value.images.uncertainty + "?v=20261030scale01", `${label} calibrated interval width: ${example.name}`);
+      assign(model + "Width", value.images.uncertainty + "?v=20261030bluered", `${label} calibrated interval width: ${example.name}`);
       assign(model + "Lower", value.images.lower_bound, `${label} lower bound: ${example.name}`);
       assign(model + "Upper", value.images.upper_bound, `${label} upper bound: ${example.name}`);
       $(model + "Bounds").hidden = !$("boundsToggle").checked;
@@ -72,7 +72,7 @@
 
   async function start() {
     try {
-      const response = await fetch("data.json?v=20261030scale01", { cache: "no-store" });
+      const response = await fetch("data.json?v=20261030bluered", { cache: "no-store" });
       if (!response.ok) throw new Error("Capture manifest unavailable");
       data = await response.json();
       if (data.experiment !== 3 || data.epoch !== 50 || data.count !== 10 || Object.keys(data.models).sort().join() !== "im2im,qutcc") throw new Error("Unexpected capture data");

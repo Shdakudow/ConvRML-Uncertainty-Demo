@@ -77,7 +77,7 @@ window.CAMERA =
     ).json();
     window.Coverage90.exp2Dataset(DATASET, window.CAMERA);
     const app = document.createElement("script");
-    app.src = "app.js?v=20261030scale01";
+    app.src = "app.js?v=20261030bluered";
     document.body.append(app);
   } catch (e) {
     document.getElementById("status").textContent =

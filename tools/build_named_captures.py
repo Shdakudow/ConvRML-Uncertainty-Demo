@@ -9,10 +9,9 @@ import shutil
 import matplotlib
 
 matplotlib.use("Agg")
-from matplotlib import colormaps
-from matplotlib.colors import to_hex
-from matplotlib import pyplot as plt
 import numpy as np
+from PIL import Image
+from heatmap_colors import colorize, CSS_GRADIENT
 
 REPO = Path(__file__).resolve().parents[1]
 MODELS = {"qutcc": "exp3_qutcc", "im2im": "exp3_im2im"}
@@ -43,8 +42,6 @@ def main():
         for key, values in predictions.items()
     }
     maximum = 1.0
-    cmap = colormaps["inferno"].copy()
-    cmap.set_bad("#e320c9")
     examples = []
     csv_rows = []
     for index, image in enumerate(manifest["images"]):
@@ -80,12 +77,8 @@ def main():
                 axis=0,
             )
             heatmap = folder / f"{key}_uncertainty.png"
-            plt.imsave(
-                heatmap,
-                np.ma.masked_where(crossing, widths[key][index]),
-                cmap=cmap,
-                vmin=0,
-                vmax=maximum,
+            Image.fromarray(colorize(widths[key][index] / maximum, crossing)).save(
+                heatmap
             )
             images["uncertainty"] = str(heatmap.relative_to(destination))
             metrics = {
@@ -130,9 +123,7 @@ def main():
             definition="Mean over RGB of clipped upper − lower",
             saturation="fixed 0–1 scale shared across the demo",
             crossing_color="#e320c9",
-            gradient="linear-gradient(90deg, "
-            + ", ".join(to_hex(cmap(v)) for v in np.linspace(0, 1, 9))
-            + ")",
+            gradient=CSS_GRADIENT,
         ),
         models={
             key: dict(

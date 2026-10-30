@@ -8,29 +8,18 @@ import argparse
 import json
 from pathlib import Path
 
-from matplotlib import colormaps
 from matplotlib import pyplot as plt
+from matplotlib.backends.backend_pdf import PdfPages
 import numpy as np
 from PIL import Image
 from scipy.ndimage import gaussian_filter
+from heatmap_colors import colorize, CMAP
 
 ROOT = Path(__file__).resolve().parents[1]
-COLORS = np.array(
-    [[8, 13, 36], [48, 54, 154], [188, 69, 146], [250, 159, 105], [255, 243, 188]],
-    dtype=float,
-)
 
 
-def save_map(path, values, palette):
-    values = np.clip(values, 0, 1)
-    if palette == "legacy":
-        levels = np.linspace(0, 1, len(COLORS))
-        rgb = np.stack(
-            [np.interp(values, levels, COLORS[:, c]) for c in range(3)], -1
-        ).astype(np.uint8)
-    else:
-        rgb = np.round(colormaps[palette](values)[..., :3] * 255).astype(np.uint8)
-    Image.fromarray(rgb).save(path)
+def save_map(path, values):
+    Image.fromarray(colorize(values)).save(path)
 
 
 def rebuild(brightness, dropout):
@@ -66,7 +55,7 @@ def rebuild(brightness, dropout):
                     < 2e-6
                 )
                 for kind, values in maps.items():
-                    save_map(folder / f"{method}-{i}-{kind}.png", values, "legacy")
+                    save_map(folder / f"{method}-{i}-{kind}.png", values)
         report["heatmap_max"] = 1.0
         report["notes"] = report["notes"].replace(
             "All maps share one camera-specific scale across methods and gains; top 0.5% may saturate.",
@@ -90,7 +79,7 @@ def rebuild(brightness, dropout):
                     abs(float(maps["width"].mean()) - model["metrics"]["width"]) < 2e-6
                 )
                 for kind, values in maps.items():
-                    save_map(folder / model[kind], values, "magma")
+                    save_map(folder / model[kind], values)
         study["map_max"] = 1.0
     (folder / "data.json").write_text(json.dumps(report, indent=2) + "\n")
     print(
@@ -150,7 +139,7 @@ def rebuild_analysis_maps(baseline, qutcc):
             for ax, value, title in zip(
                 axes[row, 1:], maps[method], ["Absolute error", "Interval width"]
             ):
-                image = ax.imshow(value, cmap="inferno", vmin=0, vmax=1)
+                image = ax.imshow(value, cmap=CMAP, vmin=0, vmax=1)
                 ax.set_title(title)
                 ax.axis("off")
                 fig.colorbar(image, ax=ax, fraction=0.04)
@@ -165,7 +154,7 @@ def rebuild_analysis_maps(baseline, qutcc):
                 [error, width, gaussian_filter(error, 1), gaussian_filter(width, 1)],
                 ["Error", "Width", "Error, Gaussian σ=1", "Width, Gaussian σ=1"],
             ):
-                image = ax.imshow(value, cmap="inferno", vmin=0, vmax=1)
+                image = ax.imshow(value, cmap=CMAP, vmin=0, vmax=1)
                 ax.set_title(title)
                 ax.set_xticks([])
                 ax.set_yticks([])
@@ -180,6 +169,22 @@ def rebuild_analysis_maps(baseline, qutcc):
         fig.savefig(output / f"{camera}_raw_vs_smoothed_scale01.png", dpi=150)
         plt.close(fig)
     print("Rebuilt expandable analysis map figures at 0–1")
+    with PdfPages(output / "Experiment2_BlueRed_Figures.pdf") as pdf:
+        for camera in ("rml", "diffuser"):
+            for suffix in (
+                "example_01_scale01",
+                "raw_vs_smoothed_scale01",
+                "smoothing",
+            ):
+                pixels = plt.imread(output / f"{camera}_{suffix}.png")
+                figure = plt.figure(
+                    figsize=(pixels.shape[1] / 140, pixels.shape[0] / 140)
+                )
+                axis = figure.add_axes([0, 0, 1, 1])
+                axis.imshow(pixels)
+                axis.axis("off")
+                pdf.savefig(figure)
+                plt.close(figure)
 
 
 if __name__ == "__main__":

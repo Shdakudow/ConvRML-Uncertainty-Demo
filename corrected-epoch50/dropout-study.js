@@ -6,7 +6,7 @@
   const colors = {30: '#73c6ff', 60: '#f5bb65', 100: '#98dc98'};
   const label = {ssim: 'SSIM ↑', psnr: 'PSNR (dB) ↑', mae: 'Absolute error ↓'};
   const format = (key, value) => Number(value).toFixed(key === 'mae' ? 6 : 5);
-  const image = (src, alt) => `<img src="dropout-study/${src}?v=20261030scale01" alt="${alt}" width="256" height="256">`;
+  const image = (src, alt) => `<img src="dropout-study/${src}?v=20261030bluered" alt="${alt}" width="256" height="256">`;
   try {
     const response = await fetch('dropout-study/data.json', {cache: 'no-store'});
     if (!response.ok) throw Error(`HTTP ${response.status}`);

@@ -13,6 +13,10 @@ from PIL import Image
 
 def export_pair(source, destination):
     report = json.loads((source / "report.json").read_text())
+    if report.get("heatmap_palette") != "raw DiffuserCam blue-to-red":
+        raise ValueError(
+            "This export uses an older palette. Rebuild blue-to-red videos from float widths with reconstruct_videos.py first."
+        )
     assert report["heatmap_range"] == [0, 1] and report["fps"] == 10
     assert report.get("display_rotation_degrees", 0) == 0
     destination.mkdir(parents=True, exist_ok=True)
