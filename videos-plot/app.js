@@ -15,7 +15,7 @@ function setFrame(index) {
 function drawPlot() {
   const svg = $('widthPlot'), left = 70, right = 970, top = 22, bottom = 275;
   const values = methods.flatMap(method => selected.models[method].per_frame.map(row => row.mean_interval_width));
-  let minimum = 0, maximum = data.heatmap_range[1];
+  let minimum = 0, maximum = data.width_plot_range[1];
   if ($('zoom').checked) {
     const low = Math.min(...values), high = Math.max(...values), margin = Math.max((high - low) * .15, .0001);
     minimum = Math.max(0, low - margin); maximum = Math.min(1, high + margin);
@@ -82,7 +82,7 @@ $('qutccVideo').addEventListener('timeupdate', () => {if (!selected) return; con
 $('qutccVideo').addEventListener('ended', pause);
 $('zoom').addEventListener('change', drawPlot);
 $('videoSelect').addEventListener('change', choose);
-fetch('data.json?v=20261030display2', {cache: 'no-store'}).then(response => {if (!response.ok) throw new Error(response.status); return response.json();}).then(value => {
+fetch('data.json?v=20261030display3', {cache: 'no-store'}).then(response => {if (!response.ok) throw new Error(response.status); return response.json();}).then(value => {
   data = value;
   for (const video of data.videos) {const option = document.createElement('option'); option.value = video.id; option.textContent = video.label; $('videoSelect').append(option);}
   const requested = new URLSearchParams(location.search).get('video');

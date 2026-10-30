@@ -4,14 +4,14 @@
       "id": "video1",
       "label": "Video 1",
       "frames": 226,
-      "fps": 20.0,
+      "fps": 20,
       "models": {
         "qutcc": {
-          "video": "assets/video1/qutcc/reconstruction_uncertainty.mp4?v=20261030display2",
+          "video": "assets/video1/qutcc/reconstruction_uncertainty.mp4?v=20261030display3",
           "method": "qutcc",
           "epoch": 50,
           "frames": 226,
-          "fps": 20.0,
+          "fps": 20,
           "fps_status": "Presentation rate; acquisition frame rate unverified",
           "mean_interval_width": 0.14042932579605627,
           "std_interval_width": 0.016029985939282496,
@@ -111,17 +111,13 @@
             "calibrated_on": "calibration split only"
           },
           "calibration_refitted": false,
-          "device": "NVIDIA H200 NVL",
+          "device": "NVIDIA RTX 6000 Ada Generation",
           "precision": "float32",
-          "seconds": 32.60874872599379,
+          "seconds": 34.363246141932905,
           "heatmap_range": [
             0,
-            0.25
+            1
           ],
-          "display_rotation_degrees": 180,
-          "reference_metrics": "/home/jy2228/ConvRML/experiments/video_uncertainty_20261030/outputs",
-          "original_metric_values_retained": true,
-          "replay_max_width_difference": 1.0374463353751695e-05,
           "interval_definition": "RGB pixel mean of clip(upper,0,1) - clip(lower,0,1)",
           "per_frame": [
             {
@@ -2837,14 +2833,19 @@
               "width_frame_change": 0.024496352383484247
             }
           ],
-          "poster": "assets/video1/qutcc/stacked_poster.png?v=20261030display2"
+          "display_rotation_degrees": 180,
+          "original_metric_values_retained": true,
+          "presentation_source": "/Users/shdakudow/.local/share/convrml-video-study-20261030/outputs/video1/qutcc",
+          "presentation_transform": "Original 0\u20131 exports; rotate each image panel 180 degrees; present all frames at 20 fps; labels remain upright",
+          "export_seconds": 3.0901771670000002,
+          "poster": "assets/video1/qutcc/stacked_poster.png?v=20261030display3"
         },
         "im2im": {
-          "video": "assets/video1/im2im/reconstruction_uncertainty.mp4?v=20261030display2",
+          "video": "assets/video1/im2im/reconstruction_uncertainty.mp4?v=20261030display3",
           "method": "im2im",
           "epoch": 50,
           "frames": 226,
-          "fps": 20.0,
+          "fps": 20,
           "fps_status": "Presentation rate; acquisition frame rate unverified",
           "mean_interval_width": 0.12093523897805407,
           "std_interval_width": 0.012015811167613783,
@@ -2870,17 +2871,13 @@
             "calibrated_on": "calibration split only"
           },
           "calibration_refitted": false,
-          "device": "NVIDIA GeForce RTX 3090",
+          "device": "NVIDIA RTX 6000 Ada Generation",
           "precision": "float32",
-          "seconds": 32.65374813042581,
+          "seconds": 14.82700698170811,
           "heatmap_range": [
             0,
-            0.25
+            1
           ],
-          "display_rotation_degrees": 180,
-          "reference_metrics": "/home/jy2228/ConvRML/experiments/video_uncertainty_20261030/outputs",
-          "original_metric_values_retained": true,
-          "replay_max_width_difference": 7.398206540720764e-06,
           "interval_definition": "RGB pixel mean of clip(upper,0,1) - clip(lower,0,1)",
           "per_frame": [
             {
@@ -5596,24 +5593,29 @@
               "width_frame_change": 0.023785749726743147
             }
           ],
-          "poster": "assets/video1/im2im/stacked_poster.png?v=20261030display2"
+          "display_rotation_degrees": 180,
+          "original_metric_values_retained": true,
+          "presentation_source": "/Users/shdakudow/.local/share/convrml-video-study-20261030/outputs/video1/im2im",
+          "presentation_transform": "Original 0\u20131 exports; rotate each image panel 180 degrees; present all frames at 20 fps; labels remain upright",
+          "export_seconds": 3.231293584,
+          "poster": "assets/video1/im2im/stacked_poster.png?v=20261030display3"
         }
       },
-      "csv": "assets/video1/frame_metrics.csv?v=20261030display2",
-      "plot": "assets/video1/width_plot.png?v=20261030display2"
+      "csv": "assets/video1/frame_metrics.csv?v=20261030display3",
+      "plot": "assets/video1/width_plot.png?v=20261030display3"
     },
     {
       "id": "video4",
       "label": "Video 4",
       "frames": 280,
-      "fps": 20.0,
+      "fps": 20,
       "models": {
         "qutcc": {
-          "video": "assets/video4/qutcc/reconstruction_uncertainty.mp4?v=20261030display2",
+          "video": "assets/video4/qutcc/reconstruction_uncertainty.mp4?v=20261030display3",
           "method": "qutcc",
           "epoch": 50,
           "frames": 280,
-          "fps": 20.0,
+          "fps": 20,
           "fps_status": "Presentation rate; acquisition frame rate unverified",
           "mean_interval_width": 0.15573122179632176,
           "std_interval_width": 0.025252860762267043,
@@ -5713,17 +5715,13 @@
             "calibrated_on": "calibration split only"
           },
           "calibration_refitted": false,
-          "device": "NVIDIA H200 NVL",
+          "device": "NVIDIA RTX 6000 Ada Generation",
           "precision": "float32",
-          "seconds": 39.191948016989045,
+          "seconds": 34.44047214370221,
           "heatmap_range": [
             0,
-            0.25
+            1
           ],
-          "display_rotation_degrees": 180,
-          "reference_metrics": "/home/jy2228/ConvRML/experiments/video_uncertainty_20261030/outputs",
-          "original_metric_values_retained": true,
-          "replay_max_width_difference": 1.0540799305819304e-05,
           "interval_definition": "RGB pixel mean of clip(upper,0,1) - clip(lower,0,1)",
           "per_frame": [
             {
@@ -9087,14 +9085,19 @@
               "width_frame_change": 0.038839545078370084
             }
           ],
-          "poster": "assets/video4/qutcc/stacked_poster.png?v=20261030display2"
+          "display_rotation_degrees": 180,
+          "original_metric_values_retained": true,
+          "presentation_source": "/Users/shdakudow/.local/share/convrml-video-study-20261030/outputs/video4/qutcc",
+          "presentation_transform": "Original 0\u20131 exports; rotate each image panel 180 degrees; present all frames at 20 fps; labels remain upright",
+          "export_seconds": 3.311726583,
+          "poster": "assets/video4/qutcc/stacked_poster.png?v=20261030display3"
         },
         "im2im": {
-          "video": "assets/video4/im2im/reconstruction_uncertainty.mp4?v=20261030display2",
+          "video": "assets/video4/im2im/reconstruction_uncertainty.mp4?v=20261030display3",
           "method": "im2im",
           "epoch": 50,
           "frames": 280,
-          "fps": 20.0,
+          "fps": 20,
           "fps_status": "Presentation rate; acquisition frame rate unverified",
           "mean_interval_width": 0.13082735386023384,
           "std_interval_width": 0.01890002441561122,
@@ -9122,15 +9125,11 @@
           "calibration_refitted": false,
           "device": "NVIDIA RTX 6000 Ada Generation",
           "precision": "float32",
-          "seconds": 16.085077092051506,
+          "seconds": 17.983187974983593,
           "heatmap_range": [
             0,
-            0.25
+            1
           ],
-          "display_rotation_degrees": 180,
-          "reference_metrics": "/home/jy2228/ConvRML/experiments/video_uncertainty_20261030/outputs",
-          "original_metric_values_retained": true,
-          "replay_max_width_difference": 0.0,
           "interval_definition": "RGB pixel mean of clip(upper,0,1) - clip(lower,0,1)",
           "per_frame": [
             {
@@ -12494,24 +12493,29 @@
               "width_frame_change": 0.03738994948946226
             }
           ],
-          "poster": "assets/video4/im2im/stacked_poster.png?v=20261030display2"
+          "display_rotation_degrees": 180,
+          "original_metric_values_retained": true,
+          "presentation_source": "/Users/shdakudow/.local/share/convrml-video-study-20261030/outputs/video4/im2im",
+          "presentation_transform": "Original 0\u20131 exports; rotate each image panel 180 degrees; present all frames at 20 fps; labels remain upright",
+          "export_seconds": 3.3332431249999996,
+          "poster": "assets/video4/im2im/stacked_poster.png?v=20261030display3"
         }
       },
-      "csv": "assets/video4/frame_metrics.csv?v=20261030display2",
-      "plot": "assets/video4/width_plot.png?v=20261030display2"
+      "csv": "assets/video4/frame_metrics.csv?v=20261030display3",
+      "plot": "assets/video4/width_plot.png?v=20261030display3"
     },
     {
       "id": "video6",
       "label": "Video 6",
       "frames": 339,
-      "fps": 20.0,
+      "fps": 20,
       "models": {
         "qutcc": {
-          "video": "assets/video6/qutcc/reconstruction_uncertainty.mp4?v=20261030display2",
+          "video": "assets/video6/qutcc/reconstruction_uncertainty.mp4?v=20261030display3",
           "method": "qutcc",
           "epoch": 50,
           "frames": 339,
-          "fps": 20.0,
+          "fps": 20,
           "fps_status": "Presentation rate; acquisition frame rate unverified",
           "mean_interval_width": 0.13637498417172358,
           "std_interval_width": 0.016840843817994,
@@ -12611,17 +12615,13 @@
             "calibrated_on": "calibration split only"
           },
           "calibration_refitted": false,
-          "device": "NVIDIA RTX 6000 Ada Generation",
+          "device": "NVIDIA GeForce RTX 3090",
           "precision": "float32",
-          "seconds": 51.18652694299817,
+          "seconds": 81.66229368606582,
           "heatmap_range": [
             0,
-            0.25
+            1
           ],
-          "display_rotation_degrees": 180,
-          "reference_metrics": "/home/jy2228/ConvRML/experiments/video_uncertainty_20261030/outputs",
-          "original_metric_values_retained": true,
-          "replay_max_width_difference": 1.034688123802141e-05,
           "interval_definition": "RGB pixel mean of clip(upper,0,1) - clip(lower,0,1)",
           "per_frame": [
             {
@@ -16693,14 +16693,19 @@
               "width_frame_change": 0.0
             }
           ],
-          "poster": "assets/video6/qutcc/stacked_poster.png?v=20261030display2"
+          "display_rotation_degrees": 180,
+          "original_metric_values_retained": true,
+          "presentation_source": "/Users/shdakudow/.local/share/convrml-video-study-20261030/outputs/video6/qutcc",
+          "presentation_transform": "Original 0\u20131 exports; rotate each image panel 180 degrees; present all frames at 20 fps; labels remain upright",
+          "export_seconds": 5.044258208,
+          "poster": "assets/video6/qutcc/stacked_poster.png?v=20261030display3"
         },
         "im2im": {
-          "video": "assets/video6/im2im/reconstruction_uncertainty.mp4?v=20261030display2",
+          "video": "assets/video6/im2im/reconstruction_uncertainty.mp4?v=20261030display3",
           "method": "im2im",
           "epoch": 50,
           "frames": 339,
-          "fps": 20.0,
+          "fps": 20,
           "fps_status": "Presentation rate; acquisition frame rate unverified",
           "mean_interval_width": 0.12175597214663171,
           "std_interval_width": 0.014209220798829142,
@@ -16728,15 +16733,11 @@
           "calibration_refitted": false,
           "device": "NVIDIA RTX 6000 Ada Generation",
           "precision": "float32",
-          "seconds": 24.63008368574083,
+          "seconds": 20.965635732747614,
           "heatmap_range": [
             0,
-            0.25
+            1
           ],
-          "display_rotation_degrees": 180,
-          "reference_metrics": "/home/jy2228/ConvRML/experiments/video_uncertainty_20261030/outputs",
-          "original_metric_values_retained": true,
-          "replay_max_width_difference": 0.0,
           "interval_definition": "RGB pixel mean of clip(upper,0,1) - clip(lower,0,1)",
           "per_frame": [
             {
@@ -20808,24 +20809,29 @@
               "width_frame_change": 0.0
             }
           ],
-          "poster": "assets/video6/im2im/stacked_poster.png?v=20261030display2"
+          "display_rotation_degrees": 180,
+          "original_metric_values_retained": true,
+          "presentation_source": "/Users/shdakudow/.local/share/convrml-video-study-20261030/outputs/video6/im2im",
+          "presentation_transform": "Original 0\u20131 exports; rotate each image panel 180 degrees; present all frames at 20 fps; labels remain upright",
+          "export_seconds": 5.195571791000001,
+          "poster": "assets/video6/im2im/stacked_poster.png?v=20261030display3"
         }
       },
-      "csv": "assets/video6/frame_metrics.csv?v=20261030display2",
-      "plot": "assets/video6/width_plot.png?v=20261030display2"
+      "csv": "assets/video6/frame_metrics.csv?v=20261030display3",
+      "plot": "assets/video6/width_plot.png?v=20261030display3"
     },
     {
       "id": "video7",
       "label": "Video 7",
       "frames": 397,
-      "fps": 20.0,
+      "fps": 20,
       "models": {
         "qutcc": {
-          "video": "assets/video7/qutcc/reconstruction_uncertainty.mp4?v=20261030display2",
+          "video": "assets/video7/qutcc/reconstruction_uncertainty.mp4?v=20261030display3",
           "method": "qutcc",
           "epoch": 50,
           "frames": 397,
-          "fps": 20.0,
+          "fps": 20,
           "fps_status": "Presentation rate; acquisition frame rate unverified",
           "mean_interval_width": 0.12569775147928666,
           "std_interval_width": 0.0212782218747419,
@@ -20927,15 +20933,11 @@
           "calibration_refitted": false,
           "device": "NVIDIA RTX 6000 Ada Generation",
           "precision": "float32",
-          "seconds": 48.20781028363854,
+          "seconds": 49.505653521977365,
           "heatmap_range": [
             0,
-            0.25
+            1
           ],
-          "display_rotation_degrees": 180,
-          "reference_metrics": "/home/jy2228/ConvRML/experiments/video_uncertainty_20261030/outputs",
-          "original_metric_values_retained": true,
-          "replay_max_width_difference": 5.498377812510058e-06,
           "interval_definition": "RGB pixel mean of clip(upper,0,1) - clip(lower,0,1)",
           "per_frame": [
             {
@@ -25703,14 +25705,19 @@
               "width_frame_change": 0.02919997806918813
             }
           ],
-          "poster": "assets/video7/qutcc/stacked_poster.png?v=20261030display2"
+          "display_rotation_degrees": 180,
+          "original_metric_values_retained": true,
+          "presentation_source": "/Users/shdakudow/.local/share/convrml-video-study-20261030/outputs/video7/qutcc",
+          "presentation_transform": "Original 0\u20131 exports; rotate each image panel 180 degrees; present all frames at 20 fps; labels remain upright",
+          "export_seconds": 4.701061749999999,
+          "poster": "assets/video7/qutcc/stacked_poster.png?v=20261030display3"
         },
         "im2im": {
-          "video": "assets/video7/im2im/reconstruction_uncertainty.mp4?v=20261030display2",
+          "video": "assets/video7/im2im/reconstruction_uncertainty.mp4?v=20261030display3",
           "method": "im2im",
           "epoch": 50,
           "frames": 397,
-          "fps": 20.0,
+          "fps": 20,
           "fps_status": "Presentation rate; acquisition frame rate unverified",
           "mean_interval_width": 0.11969006545089278,
           "std_interval_width": 0.02637359077579248,
@@ -25736,17 +25743,13 @@
             "calibrated_on": "calibration split only"
           },
           "calibration_refitted": false,
-          "device": "NVIDIA RTX 6000 Ada Generation",
+          "device": "NVIDIA GeForce RTX 3090",
           "precision": "float32",
-          "seconds": 26.406246956437826,
+          "seconds": 35.624336269684136,
           "heatmap_range": [
             0,
-            0.25
+            1
           ],
-          "display_rotation_degrees": 180,
-          "reference_metrics": "/home/jy2228/ConvRML/experiments/video_uncertainty_20261030/outputs",
-          "original_metric_values_retained": true,
-          "replay_max_width_difference": 1.1395507979239383e-05,
           "interval_definition": "RGB pixel mean of clip(upper,0,1) - clip(lower,0,1)",
           "per_frame": [
             {
@@ -30514,24 +30517,29 @@
               "width_frame_change": 0.025280646105560876
             }
           ],
-          "poster": "assets/video7/im2im/stacked_poster.png?v=20261030display2"
+          "display_rotation_degrees": 180,
+          "original_metric_values_retained": true,
+          "presentation_source": "/Users/shdakudow/.local/share/convrml-video-study-20261030/outputs/video7/im2im",
+          "presentation_transform": "Original 0\u20131 exports; rotate each image panel 180 degrees; present all frames at 20 fps; labels remain upright",
+          "export_seconds": 5.125383333000002,
+          "poster": "assets/video7/im2im/stacked_poster.png?v=20261030display3"
         }
       },
-      "csv": "assets/video7/frame_metrics.csv?v=20261030display2",
-      "plot": "assets/video7/width_plot.png?v=20261030display2"
+      "csv": "assets/video7/frame_metrics.csv?v=20261030display3",
+      "plot": "assets/video7/width_plot.png?v=20261030display3"
     },
     {
       "id": "video10",
       "label": "Video 10",
       "frames": 338,
-      "fps": 20.0,
+      "fps": 20,
       "models": {
         "qutcc": {
-          "video": "assets/video10/qutcc/reconstruction_uncertainty.mp4?v=20261030display2",
+          "video": "assets/video10/qutcc/reconstruction_uncertainty.mp4?v=20261030display3",
           "method": "qutcc",
           "epoch": 50,
           "frames": 338,
-          "fps": 20.0,
+          "fps": 20,
           "fps_status": "Presentation rate; acquisition frame rate unverified",
           "mean_interval_width": 0.10271517225653655,
           "std_interval_width": 0.02369933461583937,
@@ -30633,15 +30641,11 @@
           "calibration_refitted": false,
           "device": "NVIDIA RTX 6000 Ada Generation",
           "precision": "float32",
-          "seconds": 43.42814130522311,
+          "seconds": 41.9503139751032,
           "heatmap_range": [
             0,
-            0.25
+            1
           ],
-          "display_rotation_degrees": 180,
-          "reference_metrics": "/home/jy2228/ConvRML/experiments/video_uncertainty_20261030/outputs",
-          "original_metric_values_retained": true,
-          "replay_max_width_difference": 5.504537453043801e-06,
           "interval_definition": "RGB pixel mean of clip(upper,0,1) - clip(lower,0,1)",
           "per_frame": [
             {
@@ -34701,14 +34705,19 @@
               "width_frame_change": 0.06986795029363693
             }
           ],
-          "poster": "assets/video10/qutcc/stacked_poster.png?v=20261030display2"
+          "display_rotation_degrees": 180,
+          "original_metric_values_retained": true,
+          "presentation_source": "/Users/shdakudow/.local/share/convrml-video-study-20261030/outputs/video10/qutcc",
+          "presentation_transform": "Original 0\u20131 exports; rotate each image panel 180 degrees; present all frames at 20 fps; labels remain upright",
+          "export_seconds": 4.439956374999998,
+          "poster": "assets/video10/qutcc/stacked_poster.png?v=20261030display3"
         },
         "im2im": {
-          "video": "assets/video10/im2im/reconstruction_uncertainty.mp4?v=20261030display2",
+          "video": "assets/video10/im2im/reconstruction_uncertainty.mp4?v=20261030display3",
           "method": "im2im",
           "epoch": 50,
           "frames": 338,
-          "fps": 20.0,
+          "fps": 20,
           "fps_status": "Presentation rate; acquisition frame rate unverified",
           "mean_interval_width": 0.1014200126391862,
           "std_interval_width": 0.016826863574808136,
@@ -34734,17 +34743,13 @@
             "calibrated_on": "calibration split only"
           },
           "calibration_refitted": false,
-          "device": "NVIDIA RTX 6000 Ada Generation",
+          "device": "NVIDIA GeForce RTX 3090",
           "precision": "float32",
-          "seconds": 23.527105868794024,
+          "seconds": 30.406542695127428,
           "heatmap_range": [
             0,
-            0.25
+            1
           ],
-          "display_rotation_degrees": 180,
-          "reference_metrics": "/home/jy2228/ConvRML/experiments/video_uncertainty_20261030/outputs",
-          "original_metric_values_retained": true,
-          "replay_max_width_difference": 6.7166102092203195e-06,
           "interval_definition": "RGB pixel mean of clip(upper,0,1) - clip(lower,0,1)",
           "per_frame": [
             {
@@ -38804,16 +38809,25 @@
               "width_frame_change": 0.06474810870240061
             }
           ],
-          "poster": "assets/video10/im2im/stacked_poster.png?v=20261030display2"
+          "display_rotation_degrees": 180,
+          "original_metric_values_retained": true,
+          "presentation_source": "/Users/shdakudow/.local/share/convrml-video-study-20261030/outputs/video10/im2im",
+          "presentation_transform": "Original 0\u20131 exports; rotate each image panel 180 degrees; present all frames at 20 fps; labels remain upright",
+          "export_seconds": 4.769904624999999,
+          "poster": "assets/video10/im2im/stacked_poster.png?v=20261030display3"
         }
       },
-      "csv": "assets/video10/frame_metrics.csv?v=20261030display2",
-      "plot": "assets/video10/width_plot.png?v=20261030display2"
+      "csv": "assets/video10/frame_metrics.csv?v=20261030display3",
+      "plot": "assets/video10/width_plot.png?v=20261030display3"
     }
   ],
   "source": "https://drive.google.com/drive/folders/1dtyxApqryiXbpqLSSUKreCVKfjQcT7pS",
   "ground_truth_available": false,
   "heatmap_range": [
+    0,
+    1
+  ],
+  "width_plot_range": [
     0,
     0.25
   ],
@@ -38826,7 +38840,7 @@
     "Clean raw DiffuserCam QUTCC and Im2im epoch-50 checkpoints are frozen. QUTCC uses its saved calibrated quantiles; Im2im uses its saved separate lower/upper calibration scales. There is no fitting or training on the videos.",
     "Each frame is reconstructed independently. Prediction and bounds are clipped to [0,1]. Mean width is calculated from float endpoints before MP4 encoding; the heatmap averages width over RGB. Magenta identifies crossed bounds.",
     "Reconstruction and uncertainty panels are rotated 180 degrees after inference. Labels remain upright; the reconstruction stays above the uncertainty map.",
-    "The shared video heatmap and default width-plot range is 0\u20130.25. Pixel widths at or above 0.25 saturate at the brightest color. Numerical width measurements are not truncated at the display maximum.",
+    "The shared uncertainty heatmap color range is 0\u20131. The default mean-width plot axis is independently set to 0\u20130.25. Neither display range changes numerical width measurements.",
     "Playback is presented at 20 fps; the acquisition frame rate is unverified. Every source frame is retained, with no temporal interpolation. Plots use frame numbers. Spatial uncertainty maps can change even if their image-average width stays constant.",
     "No paired ground truth is supplied, so actual coverage, PSNR, SSIM, LPIPS, and uncertainty-error correlation cannot be measured on these videos. Calibration on the training-camera distribution does not certify 90% coverage here."
   ]

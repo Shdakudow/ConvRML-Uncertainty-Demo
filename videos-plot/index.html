@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="../named-captures/style.css?v=20261030scale01">
   <link rel="stylesheet" href="style.css?v=20261030video">
   <script defer src="../demo-navigation.js?v=20261030near90only"></script>
-  <script defer src="app.js?v=20261030display2"></script>
+  <script defer src="app.js?v=20261030display3"></script>
 </head>
 <body>
 <header>
@@ -20,7 +20,7 @@
   </nav>
   <p class="eyebrow">EXTERNAL DIFFUSERCAM SEQUENCES · EPOCH 50</p>
   <h1>Videos &amp; uncertainty over time</h1>
-  <p class="subtitle">Reconstruction above; interval width below. Rotated 180° · 20 fps · fixed 0–0.25 heatmap scale.</p>
+  <p class="subtitle">Reconstruction above; interval width below. Rotated 180° · 20 fps · heatmap colors 0–1 · mean-width plot 0–0.25.</p>
 </header>
 <main>
   <div class="controls">
@@ -41,7 +41,7 @@
     </article>
   </div>
   <div class="scrubber"><label for="frame">Frame</label><input id="frame" type="range" min="1" max="1" value="1" disabled><output id="frameLabel">—</output></div>
-  <div class="map-key"><span>Uncertainty = mean RGB (upper − lower)</span><span class="gradient" id="heatGradient"></span><span>0 → 0.25+ normalized intensity</span><span>Magenta: crossed bounds</span></div>
+  <div class="map-key"><span>Uncertainty = mean RGB (upper − lower)</span><span class="gradient" id="heatGradient"></span><span>0 → 1 normalized intensity</span><span>Magenta: crossed bounds</span></div>
   <p class="hint">No paired ground truth; reconstruction accuracy and actual coverage cannot be measured here.</p>
   <section class="card plot-card">
     <div class="plot-heading"><h2>Mean interval width per frame</h2><label><input type="checkbox" id="zoom"> Zoom width axis to data</label></div>

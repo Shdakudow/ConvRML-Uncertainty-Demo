@@ -6,7 +6,7 @@ Each MP4 shows a reconstruction above its uncertainty map. Both models play sync
 
 ## Meaning of the measurements
 
-For each frame, width is the mean of `clip(upper, 0, 1) - clip(lower, 0, 1)` over RGB and all pixels, calculated before video encoding. The uncertainty image averages this width over RGB and uses the fixed inferno scale from 0 to 0.25; higher pixel widths saturate visually, without truncating numerical metrics. Crossed bounds appear in magenta. Bounds are not sorted to hide crossings.
+For each frame, width is the mean of `clip(upper, 0, 1) - clip(lower, 0, 1)` over RGB and all pixels, calculated before video encoding. The uncertainty image averages this width over RGB and uses the fixed inferno color scale from 0 to 1, independently of the mean-width plot’s 0–0.25 axis. Crossed bounds appear in magenta. Bounds are not sorted to hide crossings.
 
 The table reports the mean, standard deviation, coefficient of variation (standard deviation divided by mean), minimum, and maximum of frame means. Low variation means the image-average width stays relatively constant; it does not imply accurate reconstruction, valid coverage, or unchanged spatial maps.
 
@@ -24,3 +24,5 @@ All 1,580 source TIFFs are read in numerical frame order: 226, 280, 339, 397, an
 - `../tools/build_video_demo.py`: numerical verification, plot generation, and publication from completed reports.
 
 The processing receipts retain Drive IDs, original filenames, raw TIFF SHA-256, dtype/range, and prepared-input SHA-256 outside this public demo. Authenticated temporary download URLs are not published.
+
+The original 0–1 exports can be rotated and accelerated locally with `tools/restyle_saved_videos.py`; no model replay or color-range inversion is required.

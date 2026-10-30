@@ -24,7 +24,14 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("source", type=Path)
     parser.add_argument("--local", type=Path, required=True)
+    parser.add_argument(
+        "--plot-max",
+        type=float,
+        default=0.25,
+        help="Width-plot limit, independent of the video heatmap range",
+    )
     args = parser.parse_args()
+    assert args.plot_max > 0
     destination = REPO / "videos-plot"
     args.local.mkdir(parents=True, exist_ok=True)
     videos = []
@@ -89,8 +96,8 @@ def main():
                 poster.save(args.local / name / method / "stacked_poster.png")
                 models[method] = dict(
                     report,
-                    video=f"assets/{name}/{method}/reconstruction_uncertainty.mp4?v=20261030display2",
-                    poster=f"assets/{name}/{method}/stacked_poster.png?v=20261030display2",
+                    video=f"assets/{name}/{method}/reconstruction_uncertainty.mp4?v=20261030display3",
+                    poster=f"assets/{name}/{method}/stacked_poster.png?v=20261030display3",
                 )
                 combined.extend(dict(model=label, **row) for row in rows)
                 overall.append(
@@ -134,8 +141,8 @@ def main():
             assert (
                 len({tuple(model["heatmap_range"]) for model in models.values()}) == 1
             )
-            axes[0].set_ylim(0, maximum)
-            axes[0].set_title(f"{name} - fixed 0-{maximum:g} scale")
+            axes[0].set_ylim(0, args.plot_max)
+            axes[0].set_title(f"{name} - fixed 0-{args.plot_max:g} plot scale")
             axes[1].set_title("Detail: width variation over time")
             axes[1].set_xlabel("Frame (source order)")
             axes[1].legend(fontsize=8, loc="best")
@@ -162,8 +169,8 @@ def main():
                     frames=frames,
                     fps=fps,
                     models=models,
-                    csv=f"assets/{name}/frame_metrics.csv?v=20261030display2",
-                    plot=str(plot.relative_to(destination)) + "?v=20261030display2",
+                    csv=f"assets/{name}/frame_metrics.csv?v=20261030display3",
+                    plot=str(plot.relative_to(destination)) + "?v=20261030display3",
                 )
             )
     manifest = json.loads((args.source.parent / "drive_manifest.json").read_text())
@@ -172,6 +179,7 @@ def main():
         source=manifest["drive_folder"],
         ground_truth_available=False,
         heatmap_range=report["heatmap_range"],
+        width_plot_range=[0, args.plot_max],
         display_rotation_degrees=report.get("display_rotation_degrees", 0),
         heatmap_gradient="linear-gradient(90deg, "
         + ", ".join(
@@ -185,7 +193,7 @@ def main():
             "Clean raw DiffuserCam QUTCC and Im2im epoch-50 checkpoints are frozen. QUTCC uses its saved calibrated quantiles; Im2im uses its saved separate lower/upper calibration scales. There is no fitting or training on the videos.",
             "Each frame is reconstructed independently. Prediction and bounds are clipped to [0,1]. Mean width is calculated from float endpoints before MP4 encoding; the heatmap averages width over RGB. Magenta identifies crossed bounds.",
             f"Reconstruction and uncertainty panels are rotated {report.get('display_rotation_degrees', 0)} degrees after inference. Labels remain upright; the reconstruction stays above the uncertainty map.",
-            f"The shared video heatmap and default width-plot range is 0–{maximum:g}. Pixel widths at or above {maximum:g} saturate at the brightest color. Numerical width measurements are not truncated at the display maximum.",
+            f"The shared uncertainty heatmap color range is 0–{maximum:g}. The default mean-width plot axis is independently set to 0–{args.plot_max:g}. Neither display range changes numerical width measurements.",
             f"Playback is presented at {fps:g} fps; the acquisition frame rate is unverified. Every source frame is retained, with no temporal interpolation. Plots use frame numbers. Spatial uncertainty maps can change even if their image-average width stays constant.",
             "No paired ground truth is supplied, so actual coverage, PSNR, SSIM, LPIPS, and uncertainty-error correlation cannot be measured on these videos. Calibration on the training-camera distribution does not certify 90% coverage here.",
         ],

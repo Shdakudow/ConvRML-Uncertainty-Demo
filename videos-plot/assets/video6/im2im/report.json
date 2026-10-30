@@ -3,7 +3,7 @@
   "method": "im2im",
   "epoch": 50,
   "frames": 339,
-  "fps": 20.0,
+  "fps": 20,
   "fps_status": "Presentation rate; acquisition frame rate unverified",
   "mean_interval_width": 0.12175597214663171,
   "std_interval_width": 0.014209220798829142,
@@ -31,15 +31,11 @@
   "calibration_refitted": false,
   "device": "NVIDIA RTX 6000 Ada Generation",
   "precision": "float32",
-  "seconds": 24.63008368574083,
+  "seconds": 20.965635732747614,
   "heatmap_range": [
     0,
-    0.25
+    1
   ],
-  "display_rotation_degrees": 180,
-  "reference_metrics": "/home/jy2228/ConvRML/experiments/video_uncertainty_20261030/outputs",
-  "original_metric_values_retained": true,
-  "replay_max_width_difference": 0.0,
   "interval_definition": "RGB pixel mean of clip(upper,0,1) - clip(lower,0,1)",
   "per_frame": [
     {
@@ -4110,5 +4106,10 @@
       "prediction_frame_change": 0.0,
       "width_frame_change": 0.0
     }
-  ]
+  ],
+  "display_rotation_degrees": 180,
+  "original_metric_values_retained": true,
+  "presentation_source": "/Users/shdakudow/.local/share/convrml-video-study-20261030/outputs/video6/im2im",
+  "presentation_transform": "Original 0\u20131 exports; rotate each image panel 180 degrees; present all frames at 20 fps; labels remain upright",
+  "export_seconds": 5.195571791000001
 }
