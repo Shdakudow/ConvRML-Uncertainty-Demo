@@ -264,6 +264,11 @@ function render() {
     $("adaptive_qutcc-description").textContent =
       `Learned q: ${q.q_lower.toFixed(4)} / ${q.q_upper.toFixed(4)}; native bounds · no RCPS`;
   }
+  window.ExperimentUI?.renderImage(MODELS.map(([key, label]) => {
+    const model = example.models[key], extra = Object.fromEntries(imageAnalysisMetrics(key));
+    return {label, metrics: {...model.metrics, mae: model.error.reduce((a,b)=>a+b,0)/N,
+      lpips: Number(extra['LPIPS']), pearson: Number(extra['Error–width Pearson']), spearman: Number(extra['Error–width Spearman'])}};
+  }));
   inspect();
   renderEnsembleComparison();
 }
@@ -558,7 +563,7 @@ function renderHistory() {
     return;
   }
   $("ensembleCurveStatus").textContent =
-    `Validation milestones: Ensemble · 5 ${DATASET.history.ensemble5?.length || 0}/10; Ensemble · 10 ${DATASET.history.ensemble10?.length || 0}/10.`;
+    `Validation milestones: Ensemble · 5 ${DATASET.history.ensemble5?.length || 0}/10.`;
   const colors = [
     "#91d9cd",
     "#ffcc80",
@@ -572,7 +577,6 @@ function renderHistory() {
       const series = [
         ["im2im", "Im2im"],
         ["ensemble5", "Ensemble · 5"],
-        ["ensemble10", "Ensemble · 10"],
         ["mc_005", "MC dropout"],
         ["adaptive_qutcc", "QUTCC adaptive · reference"],
         ["paper_qutcc", "QUTCC"],
@@ -706,12 +710,11 @@ function renderIntervalHistory(
   status = "intervalCurveStatus",
 ) {
   let rows = (window.intervalCurves?.cameras[window.CAMERA] || []).filter((r) =>
-    ["im2im", "ensemble5", "ensemble10", "mc_005"].includes(r.method),
+    ["im2im", "ensemble5", "mc_005"].includes(r.method),
   );
   const specs = [
     ["im2im", "Im2im", "#91d9cd"],
     ["ensemble5", "Ensemble · 5", "#ffcc80"],
-    ["ensemble10", "Ensemble · 10", "#c4a5ff"],
     ["mc_005", "MC dropout", "#72b7ff"],
   ];
   if (window.Coverage90.active) {

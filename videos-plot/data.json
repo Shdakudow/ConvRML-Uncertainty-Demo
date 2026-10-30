@@ -42000,7 +42000,7 @@
     "Clean raw DiffuserCam QUTCC and Im2im epoch-50 checkpoints are frozen. QUTCC uses its saved calibrated quantiles; Im2im uses its saved separate lower/upper calibration scales. There is no fitting or training on the videos.",
     "Each frame is reconstructed independently. Prediction and bounds are clipped to [0,1]. Mean width is calculated from float endpoints before MP4 encoding; the heatmap averages width over RGB. Magenta identifies crossed bounds.",
     "Reconstruction and uncertainty panels are rotated 180 degrees after inference. Labels remain upright; the reconstruction stays above the uncertainty map.",
-    "The shared uncertainty heatmap color range is 0\u20131. The default mean-width plot axis is independently set to 0\u20130.25. Neither display range changes numerical width measurements.",
+    "The shared uncertainty heatmap color range is 0\u20131. The interactive mean-width plot starts zoomed to the data; uncheck Zoom for a fixed 0\u20130.25 axis. Neither display range changes numerical width measurements.",
     "Playback is presented at 20 fps; the acquisition frame rate is unverified. Every source frame is retained, with no temporal interpolation. Plots use frame numbers. Spatial uncertainty maps can change even if their image-average width stays constant.",
     "No paired ground truth is supplied, so actual coverage, PSNR, SSIM, LPIPS, and uncertainty-error correlation cannot be measured on these videos. Calibration on the training-camera distribution does not certify 90% coverage here."
   ]

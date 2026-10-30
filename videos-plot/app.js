@@ -6,6 +6,7 @@ const colors = {qutcc: '#9ddfd2', im2im: '#f9ba77'};
 let data, selected, requestToken = 0;
 const number = value => Number(value).toFixed(5);
 const videos = () => methods.map(method => $(method + 'Video'));
+const showCumulative = () => $('cumulativeToggle').getAttribute('aria-pressed') === 'true';
 function pause() { videos().forEach(video => video.pause()); }
 function setFrame(index) {
   const bounded = Math.max(0, Math.min(selected.frames - 1, index));
@@ -33,7 +34,8 @@ function drawPlot() {
   methods.forEach(method => {
     const report = selected.models[method], points = report.per_frame.map((row, index) => `${x(index)},${y(row.mean_interval_width)}`).join(' ');
     const cumulative = report.per_frame.map((row, index) => `${x(index)},${y(row.cumulative_mean_interval_width)}`).join(' ');
-    pieces.push(`<polyline data-model="${method}" data-series="frame" points="${points}" fill="none" stroke="${colors[method]}" stroke-width="1.2" opacity=".45"/><polyline data-model="${method}" data-series="cumulative" points="${cumulative}" fill="none" stroke="${colors[method]}" stroke-width="3"/>`);
+    pieces.push(`<polyline data-model="${method}" data-series="frame" points="${points}" fill="none" stroke="${colors[method]}" stroke-width="1.1" opacity="${showCumulative() ? '.3' : '.85'}"/>`);
+    if (showCumulative()) pieces.push(`<polyline data-model="${method}" data-series="cumulative" points="${cumulative}" fill="none" stroke="${colors[method]}" stroke-width="1.7"/>`);
   });
   pieces.push('<text x="520" y="325" text-anchor="middle" fill="#bac7d6" font-size="13">Frame</text><text transform="translate(16,148) rotate(-90)" text-anchor="middle" fill="#bac7d6" font-size="13">Mean interval width</text>');
   pieces.push('<line id="plotCursor" y1="22" y2="275" stroke="#e5edf5" opacity="0"/><rect id="plotHit" x="70" y="22" width="900" height="253" fill="transparent"/>');
@@ -42,7 +44,7 @@ function drawPlot() {
     const point = new DOMPoint(event.clientX, event.clientY).matrixTransform(svg.getScreenCTM().inverse());
     const index = Math.max(0, Math.min(selected.frames - 1, Math.round((point.x - left) / (right - left) * (selected.frames - 1))));
     const cursor = $('plotCursor'); cursor.setAttribute('x1', x(index)); cursor.setAttribute('x2', x(index)); cursor.setAttribute('opacity', .7);
-    $('plotValues').textContent = `Frame ${index + 1} · ` + methods.map(method => {const row = selected.models[method].per_frame[index]; return `${labels[method]}: frame ${number(row.mean_interval_width)}, running average ${number(row.cumulative_mean_interval_width)}`;}).join(' · ');
+    $('plotValues').textContent = `Frame ${index + 1} · ` + methods.map(method => {const row = selected.models[method].per_frame[index]; return `${labels[method]}: ${number(row.mean_interval_width)}${showCumulative() ? ', cumulative '+number(row.cumulative_mean_interval_width) : ''}`;}).join(' · ');
   });
 }
 function choose() {
@@ -63,7 +65,7 @@ function choose() {
   $('frame').max = selected.frames; setFrame(0);
   $('status').textContent = `${selected.frames} frames · ${selected.fps} fps playback`;
   $('csvDownload').href = selected.csv; $('figureDownload').href = selected.plot;
-  $('plotValues').textContent = 'Thin lines: per-frame width · Thick lines: cumulative average'; drawPlot();
+  $('plotValues').textContent = 'QUTCC: green · Im2im: orange'; drawPlot();
   $('error').hidden = true;
 }
 $('play').addEventListener('click', async () => {
@@ -82,6 +84,12 @@ $('frame').addEventListener('input', () => {pause(); const index = Number($('fra
 $('qutccVideo').addEventListener('timeupdate', () => {if (!selected) return; const first = $('qutccVideo'), second = $('im2imVideo'); setFrame(Math.floor(first.currentTime * selected.fps)); if (!first.paused && Math.abs(second.currentTime - first.currentTime) > .15) second.currentTime = first.currentTime;});
 $('qutccVideo').addEventListener('ended', pause);
 $('zoom').addEventListener('change', drawPlot);
+$('cumulativeToggle').addEventListener('click', () => {
+  const next = !showCumulative(); $('cumulativeToggle').setAttribute('aria-pressed', String(next));
+  $('cumulativeToggle').textContent = next ? 'Hide cumulative average' : 'Show cumulative average';
+  $('curveHelp').textContent = next ? 'Faint thin lines: per-frame width. Solid overlays: cumulative average from frame 1 through the current frame.' : 'Thin lines show each frame’s mean width. Use the button to overlay the cumulative average through the current frame. Hover for exact values.';
+  drawPlot();
+});
 $('videoSelect').addEventListener('change', choose);
 fetch('data.json?v=20261030bluered', {cache: 'no-store'}).then(response => {if (!response.ok) throw new Error(response.status); return response.json();}).then(value => {
   data = value;

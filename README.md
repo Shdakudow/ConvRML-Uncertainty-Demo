@@ -20,7 +20,7 @@ set never chooses interval parameters; test coverage may vary.
 PSNR, SSIM, width and test-coverage curves evaluate saved checkpoints at
 epochs **5, 10, …, 50**, independently
 calibrating each one.
-Pending evaluations and calibration failures remain gaps. The image, bound, error and width
+The raw-QUTCC epoch-20 calibration failure is shown only as an explicitly labeled interpolation between epochs 15 and 25; its saved calibration failure is retained. Other missing evaluations remain unavailable. The image, bound, error and width
 maps use saved float32 arrays, audited against their metrics before publication.
 Near-90% accuracy curves use the full held-out test set, including 30-pass MC
 predictions. Historical uncertainty–error correlation analyses are not presented
@@ -37,6 +37,29 @@ reference intervals.
 identities and updates `coverage90_curves.json`. A local five-minute automation
 publishes results as the milestone jobs finish, without downloading new image
 caches. Hovering an epoch compares models' exact values and calibration coverage.
+
+## Fixed-200 metric curves
+
+Experiments 2 and 3 also plot mean LPIPS, Pearson r and Spearman rho at epochs
+5, 10, …, 50. Every measured point uses the same first 200 held-out IDs for its
+dataset and the checkpoint’s existing near-90 calibration. No training or
+calibration is performed on those images. Ensemble curves use five members;
+MC dropout retains 30 stochastic passes.
+
+`metric_curves200.json` contains the 99 measured milestone means, per-metric valid
+counts, cohort hashes and report hashes. The single failed raw-QUTCC epoch-20
+point is a hollow-diamond estimate from epochs 15 and 25, with zero measured
+samples. It does not supply a fitted quantile or a successful calibration result.
+`tools/evaluate_metrics200.py` runs frozen-checkpoint inference on Unicorn;
+`tools/collect_metrics200.py STUDY_DIRECTORY` validates cohort/calibration
+identities and builds the public JSON. LPIPS uses AlexNet on clipped RGB;
+correlations use unsmoothed mean-RGB width versus mean-RGB absolute error within
+each image, then average the image scores. These 200-image curves are separate
+from the existing full-test PSNR, SSIM, width and coverage curves.
+
+Current-image metrics appear in a translucent white frame. Colored table cells
+identify column-best values; coverage is ranked by closeness to 90%, and width
+must be read alongside coverage.
 
 ## Raw DiffuserCam analysis metrics
 

@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="../named-captures/style.css?v=20261030bluered">
   <link rel="stylesheet" href="style.css?v=20261030bluered">
   <script defer src="../demo-navigation.js?v=20261030near90only"></script>
-  <script defer src="app.js?v=20261030bluered"></script>
+  <script defer src="app.js?v=20261030metrics200"></script>
 </head>
 <body>
 <header>
@@ -44,8 +44,8 @@
   <div class="map-key"><span>Uncertainty = mean RGB (upper − lower)</span><span class="gradient" id="heatGradient"></span><span>0 → 1 normalized intensity</span><span>Magenta: crossed bounds</span></div>
   <p class="hint">No paired ground truth; reconstruction accuracy and actual coverage cannot be measured here.</p>
   <section class="card plot-card">
-    <div class="plot-heading"><h2>Mean interval width per frame</h2><div class="plot-tools"><div class="curve-legend" aria-label="Model colors"><span><i class="qutcc-swatch"></i>QUTCC</span><span><i class="im2im-swatch"></i>Im2im</span></div><label><input type="checkbox" id="zoom"> Zoom width axis to data</label></div></div>
-    <p class="hint">Thin solid lines: each frame’s mean width. Thick solid lines: cumulative average from frame 1 through the current frame. Hover for exact values.</p>
+    <div class="plot-heading"><h2>Mean interval width per frame</h2><div class="plot-tools"><div class="curve-legend" aria-label="Model colors"><span><i class="qutcc-swatch"></i>QUTCC</span><span><i class="im2im-swatch"></i>Im2im</span></div><label><input type="checkbox" id="zoom" checked> Zoom width axis to data</label><button id="cumulativeToggle" type="button" aria-pressed="false">Show cumulative average</button></div></div>
+    <p class="hint" id="curveHelp">Thin lines show each frame’s mean width. Use the button to overlay the cumulative average through the current frame. Hover for exact values.</p>
     <svg id="widthPlot" viewBox="0 0 1000 330" role="img" aria-label="Mean interval width over video frames"></svg>
     <div id="plotValues" aria-live="polite"></div>
     <p><a id="csvDownload" download>Download frame metrics CSV</a> · <a id="figureDownload" download>Download plot PNG</a></p>

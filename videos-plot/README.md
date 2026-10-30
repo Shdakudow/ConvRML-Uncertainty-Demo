@@ -2,7 +2,7 @@
 
 Five external sequences from the linked DiffuserCam capture folder: videos 1, 4, 6, 7, and 10. The page compares the same frozen clean-raw epoch-50 QUTCC and Im2im models used by the named-capture demo.
 
-Each MP4 shows a reconstruction above its uncertainty map. Both models play synchronously and share a frame slider. The plot displays each frame's mean interval width and a solid cumulative average from frame 1 through the current frame. Its default vertical scale is 0–0.25; “Zoom width axis to data” reveals smaller temporal changes without changing the heatmaps.
+Each MP4 shows a reconstruction above its uncertainty map. Both models play synchronously and share a frame slider. The plot displays each frame's mean interval width and a solid cumulative average from frame 1 through the current frame. Width-axis zoom is enabled by default. Unchecking it restores the fixed 0–0.25 plot range; the heatmap colors always remain 0–1. The cumulative average is hidden initially and can be overlaid using “Show cumulative average”.
 
 ## Meaning of the measurements
 
@@ -27,6 +27,6 @@ The processing receipts retain Drive IDs, original filenames, raw TIFF SHA-256, 
 
 Blue-to-red 0–1 source exports can be rotated and accelerated locally with `tools/restyle_saved_videos.py`; no model replay or color-range inversion is required.
 
-Plot legend: QUTCC is green; Im2im is orange. Thin solid lines show per-frame width and thick solid lines show the cumulative average. CSVs include both values.
+Plot legend: QUTCC is green; Im2im is orange. Thin solid lines show per-frame width; an optional slightly stronger overlay shows the cumulative average while the per-frame lines fade. CSVs include both values.
 
 The canonical palette is defined in `tools/heatmap_colors.py`, matching raw DiffuserCam. Video color changes are rendered from float model outputs, not inferred by inverting compressed video colors. The collector checks the palette metadata before publishing.

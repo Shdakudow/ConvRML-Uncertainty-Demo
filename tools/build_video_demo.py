@@ -134,14 +134,14 @@ def main():
                         values,
                         color=COLORS[method],
                         label=label,
-                        linewidth=1.4,
+                        linewidth=1.0,
                         alpha=0.4,
                     )
                     axis.plot(
                         np.arange(1, len(values) + 1),
                         cumulative,
                         color=COLORS[method],
-                        linewidth=2.5,
+                        linewidth=1.6,
                         label=f"{label} cumulative average",
                     )
                     axis.set_ylabel("Mean interval width")
@@ -158,7 +158,7 @@ def main():
             axes[0].legend(fontsize=8, loc="upper right")
             axes[1].legend(fontsize=8, loc="upper right")
             figure.suptitle(
-                f"DiffuserCam {name}: calibrated intervals, epoch 50\nThin = frame mean; thick = cumulative average. No paired ground truth."
+                f"DiffuserCam {name}: calibrated intervals, epoch 50\nFaint = frame mean; solid = cumulative average. No paired ground truth."
             )
             plot = destination / "assets" / name / "width_plot.png"
             figure.savefig(plot, dpi=160)
@@ -200,7 +200,7 @@ def main():
             "Clean raw DiffuserCam QUTCC and Im2im epoch-50 checkpoints are frozen. QUTCC uses its saved calibrated quantiles; Im2im uses its saved separate lower/upper calibration scales. There is no fitting or training on the videos.",
             "Each frame is reconstructed independently. Prediction and bounds are clipped to [0,1]. Mean width is calculated from float endpoints before MP4 encoding; the heatmap averages width over RGB. Magenta identifies crossed bounds.",
             f"Reconstruction and uncertainty panels are rotated {report.get('display_rotation_degrees', 0)} degrees after inference. Labels remain upright; the reconstruction stays above the uncertainty map.",
-            f"The shared uncertainty heatmap color range is 0–{maximum:g}. The default mean-width plot axis is independently set to 0–{args.plot_max:g}. Neither display range changes numerical width measurements.",
+            f"The shared uncertainty heatmap color range is 0–{maximum:g}. The interactive mean-width plot starts zoomed to the data; uncheck Zoom for a fixed 0–{args.plot_max:g} axis. Neither display range changes numerical width measurements.",
             f"Playback is presented at {fps:g} fps; the acquisition frame rate is unverified. Every source frame is retained, with no temporal interpolation. Plots use frame numbers. Spatial uncertainty maps can change even if their image-average width stays constant.",
             "No paired ground truth is supplied, so actual coverage, PSNR, SSIM, LPIPS, and uncertainty-error correlation cannot be measured on these videos. Calibration on the training-camera distribution does not certify 90% coverage here.",
         ],

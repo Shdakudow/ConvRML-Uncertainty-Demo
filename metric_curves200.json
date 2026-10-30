@@ -1,0 +1,2435 @@
+{
+  "protocol": "fixed200_near90_clipped_rgb_unsmoothed_v1",
+  "sample_count": 200,
+  "test_ids_sha256": {
+    "rml": "2001623ee663a5a0abcdf4c3ae7ce3b40e09dcf4646ae56b53ae947618d60135",
+    "diffuser": "2001623ee663a5a0abcdf4c3ae7ce3b40e09dcf4646ae56b53ae947618d60135",
+    "raw_clean": "352101677f1cf2106fd8bbc49e6b0b9a7db6d42d5b6eed1994dc6483f22f1f07"
+  },
+  "groups": {
+    "rml": {
+      "im2im": [
+        {
+          "epoch": 5,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.06401737022679299,
+            "pearson": 0.731466483068759,
+            "spearman": 0.8901507673505662,
+            "psnr": 36.30523072868005,
+            "ssim": 0.9441144847869873,
+            "coverage": 0.8971314239501953,
+            "width": 0.028406975703848033
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "38becbac0ebe94aa295d01ced866d84eee9974106514450ca5a96f4631fe0445"
+        },
+        {
+          "epoch": 10,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.054740166505798694,
+            "pearson": 0.7266776800976205,
+            "spearman": 0.8961065389976683,
+            "psnr": 37.895084138907535,
+            "ssim": 0.9510933816432953,
+            "coverage": 0.8995398712158204,
+            "width": 0.02645673304099172
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "d129290e02228f54c034a6d4948ec4d5f7cf9e2bb745fd11727a130b8df8a9de"
+        },
+        {
+          "epoch": 15,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.04711641674861312,
+            "pearson": 0.7164265390776561,
+            "spearman": 0.8822730491644237,
+            "psnr": 38.474623570586935,
+            "ssim": 0.9530675137042999,
+            "coverage": 0.8993029276529947,
+            "width": 0.026148095935775433
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "a8888a74a7c35a9dba85914652e234341959c094f3c79ef911f2ef19b7559c4a"
+        },
+        {
+          "epoch": 20,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.044978640025947245,
+            "pearson": 0.733517840215696,
+            "spearman": 0.8977653441283107,
+            "psnr": 38.775220082573554,
+            "ssim": 0.9611350291967392,
+            "coverage": 0.8987367248535156,
+            "width": 0.02243414992067981
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "c430be0e1d0346040c326e6367a4e3d0369b900c2c73a5420d38f5485448f4e0"
+        },
+        {
+          "epoch": 25,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.0411701192217879,
+            "pearson": 0.7315121227740721,
+            "spearman": 0.8982832942819483,
+            "psnr": 39.01562948771366,
+            "ssim": 0.9605692240595818,
+            "coverage": 0.8995915730794269,
+            "width": 0.02308533665449177
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "e815e398cada894248d7fd602ad96a01b4e6813bce7fceaf46f18bcf656f0a66"
+        },
+        {
+          "epoch": 30,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.0383035517600365,
+            "pearson": 0.7296070339235635,
+            "spearman": 0.893250719394614,
+            "psnr": 39.24808423931041,
+            "ssim": 0.9629119804501534,
+            "coverage": 0.9012766774495442,
+            "width": 0.021692155162290786
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "59877a7b26838257eb8c3be78b02a755bb51ddce223416c27a01ec7cb0ddb4bc"
+        },
+        {
+          "epoch": 35,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.039193386575207115,
+            "pearson": 0.7206014143323434,
+            "spearman": 0.8877761282977662,
+            "psnr": 39.297928184602284,
+            "ssim": 0.9626232734322548,
+            "coverage": 0.9013059997558593,
+            "width": 0.023184611889850576
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "47c8d7a3e3e2d935d14e2c567a524fbd76a12c47f746b6112e09a9ae9925b7bb"
+        },
+        {
+          "epoch": 40,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.03692146538523957,
+            "pearson": 0.7253560835962125,
+            "spearman": 0.8988746871731027,
+            "psnr": 39.454134111240435,
+            "ssim": 0.9630423247814178,
+            "coverage": 0.9007615407307944,
+            "width": 0.02221360717788981
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "1499817f0152d51e3d992cea9b828834937d33ccac80e6688794f47a86f134b2"
+        },
+        {
+          "epoch": 45,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.037565763290040195,
+            "pearson": 0.7188816054281699,
+            "spearman": 0.8830013601513336,
+            "psnr": 38.96829431383155,
+            "ssim": 0.9568600392341614,
+            "coverage": 0.9018169911702475,
+            "width": 0.02439868070985329
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "ac5983697dfd8964b20892da26bf145c2e7b9d0ea2c803fb7a7c0a1286b18717"
+        },
+        {
+          "epoch": 50,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.03561365062370896,
+            "pearson": 0.7333610909930985,
+            "spearman": 0.8998785114403841,
+            "psnr": 39.67390891640362,
+            "ssim": 0.9672451892495155,
+            "coverage": 0.9007556660970052,
+            "width": 0.019881606975448843
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "2bb73d8d8a4baf9d29c08f1405c306336e3f8428ebc006b3a3c19885b872e465"
+        }
+      ],
+      "qutcc": [
+        {
+          "epoch": 5,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.08489193606190383,
+            "pearson": 0.7142050619890631,
+            "spearman": 0.8910346824599807,
+            "psnr": 35.878637487447115,
+            "ssim": 0.9318487995862961,
+            "coverage": 0.8984905751546225,
+            "width": 0.03009937399046471
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "a367e35eee1465924b7d4f0ec8f1651b39142368da9ffa41fd7ef41bbc767d58"
+        },
+        {
+          "epoch": 10,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.06172732377424836,
+            "pearson": 0.6869478262965862,
+            "spearman": 0.8575652411965818,
+            "psnr": 37.00512176468878,
+            "ssim": 0.929848680794239,
+            "coverage": 0.9001380666097006,
+            "width": 0.030716795584600137
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "634c0594105f5db48a2014d06e6be44e3955693b74886153dc39b7f648fe107b"
+        },
+        {
+          "epoch": 15,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.05441417088266462,
+            "pearson": 0.7107009202722037,
+            "spearman": 0.887772779393363,
+            "psnr": 37.753770320820564,
+            "ssim": 0.9523850736021996,
+            "coverage": 0.8974086507161458,
+            "width": 0.025041795103736983
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "caab1536cc18a881c6e45cfc1c1dca8b519ce0c8119862b92ceae893410028e2"
+        },
+        {
+          "epoch": 20,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.04751364353345707,
+            "pearson": 0.7175944308946779,
+            "spearman": 0.8973134609498666,
+            "psnr": 38.55900064377729,
+            "ssim": 0.9576902443170547,
+            "coverage": 0.899437484741211,
+            "width": 0.023008943852460443
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "c11da73e72a0abc88e8093a4001eef5f02ecd4589a69bc64e2d2a03729523e1a"
+        },
+        {
+          "epoch": 25,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.04241630955133587,
+            "pearson": 0.700532535210764,
+            "spearman": 0.8800711645693485,
+            "psnr": 38.81813715324594,
+            "ssim": 0.9560585722327233,
+            "coverage": 0.8953730010986328,
+            "width": 0.023974243731832906
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "3fee3e316f9b757e91d5e9ccc7b8c67c887c80882cb9805ee137fa3ea99eeb64"
+        },
+        {
+          "epoch": 30,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.0399232443771325,
+            "pearson": 0.715858237293402,
+            "spearman": 0.8926020716671661,
+            "psnr": 39.321958821591444,
+            "ssim": 0.9641945341229439,
+            "coverage": 0.8979618581136067,
+            "width": 0.020580012604038363
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "83fed3fecd79399f35bcdde243daea1424e4ff4a0724980fd4fad3941fb04ffb"
+        },
+        {
+          "epoch": 35,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.03738963009323925,
+            "pearson": 0.7093234184332248,
+            "spearman": 0.8942433535022808,
+            "psnr": 39.55717263329826,
+            "ssim": 0.9626753705739975,
+            "coverage": 0.9020315297444662,
+            "width": 0.021738890686205697
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "30a82ceec0c0641f97b22d5997e2ddc253b0e19dc9b15cd80de468f80a64fae6"
+        },
+        {
+          "epoch": 40,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.03708978037815541,
+            "pearson": 0.7085676728519843,
+            "spearman": 0.8936536441392886,
+            "psnr": 39.77067842405734,
+            "ssim": 0.9657086291909218,
+            "coverage": 0.9014322408040365,
+            "width": 0.020907333886618088
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "c4093a848be61f96cd9a83375220529b914b576ed972af140f725f890ecabe4c"
+        },
+        {
+          "epoch": 45,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.03732369505567476,
+            "pearson": 0.7058943089535353,
+            "spearman": 0.8935553493682795,
+            "psnr": 39.8338256541596,
+            "ssim": 0.9657861250638962,
+            "coverage": 0.901218032836914,
+            "width": 0.021017166815461837
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "d01bc6c150e4028fe88a0228e449ede5e2037c8d96fc9e416f4640500c58732f"
+        },
+        {
+          "epoch": 50,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.036932169371284546,
+            "pearson": 0.7054241247554813,
+            "spearman": 0.8943773865579394,
+            "psnr": 39.83059777336284,
+            "ssim": 0.9658408629894256,
+            "coverage": 0.9012607065836588,
+            "width": 0.020832994226195948
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "88694b32534d805315a678c1b45458431e162df9a262f16792b03e1336a701ec"
+        }
+      ],
+      "ensemble5": [
+        {
+          "epoch": 5,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.11159860392101109,
+            "pearson": 0.721495450861577,
+            "spearman": 0.898675303382081,
+            "psnr": 35.371151069426375,
+            "ssim": 0.927882825434208,
+            "coverage": 0.8955594889322918,
+            "width": 0.032193726004194845
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "2b8ae31da5451899afb469701e4344ad04abb13f50159c2b67df8c5137d78c76"
+        },
+        {
+          "epoch": 10,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.08470605969429017,
+            "pearson": 0.7149982332031612,
+            "spearman": 0.8966839954498793,
+            "psnr": 36.55276906723656,
+            "ssim": 0.9357676360011101,
+            "coverage": 0.8956467437744141,
+            "width": 0.03005133038330256
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "fc6341875678f45ac3d293c25480c0a172a08ef4edc5a56438ffe248b8d005a5"
+        },
+        {
+          "epoch": 15,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.07358314827550202,
+            "pearson": 0.7279177460723076,
+            "spearman": 0.9039878018602125,
+            "psnr": 37.226172714784305,
+            "ssim": 0.9496262562274933,
+            "coverage": 0.8965959930419922,
+            "width": 0.02536953419425342
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "5e45ad844406eccff63a9038043d53f4b800153091b1cff9d04f64e752473870"
+        },
+        {
+          "epoch": 20,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.06681395240128041,
+            "pearson": 0.724049037610759,
+            "spearman": 0.9036416876300197,
+            "psnr": 37.67355475520372,
+            "ssim": 0.9530079331994057,
+            "coverage": 0.895349324544271,
+            "width": 0.024302009623024957
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "5cb1b7ca640e2fb43f0124121f47aa61ec47bcc743971da8510e47492808bbf4"
+        },
+        {
+          "epoch": 25,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.06298577750101686,
+            "pearson": 0.7239656001988015,
+            "spearman": 0.9075629510157568,
+            "psnr": 37.91965402354114,
+            "ssim": 0.9552351409196853,
+            "coverage": 0.8973937479654946,
+            "width": 0.02471867888707856
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "e0eaca3a6a636bce454dc2e2b00ebeb89ab229910c23788725d9be6badba943f"
+        },
+        {
+          "epoch": 30,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.05909665652085096,
+            "pearson": 0.7230708380100576,
+            "spearman": 0.9041011127903829,
+            "psnr": 38.18408480628186,
+            "ssim": 0.9568644940853119,
+            "coverage": 0.8960732014973959,
+            "width": 0.024041713701159546
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "39708777092d361c1561791aa70c511f7a6fce79f5b337783701fc086bfd6390"
+        },
+        {
+          "epoch": 35,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.05774481658358127,
+            "pearson": 0.7228509779286759,
+            "spearman": 0.9009671931882451,
+            "psnr": 38.34818219968681,
+            "ssim": 0.9576548889279366,
+            "coverage": 0.8975420633951824,
+            "width": 0.024135861646303568
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "f39186ea3f36d3e181c3a7eed1951e06f1c9df5d5579f4f12774c98eb8e5efd5"
+        },
+        {
+          "epoch": 40,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.05597473131492734,
+            "pearson": 0.7204666517420347,
+            "spearman": 0.9029341406146788,
+            "psnr": 38.540953437873604,
+            "ssim": 0.958626298904419,
+            "coverage": 0.8975886281331381,
+            "width": 0.023921485003507107
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "daa027947b9d3ab2da0ad336418a2f0a18175b57dad84a8d9332050cc1e1d8eb"
+        },
+        {
+          "epoch": 45,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.05359410629840568,
+            "pearson": 0.724275234679166,
+            "spearman": 0.9038694284787173,
+            "psnr": 38.67334055402144,
+            "ssim": 0.9606462237238884,
+            "coverage": 0.8974308776855469,
+            "width": 0.022509144882131425
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "6fe994dec81f7990a70cf77765bed5d163212a5cc0a58a8752395e22e4c779df"
+        },
+        {
+          "epoch": 50,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.05309073173208162,
+            "pearson": 0.7262667702602466,
+            "spearman": 0.9048558588380747,
+            "psnr": 38.80072830887474,
+            "ssim": 0.9613408952951431,
+            "coverage": 0.897838643391927,
+            "width": 0.02242345646055599
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "5f31cabb1edf482bde3f7a4545bef314c7051b25e60d200489ca0aff109fc200"
+        }
+      ],
+      "mc_005": [
+        {
+          "epoch": 5,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.07002087149769068,
+            "pearson": 0.6762262685736263,
+            "spearman": 0.8443113068560728,
+            "psnr": 36.53844729783655,
+            "ssim": 0.930743702352047,
+            "coverage": 0.8952061208089194,
+            "width": 0.02900072671748819
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "3563566f7445200365f612a1171a90d136bb71bdcc8e4eae05565fc25bd6efd9"
+        },
+        {
+          "epoch": 10,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.05785977656953037,
+            "pearson": 0.6819854946495735,
+            "spearman": 0.8590185645190976,
+            "psnr": 37.625132519061246,
+            "ssim": 0.9467954182624817,
+            "coverage": 0.8950947062174478,
+            "width": 0.02504949293457971
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "3ce5bd0aa258617a129faaaa681fcf45fbadd288505d3c607bcb0a1b2697d836"
+        },
+        {
+          "epoch": 15,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.05037665478186682,
+            "pearson": 0.6768980196181132,
+            "spearman": 0.8649959495979916,
+            "psnr": 38.14811132834381,
+            "ssim": 0.9498731178045273,
+            "coverage": 0.8947698974609375,
+            "width": 0.023628970085007323
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "842db14a003e26764e9d657027a23530e45e3a261d24da7291088d95f59392f5"
+        },
+        {
+          "epoch": 20,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.049575740504078564,
+            "pearson": 0.683134655645281,
+            "spearman": 0.8692999238965514,
+            "psnr": 38.07730267565857,
+            "ssim": 0.9458924207091332,
+            "coverage": 0.8950176239013672,
+            "width": 0.0241380160633332
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "42f7135c40129611ee875dd636e097f3fd5e7fe70ab84d6d134babc32bb3081d"
+        },
+        {
+          "epoch": 25,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.046900879798922684,
+            "pearson": 0.6813834779077151,
+            "spearman": 0.8653889106663003,
+            "psnr": 38.70796729004662,
+            "ssim": 0.9586274176836014,
+            "coverage": 0.8949420674641928,
+            "width": 0.022169493458481963
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "63f265a5d53d7f12028dbec53874ecacf50430e84caed394550efbe84566ff40"
+        },
+        {
+          "epoch": 30,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.04426502068759874,
+            "pearson": 0.679901397759912,
+            "spearman": 0.865626402576871,
+            "psnr": 38.69635124894924,
+            "ssim": 0.9565402862429618,
+            "coverage": 0.8945327250162761,
+            "width": 0.022542814137392054
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "0777a074eb42cba52c0324bcac77f06493fd0dac87d60331e222355bc16cbcf7"
+        },
+        {
+          "epoch": 35,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.043409947927575555,
+            "pearson": 0.6777442048063699,
+            "spearman": 0.8466129264256697,
+            "psnr": 39.01567968542772,
+            "ssim": 0.9563309401273727,
+            "coverage": 0.8947409820556641,
+            "width": 0.022172269404930497
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "1149ed768ce13ee08cf43366fad2830888e3140cc37b8db9e5632cfe0d8ce5da"
+        },
+        {
+          "epoch": 40,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.04233789960155263,
+            "pearson": 0.6846647164477724,
+            "spearman": 0.8441334647794275,
+            "psnr": 38.83074063192143,
+            "ssim": 0.9555440151691437,
+            "coverage": 0.8955897521972657,
+            "width": 0.02271213064784899
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "c4085079da6d141d4da126d349988fe413ea6dcb89a89d7da36aec3e263b3770"
+        },
+        {
+          "epoch": 45,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.041288416390307246,
+            "pearson": 0.6541107719225007,
+            "spearman": 0.8080999406468902,
+            "psnr": 39.080675133571866,
+            "ssim": 0.949932438135147,
+            "coverage": 0.8928389739990235,
+            "width": 0.02376543827801709
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "6bc714c313efedc26ffd41cc82ef72050e9b2bf536626975ca208f5b59516f61"
+        },
+        {
+          "epoch": 50,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.03989281761692837,
+            "pearson": 0.6933546824865406,
+            "spearman": 0.8618555362244293,
+            "psnr": 39.28860843122589,
+            "ssim": 0.9636835208535195,
+            "coverage": 0.8951712544759115,
+            "width": 0.019987326300342882
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "d5dc9dae5805f7b6fe363ca9aed414dc2737600b35ac4b8b44b6f22671c33739"
+        }
+      ]
+    },
+    "diffuser": {
+      "im2im": [
+        {
+          "epoch": 5,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.2852926503866911,
+            "pearson": 0.6629906606507145,
+            "spearman": 0.7890335654289464,
+            "psnr": 29.60393772025769,
+            "ssim": 0.8052931918203831,
+            "coverage": 0.9009470621744791,
+            "width": 0.08495350606146003
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "185cf46823cc020ddf343c755aa9233cf03ac7726721af3836113026f4641f8e"
+        },
+        {
+          "epoch": 10,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.24995715541765093,
+            "pearson": 0.6635223531427744,
+            "spearman": 0.7850380284245989,
+            "psnr": 30.39941768165112,
+            "ssim": 0.8207489481568336,
+            "coverage": 0.9045441691080728,
+            "width": 0.07706698489197046
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "931add1cfed5928b03ee9370fbfd6bce346d02ab8a396b5af9c7ff311da3954d"
+        },
+        {
+          "epoch": 15,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.23160966899245977,
+            "pearson": 0.6601752546330047,
+            "spearman": 0.7955333226674458,
+            "psnr": 30.778343037098416,
+            "ssim": 0.8408761486411095,
+            "coverage": 0.9011744944254558,
+            "width": 0.07023887721082166
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "702bba52aa8d1ea24d6ee093f635b0ec4187f127c21be353a2f2e4af77055540"
+        },
+        {
+          "epoch": 20,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.2216747296229005,
+            "pearson": 0.6553415002221936,
+            "spearman": 0.795702080558649,
+            "psnr": 30.994755858251242,
+            "ssim": 0.8450137636065483,
+            "coverage": 0.9021874237060546,
+            "width": 0.06942788245929078
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "adc8437602e0dc8cb3b8b699cddcba7f5864305e7a5cbeb24f5804e0366a0ce4"
+        },
+        {
+          "epoch": 25,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.21113763449713588,
+            "pearson": 0.6524309410783886,
+            "spearman": 0.7928431962822634,
+            "psnr": 31.12253377528543,
+            "ssim": 0.8475382074713707,
+            "coverage": 0.9003714752197266,
+            "width": 0.06828979488054458
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "a3b74b5420e9f90f4ab33eca94c8b2a3880765a3c7d7b8cdbcaaa2c69975d550"
+        },
+        {
+          "epoch": 30,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.2047757402807474,
+            "pearson": 0.653038758159538,
+            "spearman": 0.7993232215734752,
+            "psnr": 31.17185064627719,
+            "ssim": 0.8516342264413833,
+            "coverage": 0.9017535146077474,
+            "width": 0.06479014790132917
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "07e052bc99bfc564beec6dc8cf377e2a69c5d15e54e40c690eecab8b41ef10cf"
+        },
+        {
+          "epoch": 35,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.20370137998834253,
+            "pearson": 0.6504766164989297,
+            "spearman": 0.7979236854445216,
+            "psnr": 31.150616994400433,
+            "ssim": 0.8541257187724114,
+            "coverage": 0.900928675333659,
+            "width": 0.06410310228336376
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "6b776bcfc0c9c3f6fe041eead37c7117b8892c18c3661345eb8c79c9c23d28f3"
+        },
+        {
+          "epoch": 40,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.2020925698429346,
+            "pearson": 0.6379691224777551,
+            "spearman": 0.7898776801314582,
+            "psnr": 31.241398511941988,
+            "ssim": 0.854111088514328,
+            "coverage": 0.9013655853271484,
+            "width": 0.06536840824097057
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "c9e9463bbd7d4d77e62548012dfdd7adf6da2ae27f4930b7dcef1f7ed2611582"
+        },
+        {
+          "epoch": 45,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.19999096222221852,
+            "pearson": 0.6302092424740067,
+            "spearman": 0.7864100186419403,
+            "psnr": 31.146008649850646,
+            "ssim": 0.8542580842971802,
+            "coverage": 0.9018715922037761,
+            "width": 0.06603163553935527
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "ce0ef1f0fcbf5f43ca40786619e6169ed89a60e869c4dc2b71bfd4fa796c3f2d"
+        },
+        {
+          "epoch": 50,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.19749736143276095,
+            "pearson": 0.6344653275136458,
+            "spearman": 0.79179792216724,
+            "psnr": 31.289639569027408,
+            "ssim": 0.8537280812859536,
+            "coverage": 0.902042007446289,
+            "width": 0.06529306939785869
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "299658de6e9c04ae20f4176ca2567ce70bce78e8b51a92b96401bbb71eb5c158"
+        }
+      ],
+      "qutcc": [
+        {
+          "epoch": 5,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.3411355659365654,
+            "pearson": 0.6271765807543744,
+            "spearman": 0.763518572653259,
+            "psnr": 28.52945063810432,
+            "ssim": 0.7747531792521477,
+            "coverage": 0.8984559631347656,
+            "width": 0.09007926567961944
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "dd3d294037f4f2234db0213440d7d14b28dc60bce5999a71ee6edee5ca505d56"
+        },
+        {
+          "epoch": 10,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.28147475752979517,
+            "pearson": 0.6420335799475577,
+            "spearman": 0.7762884478261292,
+            "psnr": 29.75352847057741,
+            "ssim": 0.8137697157263756,
+            "coverage": 0.8998790995279947,
+            "width": 0.07718221312381239
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "e460d9c51d98f4b66e2a5c7f045e4548654b93c2f1ccf78a3596b8332dbc2c2c"
+        },
+        {
+          "epoch": 15,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.2524894169345498,
+            "pearson": 0.648797851249958,
+            "spearman": 0.7866801496751116,
+            "psnr": 30.592180606721858,
+            "ssim": 0.8325446891784668,
+            "coverage": 0.903620351155599,
+            "width": 0.07337271475589512
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "a2439ee2b4c93ebeedcdb4ba0c829df2cb24ec607f187c01c6fb9dd87cd10867"
+        },
+        {
+          "epoch": 20,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.2279838422499597,
+            "pearson": 0.6470426703267508,
+            "spearman": 0.7893124410994886,
+            "psnr": 31.081458614567353,
+            "ssim": 0.8463166975975036,
+            "coverage": 0.9030403645833335,
+            "width": 0.06904609470499166
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "8343f75b734921426dbc35529b5c00757afb9042a2caec9e4536c07939fa4792"
+        },
+        {
+          "epoch": 25,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.216798744648695,
+            "pearson": 0.6542865987011564,
+            "spearman": 0.7991723452719736,
+            "psnr": 31.457149692304473,
+            "ssim": 0.858307943046093,
+            "coverage": 0.9047358957926432,
+            "width": 0.06459052047651791
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "153c21522cafb2dd1475643d36d6ac02bcf08c4223ddc28a7146f100a6dff349"
+        },
+        {
+          "epoch": 30,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.20506377452984453,
+            "pearson": 0.645448108055102,
+            "spearman": 0.7937822970301304,
+            "psnr": 31.667823257020924,
+            "ssim": 0.8599124374985695,
+            "coverage": 0.8995914204915365,
+            "width": 0.06271000212457378
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "76d9980446abe0c41ba583734d67ff306fba89f89208fac450d55dd76897f6ca"
+        },
+        {
+          "epoch": 35,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.19980096507817507,
+            "pearson": 0.6274552706473296,
+            "spearman": 0.778937825198825,
+            "psnr": 31.845818060260743,
+            "ssim": 0.856268592774868,
+            "coverage": 0.9047648111979167,
+            "width": 0.06709480385817121
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "a66edb885c3b08b831b0904650c92cbd607e27ec5446a150cc56ca5f853d9a4a"
+        },
+        {
+          "epoch": 40,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.19888999102637173,
+            "pearson": 0.6234582545665265,
+            "spearman": 0.7888150022557814,
+            "psnr": 31.870506160789382,
+            "ssim": 0.8654063799977303,
+            "coverage": 0.9045382436116536,
+            "width": 0.06360920767077106
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "d2d28c7eb73854558593db33855a7de4f82c8a15dbbb9031f03c22ff09ba1aba"
+        },
+        {
+          "epoch": 45,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.1945028399117291,
+            "pearson": 0.6156886282639839,
+            "spearman": 0.78750191367877,
+            "psnr": 31.85225430121022,
+            "ssim": 0.8654063057899475,
+            "coverage": 0.9073689270019532,
+            "width": 0.06568699176797961
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "bbaf5158fc4cfcd1cdc17cc79d276b5af5177c63e5a3c3e1f44408364c43de31"
+        },
+        {
+          "epoch": 50,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.19467737371101976,
+            "pearson": 0.6151973725796119,
+            "spearman": 0.7866082558567246,
+            "psnr": 31.833835609616894,
+            "ssim": 0.8653179696202278,
+            "coverage": 0.9069554138183594,
+            "width": 0.06519650463668779
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "dd8f3153d7af2fbc105b9a3df872d7a6146954ef458f09ae11b9b541da345935"
+        }
+      ],
+      "ensemble5": [
+        {
+          "epoch": 5,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.35851662334054707,
+            "pearson": 0.6674811386280584,
+            "spearman": 0.792024702569408,
+            "psnr": 28.30200350157265,
+            "ssim": 0.7754574158787727,
+            "coverage": 0.9025975545247397,
+            "width": 0.09039768379904124
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "9e7f0cf22785a3e0b1da4193735c33e27cbf8a85b1a21f59cf10110644dfe32b"
+        },
+        {
+          "epoch": 10,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.3150983390212059,
+            "pearson": 0.679016163156964,
+            "spearman": 0.8093954561044159,
+            "psnr": 29.389203981451438,
+            "ssim": 0.810002310872078,
+            "coverage": 0.899771474202474,
+            "width": 0.07576138152641113
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "0e4925e8deb3e0e9011057918e4e55179b49cf33f892b905af6c07e4082e2629"
+        },
+        {
+          "epoch": 15,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.29433779139071703,
+            "pearson": 0.6785612814692936,
+            "spearman": 0.8121202722043214,
+            "psnr": 29.946873023838954,
+            "ssim": 0.8234359464049339,
+            "coverage": 0.8999409484863282,
+            "width": 0.07227469167567296
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "916ddeb5100dbb1224a5e7f639249fb3f0369f5893eb957b8951627adc788f2b"
+        },
+        {
+          "epoch": 20,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.2801707010343671,
+            "pearson": 0.6768435983219093,
+            "spearman": 0.8133936859807567,
+            "psnr": 30.32491575489847,
+            "ssim": 0.8310867324471474,
+            "coverage": 0.9015577189127604,
+            "width": 0.0705032751410419
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "1587ac36a521bac9f62cf231f5cbe31f4bba8c2b306ae66738457dc5756cef6a"
+        },
+        {
+          "epoch": 25,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.2708946337737143,
+            "pearson": 0.6730607191139932,
+            "spearman": 0.812621376430684,
+            "psnr": 30.580034059051837,
+            "ssim": 0.8359780362248421,
+            "coverage": 0.8993245951334634,
+            "width": 0.06938939875800441
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "f0f7667c5cf8c4fd5e6c4637b8737457d097f73267e67ac61ffd0827bbafaff3"
+        },
+        {
+          "epoch": 30,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.2640846759080887,
+            "pearson": 0.6727743989921922,
+            "spearman": 0.8132259888702131,
+            "psnr": 30.780379054360218,
+            "ssim": 0.8405560618638992,
+            "coverage": 0.8992463429768881,
+            "width": 0.06594624023082185
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "e7d3470237ae9687994f5c1d13726dff6e3af0bf97aed87155971d0afddec38a"
+        },
+        {
+          "epoch": 35,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.25614724377170206,
+            "pearson": 0.671826972782961,
+            "spearman": 0.8137500002053534,
+            "psnr": 30.925935899072275,
+            "ssim": 0.8451058590412139,
+            "coverage": 0.8996041107177735,
+            "width": 0.06522067543077358
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "1587e3f80beeb7f8deee6565dbbeb6c4b8be3f79b38d5e2c8f65292ca3a269bc"
+        },
+        {
+          "epoch": 40,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.2525243069604039,
+            "pearson": 0.6697522324093167,
+            "spearman": 0.8110886817179284,
+            "psnr": 31.01931066853378,
+            "ssim": 0.8473065978288651,
+            "coverage": 0.8999183400472005,
+            "width": 0.06552742731478808
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "8079ee256888e2e6f1f308289f4d12096558d677f6c201a4d31fc9affd9d176c"
+        },
+        {
+          "epoch": 45,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.24843351734802127,
+            "pearson": 0.6662479166167088,
+            "spearman": 0.8096575195861067,
+            "psnr": 31.072358094405928,
+            "ssim": 0.8459251284599304,
+            "coverage": 0.899817377726237,
+            "width": 0.06565239591573138
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "c561858d508828636c335f4ae916a65b3099b9861d539c7f829e10d76800c65d"
+        },
+        {
+          "epoch": 50,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.24569403618574143,
+            "pearson": 0.6659439414818488,
+            "spearman": 0.808647537780088,
+            "psnr": 31.16147908005123,
+            "ssim": 0.8480782213807107,
+            "coverage": 0.8996208190917969,
+            "width": 0.06487172210113283
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "99125b8c592c01a16750c937b41090abb718195aeb9fe527d7d31314307b8071"
+        }
+      ],
+      "mc_005": [
+        {
+          "epoch": 5,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.29553641270846126,
+            "pearson": 0.6242106678780857,
+            "spearman": 0.7429967779940573,
+            "psnr": 29.25221118506887,
+            "ssim": 0.7995684279501438,
+            "coverage": 0.9004487864176431,
+            "width": 0.08569955095563352
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "dece08657559c1f4efc6371c188b2927fdb6645c86f3ad03e76ffce2656d132a"
+        },
+        {
+          "epoch": 10,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.2672252299450338,
+            "pearson": 0.6364552549382929,
+            "spearman": 0.7658839761122603,
+            "psnr": 30.209882537146203,
+            "ssim": 0.8258593925833702,
+            "coverage": 0.8982558186848958,
+            "width": 0.07467619679720044
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "3ceee7178b9f4db5cae4f99e7f061437f0bed53bee4485e48dc48ad85d46e7be"
+        },
+        {
+          "epoch": 15,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.24220218889415265,
+            "pearson": 0.6223247750829393,
+            "spearman": 0.7419882509615445,
+            "psnr": 30.500684365261392,
+            "ssim": 0.8194452092051506,
+            "coverage": 0.8979012552897135,
+            "width": 0.0713217815570331
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "d1023c545a09c426596562f4cb739c48d6dd7f3fd2aa21640c9e1b567a21e21d"
+        },
+        {
+          "epoch": 20,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.23024766117334367,
+            "pearson": 0.6192161421618309,
+            "spearman": 0.7436013191829614,
+            "psnr": 30.791334006806668,
+            "ssim": 0.836487737596035,
+            "coverage": 0.8965310668945312,
+            "width": 0.06989153826523023
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "9823f1642c50e3ae9fc9d950211156ad89229272615aa5b75bff641a686d1bd1"
+        },
+        {
+          "epoch": 25,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.22995395792648196,
+            "pearson": 0.6235927442619843,
+            "spearman": 0.7608068316461715,
+            "psnr": 30.98125810172566,
+            "ssim": 0.8435710760951042,
+            "coverage": 0.8976522827148438,
+            "width": 0.06723164786972748
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "df79b0c687cefa6451b396ba0783354f0d03faa04e5d223a49f916433cba921f"
+        },
+        {
+          "epoch": 30,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.21703490007668733,
+            "pearson": 0.6163816063453329,
+            "spearman": 0.758131289835155,
+            "psnr": 31.136667149799223,
+            "ssim": 0.85003248244524,
+            "coverage": 0.8985894521077475,
+            "width": 0.06647474074171811
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "69d037b1e7945197a3d48a4abf598be67e02c2cc0a9595edc5d7e1e93326fbfd"
+        },
+        {
+          "epoch": 35,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.2112152093462646,
+            "pearson": 0.6153593124226161,
+            "spearman": 0.764453087793663,
+            "psnr": 31.146111391041096,
+            "ssim": 0.8517722317576408,
+            "coverage": 0.8982436370849609,
+            "width": 0.0662956627293591
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "34170ebe27602ce98698a13acf56730eb321bfa79419e733499f878339b551c0"
+        },
+        {
+          "epoch": 40,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.21185937678441405,
+            "pearson": 0.6153901765808585,
+            "spearman": 0.7531391350930631,
+            "psnr": 31.224414159828275,
+            "ssim": 0.8513140299916268,
+            "coverage": 0.8968165334065755,
+            "width": 0.0656265867608101
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "f51632b689b94023e89c5dbb940254f3387ad02b15d6e3bbbff01fa33d9249d6"
+        },
+        {
+          "epoch": 45,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.21293105667456985,
+            "pearson": 0.6118050477872685,
+            "spearman": 0.7454417645510304,
+            "psnr": 31.23603720977609,
+            "ssim": 0.8461631649732589,
+            "coverage": 0.8967978413899741,
+            "width": 0.06561353989209458
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "4b94747d8b1611a1979cf8f0d5aae7591f004f6c37707a3a8cea8a8f7b41ce77"
+        },
+        {
+          "epoch": 50,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.206350925732404,
+            "pearson": 0.6179848327110017,
+            "spearman": 0.7582101072962933,
+            "psnr": 31.237932157408473,
+            "ssim": 0.8533034348487853,
+            "coverage": 0.8958138529459636,
+            "width": 0.06435040324843178
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "e013d11fb1ce6fa479f9bd19e9b15472830cced0d813ca6f7a4cc746a026c336"
+        }
+      ]
+    },
+    "raw_clean": {
+      "im2im": [
+        {
+          "epoch": 5,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.38025476403534414,
+            "pearson": 0.6839427522057174,
+            "spearman": 0.8355058869584062,
+            "psnr": 22.578298214749992,
+            "ssim": 0.7129874715209007,
+            "coverage": 0.9034049382716048,
+            "width": 0.18091317091154227
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "0b959c40362ebe59ca209d7b26a319d97af07f6408d9d68fd88bc68a66720aba"
+        },
+        {
+          "epoch": 10,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.29907740104943514,
+            "pearson": 0.7007333784995307,
+            "spearman": 0.8508125657098108,
+            "psnr": 24.256734890652943,
+            "ssim": 0.7765489706397056,
+            "coverage": 0.8992434799382716,
+            "width": 0.15283471249517228
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "bdd34369dc809139c1e25b42742f2c7a82e080df26b74ff2c715efaf55f1ef0f"
+        },
+        {
+          "epoch": 15,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.2728991522267461,
+            "pearson": 0.7030123239807149,
+            "spearman": 0.8522674888426153,
+            "psnr": 24.783233127144207,
+            "ssim": 0.7909430783987045,
+            "coverage": 0.8950593106995884,
+            "width": 0.12665019432087693
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "abef3c159009ec6408b7b22ccedd952b706952d1a10675dcd399b074bcd9d276"
+        },
+        {
+          "epoch": 20,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.2543104975298047,
+            "pearson": 0.6994695326843486,
+            "spearman": 0.8547647362170189,
+            "psnr": 25.507318557311073,
+            "ssim": 0.800814197063446,
+            "coverage": 0.8967342592592593,
+            "width": 0.11213580396456299
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "b3dbe8e3219d88c4881d7ea3eb538df879d08d3005f09c866e489b413af3a312"
+        },
+        {
+          "epoch": 25,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.2423532872274518,
+            "pearson": 0.6903194100040898,
+            "spearman": 0.8538745760814294,
+            "psnr": 25.81006608583509,
+            "ssim": 0.8157827666401863,
+            "coverage": 0.8957128600823046,
+            "width": 0.10753006647888483
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "b43cbb433c3376645ce5c8762e881dc8803db133248c9281c8946aed7ec8ff16"
+        },
+        {
+          "epoch": 30,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.2284841586649418,
+            "pearson": 0.6870137753302936,
+            "spearman": 0.855922923800573,
+            "psnr": 25.971083838004855,
+            "ssim": 0.8190884158015251,
+            "coverage": 0.8956269161522633,
+            "width": 0.10480647908316561
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "a30215f2379f21f2ab8a38e27816e341714d7b589719f6fe53ae6bc8a1e0306b"
+        },
+        {
+          "epoch": 35,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.22930192548781633,
+            "pearson": 0.6789814768911345,
+            "spearman": 0.8546110733043892,
+            "psnr": 26.02327486005408,
+            "ssim": 0.8211100712418556,
+            "coverage": 0.8945029963991769,
+            "width": 0.101121391073398
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "2114027fd53872de68d12d262ffe73705df61a30634a22072bc97ed48c022bda"
+        },
+        {
+          "epoch": 40,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.22876559101045132,
+            "pearson": 0.6661529051593982,
+            "spearman": 0.8505723106745228,
+            "psnr": 25.92364165050446,
+            "ssim": 0.8200001415610313,
+            "coverage": 0.8951124485596708,
+            "width": 0.09960773111534055
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "9097ad8addfefe395d4590f799fee481a08bb354f5e0a77869aa165c7229f4cc"
+        },
+        {
+          "epoch": 45,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.22920759301632643,
+            "pearson": 0.658618492569108,
+            "spearman": 0.8542895924824326,
+            "psnr": 25.796014996685052,
+            "ssim": 0.8185655871033668,
+            "coverage": 0.8944269290123457,
+            "width": 0.09959668652899849
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "14f80eef488a1d43a3607cf0622a4c635d836a10c09f7597cf24d19eb2d065cb"
+        },
+        {
+          "epoch": 50,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.22971056289970876,
+            "pearson": 0.6552550990933894,
+            "spearman": 0.8537145694998426,
+            "psnr": 25.738249063112463,
+            "ssim": 0.817573814690113,
+            "coverage": 0.8943085905349794,
+            "width": 0.10011125332545451
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "c6f374411616a1eff920387c0e8070022a306012ad2a37fadd317dc00c92fa66"
+        }
+      ],
+      "qutcc": [
+        {
+          "epoch": 5,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.391027684956789,
+            "pearson": 0.6575619665238206,
+            "spearman": 0.8326078250902554,
+            "psnr": 21.494727170101168,
+            "ssim": 0.7130453136563301,
+            "coverage": 0.8952760288065843,
+            "width": 0.195015977639433
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "9ab8bb58cf3af080e3fd2d346281be4089bb4081db536bc98b00e0dc5b9189ce"
+        },
+        {
+          "epoch": 10,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.32034888669848444,
+            "pearson": 0.6809092774926916,
+            "spearman": 0.8495050752305287,
+            "psnr": 23.52522792339316,
+            "ssim": 0.7632066737115383,
+            "coverage": 0.8984682741769546,
+            "width": 0.155164013380248
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "a2532fc8a9fe7d50350c484a56bbe0aa8feffa7dd0b928ba395d71b004520da8"
+        },
+        {
+          "epoch": 15,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.2946511630341411,
+            "pearson": 0.6758622348328978,
+            "spearman": 0.8379841460864068,
+            "psnr": 24.141190297997568,
+            "ssim": 0.7812155157327652,
+            "coverage": 0.8953923739711933,
+            "width": 0.13509919993556715
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "d1b7e48d969ab93ed801824b725fcfcf54b6e1e487b6f68b6e3c0f8c482d256e"
+        },
+        {
+          "epoch": 20,
+          "status": "estimated",
+          "reason": "Calibration infeasible",
+          "count": 0,
+          "source_epochs": [
+            15,
+            25
+          ],
+          "metrics": {
+            "lpips": 0.2781153146363795,
+            "pearson": 0.6786555044783,
+            "spearman": 0.842883382768604,
+            "psnr": 24.767793781029468,
+            "ssim": 0.7952001716196537,
+            "coverage": 0.8950843942901234,
+            "width": 0.12520673405044058
+          },
+          "note": "Linear interpolation of neighboring 200-image means; epoch-20 calibration failed; not a measured or calibrated result"
+        },
+        {
+          "epoch": 25,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.2615794662386179,
+            "pearson": 0.6814487741237023,
+            "spearman": 0.847782619450801,
+            "psnr": 25.394397264061368,
+            "ssim": 0.8091848275065422,
+            "coverage": 0.8947764146090534,
+            "width": 0.11531426816531398
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "eaae951307d65e6a7d6eca300d63ed5788664627106b5c08771a5b10d334e786"
+        },
+        {
+          "epoch": 30,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.243021062836051,
+            "pearson": 0.6750065750709631,
+            "spearman": 0.8481021770557252,
+            "psnr": 25.609404689708207,
+            "ssim": 0.8181768774986267,
+            "coverage": 0.8969685313786008,
+            "width": 0.11333686023181423
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "7e8eb063122ffb7733e8e7b522f50726decbfd0f77d918245d8b2da2ed16c2ca"
+        },
+        {
+          "epoch": 35,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.24264081988483668,
+            "pearson": 0.6704540320480281,
+            "spearman": 0.8486363003809565,
+            "psnr": 25.855475262323,
+            "ssim": 0.82150639295578,
+            "coverage": 0.8960545781893005,
+            "width": 0.1107408409236006
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "905a0e6d07c6c4cbbc018db0b56e91b8483a6d62e9c071c1418d6bd84ef9c5bf"
+        },
+        {
+          "epoch": 40,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.240340108089149,
+            "pearson": 0.6688737244153756,
+            "spearman": 0.8544008155024838,
+            "psnr": 25.853908696025837,
+            "ssim": 0.8211412808299065,
+            "coverage": 0.8931390046296298,
+            "width": 0.10861248349518147
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "ef8d9decba882b7fa6642014e48a57424a764e9e423c275f2c038cfd83071479"
+        },
+        {
+          "epoch": 45,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.23857604760676623,
+            "pearson": 0.662390384530767,
+            "spearman": 0.8513207729833652,
+            "psnr": 25.84039136953234,
+            "ssim": 0.8210953915119171,
+            "coverage": 0.8942808384773663,
+            "width": 0.10986199130932973
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "ed393971d0b961563bb5abfcd47381d196e7a4e82a6dd89db493dd9ff4980622"
+        },
+        {
+          "epoch": 50,
+          "status": "complete",
+          "count": 200,
+          "metrics": {
+            "lpips": 0.23886727917939424,
+            "pearson": 0.6606101096783936,
+            "spearman": 0.8507550121760016,
+            "psnr": 25.81825786376106,
+            "ssim": 0.8207554474473,
+            "coverage": 0.894124318415638,
+            "width": 0.10928662867920766
+          },
+          "n_valid": {
+            "lpips": 200,
+            "pearson": 200,
+            "spearman": 200,
+            "psnr": 200,
+            "ssim": 200,
+            "coverage": 200,
+            "width": 200
+          },
+          "report_sha256": "d2069009e446591b2bdfd4f56a9036695b9759b9543342763ee96fd65d3d251d"
+        }
+      ]
+    }
+  },
+  "definition": "LPIPS-AlexNet v0.1 on clipped RGB; Pearson/Spearman within each unsmoothed mean-RGB width/error map, averaged over the same first 200 test IDs at every epoch. Fitted calibration is reused unchanged. MC dropout uses 30 passes and fixed seed 20261030.",
+  "interpolation": "Only the failed raw-QUTCC epoch 20 is a labeled estimate from epochs 15 and 25; no test-based calibration or invented q values."
+}

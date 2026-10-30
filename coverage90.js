@@ -230,25 +230,48 @@
 
   function curveRows(group) {
     return Object.entries(curves?.groups?.[group] || {}).flatMap(
-      ([method, rows]) => rows.map((row) => ({ method, ...row })),
+      ([method, rows]) => presentationRows(rows).map((row) => ({ method, ...row })),
     );
+  }
+
+  function presentationRows(rows) {
+    // Estimates are view-only. The saved calibration failure is never overwritten.
+    return rows.map(row => {
+      if (row.epoch !== 20 || row.status !== 'failed') return {...row};
+      const before = rows.filter(r => r.status === 'complete' && r.epoch < 20).sort((a,b)=>a.epoch-b.epoch).at(-1);
+      const after = rows.filter(r => r.status === 'complete' && r.epoch > 20).sort((a,b)=>a.epoch-b.epoch)[0];
+      if (!before || !after) return {...row};
+      const fraction = (20 - before.epoch) / (after.epoch - before.epoch), metrics = {};
+      for (const mode of ['raw','clipped']) {
+        metrics[mode] = {};
+        for (const [key,value] of Object.entries(before.metrics[mode] || {})) {
+          const upper=after.metrics[mode]?.[key];
+          if (Number.isFinite(value) && Number.isFinite(upper)) metrics[mode][key] = value + fraction * (upper - value);
+        }
+      }
+      return {...row,status:'estimated',estimated:true,metrics,calibration:null,
+        interpolation:{from:[before.epoch,after.epoch],reason:'Epoch-20 calibration failed; these metric values were not measured'}};
+    });
   }
 
   function curveStatus(group) {
     const rows = curveRows(group),
       complete = rows.filter((row) => row.status === "complete").length;
     const failed = rows.filter((row) => row.status === "failed").length;
-    return `${complete}/${rows.length} calibrated milestones · ${rows.length - complete - failed} pending${failed ? " · " + failed + " calibration failures" : ""} · full held-out test set`;
+    const estimated=rows.filter(row=>row.status==='estimated').length;
+    return `${complete}/${rows.length} measured milestones${estimated ? ' · '+estimated+' interpolated estimate (calibration failed)' : ''} · ${rows.length - complete - failed - estimated} pending${failed ? " · " + failed + " calibration failures" : ""} · full held-out test set`;
   }
 
   function exp2Curves() {
     return curveRows(window.CAMERA)
-      .filter((row) => row.status === "complete")
+      .filter((row) => row.status === "complete" || row.status === "estimated")
       .map((row) => ({
         method: row.method === "qutcc" ? "paper_qutcc" : row.method,
         epoch: row.epoch,
         metrics: row.metrics.clipped,
         calibration: row.calibration,
+        estimated: row.estimated,
+        interpolation: row.interpolation,
       }));
   }
 
@@ -264,7 +287,7 @@
       summary.example_count = 50;
       summary.example_metrics = entry?.per_image.map((row) => row.clipped);
       summary.epoch = entry?.epoch || 50;
-      summary.evaluations = (curves?.groups?.[group]?.[method] || []).map(
+      summary.evaluations = presentationRows(curves?.groups?.[group]?.[method] || []).map(
         (row) => ({ ...row }),
       );
       summary.history = summary.history.filter(
@@ -292,6 +315,7 @@
     entries,
     status,
     curveRows,
+    presentationRows,
     curveStatus,
     exp2Dataset,
     exp2Example,

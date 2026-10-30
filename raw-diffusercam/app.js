@@ -105,7 +105,7 @@ async function unpack(url) {
 function renderTables() {
   if (window.Coverage90.active) {
     $("#curveProtocol").textContent =
-      "All four curves use the same 2,000 held-out test images at each saved five-epoch checkpoint, with a separate 3,000-image calibration split. Pending evaluations and calibration failures remain gaps. Hover to compare exact values.";
+      "All four curves use the same 2,000 held-out test images at each saved five-epoch checkpoint, with a separate 3,000-image calibration split. Epoch 20 for QUTCC is an interpolated estimate from epochs 15 and 25 because calibration failed; hollow diamonds mark estimates. Hover to compare exact values.";
     $("#curveDownload").hidden = false;
     $("#metricsDownload").href = "../coverage90.json";
     $("#metricsDownload").textContent =
@@ -136,6 +136,7 @@ function renderTables() {
   )
     .sort((a, b) => a.epoch - b.epoch || a.method.localeCompare(b.method))
     .map((e) => {
+      if (e.status === 'estimated') return `<tr class="estimated-note"><td>${e.epoch}</td><td>${NAMES[e.method]}</td><td>Interpolated estimate (${e.interpolation.from.join(' → ')}) · calibration failed</td><td>—</td><td>—</td><td>≈ ${pct(e.metrics.clipped.coverage)}</td><td>≈ ${fmt(e.metrics.clipped.width,6)}</td></tr>`;
       if (e.status !== "complete" && e.reference) {
         const c = e.reference.calibration,
           m = e.reference.metrics.clipped;
@@ -179,7 +180,9 @@ function makePlot(container, title, key, kind) {
             epoch: r.epoch,
             status: r.status,
             calibrationCoverage: r.calibration?.calibration_coverage,
-            value: r.status === "complete" ? r.metrics.clipped[key] : null,
+            value: ['complete','estimated'].includes(r.status) ? r.metrics.clipped[key] : null,
+            estimated: r.status === 'estimated',
+            interpolation: r.interpolation,
             reference: r.reference?.metrics.clipped[key],
           }));
     if (kind === "validation" && s.baseline_validation)
@@ -239,14 +242,15 @@ function makePlot(container, title, key, kind) {
     let d = "";
     for (const r of histories[method]) {
       if (!Number.isFinite(r.value)) {
+        if (d) svg += `<path d="${d}" fill="none" stroke="${COLORS[method]}" stroke-width="1.5"/>`;
         d = "";
         continue;
       }
       const cmd = `${d ? "L" : "M"}${x(r.epoch)},${y(r.value * scale)}`;
-      svg += `<path d="${d + cmd}" fill="none" stroke="${COLORS[method]}" stroke-width="2"/>`;
       d += cmd;
-      svg += `<circle cx="${x(r.epoch)}" cy="${y(r.value * scale)}" r="3" fill="${COLORS[method]}"/>`;
+      svg += r.estimated ? `<path class="epoch-estimate" data-estimated="true" d="M${x(r.epoch)},${y(r.value*scale)-5} l5,5 -5,5 -5,-5 Z" stroke="${COLORS[method]}"><title>Interpolated estimate, not a measured calibration result</title></path>` : `<circle cx="${x(r.epoch)}" cy="${y(r.value * scale)}" r="3" fill="${COLORS[method]}"/>`;
     }
+    if (d) svg += `<path d="${d}" fill="none" stroke="${COLORS[method]}" stroke-width="1.5"/>`;
   }
   for (const method of METHODS)
     for (const r of histories[method]) {
@@ -274,7 +278,7 @@ function makePlot(container, title, key, kind) {
       const row = histories[m].find((r) => r.epoch === e),
         v = row?.value,
         ref = row?.reference;
-      return `<tr><td style="color:${COLORS[m]}">${NAMES[m]}</td><td>${Number.isFinite(v) ? (v * scale).toFixed(6) + (key === "coverage" ? "%" : "") : Number.isFinite(ref) ? (ref * scale).toFixed(6) + (key === "coverage" ? "%" : "") + " · Native, uncalibrated" : window.Coverage90.active ? (row?.status === "failed" ? "Calibration failed" : "Evaluation pending") : "Calibration failed · recheck pending / unavailable"}${window.Coverage90.active && Number.isFinite(row?.calibrationCoverage) ? ` · cal ${(100 * row.calibrationCoverage).toFixed(3)}%` : ""}</td></tr>`;
+      return `<tr><td style="color:${COLORS[m]}">${NAMES[m]}</td><td>${Number.isFinite(v) ? (v * scale).toFixed(6) + (key === "coverage" ? "%" : "") + (row?.estimated ? ' · Interpolated estimate (epochs '+row.interpolation.from.join(' / ')+'); calibration failed' : '') : Number.isFinite(ref) ? (ref * scale).toFixed(6) + (key === "coverage" ? "%" : "") + " · Native, uncalibrated" : window.Coverage90.active ? (row?.status === "failed" ? "Calibration failed" : "Evaluation pending") : "Calibration failed · recheck pending / unavailable"}${window.Coverage90.active && Number.isFinite(row?.calibrationCoverage) ? ` · cal ${(100 * row.calibrationCoverage).toFixed(3)}%` : ""}</td></tr>`;
     }).join("")}</table>`;
     guide.removeAttribute("hidden");
     for (const [k, v] of Object.entries({
