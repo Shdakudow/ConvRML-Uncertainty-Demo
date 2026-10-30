@@ -69,14 +69,16 @@ class VideoWriter:
         assert self.process.wait() == 0, "Video encoding failed"
 
 
-def stacked_frame(prediction, uncertainty, method, index):
+def stacked_frame(prediction, uncertainty, method, index, heatmap_max=1):
     image = Image.new("RGB", (480, 588), "#101722")
     image.paste(Image.fromarray(prediction), (0, 24))
     image.paste(Image.fromarray(uncertainty), (0, 318))
     draw = ImageDraw.Draw(image)
     draw.text((10, 6), f"{method} reconstruction | frame {index}", fill="white")
     draw.text(
-        (10, 300), "Uncertainty = upper - lower | fixed scale 0 - 1", fill="white"
+        (10, 300),
+        f"Uncertainty = upper - lower | fixed scale 0 - {heatmap_max:g}",
+        fill="white",
     )
     return np.asarray(image)
 
@@ -98,7 +100,18 @@ def main():
         help="Presentation fps, explicitly recorded; not a verified sensor frame rate",
     )
     parser.add_argument("--device", default="cuda")
+    parser.add_argument(
+        "--output-dir", type=Path, help="Separate presentation export directory"
+    )
+    parser.add_argument("--rotation", type=int, choices=[0, 180], default=0)
+    parser.add_argument("--heatmap-max", type=float, default=1)
+    parser.add_argument(
+        "--reference",
+        type=Path,
+        help="Original reports: verify replay and retain their numerical metrics",
+    )
     args = parser.parse_args()
+    assert args.fps > 0 and 0 < args.heatmap_max <= 1
     sys.path.insert(0, str(args.source))
     from model import Model
 
@@ -132,8 +145,18 @@ def main():
     assert numbers == list(
         range(first_source_frame, first_source_frame + len(paths))
     ), numbers
-    out = args.workdir / "outputs" / args.video / args.method
+    out = (args.output_dir or args.workdir / "outputs") / args.video / args.method
     out.mkdir(parents=True, exist_ok=True)
+    reference = None
+    maximum_width_difference = 0.0
+    if args.reference:
+        reference = json.loads(
+            (args.reference / args.video / args.method / "report.json").read_text()
+        )
+        assert reference["checkpoint_sha256"] == sha256(checkpoint)
+        assert reference["calibration"] == calibration and reference["frames"] == len(
+            paths
+        )
     writers = {
         "reconstruction": VideoWriter(out / "reconstruction.mp4", 480, 270, args.fps),
         "uncertainty": VideoWriter(out / "uncertainty.mp4", 480, 270, args.fps),
@@ -180,24 +203,31 @@ def main():
                 width = upper.astype(np.float64) - lower.astype(np.float64)
                 width_map = width.mean(axis=0)
                 crossing = np.any(lower > upper, axis=0)
-                heatmap = np.rint(cmap(width_map.clip(0, 1))[..., :3] * 255).astype(
-                    np.uint8
-                )
+                heatmap = np.rint(
+                    cmap((width_map / args.heatmap_max).clip(0, 1))[..., :3] * 255
+                ).astype(np.uint8)
                 heatmap[crossing] = [227, 32, 201]
                 rgb = (
                     np.rint(prediction.transpose(1, 2, 0) * 255)
                     .clip(0, 255)
                     .astype(np.uint8)
                 )
+                # Rotate the exported images only; the model receives the original input.
+                if args.rotation == 180:
+                    rgb, heatmap = np.rot90(rgb, 2), np.rot90(heatmap, 2)
                 writers["reconstruction"].write(rgb)
                 writers["uncertainty"].write(heatmap)
                 writers["stacked"].write(
-                    stacked_frame(rgb, heatmap, args.method.upper(), index)
+                    stacked_frame(
+                        rgb, heatmap, args.method.upper(), index, args.heatmap_max
+                    )
                 )
                 if index == 1:
                     Image.fromarray(rgb).save(out / "poster.png")
                     Image.fromarray(heatmap).save(out / "uncertainty_poster.png")
-                    Image.fromarray(pixels).save(out / "measurement_poster.png")
+                    Image.fromarray(
+                        np.rot90(pixels, 2) if args.rotation else pixels
+                    ).save(out / "measurement_poster.png")
                 rows.append(
                     dict(
                         frame=index,
@@ -220,6 +250,21 @@ def main():
                         ),
                     )
                 )
+                if reference is not None:
+                    original = reference["per_frame"][index - 1]
+                    assert original["filename"] == path.stem
+                    difference = abs(
+                        rows[-1]["mean_interval_width"]
+                        - original["mean_interval_width"]
+                    )
+                    maximum_width_difference = max(maximum_width_difference, difference)
+                    assert difference < 0.00002, (index, difference)
+                    assert (
+                        abs(rows[-1]["mean_prediction"] - original["mean_prediction"])
+                        < 0.00005
+                    )
+                    # Presentation changes do not replace the original scientific measurements.
+                    rows[-1] = dict(original, seconds=(index - 1) / args.fps)
                 previous_prediction, previous_width = prediction, width_map
                 if index % 50 == 0:
                     print(
@@ -260,7 +305,11 @@ def main():
         device=torch.cuda.get_device_name() if args.device == "cuda" else args.device,
         precision="float32",
         seconds=time.monotonic() - started,
-        heatmap_range=[0, 1],
+        heatmap_range=[0, args.heatmap_max],
+        display_rotation_degrees=args.rotation,
+        reference_metrics=str(args.reference) if args.reference else None,
+        original_metric_values_retained=reference is not None,
+        replay_max_width_difference=maximum_width_difference if reference else None,
         interval_definition="RGB pixel mean of clip(upper,0,1) - clip(lower,0,1)",
         per_frame=rows,
     )

@@ -15,7 +15,7 @@ function setFrame(index) {
 function drawPlot() {
   const svg = $('widthPlot'), left = 70, right = 970, top = 22, bottom = 275;
   const values = methods.flatMap(method => selected.models[method].per_frame.map(row => row.mean_interval_width));
-  let minimum = 0, maximum = 1;
+  let minimum = 0, maximum = data.heatmap_range[1];
   if ($('zoom').checked) {
     const low = Math.min(...values), high = Math.max(...values), margin = Math.max((high - low) * .15, .0001);
     minimum = Math.max(0, low - margin); maximum = Math.min(1, high + margin);
@@ -23,10 +23,11 @@ function drawPlot() {
   const x = index => left + index / Math.max(1, selected.frames - 1) * (right - left);
   const y = value => bottom - (value - minimum) / (maximum - minimum) * (bottom - top);
   const pieces = [];
-  for (let tick = 0; tick <= 4; tick++) {
-    const value = minimum + tick / 4 * (maximum - minimum), position = y(value);
+  const ticks = $('zoom').checked ? 4 : 5;
+  for (let tick = 0; tick <= ticks; tick++) {
+    const value = minimum + tick / ticks * (maximum - minimum), position = y(value);
     pieces.push(`<line x1="${left}" y1="${position}" x2="${right}" y2="${position}" stroke="#33455c"/><text x="${left - 9}" y="${position + 4}" text-anchor="end" fill="#bac7d6" font-size="12">${value.toFixed($('zoom').checked ? 4 : 2)}</text>`);
-    const index = Math.round(tick / 4 * (selected.frames - 1));
+    const index = Math.round(tick / ticks * (selected.frames - 1));
     pieces.push(`<text x="${x(index)}" y="${bottom + 23}" text-anchor="middle" fill="#bac7d6" font-size="12">${index + 1}</text>`);
   }
   methods.forEach(method => {
@@ -81,7 +82,7 @@ $('qutccVideo').addEventListener('timeupdate', () => {if (!selected) return; con
 $('qutccVideo').addEventListener('ended', pause);
 $('zoom').addEventListener('change', drawPlot);
 $('videoSelect').addEventListener('change', choose);
-fetch('data.json?v=20261030video', {cache: 'no-store'}).then(response => {if (!response.ok) throw new Error(response.status); return response.json();}).then(value => {
+fetch('data.json?v=20261030display2', {cache: 'no-store'}).then(response => {if (!response.ok) throw new Error(response.status); return response.json();}).then(value => {
   data = value;
   for (const video of data.videos) {const option = document.createElement('option'); option.value = video.id; option.textContent = video.label; $('videoSelect').append(option);}
   const requested = new URLSearchParams(location.search).get('video');

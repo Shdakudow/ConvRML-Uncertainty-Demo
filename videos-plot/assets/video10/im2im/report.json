@@ -3,7 +3,7 @@
   "method": "im2im",
   "epoch": 50,
   "frames": 338,
-  "fps": 10.0,
+  "fps": 20.0,
   "fps_status": "Presentation rate; acquisition frame rate unverified",
   "mean_interval_width": 0.1014200126391862,
   "std_interval_width": 0.016826863574808136,
@@ -29,13 +29,17 @@
     "calibrated_on": "calibration split only"
   },
   "calibration_refitted": false,
-  "device": "NVIDIA GeForce RTX 3090",
+  "device": "NVIDIA RTX 6000 Ada Generation",
   "precision": "float32",
-  "seconds": 30.406542695127428,
+  "seconds": 23.527105868794024,
   "heatmap_range": [
     0,
-    1
+    0.25
   ],
+  "display_rotation_degrees": 180,
+  "reference_metrics": "/home/jy2228/ConvRML/experiments/video_uncertainty_20261030/outputs",
+  "original_metric_values_retained": true,
+  "replay_max_width_difference": 6.7166102092203195e-06,
   "interval_definition": "RGB pixel mean of clip(upper,0,1) - clip(lower,0,1)",
   "per_frame": [
     {
@@ -53,7 +57,7 @@
     {
       "frame": 2,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950001",
-      "seconds": 0.1,
+      "seconds": 0.05,
       "mean_interval_width": 0.0906491525301814,
       "width_raw": 0.09558270871639252,
       "crossing_fraction": 0.0,
@@ -65,7 +69,7 @@
     {
       "frame": 3,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950002",
-      "seconds": 0.2,
+      "seconds": 0.1,
       "mean_interval_width": 0.09488768521340055,
       "width_raw": 0.0998310074210167,
       "crossing_fraction": 0.0,
@@ -77,7 +81,7 @@
     {
       "frame": 4,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950003",
-      "seconds": 0.3,
+      "seconds": 0.15,
       "mean_interval_width": 0.09488768521340055,
       "width_raw": 0.0998310074210167,
       "crossing_fraction": 0.0,
@@ -89,7 +93,7 @@
     {
       "frame": 5,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950004",
-      "seconds": 0.4,
+      "seconds": 0.2,
       "mean_interval_width": 0.08928728170999105,
       "width_raw": 0.09417661279439926,
       "crossing_fraction": 0.0,
@@ -101,7 +105,7 @@
     {
       "frame": 6,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950005",
-      "seconds": 0.5,
+      "seconds": 0.25,
       "mean_interval_width": 0.09228475481774497,
       "width_raw": 0.09703920036554337,
       "crossing_fraction": 0.0,
@@ -113,7 +117,7 @@
     {
       "frame": 7,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950006",
-      "seconds": 0.6,
+      "seconds": 0.3,
       "mean_interval_width": 0.09228475481774497,
       "width_raw": 0.09703920036554337,
       "crossing_fraction": 0.0,
@@ -125,7 +129,7 @@
     {
       "frame": 8,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950007",
-      "seconds": 0.7,
+      "seconds": 0.35,
       "mean_interval_width": 0.09157421635971222,
       "width_raw": 0.09615684300661087,
       "crossing_fraction": 0.0,
@@ -137,7 +141,7 @@
     {
       "frame": 9,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950008",
-      "seconds": 0.8,
+      "seconds": 0.4,
       "mean_interval_width": 0.0893957027452736,
       "width_raw": 0.09396327286958694,
       "crossing_fraction": 0.0,
@@ -149,7 +153,7 @@
     {
       "frame": 10,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950009",
-      "seconds": 0.9,
+      "seconds": 0.45,
       "mean_interval_width": 0.0893957027452736,
       "width_raw": 0.09396327286958694,
       "crossing_fraction": 0.0,
@@ -161,7 +165,7 @@
     {
       "frame": 11,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950010",
-      "seconds": 1.0,
+      "seconds": 0.5,
       "mean_interval_width": 0.09047747462222867,
       "width_raw": 0.09520795196294785,
       "crossing_fraction": 0.0,
@@ -173,7 +177,7 @@
     {
       "frame": 12,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950011",
-      "seconds": 1.1,
+      "seconds": 0.55,
       "mean_interval_width": 0.09047747462222867,
       "width_raw": 0.09520795196294785,
       "crossing_fraction": 0.0,
@@ -185,7 +189,7 @@
     {
       "frame": 13,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950012",
-      "seconds": 1.2,
+      "seconds": 0.6,
       "mean_interval_width": 0.08675717644547055,
       "width_raw": 0.09108902513980865,
       "crossing_fraction": 0.0,
@@ -197,7 +201,7 @@
     {
       "frame": 14,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950013",
-      "seconds": 1.3,
+      "seconds": 0.65,
       "mean_interval_width": 0.08660911490417325,
       "width_raw": 0.0910603404045105,
       "crossing_fraction": 0.0,
@@ -209,7 +213,7 @@
     {
       "frame": 15,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950014",
-      "seconds": 1.4,
+      "seconds": 0.7,
       "mean_interval_width": 0.08660911490417325,
       "width_raw": 0.0910603404045105,
       "crossing_fraction": 0.0,
@@ -221,7 +225,7 @@
     {
       "frame": 16,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950015",
-      "seconds": 1.5,
+      "seconds": 0.75,
       "mean_interval_width": 0.08760426391626727,
       "width_raw": 0.09194227308034897,
       "crossing_fraction": 0.0,
@@ -233,7 +237,7 @@
     {
       "frame": 17,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950016",
-      "seconds": 1.6,
+      "seconds": 0.8,
       "mean_interval_width": 0.08473218039307813,
       "width_raw": 0.08885928243398666,
       "crossing_fraction": 0.0,
@@ -245,7 +249,7 @@
     {
       "frame": 18,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950017",
-      "seconds": 1.7,
+      "seconds": 0.85,
       "mean_interval_width": 0.08473218039307813,
       "width_raw": 0.08885928243398666,
       "crossing_fraction": 0.0,
@@ -257,7 +261,7 @@
     {
       "frame": 19,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950018",
-      "seconds": 1.8,
+      "seconds": 0.9,
       "mean_interval_width": 0.08390446638390826,
       "width_raw": 0.08816838264465332,
       "crossing_fraction": 0.0,
@@ -269,7 +273,7 @@
     {
       "frame": 20,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950019",
-      "seconds": 1.9,
+      "seconds": 0.95,
       "mean_interval_width": 0.08390446638390826,
       "width_raw": 0.08816838264465332,
       "crossing_fraction": 0.0,
@@ -281,7 +285,7 @@
     {
       "frame": 21,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950020",
-      "seconds": 2.0,
+      "seconds": 1.0,
       "mean_interval_width": 0.08475277699519652,
       "width_raw": 0.08877688646316528,
       "crossing_fraction": 0.0,
@@ -293,7 +297,7 @@
     {
       "frame": 22,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950021",
-      "seconds": 2.1,
+      "seconds": 1.05,
       "mean_interval_width": 0.08215034129604175,
       "width_raw": 0.08607731014490128,
       "crossing_fraction": 0.0,
@@ -305,7 +309,7 @@
     {
       "frame": 23,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950022",
-      "seconds": 2.2,
+      "seconds": 1.1,
       "mean_interval_width": 0.08215034129604175,
       "width_raw": 0.08607731014490128,
       "crossing_fraction": 0.0,
@@ -317,7 +321,7 @@
     {
       "frame": 24,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950023",
-      "seconds": 2.3,
+      "seconds": 1.15,
       "mean_interval_width": 0.08347699687792841,
       "width_raw": 0.08742889016866684,
       "crossing_fraction": 0.0,
@@ -329,7 +333,7 @@
     {
       "frame": 25,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950024",
-      "seconds": 2.4,
+      "seconds": 1.2,
       "mean_interval_width": 0.08388241737459928,
       "width_raw": 0.08776664733886719,
       "crossing_fraction": 0.0,
@@ -341,7 +345,7 @@
     {
       "frame": 26,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950025",
-      "seconds": 2.5,
+      "seconds": 1.25,
       "mean_interval_width": 0.08388241737459928,
       "width_raw": 0.08776664733886719,
       "crossing_fraction": 0.0,
@@ -353,7 +357,7 @@
     {
       "frame": 27,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950026",
-      "seconds": 2.6,
+      "seconds": 1.3,
       "mean_interval_width": 0.08044781449372682,
       "width_raw": 0.08412767201662064,
       "crossing_fraction": 0.0,
@@ -365,7 +369,7 @@
     {
       "frame": 28,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950027",
-      "seconds": 2.7,
+      "seconds": 1.35,
       "mean_interval_width": 0.08044781449372682,
       "width_raw": 0.08412767201662064,
       "crossing_fraction": 0.0,
@@ -377,7 +381,7 @@
     {
       "frame": 29,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950028",
-      "seconds": 2.8,
+      "seconds": 1.4,
       "mean_interval_width": 0.08340857477636282,
       "width_raw": 0.08724907040596008,
       "crossing_fraction": 0.0,
@@ -389,7 +393,7 @@
     {
       "frame": 30,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950029",
-      "seconds": 2.9,
+      "seconds": 1.45,
       "mean_interval_width": 0.08036861937098272,
       "width_raw": 0.08426542580127716,
       "crossing_fraction": 0.0,
@@ -401,7 +405,7 @@
     {
       "frame": 31,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950030",
-      "seconds": 3.0,
+      "seconds": 1.5,
       "mean_interval_width": 0.08036861937098272,
       "width_raw": 0.08426542580127716,
       "crossing_fraction": 0.0,
@@ -413,7 +417,7 @@
     {
       "frame": 32,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950031",
-      "seconds": 3.1,
+      "seconds": 1.55,
       "mean_interval_width": 0.08281947859545094,
       "width_raw": 0.0866473987698555,
       "crossing_fraction": 0.0,
@@ -425,7 +429,7 @@
     {
       "frame": 33,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950032",
-      "seconds": 3.2,
+      "seconds": 1.6,
       "mean_interval_width": 0.08299830054220607,
       "width_raw": 0.08671368658542633,
       "crossing_fraction": 0.0,
@@ -437,7 +441,7 @@
     {
       "frame": 34,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950033",
-      "seconds": 3.3,
+      "seconds": 1.65,
       "mean_interval_width": 0.08299830054220607,
       "width_raw": 0.08671368658542633,
       "crossing_fraction": 0.0,
@@ -449,7 +453,7 @@
     {
       "frame": 35,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950034",
-      "seconds": 3.4,
+      "seconds": 1.7,
       "mean_interval_width": 0.08297706793325935,
       "width_raw": 0.08678280562162399,
       "crossing_fraction": 0.0,
@@ -461,7 +465,7 @@
     {
       "frame": 36,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950035",
-      "seconds": 3.5,
+      "seconds": 1.75,
       "mean_interval_width": 0.08297706793325935,
       "width_raw": 0.08678280562162399,
       "crossing_fraction": 0.0,
@@ -473,7 +477,7 @@
     {
       "frame": 37,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950036",
-      "seconds": 3.6,
+      "seconds": 1.8,
       "mean_interval_width": 0.08171992162558538,
       "width_raw": 0.08554860204458237,
       "crossing_fraction": 0.0,
@@ -485,7 +489,7 @@
     {
       "frame": 38,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950037",
-      "seconds": 3.7,
+      "seconds": 1.85,
       "mean_interval_width": 0.08475464865604823,
       "width_raw": 0.08854600787162781,
       "crossing_fraction": 0.0,
@@ -497,7 +501,7 @@
     {
       "frame": 39,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950038",
-      "seconds": 3.8,
+      "seconds": 1.9,
       "mean_interval_width": 0.08475464865604823,
       "width_raw": 0.08854600787162781,
       "crossing_fraction": 0.0,
@@ -509,7 +513,7 @@
     {
       "frame": 40,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950039",
-      "seconds": 3.9,
+      "seconds": 1.95,
       "mean_interval_width": 0.084663664112058,
       "width_raw": 0.0884237140417099,
       "crossing_fraction": 0.0,
@@ -521,7 +525,7 @@
     {
       "frame": 41,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950040",
-      "seconds": 4.0,
+      "seconds": 2.0,
       "mean_interval_width": 0.08370096610794986,
       "width_raw": 0.08756697177886963,
       "crossing_fraction": 0.0,
@@ -533,7 +537,7 @@
     {
       "frame": 42,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950041",
-      "seconds": 4.1,
+      "seconds": 2.05,
       "mean_interval_width": 0.08370096610794986,
       "width_raw": 0.08756697177886963,
       "crossing_fraction": 0.0,
@@ -545,7 +549,7 @@
     {
       "frame": 43,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950042",
-      "seconds": 4.2,
+      "seconds": 2.1,
       "mean_interval_width": 0.08098917892245258,
       "width_raw": 0.08475759625434875,
       "crossing_fraction": 0.0,
@@ -557,7 +561,7 @@
     {
       "frame": 44,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950043",
-      "seconds": 4.3,
+      "seconds": 2.15,
       "mean_interval_width": 0.08098917892245258,
       "width_raw": 0.08475759625434875,
       "crossing_fraction": 0.0,
@@ -569,7 +573,7 @@
     {
       "frame": 45,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950044",
-      "seconds": 4.4,
+      "seconds": 2.2,
       "mean_interval_width": 0.08377441988398493,
       "width_raw": 0.08770082890987396,
       "crossing_fraction": 0.0,
@@ -581,7 +585,7 @@
     {
       "frame": 46,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950045",
-      "seconds": 4.5,
+      "seconds": 2.25,
       "mean_interval_width": 0.08446891666302973,
       "width_raw": 0.0882546678185463,
       "crossing_fraction": 0.0,
@@ -593,7 +597,7 @@
     {
       "frame": 47,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950046",
-      "seconds": 4.6,
+      "seconds": 2.3,
       "mean_interval_width": 0.08446891666302973,
       "width_raw": 0.0882546678185463,
       "crossing_fraction": 0.0,
@@ -605,7 +609,7 @@
     {
       "frame": 48,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950047",
-      "seconds": 4.7,
+      "seconds": 2.35,
       "mean_interval_width": 0.08546064547258701,
       "width_raw": 0.08926340192556381,
       "crossing_fraction": 0.0,
@@ -617,7 +621,7 @@
     {
       "frame": 49,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950048",
-      "seconds": 4.8,
+      "seconds": 2.4,
       "mean_interval_width": 0.08546064547258701,
       "width_raw": 0.08926340192556381,
       "crossing_fraction": 0.0,
@@ -629,7 +633,7 @@
     {
       "frame": 50,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950049",
-      "seconds": 4.9,
+      "seconds": 2.45,
       "mean_interval_width": 0.08282461622942612,
       "width_raw": 0.08656471222639084,
       "crossing_fraction": 0.0,
@@ -641,7 +645,7 @@
     {
       "frame": 51,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950050",
-      "seconds": 5.0,
+      "seconds": 2.5,
       "mean_interval_width": 0.08266948468446085,
       "width_raw": 0.08651737868785858,
       "crossing_fraction": 0.0,
@@ -653,7 +657,7 @@
     {
       "frame": 52,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950051",
-      "seconds": 5.1,
+      "seconds": 2.55,
       "mean_interval_width": 0.08266948468446085,
       "width_raw": 0.08651737868785858,
       "crossing_fraction": 0.0,
@@ -665,7 +669,7 @@
     {
       "frame": 53,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950052",
-      "seconds": 5.2,
+      "seconds": 2.6,
       "mean_interval_width": 0.082245837165066,
       "width_raw": 0.08609967678785324,
       "crossing_fraction": 0.0,
@@ -677,7 +681,7 @@
     {
       "frame": 54,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950053",
-      "seconds": 5.3,
+      "seconds": 2.65,
       "mean_interval_width": 0.08510603974359167,
       "width_raw": 0.08903221786022186,
       "crossing_fraction": 0.0,
@@ -689,7 +693,7 @@
     {
       "frame": 55,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950054",
-      "seconds": 5.4,
+      "seconds": 2.7,
       "mean_interval_width": 0.08510603974359167,
       "width_raw": 0.08903221786022186,
       "crossing_fraction": 0.0,
@@ -701,7 +705,7 @@
     {
       "frame": 56,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950055",
-      "seconds": 5.5,
+      "seconds": 2.75,
       "mean_interval_width": 0.08364651452817268,
       "width_raw": 0.08754748106002808,
       "crossing_fraction": 0.0,
@@ -713,7 +717,7 @@
     {
       "frame": 57,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950056",
-      "seconds": 5.6,
+      "seconds": 2.8,
       "mean_interval_width": 0.08364651452817268,
       "width_raw": 0.08754748106002808,
       "crossing_fraction": 0.0,
@@ -725,7 +729,7 @@
     {
       "frame": 58,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950057",
-      "seconds": 5.7,
+      "seconds": 2.85,
       "mean_interval_width": 0.08271343847794921,
       "width_raw": 0.08664204180240631,
       "crossing_fraction": 0.0,
@@ -737,7 +741,7 @@
     {
       "frame": 59,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950058",
-      "seconds": 5.8,
+      "seconds": 2.9,
       "mean_interval_width": 0.08117830444783943,
       "width_raw": 0.0850520059466362,
       "crossing_fraction": 0.0,
@@ -749,7 +753,7 @@
     {
       "frame": 60,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950059",
-      "seconds": 5.9,
+      "seconds": 2.95,
       "mean_interval_width": 0.08117830444783943,
       "width_raw": 0.0850520059466362,
       "crossing_fraction": 0.0,
@@ -761,7 +765,7 @@
     {
       "frame": 61,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950060",
-      "seconds": 6.0,
+      "seconds": 3.0,
       "mean_interval_width": 0.08179154528069889,
       "width_raw": 0.08562421798706055,
       "crossing_fraction": 0.0,
@@ -773,7 +777,7 @@
     {
       "frame": 62,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950061",
-      "seconds": 6.1,
+      "seconds": 3.05,
       "mean_interval_width": 0.08193375454568258,
       "width_raw": 0.08579712361097336,
       "crossing_fraction": 0.0,
@@ -785,7 +789,7 @@
     {
       "frame": 63,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950062",
-      "seconds": 6.2,
+      "seconds": 3.1,
       "mean_interval_width": 0.08193375454568258,
       "width_raw": 0.08579712361097336,
       "crossing_fraction": 0.0,
@@ -797,7 +801,7 @@
     {
       "frame": 64,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950063",
-      "seconds": 6.3,
+      "seconds": 3.15,
       "mean_interval_width": 0.08437592733299948,
       "width_raw": 0.08830475062131882,
       "crossing_fraction": 0.0,
@@ -809,7 +813,7 @@
     {
       "frame": 65,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950064",
-      "seconds": 6.4,
+      "seconds": 3.2,
       "mean_interval_width": 0.08437592733299948,
       "width_raw": 0.08830475062131882,
       "crossing_fraction": 0.0,
@@ -821,7 +825,7 @@
     {
       "frame": 66,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950065",
-      "seconds": 6.5,
+      "seconds": 3.25,
       "mean_interval_width": 0.07964984386229028,
       "width_raw": 0.0833704024553299,
       "crossing_fraction": 0.0,
@@ -833,7 +837,7 @@
     {
       "frame": 67,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950066",
-      "seconds": 6.6,
+      "seconds": 3.3,
       "mean_interval_width": 0.08266007916693886,
       "width_raw": 0.08647854626178741,
       "crossing_fraction": 0.0,
@@ -845,7 +849,7 @@
     {
       "frame": 68,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950067",
-      "seconds": 6.7,
+      "seconds": 3.35,
       "mean_interval_width": 0.08266007916693886,
       "width_raw": 0.08647854626178741,
       "crossing_fraction": 0.0,
@@ -857,7 +861,7 @@
     {
       "frame": 69,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950068",
-      "seconds": 6.8,
+      "seconds": 3.4,
       "mean_interval_width": 0.0809098703213409,
       "width_raw": 0.08474110066890717,
       "crossing_fraction": 0.0,
@@ -869,7 +873,7 @@
     {
       "frame": 70,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950069",
-      "seconds": 6.9,
+      "seconds": 3.45,
       "mean_interval_width": 0.08130518255170704,
       "width_raw": 0.08516468107700348,
       "crossing_fraction": 0.0,
@@ -881,7 +885,7 @@
     {
       "frame": 71,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950070",
-      "seconds": 7.0,
+      "seconds": 3.5,
       "mean_interval_width": 0.08130518255170704,
       "width_raw": 0.08516468107700348,
       "crossing_fraction": 0.0,
@@ -893,7 +897,7 @@
     {
       "frame": 72,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950071",
-      "seconds": 7.1,
+      "seconds": 3.55,
       "mean_interval_width": 0.08122840429597102,
       "width_raw": 0.08509206771850586,
       "crossing_fraction": 0.0,
@@ -905,7 +909,7 @@
     {
       "frame": 73,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950072",
-      "seconds": 7.2,
+      "seconds": 3.6,
       "mean_interval_width": 0.08122840429597102,
       "width_raw": 0.08509206771850586,
       "crossing_fraction": 0.0,
@@ -917,7 +921,7 @@
     {
       "frame": 74,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950073",
-      "seconds": 7.3,
+      "seconds": 3.65,
       "mean_interval_width": 0.08306576840943757,
       "width_raw": 0.08682697266340256,
       "crossing_fraction": 0.0,
@@ -929,7 +933,7 @@
     {
       "frame": 75,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950074",
-      "seconds": 7.4,
+      "seconds": 3.7,
       "mean_interval_width": 0.08123415547484081,
       "width_raw": 0.08492720872163773,
       "crossing_fraction": 0.0,
@@ -941,7 +945,7 @@
     {
       "frame": 76,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950075",
-      "seconds": 7.5,
+      "seconds": 3.75,
       "mean_interval_width": 0.08123415547484081,
       "width_raw": 0.08492720872163773,
       "crossing_fraction": 0.0,
@@ -953,7 +957,7 @@
     {
       "frame": 77,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950076",
-      "seconds": 7.6,
+      "seconds": 3.8,
       "mean_interval_width": 0.0831666635778345,
       "width_raw": 0.08697777986526489,
       "crossing_fraction": 0.0,
@@ -965,7 +969,7 @@
     {
       "frame": 78,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950077",
-      "seconds": 7.7,
+      "seconds": 3.85,
       "mean_interval_width": 0.08473392743307746,
       "width_raw": 0.08850923180580139,
       "crossing_fraction": 0.0,
@@ -977,7 +981,7 @@
     {
       "frame": 79,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950078",
-      "seconds": 7.8,
+      "seconds": 3.9,
       "mean_interval_width": 0.08473392743307746,
       "width_raw": 0.08850923180580139,
       "crossing_fraction": 0.0,
@@ -989,7 +993,7 @@
     {
       "frame": 80,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950079",
-      "seconds": 7.9,
+      "seconds": 3.95,
       "mean_interval_width": 0.08419901987380773,
       "width_raw": 0.0880938321352005,
       "crossing_fraction": 0.0,
@@ -1001,7 +1005,7 @@
     {
       "frame": 81,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950080",
-      "seconds": 8.0,
+      "seconds": 4.0,
       "mean_interval_width": 0.08419901987380773,
       "width_raw": 0.0880938321352005,
       "crossing_fraction": 0.0,
@@ -1013,7 +1017,7 @@
     {
       "frame": 82,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950081",
-      "seconds": 8.1,
+      "seconds": 4.05,
       "mean_interval_width": 0.08071637155593488,
       "width_raw": 0.08454786986112595,
       "crossing_fraction": 0.0,
@@ -1025,7 +1029,7 @@
     {
       "frame": 83,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950082",
-      "seconds": 8.2,
+      "seconds": 4.1,
       "mean_interval_width": 0.08167661702050841,
       "width_raw": 0.08554038405418396,
       "crossing_fraction": 0.0,
@@ -1037,7 +1041,7 @@
     {
       "frame": 84,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950083",
-      "seconds": 8.3,
+      "seconds": 4.15,
       "mean_interval_width": 0.08167661702050841,
       "width_raw": 0.08554038405418396,
       "crossing_fraction": 0.0,
@@ -1049,7 +1053,7 @@
     {
       "frame": 85,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950084",
-      "seconds": 8.4,
+      "seconds": 4.2,
       "mean_interval_width": 0.08349475264762163,
       "width_raw": 0.08740562200546265,
       "crossing_fraction": 0.0,
@@ -1061,7 +1065,7 @@
     {
       "frame": 86,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950085",
-      "seconds": 8.5,
+      "seconds": 4.25,
       "mean_interval_width": 0.0812112150580602,
       "width_raw": 0.08497872948646545,
       "crossing_fraction": 0.0,
@@ -1073,7 +1077,7 @@
     {
       "frame": 87,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950086",
-      "seconds": 8.6,
+      "seconds": 4.3,
       "mean_interval_width": 0.0812112150580602,
       "width_raw": 0.08497872948646545,
       "crossing_fraction": 0.0,
@@ -1085,7 +1089,7 @@
     {
       "frame": 88,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950087",
-      "seconds": 8.7,
+      "seconds": 4.35,
       "mean_interval_width": 0.08330150737382855,
       "width_raw": 0.08715701848268509,
       "crossing_fraction": 0.0,
@@ -1097,7 +1101,7 @@
     {
       "frame": 89,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950088",
-      "seconds": 8.8,
+      "seconds": 4.4,
       "mean_interval_width": 0.08330150737382855,
       "width_raw": 0.08715701848268509,
       "crossing_fraction": 0.0,
@@ -1109,7 +1113,7 @@
     {
       "frame": 90,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950089",
-      "seconds": 8.9,
+      "seconds": 4.45,
       "mean_interval_width": 0.08254487890259048,
       "width_raw": 0.08639369904994965,
       "crossing_fraction": 0.0,
@@ -1121,7 +1125,7 @@
     {
       "frame": 91,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950090",
-      "seconds": 9.0,
+      "seconds": 4.5,
       "mean_interval_width": 0.08045042372155314,
       "width_raw": 0.08438795804977417,
       "crossing_fraction": 0.0,
@@ -1133,7 +1137,7 @@
     {
       "frame": 92,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950091",
-      "seconds": 9.1,
+      "seconds": 4.55,
       "mean_interval_width": 0.08045042372155314,
       "width_raw": 0.08438795804977417,
       "crossing_fraction": 0.0,
@@ -1145,7 +1149,7 @@
     {
       "frame": 93,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950092",
-      "seconds": 9.2,
+      "seconds": 4.6,
       "mean_interval_width": 0.07986204557084703,
       "width_raw": 0.08375504612922668,
       "crossing_fraction": 0.0,
@@ -1157,7 +1161,7 @@
     {
       "frame": 94,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950093",
-      "seconds": 9.3,
+      "seconds": 4.65,
       "mean_interval_width": 0.0817155761730531,
       "width_raw": 0.0856219232082367,
       "crossing_fraction": 0.0,
@@ -1169,7 +1173,7 @@
     {
       "frame": 95,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950094",
-      "seconds": 9.4,
+      "seconds": 4.7,
       "mean_interval_width": 0.0817155761730531,
       "width_raw": 0.0856219232082367,
       "crossing_fraction": 0.0,
@@ -1181,7 +1185,7 @@
     {
       "frame": 96,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950095",
-      "seconds": 9.5,
+      "seconds": 4.75,
       "mean_interval_width": 0.07944072331964894,
       "width_raw": 0.08318782597780228,
       "crossing_fraction": 0.0,
@@ -1193,7 +1197,7 @@
     {
       "frame": 97,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950096",
-      "seconds": 9.6,
+      "seconds": 4.8,
       "mean_interval_width": 0.07944072331964894,
       "width_raw": 0.08318782597780228,
       "crossing_fraction": 0.0,
@@ -1205,7 +1209,7 @@
     {
       "frame": 98,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950097",
-      "seconds": 9.7,
+      "seconds": 4.85,
       "mean_interval_width": 0.08125805428197436,
       "width_raw": 0.08508468419313431,
       "crossing_fraction": 0.0,
@@ -1217,7 +1221,7 @@
     {
       "frame": 99,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950098",
-      "seconds": 9.8,
+      "seconds": 4.9,
       "mean_interval_width": 0.08455602362738442,
       "width_raw": 0.08849997073411942,
       "crossing_fraction": 0.0,
@@ -1229,7 +1233,7 @@
     {
       "frame": 100,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950099",
-      "seconds": 9.9,
+      "seconds": 4.95,
       "mean_interval_width": 0.08455602362738442,
       "width_raw": 0.08849997073411942,
       "crossing_fraction": 0.0,
@@ -1241,7 +1245,7 @@
     {
       "frame": 101,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950100",
-      "seconds": 10.0,
+      "seconds": 5.0,
       "mean_interval_width": 0.08397919439460358,
       "width_raw": 0.08808282017707825,
       "crossing_fraction": 0.0,
@@ -1253,7 +1257,7 @@
     {
       "frame": 102,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950101",
-      "seconds": 10.1,
+      "seconds": 5.05,
       "mean_interval_width": 0.07764541872591592,
       "width_raw": 0.0815214142203331,
       "crossing_fraction": 0.0,
@@ -1265,7 +1269,7 @@
     {
       "frame": 103,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950102",
-      "seconds": 10.2,
+      "seconds": 5.1,
       "mean_interval_width": 0.07764541872591592,
       "width_raw": 0.0815214142203331,
       "crossing_fraction": 0.0,
@@ -1277,7 +1281,7 @@
     {
       "frame": 104,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950103",
-      "seconds": 10.3,
+      "seconds": 5.15,
       "mean_interval_width": 0.08195499191243104,
       "width_raw": 0.08602844178676605,
       "crossing_fraction": 0.0,
@@ -1289,7 +1293,7 @@
     {
       "frame": 105,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950104",
-      "seconds": 10.4,
+      "seconds": 5.2,
       "mean_interval_width": 0.08195499191243104,
       "width_raw": 0.08602844178676605,
       "crossing_fraction": 0.0,
@@ -1301,7 +1305,7 @@
     {
       "frame": 106,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950105",
-      "seconds": 10.5,
+      "seconds": 5.25,
       "mean_interval_width": 0.08126671981937557,
       "width_raw": 0.08527534455060959,
       "crossing_fraction": 0.0,
@@ -1313,7 +1317,7 @@
     {
       "frame": 107,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950106",
-      "seconds": 10.6,
+      "seconds": 5.3,
       "mean_interval_width": 0.08391753057879399,
       "width_raw": 0.08784392476081848,
       "crossing_fraction": 0.0,
@@ -1325,7 +1329,7 @@
     {
       "frame": 108,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950107",
-      "seconds": 10.7,
+      "seconds": 5.35,
       "mean_interval_width": 0.08391753057879399,
       "width_raw": 0.08784392476081848,
       "crossing_fraction": 0.0,
@@ -1337,7 +1341,7 @@
     {
       "frame": 109,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950108",
-      "seconds": 10.8,
+      "seconds": 5.4,
       "mean_interval_width": 0.08345051209974241,
       "width_raw": 0.08737550675868988,
       "crossing_fraction": 0.0,
@@ -1349,7 +1353,7 @@
     {
       "frame": 110,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950109",
-      "seconds": 10.9,
+      "seconds": 5.45,
       "mean_interval_width": 0.08471385237131189,
       "width_raw": 0.08868370205163956,
       "crossing_fraction": 0.0,
@@ -1361,7 +1365,7 @@
     {
       "frame": 111,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950110",
-      "seconds": 11.0,
+      "seconds": 5.5,
       "mean_interval_width": 0.08471385237131189,
       "width_raw": 0.08868370205163956,
       "crossing_fraction": 0.0,
@@ -1373,7 +1377,7 @@
     {
       "frame": 112,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950111",
-      "seconds": 11.1,
+      "seconds": 5.55,
       "mean_interval_width": 0.08651995278924776,
       "width_raw": 0.09060243517160416,
       "crossing_fraction": 0.0,
@@ -1385,7 +1389,7 @@
     {
       "frame": 113,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950112",
-      "seconds": 11.2,
+      "seconds": 5.6,
       "mean_interval_width": 0.08651995278924776,
       "width_raw": 0.09060243517160416,
       "crossing_fraction": 0.0,
@@ -1397,7 +1401,7 @@
     {
       "frame": 114,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950113",
-      "seconds": 11.3,
+      "seconds": 5.65,
       "mean_interval_width": 0.08123355422605862,
       "width_raw": 0.08525729179382324,
       "crossing_fraction": 0.0,
@@ -1409,7 +1413,7 @@
     {
       "frame": 115,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950114",
-      "seconds": 11.4,
+      "seconds": 5.7,
       "mean_interval_width": 0.08482572055503732,
       "width_raw": 0.08881191909313202,
       "crossing_fraction": 0.0,
@@ -1421,7 +1425,7 @@
     {
       "frame": 116,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950115",
-      "seconds": 11.5,
+      "seconds": 5.75,
       "mean_interval_width": 0.08482572055503732,
       "width_raw": 0.08881191909313202,
       "crossing_fraction": 0.0,
@@ -1433,7 +1437,7 @@
     {
       "frame": 117,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950116",
-      "seconds": 11.6,
+      "seconds": 5.8,
       "mean_interval_width": 0.08612595897790676,
       "width_raw": 0.0900399386882782,
       "crossing_fraction": 0.0,
@@ -1445,7 +1449,7 @@
     {
       "frame": 118,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950117",
-      "seconds": 11.7,
+      "seconds": 5.85,
       "mean_interval_width": 0.08210645999874956,
       "width_raw": 0.08589920401573181,
       "crossing_fraction": 0.0,
@@ -1457,7 +1461,7 @@
     {
       "frame": 119,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950118",
-      "seconds": 11.8,
+      "seconds": 5.9,
       "mean_interval_width": 0.08210645999874956,
       "width_raw": 0.08589920401573181,
       "crossing_fraction": 0.0,
@@ -1469,7 +1473,7 @@
     {
       "frame": 120,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950119",
-      "seconds": 11.9,
+      "seconds": 5.95,
       "mean_interval_width": 0.08550908802860133,
       "width_raw": 0.0894598439335823,
       "crossing_fraction": 0.0,
@@ -1481,7 +1485,7 @@
     {
       "frame": 121,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950120",
-      "seconds": 12.0,
+      "seconds": 6.0,
       "mean_interval_width": 0.08550908802860133,
       "width_raw": 0.0894598439335823,
       "crossing_fraction": 0.0,
@@ -1493,7 +1497,7 @@
     {
       "frame": 122,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950121",
-      "seconds": 12.1,
+      "seconds": 6.05,
       "mean_interval_width": 0.0837276532178693,
       "width_raw": 0.08765960484743118,
       "crossing_fraction": 0.0,
@@ -1505,7 +1509,7 @@
     {
       "frame": 123,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950122",
-      "seconds": 12.2,
+      "seconds": 6.1,
       "mean_interval_width": 0.08622127707160693,
       "width_raw": 0.09010864794254303,
       "crossing_fraction": 0.0,
@@ -1517,7 +1521,7 @@
     {
       "frame": 124,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950123",
-      "seconds": 12.3,
+      "seconds": 6.15,
       "mean_interval_width": 0.08622127707160693,
       "width_raw": 0.09010864794254303,
       "crossing_fraction": 0.0,
@@ -1529,7 +1533,7 @@
     {
       "frame": 125,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950124",
-      "seconds": 12.4,
+      "seconds": 6.2,
       "mean_interval_width": 0.08510351700876384,
       "width_raw": 0.0889773815870285,
       "crossing_fraction": 0.0,
@@ -1541,7 +1545,7 @@
     {
       "frame": 126,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950125",
-      "seconds": 12.5,
+      "seconds": 6.25,
       "mean_interval_width": 0.08865692260076113,
       "width_raw": 0.09260981529951096,
       "crossing_fraction": 0.0,
@@ -1553,7 +1557,7 @@
     {
       "frame": 127,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950126",
-      "seconds": 12.6,
+      "seconds": 6.3,
       "mean_interval_width": 0.08865692260076113,
       "width_raw": 0.09260981529951096,
       "crossing_fraction": 0.0,
@@ -1565,7 +1569,7 @@
     {
       "frame": 128,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950127",
-      "seconds": 12.7,
+      "seconds": 6.35,
       "mean_interval_width": 0.08942168113769353,
       "width_raw": 0.09342101961374283,
       "crossing_fraction": 0.0,
@@ -1577,7 +1581,7 @@
     {
       "frame": 129,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950128",
-      "seconds": 12.8,
+      "seconds": 6.4,
       "mean_interval_width": 0.08942168113769353,
       "width_raw": 0.09342101961374283,
       "crossing_fraction": 0.0,
@@ -1589,7 +1593,7 @@
     {
       "frame": 130,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950129",
-      "seconds": 12.9,
+      "seconds": 6.45,
       "mean_interval_width": 0.08844132518035264,
       "width_raw": 0.09255774319171906,
       "crossing_fraction": 0.0,
@@ -1601,7 +1605,7 @@
     {
       "frame": 131,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950130",
-      "seconds": 13.0,
+      "seconds": 6.5,
       "mean_interval_width": 0.1017501132541171,
       "width_raw": 0.10660628229379654,
       "crossing_fraction": 0.0,
@@ -1613,7 +1617,7 @@
     {
       "frame": 132,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950131",
-      "seconds": 13.1,
+      "seconds": 6.55,
       "mean_interval_width": 0.1017501132541171,
       "width_raw": 0.10660628229379654,
       "crossing_fraction": 0.0,
@@ -1625,7 +1629,7 @@
     {
       "frame": 133,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950132",
-      "seconds": 13.2,
+      "seconds": 6.6,
       "mean_interval_width": 0.10419212142918252,
       "width_raw": 0.10916423797607422,
       "crossing_fraction": 0.0,
@@ -1637,7 +1641,7 @@
     {
       "frame": 134,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950133",
-      "seconds": 13.3,
+      "seconds": 6.65,
       "mean_interval_width": 0.10419212142918252,
       "width_raw": 0.10916423797607422,
       "crossing_fraction": 0.0,
@@ -1649,7 +1653,7 @@
     {
       "frame": 135,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950134",
-      "seconds": 13.4,
+      "seconds": 6.7,
       "mean_interval_width": 0.11861102266110482,
       "width_raw": 0.12493037432432175,
       "crossing_fraction": 0.0,
@@ -1661,7 +1665,7 @@
     {
       "frame": 136,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950135",
-      "seconds": 13.5,
+      "seconds": 6.75,
       "mean_interval_width": 0.10525159559173329,
       "width_raw": 0.11064369976520538,
       "crossing_fraction": 0.0,
@@ -1673,7 +1677,7 @@
     {
       "frame": 137,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950136",
-      "seconds": 13.6,
+      "seconds": 6.8,
       "mean_interval_width": 0.1321795791452419,
       "width_raw": 0.14002716541290283,
       "crossing_fraction": 0.0,
@@ -1685,7 +1689,7 @@
     {
       "frame": 138,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950137",
-      "seconds": 13.7,
+      "seconds": 6.85,
       "mean_interval_width": 0.13153948980270005,
       "width_raw": 0.1408388763666153,
       "crossing_fraction": 0.0,
@@ -1697,7 +1701,7 @@
     {
       "frame": 139,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950138",
-      "seconds": 13.8,
+      "seconds": 6.9,
       "mean_interval_width": 0.1273642451622998,
       "width_raw": 0.13479675352573395,
       "crossing_fraction": 0.0,
@@ -1709,7 +1713,7 @@
     {
       "frame": 140,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950139",
-      "seconds": 13.9,
+      "seconds": 6.95,
       "mean_interval_width": 0.12351909625439234,
       "width_raw": 0.13067218661308289,
       "crossing_fraction": 0.0,
@@ -1721,7 +1725,7 @@
     {
       "frame": 141,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950140",
-      "seconds": 14.0,
+      "seconds": 7.0,
       "mean_interval_width": 0.13171205631570693,
       "width_raw": 0.13921163976192474,
       "crossing_fraction": 0.0,
@@ -1733,7 +1737,7 @@
     {
       "frame": 142,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950141",
-      "seconds": 14.1,
+      "seconds": 7.05,
       "mean_interval_width": 0.12038008762185899,
       "width_raw": 0.12872353196144104,
       "crossing_fraction": 0.0,
@@ -1745,7 +1749,7 @@
     {
       "frame": 143,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950142",
-      "seconds": 14.2,
+      "seconds": 7.1,
       "mean_interval_width": 0.11278994140927089,
       "width_raw": 0.11948246508836746,
       "crossing_fraction": 0.0,
@@ -1757,7 +1761,7 @@
     {
       "frame": 144,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950143",
-      "seconds": 14.3,
+      "seconds": 7.15,
       "mean_interval_width": 0.09950051631975466,
       "width_raw": 0.10473843663930893,
       "crossing_fraction": 0.0,
@@ -1769,7 +1773,7 @@
     {
       "frame": 145,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950144",
-      "seconds": 14.4,
+      "seconds": 7.2,
       "mean_interval_width": 0.09838528597723349,
       "width_raw": 0.10344716161489487,
       "crossing_fraction": 0.0,
@@ -1781,7 +1785,7 @@
     {
       "frame": 146,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950145",
-      "seconds": 14.5,
+      "seconds": 7.25,
       "mean_interval_width": 0.1035274566875128,
       "width_raw": 0.10841472446918488,
       "crossing_fraction": 0.0,
@@ -1793,7 +1797,7 @@
     {
       "frame": 147,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950146",
-      "seconds": 14.6,
+      "seconds": 7.3,
       "mean_interval_width": 0.1088349946179253,
       "width_raw": 0.11441954970359802,
       "crossing_fraction": 0.0,
@@ -1805,7 +1809,7 @@
     {
       "frame": 148,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950147",
-      "seconds": 14.7,
+      "seconds": 7.35,
       "mean_interval_width": 0.10302252105155554,
       "width_raw": 0.10900477319955826,
       "crossing_fraction": 0.0,
@@ -1817,7 +1821,7 @@
     {
       "frame": 149,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950148",
-      "seconds": 14.8,
+      "seconds": 7.4,
       "mean_interval_width": 0.11201519905377101,
       "width_raw": 0.11908307671546936,
       "crossing_fraction": 0.0,
@@ -1829,7 +1833,7 @@
     {
       "frame": 150,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950149",
-      "seconds": 14.9,
+      "seconds": 7.45,
       "mean_interval_width": 0.10365535187914993,
       "width_raw": 0.10996212065219879,
       "crossing_fraction": 0.0,
@@ -1841,7 +1845,7 @@
     {
       "frame": 151,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950150",
-      "seconds": 15.0,
+      "seconds": 7.5,
       "mean_interval_width": 0.10712739404585853,
       "width_raw": 0.11313854157924652,
       "crossing_fraction": 0.0,
@@ -1853,7 +1857,7 @@
     {
       "frame": 152,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950151",
-      "seconds": 15.1,
+      "seconds": 7.55,
       "mean_interval_width": 0.10143870919792883,
       "width_raw": 0.10608569532632828,
       "crossing_fraction": 0.0,
@@ -1865,7 +1869,7 @@
     {
       "frame": 153,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950152",
-      "seconds": 15.2,
+      "seconds": 7.6,
       "mean_interval_width": 0.1046738538526286,
       "width_raw": 0.10971374064683914,
       "crossing_fraction": 0.0,
@@ -1877,7 +1881,7 @@
     {
       "frame": 154,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950153",
-      "seconds": 15.3,
+      "seconds": 7.65,
       "mean_interval_width": 0.09873301071938788,
       "width_raw": 0.1045001968741417,
       "crossing_fraction": 0.0,
@@ -1889,7 +1893,7 @@
     {
       "frame": 155,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950154",
-      "seconds": 15.4,
+      "seconds": 7.7,
       "mean_interval_width": 0.11583164760678097,
       "width_raw": 0.12149225920438766,
       "crossing_fraction": 0.0,
@@ -1901,7 +1905,7 @@
     {
       "frame": 156,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950155",
-      "seconds": 15.5,
+      "seconds": 7.75,
       "mean_interval_width": 0.1233058126325759,
       "width_raw": 0.12939849495887756,
       "crossing_fraction": 0.0,
@@ -1913,7 +1917,7 @@
     {
       "frame": 157,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950156",
-      "seconds": 15.6,
+      "seconds": 7.8,
       "mean_interval_width": 0.1287250915178367,
       "width_raw": 0.13502252101898193,
       "crossing_fraction": 0.0,
@@ -1925,7 +1929,7 @@
     {
       "frame": 158,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950157",
-      "seconds": 15.7,
+      "seconds": 7.85,
       "mean_interval_width": 0.12330509292490127,
       "width_raw": 0.12941470742225647,
       "crossing_fraction": 0.0,
@@ -1937,7 +1941,7 @@
     {
       "frame": 159,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950158",
-      "seconds": 15.8,
+      "seconds": 7.9,
       "mean_interval_width": 0.11693615734484294,
       "width_raw": 0.12302146852016449,
       "crossing_fraction": 0.0,
@@ -1949,7 +1953,7 @@
     {
       "frame": 160,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950159",
-      "seconds": 15.9,
+      "seconds": 7.95,
       "mean_interval_width": 0.11771134977588317,
       "width_raw": 0.12422914057970047,
       "crossing_fraction": 0.0,
@@ -1961,7 +1965,7 @@
     {
       "frame": 161,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950160",
-      "seconds": 16.0,
+      "seconds": 8.0,
       "mean_interval_width": 0.1148134160055632,
       "width_raw": 0.12120237946510315,
       "crossing_fraction": 0.0,
@@ -1973,7 +1977,7 @@
     {
       "frame": 162,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950161",
-      "seconds": 16.1,
+      "seconds": 8.05,
       "mean_interval_width": 0.12009252163430605,
       "width_raw": 0.12690100073814392,
       "crossing_fraction": 0.0,
@@ -1985,7 +1989,7 @@
     {
       "frame": 163,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950162",
-      "seconds": 16.2,
+      "seconds": 8.1,
       "mean_interval_width": 0.11730984824847847,
       "width_raw": 0.12399353832006454,
       "crossing_fraction": 0.0,
@@ -1997,7 +2001,7 @@
     {
       "frame": 164,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950163",
-      "seconds": 16.3,
+      "seconds": 8.15,
       "mean_interval_width": 0.11641219502365084,
       "width_raw": 0.12313458323478699,
       "crossing_fraction": 0.0,
@@ -2009,7 +2013,7 @@
     {
       "frame": 165,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950164",
-      "seconds": 16.4,
+      "seconds": 8.2,
       "mean_interval_width": 0.12275146470263298,
       "width_raw": 0.1293434202671051,
       "crossing_fraction": 0.0,
@@ -2021,7 +2025,7 @@
     {
       "frame": 166,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950165",
-      "seconds": 16.5,
+      "seconds": 8.25,
       "mean_interval_width": 0.11197551144969865,
       "width_raw": 0.11855996400117874,
       "crossing_fraction": 0.0,
@@ -2033,7 +2037,7 @@
     {
       "frame": 167,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950166",
-      "seconds": 16.6,
+      "seconds": 8.3,
       "mean_interval_width": 0.11982728057508135,
       "width_raw": 0.127122163772583,
       "crossing_fraction": 0.0,
@@ -2045,7 +2049,7 @@
     {
       "frame": 168,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950167",
-      "seconds": 16.7,
+      "seconds": 8.35,
       "mean_interval_width": 0.12795267517943712,
       "width_raw": 0.13559497892856598,
       "crossing_fraction": 0.0,
@@ -2057,7 +2061,7 @@
     {
       "frame": 169,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950168",
-      "seconds": 16.8,
+      "seconds": 8.4,
       "mean_interval_width": 0.12255476363794623,
       "width_raw": 0.12982209026813507,
       "crossing_fraction": 0.0,
@@ -2069,7 +2073,7 @@
     {
       "frame": 170,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950169",
-      "seconds": 16.9,
+      "seconds": 8.45,
       "mean_interval_width": 0.11914901739727199,
       "width_raw": 0.1262386590242386,
       "crossing_fraction": 0.0,
@@ -2081,7 +2085,7 @@
     {
       "frame": 171,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950170",
-      "seconds": 17.0,
+      "seconds": 8.5,
       "mean_interval_width": 0.1175407773493232,
       "width_raw": 0.12483153492212296,
       "crossing_fraction": 0.0,
@@ -2093,7 +2097,7 @@
     {
       "frame": 172,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950171",
-      "seconds": 17.1,
+      "seconds": 8.55,
       "mean_interval_width": 0.11848690137682337,
       "width_raw": 0.12572850286960602,
       "crossing_fraction": 0.0,
@@ -2105,7 +2109,7 @@
     {
       "frame": 173,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950172",
-      "seconds": 17.2,
+      "seconds": 8.6,
       "mean_interval_width": 0.11930839464774329,
       "width_raw": 0.12622717022895813,
       "crossing_fraction": 0.0,
@@ -2117,7 +2121,7 @@
     {
       "frame": 174,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950173",
-      "seconds": 17.3,
+      "seconds": 8.65,
       "mean_interval_width": 0.09831404809705152,
       "width_raw": 0.10508926957845688,
       "crossing_fraction": 0.0,
@@ -2129,7 +2133,7 @@
     {
       "frame": 175,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950174",
-      "seconds": 17.4,
+      "seconds": 8.7,
       "mean_interval_width": 0.10649104216040156,
       "width_raw": 0.113669253885746,
       "crossing_fraction": 0.0,
@@ -2141,7 +2145,7 @@
     {
       "frame": 176,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950175",
-      "seconds": 17.5,
+      "seconds": 8.75,
       "mean_interval_width": 0.11528977315378479,
       "width_raw": 0.12262453883886337,
       "crossing_fraction": 0.0,
@@ -2153,7 +2157,7 @@
     {
       "frame": 177,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950176",
-      "seconds": 17.6,
+      "seconds": 8.8,
       "mean_interval_width": 0.11294292356270728,
       "width_raw": 0.11999312043190002,
       "crossing_fraction": 0.0,
@@ -2165,7 +2169,7 @@
     {
       "frame": 178,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950177",
-      "seconds": 17.7,
+      "seconds": 8.85,
       "mean_interval_width": 0.11604978840998646,
       "width_raw": 0.12340550124645233,
       "crossing_fraction": 0.0,
@@ -2177,7 +2181,7 @@
     {
       "frame": 179,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950178",
-      "seconds": 17.8,
+      "seconds": 8.9,
       "mean_interval_width": 0.1125172568816655,
       "width_raw": 0.11907786875963211,
       "crossing_fraction": 0.0,
@@ -2189,7 +2193,7 @@
     {
       "frame": 180,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950179",
-      "seconds": 17.9,
+      "seconds": 8.95,
       "mean_interval_width": 0.1159882905311672,
       "width_raw": 0.12238109111785889,
       "crossing_fraction": 0.0,
@@ -2201,7 +2205,7 @@
     {
       "frame": 181,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950180",
-      "seconds": 18.0,
+      "seconds": 9.0,
       "mean_interval_width": 0.11100923294805717,
       "width_raw": 0.11758124828338623,
       "crossing_fraction": 0.0,
@@ -2213,7 +2217,7 @@
     {
       "frame": 182,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950181",
-      "seconds": 18.1,
+      "seconds": 9.05,
       "mean_interval_width": 0.1132538000328143,
       "width_raw": 0.11972369253635406,
       "crossing_fraction": 0.0,
@@ -2225,7 +2229,7 @@
     {
       "frame": 183,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950182",
-      "seconds": 18.2,
+      "seconds": 9.1,
       "mean_interval_width": 0.11258514724506918,
       "width_raw": 0.11883708834648132,
       "crossing_fraction": 0.0,
@@ -2237,7 +2241,7 @@
     {
       "frame": 184,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950183",
-      "seconds": 18.3,
+      "seconds": 9.15,
       "mean_interval_width": 0.11004871948251249,
       "width_raw": 0.11673396080732346,
       "crossing_fraction": 0.0,
@@ -2249,7 +2253,7 @@
     {
       "frame": 185,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950184",
-      "seconds": 18.4,
+      "seconds": 9.2,
       "mean_interval_width": 0.11192200907924033,
       "width_raw": 0.11882543563842773,
       "crossing_fraction": 0.0,
@@ -2261,7 +2265,7 @@
     {
       "frame": 186,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950185",
-      "seconds": 18.5,
+      "seconds": 9.25,
       "mean_interval_width": 0.1158949786235318,
       "width_raw": 0.12264661490917206,
       "crossing_fraction": 0.0,
@@ -2273,7 +2277,7 @@
     {
       "frame": 187,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950186",
-      "seconds": 18.6,
+      "seconds": 9.3,
       "mean_interval_width": 0.11740417897780156,
       "width_raw": 0.12463575601577759,
       "crossing_fraction": 0.0,
@@ -2285,7 +2289,7 @@
     {
       "frame": 188,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950187",
-      "seconds": 18.7,
+      "seconds": 9.35,
       "mean_interval_width": 0.10705641959299235,
       "width_raw": 0.1133173480629921,
       "crossing_fraction": 0.0,
@@ -2297,7 +2301,7 @@
     {
       "frame": 189,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950188",
-      "seconds": 18.8,
+      "seconds": 9.4,
       "mean_interval_width": 0.11614280449089213,
       "width_raw": 0.1227961853146553,
       "crossing_fraction": 0.0,
@@ -2309,7 +2313,7 @@
     {
       "frame": 190,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950189",
-      "seconds": 18.9,
+      "seconds": 9.45,
       "mean_interval_width": 0.11333764018783447,
       "width_raw": 0.12009444087743759,
       "crossing_fraction": 0.0,
@@ -2321,7 +2325,7 @@
     {
       "frame": 191,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950190",
-      "seconds": 19.0,
+      "seconds": 9.5,
       "mean_interval_width": 0.12021218687234694,
       "width_raw": 0.12708061933517456,
       "crossing_fraction": 0.0,
@@ -2333,7 +2337,7 @@
     {
       "frame": 192,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950191",
-      "seconds": 19.1,
+      "seconds": 9.55,
       "mean_interval_width": 0.11747499254642407,
       "width_raw": 0.12386272847652435,
       "crossing_fraction": 0.0,
@@ -2345,7 +2349,7 @@
     {
       "frame": 193,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950192",
-      "seconds": 19.2,
+      "seconds": 9.6,
       "mean_interval_width": 0.11637489557009421,
       "width_raw": 0.12304875254631042,
       "crossing_fraction": 0.0,
@@ -2357,7 +2361,7 @@
     {
       "frame": 194,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950193",
-      "seconds": 19.3,
+      "seconds": 9.65,
       "mean_interval_width": 0.10953446376546644,
       "width_raw": 0.11612767726182938,
       "crossing_fraction": 0.0,
@@ -2369,7 +2373,7 @@
     {
       "frame": 195,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950194",
-      "seconds": 19.4,
+      "seconds": 9.7,
       "mean_interval_width": 0.11754865150574409,
       "width_raw": 0.12455208599567413,
       "crossing_fraction": 0.0,
@@ -2381,7 +2385,7 @@
     {
       "frame": 196,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950195",
-      "seconds": 19.5,
+      "seconds": 9.75,
       "mean_interval_width": 0.10637852656239609,
       "width_raw": 0.11238083988428116,
       "crossing_fraction": 0.0,
@@ -2393,7 +2397,7 @@
     {
       "frame": 197,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950196",
-      "seconds": 19.6,
+      "seconds": 9.8,
       "mean_interval_width": 0.10721128337990493,
       "width_raw": 0.11360269039869308,
       "crossing_fraction": 0.0,
@@ -2405,7 +2409,7 @@
     {
       "frame": 198,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950197",
-      "seconds": 19.7,
+      "seconds": 9.85,
       "mean_interval_width": 0.1154715380341166,
       "width_raw": 0.12240887433290482,
       "crossing_fraction": 0.0,
@@ -2417,7 +2421,7 @@
     {
       "frame": 199,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950198",
-      "seconds": 19.8,
+      "seconds": 9.9,
       "mean_interval_width": 0.11577016686202457,
       "width_raw": 0.12255150079727173,
       "crossing_fraction": 0.0,
@@ -2429,7 +2433,7 @@
     {
       "frame": 200,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950199",
-      "seconds": 19.9,
+      "seconds": 9.95,
       "mean_interval_width": 0.11705850511715174,
       "width_raw": 0.12381831556558609,
       "crossing_fraction": 0.0,
@@ -2441,7 +2445,7 @@
     {
       "frame": 201,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950200",
-      "seconds": 20.0,
+      "seconds": 10.0,
       "mean_interval_width": 0.11871213194368553,
       "width_raw": 0.12551459670066833,
       "crossing_fraction": 0.0,
@@ -2453,7 +2457,7 @@
     {
       "frame": 202,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950201",
-      "seconds": 20.1,
+      "seconds": 10.05,
       "mean_interval_width": 0.12046053496715081,
       "width_raw": 0.12761153280735016,
       "crossing_fraction": 0.0,
@@ -2465,7 +2469,7 @@
     {
       "frame": 203,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950202",
-      "seconds": 20.2,
+      "seconds": 10.1,
       "mean_interval_width": 0.11984237673352445,
       "width_raw": 0.12733711302280426,
       "crossing_fraction": 0.0,
@@ -2477,7 +2481,7 @@
     {
       "frame": 204,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950203",
-      "seconds": 20.3,
+      "seconds": 10.15,
       "mean_interval_width": 0.11658910308070679,
       "width_raw": 0.12374652177095413,
       "crossing_fraction": 0.0,
@@ -2489,7 +2493,7 @@
     {
       "frame": 205,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950204",
-      "seconds": 20.4,
+      "seconds": 10.2,
       "mean_interval_width": 0.11651562993030132,
       "width_raw": 0.12380760163068771,
       "crossing_fraction": 0.0,
@@ -2501,7 +2505,7 @@
     {
       "frame": 206,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950205",
-      "seconds": 20.5,
+      "seconds": 10.25,
       "mean_interval_width": 0.11393250999585465,
       "width_raw": 0.1212657019495964,
       "crossing_fraction": 0.0,
@@ -2513,7 +2517,7 @@
     {
       "frame": 207,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950206",
-      "seconds": 20.6,
+      "seconds": 10.3,
       "mean_interval_width": 0.12038738976130248,
       "width_raw": 0.12733057141304016,
       "crossing_fraction": 0.0,
@@ -2525,7 +2529,7 @@
     {
       "frame": 208,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950207",
-      "seconds": 20.7,
+      "seconds": 10.35,
       "mean_interval_width": 0.11090496808579495,
       "width_raw": 0.11760473996400833,
       "crossing_fraction": 0.0,
@@ -2537,7 +2541,7 @@
     {
       "frame": 209,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950208",
-      "seconds": 20.8,
+      "seconds": 10.4,
       "mean_interval_width": 0.11363068202392967,
       "width_raw": 0.12052778899669647,
       "crossing_fraction": 0.0,
@@ -2549,7 +2553,7 @@
     {
       "frame": 210,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950209",
-      "seconds": 20.9,
+      "seconds": 10.45,
       "mean_interval_width": 0.11355952301848674,
       "width_raw": 0.12023238837718964,
       "crossing_fraction": 0.0,
@@ -2561,7 +2565,7 @@
     {
       "frame": 211,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950210",
-      "seconds": 21.0,
+      "seconds": 10.5,
       "mean_interval_width": 0.1118103948831807,
       "width_raw": 0.11847863346338272,
       "crossing_fraction": 0.0,
@@ -2573,7 +2577,7 @@
     {
       "frame": 212,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950211",
-      "seconds": 21.1,
+      "seconds": 10.55,
       "mean_interval_width": 0.12070769733912089,
       "width_raw": 0.12799924612045288,
       "crossing_fraction": 0.0,
@@ -2585,7 +2589,7 @@
     {
       "frame": 213,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950212",
-      "seconds": 21.2,
+      "seconds": 10.6,
       "mean_interval_width": 0.1107124714245646,
       "width_raw": 0.11760944873094559,
       "crossing_fraction": 0.0,
@@ -2597,7 +2601,7 @@
     {
       "frame": 214,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950213",
-      "seconds": 21.3,
+      "seconds": 10.65,
       "mean_interval_width": 0.106236193869791,
       "width_raw": 0.11373014748096466,
       "crossing_fraction": 0.0,
@@ -2609,7 +2613,7 @@
     {
       "frame": 215,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950214",
-      "seconds": 21.4,
+      "seconds": 10.7,
       "mean_interval_width": 0.11108101508297687,
       "width_raw": 0.11827336996793747,
       "crossing_fraction": 0.0,
@@ -2621,7 +2625,7 @@
     {
       "frame": 216,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950215",
-      "seconds": 21.5,
+      "seconds": 10.75,
       "mean_interval_width": 0.10392945154193607,
       "width_raw": 0.11054942011833191,
       "crossing_fraction": 0.0,
@@ -2633,7 +2637,7 @@
     {
       "frame": 217,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950216",
-      "seconds": 21.6,
+      "seconds": 10.8,
       "mean_interval_width": 0.11431169013213122,
       "width_raw": 0.12159941345453262,
       "crossing_fraction": 0.0,
@@ -2645,7 +2649,7 @@
     {
       "frame": 218,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950217",
-      "seconds": 21.7,
+      "seconds": 10.85,
       "mean_interval_width": 0.10913481227765494,
       "width_raw": 0.11561792343854904,
       "crossing_fraction": 0.0,
@@ -2657,7 +2661,7 @@
     {
       "frame": 219,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950218",
-      "seconds": 21.8,
+      "seconds": 10.9,
       "mean_interval_width": 0.11552500843995193,
       "width_raw": 0.12225240468978882,
       "crossing_fraction": 0.0,
@@ -2669,7 +2673,7 @@
     {
       "frame": 220,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950219",
-      "seconds": 21.9,
+      "seconds": 10.95,
       "mean_interval_width": 0.10632842008281884,
       "width_raw": 0.11272472143173218,
       "crossing_fraction": 0.0,
@@ -2681,7 +2685,7 @@
     {
       "frame": 221,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950220",
-      "seconds": 22.0,
+      "seconds": 11.0,
       "mean_interval_width": 0.10643387599542393,
       "width_raw": 0.11317925155162811,
       "crossing_fraction": 0.0,
@@ -2693,7 +2697,7 @@
     {
       "frame": 222,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950221",
-      "seconds": 22.1,
+      "seconds": 11.05,
       "mean_interval_width": 0.10592147617790981,
       "width_raw": 0.11219083517789841,
       "crossing_fraction": 0.0,
@@ -2705,7 +2709,7 @@
     {
       "frame": 223,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950222",
-      "seconds": 22.2,
+      "seconds": 11.1,
       "mean_interval_width": 0.1042576625291625,
       "width_raw": 0.11056903749704361,
       "crossing_fraction": 0.0,
@@ -2717,7 +2721,7 @@
     {
       "frame": 224,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950223",
-      "seconds": 22.3,
+      "seconds": 11.15,
       "mean_interval_width": 0.10672246361406335,
       "width_raw": 0.11320576816797256,
       "crossing_fraction": 0.0,
@@ -2729,7 +2733,7 @@
     {
       "frame": 225,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950224",
-      "seconds": 22.4,
+      "seconds": 11.2,
       "mean_interval_width": 0.10449538767515766,
       "width_raw": 0.11050514131784439,
       "crossing_fraction": 0.0,
@@ -2741,7 +2745,7 @@
     {
       "frame": 226,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950225",
-      "seconds": 22.5,
+      "seconds": 11.25,
       "mean_interval_width": 0.10797151367584355,
       "width_raw": 0.11414064466953278,
       "crossing_fraction": 0.0,
@@ -2753,7 +2757,7 @@
     {
       "frame": 227,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950226",
-      "seconds": 22.6,
+      "seconds": 11.3,
       "mean_interval_width": 0.09974118112520472,
       "width_raw": 0.10590647161006927,
       "crossing_fraction": 0.0,
@@ -2765,7 +2769,7 @@
     {
       "frame": 228,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950227",
-      "seconds": 22.7,
+      "seconds": 11.35,
       "mean_interval_width": 0.10125412653267966,
       "width_raw": 0.1074054166674614,
       "crossing_fraction": 0.0,
@@ -2777,7 +2781,7 @@
     {
       "frame": 229,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950228",
-      "seconds": 22.8,
+      "seconds": 11.4,
       "mean_interval_width": 0.1032479340936638,
       "width_raw": 0.10976819694042206,
       "crossing_fraction": 0.0,
@@ -2789,7 +2793,7 @@
     {
       "frame": 230,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950229",
-      "seconds": 22.9,
+      "seconds": 11.45,
       "mean_interval_width": 0.10313795595772103,
       "width_raw": 0.1092299297451973,
       "crossing_fraction": 0.0,
@@ -2801,7 +2805,7 @@
     {
       "frame": 231,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950230",
-      "seconds": 23.0,
+      "seconds": 11.5,
       "mean_interval_width": 0.09906056037172897,
       "width_raw": 0.10494212806224823,
       "crossing_fraction": 0.0,
@@ -2813,7 +2817,7 @@
     {
       "frame": 232,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950231",
-      "seconds": 23.1,
+      "seconds": 11.55,
       "mean_interval_width": 0.09817113491060737,
       "width_raw": 0.10408376157283783,
       "crossing_fraction": 0.0,
@@ -2825,7 +2829,7 @@
     {
       "frame": 233,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950232",
-      "seconds": 23.2,
+      "seconds": 11.6,
       "mean_interval_width": 0.10602582310917676,
       "width_raw": 0.11221828311681747,
       "crossing_fraction": 0.0,
@@ -2837,7 +2841,7 @@
     {
       "frame": 234,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950233",
-      "seconds": 23.3,
+      "seconds": 11.65,
       "mean_interval_width": 0.10472014346011409,
       "width_raw": 0.11112167686223984,
       "crossing_fraction": 0.0,
@@ -2849,7 +2853,7 @@
     {
       "frame": 235,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950234",
-      "seconds": 23.4,
+      "seconds": 11.7,
       "mean_interval_width": 0.10643905363025405,
       "width_raw": 0.1134566068649292,
       "crossing_fraction": 0.0,
@@ -2861,7 +2865,7 @@
     {
       "frame": 236,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950235",
-      "seconds": 23.5,
+      "seconds": 11.75,
       "mean_interval_width": 0.10595687720607551,
       "width_raw": 0.11313256621360779,
       "crossing_fraction": 0.0,
@@ -2873,7 +2877,7 @@
     {
       "frame": 237,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950236",
-      "seconds": 23.6,
+      "seconds": 11.8,
       "mean_interval_width": 0.10650174201149351,
       "width_raw": 0.11314334720373154,
       "crossing_fraction": 0.0,
@@ -2885,7 +2889,7 @@
     {
       "frame": 238,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950237",
-      "seconds": 23.7,
+      "seconds": 11.85,
       "mean_interval_width": 0.10931686194242467,
       "width_raw": 0.11654946208000183,
       "crossing_fraction": 0.0,
@@ -2897,7 +2901,7 @@
     {
       "frame": 239,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950238",
-      "seconds": 23.8,
+      "seconds": 11.9,
       "mean_interval_width": 0.11056381590138699,
       "width_raw": 0.11771243065595627,
       "crossing_fraction": 0.0,
@@ -2909,7 +2913,7 @@
     {
       "frame": 240,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950239",
-      "seconds": 23.9,
+      "seconds": 11.95,
       "mean_interval_width": 0.11010226427244035,
       "width_raw": 0.11697707325220108,
       "crossing_fraction": 0.0,
@@ -2921,7 +2925,7 @@
     {
       "frame": 241,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950240",
-      "seconds": 24.0,
+      "seconds": 12.0,
       "mean_interval_width": 0.10464215717281196,
       "width_raw": 0.11123592406511307,
       "crossing_fraction": 0.0,
@@ -2933,7 +2937,7 @@
     {
       "frame": 242,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950241",
-      "seconds": 24.1,
+      "seconds": 12.05,
       "mean_interval_width": 0.11097490869401352,
       "width_raw": 0.1181238666176796,
       "crossing_fraction": 0.0,
@@ -2945,7 +2949,7 @@
     {
       "frame": 243,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950242",
-      "seconds": 24.2,
+      "seconds": 12.1,
       "mean_interval_width": 0.10536810041875397,
       "width_raw": 0.11209686845541,
       "crossing_fraction": 0.0,
@@ -2957,7 +2961,7 @@
     {
       "frame": 244,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950243",
-      "seconds": 24.3,
+      "seconds": 12.15,
       "mean_interval_width": 0.11052119430651193,
       "width_raw": 0.11793886870145798,
       "crossing_fraction": 0.0,
@@ -2969,7 +2973,7 @@
     {
       "frame": 245,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950244",
-      "seconds": 24.4,
+      "seconds": 12.2,
       "mean_interval_width": 0.106485750755111,
       "width_raw": 0.11333741247653961,
       "crossing_fraction": 0.0,
@@ -2981,7 +2985,7 @@
     {
       "frame": 246,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950245",
-      "seconds": 24.5,
+      "seconds": 12.25,
       "mean_interval_width": 0.11207493438526793,
       "width_raw": 0.11918196082115173,
       "crossing_fraction": 0.0,
@@ -2993,7 +2997,7 @@
     {
       "frame": 247,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950246",
-      "seconds": 24.6,
+      "seconds": 12.3,
       "mean_interval_width": 0.11386176001514135,
       "width_raw": 0.12124762684106827,
       "crossing_fraction": 0.0,
@@ -3005,7 +3009,7 @@
     {
       "frame": 248,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950247",
-      "seconds": 24.7,
+      "seconds": 12.35,
       "mean_interval_width": 0.10521914448963085,
       "width_raw": 0.11207879334688187,
       "crossing_fraction": 0.0,
@@ -3017,7 +3021,7 @@
     {
       "frame": 249,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950248",
-      "seconds": 24.8,
+      "seconds": 12.4,
       "mean_interval_width": 0.10005633734321588,
       "width_raw": 0.10690739005804062,
       "crossing_fraction": 0.0,
@@ -3029,7 +3033,7 @@
     {
       "frame": 250,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950249",
-      "seconds": 24.9,
+      "seconds": 12.45,
       "mean_interval_width": 0.10830102842387822,
       "width_raw": 0.115303173661232,
       "crossing_fraction": 0.0,
@@ -3041,7 +3045,7 @@
     {
       "frame": 251,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950250",
-      "seconds": 25.0,
+      "seconds": 12.5,
       "mean_interval_width": 0.10394751273973268,
       "width_raw": 0.11085420101881027,
       "crossing_fraction": 0.0,
@@ -3053,7 +3057,7 @@
     {
       "frame": 252,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950251",
-      "seconds": 25.1,
+      "seconds": 12.55,
       "mean_interval_width": 0.10392525532748025,
       "width_raw": 0.11070365458726883,
       "crossing_fraction": 0.0,
@@ -3065,7 +3069,7 @@
     {
       "frame": 253,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950252",
-      "seconds": 25.2,
+      "seconds": 12.6,
       "mean_interval_width": 0.1020153916579839,
       "width_raw": 0.10903975367546082,
       "crossing_fraction": 0.0,
@@ -3077,7 +3081,7 @@
     {
       "frame": 254,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950253",
-      "seconds": 25.3,
+      "seconds": 12.65,
       "mean_interval_width": 0.10556359394423484,
       "width_raw": 0.11270889639854431,
       "crossing_fraction": 0.0,
@@ -3089,7 +3093,7 @@
     {
       "frame": 255,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950254",
-      "seconds": 25.4,
+      "seconds": 12.7,
       "mean_interval_width": 0.09661220137674445,
       "width_raw": 0.10329685360193253,
       "crossing_fraction": 0.0,
@@ -3101,7 +3105,7 @@
     {
       "frame": 256,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950255",
-      "seconds": 25.5,
+      "seconds": 12.75,
       "mean_interval_width": 0.10500520003748537,
       "width_raw": 0.11222029477357864,
       "crossing_fraction": 0.0,
@@ -3113,7 +3117,7 @@
     {
       "frame": 257,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950256",
-      "seconds": 25.6,
+      "seconds": 12.8,
       "mean_interval_width": 0.11229753180457365,
       "width_raw": 0.11924761533737183,
       "crossing_fraction": 0.0,
@@ -3125,7 +3129,7 @@
     {
       "frame": 258,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950257",
-      "seconds": 25.7,
+      "seconds": 12.85,
       "mean_interval_width": 0.1026716029644749,
       "width_raw": 0.10909831523895264,
       "crossing_fraction": 0.0,
@@ -3137,7 +3141,7 @@
     {
       "frame": 259,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950258",
-      "seconds": 25.8,
+      "seconds": 12.9,
       "mean_interval_width": 0.11043382437251154,
       "width_raw": 0.11801540851593018,
       "crossing_fraction": 0.0,
@@ -3149,7 +3153,7 @@
     {
       "frame": 260,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950259",
-      "seconds": 25.9,
+      "seconds": 12.95,
       "mean_interval_width": 0.09811240945274233,
       "width_raw": 0.10487501323223114,
       "crossing_fraction": 0.0,
@@ -3161,7 +3165,7 @@
     {
       "frame": 261,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950260",
-      "seconds": 26.0,
+      "seconds": 13.0,
       "mean_interval_width": 0.1051283753783541,
       "width_raw": 0.11198562383651733,
       "crossing_fraction": 0.0,
@@ -3173,7 +3177,7 @@
     {
       "frame": 262,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950261",
-      "seconds": 26.1,
+      "seconds": 13.05,
       "mean_interval_width": 0.10536007701186703,
       "width_raw": 0.11213535815477371,
       "crossing_fraction": 0.0,
@@ -3185,7 +3189,7 @@
     {
       "frame": 263,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950262",
-      "seconds": 26.2,
+      "seconds": 13.1,
       "mean_interval_width": 0.1131558423604191,
       "width_raw": 0.11979471892118454,
       "crossing_fraction": 0.0,
@@ -3197,7 +3201,7 @@
     {
       "frame": 264,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950263",
-      "seconds": 26.3,
+      "seconds": 13.15,
       "mean_interval_width": 0.11355336431336563,
       "width_raw": 0.12075500935316086,
       "crossing_fraction": 0.0,
@@ -3209,7 +3213,7 @@
     {
       "frame": 265,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950264",
-      "seconds": 26.4,
+      "seconds": 13.2,
       "mean_interval_width": 0.12247029027742005,
       "width_raw": 0.12997032701969147,
       "crossing_fraction": 0.0,
@@ -3221,7 +3225,7 @@
     {
       "frame": 266,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950265",
-      "seconds": 26.5,
+      "seconds": 13.25,
       "mean_interval_width": 0.11800617278265031,
       "width_raw": 0.12492769956588745,
       "crossing_fraction": 0.0,
@@ -3233,7 +3237,7 @@
     {
       "frame": 267,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950266",
-      "seconds": 26.6,
+      "seconds": 13.3,
       "mean_interval_width": 0.1223520287668191,
       "width_raw": 0.1288769692182541,
       "crossing_fraction": 0.0,
@@ -3245,7 +3249,7 @@
     {
       "frame": 268,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950267",
-      "seconds": 26.7,
+      "seconds": 13.35,
       "mean_interval_width": 0.12191865195049875,
       "width_raw": 0.1288762092590332,
       "crossing_fraction": 0.0,
@@ -3257,7 +3261,7 @@
     {
       "frame": 269,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950268",
-      "seconds": 26.8,
+      "seconds": 13.4,
       "mean_interval_width": 0.12610886772396793,
       "width_raw": 0.13285896182060242,
       "crossing_fraction": 0.0,
@@ -3269,7 +3273,7 @@
     {
       "frame": 270,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950269",
-      "seconds": 26.9,
+      "seconds": 13.45,
       "mean_interval_width": 0.12911714608206448,
       "width_raw": 0.13609008491039276,
       "crossing_fraction": 0.0,
@@ -3281,7 +3285,7 @@
     {
       "frame": 271,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950270",
-      "seconds": 27.0,
+      "seconds": 13.5,
       "mean_interval_width": 0.14326196703264302,
       "width_raw": 0.15045395493507385,
       "crossing_fraction": 0.0,
@@ -3293,7 +3297,7 @@
     {
       "frame": 272,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950271",
-      "seconds": 27.1,
+      "seconds": 13.55,
       "mean_interval_width": 0.14422964199358532,
       "width_raw": 0.15133678913116455,
       "crossing_fraction": 0.0,
@@ -3305,7 +3309,7 @@
     {
       "frame": 273,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950272",
-      "seconds": 27.2,
+      "seconds": 13.6,
       "mean_interval_width": 0.13598731750725235,
       "width_raw": 0.14250236749649048,
       "crossing_fraction": 0.0,
@@ -3317,7 +3321,7 @@
     {
       "frame": 274,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950273",
-      "seconds": 27.3,
+      "seconds": 13.65,
       "mean_interval_width": 0.13883260531206554,
       "width_raw": 0.14561150968074799,
       "crossing_fraction": 0.0,
@@ -3329,7 +3333,7 @@
     {
       "frame": 275,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950274",
-      "seconds": 27.4,
+      "seconds": 13.7,
       "mean_interval_width": 0.1472359650677748,
       "width_raw": 0.15453636646270752,
       "crossing_fraction": 0.0,
@@ -3341,7 +3345,7 @@
     {
       "frame": 276,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950275",
-      "seconds": 27.5,
+      "seconds": 13.75,
       "mean_interval_width": 0.1413480676008934,
       "width_raw": 0.14816057682037354,
       "crossing_fraction": 0.0,
@@ -3353,7 +3357,7 @@
     {
       "frame": 277,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950276",
-      "seconds": 27.6,
+      "seconds": 13.8,
       "mean_interval_width": 0.1427917899441682,
       "width_raw": 0.14995244145393372,
       "crossing_fraction": 0.0,
@@ -3365,7 +3369,7 @@
     {
       "frame": 278,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950277",
-      "seconds": 27.7,
+      "seconds": 13.85,
       "mean_interval_width": 0.1361446772373076,
       "width_raw": 0.1431417018175125,
       "crossing_fraction": 0.0,
@@ -3377,7 +3381,7 @@
     {
       "frame": 279,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950278",
-      "seconds": 27.8,
+      "seconds": 13.9,
       "mean_interval_width": 0.1263995421360065,
       "width_raw": 0.13353919982910156,
       "crossing_fraction": 0.0,
@@ -3389,7 +3393,7 @@
     {
       "frame": 280,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950279",
-      "seconds": 27.9,
+      "seconds": 13.95,
       "mean_interval_width": 0.12558317599870555,
       "width_raw": 0.13243107497692108,
       "crossing_fraction": 0.0,
@@ -3401,7 +3405,7 @@
     {
       "frame": 281,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950280",
-      "seconds": 28.0,
+      "seconds": 14.0,
       "mean_interval_width": 0.11773032746907708,
       "width_raw": 0.12425664812326431,
       "crossing_fraction": 0.0,
@@ -3413,7 +3417,7 @@
     {
       "frame": 282,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950281",
-      "seconds": 28.1,
+      "seconds": 14.05,
       "mean_interval_width": 0.12075913972350678,
       "width_raw": 0.12775400280952454,
       "crossing_fraction": 0.0,
@@ -3425,7 +3429,7 @@
     {
       "frame": 283,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950282",
-      "seconds": 28.2,
+      "seconds": 14.1,
       "mean_interval_width": 0.1170672429195852,
       "width_raw": 0.12406942993402481,
       "crossing_fraction": 0.0,
@@ -3437,7 +3441,7 @@
     {
       "frame": 284,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950283",
-      "seconds": 28.3,
+      "seconds": 14.15,
       "mean_interval_width": 0.11471877036333611,
       "width_raw": 0.12136015295982361,
       "crossing_fraction": 0.0,
@@ -3449,7 +3453,7 @@
     {
       "frame": 285,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950284",
-      "seconds": 28.4,
+      "seconds": 14.2,
       "mean_interval_width": 0.11576571996924129,
       "width_raw": 0.12246285378932953,
       "crossing_fraction": 0.0,
@@ -3461,7 +3465,7 @@
     {
       "frame": 286,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950285",
-      "seconds": 28.5,
+      "seconds": 14.25,
       "mean_interval_width": 0.11792203962561411,
       "width_raw": 0.12465094029903412,
       "crossing_fraction": 0.0,
@@ -3473,7 +3477,7 @@
     {
       "frame": 287,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950286",
-      "seconds": 28.6,
+      "seconds": 14.3,
       "mean_interval_width": 0.1264625167973287,
       "width_raw": 0.13370949029922485,
       "crossing_fraction": 0.0,
@@ -3485,7 +3489,7 @@
     {
       "frame": 288,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950287",
-      "seconds": 28.7,
+      "seconds": 14.35,
       "mean_interval_width": 0.11562882937839902,
       "width_raw": 0.12257303297519684,
       "crossing_fraction": 0.0,
@@ -3497,7 +3501,7 @@
     {
       "frame": 289,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950288",
-      "seconds": 28.8,
+      "seconds": 14.4,
       "mean_interval_width": 0.11878645818271828,
       "width_raw": 0.12585043907165527,
       "crossing_fraction": 0.0,
@@ -3509,7 +3513,7 @@
     {
       "frame": 290,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950289",
-      "seconds": 28.9,
+      "seconds": 14.45,
       "mean_interval_width": 0.1129921770008473,
       "width_raw": 0.11985765397548676,
       "crossing_fraction": 0.0,
@@ -3521,7 +3525,7 @@
     {
       "frame": 291,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950290",
-      "seconds": 29.0,
+      "seconds": 14.5,
       "mean_interval_width": 0.11271059995770859,
       "width_raw": 0.12004363536834717,
       "crossing_fraction": 0.0,
@@ -3533,7 +3537,7 @@
     {
       "frame": 292,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950291",
-      "seconds": 29.1,
+      "seconds": 14.55,
       "mean_interval_width": 0.10184902756518174,
       "width_raw": 0.10939829051494598,
       "crossing_fraction": 0.0,
@@ -3545,7 +3549,7 @@
     {
       "frame": 293,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950292",
-      "seconds": 29.2,
+      "seconds": 14.6,
       "mean_interval_width": 0.10685816733578142,
       "width_raw": 0.11493632197380066,
       "crossing_fraction": 0.0,
@@ -3557,7 +3561,7 @@
     {
       "frame": 294,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950293",
-      "seconds": 29.3,
+      "seconds": 14.65,
       "mean_interval_width": 0.10373065585314423,
       "width_raw": 0.11183520406484604,
       "crossing_fraction": 0.0,
@@ -3569,7 +3573,7 @@
     {
       "frame": 295,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950294",
-      "seconds": 29.4,
+      "seconds": 14.7,
       "mean_interval_width": 0.10623940633068285,
       "width_raw": 0.11459755152463913,
       "crossing_fraction": 0.0,
@@ -3581,7 +3585,7 @@
     {
       "frame": 296,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950295",
-      "seconds": 29.5,
+      "seconds": 14.75,
       "mean_interval_width": 0.10926202125673588,
       "width_raw": 0.11815135926008224,
       "crossing_fraction": 0.0,
@@ -3593,7 +3597,7 @@
     {
       "frame": 297,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950296",
-      "seconds": 29.6,
+      "seconds": 14.8,
       "mean_interval_width": 0.09687516106246356,
       "width_raw": 0.10469546914100647,
       "crossing_fraction": 0.0,
@@ -3605,7 +3609,7 @@
     {
       "frame": 298,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950297",
-      "seconds": 29.7,
+      "seconds": 14.85,
       "mean_interval_width": 0.09828325650501185,
       "width_raw": 0.1061524823307991,
       "crossing_fraction": 0.0,
@@ -3617,7 +3621,7 @@
     {
       "frame": 299,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950298",
-      "seconds": 29.8,
+      "seconds": 14.9,
       "mean_interval_width": 0.09470356910346303,
       "width_raw": 0.10233066976070404,
       "crossing_fraction": 0.0,
@@ -3629,7 +3633,7 @@
     {
       "frame": 300,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950299",
-      "seconds": 29.9,
+      "seconds": 14.95,
       "mean_interval_width": 0.09538457296806108,
       "width_raw": 0.10307492315769196,
       "crossing_fraction": 0.0,
@@ -3641,7 +3645,7 @@
     {
       "frame": 301,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950300",
-      "seconds": 30.0,
+      "seconds": 15.0,
       "mean_interval_width": 0.09971297938382095,
       "width_raw": 0.10710909217596054,
       "crossing_fraction": 0.0,
@@ -3653,7 +3657,7 @@
     {
       "frame": 302,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950301",
-      "seconds": 30.1,
+      "seconds": 15.05,
       "mean_interval_width": 0.10768911355978475,
       "width_raw": 0.1156173050403595,
       "crossing_fraction": 0.0,
@@ -3665,7 +3669,7 @@
     {
       "frame": 303,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950302",
-      "seconds": 30.2,
+      "seconds": 15.1,
       "mean_interval_width": 0.08431655418069647,
       "width_raw": 0.0912124365568161,
       "crossing_fraction": 0.0,
@@ -3677,7 +3681,7 @@
     {
       "frame": 304,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950303",
-      "seconds": 30.3,
+      "seconds": 15.15,
       "mean_interval_width": 0.08331658005772499,
       "width_raw": 0.09024516493082047,
       "crossing_fraction": 0.0,
@@ -3689,7 +3693,7 @@
     {
       "frame": 305,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950304",
-      "seconds": 30.4,
+      "seconds": 15.2,
       "mean_interval_width": 0.09829969446280794,
       "width_raw": 0.1047888919711113,
       "crossing_fraction": 0.0,
@@ -3701,7 +3705,7 @@
     {
       "frame": 306,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950305",
-      "seconds": 30.5,
+      "seconds": 15.25,
       "mean_interval_width": 0.08267098398307526,
       "width_raw": 0.08894075453281403,
       "crossing_fraction": 0.0,
@@ -3713,7 +3717,7 @@
     {
       "frame": 307,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950306",
-      "seconds": 30.6,
+      "seconds": 15.3,
       "mean_interval_width": 0.08548052242717641,
       "width_raw": 0.09123983979225159,
       "crossing_fraction": 0.0,
@@ -3725,7 +3729,7 @@
     {
       "frame": 308,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950307",
-      "seconds": 30.7,
+      "seconds": 15.35,
       "mean_interval_width": 0.08736568327917435,
       "width_raw": 0.09291981160640717,
       "crossing_fraction": 0.0,
@@ -3737,7 +3741,7 @@
     {
       "frame": 309,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950308",
-      "seconds": 30.8,
+      "seconds": 15.4,
       "mean_interval_width": 0.09023262297545998,
       "width_raw": 0.09528183937072754,
       "crossing_fraction": 0.0,
@@ -3749,7 +3753,7 @@
     {
       "frame": 310,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950309",
-      "seconds": 30.9,
+      "seconds": 15.45,
       "mean_interval_width": 0.0997502982903774,
       "width_raw": 0.10412056744098663,
       "crossing_fraction": 0.0,
@@ -3761,7 +3765,7 @@
     {
       "frame": 311,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950310",
-      "seconds": 31.0,
+      "seconds": 15.5,
       "mean_interval_width": 0.09794095743678068,
       "width_raw": 0.10170861333608627,
       "crossing_fraction": 0.0,
@@ -3773,7 +3777,7 @@
     {
       "frame": 312,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950311",
-      "seconds": 31.1,
+      "seconds": 15.55,
       "mean_interval_width": 0.10427726491246464,
       "width_raw": 0.10806696116924286,
       "crossing_fraction": 0.0,
@@ -3785,7 +3789,7 @@
     {
       "frame": 313,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950312",
-      "seconds": 31.2,
+      "seconds": 15.6,
       "mean_interval_width": 0.10416110770072219,
       "width_raw": 0.10788294672966003,
       "crossing_fraction": 0.0,
@@ -3797,7 +3801,7 @@
     {
       "frame": 314,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950313",
-      "seconds": 31.3,
+      "seconds": 15.65,
       "mean_interval_width": 0.09490970000184021,
       "width_raw": 0.09892882406711578,
       "crossing_fraction": 0.0,
@@ -3809,7 +3813,7 @@
     {
       "frame": 315,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950314",
-      "seconds": 31.4,
+      "seconds": 15.7,
       "mean_interval_width": 0.09480053456543636,
       "width_raw": 0.09936690330505371,
       "crossing_fraction": 0.0,
@@ -3821,7 +3825,7 @@
     {
       "frame": 316,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950315",
-      "seconds": 31.5,
+      "seconds": 15.75,
       "mean_interval_width": 0.09602672513193637,
       "width_raw": 0.10057695209980011,
       "crossing_fraction": 0.0,
@@ -3833,7 +3837,7 @@
     {
       "frame": 317,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950316",
-      "seconds": 31.6,
+      "seconds": 15.8,
       "mean_interval_width": 0.10165589329549556,
       "width_raw": 0.10642971843481064,
       "crossing_fraction": 0.0,
@@ -3845,7 +3849,7 @@
     {
       "frame": 318,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950317",
-      "seconds": 31.7,
+      "seconds": 15.85,
       "mean_interval_width": 0.097361427370459,
       "width_raw": 0.10218653827905655,
       "crossing_fraction": 0.0,
@@ -3857,7 +3861,7 @@
     {
       "frame": 319,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950318",
-      "seconds": 31.8,
+      "seconds": 15.9,
       "mean_interval_width": 0.09093047313080561,
       "width_raw": 0.09582827240228653,
       "crossing_fraction": 0.0,
@@ -3869,7 +3873,7 @@
     {
       "frame": 320,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950319",
-      "seconds": 31.9,
+      "seconds": 15.95,
       "mean_interval_width": 0.09519633682887094,
       "width_raw": 0.10033313930034637,
       "crossing_fraction": 0.0,
@@ -3881,7 +3885,7 @@
     {
       "frame": 321,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950320",
-      "seconds": 32.0,
+      "seconds": 16.0,
       "mean_interval_width": 0.09344670682890086,
       "width_raw": 0.09866861999034882,
       "crossing_fraction": 0.0,
@@ -3893,7 +3897,7 @@
     {
       "frame": 322,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950321",
-      "seconds": 32.1,
+      "seconds": 16.05,
       "mean_interval_width": 0.10206486891353048,
       "width_raw": 0.10825206339359283,
       "crossing_fraction": 0.0,
@@ -3905,7 +3909,7 @@
     {
       "frame": 323,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950322",
-      "seconds": 32.2,
+      "seconds": 16.1,
       "mean_interval_width": 0.10255667372295954,
       "width_raw": 0.10863762348890305,
       "crossing_fraction": 0.0,
@@ -3917,7 +3921,7 @@
     {
       "frame": 324,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950323",
-      "seconds": 32.3,
+      "seconds": 16.15,
       "mean_interval_width": 0.11206496310382363,
       "width_raw": 0.11809016019105911,
       "crossing_fraction": 0.0,
@@ -3929,7 +3933,7 @@
     {
       "frame": 325,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950324",
-      "seconds": 32.4,
+      "seconds": 16.2,
       "mean_interval_width": 0.11540996949955326,
       "width_raw": 0.12146073579788208,
       "crossing_fraction": 0.0,
@@ -3941,7 +3945,7 @@
     {
       "frame": 326,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950325",
-      "seconds": 32.5,
+      "seconds": 16.25,
       "mean_interval_width": 0.12161185902111558,
       "width_raw": 0.12807098031044006,
       "crossing_fraction": 0.0,
@@ -3953,7 +3957,7 @@
     {
       "frame": 327,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950326",
-      "seconds": 32.6,
+      "seconds": 16.3,
       "mean_interval_width": 0.1165801038931159,
       "width_raw": 0.12265956401824951,
       "crossing_fraction": 0.0,
@@ -3965,7 +3969,7 @@
     {
       "frame": 328,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950327",
-      "seconds": 32.7,
+      "seconds": 16.35,
       "mean_interval_width": 0.1259779861480073,
       "width_raw": 0.13272523880004883,
       "crossing_fraction": 0.0,
@@ -3977,7 +3981,7 @@
     {
       "frame": 329,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950328",
-      "seconds": 32.8,
+      "seconds": 16.4,
       "mean_interval_width": 0.1339122496654989,
       "width_raw": 0.14127030968666077,
       "crossing_fraction": 0.0,
@@ -3989,7 +3993,7 @@
     {
       "frame": 330,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950329",
-      "seconds": 32.9,
+      "seconds": 16.45,
       "mean_interval_width": 0.1387234241603848,
       "width_raw": 0.14601534605026245,
       "crossing_fraction": 0.0,
@@ -4001,7 +4005,7 @@
     {
       "frame": 331,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950330",
-      "seconds": 33.0,
+      "seconds": 16.5,
       "mean_interval_width": 0.13616240746784922,
       "width_raw": 0.14276361465454102,
       "crossing_fraction": 0.0,
@@ -4013,7 +4017,7 @@
     {
       "frame": 332,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950331",
-      "seconds": 33.1,
+      "seconds": 16.55,
       "mean_interval_width": 0.13369203053622636,
       "width_raw": 0.14028578996658325,
       "crossing_fraction": 0.0,
@@ -4025,7 +4029,7 @@
     {
       "frame": 333,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950332",
-      "seconds": 33.2,
+      "seconds": 16.6,
       "mean_interval_width": 0.12808406019983976,
       "width_raw": 0.13412289321422577,
       "crossing_fraction": 0.0,
@@ -4037,7 +4041,7 @@
     {
       "frame": 334,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950333",
-      "seconds": 33.3,
+      "seconds": 16.65,
       "mean_interval_width": 0.12871344769184842,
       "width_raw": 0.1345120072364807,
       "crossing_fraction": 0.0,
@@ -4049,7 +4053,7 @@
     {
       "frame": 335,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950334",
-      "seconds": 33.4,
+      "seconds": 16.7,
       "mean_interval_width": 0.13698522684002118,
       "width_raw": 0.14249089360237122,
       "crossing_fraction": 0.0,
@@ -4061,7 +4065,7 @@
     {
       "frame": 336,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950335",
-      "seconds": 33.5,
+      "seconds": 16.75,
       "mean_interval_width": 0.13252838799126293,
       "width_raw": 0.13688427209854126,
       "crossing_fraction": 0.0,
@@ -4073,7 +4077,7 @@
     {
       "frame": 337,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950336",
-      "seconds": 33.6,
+      "seconds": 16.8,
       "mean_interval_width": 0.13281096209457932,
       "width_raw": 0.1369682401418686,
       "crossing_fraction": 0.0,
@@ -4085,7 +4089,7 @@
     {
       "frame": 338,
       "filename": "Basler_daA1920-30uc__22375068__20190530_1937432950337",
-      "seconds": 33.7,
+      "seconds": 16.85,
       "mean_interval_width": 0.13404416584053624,
       "width_raw": 0.1380533128976822,
       "crossing_fraction": 0.0,
