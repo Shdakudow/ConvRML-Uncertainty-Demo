@@ -44,11 +44,11 @@
       const value = example.models[model];
       const label = data.models[model].label;
       assign(model + "Prediction", value.images.reconstruction, `${label} reconstruction: ${example.name}`);
-      assign(model + "Width", value.images.uncertainty, `${label} calibrated interval width: ${example.name}`);
+      assign(model + "Width", value.images.uncertainty + "?v=20261030scale01", `${label} calibrated interval width: ${example.name}`);
       assign(model + "Lower", value.images.lower_bound, `${label} lower bound: ${example.name}`);
       assign(model + "Upper", value.images.upper_bound, `${label} upper bound: ${example.name}`);
       $(model + "Bounds").hidden = !$("boundsToggle").checked;
-      $(model + "Metrics").textContent = `Mean width ${value.metrics.width_clipped.toFixed(5)} · ${(value.metrics.seconds * 1000).toFixed(1)} ms`;
+      $(model + "Metrics").textContent = `Mean interval width: ${value.metrics.mean_interval_width.toFixed(5)}`;
       $(model + "Download").href = value.images.reconstruction;
       $(model + "Download").download = `${example.id}_${model}_exp3_sensor12.png`;
     }
@@ -72,7 +72,7 @@
 
   async function start() {
     try {
-      const response = await fetch("data.json?v=20261020captures");
+      const response = await fetch("data.json?v=20261030scale01", { cache: "no-store" });
       if (!response.ok) throw new Error("Capture manifest unavailable");
       data = await response.json();
       if (data.experiment !== 3 || data.epoch !== 50 || data.count !== 10 || Object.keys(data.models).sort().join() !== "im2im,qutcc") throw new Error("Unexpected capture data");
@@ -82,6 +82,20 @@
         option.textContent = example.name;
         $("imageSelect").append(option);
       }
+      for (const example of data.examples) {
+        const row = document.createElement("tr");
+        const values = [example.name, ...models.map(model =>
+          example.models[model].metrics.mean_interval_width.toFixed(5))];
+        for (const value of values) {
+          const cell = document.createElement("td");
+          cell.textContent = value;
+          row.append(cell);
+        }
+        $("widthRows").append(row);
+      }
+      $("widthAverage").innerHTML = `<tr><th>Mean across all ten captures</th>${models.map(model =>
+        `<th>${data.mean_interval_width[model].toFixed(5)}</th>`
+      ).join("")}</tr>`;
       $("heatGradient").style.background = data.heatmap.gradient;
       $("heatRange").textContent = `0 – ${data.heatmap.max.toFixed(3)}`;
       const q = data.models.qutcc.calibration;

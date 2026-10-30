@@ -13,7 +13,7 @@ endpoints are clipped to [0,1]. Model identities and fitted parameters are in
 data.json, without weight binaries or private filesystem paths.
 
 Uncertainty maps are RGB-average upper-minus-lower. A single shared inferno
-color scale uses the 99.5th percentile across the two models and all ten images.
+color scale uses the fixed normalized-intensity range 0–1 across the demo.
 Higher widths saturate. A pixel with any crossed RGB interval is magenta.
 Bounds are never silently sorted. The Show lower & upper bounds checkbox
 reveals the actual saved lower and upper PNGs for both models.
@@ -23,6 +23,9 @@ SSIM, PSNR, MAE, LPIPS, error maps, actual coverage and error/width correlations
 cannot be measured for these captures. The saved 90% calibration target does
 not certify coverage on this external distribution. metrics.csv contains widths
 and latency; unavailable ground-truth metrics are empty, not zero.
+The visible width table includes all ten captures and the mean across captures.
+Mean interval width averages the clipped upper-minus-lower values over all
+pixels and RGB channels using the original saved float32 endpoints.
 
 Saved inference ran on Apple MPS in float32. Metrics use saved float32 arrays;
 PNG assets are encoded at 8 bits/channel. Original TIFFs and trained weights

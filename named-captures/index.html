@@ -6,7 +6,7 @@
   <title>Named captures · Sensor12 · ConvRML</title>
   <link rel="stylesheet" href="style.css?v=20261020captures">
   <script defer src="../demo-navigation.js?v=20261022coverage"></script>
-  <script defer src="app.js?v=20261020captures"></script>
+  <script defer src="app.js?v=20261030scale01"></script>
 </head>
 <body>
   <header>
@@ -69,6 +69,11 @@
       </article>
     </div>
     <p class="hint">One shared heatmap scale for both models and all ten images. Brighter means a wider interval, not a measured reconstruction error.</p>
+    <section aria-label="Mean interval width for all captures">
+      <h2>Mean interval width</h2>
+      <p class="hint">Average calibrated upper − lower bound over every pixel and RGB channel. Normalized intensity units.</p>
+      <div class="table-wrap"><table><thead><tr><th>Capture</th><th>QUTCC</th><th>Im2im</th></tr></thead><tbody id="widthRows"></tbody><tfoot id="widthAverage"></tfoot></table></div>
+    </section>
     <details>
       <summary>Preprocessing &amp; calibration</summary>
       <div class="detail-body">

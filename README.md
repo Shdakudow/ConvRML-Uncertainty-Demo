@@ -70,7 +70,9 @@ is needed.
 [Open the separate named-captures tab](https://shdakudow.github.io/ConvRML-Uncertainty-Demo/named-captures/).
 It shows all ten named TIFF captures reconstructed by **Exp3 clean raw QUTCC and Im2im at epoch 50**, using the explicit Sensor12 (`TIFF / 4095`) input assumption. The lower/upper bound checkbox applies to both models. Images, interval widths, original filenames and selection links are preserved; no models run in the browser. Exp2 outputs and Sensor16 outputs are not included in this tab.
 
-These external captures have no matched ground truth. SSIM, PSNR and actual coverage are unavailable. Saved calibration parameters are reused, and bounds/predictions are clipped to [0,1]. Heatmaps use one shared scale across both models and all ten captures. `tools/build_named_captures.py` rebuilds the small static asset subset from the existing local inference report; `tools/verify_named_captures.py` checks the tab in a browser.
+These external captures have no matched ground truth. SSIM, PSNR and actual coverage are unavailable. Saved calibration parameters are reused, and bounds/predictions are clipped to [0,1]. Heatmaps use the fixed 0–1 scale, shared with the rest of the demo. Mean interval
+width is shown for each capture and averaged across all ten, calculated from the
+saved calibrated endpoints. `tools/build_named_captures.py` rebuilds the small static asset subset from the existing local inference report; `tools/verify_named_captures.py` checks the tab in a browser.
 
 ## Earlier benchmark demos
 
@@ -103,3 +105,11 @@ images. See corrected-latest/README.txt for details.
 The legacy 50-epoch experiment remains at the repository root. The earlier
 epoch-25 comparison is archived in Git commit 34262cb; its old URL redirects to
 the latest comparison. Training checkpoints are not hosted in this repository.
+
+## Heatmap scale
+
+The live error and interval-width maps use a fixed normalized-intensity range of
+0–1 throughout the demo. This includes the legacy/current comparisons, raw data,
+named captures, brightness examples and dropout-rate examples. Plot axes for
+learning curves retain their metric-specific ranges. Changing map colors does
+not change predictions, bounds, coverage, widths or correlation values.

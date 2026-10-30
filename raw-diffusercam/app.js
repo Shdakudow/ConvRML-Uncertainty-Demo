@@ -18,7 +18,7 @@ let referenceData,
   busy = false,
   point = { x: 240, y: 135 },
   requestSerial = 0;
-const MAP_MAX = 0.35,
+const MAP_MAX = 1,
   CACHE = new Map();
 function escapeHTML(v) {
   return String(v).replace(
@@ -112,7 +112,7 @@ function renderTables() {
     $("#calibrationProtocol").textContent =
       "Near-90% empirical calibration on 3,000 separate images: refine global QUTCC quantile inputs or independent Im2im endpoint scales. Target calibration coverage is 90.0–90.1%; held-out test coverage may vary. No RCPS guarantee.";
     $("#calibrationClipping").textContent =
-      "Calibration and displayed metrics use clipped [0,1] endpoints. Endpoints are never sorted. Width and error maps share the same scale.";
+      "Calibration and displayed metrics use clipped [0,1] endpoints. Endpoints are never sorted. Width and error maps share the fixed 0–1 scale.";
   }
 
   $("#aggregateRows").innerHTML = METHODS.map((method) => {

@@ -285,11 +285,11 @@
       "upper": 0.876101
     }
   },
-  "heatmap_max": 0.06620261073112488,
+  "heatmap_max": 1.0,
   "seconds": 47.682127431966364,
   "gpu": "NVIDIA RTX 6000 Ada Generation",
   "alpha": 0.1,
   "delta": 0.05,
   "mc_passes": 30,
-  "notes": "Measurement and ground truth both multiplied by the same gain and clipped to [0,1]. Frozen weights and original RCPS scales. Synthetic paired brightness augmentation, not a physical exposure/noise simulation. Shifted-distribution coverage is measured, not guaranteed. Harder is a descriptive >10% increase in mean MAE across these four methods. Ensemble sizes are correlated comparisons. One example does not establish a general trend. QUTCC has no completed epoch-50 checkpoint and is excluded. All maps share one camera-specific scale across methods and gains; top 0.5% may saturate."
+  "notes": "Measurement and ground truth both multiplied by the same gain and clipped to [0,1]. Frozen weights and original RCPS scales. Synthetic paired brightness augmentation, not a physical exposure/noise simulation. Shifted-distribution coverage is measured, not guaranteed. Harder is a descriptive >10% increase in mean MAE across these four methods. Ensemble sizes are correlated comparisons. One example does not establish a general trend. QUTCC has no completed epoch-50 checkpoint and is excluded. All maps share the fixed 0\u20131 normalized-intensity scale across the demo."
 }

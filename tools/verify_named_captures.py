@@ -118,6 +118,12 @@ def main(base=None):
         assert js("document.querySelectorAll('#imageSelect option').length") == 10
         assert js("document.querySelectorAll('.model').length") == 2
         assert js("[...document.querySelectorAll('.bounds')].every(e=>e.hidden)")
+        assert expected["heatmap"]["min"] == 0 and expected["heatmap"]["max"] == 1
+        assert js("document.querySelectorAll('#widthRows tr').length") == 10
+        for model in ("qutcc", "im2im"):
+            assert f"{expected['mean_interval_width'][model]:.5f}" in js(
+                "document.querySelector('#widthAverage').textContent"
+            )
         assert js(
             "[...document.querySelectorAll('#viewer img')].every(e=>e.complete && e.naturalWidth===480 && e.naturalHeight===270)"
         )
@@ -148,11 +154,11 @@ def main(base=None):
                 ]:
                     assert (
                         js(
-                            f"document.querySelector('#{key+suffix}').getAttribute('src')"
+                            f"document.querySelector('#{key+suffix}').getAttribute('src').split('?')[0]"
                         )
                         == example["models"][key]["images"][field]
                     )
-                width = f"{example['models'][key]['metrics']['width_clipped']:.5f}"
+                width = f"{example['models'][key]['metrics']['mean_interval_width']:.5f}"
                 assert width in js(
                     f"document.querySelector('#{key}Metrics').textContent"
                 )

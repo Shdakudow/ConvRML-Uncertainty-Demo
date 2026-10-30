@@ -44,7 +44,7 @@ for camera in ['rml','diffuser']:
   assert np.array_equal(arrays['mc_005'][key],arrays['mc_010'][key])
  maps={arm:{'error':np.abs(a['prediction']-a['target']).mean(1),
              'width':(a['upper']-a['lower']).mean(1)} for arm,a in arrays.items()}
- scale=float(np.percentile(np.concatenate([v.ravel() for m in maps.values() for v in m.values()]),99.5))
+ scale=1.0  # Fixed normalized-intensity heatmap range across the demo.
  examples=[]
  for i in range(8):
   prefix=f'images/{camera}/{i:02d}'

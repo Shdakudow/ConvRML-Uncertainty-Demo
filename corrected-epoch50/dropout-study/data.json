@@ -103,7 +103,7 @@
       ],
       "selected_p": 0.05,
       "selection": "Highest clipped validation SSIM at 100 passes; ties choose lower p",
-      "map_max": 0.12077741324901581,
+      "map_max": 1.0,
       "examples": [
         {
           "id": 35894,
@@ -498,7 +498,7 @@
       ],
       "selected_p": 0.05,
       "selection": "Highest clipped validation SSIM at 100 passes; ties choose lower p",
-      "map_max": 0.31284284591674805,
+      "map_max": 1.0,
       "examples": [
         {
           "id": 35894,

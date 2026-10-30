@@ -42,10 +42,7 @@ def main():
         ).mean(axis=1)
         for key, values in predictions.items()
     }
-    maximum = float(
-        np.percentile(np.concatenate([w.ravel() for w in widths.values()]), 99.5)
-    )
-    assert maximum > 0
+    maximum = 1.0
     cmap = colormaps["inferno"].copy()
     cmap.set_bad("#e320c9")
     examples = []
@@ -95,6 +92,10 @@ def main():
                 k: row[k]
                 for k in ["width_clipped", "width_raw", "crossing_clipped", "seconds"]
             }
+            # Calculate from calibrated float32 endpoints before PNG conversion.
+            lower = np.clip(data["lower_raw"][index], 0, 1).astype(np.float64)
+            upper = np.clip(data["upper_raw"][index], 0, 1).astype(np.float64)
+            metrics["mean_interval_width"] = float((upper - lower).mean())
             assert (
                 abs(float(widths[key][index].mean()) - metrics["width_clipped"]) < 1e-6
             )
@@ -127,7 +128,7 @@ def main():
             max=maximum,
             units="normalized intensity",
             definition="Mean over RGB of clipped upper − lower",
-            saturation="99.5th percentile across these two models and all ten captures",
+            saturation="fixed 0–1 scale shared across the demo",
             crossing_color="#e320c9",
             gradient="linear-gradient(90deg, "
             + ", ".join(to_hex(cmap(v)) for v in np.linspace(0, 1, 9))
@@ -146,6 +147,17 @@ def main():
             for key, report in reports.items()
         },
         examples=examples,
+        mean_interval_width={
+            key: float(
+                np.mean(
+                    [
+                        example["models"][key]["metrics"]["mean_interval_width"]
+                        for example in examples
+                    ]
+                )
+            )
+            for key in MODELS
+        },
     )
     (destination / "data.json").write_text(json.dumps(data, indent=2) + "\n")
     with (destination / "metrics.csv").open("w", newline="") as stream:

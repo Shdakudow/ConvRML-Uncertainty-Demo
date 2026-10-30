@@ -190,8 +190,7 @@ const stops = [
   [250, 159, 105],
   [255, 243, 188],
 ];
-const maxValue = () =>
-  DATASET.mapMax || Math.max(DATASET.widthMax, DATASET.errorMax);
+const maxValue = () => 1; // Fixed normalized-intensity heatmap scale.
 function color(value) {
   const t = Math.max(0, Math.min(1, value / maxValue())) * 4,
     k = Math.min(3, Math.floor(t)),
@@ -550,7 +549,7 @@ function renderAnalysis() {
   ]
     .map(
       (s) =>
-        `<img loading="lazy" src="analysis/${window.CAMERA}_${s}.png" alt="${window.CAMERA}: ${s.replaceAll("_", " ")}" style="display:block;width:100%;height:auto;margin:14px 0">`,
+        `<img loading="lazy" src="analysis/${window.CAMERA}_${s}${s === "smoothing" ? "" : "_scale01"}.png?v=20261030scale01" alt="${window.CAMERA}: ${s.replaceAll("_", " ")}" style="display:block;width:100%;height:auto;margin:14px 0">`,
     )
     .join("");
 }

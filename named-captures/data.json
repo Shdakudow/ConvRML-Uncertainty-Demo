@@ -14,10 +14,10 @@
   "clipping": "Reconstruction and calibrated bounds clipped to [0,1]",
   "heatmap": {
     "min": 0,
-    "max": 0.44349968433380127,
+    "max": 1.0,
     "units": "normalized intensity",
     "definition": "Mean over RGB of clipped upper \u2212 lower",
-    "saturation": "99.5th percentile across these two models and all ten captures",
+    "saturation": "fixed 0\u20131 scale shared across the demo",
     "crossing_color": "#e320c9",
     "gradient": "linear-gradient(90deg, #000004, #210c4a, #57106e, #8a226a, #bc3754, #e45a31, #f98e09, #f9cb35, #fcffa4)"
   },
@@ -152,7 +152,8 @@
             "width_clipped": 0.03860188648104668,
             "width_raw": 0.03872000426054001,
             "crossing_clipped": 0.0,
-            "seconds": 0.20194983300000002
+            "seconds": 0.20194983300000002,
+            "mean_interval_width": 0.03860188479541091
           }
         },
         "im2im": {
@@ -166,7 +167,8 @@
             "width_clipped": 0.04046379029750824,
             "width_raw": 0.04064721241593361,
             "crossing_clipped": 0.0,
-            "seconds": 0.05928258299999989
+            "seconds": 0.05928258299999989,
+            "mean_interval_width": 0.04046378958597816
           }
         }
       }
@@ -187,7 +189,8 @@
             "width_clipped": 0.07162777334451675,
             "width_raw": 0.07175649702548981,
             "crossing_clipped": 0.0,
-            "seconds": 0.20174512499999953
+            "seconds": 0.20174512499999953,
+            "mean_interval_width": 0.07162777530603348
           }
         },
         "im2im": {
@@ -201,7 +204,8 @@
             "width_clipped": 0.06966272741556168,
             "width_raw": 0.06985302269458771,
             "crossing_clipped": 0.0,
-            "seconds": 0.05912279100000006
+            "seconds": 0.05912279100000006,
+            "mean_interval_width": 0.06966273010320341
           }
         }
       }
@@ -222,7 +226,8 @@
             "width_clipped": 0.03804368898272514,
             "width_raw": 0.03830575942993164,
             "crossing_clipped": 0.0,
-            "seconds": 0.2019822919999994
+            "seconds": 0.2019822919999994,
+            "mean_interval_width": 0.0380436899304321
           }
         },
         "im2im": {
@@ -236,7 +241,8 @@
             "width_clipped": 0.04065561667084694,
             "width_raw": 0.041106730699539185,
             "crossing_clipped": 0.0,
-            "seconds": 0.06004837500000004
+            "seconds": 0.06004837500000004,
+            "mean_interval_width": 0.04065561922299043
           }
         }
       }
@@ -257,7 +263,8 @@
             "width_clipped": 0.04960060492157936,
             "width_raw": 0.05008600279688835,
             "crossing_clipped": 0.0,
-            "seconds": 0.2018981670000004
+            "seconds": 0.2018981670000004,
+            "mean_interval_width": 0.04960060063697632
           }
         },
         "im2im": {
@@ -271,7 +278,8 @@
             "width_clipped": 0.04806196689605713,
             "width_raw": 0.048617541790008545,
             "crossing_clipped": 0.0,
-            "seconds": 0.059915709000000206
+            "seconds": 0.059915709000000206,
+            "mean_interval_width": 0.048061961522764075
           }
         }
       }
@@ -292,7 +300,8 @@
             "width_clipped": 0.07220154255628586,
             "width_raw": 0.07279297709465027,
             "crossing_clipped": 0.0,
-            "seconds": 0.2018992500000003
+            "seconds": 0.2018992500000003,
+            "mean_interval_width": 0.07220154435332403
           }
         },
         "im2im": {
@@ -306,7 +315,8 @@
             "width_clipped": 0.07451462000608444,
             "width_raw": 0.0759168192744255,
             "crossing_clipped": 0.0,
-            "seconds": 0.05947316700000016
+            "seconds": 0.05947316700000016,
+            "mean_interval_width": 0.07451461813085339
           }
         }
       }
@@ -327,7 +337,8 @@
             "width_clipped": 0.106314517557621,
             "width_raw": 0.10661327838897705,
             "crossing_clipped": 0.0,
-            "seconds": 0.20160287499999985
+            "seconds": 0.20160287499999985,
+            "mean_interval_width": 0.10631452924146392
           }
         },
         "im2im": {
@@ -341,7 +352,8 @@
             "width_clipped": 0.09971954673528671,
             "width_raw": 0.10079331696033478,
             "crossing_clipped": 0.0,
-            "seconds": 0.05982708300000006
+            "seconds": 0.05982708300000006,
+            "mean_interval_width": 0.09971955353851847
           }
         }
       }
@@ -362,7 +374,8 @@
             "width_clipped": 0.07704014331102371,
             "width_raw": 0.07733844965696335,
             "crossing_clipped": 0.0,
-            "seconds": 0.20236541600000013
+            "seconds": 0.20236541600000013,
+            "mean_interval_width": 0.07704014984230054
           }
         },
         "im2im": {
@@ -376,7 +389,8 @@
             "width_clipped": 0.07605686038732529,
             "width_raw": 0.0765436515212059,
             "crossing_clipped": 0.0,
-            "seconds": 0.059181916
+            "seconds": 0.059181916,
+            "mean_interval_width": 0.07605685837448581
           }
         }
       }
@@ -397,7 +411,8 @@
             "width_clipped": 0.08285408467054367,
             "width_raw": 0.08472242206335068,
             "crossing_clipped": 0.0,
-            "seconds": 0.20157900000000062
+            "seconds": 0.20157900000000062,
+            "mean_interval_width": 0.08285408470132187
           }
         },
         "im2im": {
@@ -411,7 +426,8 @@
             "width_clipped": 0.07910485565662384,
             "width_raw": 0.08109695464372635,
             "crossing_clipped": 0.0,
-            "seconds": 0.058988458999999605
+            "seconds": 0.058988458999999605,
+            "mean_interval_width": 0.07910485705337506
           }
         }
       }
@@ -432,7 +448,8 @@
             "width_clipped": 0.04333885759115219,
             "width_raw": 0.04354630410671234,
             "crossing_clipped": 0.0,
-            "seconds": 0.20161879099999958
+            "seconds": 0.20161879099999958,
+            "mean_interval_width": 0.04333885613686073
           }
         },
         "im2im": {
@@ -446,7 +463,8 @@
             "width_clipped": 0.0430668480694294,
             "width_raw": 0.04352525994181633,
             "crossing_clipped": 0.0,
-            "seconds": 0.05924258399999971
+            "seconds": 0.05924258399999971,
+            "mean_interval_width": 0.04306684979425058
           }
         }
       }
@@ -467,7 +485,8 @@
             "width_clipped": 0.03642580285668373,
             "width_raw": 0.03653436154127121,
             "crossing_clipped": 0.0,
-            "seconds": 0.21507383299999994
+            "seconds": 0.21507383299999994,
+            "mean_interval_width": 0.03642580402918125
           }
         },
         "im2im": {
@@ -481,10 +500,15 @@
             "width_clipped": 0.03663807734847069,
             "width_raw": 0.03681403398513794,
             "crossing_clipped": 0.0,
-            "seconds": 0.05931387499999996
+            "seconds": 0.05931387499999996,
+            "mean_interval_width": 0.036638076133024965
           }
         }
       }
     }
-  ]
+  ],
+  "mean_interval_width": {
+    "qutcc": 0.06160489189733052,
+    "im2im": 0.06079449134594443
+  }
 }
