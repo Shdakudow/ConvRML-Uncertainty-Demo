@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Videos plot · DiffuserCam</title>
+  <link rel="stylesheet" href="../named-captures/style.css?v=20261030scale01">
+  <link rel="stylesheet" href="style.css?v=20261030video">
+  <script defer src="../demo-navigation.js?v=20261030video"></script>
+  <script defer src="app.js?v=20261030video"></script>
+</head>
+<body>
+<header>
+  <nav class="experiment-nav" aria-label="Demo tabs">
+    <a data-demo-route="legacy" href="../">1 · Legacy</a>
+    <a data-demo-route="current" href="../corrected-epoch50/">2 · Later experiment</a>
+    <a data-demo-route="raw" href="../raw-diffusercam/">3 · Raw DiffuserCam</a>
+    <a data-demo-route="captures" href="../named-captures/">Named captures</a>
+    <a data-demo-route="videos" href="./" aria-current="page">Videos plot</a>
+  </nav>
+  <p class="eyebrow">EXTERNAL DIFFUSERCAM SEQUENCES · EPOCH 50</p>
+  <h1>Videos &amp; uncertainty over time</h1>
+  <p class="subtitle">Reconstruction above; interval width below. One fixed 0–1 heatmap scale.</p>
+</header>
+<main>
+  <div class="controls">
+    <label>Sequence <select id="videoSelect" disabled></select></label>
+    <button id="play" disabled>Play both</button>
+    <button id="pause" disabled>Pause</button>
+    <span id="status" role="status">Loading videos…</span>
+  </div>
+  <p id="error" class="error" hidden></p>
+  <div class="video-grid">
+    <article class="card"><h2>QUTCC</h2><p id="qutccSummary"></p>
+      <video id="qutccVideo" playsinline muted preload="metadata" aria-label="QUTCC reconstruction and uncertainty"></video>
+      <p><a id="qutccDownload" download>Download MP4</a></p>
+    </article>
+    <article class="card"><h2>Im2im</h2><p id="im2imSummary"></p>
+      <video id="im2imVideo" playsinline muted preload="metadata" aria-label="Im2im reconstruction and uncertainty"></video>
+      <p><a id="im2imDownload" download>Download MP4</a></p>
+    </article>
+  </div>
+  <div class="scrubber"><label for="frame">Frame</label><input id="frame" type="range" min="1" max="1" value="1" disabled><output id="frameLabel">—</output></div>
+  <div class="map-key"><span>Uncertainty = mean RGB (upper − lower)</span><span class="gradient" id="heatGradient"></span><span>0 → 1 normalized intensity</span><span>Magenta: crossed bounds</span></div>
+  <p class="hint">No paired ground truth; reconstruction accuracy and actual coverage cannot be measured here.</p>
+  <section class="card plot-card">
+    <div class="plot-heading"><h2>Mean interval width per frame</h2><label><input type="checkbox" id="zoom"> Zoom width axis to data</label></div>
+    <p class="hint">Solid lines: frame means. Dashed lines: each model’s whole-video average. Hover for exact values.</p>
+    <svg id="widthPlot" viewBox="0 0 1000 330" role="img" aria-label="Mean interval width over video frames"></svg>
+    <div id="plotValues" aria-live="polite"></div>
+    <p><a id="csvDownload" download>Download frame metrics CSV</a> · <a id="figureDownload" download>Download plot PNG</a></p>
+  </section>
+  <section class="table-wrap"><h2>Temporal stability</h2>
+    <table><thead><tr><th>Model</th><th>Mean width</th><th>Std. across frames</th><th>CV</th><th>Minimum</th><th>Maximum</th></tr></thead><tbody id="metricsRows"></tbody></table>
+    <p class="hint">CV = standard deviation ÷ mean. A lower CV means a more constant mean width; it does not establish accurate uncertainty. The full spatial maps can still change.</p>
+  </section>
+  <details><summary>Data &amp; model settings</summary><div class="detail-body" id="protocol"></div></details>
+</main>
+<footer>Videos plot · <a href="data.json" download>Download summary</a></footer>
+</body>
+</html>
