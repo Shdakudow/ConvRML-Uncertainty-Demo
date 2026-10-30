@@ -41,7 +41,7 @@ caches. Hovering an epoch compares models' exact values and calibration coverage
 
 ## Raw DiffuserCam analysis metrics
 
-Experiment 2 also shows per-image Pearson and Spearman in its calibrated
+Experiment 2 also shows per-image LPIPS, Pearson and Spearman in its calibrated
 four-model comparison for RML and normalized DiffuserCam. These values use the
 selected saved interval maps; `tools/build_exp2_correlations.py` regenerates the
 Near-90% values from the exact immutable exports. They are per-image scores, not

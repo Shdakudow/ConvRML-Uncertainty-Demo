@@ -454,6 +454,7 @@ function imageAnalysisMetrics(key) {
     const row = record?.per_image.find((r) => String(r.id) === String(example.id));
     return row
       ? [
+          ["LPIPS", row.lpips?.toFixed(5) ?? "Unavailable"],
           ["Error–width Pearson", row.pearson?.toFixed(5) ?? "Undefined"],
           ["Error–width Spearman", row.spearman?.toFixed(5) ?? "Undefined"],
         ]
