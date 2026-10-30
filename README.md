@@ -1,5 +1,13 @@
 # ConvRML reconstruction and uncertainty demo
 
+## Simplified comparison
+
+[One experiment · two datasets](https://shdakudow.github.io/ConvRML-Uncertainty-Demo/comparison/)
+keeps the current four-model comparison in one page. Choose RML or normalized
+DiffuserCam, browse images, inspect pixels and bounds, and hover the learning
+curves. Extra explanations and studies are folded away. This presentation copy
+reuses the existing saved results; the original pages remain available.
+
 ## Current comparison · coverage close to 90%
 
 [Experiment 2](https://shdakudow.github.io/ConvRML-Uncertainty-Demo/corrected-epoch50/)

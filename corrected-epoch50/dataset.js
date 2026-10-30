@@ -73,7 +73,7 @@ window.CAMERA =
     ).json();
     window.Coverage90.exp2Dataset(DATASET, window.CAMERA);
     const app = document.createElement("script");
-    app.src = "app.js?v=20261023milestones";
+    app.src = "app.js?v=20261030paths";
     document.body.append(app);
   } catch (e) {
     document.getElementById("status").textContent =

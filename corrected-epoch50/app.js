@@ -170,7 +170,8 @@ async function load(i) {
     $("example").value = i;
     const q = new URLSearchParams(location.search);
     q.set("example", i);
-    history.replaceState(null, "", "?" + q);
+    // Keep a presentation copy on its own route even when it uses a base URL.
+    history.replaceState(null, "", location.pathname + "?" + q + location.hash);
     window.syncDemoNavigation?.();
     render();
     window.exampleBrowser?.update(i);

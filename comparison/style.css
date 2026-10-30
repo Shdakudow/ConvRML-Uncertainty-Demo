@@ -1,0 +1,19 @@
+/* Presentation only. Model outputs, metrics and viewer code are shared. */
+header, main, footer { max-width: 1400px; }
+.intro { color: var(--muted); font-size: 14px; }
+main > nav { gap: 10px 14px; }
+main > nav label { font-size: 13px; }
+.inputs { grid-template-columns: 150px 150px 1fr; }
+.guide { align-self: center; }
+.matrix { grid-template-columns: 104px repeat(var(--models, 4), minmax(0, 256px)); }
+.model-head { padding: 9px; }
+.model-head h2 { font-size: 15px; }
+.learning > h2 { margin-top: 24px; }
+.notice { font-size: 12px; padding: 7px 10px; }
+details { font-size: 13px; }
+details p { max-width: 100ch; }
+[hidden] { display: none !important; }
+@media (max-width: 800px) {
+  .matrix { grid-template-columns: 82px repeat(var(--models, 4), 160px); justify-content: start; }
+  .inputs { grid-template-columns: 1fr 1fr; }
+}
