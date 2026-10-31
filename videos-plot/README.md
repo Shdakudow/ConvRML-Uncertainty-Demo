@@ -30,3 +30,9 @@ Blue-to-red 0–1 source exports can be rotated and accelerated locally with `to
 Plot legend: QUTCC is green; Im2im is orange. Thin solid lines show per-frame width; an optional slightly stronger overlay shows the cumulative average while the per-frame lines fade. CSVs include both values.
 
 The canonical palette is defined in `tools/heatmap_colors.py`, matching raw DiffuserCam. Video color changes are rendered from float model outputs, not inferred by inverting compressed video colors. The collector checks the palette metadata before publishing.
+
+Click a reconstruction or uncertainty pixel to pause both videos and display the
+numerical RGB-mean interval width for both models. The selected coordinate follows
+frame seeks; playback clears it. Sidecars are float32 values from the frozen
+models, fetched on demand through `../pixel_maps.json`, rather than inferred
+from compressed video colors. Coordinates follow the displayed 180° rotation.

@@ -128,6 +128,21 @@ The legacy 50-epoch experiment remains at the repository root. The earlier
 epoch-25 comparison is archived in Git commit 34262cb; its old URL redirects to
 the latest comparison. Training checkpoints are not hosted in this repository.
 
+## Pixel inspection
+
+Click a named-capture image or either panel of a video to inspect RGB-mean
+interval width at that coordinate in both models. Videos pause together; seeking
+another frame refreshes the selected pixel. Playback and image changes clear old
+values. Crossed bounds are labeled explicitly.
+
+The browser fetches one losslessly compressed float32 map per model/frame on
+demand, using the immutable asset commit in `pixel_maps.json`. It never estimates
+values from PNG or MP4 colors. Numerical sidecars live on the separate
+`pixel-inspection-assets-20261030` branch to keep the Pages source small.
+`tools/pixel_maps.py` writes the shared format. Add `--pixel-dir DIRECTORY` to
+`tools/build_named_captures.py` or `tools/reconstruct_videos.py` to export maps;
+video `--pixels-only` skips MP4 encoding during a frozen-checkpoint replay.
+
 ## Heatmap scale
 
 The live error and interval-width maps use a fixed normalized-intensity range of

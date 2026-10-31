@@ -6,6 +6,7 @@
   let data;
   let current = 0;
   let renderVersion = 0;
+  const pixelInspector = new HeatmapPixels.Inspector($("viewer"));
 
   function saveLocation() {
     const url = new URL(location.href);
@@ -23,6 +24,7 @@
   }
 
   async function render(index, updateLocation = true) {
+    pixelInspector.clear();
     const version = ++renderVersion;
     current = (index + data.count) % data.count;
     const example = data.examples[current];
@@ -111,6 +113,16 @@
       $("boundsToggle").addEventListener("change", () => {
         for (const model of models) $(model + "Bounds").hidden = !$("boundsToggle").checked;
         saveLocation();
+      });
+      for (const image of $("viewer").querySelectorAll("img")) image.addEventListener("click", event => {
+        if ($("viewer").getAttribute("aria-busy") === "true") return;
+        const point = HeatmapPixels.pointAt(image, event, 480, 270);
+        if (!point) return;
+        for (const other of $("viewer").querySelectorAll("img")) HeatmapPixels.mark(other, [{x: point.x + .5, y: point.y + .5}], 480, 270);
+        pixelInspector.show({...point, targets: models.map(model => ({
+          element: $(model + "Width"),
+          path: `captures/${data.examples[current].id}/${model}.bin.gz`,
+        }))});
       });
       document.addEventListener("keydown", event => {
         if (event.target.closest?.("input, select, textarea") || event.ctrlKey || event.altKey || event.metaKey) return;

@@ -1,0 +1,10 @@
+{
+  "base": "https://raw.githubusercontent.com/Shdakudow/ConvRML-Uncertainty-Demo/bffefcaf4a6956d656882fe9420d46c8a730590c",
+  "encoding": "float32-shuffled-le",
+  "map_count": 3180,
+  "units": "normalized intensity",
+  "definition": "RGB mean of clipped calibrated upper minus lower, stored as float32; never inferred from image/video colors",
+  "video_display_rotation_degrees": 180,
+  "named_capture_rotation_degrees": 0,
+  "max_video_mean_replay_difference": 1.2814358033907958e-05
+}

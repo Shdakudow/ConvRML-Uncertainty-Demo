@@ -19,6 +19,7 @@ import numpy as np
 from PIL import Image, ImageDraw
 import torch
 from heatmap_colors import colorize
+from pixel_maps import save_pixel_map
 
 
 def sha256(path):
@@ -106,11 +107,17 @@ def main():
     parser.add_argument("--rotation", type=int, choices=[0, 180], default=0)
     parser.add_argument("--heatmap-max", type=float, default=1)
     parser.add_argument(
+        "--pixel-dir", type=Path, help="Export float32 width sidecars here"
+    )
+    parser.add_argument("--pixels-only", action="store_true", help="Skip MP4 encoding")
+    parser.add_argument(
         "--reference",
         type=Path,
         help="Original reports: verify replay and retain their numerical metrics",
     )
     args = parser.parse_args()
+    if args.pixels_only and not args.pixel_dir:
+        parser.error("--pixels-only requires --pixel-dir")
     assert args.fps > 0 and 0 < args.heatmap_max <= 1
     sys.path.insert(0, str(args.source))
     from model import Model
@@ -157,13 +164,19 @@ def main():
         assert reference["calibration"] == calibration and reference["frames"] == len(
             paths
         )
-    writers = {
-        "reconstruction": VideoWriter(out / "reconstruction.mp4", 480, 270, args.fps),
-        "uncertainty": VideoWriter(out / "uncertainty.mp4", 480, 270, args.fps),
-        "stacked": VideoWriter(
-            out / "reconstruction_uncertainty.mp4", 480, 588, args.fps
-        ),
-    }
+    writers = (
+        {}
+        if args.pixels_only
+        else {
+            "reconstruction": VideoWriter(
+                out / "reconstruction.mp4", 480, 270, args.fps
+            ),
+            "uncertainty": VideoWriter(out / "uncertainty.mp4", 480, 270, args.fps),
+            "stacked": VideoWriter(
+                out / "reconstruction_uncertainty.mp4", 480, 588, args.fps
+            ),
+        }
+    )
     rows = []
     previous_prediction = None
     previous_width = None
@@ -211,14 +224,24 @@ def main():
                 # Rotate the exported images only; the model receives the original input.
                 if args.rotation == 180:
                     rgb, heatmap = np.rot90(rgb, 2), np.rot90(heatmap, 2)
-                writers["reconstruction"].write(rgb)
-                writers["uncertainty"].write(heatmap)
-                writers["stacked"].write(
-                    stacked_frame(
-                        rgb, heatmap, args.method.upper(), index, args.heatmap_max
+                if args.pixel_dir:
+                    save_pixel_map(
+                        args.pixel_dir
+                        / args.video
+                        / args.method
+                        / f"frame_{index:04d}.bin.gz",
+                        np.rot90(width_map, 2) if args.rotation else width_map,
+                        np.rot90(crossing, 2) if args.rotation else crossing,
                     )
-                )
-                if index == 1:
+                if writers:
+                    writers["reconstruction"].write(rgb)
+                    writers["uncertainty"].write(heatmap)
+                    writers["stacked"].write(
+                        stacked_frame(
+                            rgb, heatmap, args.method.upper(), index, args.heatmap_max
+                        )
+                    )
+                if index == 1 and writers:
                     Image.fromarray(rgb).save(out / "poster.png")
                     Image.fromarray(heatmap).save(out / "uncertainty_poster.png")
                     Image.fromarray(
@@ -308,6 +331,7 @@ def main():
         original_metric_values_retained=reference is not None,
         replay_max_width_difference=maximum_width_difference if reference else None,
         interval_definition="RGB pixel mean of clip(upper,0,1) - clip(lower,0,1)",
+        pixel_maps_exported=args.pixel_dir is not None,
         per_frame=rows,
     )
     (out / "report.json").write_text(

@@ -4,6 +4,8 @@ const methods = ['qutcc', 'im2im'];
 const labels = {qutcc: 'QUTCC', im2im: 'Im2im'};
 const colors = {qutcc: '#9ddfd2', im2im: '#f9ba77'};
 let data, selected, requestToken = 0;
+let pixelPoint = null;
+const pixelInspector = new HeatmapPixels.Inspector(document.querySelector('.video-grid'));
 const number = value => Number(value).toFixed(5);
 const videos = () => methods.map(method => $(method + 'Video'));
 const showCumulative = () => $('cumulativeToggle').getAttribute('aria-pressed') === 'true';
@@ -18,7 +20,19 @@ function seekFrame(index) {
   const bounded = Math.max(0, Math.min(selected.frames - 1, index));
   videos().forEach(video => { video.currentTime = bounded / selected.fps; });
   setFrame(bounded);
+  if (pixelPoint) inspectFrame(bounded);
 }
+function inspectFrame(index) {
+  for (const video of videos()) HeatmapPixels.mark(video, [
+    {x: pixelPoint.x + .5, y: pixelPoint.y + 24.5},
+    {x: pixelPoint.x + .5, y: pixelPoint.y + 318.5},
+  ], 480, 588);
+  pixelInspector.show({...pixelPoint, frame: index + 1, targets: methods.map(method => ({
+    element: $(method + 'Video'),
+    path: `videos/${selected.id}/${method}/frame_${String(index + 1).padStart(4, '0')}.bin.gz`,
+  }))});
+}
+function clearPixel() {pixelPoint = null; pixelInspector.clear();}
 function drawPlot() {
   const svg = $('widthPlot'), left = 70, right = 970, top = 22, bottom = 275;
   const values = methods.flatMap(method => selected.models[method].per_frame.map(row => row.mean_interval_width));
@@ -62,6 +76,7 @@ function drawPlot() {
   });
 }
 function choose() {
+  clearPixel();
   pause(); requestToken++;
   selected = data.videos.find(video => video.id === $('videoSelect').value);
   const url = new URL(location.href); url.searchParams.set('video', selected.id); history.replaceState(null, '', url);
@@ -83,6 +98,7 @@ function choose() {
   $('error').hidden = true;
 }
 $('play').addEventListener('click', async () => {
+  clearPixel();
   const token = requestToken;
   try {
     const [first, second] = videos();
@@ -94,6 +110,15 @@ $('play').addEventListener('click', async () => {
   }
 });
 $('pause').addEventListener('click', pause);
+for (const video of videos()) video.addEventListener('click', event => {
+  if (!selected || video.readyState < 2) return;
+  const point = HeatmapPixels.pointAt(video, event, 480, 588);
+  if (!point) return;
+  const offset = point.y >= 318 ? 318 : point.y >= 24 && point.y < 294 ? 24 : null;
+  if (offset === null) return;
+  pixelPoint = {x: point.x, y: point.y - offset};
+  seekFrame(Math.min(selected.frames - 1, Math.floor(video.currentTime * selected.fps + 1e-6)));
+});
 $('frame').addEventListener('input', () => seekFrame(Number($('frame').value) - 1));
 $('qutccVideo').addEventListener('timeupdate', () => {if (!selected) return; const first = $('qutccVideo'), second = $('im2imVideo'); setFrame(Math.floor(first.currentTime * selected.fps)); if (!first.paused && Math.abs(second.currentTime - first.currentTime) > .15) second.currentTime = first.currentTime;});
 $('qutccVideo').addEventListener('ended', pause);

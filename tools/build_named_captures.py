@@ -12,6 +12,7 @@ matplotlib.use("Agg")
 import numpy as np
 from PIL import Image
 from heatmap_colors import colorize, CSS_GRADIENT
+from pixel_maps import save_pixel_map
 
 REPO = Path(__file__).resolve().parents[1]
 MODELS = {"qutcc": "exp3_qutcc", "im2im": "exp3_im2im"}
@@ -21,6 +22,9 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "source", type=Path, help="Local downloaded-TIFF reconstruction report folder"
+    )
+    parser.add_argument(
+        "--pixel-dir", type=Path, help="Export float32 width sidecars here"
     )
     args = parser.parse_args()
     destination = REPO / "named-captures"
@@ -89,6 +93,12 @@ def main():
             lower = np.clip(data["lower_raw"][index], 0, 1).astype(np.float64)
             upper = np.clip(data["upper_raw"][index], 0, 1).astype(np.float64)
             metrics["mean_interval_width"] = float((upper - lower).mean())
+            if args.pixel_dir:
+                save_pixel_map(
+                    args.pixel_dir / identifier / f"{key}.bin.gz",
+                    (upper - lower).mean(axis=0),
+                    crossing,
+                )
             assert (
                 abs(float(widths[key][index].mean()) - metrics["width_clipped"]) < 1e-6
             )
