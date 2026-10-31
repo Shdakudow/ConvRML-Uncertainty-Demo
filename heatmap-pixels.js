@@ -53,7 +53,13 @@
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svg.setAttribute('viewBox', `0 0 ${width} ${height}`); svg.classList.add('pixel-overlay');
     svg.setAttribute('aria-hidden', 'true');
-    svg.innerHTML = points.map(({x, y}) => `<path d="M${x-6},${y}h12 M${x},${y-6}v12" fill="none" stroke="white" stroke-width="1.5" vector-effect="non-scaling-stroke"/>`).join('');
+    const rect = element.getBoundingClientRect();
+    const scale = Math.min(rect.width / width, rect.height / height) || 1;
+    const halfSize = 10 / scale;
+    svg.innerHTML = points.map(({x, y}) => {
+      const box = `x="${x-halfSize}" y="${y-halfSize}" width="${2*halfSize}" height="${2*halfSize}" fill="none" vector-effect="non-scaling-stroke"`;
+      return `<rect ${box} stroke="#07111b" stroke-width="4"/><rect ${box} stroke="#c6ff3b" stroke-width="2"/>`;
+    }).join('');
     wrapper.append(svg);
   }
 
