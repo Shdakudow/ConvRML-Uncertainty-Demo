@@ -88,7 +88,7 @@
       this.container.hidden = false; this.row = row; this.point = point;
       this.container.querySelector('.agreement-title').textContent = title;
       this.container.querySelector('.agreement-metrics').innerHTML = '<tr>'+[row.pearson,row.spearman,row.mean_absolute_width_gap].map(value => '<td>'+format(value)+'</td>').join('')+'</tr>';
-      if (this.loadedKey !== key) {
+      if (this.loadedKey !== key || !this.maps) {
         this.container.setAttribute('aria-busy', 'true'); this.regionButton.disabled = true;
         this.status.textContent = 'Loading numerical width maps…';
         try {
