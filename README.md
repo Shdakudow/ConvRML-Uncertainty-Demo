@@ -143,6 +143,37 @@ values from PNG or MP4 colors. Numerical sidecars live on the separate
 `tools/build_named_captures.py` or `tools/reconstruct_videos.py` to export maps;
 video `--pixels-only` skips MP4 encoding during a frozen-checkpoint replay.
 
+## Agreement between QUTCC and Im2im uncertainty maps
+
+The video and named-capture pages compare the same-pixel RGB-mean interval-width
+maps without ground truth. `uncertainty_agreement.json` contains one Pearson and
+one Spearman coefficient for each of all 1,580 video frames and ten captures.
+A common mask excludes nonfinite values and pixels with crossed bounds in either
+model. Constant maps have undefined correlations. These scores measure model
+agreement, not reconstruction accuracy or coverage.
+
+The video plot below the width plot shows both correlation coefficients. Clicking
+it seeks both videos. Five low-Spearman frame buttons per sequence are separated
+by at least 20 display frames. Named captures have corresponding scores and
+low-agreement image buttons.
+
+The interactive disagreement view offers absolute width differences (normalized
+intensity) or absolute differences in within-image percentile ranks (dimensionless).
+Both use a fixed 0–1 color scale. The region button selects the center of the
+30×30 grid patch with the largest mean rank difference; at least half its pixels
+must be valid. Clicking the map links the same pixel in both model outputs.
+The numerical pixel maps are fetched lazily, with their immutable asset identity
+checked against the agreement analysis. Playback suspends snapshot inspection.
+
+Run `tools/build_uncertainty_agreement.py PIXEL_ASSET_CHECKOUT --workers 4` on CPU
+to regenerate coefficients and CSVs. It verifies every input map checksum and
+performs no training, inference, smoothing or calibration. Run
+`tools/build_agreement_figures.py PIXEL_ASSET_CHECKOUT --local OUTPUT_DIRECTORY`
+to create the curve overview, selected-example sheets and a local PDF. Display
+reconstruction frames come from saved MP4s/PNGs; every correlation and difference
+map uses numerical float32 width sidecars. Video coordinates follow the existing
+180° display rotation.
+
 ## Heatmap scale
 
 The live error and interval-width maps use a fixed normalized-intensity range of

@@ -8,6 +8,26 @@ from pathlib import Path
 import numpy as np
 
 
+def load_pixel_map(path):
+    """Read a sidecar as (float32 width map, boolean crossed-bound mask)."""
+    payload = gzip.decompress(Path(path).read_bytes())
+    header_size = struct.unpack("<I", payload[:4])[0]
+    header = json.loads(payload[4 : 4 + header_size])
+    assert header["version"] == 1 and header["encoding"] == "float32-shuffled-le"
+    height, width = header["height"], header["width"]
+    count, start = height * width, 4 + header_size
+    assert len(payload) == start + count * 4 + (count + 7) // 8
+    values = (
+        np.frombuffer(payload[start : start + 4 * count], np.uint8)
+        .reshape(4, count)
+        .T.copy()
+        .view("<f4")
+        .reshape(height, width)
+    )
+    crossing = np.unpackbits(np.frombuffer(payload[start + 4 * count :], np.uint8))
+    return values, crossing[:count].reshape(height, width).astype(bool)
+
+
 def save_pixel_map(path, width, crossing):
     """Store a displayed H×W width map and any-RGB crossed-bound mask.
 

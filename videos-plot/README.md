@@ -36,3 +36,10 @@ numerical RGB-mean interval width for both models. The selected coordinate follo
 frame seeks; playback clears it. Sidecars are float32 values from the frozen
 models, fetched on demand through `../pixel_maps.json`, rather than inferred
 from compressed video colors. Coordinates follow the displayed 180° rotation.
+
+The model-agreement plot below mean width shows one Pearson r and Spearman rho
+per frame for QUTCC versus Im2im. Its frame buttons choose low spatial agreement,
+not low reconstruction accuracy. The selected-frame map can show percentile-rank
+differences or absolute width differences and links pixel/region inspection to
+both videos. Crossed bounds are excluded jointly. All 1,580 coefficients use
+saved numerical maps; no ground truth, retraining or model replay is used.

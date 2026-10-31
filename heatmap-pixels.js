@@ -44,7 +44,7 @@
       if (buffer.byteLength !== 4 + headerSize + 4 * count + Math.ceil(count / 8)) throw Error('Incomplete pixel map');
       const shuffled = new Uint8Array(buffer, 4 + headerSize, 4 * count), ordered = new Uint8Array(4 * count);
       for (let byte = 0; byte < 4; byte++) for (let index = 0; index < count; index++) ordered[4 * index + byte] = shuffled[byte * count + index];
-      return {...header, values: new DataView(ordered.buffer), crossing: new Uint8Array(buffer, 4 + headerSize + 4 * count)};
+      return {...header, assetBase: config.base, values: new DataView(ordered.buffer), crossing: new Uint8Array(buffer, 4 + headerSize + 4 * count)};
     })();
     cache.set(url, pending);
     pending.catch(() => {if (cache.get(url) === pending) cache.delete(url);});
@@ -118,5 +118,5 @@
       }));
     }
   }
-  window.HeatmapPixels = {Inspector, pointAt, mark, drawCanvas};
+  window.HeatmapPixels = {Inspector, pointAt, mark, drawCanvas, loadMap};
 })();

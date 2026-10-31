@@ -5,6 +5,7 @@ const labels = {qutcc: 'QUTCC', im2im: 'Im2im'};
 const colors = {qutcc: '#9ddfd2', im2im: '#f9ba77'};
 let data, selected, requestToken = 0;
 let pixelPoint = null;
+let agreementData = null, agreementPanel = null, agreementCursor = null;
 const pixelInspector = new HeatmapPixels.Inspector(document.querySelector('.video-grid'));
 const number = value => Number(value).toFixed(5);
 const videos = () => methods.map(method => $(method + 'Video'));
@@ -14,6 +15,7 @@ function setFrame(index) {
   const bounded = Math.max(0, Math.min(selected.frames - 1, index));
   $('frame').value = bounded + 1;
   $('frameLabel').textContent = `${bounded + 1} / ${selected.frames}`;
+  if (agreementCursor) agreementCursor(bounded);
 }
 function seekFrame(index) {
   pause();
@@ -21,6 +23,60 @@ function seekFrame(index) {
   videos().forEach(video => { video.currentTime = bounded / selected.fps; });
   setFrame(bounded);
   if (pixelPoint) inspectFrame(bounded);
+  showAgreementFrame(bounded);
+}
+function showAgreementFrame(index) {
+  if (!agreementPanel || !agreementData) return;
+  const row = agreementData.videos[selected.id]?.rows[index];
+  if (!row) return;
+  agreementPanel.show({key: selected.id + '/' + (index + 1), title: `${selected.label} · Frame ${index + 1}`, row, point: pixelPoint,
+    paths: Object.fromEntries(methods.map(method => [method, `videos/${selected.id}/${method}/frame_${String(index + 1).padStart(4, '0')}.bin.gz`]))});
+}
+function drawAgreementPlot() {
+  if (!agreementData || !selected) return;
+  const rows = agreementData.videos[selected.id].rows, svg = $('agreementPlot');
+  const values = rows.flatMap(row => [row.pearson, row.spearman]).filter(Number.isFinite);
+  let low = -1, high = 1;
+  if ($('agreementZoom').checked && values.length) {
+    const minimum = Math.min(...values), maximum = Math.max(...values), margin = Math.max(.01, (maximum - minimum) * .15);
+    low = Math.max(-1, minimum - margin); high = Math.min(1, maximum + margin);
+  }
+  const X = index => 70 + index / Math.max(1, rows.length - 1) * 900;
+  const Y = value => 275 - (value - low) / Math.max(.001, high - low) * 253;
+  let markup = '';
+  for (let tick = 0; tick <= 4; tick++) {
+    const value = low + tick / 4 * (high - low), index = Math.round(tick / 4 * (rows.length - 1));
+    markup += `<line x1="70" x2="970" y1="${Y(value)}" y2="${Y(value)}" stroke="#33455c"/><text x="61" y="${Y(value)+4}" text-anchor="end" fill="#bac7d6" font-size="12">${value.toFixed(3)}</text><text x="${X(index)}" y="298" text-anchor="middle" fill="#bac7d6" font-size="12">${index+1}</text>`;
+  }
+  for (const [metric, color] of [['pearson','#72b7ff'],['spearman','#d7a3ff']]) {
+    let path = '', connected = false;
+    rows.forEach((row, index) => {if (Number.isFinite(row[metric])) {path += `${connected?'L':'M'}${X(index)},${Y(row[metric])}`; connected = true;} else connected = false;});
+    markup += `<path data-metric="${metric}" d="${path}" fill="none" stroke="${color}" stroke-width="1.2"/>`;
+  }
+  markup += '<text x="520" y="325" text-anchor="middle" fill="#bac7d6" font-size="13">Frame</text><text transform="translate(16,148) rotate(-90)" text-anchor="middle" fill="#bac7d6" font-size="13">Inter-model correlation</text><line id="agreementCursor" y1="22" y2="275" stroke="#e5edf5" opacity=".6"/><rect id="agreementHit" x="70" y="22" width="900" height="253" fill="transparent"/>';
+  svg.innerHTML = markup;
+  agreementCursor = index => {
+    const cursor = $('agreementCursor'); cursor.setAttribute('x1', X(index)); cursor.setAttribute('x2', X(index));
+    const row = rows[index];
+    $('agreementValues').textContent = `Frame ${index+1} · Pearson ${UncertaintyAgreement.format(row.pearson)} · Spearman ${UncertaintyAgreement.format(row.spearman)}`;
+  };
+  const frameAtPointer = event => {
+    const p = new DOMPoint(event.clientX, event.clientY).matrixTransform(svg.getScreenCTM().inverse());
+    return Math.max(0, Math.min(rows.length - 1, Math.round((p.x - 70) / 900 * (rows.length - 1))));
+  };
+  $('agreementHit').onpointermove = event => agreementCursor(frameAtPointer(event));
+  $('agreementHit').onclick = event => seekFrame(frameAtPointer(event));
+  $('agreementJumps').replaceChildren(...agreementData.videos[selected.id].low_agreement_frames.map(frame => {
+    const button = document.createElement('button'); button.textContent = `Frame ${frame} · ρ ${rows[frame-1].spearman.toFixed(3)}`;
+    button.onclick = () => {
+      const region = rows[frame-1].region;
+      if (region) pixelPoint = {x: region.x + 15, y: region.y + 15};
+      seekFrame(frame - 1); document.querySelector('.video-grid').scrollIntoView({block: 'start'});
+    };
+    return button;
+  }));
+  $('agreementCSV').href = `agreement/${selected.id}.csv`;
+  agreementCursor(Number($('frame').value) - 1);
 }
 function inspectFrame(index) {
   for (const video of videos()) HeatmapPixels.mark(video, [
@@ -77,6 +133,7 @@ function drawPlot() {
 }
 function choose() {
   clearPixel();
+  agreementCursor = null;
   pause(); requestToken++;
   selected = data.videos.find(video => video.id === $('videoSelect').value);
   const url = new URL(location.href); url.searchParams.set('video', selected.id); history.replaceState(null, '', url);
@@ -95,10 +152,12 @@ function choose() {
   $('status').textContent = `${selected.frames} frames · ${selected.fps} fps playback`;
   $('csvDownload').href = selected.csv; $('figureDownload').href = selected.plot;
   $('plotValues').textContent = 'QUTCC: green · Im2im: orange'; drawPlot();
+  drawAgreementPlot(); showAgreementFrame(0);
   $('error').hidden = true;
 }
 $('play').addEventListener('click', async () => {
   clearPixel();
+  agreementPanel?.suspend('Pause or select a frame to inspect the disagreement map.');
   const token = requestToken;
   try {
     const [first, second] = videos();
@@ -109,7 +168,7 @@ $('play').addEventListener('click', async () => {
     if (token === requestToken) {pause(); $('error').textContent = 'Video playback failed. Please reload or download the MP4.'; $('error').hidden = false;}
   }
 });
-$('pause').addEventListener('click', pause);
+$('pause').addEventListener('click', () => {pause(); if (selected) showAgreementFrame(Math.min(selected.frames - 1, Math.floor($('qutccVideo').currentTime * selected.fps + 1e-6)));});
 for (const video of videos()) video.addEventListener('click', event => {
   if (!selected || video.readyState < 2) return;
   const point = HeatmapPixels.pointAt(video, event, 480, 588);
@@ -121,7 +180,8 @@ for (const video of videos()) video.addEventListener('click', event => {
 });
 $('frame').addEventListener('input', () => seekFrame(Number($('frame').value) - 1));
 $('qutccVideo').addEventListener('timeupdate', () => {if (!selected) return; const first = $('qutccVideo'), second = $('im2imVideo'); setFrame(Math.floor(first.currentTime * selected.fps)); if (!first.paused && Math.abs(second.currentTime - first.currentTime) > .15) second.currentTime = first.currentTime;});
-$('qutccVideo').addEventListener('ended', pause);
+$('qutccVideo').addEventListener('ended', () => {pause(); if (selected) showAgreementFrame(selected.frames - 1);});
+$('agreementZoom').addEventListener('change', drawAgreementPlot);
 $('zoom').addEventListener('change', drawPlot);
 $('cumulativeToggle').addEventListener('click', () => {
   const next = !showCumulative(); $('cumulativeToggle').setAttribute('aria-pressed', String(next));
@@ -139,3 +199,15 @@ fetch('data.json?v=20261030bluered', {cache: 'no-store'}).then(response => {if (
   data.notes.forEach(text => {const paragraph = document.createElement('p'); paragraph.textContent = text; $('protocol').append(paragraph);});
   ['videoSelect', 'play', 'pause', 'frame'].forEach(id => {$(id).disabled = false;}); choose();
 }).catch(error => {$('status').textContent = 'Unable to load videos'; $('error').hidden = false; $('error').textContent = String(error);});
+UncertaintyAgreement.load().then(value => {
+  agreementData = value;
+  agreementPanel = new UncertaintyAgreement.Panel($('videoDisagreement'), point => {
+    pixelPoint = point;
+    seekFrame(Math.min(selected.frames - 1, Math.floor($('qutccVideo').currentTime * selected.fps + 1e-6)));
+  });
+  if (selected) {
+    drawAgreementPlot();
+    if ($('qutccVideo').paused) showAgreementFrame(Number($('frame').value) - 1);
+    else agreementPanel.suspend('Pause or select a frame to inspect the disagreement map.');
+  }
+}).catch(() => {$('agreementValues').textContent = 'Agreement analysis unavailable.'; $('videoDisagreement').hidden = true;});

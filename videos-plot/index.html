@@ -8,8 +8,10 @@
   <link rel="stylesheet" href="style.css?v=20261030seek">
   <script defer src="../demo-navigation.js?v=20261030near90only"></script>
   <link rel="stylesheet" href="../heatmap-pixels.css?v=20261030selection">
-  <script defer src="../heatmap-pixels.js?v=20261030selection"></script>
-  <script defer src="app.js?v=20261030pixels"></script>
+  <script defer src="../heatmap-pixels.js?v=20261030agreement"></script>
+  <link rel="stylesheet" href="../uncertainty-agreement.css?v=20261030agreement">
+  <script defer src="../uncertainty-agreement.js?v=20261030agreement"></script>
+  <script defer src="app.js?v=20261030agreement"></script>
 </head>
 <body>
 <header>
@@ -52,6 +54,17 @@
     <div id="plotValues" aria-live="polite"></div>
     <p><a id="csvDownload" download>Download frame metrics CSV</a> · <a id="figureDownload" download>Download plot PNG</a></p>
   </section>
+  <section class="card plot-card" id="agreementSection">
+    <div class="plot-heading"><h2>Uncertainty agreement between models</h2><label><input type="checkbox" id="agreementZoom" checked> Zoom correlation axis</label></div>
+    <div class="agreement-legend"><span style="color:#72b7ff">Pearson r</span><span style="color:#d7a3ff">Spearman ρ</span></div>
+    <p class="hint">One value per frame for the model pair. Lower values mean less agreement. Click the graph to inspect that frame.</p>
+    <svg id="agreementPlot" viewBox="0 0 1000 330" role="img" aria-label="Pearson and Spearman uncertainty-map agreement versus frame"></svg>
+    <div id="agreementValues" aria-live="polite"></div>
+    <p class="hint">Lowest-agreement frames · separated by at least 20 frames</p>
+    <div id="agreementJumps" class="agreement-jumps"></div>
+    <p><a id="agreementCSV" download>Download per-frame agreement CSV</a> · <a href="agreement/overview.png">All-video overview</a> · <a href="agreement/examples.png">Disagreement examples</a></p>
+  </section>
+  <section class="card plot-card" id="videoDisagreement"></section>
   <section class="table-wrap"><h2>Temporal stability</h2>
     <table><thead><tr><th>Model</th><th>Mean width</th><th>Std. across frames</th><th>CV</th><th>Minimum</th><th>Maximum</th></tr></thead><tbody id="metricsRows"></tbody></table>
     <p class="hint">CV = standard deviation ÷ mean. A lower CV means a more constant mean width; it does not establish accurate uncertainty. The full spatial maps can still change.</p>

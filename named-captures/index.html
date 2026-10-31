@@ -7,8 +7,10 @@
   <link rel="stylesheet" href="style.css?v=20261030bluered">
   <script defer src="../demo-navigation.js?v=20261030near90only"></script>
   <link rel="stylesheet" href="../heatmap-pixels.css?v=20261030selection">
-  <script defer src="../heatmap-pixels.js?v=20261030selection"></script>
-  <script defer src="app.js?v=20261030pixels"></script>
+  <script defer src="../heatmap-pixels.js?v=20261030agreement"></script>
+  <link rel="stylesheet" href="../uncertainty-agreement.css?v=20261030agreement">
+  <script defer src="../uncertainty-agreement.js?v=20261030agreement"></script>
+  <script defer src="app.js?v=20261030agreement"></script>
 </head>
 <body>
   <header>
@@ -71,10 +73,13 @@
       </article>
     </div>
     <p class="hint">One shared heatmap scale for both models and all ten images. Brighter means a wider interval, not a measured reconstruction error.</p>
+    <section class="card" id="captureAgreement"></section>
     <section aria-label="Mean interval width for all captures">
-      <h2>Mean interval width</h2>
+      <h2>Interval width and model agreement</h2>
       <p class="hint">Average calibrated upper − lower bound over every pixel and RGB channel. Normalized intensity units.</p>
-      <div class="table-wrap"><table><thead><tr><th>Capture</th><th>QUTCC</th><th>Im2im</th></tr></thead><tbody id="widthRows"></tbody><tfoot id="widthAverage"></tfoot></table></div>
+      <p class="hint">Lowest spatial agreement</p><div id="captureAgreementJumps" class="agreement-jumps"></div>
+      <div class="table-wrap"><table><thead><tr><th>Capture</th><th>QUTCC width</th><th>Im2im width</th><th>Pearson r</th><th>Spearman ρ</th></tr></thead><tbody id="widthRows"></tbody><tfoot id="widthAverage"></tfoot></table></div>
+      <p><a href="../videos-plot/agreement/named_captures.csv" download>Download agreement CSV</a></p>
     </section>
     <details>
       <summary>Preprocessing &amp; calibration</summary>
