@@ -376,9 +376,7 @@ function paint(canvas, kind, model) {
   }
   ctx.putImageData(img, 0, 0);
   if (kind !== "measurement") {
-    ctx.strokeStyle = "#fff";
-    ctx.lineWidth = 1;
-    ctx.strokeRect(point.x - 3, point.y - 3, 7, 7);
+    HeatmapPixels.drawCanvas(canvas, point.x + 0.5, point.y + 0.5);
   }
   if (kind === "measurement") {
     canvas.onclick = null;

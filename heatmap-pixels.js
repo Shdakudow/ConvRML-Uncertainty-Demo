@@ -4,6 +4,27 @@
   const root = new URL('./', document.currentScript.src);
   const cache = new Map();
   let configuration;
+  const selectionStrokes = [['#ffffff', 6], ['#07111b', 4], ['#fff200', 2]];
+
+  function selectionBox(x, y, width, height, scale) {
+    const size = Math.min(24 / (scale || 1), width, height);
+    return {x: Math.max(0, Math.min(width - size, x - size / 2)),
+      y: Math.max(0, Math.min(height - size, y - size / 2)), size};
+  }
+
+  function drawCanvas(canvas, x, y) {
+    const rect = canvas.getBoundingClientRect();
+    const scale = Math.min(rect.width / canvas.width, rect.height / canvas.height) || 1;
+    const box = selectionBox(x, y, canvas.width, canvas.height, scale);
+    const context = canvas.getContext('2d');
+    context.save();
+    for (const [color, thickness] of selectionStrokes) {
+      context.strokeStyle = color; context.lineWidth = thickness / scale;
+      context.strokeRect(box.x, box.y, box.size, box.size);
+    }
+    context.restore();
+    canvas.dataset.selectionBox = 'true';
+  }
 
   async function loadMap(path) {
     if (!configuration) configuration = fetch(new URL('pixel_maps.json', root), {cache: 'no-store'})
@@ -55,10 +76,10 @@
     svg.setAttribute('aria-hidden', 'true');
     const rect = element.getBoundingClientRect();
     const scale = Math.min(rect.width / width, rect.height / height) || 1;
-    const halfSize = 10 / scale;
     svg.innerHTML = points.map(({x, y}) => {
-      const box = `x="${x-halfSize}" y="${y-halfSize}" width="${2*halfSize}" height="${2*halfSize}" fill="none" vector-effect="non-scaling-stroke"`;
-      return `<rect ${box} stroke="#07111b" stroke-width="4"/><rect ${box} stroke="#c6ff3b" stroke-width="2"/>`;
+      const box = selectionBox(x, y, width, height, scale);
+      const attributes = `x="${box.x}" y="${box.y}" width="${box.size}" height="${box.size}" fill="none" vector-effect="non-scaling-stroke"`;
+      return selectionStrokes.map(([color, thickness]) => `<rect ${attributes} stroke="${color}" stroke-width="${thickness}"/>`).join('');
     }).join('');
     wrapper.append(svg);
   }
@@ -97,5 +118,5 @@
       }));
     }
   }
-  window.HeatmapPixels = {Inspector, pointAt, mark};
+  window.HeatmapPixels = {Inspector, pointAt, mark, drawCanvas};
 })();

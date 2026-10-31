@@ -219,19 +219,7 @@ function draw(cv, data, type) {
   ctx.drawImage(tmp, ox, oy, size, size, 0, 0, 256, 256);
   const x = (point.x - ox + 0.5) * z,
     y = (point.y - oy + 0.5) * z;
-  for (const [stroke, width] of [
-    ["black", 3],
-    ["white", 1],
-  ]) {
-    ctx.strokeStyle = stroke;
-    ctx.lineWidth = width;
-    ctx.beginPath();
-    ctx.moveTo(x - 4, y);
-    ctx.lineTo(x + 4, y);
-    ctx.moveTo(x, y - 4);
-    ctx.lineTo(x, y + 4);
-    ctx.stroke();
-  }
+  HeatmapPixels.drawCanvas(cv, x, y);
 }
 function render() {
   if (!example) return;
