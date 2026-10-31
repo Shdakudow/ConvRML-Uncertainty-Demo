@@ -13,6 +13,12 @@ function setFrame(index) {
   $('frame').value = bounded + 1;
   $('frameLabel').textContent = `${bounded + 1} / ${selected.frames}`;
 }
+function seekFrame(index) {
+  pause();
+  const bounded = Math.max(0, Math.min(selected.frames - 1, index));
+  videos().forEach(video => { video.currentTime = bounded / selected.fps; });
+  setFrame(bounded);
+}
 function drawPlot() {
   const svg = $('widthPlot'), left = 70, right = 970, top = 22, bottom = 275;
   const values = methods.flatMap(method => selected.models[method].per_frame.map(row => row.mean_interval_width));
@@ -40,11 +46,19 @@ function drawPlot() {
   pieces.push('<text x="520" y="325" text-anchor="middle" fill="#bac7d6" font-size="13">Frame</text><text transform="translate(16,148) rotate(-90)" text-anchor="middle" fill="#bac7d6" font-size="13">Mean interval width</text>');
   pieces.push('<line id="plotCursor" y1="22" y2="275" stroke="#e5edf5" opacity="0"/><rect id="plotHit" x="70" y="22" width="900" height="253" fill="transparent"/>');
   svg.innerHTML = pieces.join('');
-  $('plotHit').addEventListener('pointermove', event => {
+  const frameAtPointer = event => {
     const point = new DOMPoint(event.clientX, event.clientY).matrixTransform(svg.getScreenCTM().inverse());
-    const index = Math.max(0, Math.min(selected.frames - 1, Math.round((point.x - left) / (right - left) * (selected.frames - 1))));
+    return Math.max(0, Math.min(selected.frames - 1, Math.round((point.x - left) / (right - left) * (selected.frames - 1))));
+  };
+  const showFrame = index => {
     const cursor = $('plotCursor'); cursor.setAttribute('x1', x(index)); cursor.setAttribute('x2', x(index)); cursor.setAttribute('opacity', .7);
     $('plotValues').textContent = `Frame ${index + 1} · ` + methods.map(method => {const row = selected.models[method].per_frame[index]; return `${labels[method]}: ${number(row.mean_interval_width)}${showCumulative() ? ', cumulative '+number(row.cumulative_mean_interval_width) : ''}`;}).join(' · ');
+  };
+  $('plotHit').addEventListener('pointermove', event => showFrame(frameAtPointer(event)));
+  $('plotHit').addEventListener('click', event => {
+    const index = frameAtPointer(event);
+    seekFrame(index);
+    showFrame(index);
   });
 }
 function choose() {
@@ -80,7 +94,7 @@ $('play').addEventListener('click', async () => {
   }
 });
 $('pause').addEventListener('click', pause);
-$('frame').addEventListener('input', () => {pause(); const index = Number($('frame').value) - 1; videos().forEach(video => {video.currentTime = index / selected.fps;}); setFrame(index);});
+$('frame').addEventListener('input', () => seekFrame(Number($('frame').value) - 1));
 $('qutccVideo').addEventListener('timeupdate', () => {if (!selected) return; const first = $('qutccVideo'), second = $('im2imVideo'); setFrame(Math.floor(first.currentTime * selected.fps)); if (!first.paused && Math.abs(second.currentTime - first.currentTime) > .15) second.currentTime = first.currentTime;});
 $('qutccVideo').addEventListener('ended', pause);
 $('zoom').addEventListener('change', drawPlot);
