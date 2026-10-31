@@ -92,7 +92,7 @@
       if (!response.ok) throw new Error("Capture manifest unavailable");
       data = await response.json();
       agreementData = await UncertaintyAgreement.load().catch(() => null);
-      if (agreementData) agreementPanel = new UncertaintyAgreement.Panel($("captureAgreement"), selectPixel);
+      if (agreementData) agreementPanel = new UncertaintyAgreement.Panel($("captureAgreement"), selectPixel, [$("inspectRankGapTop")]);
       else $("captureAgreement").hidden = true;
       if (data.experiment !== 3 || data.epoch !== 50 || data.count !== 10 || Object.keys(data.models).sort().join() !== "im2im,qutcc") throw new Error("Unexpected capture data");
       for (const example of data.examples) {

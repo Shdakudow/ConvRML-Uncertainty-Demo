@@ -204,7 +204,7 @@ UncertaintyAgreement.load().then(value => {
   agreementPanel = new UncertaintyAgreement.Panel($('videoDisagreement'), point => {
     pixelPoint = point;
     seekFrame(Math.min(selected.frames - 1, Math.floor($('qutccVideo').currentTime * selected.fps + 1e-6)));
-  });
+  }, [$('inspectRankGapTop')]);
   if (selected) {
     drawAgreementPlot();
     if ($('qutccVideo').paused) showAgreementFrame(Number($('frame').value) - 1);

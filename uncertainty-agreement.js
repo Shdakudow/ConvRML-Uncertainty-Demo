@@ -54,30 +54,37 @@
   }
 
   class Panel {
-    constructor(container, onPick) {
+    constructor(container, onPick, extraRegionButtons = []) {
       this.container = container; this.onPick = onPick; this.version = 0;
       container.innerHTML = '<h2>Where uncertainty maps disagree</h2><p class="agreement-title"></p><div class="agreement-layout"><figure><canvas class="agreement-map" width="480" height="270" aria-label="Difference between the two uncertainty maps"></canvas><figcaption class="agreement-map-label"></figcaption><div class="map-key"><span class="gradient"></span><span>0 → 1</span><span>Magenta: excluded crossed bounds</span></div><output class="agreement-pixel"></output></figure><div><div class="agreement-controls"><label>Difference <select class="agreement-mode"><option value="rank">Spatial uncertainty ranking</option><option value="width">Absolute interval width</option></select></label><button class="agreement-region" disabled>Inspect largest rank gap</button></div><div class="table-wrap"><table><thead><tr><th>Pearson r</th><th>Spearman ρ</th><th>Mean |width gap|</th></tr></thead><tbody class="agreement-metrics"></tbody></table></div><p class="agreement-status hint" role="status"></p><p class="hint">Agreement between models, not reconstruction accuracy. Click the map to inspect both models at that pixel.</p></div></div>';
       this.canvas = container.querySelector('canvas');
       this.mode = container.querySelector('select');
       this.status = container.querySelector('.agreement-status');
       this.regionButton = container.querySelector('.agreement-region');
+      this.regionButtons = [this.regionButton, ...extraRegionButtons];
       this.mode.onchange = () => this.draw();
       this.canvas.onclick = event => {
         if (this.container.getAttribute('aria-busy') === 'true' || !this.maps) return;
         const point = HeatmapPixels.pointAt(this.canvas, event, this.maps.width, this.maps.height);
         if (point) this.pick(point);
       };
-      this.regionButton.onclick = () => {
+      const inspectRegion = () => {
         const region = this.row?.region;
         if (region) this.pick({x: region.x + Math.floor(region.width / 2), y: region.y + Math.floor(region.height / 2)});
       };
+      for (const button of this.regionButtons) {
+        button.onclick = inspectRegion;
+        button.title = 'Select the center of the 30 × 30 patch with the largest mean absolute percentile-rank difference';
+      }
     }
+
+    enableRegionButtons(enabled) {for (const button of this.regionButtons) button.disabled = !enabled;}
 
     pick(point) {this.point = point; this.draw(); this.onPick(point);}
 
     suspend(message) {
       this.version++; this.container.hidden = false; this.container.setAttribute('aria-busy', 'true');
-      this.status.textContent = message; this.regionButton.disabled = true;
+      this.status.textContent = message; this.enableRegionButtons(false);
       this.container.querySelector('.agreement-title').textContent = '';
       this.container.querySelector('.agreement-metrics').replaceChildren();
       this.container.querySelector('.agreement-pixel').textContent = '';
@@ -89,7 +96,7 @@
       this.container.querySelector('.agreement-title').textContent = title;
       this.container.querySelector('.agreement-metrics').innerHTML = '<tr>'+[row.pearson,row.spearman,row.mean_absolute_width_gap].map(value => '<td>'+format(value)+'</td>').join('')+'</tr>';
       if (this.loadedKey !== key || !this.maps) {
-        this.container.setAttribute('aria-busy', 'true'); this.regionButton.disabled = true;
+        this.container.setAttribute('aria-busy', 'true'); this.enableRegionButtons(false);
         this.status.textContent = 'Loading numerical width maps…';
         try {
           const [agreement, q, i] = await Promise.all([load(), HeatmapPixels.loadMap(paths.qutcc), HeatmapPixels.loadMap(paths.im2im)]);
@@ -104,8 +111,7 @@
         }
       }
       if (version !== this.version) return;
-      this.container.setAttribute('aria-busy', 'false'); this.regionButton.disabled = !row.region;
-      this.regionButton.title = 'Select the center of the 30 × 30 patch with the largest average rank disagreement';
+      this.container.setAttribute('aria-busy', 'false'); this.enableRegionButtons(Boolean(row.region));
       this.status.textContent = `${row.valid_pixels.toLocaleString()} jointly valid pixels · lower correlation means less spatial agreement.`;
       this.draw();
     }
