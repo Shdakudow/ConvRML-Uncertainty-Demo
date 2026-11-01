@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Videos plot · DiffuserCam</title>
   <link rel="stylesheet" href="../named-captures/style.css?v=20261030bluered">
-  <link rel="stylesheet" href="style.css?v=20261030seek">
+  <link rel="stylesheet" href="style.css?v=20261101tracking">
   <script defer src="../demo-navigation.js?v=20261030near90only"></script>
   <link rel="stylesheet" href="../heatmap-pixels.css?v=20261030selection">
   <script defer src="../heatmap-pixels.js?v=20261030agreement"></script>
   <link rel="stylesheet" href="../uncertainty-agreement.css?v=20261030agreement">
   <script defer src="../uncertainty-agreement.js?v=20261031toprank"></script>
-  <script defer src="app.js?v=20261031toprank"></script>
+  <script defer src="app.js?v=20261101tracking"></script>
 </head>
 <body>
 <header>
@@ -32,6 +32,8 @@
     <button id="play" disabled>Play both</button>
     <button id="pause" disabled>Pause</button>
     <button id="inspectRankGapTop" type="button" disabled>Inspect largest rank gap</button>
+    <label><input id="trackRankGap" type="checkbox" disabled> Track largest rank gap</label>
+    <label>Speed <select id="playbackSpeed" disabled><option value="0.25">0.25×</option><option value="0.5">0.5×</option><option value="1" selected>1×</option></select></label>
     <span id="status" role="status">Loading videos…</span>
   </div>
   <p id="error" class="error" hidden></p>
@@ -46,6 +48,7 @@
     </article>
   </div>
   <div class="scrubber"><label for="frame">Frame</label><input id="frame" type="range" min="1" max="1" value="1" disabled><output id="frameLabel">—</output></div>
+  <output id="trackingStatus" hidden></output>
   <div class="map-key"><span>Uncertainty = mean RGB (upper − lower)</span><span class="gradient" id="heatGradient"></span><span>0 → 1 normalized intensity</span><span>Magenta: crossed bounds</span></div>
   <p class="hint">No paired ground truth; reconstruction accuracy and actual coverage cannot be measured here.</p>
   <section class="card plot-card">
