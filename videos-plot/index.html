@@ -9,10 +9,10 @@
   <script defer src="../demo-navigation.js?v=20261030near90only"></script>
   <link rel="stylesheet" href="../heatmap-pixels.css?v=20261030selection">
   <script defer src="../heatmap-pixels.js?v=20261030agreement"></script>
-  <link rel="stylesheet" href="../uncertainty-agreement.css?v=20261030agreement">
-  <script defer src="../uncertainty-agreement.js?v=20261031toprank"></script>
+  <link rel="stylesheet" href="../uncertainty-agreement.css?v=20261102overlap">
+  <script defer src="../uncertainty-agreement.js?v=20261102overlap"></script>
   <script defer src="intensity-correlation.js?v=20261102"></script>
-  <script defer src="app.js?v=20261102intensity"></script>
+  <script defer src="app.js?v=20261102overlap"></script>
 </head>
 <body>
 <header>
@@ -32,8 +32,8 @@
     <label>Sequence <select id="videoSelect" disabled></select></label>
     <button id="play" disabled>Play both</button>
     <button id="pause" disabled>Pause</button>
-    <button id="inspectRankGapTop" type="button" disabled>Inspect largest rank gap</button>
-    <label><input id="trackRankGap" type="checkbox" disabled> Track largest rank gap</label>
+    <button id="inspectRankGapTop" type="button" disabled hidden>Inspect largest rank gap</button>
+    <label id="trackingControl" hidden><input id="trackRankGap" type="checkbox" disabled> Track largest rank gap</label>
     <label>Speed <select id="playbackSpeed" disabled><option value="0.25">0.25×</option><option value="0.5">0.5×</option><option value="1" selected>1×</option></select></label>
     <span id="status" role="status">Loading videos…</span>
   </div>
@@ -71,14 +71,14 @@
     <p><a id="intensityCSV" download>Download correlation CSV</a> · <a id="intensityPNG" download>Download plot PNG</a> · <a href="intensity/overview.png">All-video overview</a></p>
   </section>
   <section class="card plot-card" id="agreementSection">
-    <div class="plot-heading"><h2>Uncertainty agreement between models</h2><label><input type="checkbox" id="agreementZoom" checked> Zoom correlation axis</label></div>
-    <div class="agreement-legend"><span style="color:#72b7ff">Pearson r</span><span style="color:#d7a3ff">Spearman ρ</span></div>
-    <p class="hint">One value per frame for the model pair. Lower values mean less agreement. Click the graph to inspect that frame.</p>
-    <svg id="agreementPlot" viewBox="0 0 1000 330" role="img" aria-label="Pearson and Spearman uncertainty-map agreement versus frame"></svg>
+    <div class="plot-heading"><h2>Uncertainty agreement between models</h2><div class="plot-tools"><label>Comparison <select id="agreementMetric"><option value="spearman">Spearman correlation</option><option value="overlap" selected>Overlap · most uncertain 10% of pixels</option></select></label><label><input type="checkbox" id="agreementZoom"> Zoom to data</label></div></div>
+    <div class="agreement-legend"><span id="agreementLegend" style="color:#d7a3ff">Overlap of most uncertain 10% (IoU)</span></div>
+    <p class="hint" id="agreementHelp">One overlap score per frame for the model pair. Click the graph to inspect the selected pixels.</p>
+    <svg id="agreementPlot" viewBox="0 0 1000 330" role="img" aria-label="Selected uncertainty-map agreement measure versus frame"></svg>
     <div id="agreementValues" aria-live="polite"></div>
-    <p class="hint">Lowest-agreement frames · separated by at least 20 frames</p>
+    <p class="hint" id="agreementJumpTitle">Lowest-overlap frames · separated by at least 20 frames</p>
     <div id="agreementJumps" class="agreement-jumps"></div>
-    <p><a id="agreementCSV" download>Download per-frame agreement CSV</a> · <a href="agreement/overview.png">All-video overview</a> · <a href="agreement/examples.png">Disagreement examples</a></p>
+    <p><a id="agreementCSV" download>Download per-frame agreement CSV</a> · <a id="agreementOverview" href="agreement/overlap-overview.png">All-video overview</a> <a id="agreementExamples" href="agreement/examples.png" hidden>· Rank-disagreement examples</a></p>
   </section>
   <section class="card plot-card" id="videoDisagreement"></section>
   <section class="table-wrap"><h2>Temporal stability</h2>

@@ -25,6 +25,53 @@ from pixel_maps import load_pixel_map
 REPO = Path(__file__).resolve().parents[1]
 
 
+def overlap_overview(agreement, destination, local):
+    """Plot pairwise top-decile IoU, using the full 0–1 scale for every case."""
+    figure, axes = plt.subplots(3, 2, figsize=(13, 10), constrained_layout=True)
+    for axis, (name, report) in zip(axes.ravel(), agreement["videos"].items()):
+        rows = report["rows"]
+        axis.plot(
+            [r["frame"] for r in rows],
+            [r["top10_iou"] for r in rows],
+            color="#8652a3",
+            linewidth=1,
+        )
+        axis.set(
+            title=name.replace("video", "Video "),
+            xlabel="Frame",
+            ylabel="Top-10% overlap (IoU)",
+            ylim=(0, 1),
+            xlim=(1, len(rows)),
+        )
+        axis.grid(alpha=0.2)
+    axis = axes.ravel()[-1]
+    captures = sorted(
+        agreement["captures"].items(),
+        key=lambda pair: (
+            pair[1]["top10_iou"] if pair[1]["top10_iou"] is not None else -1
+        ),
+    )
+    axis.barh(
+        [name for name, _ in captures],
+        [
+            row["top10_iou"] if row["top10_iou"] is not None else np.nan
+            for _, row in captures
+        ],
+        color="#8652a3",
+    )
+    axis.set(title="Named captures", xlabel="Top-10% overlap (IoU)", xlim=(0, 1))
+    axis.tick_params(axis="y", labelsize=8)
+    axis.grid(axis="x", alpha=0.2)
+    figure.suptitle(
+        "Do QUTCC and Im2im flag the same most-uncertain pixels?\nIoU = shared selected pixels / pixels selected by either model",
+        fontsize=14,
+    )
+    for extension in ("png", "pdf"):
+        figure.savefig(destination / ("overlap-overview." + extension), dpi=170)
+        figure.savefig(local / ("overlap-overview." + extension), dpi=170)
+    plt.close(figure)
+
+
 def video_image(video, method, frame):
     path = (
         REPO / "videos-plot/assets" / video / method / "reconstruction_uncertainty.mp4"
@@ -56,10 +103,14 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("assets", type=Path)
     parser.add_argument("--local", type=Path, required=True)
+    parser.add_argument("--overlap-only", action="store_true")
     args = parser.parse_args()
     args.local.mkdir(parents=True, exist_ok=True)
     destination = REPO / "videos-plot/agreement"
     agreement = json.loads((REPO / "uncertainty_agreement.json").read_text())
+    if args.overlap_only:
+        overlap_overview(agreement, destination, args.local)
+        return
     captures = json.loads((REPO / "named-captures/data.json").read_text())
     figure, axes = plt.subplots(3, 2, figsize=(14, 11), constrained_layout=True)
     for axis, (video, report) in zip(axes.ravel(), agreement["videos"].items()):

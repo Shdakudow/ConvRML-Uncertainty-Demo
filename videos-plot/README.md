@@ -37,12 +37,32 @@ frame seeks; playback clears it. Sidecars are float32 values from the frozen
 models, fetched on demand through `../pixel_maps.json`, rather than inferred
 from compressed video colors. Coordinates follow the displayed 180° rotation.
 
-The model-agreement plot below mean width shows one Pearson r and Spearman rho
-per frame for QUTCC versus Im2im. Its frame buttons choose low spatial agreement,
-not low reconstruction accuracy. The selected-frame map can show percentile-rank
-differences or absolute width differences and links pixel/region inspection to
-both videos. Crossed bounds are excluded jointly. All 1,580 coefficients use
-saved numerical maps; no ground truth, retraining or model replay is used.
+The model-agreement plot below mean width has a shared comparison selector:
+**Spearman correlation** or **Overlap · most uncertain 10% of pixels** (default).
+Changing either the graph selector or the selected-frame panel selector updates
+both. Each graph point compares QUTCC with Im2im at one frame. Frame seeking,
+playback and low-agreement jump buttons use the selected measure. In overlap
+mode, all selected locations are displayed rather than one rank-gap patch. The
+legacy rank inspection/tracking controls appear in Spearman mode.
+
+Overlap is intersection-over-union (IoU). Both models use the same finite,
+uncrossed pixels. Within each map, select widths at or above its 90th percentile
+(linear interpolation), then compute `shared / selected_by_either`. A score of
+100% means identical selected locations; 0% means no shared location. Cutoff ties
+are kept together, so selection can slightly exceed 10%; displayed counts show
+this. A constant map has no distinct high-uncertainty set and is undefined.
+The categorical map uses purple for both models, green for QUTCC only, orange for
+Im2im only, dark blue for neither, and magenta for excluded pixels.
+
+This is a full-frame comparison, with no foreground mask or attention model.
+It measures agreement about relatively high uncertainty, not reconstruction
+accuracy or actual coverage. The five lowest-overlap frames are selected
+separately from the five lowest-Spearman frames, with at least 20 frames between
+jump buttons. The named-capture page has the same selector and overlap display.
+CSV exports contain both measures, thresholds, intersection/union and selected
+counts. `agreement/overlap-overview.{png,pdf}` shows all five videos and ten named
+captures. Saved numerical maps are reused; no inference, retraining or calibration
+fitting is performed. Existing correlation and rank-gap values are preserved.
 
 ## Brightness–uncertainty correlation per frame
 

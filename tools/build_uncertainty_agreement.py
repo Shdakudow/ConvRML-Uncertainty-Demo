@@ -16,6 +16,7 @@ import numpy as np
 from scipy import stats
 
 from pixel_maps import load_pixel_map
+from uncertainty_overlap import top10_overlap
 
 REPO = Path(__file__).resolve().parents[1]
 
@@ -60,13 +61,14 @@ def compare(task):
         mean_absolute_width_gap=float(np.mean(np.abs(q - i))) if len(q) else None,
         mean_rank_gap=float(np.nanmean(rank_gap)) if regions else None,
         region=region,
+        **top10_overlap(qutcc, im2im, valid),
     )
 
 
-def choose_frames(rows, separation=20, limit=5):
+def choose_frames(rows, separation=20, limit=5, metric="spearman"):
     selected = []
     for row in sorted(
-        (r for r in rows if r["spearman"] is not None), key=lambda r: r["spearman"]
+        (r for r in rows if r[metric] is not None), key=lambda r: r[metric]
     ):
         if all(abs(row["frame"] - frame) >= separation for frame in selected):
             selected.append(row["frame"])
@@ -135,6 +137,16 @@ def main():
         videos[video["id"]] = dict(
             rows=frames,
             low_agreement_frames=choose_frames(frames),
+            low_overlap_frames=choose_frames(frames, metric="top10_iou"),
+            mean_top10_iou=(
+                float(
+                    np.mean(
+                        [r["top10_iou"] for r in frames if r["top10_iou"] is not None]
+                    )
+                )
+                if any(r["top10_iou"] is not None for r in frames)
+                else None
+            ),
             mean_pearson=float(
                 np.mean([r["pearson"] for r in frames if r["pearson"] is not None])
             ),
@@ -143,13 +155,14 @@ def main():
             ),
         )
     result = dict(
-        protocol="intermodel_rgb_width_agreement_v1",
+        protocol="intermodel_rgb_width_agreement_v2",
         pixel_asset_base=json.loads((REPO / "pixel_maps.json").read_text())["base"],
         pixel_manifest_sha256=hashlib.sha256(
             (args.assets / "manifest.json").read_bytes()
         ).hexdigest(),
         definition="Within-image Pearson/Spearman between the two unsmoothed RGB-mean calibrated width maps. Both models must have finite widths and no crossed RGB bounds at that pixel. Coefficients describe model agreement, not reconstruction accuracy or coverage.",
         rank_gap_definition="Absolute difference of average-tie percentile ranks over the jointly valid pixels, in [0,1].",
+        overlap_definition="For each map select widths >= its linearly interpolated 90th percentile on the same jointly valid pixels. IoU = intersection / union. Include cutoff ties and report counts; constant maps are undefined. No foreground mask is applied.",
         region_definition="30x30 pixel grid patch with largest mean rank gap; at least half the patch must be valid. Coordinates follow the displayed images.",
         frame_selection="Five lowest-Spearman frames per video, separated by at least 20 display frames; not a quality ranking.",
         ground_truth_used=False,
@@ -171,6 +184,15 @@ def main():
         "mean_absolute_width_gap",
         "mean_rank_gap",
         "valid_pixels",
+        "top10_iou",
+        "top10_intersection",
+        "top10_union",
+        "top10_qutcc_count",
+        "top10_im2im_count",
+        "top10_valid_pixels",
+        "top10_threshold_qutcc",
+        "top10_threshold_im2im",
+        "top10_reason",
     ]
     for name, entries in [("named_captures", list(captures.values()))] + [
         (v, r["rows"]) for v, r in videos.items()

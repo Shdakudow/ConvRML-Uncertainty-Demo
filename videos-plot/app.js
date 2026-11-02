@@ -44,8 +44,8 @@ function stopTracking() {
 }
 
 function presentedFrame(video, time) {
-  if (!selected) return;
-  const index = frameIndex(time);
+  if (!selected || video.seeking) return;
+  const index = frameIndex(video.paused ? video.currentTime : time);
   if (video.id === 'qutccVideo') setFrame(index);
   trackRegion(video, index);
 }
@@ -74,7 +74,8 @@ function setFrame(index) {
 function seekFrame(index) {
   pause();
   const bounded = Math.max(0, Math.min(selected.frames - 1, index));
-  videos().forEach(video => { video.currentTime = bounded / selected.fps; });
+  // Seek inside the frame interval; an exact boundary can decode its predecessor.
+  videos().forEach(video => { video.currentTime = (bounded + .5) / selected.fps; });
   setFrame(bounded);
   if (tracking()) videos().forEach(video => trackRegion(video, bounded));
   if (pixelPoint) inspectFrame(bounded);
@@ -90,44 +91,59 @@ function showAgreementFrame(index) {
 }
 function drawAgreementPlot() {
   if (!agreementData || !selected) return;
-  const rows = agreementData.videos[selected.id].rows, svg = $('agreementPlot');
-  const values = rows.flatMap(row => [row.pearson, row.spearman]).filter(Number.isFinite);
-  let low = -1, high = 1;
+  const info = agreementData.videos[selected.id], rows = info.rows, svg = $('agreementPlot');
+  const overlap = UncertaintyAgreement.getMode() === 'overlap';
+  const metric = overlap ? 'top10_iou' : 'spearman';
+  const label = overlap ? 'Overlap of most uncertain 10% (IoU)' : 'Spearman correlation';
+  const display = value => overlap ? UncertaintyAgreement.percent(value) : UncertaintyAgreement.format(value);
+  const values = rows.map(row => row[metric]).filter(Number.isFinite);
+  $('agreementMetric').value = UncertaintyAgreement.getMode();
+  $('agreementLegend').textContent = label;
+  $('agreementHelp').textContent = overlap ? 'One overlap score per frame. Shared selected pixels ÷ pixels selected by either model. Higher means more agreement about the most uncertain locations. Click the graph to inspect a frame.' : 'One Spearman coefficient per frame between the two uncertainty maps. Higher means more similar pixel rankings. Click the graph to inspect a frame.';
+  $('agreementJumpTitle').textContent = overlap ? 'Lowest-overlap frames · separated by at least 20 frames' : 'Lowest-correlation frames · separated by at least 20 frames';
+  $('agreementOverview').href = overlap ? 'agreement/overlap-overview.png' : 'agreement/overview.png';
+  $('agreementExamples').hidden = overlap;
+  let low = overlap ? 0 : -1, high = 1;
   if ($('agreementZoom').checked && values.length) {
     const minimum = Math.min(...values), maximum = Math.max(...values), margin = Math.max(.01, (maximum - minimum) * .15);
-    low = Math.max(-1, minimum - margin); high = Math.min(1, maximum + margin);
+    low = Math.max(overlap ? 0 : -1, minimum - margin); high = Math.min(1, maximum + margin);
   }
   const X = index => 70 + index / Math.max(1, rows.length - 1) * 900;
   const Y = value => 275 - (value - low) / Math.max(.001, high - low) * 253;
   let markup = '';
   for (let tick = 0; tick <= 4; tick++) {
     const value = low + tick / 4 * (high - low), index = Math.round(tick / 4 * (rows.length - 1));
-    markup += `<line x1="70" x2="970" y1="${Y(value)}" y2="${Y(value)}" stroke="#33455c"/><text x="61" y="${Y(value)+4}" text-anchor="end" fill="#bac7d6" font-size="12">${value.toFixed(3)}</text><text x="${X(index)}" y="298" text-anchor="middle" fill="#bac7d6" font-size="12">${index+1}</text>`;
+    const text = overlap ? `${(100 * value).toFixed(0)}%` : value.toFixed(2);
+    markup += `<line x1="70" x2="970" y1="${Y(value)}" y2="${Y(value)}" stroke="#33455c"/><text x="61" y="${Y(value)+4}" text-anchor="end" fill="#bac7d6" font-size="12">${text}</text><text x="${X(index)}" y="298" text-anchor="middle" fill="#bac7d6" font-size="12">${index+1}</text>`;
   }
-  for (const [metric, color] of [['pearson','#72b7ff'],['spearman','#d7a3ff']]) {
-    let path = '', connected = false;
-    rows.forEach((row, index) => {if (Number.isFinite(row[metric])) {path += `${connected?'L':'M'}${X(index)},${Y(row[metric])}`; connected = true;} else connected = false;});
-    markup += `<path data-metric="${metric}" d="${path}" fill="none" stroke="${color}" stroke-width="1.2"/>`;
-  }
-  markup += '<text x="520" y="325" text-anchor="middle" fill="#bac7d6" font-size="13">Frame</text><text transform="translate(16,148) rotate(-90)" text-anchor="middle" fill="#bac7d6" font-size="13">Inter-model correlation</text><line id="agreementCursor" y1="22" y2="275" stroke="#e5edf5" opacity=".6"/><rect id="agreementHit" x="70" y="22" width="900" height="253" fill="transparent"/>';
+  let path = '', connected = false;
+  rows.forEach((row, index) => {
+    if (Number.isFinite(row[metric])) {path += `${connected?'L':'M'}${X(index)},${Y(row[metric])}`; connected = true;}
+    else connected = false;
+  });
+  markup += `<path data-metric="${metric}" d="${path}" fill="none" stroke="#d7a3ff" stroke-width="1.4"/>`;
+  markup += `<text x="520" y="325" text-anchor="middle" fill="#bac7d6" font-size="13">Frame</text><text transform="translate(16,148) rotate(-90)" text-anchor="middle" fill="#bac7d6" font-size="13">${overlap ? 'Top-10% overlap (IoU)' : 'Spearman ρ'}</text><line id="agreementCursor" y1="22" y2="275" stroke="#e5edf5" opacity=".6"/><rect id="agreementHit" x="70" y="22" width="900" height="253" fill="transparent"/>`;
   svg.innerHTML = markup;
   agreementCursor = index => {
     const cursor = $('agreementCursor'); cursor.setAttribute('x1', X(index)); cursor.setAttribute('x2', X(index));
     const row = rows[index];
-    $('agreementValues').textContent = `Frame ${index+1} · Pearson ${UncertaintyAgreement.format(row.pearson)} · Spearman ${UncertaintyAgreement.format(row.spearman)}`;
+    $('agreementValues').textContent = `Frame ${index+1} · ${overlap ? 'Overlap (IoU)' : 'Spearman ρ'} ${display(row[metric])}${overlap ? ` · ${row.top10_intersection.toLocaleString()} shared / ${row.top10_union.toLocaleString()} selected by either` : ''}`;
   };
   const frameAtPointer = event => {
-    const p = new DOMPoint(event.clientX, event.clientY).matrixTransform(svg.getScreenCTM().inverse());
-    return Math.max(0, Math.min(rows.length - 1, Math.round((p.x - 70) / 900 * (rows.length - 1))));
+    const point = new DOMPoint(event.clientX, event.clientY).matrixTransform(svg.getScreenCTM().inverse());
+    return Math.max(0, Math.min(rows.length - 1, Math.round((point.x - 70) / 900 * (rows.length - 1))));
   };
   $('agreementHit').onpointermove = event => agreementCursor(frameAtPointer(event));
   $('agreementHit').onclick = event => seekFrame(frameAtPointer(event));
-  $('agreementJumps').replaceChildren(...agreementData.videos[selected.id].low_agreement_frames.map(frame => {
-    const button = document.createElement('button'); button.textContent = `Frame ${frame} · ρ ${rows[frame-1].spearman.toFixed(3)}`;
+  const jumps = overlap ? info.low_overlap_frames : info.low_agreement_frames;
+  $('agreementJumps').replaceChildren(...jumps.map(frame => {
+    const button = document.createElement('button'); button.textContent = `Frame ${frame} · ${overlap ? 'IoU' : 'ρ'} ${display(rows[frame-1][metric])}`;
     button.onclick = () => {
       const region = rows[frame-1].region;
-      if (region) pixelPoint = {x: region.x + 15, y: region.y + 15};
-      seekFrame(frame - 1); document.querySelector('.video-grid').scrollIntoView({block: 'start'});
+      if (!overlap && region) pixelPoint = {x: region.x + 15, y: region.y + 15};
+      else clearPixel();
+      seekFrame(frame - 1);
+      (overlap ? $('videoDisagreement') : document.querySelector('.video-grid')).scrollIntoView({block: 'start'});
     };
     return button;
   }));
@@ -247,9 +263,15 @@ $('trackRankGap').addEventListener('change', () => {
 $('playbackSpeed').addEventListener('change', () => {
   videos().forEach(video => {video.playbackRate = Number($('playbackSpeed').value);});
 });
-$('qutccVideo').addEventListener('timeupdate', () => {if (!selected) return; const first = $('qutccVideo'), second = $('im2imVideo'); setFrame(Math.floor(first.currentTime * selected.fps)); if (!first.paused && Math.abs(second.currentTime - first.currentTime) > .15) second.currentTime = first.currentTime;});
+$('qutccVideo').addEventListener('timeupdate', () => {if (!selected) return; const first = $('qutccVideo'), second = $('im2imVideo'); setFrame(frameIndex(first.currentTime)); if (!first.paused && Math.abs(second.currentTime - first.currentTime) > .15) second.currentTime = first.currentTime;});
 $('qutccVideo').addEventListener('ended', () => {pause(); if (selected) showAgreementFrame(selected.frames - 1);});
 $('agreementZoom').addEventListener('change', drawAgreementPlot);
+$('agreementMetric').addEventListener('change', () => UncertaintyAgreement.setMode($('agreementMetric').value));
+window.addEventListener('uncertaintycomparisonchange', () => {
+  if (UncertaintyAgreement.getMode() === 'overlap') stopTracking();
+  $('trackingControl').hidden = UncertaintyAgreement.getMode() === 'overlap';
+  drawAgreementPlot();
+});
 $('zoom').addEventListener('change', drawPlot);
 $('cumulativeToggle').addEventListener('click', () => {
   const next = !showCumulative(); $('cumulativeToggle').setAttribute('aria-pressed', String(next));

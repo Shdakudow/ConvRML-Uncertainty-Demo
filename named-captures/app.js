@@ -86,6 +86,27 @@
     return Math.max(0, index);
   }
 
+  function drawAgreementJumps() {
+    if (!data || !agreementData) return;
+    const overlap = UncertaintyAgreement.getMode() === 'overlap';
+    const metric = overlap ? 'top10_iou' : 'spearman';
+    $('captureAgreementJumpTitle').textContent = overlap ? 'Lowest overlap of most uncertain 10% of pixels' : 'Lowest Spearman correlation';
+    const lowest = data.examples.map((example, index) => ({example, index, score: agreementData.captures[example.id][metric]}))
+      .filter(item => Number.isFinite(item.score)).sort((a,b) => a.score-b.score).slice(0,3);
+    $('captureAgreementJumps').replaceChildren(...lowest.map(({example,index,score}) => {
+      const button = document.createElement('button');
+      button.textContent = `${example.name} · ${overlap ? 'IoU '+UncertaintyAgreement.percent(score) : 'ρ '+score.toFixed(3)}`;
+      button.onclick = async () => {
+        await render(index);
+        if (data.examples[current].id !== example.id) return;
+        const region = agreementData.captures[example.id].region;
+        if (!overlap && region) selectPixel({x: region.x + 15, y: region.y + 15});
+        (overlap ? $('captureAgreement') : $('viewer')).scrollIntoView({block:'start'});
+      };
+      return button;
+    }));
+  }
+
   async function start() {
     try {
       const response = await fetch("data.json?v=20261030bluered", { cache: "no-store" });
@@ -106,7 +127,7 @@
         const agreement = agreementData?.captures[example.id];
         const values = [example.name, ...models.map(model =>
           example.models[model].metrics.mean_interval_width.toFixed(5)),
-          ...['pearson','spearman'].map(metric => UncertaintyAgreement.format(agreement?.[metric]))];
+          ...['pearson','spearman'].map(metric => UncertaintyAgreement.format(agreement?.[metric])), UncertaintyAgreement.percent(agreement?.top10_iou)];
         for (const value of values) {
           const cell = document.createElement("td");
           cell.textContent = value;
@@ -116,22 +137,9 @@
       }
       $("widthAverage").innerHTML = `<tr><th>Mean across all ten captures</th>${models.map(model =>
         `<th>${data.mean_interval_width[model].toFixed(5)}</th>`
-      ).join("")}<th colspan="2">Per-capture agreement shown above</th></tr>`;
-      if (agreementData) {
-        const lowest = data.examples.map((example, index) => ({example, index, score: agreementData.captures[example.id].spearman}))
-          .filter(item => Number.isFinite(item.score)).sort((a,b) => a.score-b.score).slice(0,3);
-        for (const {example,index,score} of lowest) {
-          const button = document.createElement('button');button.textContent = `${example.name} · ρ ${score.toFixed(3)}`;
-          button.onclick = async () => {
-            await render(index);
-            if (data.examples[current].id !== example.id) return;
-            const region = agreementData.captures[example.id].region;
-            if (region) selectPixel({x: region.x + 15, y: region.y + 15});
-            $('viewer').scrollIntoView({block:'start'});
-          };
-          $('captureAgreementJumps').append(button);
-        }
-      }
+      ).join("")}<th colspan="3">Per-capture agreement shown above</th></tr>`;
+      drawAgreementJumps();
+      window.addEventListener('uncertaintycomparisonchange', drawAgreementJumps);
       $("heatGradient").style.background = data.heatmap.gradient;
       $("heatRange").textContent = `0 – ${data.heatmap.max.toFixed(3)}`;
       const q = data.models.qutcc.calibration;
