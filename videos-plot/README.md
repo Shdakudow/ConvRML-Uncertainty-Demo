@@ -43,3 +43,40 @@ not low reconstruction accuracy. The selected-frame map can show percentile-rank
 differences or absolute width differences and links pixel/region inspection to
 both videos. Crossed bounds are excluded jointly. All 1,580 coefficients use
 saved numerical maps; no ground truth, retraining or model replay is used.
+
+## Brightness–uncertainty correlation per frame
+
+The brightness plot measures spatial correlation **within each frame**, then
+plots those coefficients against frame number. Its two curves are QUTCC and
+Im2im. Spearman ρ is the default; Pearson r is an optional linear-association
+view. The vertical axis stays at −1 to +1, with a zero reference line. Hover
+shows coefficients and valid-pixel counts; clicking seeks both videos. The plot
+also follows playback, the frame slider, and keyboard left/right arrows when
+focused. CSV, PNG, and PDF exports retain every frame without temporal smoothing.
+
+For each model, brightness is the RGB mean of its own clipped full-precision
+reconstruction. It is **estimated image brightness**, not measured illumination,
+linear-light luminance, or sensor-pixel intensity. Uncertainty is the RGB mean of
+`clip(upper,0,1) - clip(lower,0,1)`. Both coefficients use identical spatial pixels,
+excluding nonfinite values and any crossed RGB interval in either model. The same
+180° rotation is applied to both displayed maps; correlation is unchanged by that
+shared permutation. Ties receive average ranks; a constant map gives an undefined
+coefficient and a gap in the graph. No pixel-independence p-values are reported.
+
+Positive correlation means brighter reconstructed pixels tend to have wider
+intervals; negative means darker pixels tend to have wider intervals. A value
+near zero does not rule out a curved relationship. These are within-model
+associations: the models produce different brightness estimates. They do not
+establish causality, uncertainty accuracy, or real video coverage. Clipping and
+scene structure can influence the coefficients. Width divided by intensity is
+not used, since it measures relative width and is unstable near black.
+
+`tools/analyze_video_intensity.py` replays the original frozen epoch-50 models
+using the exact published calibration and receipt-verified prepared inputs. It
+checks per-frame mean brightness and width against the published video reports
+before recording correlations; no video colors are inverted. The analysis job
+is independent of all ongoing training and never refits calibration.
+`tools/build_video_intensity.py` verifies the completed export and creates
+`intensity/data.json`, per-video CSVs, and publication figures. The four numerical
+tests cover nonlinear monotonic associations, tied ranks, common exclusion masks,
+and undefined constant maps.

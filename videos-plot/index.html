@@ -11,7 +11,8 @@
   <script defer src="../heatmap-pixels.js?v=20261030agreement"></script>
   <link rel="stylesheet" href="../uncertainty-agreement.css?v=20261030agreement">
   <script defer src="../uncertainty-agreement.js?v=20261031toprank"></script>
-  <script defer src="app.js?v=20261101tracking"></script>
+  <script defer src="intensity-correlation.js?v=20261102"></script>
+  <script defer src="app.js?v=20261102intensity"></script>
 </head>
 <body>
 <header>
@@ -57,6 +58,17 @@
     <svg id="widthPlot" viewBox="0 0 1000 330" role="img" aria-label="Mean interval width over video frames"></svg>
     <div id="plotValues" aria-live="polite"></div>
     <p><a id="csvDownload" download>Download frame metrics CSV</a> · <a id="figureDownload" download>Download plot PNG</a></p>
+  </section>
+  <section class="card plot-card" id="intensitySection">
+    <div class="plot-heading"><h2>Brightness vs uncertainty per frame</h2><div class="plot-tools">
+      <div class="curve-legend" aria-label="Model colors"><span><i class="qutcc-swatch"></i>QUTCC</span><span><i class="im2im-swatch"></i>Im2im</span></div>
+      <label>Measure <select id="intensityMetric" disabled><option value="spearman" selected>Spearman ρ · rank relationship</option><option value="pearson">Pearson r · linear relationship</option></select></label>
+    </div></div>
+    <p class="hint">Each value compares pixel brightness with interval width within one frame. Positive: brighter pixels tend to have wider uncertainty. Negative: darker pixels tend to have wider uncertainty. Frame order is unchanged; no smoothing is applied.</p>
+    <svg id="intensityPlot" viewBox="0 0 1000 330" role="img" tabindex="0" aria-label="Brightness–uncertainty correlation versus frame; click to seek or use left and right arrow keys"></svg>
+    <div id="intensityValues" aria-live="polite">Loading brightness–uncertainty analysis…</div>
+    <p class="hint">Brightness is each model’s own reconstructed RGB mean, not measured light intensity. Width is the RGB mean of calibrated upper − lower, with predictions and bounds clipped to [0,1]. Both curves use the same finite, uncrossed pixels. A near-zero coefficient can hide a curved relationship; these curves do not measure uncertainty accuracy.</p>
+    <p><a id="intensityCSV" download>Download correlation CSV</a> · <a id="intensityPNG" download>Download plot PNG</a> · <a href="intensity/overview.png">All-video overview</a></p>
   </section>
   <section class="card plot-card" id="agreementSection">
     <div class="plot-heading"><h2>Uncertainty agreement between models</h2><label><input type="checkbox" id="agreementZoom" checked> Zoom correlation axis</label></div>

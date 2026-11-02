@@ -2,3 +2,5 @@
 .plot-tools{display:flex;flex-direction:column;align-items:flex-end;gap:9px}.curve-legend{display:flex;gap:20px;font-size:14px;font-weight:600}.curve-legend span{display:inline-flex;align-items:center;gap:7px}.curve-legend i{display:inline-block;width:24px;height:4px;border-radius:2px}.qutcc-swatch{background:#9ddfd2}.im2im-swatch{background:#f9ba77}
 #plotHit{cursor:crosshair}
 #trackingStatus{display:block;margin:10px 0;font-size:13px;font-variant-numeric:tabular-nums;color:#fff200}#trackingStatus[hidden]{display:none}
+
+#intensityPlot{display:block;width:100%;height:auto;touch-action:pan-y}#intensityHit{cursor:crosshair}#intensityValues{min-height:26px;font-size:13px;font-variant-numeric:tabular-nums}#intensityMetric{max-width:100%}#intensityPlot:focus-visible{outline:2px solid #9ddfd2;outline-offset:4px}

@@ -69,6 +69,7 @@ function setFrame(index) {
   $('frame').value = bounded + 1;
   $('frameLabel').textContent = `${bounded + 1} / ${selected.frames}`;
   if (agreementCursor) agreementCursor(bounded);
+  VideoIntensityPlot.setFrame(bounded);
 }
 function seekFrame(index) {
   pause();
@@ -204,6 +205,7 @@ function choose() {
     [labels[method], number(report.mean_interval_width), number(report.std_interval_width), `${(report.coefficient_of_variation * 100).toFixed(2)}%`, number(report.minimum), number(report.maximum)].forEach(value => {const cell = document.createElement('td'); cell.textContent = value; row.append(cell);});
     return row;
   }));
+  VideoIntensityPlot.select(selected.id);
   $('frame').max = selected.frames; setFrame(0);
   $('status').textContent = `${selected.frames} frames · ${selected.fps} fps playback`;
   $('csvDownload').href = selected.csv; $('figureDownload').href = selected.plot;
@@ -279,3 +281,5 @@ UncertaintyAgreement.load().then(value => {
     else agreementPanel.suspend('Pause or select a frame to inspect the disagreement map.');
   }
 }).catch(() => {$('agreementValues').textContent = 'Agreement analysis unavailable.'; $('videoDisagreement').hidden = true;});
+
+VideoIntensityPlot.init({onSeek: index => seekFrame(index)});
