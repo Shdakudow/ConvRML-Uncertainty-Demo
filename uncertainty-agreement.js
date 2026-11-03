@@ -86,6 +86,7 @@
         <h2 class="agreement-heading">Most uncertain 10% of pixels</h2><p class="agreement-title"></p>
         <div class="agreement-layout"><figure>
           <canvas class="agreement-map" width="480" height="270" aria-label="Spatial comparison of the two uncertainty maps"></canvas>
+          <video class="agreement-playback" playsinline muted preload="metadata" hidden aria-label="Most uncertain 10% of pixels during playback"></video>
           <figcaption class="agreement-map-label"></figcaption>
           <div class="map-key agreement-rank-key"><span class="gradient"></span><span>0 → 1</span><span>Magenta: excluded crossed bounds</span></div>
           <div class="agreement-overlap-key"><span class="both">Both models</span><span class="q-only">QUTCC only</span><span class="i-only">Im2im only</span><span class="neither">Neither</span><span class="excluded">Excluded</span></div>
@@ -102,6 +103,8 @@
           <p class="hint">Agreement between models, not reconstruction accuracy. Click the map to inspect both models at that pixel.</p>
         </div></div>`;
       this.canvas = container.querySelector('canvas');
+      this.playbackVideo = container.querySelector('.agreement-playback');
+      this.playing = false;
       this.mode = container.querySelector('.agreement-mode');
       this.comparison = container.querySelector('.agreement-comparison');
       this.status = container.querySelector('.agreement-status');
@@ -128,12 +131,16 @@
     enableRegionButtons(enabled) {
       for (const button of this.regionButtons) {
         button.hidden = getMode() === 'overlap';
-        button.disabled = !enabled || getMode() === 'overlap';
+        button.disabled = !enabled || getMode() === 'overlap' || this.playing;
       }
     }
 
     renderComparison() {
       const overlap = getMode() === 'overlap';
+      const live = this.playing && overlap && Boolean(this.playbackVideo.getAttribute('src'));
+      this.canvas.hidden = live;
+      this.playbackVideo.hidden = !live;
+      if (this.playing) this.container.setAttribute('aria-busy', live ? 'false' : 'true');
       this.comparison.value = getMode();
       this.container.querySelector('.agreement-heading').textContent = overlap ? 'Most uncertain 10% of pixels' : 'Where uncertainty maps disagree';
       this.container.querySelector('.agreement-difference-control').hidden = overlap;
@@ -144,9 +151,32 @@
       const values = this.row ? (overlap ? [percent(this.row.top10_iou), this.row.top10_intersection.toLocaleString(), this.row.top10_qutcc_count.toLocaleString(), this.row.top10_im2im_count.toLocaleString()] : [format(this.row.spearman), format(this.row.pearson), format(this.row.mean_absolute_width_gap)]) : [];
       this.container.querySelector('.agreement-metrics').innerHTML = values.length ? '<tr>'+values.map(value => '<td>'+value+'</td>').join('')+'</tr>' : '';
       this.container.querySelector('.agreement-explanation').textContent = overlap ? 'Select values at or above each map’s 90th percentile. Overlap = shared pixels ÷ pixels selected by either model. 0% means no overlap; 100% means the same locations. Cutoff ties stay together, so the selected count can exceed 10%. Constant maps are undefined. Whole frame; no foreground mask is applied.' : 'Rank differences compare relative uncertainty ordering. Large rank changes can occur even when both widths are small.';
+      if (live) this.container.querySelector('.agreement-map-label').textContent = 'Moving top-10% selections · purple = shared by both models';
       this.enableRegionButtons(Boolean(this.row?.region) && this.container.getAttribute('aria-busy') !== 'true');
       if (this.row && this.container.getAttribute('aria-busy') !== 'true') this.status.textContent = `${this.row.valid_pixels.toLocaleString()} jointly valid pixels · ${overlap ? (this.row.top10_reason || 'higher overlap means the models select more of the same locations.') : 'lower correlation means less spatial agreement.'}`;
+      if (this.playing && !live) this.status.textContent = 'Pause or select a frame to inspect the rank-difference map.';
       this.draw();
+    }
+
+    setPlaybackSource(source) {
+      this.playbackVideo.src = source.video;
+      this.playbackVideo.poster = source.poster;
+      this.playbackVideo.load();
+    }
+
+    setPlaying(value) {
+      this.version++;
+      this.playing = value;
+      this.container.setAttribute('aria-busy', 'true');
+      this.renderComparison();
+      if (value && getMode() !== 'overlap') this.status.textContent = 'Pause or select a frame to inspect the rank-difference map.';
+    }
+
+    updatePlaybackFrame(row, title) {
+      if (!this.playing) return;
+      this.row = row;
+      this.container.querySelector('.agreement-title').textContent = title;
+      this.renderComparison();
     }
 
     pick(point) {this.point = point; this.draw(); this.onPick(point);}
@@ -186,7 +216,7 @@
     }
 
     draw() {
-      if (!this.maps || this.container.getAttribute('aria-busy') === 'true') return;
+      if (!this.maps || this.playing || this.container.getAttribute('aria-busy') === 'true') return;
       const overlap = getMode() === 'overlap', rank = this.mode.value === 'rank';
       const values = rank ? this.maps.rankGap : this.maps.widthGap;
       const context = this.canvas.getContext('2d'), image = context.createImageData(this.maps.width, this.maps.height);

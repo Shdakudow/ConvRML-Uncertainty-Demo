@@ -6,7 +6,8 @@
   <title>Exp 4 · Generalized inputs · ConvRML</title>
   <link rel="stylesheet" href="style.css">
   <script src="../demo-navigation.js" defer></script>
-  <script src="app.js" defer></script>
+  <script src="learning-curves.js?v=20261103" defer></script>
+  <script src="app.js?v=20261103" defer></script>
 </head>
 <body>
   <header>
@@ -31,12 +32,23 @@
         <span id="counter"></span>
       </div>
       <p class="caption">Browse the first 50 test scenes in the original split order. Scores below each section use all 2,000 test scenes. No examples were chosen by quality.</p>
+      <section id="learningCurves" class="learning-curves">
+        <h2>Learning curves</h2>
+        <p id="learningStatus" class="caption">Loading recorded validation history…</p>
+        <fieldset id="learningConditions"><legend>Show conditions</legend></fieldset>
+        <div class="learning-grid">
+          <figure><figcaption>Validation SSIM · higher is better</figcaption><svg id="learning-ssim" viewBox="0 0 600 340" role="img" aria-label="Validation SSIM by epoch"></svg><div id="learning-values-ssim" class="learning-values"></div></figure>
+          <figure><figcaption>Validation PSNR · higher is better</figcaption><svg id="learning-psnr" viewBox="0 0 600 340" role="img" aria-label="Validation PSNR by epoch"></svg><div id="learning-values-psnr" class="learning-values"></div></figure>
+        </div>
+        <p class="caption">These curves show generalized training. The historical clean-trained models did not record the same per-corruption validation panel. Hover for exact values. <a href="learning-data.json">Download learning history</a>.</p>
+      </section>
       <div id="conditions"></div>
       <aside class="methods">
         <h2>How to read this comparison</h2>
         <p>The original input is the lensless sensor image. The target is the sharp scene used to judge reconstruction. Changes affect the sensor image only. <code>clip</code> keeps values between 0 and 1.</p>
         <p>Generalized training chose clean input or one of nine modification families with 10% probability each. Exposure used a global gain of 0.50 or 1.50, each with 5% probability overall. Masks and pixel patterns simulate a different sensor per image.</p>
         <p>Each model is calibrated once on the same separate 3,000-scene mixture, aiming for 90% overall coverage. This is empirical calibration, with no population guarantee. Coverage for an individual modification can differ. Any failed calibration is marked explicitly.</p>
+        <p>Absolute-error maps show mean RGB |reconstruction − ground truth| on a shared 0–1 color scale.</p>
         <p>PSNR and SSIM: higher is better. MAE: lower is better. Coverage is the fraction of target RGB values inside the interval. Width is the mean interval size. Crossing is the fraction with lower bound above upper bound. Predictions and bounds are clipped to [0, 1] for scores; crossed bounds are never sorted. Scores use full-precision outputs before display images are rounded to 8 bits.</p>
         <p><a id="data-link" href="data.json">Download results and calibration details</a></p>
       </aside>

@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Videos plot · DiffuserCam</title>
   <link rel="stylesheet" href="../named-captures/style.css?v=20261030bluered">
-  <link rel="stylesheet" href="style.css?v=20261101tracking">
+  <link rel="stylesheet" href="style.css?v=20261103playback">
   <script defer src="../demo-navigation.js?v=20261030near90only"></script>
   <link rel="stylesheet" href="../heatmap-pixels.css?v=20261030selection">
   <script defer src="../heatmap-pixels.js?v=20261030agreement"></script>
-  <link rel="stylesheet" href="../uncertainty-agreement.css?v=20261102overlap">
-  <script defer src="../uncertainty-agreement.js?v=20261102overlap"></script>
+  <link rel="stylesheet" href="../uncertainty-agreement.css?v=20261103playback">
+  <script defer src="../uncertainty-agreement.js?v=20261103playback"></script>
   <script defer src="intensity-correlation.js?v=20261102"></script>
-  <script defer src="app.js?v=20261102overlap"></script>
+  <script defer src="app.js?v=20261103playback"></script>
 </head>
 <body>
 <header>
@@ -30,14 +30,16 @@
 <main>
   <div class="controls">
     <label>Sequence <select id="videoSelect" disabled></select></label>
-    <button id="play" disabled>Play both</button>
+    <button id="play" disabled>Play</button>
     <button id="pause" disabled>Pause</button>
+    <label><input id="showTop10" type="checkbox" checked disabled> Highlight top 10% on reconstructions</label>
     <button id="inspectRankGapTop" type="button" disabled hidden>Inspect largest rank gap</button>
     <label id="trackingControl" hidden><input id="trackRankGap" type="checkbox" disabled> Track largest rank gap</label>
     <label>Speed <select id="playbackSpeed" disabled><option value="0.25">0.25×</option><option value="0.5">0.5×</option><option value="1" selected>1×</option></select></label>
     <span id="status" role="status">Loading videos…</span>
   </div>
   <p id="error" class="error" hidden></p>
+  <p class="hint">Moving highlights: purple = selected by both models; green = QUTCC only; orange = Im2im only. The uncertainty panels retain their original color scale. Pause for exact pixel inspection.</p>
   <div class="video-grid">
     <article class="card"><h2>QUTCC</h2><p id="qutccSummary"></p>
       <video id="qutccVideo" playsinline muted preload="metadata" aria-label="QUTCC reconstruction and uncertainty"></video>

@@ -4,7 +4,7 @@
   const arms = ['qutcc_clean50','qutcc_general100','im2im_clean50','im2im_general100'];
   const labels = {qutcc_clean50:'QUTCC · clean · 50 epochs',qutcc_general100:'QUTCC · generalized · 100 epochs',im2im_clean50:'Im2im · clean · 50 epochs',im2im_general100:'Im2im · generalized · 100 epochs'};
   const metrics = [['psnr','PSNR (dB)'],['ssim','SSIM'],['mae','MAE'],['coverage','Coverage'],['width','Width'],['crossing','Crossing']];
-  let data, index = 0;
+  let data, errorData, index = 0;
   const cards = new Map();
   const el = (tag, text, className) => {
     const node = document.createElement(tag);
@@ -29,14 +29,14 @@
     node.append(image);
     return node;
   }
-  function pairs(width = false) {
-    const grid = el('div', undefined, `model-grid${width ? ' maps' : ''}`);
+  function pairs(kind = 'prediction') {
+    const grid = el('div', undefined, `model-grid${kind === 'width' ? ' maps' : kind === 'error' ? ' errors' : ''}`);
     for (const method of ['qutcc','im2im']) {
       const pair = el('div', undefined, 'pair');
       pair.append(el('h3', method === 'qutcc' ? 'QUTCC' : 'Im2im'));
       const images = el('div', undefined, 'pair-images');
-      images.append(figure('Clean-trained · 50 epochs', width ? 'width' : 'prediction', `${method}_clean50`));
-      images.append(figure('Generalized · 100 epochs', width ? 'width' : 'prediction', `${method}_general100`));
+      images.append(figure('Clean-trained · 50 epochs', kind, `${method}_clean50`));
+      images.append(figure('Generalized · 100 epochs', kind, `${method}_general100`));
       pair.append(images); grid.append(pair);
     }
     return grid;
@@ -63,7 +63,7 @@
     const details = card.querySelector('details');
     if (!details.open) return;
     const content = details.querySelector('.detail-content'); content.replaceChildren();
-    content.append(pairs(true));
+    content.append(pairs('width'));
     const legend = el('div', undefined, 'legend');
     legend.append(el('span','Narrow 0'), el('span',undefined,'gradient'), el('span','Wide 1'), el('span','Pink = crossed bounds','pink'));
     content.append(legend, el('p','Mean RGB interval width; the same color scale is used for every model and scene.','caption'));
@@ -89,7 +89,10 @@
       if (kind === 'original' || kind === 'target') path = `images/shared/${stem}-${kind}.png`;
       else if (kind === 'input') path = condition.id === 'clean' ? `images/shared/${stem}-original.png` : `images/${condition.id}/${stem}-input.png`;
       else path = `images/${condition.id}/${image.dataset.arm}/${stem}-${kind}.png`;
-      image.src = asset(path);
+      if (kind === 'error') {
+        path = `errors/${condition.id}/${image.dataset.arm}/${stem}.png`;
+        image.src = new URL(path, new URL(errorData.base, location.href)).href;
+      } else image.src = asset(path);
     }
   }
   function buildCard(condition) {
@@ -99,6 +102,10 @@
     const inputs = el('div',undefined,'inputs');
     inputs.append(figure('Original sensor input','original'),figure(condition.id === 'clean' ? 'Unchanged input' : 'Modified sensor input','input'),figure('Target scene','target'));
     card.append(inputs, el('code',condition.formula,'formula'), pairs());
+    card.append(el('h3','Absolute reconstruction error','error-title'), pairs('error'));
+    const errorLegend = el('div', undefined, 'legend');
+    errorLegend.append(el('span','Low error 0'), el('span',undefined,'gradient'), el('span','High error 1'));
+    card.append(errorLegend, el('p','Mean RGB |reconstruction − ground truth|, computed before display quantization. The same 0–1 scale is used for every model and condition.','caption'));
     const details = el('details'), summary = el('summary');
     summary.append(el('span','⬇️','arrow'),document.createTextNode('Uncertainty maps and metrics'));
     details.append(summary,el('div',undefined,'detail-content'));
@@ -122,6 +129,10 @@
     const response = await fetch('data.json');
     if (!response.ok) throw new Error(`Results could not be loaded (${response.status})`);
     data = await response.json();
+    const errorResponse = await fetch('error-maps.json');
+    if (!errorResponse.ok) throw new Error('Absolute-error maps could not be loaded');
+    errorData = await errorResponse.json();
+    if (errorData.schema !== 'exp4_error_maps_v1' || JSON.stringify(errorData.ids) !== JSON.stringify(data.ids)) throw new Error('Absolute-error export does not match these test scenes');
     if (data.schema !== 'experiment4-v1' || data.ids.length !== 50 || data.conditions.length !== 11) throw new Error('Incomplete experiment data');
     index = Math.max(0,Math.min(data.ids.length-1,Number.parseInt(new URLSearchParams(location.search).get('example'),10) || 0));
     const scenes = document.getElementById('scene'), conditions = document.getElementById('condition');

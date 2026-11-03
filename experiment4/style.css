@@ -343,3 +343,15 @@ button:focus-visible,select:focus-visible,summary:focus-visible,a:focus-visible 
     font-size:11px;
   }
 }
+
+.learning-curves { margin: 28px 0; padding: 22px; background: white; border: 1px solid var(--line); border-radius: 12px; }
+#learningConditions { display: flex; gap: 10px 18px; flex-wrap: wrap; border: 1px solid var(--line); border-radius: 7px; padding: 12px; margin-bottom: 20px; }
+#learningConditions label { display: inline-flex; flex-direction: row; align-items: center; gap: 6px; color: var(--ink); font-size: 13px; }
+#learningConditions input { accent-color: var(--blue); }
+.learning-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.learning-grid svg { display: block; width: 100%; height: auto; background: white; }
+.learning-values { font-size: 12px; color: var(--muted); min-height: 58px; font-variant-numeric: tabular-nums; }
+.learning-hit { cursor: crosshair; }
+@media(max-width:720px) { .learning-grid { grid-template-columns: 1fr; } .learning-curves { padding: 14px; } }
+
+.error-title { font-size: 16px; margin: 24px 0 12px; }

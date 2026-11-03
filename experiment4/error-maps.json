@@ -1,0 +1,372 @@
+{
+  "schema": "exp4_error_maps_v1",
+  "definition": "Mean RGB |clip(reconstruction,0,1) - ground truth|, computed from full-precision model output before display quantization.",
+  "scale": [
+    0,
+    1
+  ],
+  "palette": "raw DiffuserCam blue-to-red",
+  "ids": [
+    "test_im307.png",
+    "train_im12840.png",
+    "test_im324.png",
+    "test_im356.png",
+    "train_im12923.png",
+    "train_im24262.png",
+    "test_im528.png",
+    "train_im23670.png",
+    "test_im634.png",
+    "train_im9437.png",
+    "train_im15464.png",
+    "train_im3751.png",
+    "train_im24583.png",
+    "train_im4225.png",
+    "train_im23340.png",
+    "train_im2041.png",
+    "train_im5003.png",
+    "test_im8.png",
+    "test_im811.png",
+    "train_im4217.png",
+    "train_im6300.png",
+    "train_im15490.png",
+    "train_im20882.png",
+    "test_im290.png",
+    "train_im9334.png",
+    "train_im14519.png",
+    "train_im13152.png",
+    "train_im15717.png",
+    "train_im18084.png",
+    "train_im10749.png",
+    "test_im913.png",
+    "test_im720.png",
+    "test_im150.png",
+    "train_im7713.png",
+    "test_im877.png",
+    "test_im153.png",
+    "test_im357.png",
+    "train_im14612.png",
+    "test_im341.png",
+    "train_im18855.png",
+    "test_im425.png",
+    "train_im6372.png",
+    "train_im21464.png",
+    "test_im315.png",
+    "test_im998.png",
+    "train_im7747.png",
+    "train_im23005.png",
+    "train_im6114.png",
+    "test_im246.png",
+    "test_im656.png"
+  ],
+  "conditions": [
+    "clean",
+    "gaussian",
+    "poisson",
+    "poisson_gaussian",
+    "exposure_050",
+    "exposure_150",
+    "dead_pixels",
+    "fixed_pattern",
+    "gaussian_blur",
+    "resolution",
+    "jpeg"
+  ],
+  "arms": [
+    "qutcc_clean50",
+    "qutcc_general100",
+    "im2im_clean50",
+    "im2im_general100"
+  ],
+  "reports": {
+    "clean": {
+      "count": 50,
+      "maximum_replay_difference": {
+        "qutcc_clean50": {
+          "psnr": 0.0004024505615234375,
+          "ssim": 6.020069122314453e-06,
+          "mae": 7.618218660354614e-07
+        },
+        "qutcc_general100": {
+          "psnr": 0.0005321502685546875,
+          "ssim": 1.329183578491211e-05,
+          "mae": 1.7508864402770996e-06
+        },
+        "im2im_clean50": {
+          "psnr": 0.0,
+          "ssim": 0.0,
+          "mae": 0.0
+        },
+        "im2im_general100": {
+          "psnr": 0.0,
+          "ssim": 0.0,
+          "mae": 0.0
+        }
+      }
+    },
+    "gaussian": {
+      "count": 50,
+      "maximum_replay_difference": {
+        "qutcc_clean50": {
+          "psnr": 0.0003490447998046875,
+          "ssim": 1.1235475540161133e-05,
+          "mae": 1.9744038581848145e-06
+        },
+        "qutcc_general100": {
+          "psnr": 0.0002841949462890625,
+          "ssim": 7.331371307373047e-06,
+          "mae": 1.5422701835632324e-06
+        },
+        "im2im_clean50": {
+          "psnr": 0.0,
+          "ssim": 0.0,
+          "mae": 0.0
+        },
+        "im2im_general100": {
+          "psnr": 0.0,
+          "ssim": 0.0,
+          "mae": 0.0
+        }
+      }
+    },
+    "poisson": {
+      "count": 50,
+      "maximum_replay_difference": {
+        "qutcc_clean50": {
+          "psnr": 0.0006275177001953125,
+          "ssim": 1.4603137969970703e-05,
+          "mae": 2.555549144744873e-06
+        },
+        "qutcc_general100": {
+          "psnr": 0.00032806396484375,
+          "ssim": 8.404254913330078e-06,
+          "mae": 1.1026859283447266e-06
+        },
+        "im2im_clean50": {
+          "psnr": 0.0,
+          "ssim": 0.0,
+          "mae": 0.0
+        },
+        "im2im_general100": {
+          "psnr": 0.0,
+          "ssim": 0.0,
+          "mae": 0.0
+        }
+      }
+    },
+    "poisson_gaussian": {
+      "count": 50,
+      "maximum_replay_difference": {
+        "qutcc_clean50": {
+          "psnr": 0.0005035400390625,
+          "ssim": 1.710653305053711e-05,
+          "mae": 2.086162567138672e-06
+        },
+        "qutcc_general100": {
+          "psnr": 0.00030517578125,
+          "ssim": 2.0265579223632812e-05,
+          "mae": 2.08243727684021e-06
+        },
+        "im2im_clean50": {
+          "psnr": 0.000415802001953125,
+          "ssim": 1.8924474716186523e-05,
+          "mae": 4.954636096954346e-06
+        },
+        "im2im_general100": {
+          "psnr": 0.0002880096435546875,
+          "ssim": 1.0788440704345703e-05,
+          "mae": 2.4884939193725586e-06
+        }
+      }
+    },
+    "exposure_050": {
+      "count": 50,
+      "maximum_replay_difference": {
+        "qutcc_clean50": {
+          "psnr": 0.00015926361083984375,
+          "ssim": 3.2901763916015625e-05,
+          "mae": 2.5480985641479492e-06
+        },
+        "qutcc_general100": {
+          "psnr": 0.000835418701171875,
+          "ssim": 8.225440979003906e-06,
+          "mae": 2.1811574697494507e-06
+        },
+        "im2im_clean50": {
+          "psnr": 0.000644683837890625,
+          "ssim": 4.470348358154297e-05,
+          "mae": 2.816319465637207e-06
+        },
+        "im2im_general100": {
+          "psnr": 0.000782012939453125,
+          "ssim": 1.33514404296875e-05,
+          "mae": 2.730637788772583e-06
+        }
+      }
+    },
+    "exposure_150": {
+      "count": 50,
+      "maximum_replay_difference": {
+        "qutcc_clean50": {
+          "psnr": 0.0,
+          "ssim": 0.0,
+          "mae": 0.0
+        },
+        "qutcc_general100": {
+          "psnr": 0.0,
+          "ssim": 0.0,
+          "mae": 0.0
+        },
+        "im2im_clean50": {
+          "psnr": 0.0,
+          "ssim": 0.0,
+          "mae": 0.0
+        },
+        "im2im_general100": {
+          "psnr": 0.0,
+          "ssim": 0.0,
+          "mae": 0.0
+        }
+      }
+    },
+    "dead_pixels": {
+      "count": 50,
+      "maximum_replay_difference": {
+        "qutcc_clean50": {
+          "psnr": 0.0,
+          "ssim": 0.0,
+          "mae": 0.0
+        },
+        "qutcc_general100": {
+          "psnr": 0.0,
+          "ssim": 0.0,
+          "mae": 0.0
+        },
+        "im2im_clean50": {
+          "psnr": 0.0,
+          "ssim": 0.0,
+          "mae": 0.0
+        },
+        "im2im_general100": {
+          "psnr": 0.0,
+          "ssim": 0.0,
+          "mae": 0.0
+        }
+      }
+    },
+    "fixed_pattern": {
+      "count": 50,
+      "maximum_replay_difference": {
+        "qutcc_clean50": {
+          "psnr": 0.0,
+          "ssim": 0.0,
+          "mae": 0.0
+        },
+        "qutcc_general100": {
+          "psnr": 0.0,
+          "ssim": 0.0,
+          "mae": 0.0
+        },
+        "im2im_clean50": {
+          "psnr": 0.0,
+          "ssim": 0.0,
+          "mae": 0.0
+        },
+        "im2im_general100": {
+          "psnr": 0.0,
+          "ssim": 0.0,
+          "mae": 0.0
+        }
+      }
+    },
+    "gaussian_blur": {
+      "count": 50,
+      "maximum_replay_difference": {
+        "qutcc_clean50": {
+          "psnr": 0.0,
+          "ssim": 0.0,
+          "mae": 0.0
+        },
+        "qutcc_general100": {
+          "psnr": 0.0,
+          "ssim": 0.0,
+          "mae": 0.0
+        },
+        "im2im_clean50": {
+          "psnr": 0.0,
+          "ssim": 0.0,
+          "mae": 0.0
+        },
+        "im2im_general100": {
+          "psnr": 0.0,
+          "ssim": 0.0,
+          "mae": 0.0
+        }
+      }
+    },
+    "resolution": {
+      "count": 50,
+      "maximum_replay_difference": {
+        "qutcc_clean50": {
+          "psnr": 0.0,
+          "ssim": 0.0,
+          "mae": 0.0
+        },
+        "qutcc_general100": {
+          "psnr": 0.0,
+          "ssim": 0.0,
+          "mae": 0.0
+        },
+        "im2im_clean50": {
+          "psnr": 0.0,
+          "ssim": 0.0,
+          "mae": 0.0
+        },
+        "im2im_general100": {
+          "psnr": 0.0,
+          "ssim": 0.0,
+          "mae": 0.0
+        }
+      }
+    },
+    "jpeg": {
+      "count": 50,
+      "maximum_replay_difference": {
+        "qutcc_clean50": {
+          "psnr": 0.0,
+          "ssim": 0.0,
+          "mae": 0.0
+        },
+        "qutcc_general100": {
+          "psnr": 0.0,
+          "ssim": 0.0,
+          "mae": 0.0
+        },
+        "im2im_clean50": {
+          "psnr": 0.0,
+          "ssim": 0.0,
+          "mae": 0.0
+        },
+        "im2im_general100": {
+          "psnr": 0.0,
+          "ssim": 0.0,
+          "mae": 0.0
+        }
+      }
+    }
+  },
+  "request": {
+    "schema": "exp4_error_maps_v1",
+    "reference_sha256": "53b0e596b0e5f036684185e5fb2854cd436890e45e68eb3da226d46b8253b197",
+    "source_sha256": "12652bd74d36a9cb93b9fbac676be26bfc4d9eff22881aee7c06e75384462398",
+    "palette_sha256": "2750ca14fb15c42976770c7414cf27a0d3333405a9ce4f8b92030408adf0dbe9",
+    "checkpoints": {
+      "qutcc_clean50": "297750d72e1b3c754ff23b4cbe3e8edc41e9f41800d3fa21d13b7418653edb0a",
+      "qutcc_general100": "a8c8b4867999d565b79aecf7dcbb4f03de8ce1b7739f4a3dda8c869803592d6a",
+      "im2im_clean50": "360551a7db56ca66c6aae29a0be975cad9a5165ccaa8ff2f76b887e906d35406",
+      "im2im_general100": "b1c6269732ba61e145de8ed3026bc995745eef56e85a1cb2597fbd791159bca6"
+    }
+  },
+  "base": "https://raw.githubusercontent.com/Shdakudow/ConvRML-Uncertainty-Demo/c9fad4d54b2992ae494581b4f0415a63d400fbd6/",
+  "map_count": 2200,
+  "manifest_url": "https://raw.githubusercontent.com/Shdakudow/ConvRML-Uncertainty-Demo/c9fad4d54b2992ae494581b4f0415a63d400fbd6/error-maps.json"
+}

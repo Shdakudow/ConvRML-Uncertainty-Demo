@@ -5,10 +5,41 @@ const labels = {qutcc: 'QUTCC', im2im: 'Im2im'};
 const colors = {qutcc: '#9ddfd2', im2im: '#f9ba77'};
 let data, selected, requestToken = 0;
 let pixelPoint = null;
-let agreementData = null, agreementPanel = null, agreementCursor = null;
+let agreementData = null, agreementPanel = null, agreementCursor = null, overlapPlayback = null;
 const pixelInspector = new HeatmapPixels.Inspector(document.querySelector('.video-grid'));
 const number = value => Number(value).toFixed(5);
 const videos = () => methods.map(method => $(method + 'Video'));
+const playbackVideos = () => [...videos(), agreementPanel?.playbackVideo].filter(video => video?.getAttribute('src'));
+const highlighted = () => $('showTop10').checked && Boolean(overlapPlayback?.videos[selected?.id]);
+const sourceFor = method => highlighted() ? overlapPlayback.videos[selected.id].models[method] : selected.models[method];
+function metadataReady(video) {
+  if (video.readyState >= 1) return Promise.resolve();
+  return new Promise((resolve, reject) => {
+    const clean = () => {video.removeEventListener('loadedmetadata', ready); video.removeEventListener('error', failed);};
+    const ready = () => {clean(); resolve();};
+    const failed = () => {clean(); reject(Error('Video metadata could not be loaded'));};
+    video.addEventListener('loadedmetadata', ready, {once:true});
+    video.addEventListener('error', failed, {once:true});
+  });
+}
+function assignModelVideos() {
+  for (const method of methods) {
+    const video = $(method + 'Video'), source = sourceFor(method);
+    video.src = source.video; video.poster = source.poster; video.load();
+    video.playbackRate = Number($('playbackSpeed').value);
+    $(method + 'Download').href = source.video;
+  }
+}
+async function playAll(token = requestToken) {
+  const group = playbackVideos();
+  await Promise.all(group.map(metadataReady));
+  if (token !== requestToken) return;
+  const first = $('qutccVideo'), time = first.ended ? 0 : first.currentTime;
+  group.forEach(video => {video.currentTime = time; video.playbackRate = Number($('playbackSpeed').value);});
+  agreementPanel?.setPlaying(true);
+  await Promise.all(group.map(video => video.play()));
+  setFrame(frameIndex(time));
+}
 const showCumulative = () => $('cumulativeToggle').getAttribute('aria-pressed') === 'true';
 const tracking = () => $('trackRankGap').checked;
 const frameIndex = time => Math.max(0, Math.min(selected.frames - 1, Math.floor(time * selected.fps + 1e-6)));
@@ -63,19 +94,20 @@ for (const video of videos()) {
   }
   video.addEventListener('seeked', () => presentedFrame(video, video.currentTime));
 }
-function pause() { videos().forEach(video => video.pause()); }
+function pause() { playbackVideos().forEach(video => video.pause()); agreementPanel?.setPlaying(false); }
 function setFrame(index) {
   const bounded = Math.max(0, Math.min(selected.frames - 1, index));
   $('frame').value = bounded + 1;
   $('frameLabel').textContent = `${bounded + 1} / ${selected.frames}`;
   if (agreementCursor) agreementCursor(bounded);
   VideoIntensityPlot.setFrame(bounded);
+  if (agreementPanel?.playing && agreementData) agreementPanel.updatePlaybackFrame(agreementData.videos[selected.id].rows[bounded], `${selected.label} · Frame ${bounded + 1}`);
 }
 function seekFrame(index) {
   pause();
   const bounded = Math.max(0, Math.min(selected.frames - 1, index));
   // Seek inside the frame interval; an exact boundary can decode its predecessor.
-  videos().forEach(video => { video.currentTime = (bounded + .5) / selected.fps; });
+  playbackVideos().forEach(video => { video.currentTime = (bounded + .5) / selected.fps; });
   setFrame(bounded);
   if (tracking()) videos().forEach(video => trackRegion(video, bounded));
   if (pixelPoint) inspectFrame(bounded);
@@ -209,11 +241,13 @@ function choose() {
   pause(); requestToken++;
   selected = data.videos.find(video => video.id === $('videoSelect').value);
   const url = new URL(location.href); url.searchParams.set('video', selected.id); history.replaceState(null, '', url);
+  assignModelVideos();
+  if (agreementPanel && overlapPlayback?.videos[selected.id]) {
+    agreementPanel.setPlaybackSource(overlapPlayback.videos[selected.id].map);
+    agreementPanel.playbackVideo.playbackRate = Number($('playbackSpeed').value);
+  }
   methods.forEach(method => {
-    const report = selected.models[method], video = $(method + 'Video');
-    video.src = report.video; video.poster = report.poster; video.load();
-    video.playbackRate = Number($('playbackSpeed').value);
-    $(method + 'Download').href = report.video;
+    const report = selected.models[method];
     $(method + 'Summary').textContent = `Mean width ${number(report.mean_interval_width)} · CV ${(report.coefficient_of_variation * 100).toFixed(2)}%`;
   });
   $('metricsRows').replaceChildren(...methods.map(method => {
@@ -232,16 +266,21 @@ function choose() {
 }
 $('play').addEventListener('click', async () => {
   clearPixel();
-  agreementPanel?.suspend('Pause or select a frame to inspect the disagreement map.');
   const token = requestToken;
+  try {await playAll(token);}
+  catch (_) {if (token === requestToken) {pause(); $('error').textContent = 'Video playback failed. Reload or download the MP4.'; $('error').hidden = false;}}
+});
+$('showTop10').addEventListener('change', async () => {
+  if (!selected) return;
+  const resume = !$('qutccVideo').paused, index = frameIndex($('qutccVideo').currentTime);
+  pause(); const token = ++requestToken;
+  assignModelVideos();
   try {
-    const [first, second] = videos();
-    if (first.ended) first.currentTime = second.currentTime = 0;
-    else second.currentTime = first.currentTime;
-    await Promise.all(videos().map(video => video.play()));
-  } catch (error) {
-    if (token === requestToken) {pause(); $('error').textContent = 'Video playback failed. Please reload or download the MP4.'; $('error').hidden = false;}
-  }
+    await Promise.all(videos().map(metadataReady));
+    if (token !== requestToken) return;
+    seekFrame(index);
+    if (resume) await playAll(token);
+  } catch (_) {if (token === requestToken) {$('error').textContent = 'Highlights could not be loaded. Reload to retry.'; $('error').hidden = false;}}
 });
 $('pause').addEventListener('click', () => {pause(); if (selected) showAgreementFrame(Math.min(selected.frames - 1, Math.floor($('qutccVideo').currentTime * selected.fps + 1e-6)));});
 for (const video of videos()) video.addEventListener('click', event => {
@@ -261,9 +300,9 @@ $('trackRankGap').addEventListener('change', () => {
   if (selected && $('qutccVideo').paused) showAgreementFrame(frameIndex($('qutccVideo').currentTime));
 });
 $('playbackSpeed').addEventListener('change', () => {
-  videos().forEach(video => {video.playbackRate = Number($('playbackSpeed').value);});
+  playbackVideos().forEach(video => {video.playbackRate = Number($('playbackSpeed').value);});
 });
-$('qutccVideo').addEventListener('timeupdate', () => {if (!selected) return; const first = $('qutccVideo'), second = $('im2imVideo'); setFrame(frameIndex(first.currentTime)); if (!first.paused && Math.abs(second.currentTime - first.currentTime) > .15) second.currentTime = first.currentTime;});
+$('qutccVideo').addEventListener('timeupdate', () => {if (!selected) return; const first = $('qutccVideo'); setFrame(frameIndex(first.currentTime)); if (!first.paused) for (const other of playbackVideos().slice(1)) if (Math.abs(other.currentTime - first.currentTime) > .075) other.currentTime = first.currentTime;});
 $('qutccVideo').addEventListener('ended', () => {pause(); if (selected) showAgreementFrame(selected.frames - 1);});
 $('agreementZoom').addEventListener('change', drawAgreementPlot);
 $('agreementMetric').addEventListener('change', () => UncertaintyAgreement.setMode($('agreementMetric').value));
@@ -280,28 +319,35 @@ $('cumulativeToggle').addEventListener('click', () => {
   drawPlot();
 });
 $('videoSelect').addEventListener('change', choose);
-fetch('data.json?v=20261030bluered', {cache: 'no-store'}).then(response => {if (!response.ok) throw new Error(response.status); return response.json();}).then(value => {
-  data = value;
-  for (const video of data.videos) {const option = document.createElement('option'); option.value = video.id; option.textContent = video.label; $('videoSelect').append(option);}
-  const requested = new URLSearchParams(location.search).get('video');
-  if (data.videos.some(video => video.id === requested)) $('videoSelect').value = requested;
-  $('heatGradient').style.background = data.heatmap_gradient;
-  data.notes.forEach(text => {const paragraph = document.createElement('p'); paragraph.textContent = text; $('protocol').append(paragraph);});
-  ['videoSelect', 'play', 'pause', 'frame', 'playbackSpeed'].forEach(id => {$(id).disabled = false;}); choose();
-}).catch(error => {$('status').textContent = 'Unable to load videos'; $('error').hidden = false; $('error').textContent = String(error);});
-UncertaintyAgreement.load().then(value => {
-  agreementData = value;
-  agreementPanel = new UncertaintyAgreement.Panel($('videoDisagreement'), point => {
-    stopTracking();
-    pixelPoint = point;
-    seekFrame(Math.min(selected.frames - 1, Math.floor($('qutccVideo').currentTime * selected.fps + 1e-6)));
-  }, [$('inspectRankGapTop')]);
-  $('trackRankGap').disabled = false;
-  if (selected) {
-    drawAgreementPlot();
-    if ($('qutccVideo').paused) showAgreementFrame(Number($('frame').value) - 1);
-    else agreementPanel.suspend('Pause or select a frame to inspect the disagreement map.');
-  }
-}).catch(() => {$('agreementValues').textContent = 'Agreement analysis unavailable.'; $('videoDisagreement').hidden = true;});
-
+async function start() {
+  const json = async path => {const response = await fetch(path, {cache:'no-store'}); if (!response.ok) throw Error(response.status); return response.json();};
+  try {
+    const [value, agreement, playback] = await Promise.all([
+      json('data.json?v=20261030bluered'), UncertaintyAgreement.load().catch(() => null),
+      json('overlap-playback.json?v=20261103').catch(() => null)
+    ]);
+    data = value; agreementData = agreement; overlapPlayback = playback;
+    if (agreementData) {
+      agreementPanel = new UncertaintyAgreement.Panel($('videoDisagreement'), point => {
+        stopTracking(); pixelPoint = point; seekFrame(frameIndex($('qutccVideo').currentTime));
+      }, [$('inspectRankGapTop')]);
+      agreementPanel.playbackVideo.addEventListener('click', event => {
+        const point = HeatmapPixels.pointAt(agreementPanel.playbackVideo, event, 480, 270);
+        stopTracking(); pixelPoint = point;
+        seekFrame(frameIndex($('qutccVideo').currentTime));
+      });
+      $('trackRankGap').disabled = false;
+    } else {$('agreementValues').textContent = 'Agreement analysis unavailable.'; $('videoDisagreement').hidden = true;}
+    $('showTop10').disabled = !overlapPlayback;
+    if (!overlapPlayback) $('showTop10').checked = false;
+    for (const video of data.videos) {const option = document.createElement('option'); option.value = video.id; option.textContent = video.label; $('videoSelect').append(option);}
+    const requested = new URLSearchParams(location.search).get('video');
+    if (data.videos.some(video => video.id === requested)) $('videoSelect').value = requested;
+    $('heatGradient').style.background = data.heatmap_gradient;
+    data.notes.forEach(text => {const paragraph = document.createElement('p'); paragraph.textContent = text; $('protocol').append(paragraph);});
+    ['videoSelect','play','pause','frame','playbackSpeed'].forEach(id => {$(id).disabled = false;});
+    choose();
+  } catch (error) {$('status').textContent = 'Unable to load videos'; $('error').hidden = false; $('error').textContent = String(error);}
+}
+start();
 VideoIntensityPlot.init({onSeek: index => seekFrame(index)});

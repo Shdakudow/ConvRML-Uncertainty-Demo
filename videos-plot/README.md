@@ -54,6 +54,22 @@ this. A constant map has no distinct high-uncertainty set and is undefined.
 The categorical map uses purple for both models, green for QUTCC only, orange for
 Im2im only, dark blue for neither, and magenta for excluded pixels.
 
+During playback, this map moves with the videos. “Highlight top 10% on
+reconstructions” is checked initially: each model's selected pixels are tinted
+on its reconstruction, with purple marking shared selections. Uncheck it to
+view the original reconstructions. The uncertainty panels keep their original
+colors. Play, pause, speed, and frame seeking control all three videos together.
+Pausing restores the exact numerical map for pixel inspection.
+
+`tools/build_overlap_playback.py` renders these display-only MP4s from the saved
+float32 width sidecars and recorded float64 percentile thresholds. It checks
+intersection/union counts against the published statistics for every frame,
+verifies sidecar hashes, and checks encoded frame counts and durations. The
+manifest is `overlap-playback.json`; videos and first-frame posters are in
+`overlap-assets/`. Lossy MP4 colors are for display; overlap scores and paused
+pixel selections always use the numerical maps. Playback requires no per-frame
+sidecar downloads or model inference.
+
 This is a full-frame comparison, with no foreground mask or attention model.
 It measures agreement about relatively high uncertainty, not reconstruction
 accuracy or actual coverage. The five lowest-overlap frames are selected

@@ -17,9 +17,13 @@ import websocket
 
 ROOT = Path(__file__).resolve().parents[1]
 PIXELS = Path.home() / ".local/share/convrml-pixel-inspection-20261030/assets"
+EXP4 = Path.home() / ".local/share/convrml-exp4-20261101/assets"
+ERRORS = Path.home() / ".local/share/convrml-exp4-errors-20261103/exports"
 
 
 def main():
+    map_requests = []
+
     class Quiet(http.server.SimpleHTTPRequestHandler):
         def log_message(self, *_args):
             pass
@@ -27,6 +31,23 @@ def main():
         def do_GET(self):
             try:
                 name = self.path.split("?", 1)[0].lstrip("/")
+                if name.startswith("_pixels/"):
+                    map_requests.append(name)
+                if name in ("experiment4/data.json", "experiment4/error-maps.json"):
+                    payload = json.loads((ROOT / name).read_text())
+                    alias = (
+                        "_exp4_errors" if name.endswith("error-maps.json") else "_exp4"
+                    )
+                    payload["base"] = (
+                        f"http://127.0.0.1:{self.server.server_address[1]}/{alias}/"
+                    )
+                    body = json.dumps(payload).encode()
+                    self.send_response(200)
+                    self.send_header("Content-Type", "application/json")
+                    self.send_header("Content-Length", str(len(body)))
+                    self.end_headers()
+                    self.wfile.write(body)
+                    return
                 if name in ("pixel_maps.json", "uncertainty_agreement.json"):
                     payload = json.loads((ROOT / name).read_text())
                     # Serve the exact saved maps locally to make QA independent
@@ -77,6 +98,14 @@ def main():
 
         def translate_path(self, path):
             name = path.split("?", 1)[0]
+            for alias, base in (("/_exp4/", EXP4), ("/_exp4_errors/", ERRORS)):
+                if name.startswith(alias):
+                    target = (base / name[len(alias) :]).resolve()
+                    return (
+                        str(target)
+                        if target.is_relative_to(base.resolve())
+                        else "/dev/null"
+                    )
             if name.startswith("/_pixels/"):
                 target = (PIXELS / name[len("/_pixels/") :]).resolve()
                 return (
@@ -327,6 +356,70 @@ def main():
                 actual,
             )
             assert_map_counts("#videoDisagreement canvas", row)
+        # Playback uses three synchronized, pre-rendered videos. No numerical
+        # width-map sidecars should be downloaded while frames advance.
+        assert js("document.querySelector('#showTop10').checked")
+        assert js(
+            "[...document.querySelectorAll('.video-grid video')].every(v=>v.src.includes('/overlap-assets/'))"
+        )
+        js("seekFrame(20)")
+        wait_for(
+            "document.querySelector('#videoDisagreement').getAttribute('aria-busy') === 'false' && [...document.querySelectorAll('video')].every(v=>!v.seeking)"
+        )
+        time.sleep(0.2)
+        before = len(map_requests)
+        js("document.querySelector('#play').click()")
+        wait_for(
+            "[...document.querySelectorAll('video')].every(v=>!v.paused) && Number(document.querySelector('#frame').value)>25"
+        )
+        assert js(
+            "!document.querySelector('.agreement-playback').hidden && document.querySelector('#videoDisagreement canvas').hidden"
+        )
+        fingerprint = "(()=>{const v=document.querySelector('.agreement-playback'),c=document.createElement('canvas');c.width=48;c.height=27;const x=c.getContext('2d');x.drawImage(v,0,0,48,27);return [...x.getImageData(0,0,48,27).data].reduce((s,n,i)=>(s+n*(i+1))%1000000007,0)})()"
+        first = js(fingerprint)
+        time.sleep(0.6)
+        assert js(fingerprint) != first
+        assert js(
+            "[...document.querySelectorAll('video')].every(v=>Math.abs(v.currentTime-document.querySelector('#qutccVideo').currentTime)<.12)"
+        )
+        assert len(map_requests) == before, (before, len(map_requests))
+        js(
+            "document.querySelector('#agreementMetric').value='spearman';document.querySelector('#agreementMetric').dispatchEvent(new Event('change'))"
+        )
+        assert js("document.querySelector('.agreement-playback').hidden")
+        js(
+            "document.querySelector('#agreementMetric').value='overlap';document.querySelector('#agreementMetric').dispatchEvent(new Event('change'))"
+        )
+        assert js("!document.querySelector('.agreement-playback').hidden")
+        js(
+            "document.querySelector('#showTop10').checked=false;document.querySelector('#showTop10').dispatchEvent(new Event('change'))"
+        )
+        wait_for(
+            "[...document.querySelectorAll('video')].every(v=>!v.paused && !v.seeking) && !document.querySelector('#qutccVideo').src.includes('/overlap-assets/')"
+        )
+        js(
+            "document.querySelector('#showTop10').checked=true;document.querySelector('#showTop10').dispatchEvent(new Event('change'))"
+        )
+        wait_for(
+            "[...document.querySelectorAll('video')].every(v=>!v.paused && !v.seeking) && document.querySelector('#qutccVideo').src.includes('/overlap-assets/')"
+        )
+        js(
+            "document.querySelector('#playbackSpeed').value='0.5';document.querySelector('#playbackSpeed').dispatchEvent(new Event('change'))"
+        )
+        assert js(
+            "[...document.querySelectorAll('video')].every(v=>v.playbackRate===.5)"
+        )
+        js("document.querySelector('#pause').click()")
+        wait_for(
+            "document.querySelector('#videoDisagreement').getAttribute('aria-busy') === 'false'"
+        )
+        assert js(
+            "[...document.querySelectorAll('video')].every(v=>v.paused) && document.querySelector('.agreement-playback').hidden && !document.querySelector('#videoDisagreement canvas').hidden"
+        )
+        current = js("Number(document.querySelector('#frame').value)-1")
+        assert_map_counts(
+            "#videoDisagreement canvas", agreement["videos"]["video10"]["rows"][current]
+        )
         js("document.querySelector('#agreementSection').scrollIntoView()")
         time.sleep(0.1)
         shot = call("Page.captureScreenshot", dict(format="png", fromSurface=True))
@@ -401,9 +494,97 @@ def main():
             assert js("document.documentElement.scrollWidth <= window.innerWidth + 1")
             shot = call("Page.captureScreenshot", dict(format="png", fromSurface=True))
             (work / (name + ".png")).write_bytes(base64.b64decode(shot["data"]))
+        call(
+            "Page.navigate",
+            dict(url=f"http://127.0.0.1:{server.server_address[1]}/experiment4/"),
+        )
+        wait_for(
+            "document.querySelectorAll('#conditions .condition').length===11 && document.querySelectorAll('#learning-ssim polyline').length===2"
+        )
+        assert (
+            js(
+                "[...document.querySelectorAll('#learningConditions input:checked')].map(e=>e.value).join(',')"
+            )
+            == "average"
+        )
+        assert js(
+            "[...document.querySelectorAll('#learning-ssim polyline, #learning-psnr polyline')].every(e=>e.getAttribute('points').split(' ').length===100)"
+        )
+        learning = json.loads((ROOT / "experiment4/learning-data.json").read_text())
+        for method in ("qutcc", "im2im"):
+            score = learning["methods"][method]["history"][-1]["mean"]["ssim"]
+            assert f"{score:.4f}" in js(
+                "document.querySelector('#learning-values-ssim').textContent"
+            )
+        js(
+            "document.querySelector('#learningConditions input[value=gaussian]').click()"
+        )
+        assert js("document.querySelectorAll('#learning-ssim polyline').length") == 4
+        js("document.querySelector('#learningConditions input[value=average]').click()")
+        assert js("document.querySelectorAll('#learning-ssim polyline').length") == 2
+        assert js(
+            "[...document.querySelectorAll('#learning-ssim polyline')].every(e=>e.dataset.condition==='gaussian')"
+        )
+        js(
+            "(()=>{const svg=document.querySelector('#learning-ssim'),p=new DOMPoint(60,100).matrixTransform(svg.getScreenCTM());svg.querySelector('rect').dispatchEvent(new PointerEvent('pointermove',{clientX:p.x,clientY:p.y,bubbles:true}));})()"
+        )
+        assert "Epoch 1" in js(
+            "document.querySelector('#learning-values-ssim').textContent"
+        )
+        assert js("document.querySelector('#scene').value") == "0"
+        assert js("document.querySelectorAll('img[data-kind=error]').length") == 44
+        assert js(
+            "[...document.querySelectorAll('#conditions details')].every(e=>!e.open)"
+        )
+        js(
+            "[...document.querySelectorAll('img[data-kind=error]')].forEach(e=>e.loading='eager')"
+        )
+        wait_for(
+            "[...document.querySelectorAll('img[data-kind=error]')].every(e=>e.complete && e.naturalWidth===480 && e.naturalHeight===270)"
+        )
+        assert js(
+            "[...document.querySelectorAll('img[data-kind=error]')].every(e=>new URL(e.src).pathname==='/_exp4_errors/errors/'+e.closest('.condition').id+'/'+e.dataset.arm+'/000.png')"
+        )
+        js(
+            "document.querySelector('#scene').value='1';document.querySelector('#scene').dispatchEvent(new Event('change'))"
+        )
+        wait_for(
+            "[...document.querySelectorAll('img[data-kind=error]')].every(e=>e.complete && e.naturalWidth===480)"
+        )
+        assert js(
+            "[...document.querySelectorAll('img[data-kind=error]')].every(e=>e.src.endsWith('/001.png'))"
+        )
+        js("document.querySelector('#gaussian details').open=true")
+        wait_for(
+            "document.querySelectorAll('#gaussian img[data-kind=width]').length===4"
+        )
+        js(
+            "[...document.querySelectorAll('#gaussian img[data-kind=width]')].forEach(e=>e.loading='eager')"
+        )
+        wait_for(
+            "[...document.querySelectorAll('#gaussian img[data-kind=width]')].every(e=>e.complete && e.naturalWidth===480)"
+        )
+        js("document.querySelector('#learningConditions input[value=average]').click()")
+        for layout, width, height in [("desktop", 1440, 1100), ("mobile", 390, 844)]:
+            call(
+                "Emulation.setDeviceMetricsOverride",
+                dict(
+                    width=width, height=height, deviceScaleFactor=1, mobile=width < 500
+                ),
+            )
+            for section in ("learningCurves", "gaussian"):
+                js(f"document.querySelector('#{section}').scrollIntoView()")
+                time.sleep(0.25)
+                assert js("document.documentElement.scrollWidth<=window.innerWidth+1")
+                shot = call(
+                    "Page.captureScreenshot", dict(format="png", fromSurface=True)
+                )
+                (work / f"exp4-{section}-{layout}.png").write_bytes(
+                    base64.b64decode(shot["data"])
+                )
         assert not errors, errors
         print(
-            "PASS: 5 real videos, exact per-frame Spearman/Pearson values, fixed ±1 axis, plot-click seeking, keyboard seeking, frame-slider synchronization, correct CSV links; Spearman/overlap selector synchronization; exact intersection and exclusive-region pixel counts for five videos and ten named captures; desktop/mobile layout; no JavaScript errors."
+            "PASS: 5 videos and 10 captures; exact correlations and pixel sets; moving synchronized overlays without sidecar downloads; playback toggles and speed; Exp4 error maps for all conditions and scene changes; 100-epoch learning curves and category checkboxes; desktop/mobile layout; no JavaScript errors."
         )
     finally:
         if ws:
