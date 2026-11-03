@@ -4,7 +4,10 @@
   const root = document.getElementById('learningCurves');
   const conditions = document.getElementById('learningConditions');
   const methods = ['qutcc','im2im'];
-  const colors = ['#007b79','#a24c20','#6b5cbb','#a02d68','#658819','#176ab1','#b46c00','#68727d','#a93e3e','#4a8291'];
+  const colors = ['#b59aff','#f58cc1','#c3dc77','#7ebcff','#ffd36c','#a9b4c4','#ff8c8c','#76d2df','#8d9aff','#d8b495'];
+  const theme = getComputedStyle(document.documentElement);
+  const axisColor = theme.getPropertyValue('--muted').trim();
+  const gridColor = theme.getPropertyValue('--line').trim();
   let data;
   const create = (tag,text) => {const e=document.createElement(tag);if(text!==undefined)e.textContent=text;return e;};
   const active = () => [...conditions.querySelectorAll('input:checked')].map(e=>e.value);
@@ -21,14 +24,14 @@
       let html='';
       for(let tick=0;tick<=4;tick++) {
         const v=low+tick/4*(high-low),epoch=Math.round(1+tick/4*99);
-        html+=`<line x1="60" x2="580" y1="${y(v)}" y2="${y(v)}" stroke="#dce5eb"/><text x="50" y="${y(v)+4}" text-anchor="end" font-size="13" fill="#536779">${v.toFixed(metric==='ssim'?3:1)}</text><text x="${x(epoch)}" y="298" text-anchor="middle" font-size="13" fill="#536779">${epoch}</text>`;
+        html+=`<line x1="60" x2="580" y1="${y(v)}" y2="${y(v)}" stroke="${gridColor}"/><text x="50" y="${y(v)+4}" text-anchor="end" font-size="13" fill="${axisColor}">${v.toFixed(metric==='ssim'?3:1)}</text><text x="${x(epoch)}" y="298" text-anchor="middle" font-size="13" fill="${axisColor}">${epoch}</text>`;
       }
       for(const condition of selected)for(const method of methods) {
-        const color=condition==='average'?(method==='qutcc'?'#17697c':'#a24c20'):colors[data.conditions.findIndex(c=>c.id===condition)];
+        const color=condition==='average'?(method==='qutcc'?'#9ddfd2':'#f9ba77'):colors[data.conditions.findIndex(c=>c.id===condition)];
         const path=data.methods[method].history.map(row=>`${x(row.epoch)},${y(value(row,condition,metric))}`).join(' ');
         html+=`<polyline data-condition="${condition}" data-model="${method}" points="${path}" fill="none" stroke="${color}" stroke-width="${condition==='average'?2.5:1.6}" ${method==='im2im'?'stroke-dasharray="7 4"':''}/>`;
       }
-      html+=`<text x="320" y="326" text-anchor="middle" fill="#536779" font-size="14">Epoch</text><text transform="translate(17,150) rotate(-90)" text-anchor="middle" fill="#536779" font-size="14">Validation ${metric==='ssim'?'SSIM':'PSNR (dB)'}</text><line id="learning-cursor-${metric}" x1="60" x2="60" y1="25" y2="275" stroke="#879aaa"/><rect class="learning-hit" x="60" y="25" width="520" height="250" fill="transparent"/>`;
+      html+=`<text x="320" y="326" text-anchor="middle" fill="${axisColor}" font-size="14">Epoch</text><text transform="translate(17,150) rotate(-90)" text-anchor="middle" fill="${axisColor}" font-size="14">Validation ${metric==='ssim'?'SSIM':'PSNR (dB)'}</text><line id="learning-cursor-${metric}" x1="60" x2="60" y1="25" y2="275" stroke="#879aaa"/><rect class="learning-hit" x="60" y="25" width="520" height="250" fill="transparent"/>`;
       svg.innerHTML=html;
       const show=epoch=>{
         svg.querySelector('line[id]').setAttribute('x1',x(epoch));svg.querySelector('line[id]').setAttribute('x2',x(epoch));

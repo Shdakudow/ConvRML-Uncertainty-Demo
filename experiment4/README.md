@@ -13,12 +13,16 @@ frozen models and deterministic inputs, verifies checkpoint hashes, and checks
 per-scene PSNR, SSIM, and MAE against the original evaluation. The metadata
 builder checks every image hash, dimensions, scene order, and replay tolerance.
 
-Learning curves come from the recorded generalized-model histories, with one
+The Overview tab includes learning curves from the recorded generalized-model histories, with one
 validation point per completed epoch (1–100). Both models use the same fixed
 100 validation scenes under each of ten conditions. “Average” is the arithmetic
 mean of those ten equally sized groups. Checkboxes add or remove condition
-curves; solid lines show QUTCC and dashed lines show Im2im. Hover shows epoch
+curves; solid lines show QUTCC and dashed lines show Im2im. The average uses teal
+for QUTCC and orange for Im2im; category colors match their checkbox borders. Hover shows epoch
 values. Plot selections do not change the displayed test scene.
+
+Category tabs load their own scene images when selected. Absolute errors remain
+visible below reconstructions; the uncertainty section starts collapsed.
 
 The histories logged exposure as one family mixing gains 0.50 and 1.50, so its
 learning curve combines them. The test-scene viewer displays the gains

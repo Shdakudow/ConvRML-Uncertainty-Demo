@@ -499,7 +499,7 @@ def main():
             dict(url=f"http://127.0.0.1:{server.server_address[1]}/experiment4/"),
         )
         wait_for(
-            "document.querySelectorAll('#conditions .condition').length===11 && document.querySelectorAll('#learning-ssim polyline').length===2"
+            "document.querySelectorAll('#category-tabs button').length===12 && document.querySelectorAll('#learning-ssim polyline').length===2 && !document.querySelector('#panel-overview').hidden"
         )
         assert (
             js(
@@ -532,37 +532,46 @@ def main():
             "document.querySelector('#learning-values-ssim').textContent"
         )
         assert js("document.querySelector('#scene').value") == "0"
-        assert js("document.querySelectorAll('img[data-kind=error]').length") == 44
+        assert js("document.querySelectorAll('img[data-kind=error]').length") == 48
         assert js(
-            "[...document.querySelectorAll('#conditions details')].every(e=>!e.open)"
+            "[...document.querySelectorAll('.uncertainty-details')].every(e=>!e.open)"
         )
-        js(
-            "[...document.querySelectorAll('img[data-kind=error]')].forEach(e=>e.loading='eager')"
-        )
-        wait_for(
-            "[...document.querySelectorAll('img[data-kind=error]')].every(e=>e.complete && e.naturalWidth===480 && e.naturalHeight===270)"
-        )
-        assert js(
-            "[...document.querySelectorAll('img[data-kind=error]')].every(e=>new URL(e.src).pathname==='/_exp4_errors/errors/'+e.closest('.condition').id+'/'+e.dataset.arm+'/000.png')"
-        )
+        # The current layout loads assets only for the active category tab.
+        results = json.loads((ROOT / "experiment4/data.json").read_text())
+        for condition in results["conditions"]:
+            key = condition["id"]
+            js(
+                f"document.querySelector('#tab-{key}').click();document.querySelectorAll('#panel-{key} img[data-kind=error]').forEach(e=>e.loading='eager')"
+            )
+            wait_for(
+                f"[...document.querySelectorAll('#panel-{key} img[data-kind=error]')].every(e=>e.complete && e.naturalWidth===480 && e.naturalHeight===270)"
+            )
+            assert js(
+                f"[...document.querySelectorAll('#panel-{key} img[data-kind=error]')].every(e=>new URL(e.src).pathname==='/_exp4_errors/errors/{key}/'+e.dataset.arm+'/000.png')"
+            )
+            assert (
+                js("document.querySelectorAll('#tab-panels > :not([hidden])').length")
+                == 1
+            )
+        js("document.querySelector('#tab-gaussian').click()")
         js(
             "document.querySelector('#scene').value='1';document.querySelector('#scene').dispatchEvent(new Event('change'))"
         )
         wait_for(
-            "[...document.querySelectorAll('img[data-kind=error]')].every(e=>e.complete && e.naturalWidth===480)"
+            "[...document.querySelectorAll('#panel-gaussian img[data-kind=error]')].every(e=>e.complete && e.naturalWidth===480)"
         )
         assert js(
-            "[...document.querySelectorAll('img[data-kind=error]')].every(e=>e.src.endsWith('/001.png'))"
+            "[...document.querySelectorAll('#panel-gaussian img[data-kind=error]')].every(e=>e.src.endsWith('/001.png'))"
         )
-        js("document.querySelector('#gaussian details').open=true")
+        js("document.querySelector('#panel-gaussian details').open=true")
         wait_for(
-            "document.querySelectorAll('#gaussian img[data-kind=width]').length===4"
+            "document.querySelectorAll('#panel-gaussian img[data-kind=width]').length===4"
         )
         js(
-            "[...document.querySelectorAll('#gaussian img[data-kind=width]')].forEach(e=>e.loading='eager')"
+            "[...document.querySelectorAll('#panel-gaussian img[data-kind=width]')].forEach(e=>e.loading='eager')"
         )
         wait_for(
-            "[...document.querySelectorAll('#gaussian img[data-kind=width]')].every(e=>e.complete && e.naturalWidth===480)"
+            "[...document.querySelectorAll('#panel-gaussian img[data-kind=width]')].every(e=>e.complete && e.naturalWidth===480)"
         )
         js("document.querySelector('#learningConditions input[value=average]').click()")
         for layout, width, height in [("desktop", 1440, 1100), ("mobile", 390, 844)]:
@@ -572,9 +581,12 @@ def main():
                     width=width, height=height, deviceScaleFactor=1, mobile=width < 500
                 ),
             )
-            for section in ("learningCurves", "gaussian"):
-                js(f"document.querySelector('#{section}').scrollIntoView()")
-                time.sleep(0.25)
+            for section in ("learningCurves", "panel-gaussian"):
+                tab = "overview" if section == "learningCurves" else "gaussian"
+                js(
+                    f"document.querySelector('#tab-{tab}').click();document.querySelector('#{section}').scrollIntoView({{behavior:'instant'}})"
+                )
+                time.sleep(0.3)
                 assert js("document.documentElement.scrollWidth<=window.innerWidth+1")
                 shot = call(
                     "Page.captureScreenshot", dict(format="png", fromSurface=True)
