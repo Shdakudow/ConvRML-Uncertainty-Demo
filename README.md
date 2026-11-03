@@ -152,8 +152,8 @@ A common mask excludes nonfinite values and pixels with crossed bounds in either
 model. Constant maps have undefined correlations. These scores measure model
 agreement, not reconstruction accuracy or coverage.
 
-The video plot below the width plot shows both correlation coefficients. Clicking
-it seeks both videos. Five low-Spearman frame buttons per sequence are separated
+The agreement plot shows the selected metric: Spearman correlation or overlap
+of the most uncertain 10% of pixels. Clicking it seeks both videos. Five low-Spearman frame buttons per sequence are separated
 by at least 20 display frames. Named captures have corresponding scores and
 low-agreement image buttons.
 
@@ -163,7 +163,16 @@ Both use a fixed 0–1 color scale. The region button selects the center of the
 30×30 grid patch with the largest mean rank difference; at least half its pixels
 must be valid. Clicking the map links the same pixel in both model outputs.
 The numerical pixel maps are fetched lazily, with their immutable asset identity
-checked against the agreement analysis. Playback suspends snapshot inspection.
+checked against the agreement analysis. During playback, a synchronized video
+shows the selected overlap, percentile-rank difference, or absolute-width
+difference map. Spearman is one coefficient per frame; the spatial rank-gap map
+shows where the two rankings differ. Both reconstruction videos keep their
+original colors; categorical selection colors appear only in the comparison map.
+Playback suspends numerical pixel inspection.
+
+Run `tools/build_overlap_playback.py PIXEL_ASSET_CHECKOUT` to rebuild the moving
+comparison maps. It validates saved Spearman coefficients, top-10% pixel counts,
+and numerical input checksums for every frame.
 
 Run `tools/build_uncertainty_agreement.py PIXEL_ASSET_CHECKOUT --workers 4` on CPU
 to regenerate coefficients and CSVs. It verifies every input map checksum and
