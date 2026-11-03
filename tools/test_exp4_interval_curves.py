@@ -58,7 +58,17 @@ class IntervalCurves(unittest.TestCase):
         )
         result = summarize(data)
         self.assertFalse(result["calibration_target_met"])
+        self.assertFalse(result["calibration_fit_valid"])
         self.assertEqual(result["calibration_failure"], "fixture failure")
+
+    def test_overcoverage_does_not_hide_failed_equal_tail_search(self):
+        data = measurement()
+        data["fit"].update(
+            status="target_unattainable", target_met=True, within_tolerance=False
+        )
+        result = summarize(data)
+        self.assertTrue(result["calibration_target_met"])
+        self.assertFalse(result["calibration_fit_valid"])
 
 
 if __name__ == "__main__":

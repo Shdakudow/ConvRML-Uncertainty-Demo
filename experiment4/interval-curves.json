@@ -76,6 +76,7 @@
           },
           "calibration_status": "fitted",
           "calibration_target_met": true,
+          "calibration_fit_valid": true,
           "calibration_failure": null,
           "checkpoint_sha256": "a8c8b4867999d565b79aecf7dcbb4f03de8ce1b7739f4a3dda8c869803592d6a"
         }
@@ -156,6 +157,7 @@
           },
           "calibration_status": "fitted",
           "calibration_target_met": true,
+          "calibration_fit_valid": true,
           "calibration_failure": null,
           "checkpoint_sha256": "b1c6269732ba61e145de8ed3026bc995745eef56e85a1cb2597fbd791159bca6"
         }

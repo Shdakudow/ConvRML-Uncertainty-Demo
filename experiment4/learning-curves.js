@@ -78,7 +78,7 @@
         const path = history.map((row, index) => `${index && row.epoch - history[index - 1].epoch === 10 ? 'L' : 'M'}${x(row.epoch)},${y(value(row, condition, metric.id))}`).join(' ');
         if (history.length) html += `<path ${attributes} d="${path}"/>`;
         for (const row of history) {
-          html += `<circle data-epoch="${row.epoch}" data-condition="${condition}" data-model="${method}" cx="${x(row.epoch)}" cy="${y(value(row, condition, metric.id))}" r="3" fill="${stroke}"><title>${source.methods[method].label} · ${label(condition)} · epoch ${row.epoch}: ${display(value(row, condition, metric.id), metric)}${row.calibration_target_met ? '' : ' · calibration target not met'}</title></circle>`;
+          html += `<circle data-epoch="${row.epoch}" data-condition="${condition}" data-model="${method}" cx="${x(row.epoch)}" cy="${y(value(row, condition, metric.id))}" r="3" fill="${stroke}"><title>${source.methods[method].label} · ${label(condition)} · epoch ${row.epoch}: ${display(value(row, condition, metric.id), metric)}${row.calibration_fit_valid ? '' : ' · calibration fit did not meet its target'}</title></circle>`;
         }
       }
     }
@@ -104,7 +104,7 @@
       }
       for (const method of methods) {
         const row = source.methods[method].history.find(item => item.epoch === nearest);
-        if (row && !row.calibration_target_met && metric.source === 'intervals') output.append(element('div', `${source.methods[method].label}: calibration target not met at this epoch.`));
+        if (row && !row.calibration_fit_valid && metric.source === 'intervals') output.append(element('div', `${source.methods[method].label}: calibration fit did not meet its target at this epoch. ${row.calibration_failure || row.calibration_status}`));
       }
     }
     svg.querySelector('rect').onpointermove = event => {

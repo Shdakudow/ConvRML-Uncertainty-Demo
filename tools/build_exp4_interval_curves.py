@@ -71,6 +71,11 @@ def summarize(result):
         conditions=groups,
         calibration_status=result["fit"]["status"],
         calibration_target_met=result["fit"]["target_met"],
+        calibration_fit_valid=(
+            result["fit"]["status"] == "fitted"
+            and result["fit"].get("within_tolerance", False)
+            and result["fit"]["target_met"]
+        ),
         calibration_failure=result["fit"].get("failure"),
         checkpoint_sha256=result["request"]["checkpoint_sha256"],
     )
