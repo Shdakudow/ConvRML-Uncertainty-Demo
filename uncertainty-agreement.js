@@ -89,7 +89,7 @@
           <video class="agreement-playback" playsinline muted preload="metadata" hidden aria-label="Spatial uncertainty comparison during playback"></video>
           <figcaption class="agreement-map-label"></figcaption>
           <div class="map-key agreement-rank-key"><span class="gradient"></span><span>0 → 1</span><span>Magenta: excluded crossed bounds</span></div>
-          <div class="agreement-overlap-key"><span class="both">Both models</span><span class="q-only">QUTCC only</span><span class="i-only">Im2im only</span><span class="neither">Neither</span><span class="excluded">Excluded</span></div>
+          <div class="agreement-overlap-key"><span class="both">Both in top 10%</span><span class="q-only">QUTCC top 10% only</span><span class="i-only">Im2im top 10% only</span><span class="neither">Neither in top 10%</span><span class="excluded">Excluded</span></div>
           <output class="agreement-pixel"></output>
         </figure><div>
           <div class="agreement-controls">
@@ -243,7 +243,7 @@
       if (this.point) {
         HeatmapPixels.drawCanvas(this.canvas, this.point.x + .5, this.point.y + .5);
         const p = this.point.y * this.maps.width + this.point.x;
-        const selected = ['neither model','QUTCC only','Im2im only','both models'][this.maps.overlapClasses[p]] || 'excluded pixel';
+        const selected = ['neither in top 10%','QUTCC top 10% only','Im2im top 10% only','both in top 10%'][this.maps.overlapClasses[p]] || 'excluded pixel';
         output.textContent = `(${this.point.x}, ${this.point.y}) · ${overlap ? selected : `rank gap ${format(this.maps.rankGap[p])}`} · width gap ${format(this.maps.widthGap[p])}`;
       }
     }
