@@ -31,15 +31,20 @@ reconstructions. “Uneven pixel response” is the display name for
 the existing `fixed_pattern` gain-and-offset modification; its parameters and
 stored condition ID are unchanged.
 
-“Inspect a batch” browses 2, 4, or 6 adjacent exported scenes together, defaulting
-to four. Category tabs apply the same input condition to every card. The Show
-selector switches the entire batch between reconstructions, absolute error,
-and uncertainty. Each card includes its own scene metrics and an Open scene
-button for the full comparison. Previous/next buttons page through batches;
-the scene selector jumps to the batch containing that scene. Batch size,
-displayed map, category, and selected scene are preserved in the URL, including
-reload and browser back/forward. The final batch contains the remaining scenes
-rather than wrapping around. Overview batches use the clean reference.
+“Inspect a patch” opens a full-scene reference with a selection box. Drag a
+rectangle there, click or drag on a reconstruction/ground-truth/error/uncertainty
+image, choose a 64/96/128-pixel preset, or enter X/Y/width/height. All four models
+and the ground-truth view enlarge exactly the same source rectangle. The full
+reference remains available for moving the selection; arrow keys move it one
+pixel, or ten pixels with Shift. Touch selection is enabled in patch mode.
+
+The crop uses the original 480 × 270 display coordinates, stays inside image
+bounds, and persists across scene/category changes and URL reloads. “Show full
+images” restores the full views. Sensor inputs remain full-frame because a
+lensless sensor region does not correspond to the same spatial scene patch.
+Only display cropping changes: error/uncertainty palettes and saved full-scene
+metrics remain unchanged. No patch-level numerical metrics are inferred from
+8-bit display images.
 
 Every graph has numeric axis ticks, a written scale, units, and a model key:
 QUTCC is solid; Im2im is dashed. Mobile graphs use a smaller coordinate system

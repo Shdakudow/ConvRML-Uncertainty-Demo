@@ -723,84 +723,142 @@ def main():
         wait_for(
             "[...document.querySelectorAll('#panel-gaussian img[data-kind=width]')].every(e=>e.complete && e.naturalWidth===480)"
         )
-        # All batch assets and scores must use each card's scene, rather than
-        # accidentally reusing the single-scene selection for every card.
-        js("document.querySelector('#batchToggle').click()")
-        wait_for("document.querySelectorAll('#batchScenes .batch-card').length===4")
-        assert js(
-            "!document.querySelector('#batchInspector').hidden && !document.querySelector('#batchControls').hidden"
+        # Patch inspection must select the same source pixels in every model,
+        # without cropping the lensless sensor inputs or changing scene metrics.
+        js("document.querySelector('#patchToggle').click()")
+        wait_for("!document.querySelector('#patchInspector').hidden")
+        assert js("document.querySelector('#batchToggle')===null")
+        assert (
+            js("document.querySelectorAll('#panel-gaussian .patch-cropped').length")
+            == 13
         )
-        assert js(
-            "[...document.querySelectorAll('#tab-panels > section')].every(e=>e.hidden)"
-        )
-        assert js(
-            "[...document.querySelectorAll('#batchScenes .batch-card')].map(e=>Number(e.dataset.scene))"
-        ) == [0, 1, 2, 3]
-        arms = [
-            "qutcc_clean50",
-            "qutcc_general100",
-            "im2im_clean50",
-            "im2im_general100",
-        ]
-        for scene_index in range(4):
-            assert results["ids"][scene_index] in js(
-                f"document.querySelector('#batchScenes [data-scene=\"{scene_index}\"] h3').textContent"
-            )
-            for row_index, arm in enumerate(arms):
-                actual = js(
-                    f"document.querySelector('#batchScenes [data-scene=\"{scene_index}\"] tbody').rows[{row_index}].cells[2].textContent"
-                )
-                assert (
-                    actual
-                    == f"{results['results']['gaussian']['arms'][arm]['examples'][scene_index]['ssim']:.4f}"
-                )
-        for kind in ("error", "width"):
-            js(
-                f"document.querySelector('#batchKind').value='{kind}';document.querySelector('#batchKind').dispatchEvent(new Event('change'))"
-            )
-            assert (
-                js(
-                    f"document.querySelectorAll('#batchScenes img[data-kind={kind}]').length"
-                )
-                == 16
-            )
-            js(
-                "document.querySelectorAll('#batchScenes img').forEach(e=>e.loading='eager')"
-            )
-            wait_for(
-                "[...document.querySelectorAll('#batchScenes img')].every(e=>e.complete && e.naturalWidth===480)"
-            )
-            assert js("!document.querySelector('#batchLegend').hidden")
+        assert js("new URL(location.href).searchParams.get('patch')") == "192,87,96,96"
         js(
-            "document.querySelector('#batchSize').value='6';document.querySelector('#batchSize').dispatchEvent(new Event('change'));document.querySelector('#next').click()"
+            "for(const [key,value] of Object.entries({x:100,y:60,width:80,height:48}))document.querySelector('[data-patch-field='+key+']').value=value;document.querySelector('[data-patch-field=width]').dispatchEvent(new Event('change'))"
+        )
+        assert js("new URL(location.href).searchParams.get('patch')") == "100,60,80,48"
+        assert js(
+            "[...document.querySelectorAll('#panel-gaussian .patch-cropped')].every(e=>e.dataset.patch==='100,60,80,48')"
+        )
+        geometry = """(()=>[...document.querySelectorAll('.condition:not([hidden]) .patch-cropped')].every(v=>{const a=v.getBoundingClientRect(),b=v.querySelector('img').getBoundingClientRect(),[x,y,w,h]=v.dataset.patch.split(',').map(Number);return Math.abs(b.width/(a.width-2*v.clientLeft)-480/w)<.02&&Math.abs(b.height/(a.height-2*v.clientTop)-270/h)<.02&&Math.abs(b.left+x/480*b.width-a.left-v.clientLeft)<1.5&&Math.abs(b.top+y/270*b.height-a.top-v.clientTop)<1.5}))()"""
+        assert js(geometry), js(
+            "[...document.querySelectorAll('.condition:not([hidden]) .patch-cropped')].map(v=>({kind:v.querySelector('img').dataset.kind,viewport:v.getBoundingClientRect().toJSON(),image:v.querySelector('img').getBoundingClientRect().toJSON(),patch:v.dataset.patch}))"
         )
         assert js(
-            "[...document.querySelectorAll('#batchScenes .batch-card')].map(e=>Number(e.dataset.scene))"
-        ) == list(range(6, 12))
+            "[...document.querySelectorAll('#panel-gaussian .inputs img')].filter(e=>['original','input'].includes(e.dataset.kind)).every(e=>!e.closest('.patch-viewport'))"
+        )
         js(
-            "document.querySelector('#scene').value='49';document.querySelector('#scene').dispatchEvent(new Event('change'))"
+            "document.querySelector('#patchReferenceStage').scrollIntoView({behavior:'instant',block:'center'})"
         )
-        assert js(
-            "[...document.querySelectorAll('#batchScenes .batch-card')].map(e=>Number(e.dataset.scene))"
-        ) == [48, 49]
-        assert js("document.querySelector('#next').disabled")
-        assert js("document.querySelector('#counter').textContent") == "49–50 / 50"
+        coordinates = js(
+            "(()=>{const b=document.querySelector('#patchReference').getBoundingClientRect();return [b.left+20.5/480*b.width,b.top+30.5/270*b.height,b.left+140.5/480*b.width,b.top+90.5/270*b.height]})()"
+        )
+        call(
+            "Input.dispatchMouseEvent",
+            dict(
+                type="mousePressed",
+                x=coordinates[0],
+                y=coordinates[1],
+                button="left",
+                buttons=1,
+                clickCount=1,
+            ),
+        )
+        call(
+            "Input.dispatchMouseEvent",
+            dict(type="mouseMoved", x=coordinates[2], y=coordinates[3], buttons=1),
+        )
+        call(
+            "Input.dispatchMouseEvent",
+            dict(
+                type="mouseReleased",
+                x=coordinates[2],
+                y=coordinates[3],
+                button="left",
+                buttons=0,
+                clickCount=1,
+            ),
+        )
+        assert js("new URL(location.href).searchParams.get('patch')") == "20,30,121,61"
+        assert js(geometry)
         js(
-            "document.querySelector('#previous').click();document.querySelector('#batchSize').value='2';document.querySelector('#batchSize').dispatchEvent(new Event('change'));document.querySelector('#tab-exposure_150').click()"
+            "document.querySelector('#patchReferenceStage').dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',shiftKey:true,bubbles:true}))"
+        )
+        assert js("new URL(location.href).searchParams.get('patch')") == "30,30,121,61"
+        js(
+            "for(const [key,value] of Object.entries({x:9999,y:9999,width:128,height:128}))document.querySelector('[data-patch-field='+key+']').value=value;document.querySelector('[data-patch-field=x]').dispatchEvent(new Event('change'))"
+        )
+        assert (
+            js("new URL(location.href).searchParams.get('patch')") == "352,142,128,128"
+        )
+        js(
+            "document.querySelector('#patchSize').value='64';document.querySelector('#patchSize').dispatchEvent(new Event('change'))"
+        )
+        assert js("new URL(location.href).searchParams.get('patch')") == "384,174,64,64"
+        js(
+            "document.querySelector('#patchSize').value='128';document.querySelector('#patchSize').dispatchEvent(new Event('change'))"
+        )
+        assert (
+            js("new URL(location.href).searchParams.get('patch')") == "352,142,128,128"
+        )
+        js(
+            "document.querySelector('#scene').value='42';document.querySelector('#scene').dispatchEvent(new Event('change'));document.querySelector('#tab-exposure_150').click()"
         )
         assert js(
-            "[...document.querySelectorAll('#batchScenes .batch-card')].map(e=>Number(e.dataset.scene))"
-        ) == [42, 43]
-        assert js(
-            "[...document.querySelectorAll('#batchScenes img[data-kind=width]')].every(e=>e.src.includes('/images/exposure_150/'))"
+            "[...document.querySelectorAll('#panel-exposure_150 .patch-cropped')].every(e=>e.dataset.patch==='352,142,128,128')"
         )
-        assert js("new URL(location.href).searchParams.get('view')") == "batch"
+        assert js(
+            "document.querySelector('#patchReference').src.endsWith('/042-target.png')"
+        )
         call("Page.reload")
         wait_for(
-            "document.querySelectorAll('#batchScenes .batch-card').length===2 && !document.querySelector('#batchInspector').hidden"
+            "document.querySelectorAll('#panel-exposure_150 .patch-cropped').length===13 && !document.querySelector('#patchInspector').hidden"
         )
-        assert js("document.querySelector('#batchKind').value") == "width"
-        assert js("document.querySelector('#batchSize').value") == "2"
+        assert (
+            js("new URL(location.href).searchParams.get('patch')") == "352,142,128,128"
+        )
+        js(
+            "document.querySelector('#patchReset').click();document.querySelector('#patchToggle').click()"
+        )
+        assert js(
+            "document.querySelector('#patchInspector').hidden && document.querySelectorAll('.patch-cropped').length===0"
+        )
+        assert js("!new URL(location.href).searchParams.has('patch')")
+        assert js(
+            "[...document.querySelectorAll('#panel-exposure_150 .patch-viewport img')].every(e=>e.style.width===''&&e.style.left==='')"
+        )
+        js(
+            "document.querySelector('#panel-exposure_150 .reconstructions img').scrollIntoView({behavior:'instant',block:'center'})"
+        )
+        wait_for(
+            "document.querySelector('#panel-exposure_150 .reconstructions img').complete && document.querySelector('#panel-exposure_150 .reconstructions img').naturalWidth===480"
+        )
+        click = js(
+            "(()=>{const b=document.querySelector('#panel-exposure_150 .reconstructions img').getBoundingClientRect();return [b.left+100.5/480*b.width,b.top+90.5/270*b.height]})()"
+        )
+        call(
+            "Input.dispatchMouseEvent",
+            dict(
+                type="mousePressed",
+                x=click[0],
+                y=click[1],
+                button="left",
+                buttons=1,
+                clickCount=1,
+            ),
+        )
+        call(
+            "Input.dispatchMouseEvent",
+            dict(
+                type="mouseReleased",
+                x=click[0],
+                y=click[1],
+                button="left",
+                buttons=0,
+                clickCount=1,
+            ),
+        )
+        assert js("new URL(location.href).searchParams.get('patch')") == "52,42,96,96"
         for layout, width, height in [("desktop", 1440, 1100), ("mobile", 390, 844)]:
             call(
                 "Emulation.setDeviceMetricsOverride",
@@ -809,33 +867,33 @@ def main():
                 ),
             )
             js(
-                "document.querySelectorAll('#batchScenes img').forEach(e=>e.loading='eager');document.querySelector('#batchInspector').scrollIntoView({behavior:'instant'})"
+                "document.querySelectorAll('#panel-exposure_150 img').forEach(e=>e.loading='eager');document.querySelector('#patchInspector').scrollIntoView({behavior:'instant'})"
             )
             wait_for(
-                "[...document.querySelectorAll('#batchScenes img')].every(e=>e.complete && e.naturalWidth===480)"
+                "[...document.querySelectorAll('#panel-exposure_150 img')].every(e=>e.complete && e.naturalWidth===480)"
             )
+            assert js(geometry)
             assert js("document.documentElement.scrollWidth<=innerWidth+1")
-            assert js(
-                "document.querySelector('#batchTitle').getBoundingClientRect().top >= document.querySelector('.workspace-toolbar').getBoundingClientRect().bottom"
-            )
             shot = call("Page.captureScreenshot", dict(format="png", fromSurface=True))
-            (work / f"exp4-batch-{layout}.png").write_bytes(
+            (work / f"exp4-patch-{layout}.png").write_bytes(
                 base64.b64decode(shot["data"])
             )
-        js("document.querySelector('#batchScenes [data-scene=\"43\"] button').click()")
-        assert js(
-            "document.querySelector('#batchInspector').hidden && !document.querySelector('#panel-exposure_150').hidden"
-        )
-        assert js("document.querySelector('#scene').value") == "43"
-        assert js(
-            "[...document.querySelectorAll('#panel-exposure_150 img[data-kind=width]')].every(e=>e.src.endsWith('/043-width.png'))"
-        )
-        assert js("!new URL(location.href).searchParams.has('view')")
-        js("history.back()")
-        wait_for("!document.querySelector('#batchInspector').hidden")
-        assert js("document.querySelectorAll('#batchScenes .batch-card').length") == 2
+        call("Emulation.setTouchEmulationEnabled", dict(enabled=True, maxTouchPoints=1))
         js(
-            "document.querySelector('#batchToggle').click();document.querySelector('#tab-gaussian').click()"
+            "document.querySelector('#patchReferenceStage').scrollIntoView({behavior:'instant',block:'center'})"
+        )
+        touch = js(
+            "(()=>{const b=document.querySelector('#patchReference').getBoundingClientRect();return {x:b.left+250.5/480*b.width,y:b.top+120.5/270*b.height}})()"
+        )
+        call(
+            "Input.dispatchTouchEvent",
+            dict(type="touchStart", touchPoints=[dict(id=0, **touch)]),
+        )
+        call("Input.dispatchTouchEvent", dict(type="touchEnd", touchPoints=[]))
+        assert js("new URL(location.href).searchParams.get('patch')") == "202,72,96,96"
+        call("Emulation.setTouchEmulationEnabled", dict(enabled=False))
+        js(
+            "document.querySelector('#patchToggle').click();document.querySelector('#tab-gaussian').click()"
         )
         js(
             "for(const id of ['average','gaussian']){const input=document.querySelector('#learningConditions input[value='+id+']');input.checked=true;input.dispatchEvent(new Event('change'));}"
@@ -883,7 +941,7 @@ def main():
                         )
         assert not errors, errors
         print(
-            "PASS: video plots and moving overlays; exact correlations and pixel sets; Exp4 scene-specific maps and metrics; learning/interval controls and scales; larger visible uncertainty/error maps; batch sizes 2/4/6, final-page bounds, category changes, map switching, scene opening, URL reload and browser back; desktop/mobile layout; no JavaScript errors."
+            "PASS: video plots and moving overlays; Exp4 maps and metrics; learning/interval controls; linked patch geometry across all four models; mouse drag/click, presets, bounds, keyboard/touch, scene/category changes, URL reload, and full-image reset; desktop/mobile layout; no JavaScript errors."
         )
     finally:
         if ws:

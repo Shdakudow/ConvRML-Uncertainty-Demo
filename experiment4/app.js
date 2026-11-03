@@ -36,10 +36,8 @@
   };
   let data, errorData,
     index = 0,
-    activeTab = "overview",
-    batchMode = false,
-    batchSize = 4,
-    batchKind = "prediction";
+    activeTab = "overview";
+  let patchInspector;
   const cards = new Map();
   const buttons = new Map();
   const el = (tag, text, className) => {
@@ -78,7 +76,11 @@
     image.addEventListener("error", () => {
       image.alt = `${label} · image unavailable`;
     });
-    node.append(image);
+    if (["target", "prediction", "error", "width"].includes(kind)) {
+      const viewport = el("div", undefined, "patch-viewport");
+      viewport.append(image);
+      node.append(viewport);
+    } else node.append(image);
     return node;
   }
 
@@ -162,7 +164,7 @@
     const content = card.querySelector(".scene-metrics");
     content.replaceChildren();
     content.append(
-      el("h4", `Selected scene · ${data.ids[index]}`, "table-title"),
+      el("h4", `Full-scene metrics · ${data.ids[index]}`, "table-title"),
       table(condition, false),
     );
     content.append(
@@ -316,10 +318,9 @@
     const url = new URL(location.href);
     url.searchParams.set("example", String(index));
     url.searchParams.set("condition", activeTab);
-    for (const [key, value] of Object.entries({view: batchMode ? "batch" : null, batchSize: batchMode ? batchSize : null, batchKind: batchMode ? batchKind : null})) {
-      if (value === null) url.searchParams.delete(key);
-      else url.searchParams.set(key, value);
-    }
+    for (const key of ["view", "batchSize", "batchKind"]) url.searchParams.delete(key);
+    if (patchInspector?.value) url.searchParams.set("patch", patchInspector.value);
+    else url.searchParams.delete("patch");
     url.hash = "";
     if (url.href !== location.href)
       history[push ? "pushState" : "replaceState"](null, "", url);
@@ -327,75 +328,26 @@
   }
 
   function render() {
-    const start = batchMode ? Math.floor(index / batchSize) * batchSize : index;
-    const end = Math.min(data.ids.length, start + batchSize);
     document.getElementById("scene").value = String(index);
     document.getElementById("counter").textContent =
-      batchMode ? `${start + 1}–${end} / ${data.ids.length}` : `${index + 1} / ${data.ids.length}`;
-    document.getElementById("previous").disabled = start === 0;
-    document.getElementById("next").disabled = batchMode ? end === data.ids.length : index === data.ids.length - 1;
-    document.getElementById("previous").setAttribute("aria-label", batchMode ? "Previous batch" : "Previous scene");
-    document.getElementById("next").setAttribute("aria-label", batchMode ? "Next batch" : "Next scene");
-    document.getElementById("batchToggle").textContent = batchMode ? "Single scene" : "Inspect a batch";
-    document.getElementById("batchToggle").setAttribute("aria-pressed", String(batchMode));
-    document.getElementById("batchControls").hidden = !batchMode;
-    document.getElementById("batchSize").value = String(batchSize);
-    document.getElementById("batchKind").value = batchKind;
-    document.getElementById("batchInspector").hidden = !batchMode;
+      `${index + 1} / ${data.ids.length}`;
+    document.getElementById("previous").disabled = index === 0;
+    document.getElementById("next").disabled = index === data.ids.length - 1;
     for (const [id, card] of cards) {
       const selected = id === activeTab;
-      card.hidden = batchMode || !selected;
+      card.hidden = !selected;
       const button = buttons.get(id);
       button.setAttribute("aria-selected", String(selected));
-      button.setAttribute("aria-controls", batchMode && selected ? "batchInspector" : card.id);
       button.tabIndex = selected ? 0 : -1;
     }
     updateToolbarOffset();
     const condition =
       data.conditions.find((item) => item.id === activeTab) ||
       data.conditions.find((item) => item.id === "clean");
-    if (batchMode) {
-      document.getElementById("batchInspector").setAttribute("aria-labelledby", `tab-${activeTab}`);
-      renderBatch(condition, start, end);
-      return;
-    }
     const card = cards.get(activeTab);
     loadImages(card, condition);
     renderMetrics(card, condition);
-  }
-
-  function renderBatch(condition, start, end) {
-    document.getElementById("batchTitle").textContent = `${condition.title} · scenes ${start + 1}–${end}`;
-    const grid = document.getElementById("batchScenes");
-    const legend = document.getElementById("batchLegend");
-    legend.hidden = batchKind === "prediction";
-    legend.replaceChildren();
-    if (batchKind !== "prediction") {
-      legend.append(el("span", batchKind === "error" ? "Low error 0" : "Narrow 0"), el("span", undefined, "gradient"), el("span", batchKind === "error" ? "High error 1" : "Wide 1"));
-      if (batchKind === "width") legend.append(el("span", "Pink = crossed bounds", "pink"));
-    }
-    grid.replaceChildren();
-    for (let sceneIndex = start; sceneIndex < end; sceneIndex++) {
-      const card = el("article", undefined, "batch-card");
-      card.dataset.scene = String(sceneIndex);
-      if (sceneIndex === index) card.classList.add("selected-scene");
-      const header = el("div", undefined, "batch-scene-heading");
-      const open = el("button", "Open scene");
-      open.type = "button";
-      open.setAttribute("aria-label", `Open scene ${sceneIndex + 1}: ${data.ids[sceneIndex]}`);
-      open.addEventListener("click", () => {
-        index = sceneIndex; batchMode = false; render(); updateURL(true);
-        cards.get(activeTab).scrollIntoView({block: "start"});
-      });
-      header.append(el("h3", `${sceneIndex + 1} · ${data.ids[sceneIndex]}`), open);
-      const inputs = el("div", undefined, `inputs${condition.id === "clean" ? " two-inputs" : ""}`);
-      inputs.append(figure("Original input", "original"));
-      if (condition.id !== "clean") inputs.append(figure("Modified input", "input"));
-      inputs.append(figure("Ground truth", "target"));
-      card.append(header, inputs, pairs(batchKind), table(condition, false, sceneIndex));
-      loadImages(card, condition, sceneIndex);
-      grid.append(card);
-    }
+    patchInspector.setScene({card, reference: imageUrl("target", condition, index), title: `${condition.title} · ${data.ids[index]}`});
   }
 
   function selectTab(id, push = false) {
@@ -418,11 +370,7 @@
     const candidate =
       url.searchParams.get("condition") || url.hash.slice(1) || "overview";
     activeTab = cards.has(candidate) ? candidate : "overview";
-    batchMode = url.searchParams.get("view") === "batch";
-    const requestedSize = Number(url.searchParams.get("batchSize"));
-    batchSize = [2, 4, 6].includes(requestedSize) ? requestedSize : 4;
-    const requestedKind = url.searchParams.get("batchKind");
-    batchKind = ["prediction", "error", "width"].includes(requestedKind) ? requestedKind : "prediction";
+    patchInspector.readURL(url.searchParams.get("patch"));
   }
 
   function addTab(id, label, card) {
@@ -477,6 +425,7 @@
     )
       throw new Error("Incomplete experiment data");
     const scenes = document.getElementById("scene");
+    patchInspector = new PatchInspector(document.getElementById("patchInspector"), () => updateURL());
     data.ids.forEach((id, i) => {
       const option = el("option", `${i + 1} · ${id}`);
       option.value = String(i);
@@ -497,26 +446,17 @@
     });
     document.getElementById("previous").addEventListener("click", () => {
       if (index > 0) {
-        index = batchMode ? Math.max(0, Math.floor(index / batchSize) * batchSize - batchSize) : index - 1;
+        index--;
         render();
         updateURL();
       }
     });
     document.getElementById("next").addEventListener("click", () => {
       if (index < data.ids.length - 1) {
-        index = batchMode ? Math.min(data.ids.length - 1, Math.floor(index / batchSize) * batchSize + batchSize) : index + 1;
+        index++;
         render();
         updateURL();
       }
-    });
-    document.getElementById("batchToggle").addEventListener("click", () => {
-      batchMode = !batchMode; render(); updateURL(true);
-    });
-    document.getElementById("batchSize").addEventListener("change", event => {
-      batchSize = Number(event.target.value); render(); updateURL();
-    });
-    document.getElementById("batchKind").addEventListener("change", event => {
-      batchKind = event.target.value; render(); updateURL();
     });
     window.addEventListener("popstate", () => {
       readURL();
