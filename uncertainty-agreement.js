@@ -3,7 +3,7 @@
   'use strict';
   const root = new URL('./', document.currentScript.src);
   const palette = [[20,35,60],[34,95,157],[35,185,172],[243,203,85],[250,112,82]];
-  const overlapColors = [[20,35,60],[157,223,210],[249,186,119],[226,195,255]];
+  const overlapColors = [[16,23,34],[0,190,255],[255,112,0],[240,240,240]];
   const format = value => Number.isFinite(value) ? value.toFixed(5) : 'Undefined';
   const percent = value => Number.isFinite(value) ? `${(100 * value).toFixed(2)}%` : 'Undefined';
   let metadata, comparison = 'overlap';
@@ -151,7 +151,7 @@
       const values = this.row ? (overlap ? [percent(this.row.top10_iou), this.row.top10_intersection.toLocaleString(), this.row.top10_qutcc_count.toLocaleString(), this.row.top10_im2im_count.toLocaleString()] : [format(this.row.spearman), format(this.row.pearson), format(this.row.mean_absolute_width_gap)]) : [];
       this.container.querySelector('.agreement-metrics').innerHTML = values.length ? '<tr>'+values.map(value => '<td>'+value+'</td>').join('')+'</tr>' : '';
       this.container.querySelector('.agreement-explanation').textContent = overlap ? 'Select values at or above each map’s 90th percentile. Overlap = shared pixels ÷ pixels selected by either model. 0% means no overlap; 100% means the same locations. Cutoff ties stay together, so the selected count can exceed 10%. Constant maps are undefined. Whole frame; no foreground mask is applied.' : 'Rank differences compare relative uncertainty ordering. Large rank changes can occur even when both widths are small.';
-      if (live) this.container.querySelector('.agreement-map-label').textContent = 'Moving top-10% selections · purple = shared by both models';
+      if (live) this.container.querySelector('.agreement-map-label').textContent = 'Moving top-10% selections · white = shared by both models';
       this.enableRegionButtons(Boolean(this.row?.region) && this.container.getAttribute('aria-busy') !== 'true');
       if (this.row && this.container.getAttribute('aria-busy') !== 'true') this.status.textContent = `${this.row.valid_pixels.toLocaleString()} jointly valid pixels · ${overlap ? (this.row.top10_reason || 'higher overlap means the models select more of the same locations.') : 'lower correlation means less spatial agreement.'}`;
       if (this.playing && !live) this.status.textContent = 'Pause or select a frame to inspect the rank-difference map.';
@@ -231,7 +231,7 @@
         image.data[4*p+3] = 255;
       }
       context.putImageData(image, 0, 0);
-      this.container.querySelector('.agreement-map-label').textContent = overlap ? 'All selected high-uncertainty locations · purple = shared by both models' : rank ? 'Difference in uncertainty percentile rank · 0–1' : '|QUTCC width − Im2im width| · normalized intensity';
+      this.container.querySelector('.agreement-map-label').textContent = overlap ? 'All selected high-uncertainty locations · white = shared by both models' : rank ? 'Difference in uncertainty percentile rank · 0–1' : '|QUTCC width − Im2im width| · normalized intensity';
       const output = this.container.querySelector('.agreement-pixel'); output.textContent = '';
       if (this.point) {
         HeatmapPixels.drawCanvas(this.canvas, this.point.x + .5, this.point.y + .5);

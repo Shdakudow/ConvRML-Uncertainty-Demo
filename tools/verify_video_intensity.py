@@ -123,7 +123,7 @@ def main():
         available.bind(("127.0.0.1", 0))
         port = available.getsockname()[1]
     profile = tempfile.mkdtemp(prefix="video-intensity-browser-")
-    work = Path.home() / ".local/share/convrml-video-columns-20261103"
+    work = Path.home() / ".local/share/convrml-video-top10-20261103"
     work.mkdir(parents=True, exist_ok=True)
     log = (work / "chrome.log").open("w")
     process = subprocess.Popen(
@@ -215,6 +215,12 @@ def main():
             raise RuntimeError(
                 js("document.querySelector('#intensityValues').textContent")
             )
+        assert js(
+            "(()=>{const q=document.querySelector('#qutccVideo').getBoundingClientRect(),m=document.querySelector('#videoDisagreement').getBoundingClientRect(),i=document.querySelector('#im2imVideo').getBoundingClientRect(),plots=document.querySelector('.frame-plots').getBoundingClientRect();return q.left<m.left&&m.right<i.left&&m.bottom<plots.top})()"
+        )
+        assert js(
+            "document.querySelector('.top10-key .q-only').textContent.includes('disagree')"
+        )
         expected = json.loads((ROOT / "videos-plot/intensity/data.json").read_text())
         for name in ("video1", "video4", "video6", "video7", "video10"):
             js(
@@ -296,6 +302,9 @@ def main():
             js(
                 "document.querySelector('#intensityMetrics input[value=pearson]').click()"
             )
+        js("document.querySelector('.comparison-stage').scrollIntoView()")
+        shot = call("Page.captureScreenshot", dict(format="png", fromSurface=True))
+        (work / "top10-desktop.png").write_bytes(base64.b64decode(shot["data"]))
         # Checkbox combinations affect visibility only and retain the selected frame.
         js(
             "document.querySelector('#intensityMetrics input[value=pearson]').click();document.querySelector('#intensityMetrics input[value=spearman]').click()"
@@ -366,7 +375,7 @@ def main():
             counts = js(
                 """(()=>{const c=document.querySelector('"""
                 + selector
-                + """'),a=c.getContext('2d').getImageData(0,0,c.width,c.height).data,n=[0,0,0];for(let p=0;p<a.length;p+=4){if(a[p]===226&&a[p+1]===195&&a[p+2]===255)n[0]++;if(a[p]===157&&a[p+1]===223&&a[p+2]===210)n[1]++;if(a[p]===249&&a[p+1]===186&&a[p+2]===119)n[2]++;}return n})()"""
+                + """'),a=c.getContext('2d').getImageData(0,0,c.width,c.height).data,n=[0,0,0];for(let p=0;p<a.length;p+=4){if(a[p]===240&&a[p+1]===240&&a[p+2]===240)n[0]++;if(a[p]===0&&a[p+1]===190&&a[p+2]===255)n[1]++;if(a[p]===255&&a[p+1]===112&&a[p+2]===0)n[2]++;}return n})()"""
             )
             assert counts == [
                 expected_row["top10_intersection"],

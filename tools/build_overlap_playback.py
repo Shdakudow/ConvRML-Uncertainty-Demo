@@ -20,7 +20,7 @@ from pixel_maps import load_pixel_map
 
 ROOT = Path(__file__).resolve().parents[1]
 COLORS = np.array(
-    [[20, 35, 60], [157, 223, 210], [249, 186, 119], [226, 195, 255]], dtype=np.uint8
+    [[16, 23, 34], [0, 190, 255], [255, 112, 0], [240, 240, 240]], dtype=np.uint8
 )
 METHODS = ("qutcc", "im2im")
 
@@ -52,8 +52,10 @@ def highlight(frame, codes, method):
     selected = (codes != 255) & ((codes & (1 if method == "qutcc" else 2)) != 0)
     region = image[24:294]
     colors = COLORS[np.minimum(codes, 3)]
+    # Emphasize exclusive selections; keep shared selections more transparent.
+    alpha = np.where(codes[selected] == 3, 0.35, 0.70)[:, None]
     region[selected] = np.floor(
-        region[selected].astype(float) * 0.5 + colors[selected] * 0.5 + 0.5
+        region[selected].astype(float) * (1 - alpha) + colors[selected] * alpha + 0.5
     ).astype(np.uint8)
     return image
 
@@ -141,10 +143,12 @@ def render(task):
             raise ValueError("Encoded frame count/duration mismatch")
         path = destination / (method + ".mp4")
         temporary.replace(path)
+        digest = sha(path)
+        poster = destination / (method + ".png")
         item = dict(
-            video=f"overlap-assets/{name}/{method}.mp4",
-            poster=f"overlap-assets/{name}/{method}.png",
-            sha256=sha(path),
+            video=f"overlap-assets/{name}/{method}.mp4?v={digest[:12]}",
+            poster=f"overlap-assets/{name}/{method}.png?v={sha(poster)[:12]}",
+            sha256=digest,
         )
         if method == "map":
             result["map"] = item
@@ -169,7 +173,7 @@ def main(args):
         schema="overlap_playback_v1",
         agreement_sha256=sha(ROOT / "uncertainty_agreement.json"),
         pixel_manifest_sha256=sha(args.assets / "manifest.json"),
-        definition="Precomputed top-10% selections from full-precision numerical width maps. Purple: both models; green: QUTCC only; orange: Im2im only. Only the reconstruction panel receives the highlight; statistical metrics are unchanged.",
+        definition="Precomputed top-10% selections from full-precision numerical width maps. White: both models; bright blue: QUTCC only; vivid orange: Im2im only. Only the reconstruction panel receives the highlight; statistical metrics are unchanged.",
         videos=results,
     )
     (ROOT / "videos-plot/overlap-playback.json").write_text(
