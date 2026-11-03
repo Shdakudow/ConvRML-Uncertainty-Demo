@@ -123,7 +123,7 @@ def main():
         available.bind(("127.0.0.1", 0))
         port = available.getsockname()[1]
     profile = tempfile.mkdtemp(prefix="video-intensity-browser-")
-    work = Path.home() / ".local/share/convrml-video-intensity-20261102"
+    work = Path.home() / ".local/share/convrml-video-columns-20261103"
     work.mkdir(parents=True, exist_ok=True)
     log = (work / "chrome.log").open("w")
     process = subprocess.Popen(
@@ -230,7 +230,9 @@ def main():
                 )
                 == 2
             )
-            assert js("document.querySelector('#intensityMetric').value") == "spearman"
+            assert js(
+                "[...document.querySelectorAll('#intensityMetrics input:checked')].map(e=>e.value)"
+            ) == ["spearman"]
             assert js(
                 "document.querySelector('#intensityPlot').textContent.includes('-1.0') && document.querySelector('#intensityPlot').textContent.includes('1.0')"
             )
@@ -243,41 +245,121 @@ def main():
                 f"[...document.querySelectorAll('video')].every(v => !v.seeking && Math.floor(v.currentTime * 20 + 1e-6) === {index})"
             )
             text = js("document.querySelector('#intensityValues').textContent")
-            assert f"Frame {index+1} " in text, text
+            assert f"Frame {index+1}\n" in text, text
             for method in ("qutcc", "im2im"):
                 value = expected["videos"][name]["models"][method]["rows"][index][
                     "spearman"
                 ]
                 assert f"{value:.4f}" in text, text
-            # The graph itself seeks to frame 10.
-            js(
-                """(()=>{const svg=document.querySelector('#intensityPlot'),hit=document.querySelector('#intensityHit'),n=Number(document.querySelector('#frame').max),p=new DOMPoint(80+890*9/(n-1),100).matrixTransform(svg.getScreenCTM());hit.dispatchEvent(new MouseEvent('click',{clientX:p.x,clientY:p.y,bubbles:true}));})()"""
+            # Real pointer coordinates are integer CSS pixels. Compute the
+            # nearest frame after that rounding, which matters in narrow columns.
+            clicked_frame = js(
+                """(()=>{const svg=document.querySelector('#intensityPlot'),hit=document.querySelector('#intensityHit'),n=Number(document.querySelector('#frame').max),left=Number(hit.getAttribute('x')),width=Number(hit.getAttribute('width')),p=new DOMPoint(left+width*9/(n-1),100).matrixTransform(svg.getScreenCTM()),event=new MouseEvent('click',{clientX:p.x,clientY:p.y,bubbles:true}),actual=new DOMPoint(event.clientX,event.clientY).matrixTransform(svg.getScreenCTM().inverse()),frame=Math.max(0,Math.min(n-1,Math.round((actual.x-left)/width*(n-1))))+1;hit.dispatchEvent(event);return frame})()"""
             )
-            assert js("Number(document.querySelector('#frame').value)") == 10
+            wait_for(
+                f"Number(document.querySelector('#frame').value)==={clicked_frame}&&[...document.querySelectorAll('video')].every(v=>!v.seeking)"
+            )
             # Focused arrow-key navigation also updates both video frame controls.
             js(
                 "document.querySelector('#intensityPlot').dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}))"
             )
             wait_for(
-                "Number(document.querySelector('#frame').value) === 11 && [...document.querySelectorAll('video')].every(v => !v.seeking)"
+                f"Number(document.querySelector('#frame').value) === {clicked_frame+1} && [...document.querySelectorAll('video')].every(v => !v.seeking)"
             )
             js(
-                "document.querySelector('#intensityMetric').value='pearson';document.querySelector('#intensityMetric').dispatchEvent(new Event('change'))"
+                "document.querySelector('#intensityMetrics input[value=pearson]').click()"
             )
             text = js("document.querySelector('#intensityValues').textContent")
+            assert (
+                js(
+                    "document.querySelectorAll('#intensityPlot path[data-model]').length"
+                )
+                == 4
+            )
+            assert (
+                js(
+                    "document.querySelectorAll('#intensityPlot path[data-metric=pearson][stroke-dasharray]').length"
+                )
+                == 2
+            )
+            assert "Spearman ρ" in text
             assert "Pearson r" in text
             for method in ("qutcc", "im2im"):
-                value = expected["videos"][name]["models"][method]["rows"][10][
-                    "pearson"
-                ]
+                value = expected["videos"][name]["models"][method]["rows"][
+                    clicked_frame
+                ]["pearson"]
                 assert f"{value:.4f}" in text, text
             assert (
                 js("document.querySelector('#intensityCSV').getAttribute('href')")
                 == f"intensity/{name}.csv"
             )
             js(
-                "document.querySelector('#intensityMetric').value='spearman';document.querySelector('#intensityMetric').dispatchEvent(new Event('change'))"
+                "document.querySelector('#intensityMetrics input[value=pearson]').click()"
             )
+        # Checkbox combinations affect visibility only and retain the selected frame.
+        js(
+            "document.querySelector('#intensityMetrics input[value=pearson]').click();document.querySelector('#intensityMetrics input[value=spearman]').click()"
+        )
+        assert (
+            js("document.querySelectorAll('#intensityPlot path[data-model]').length")
+            == 2
+        )
+        assert js(
+            "[...document.querySelectorAll('#intensityPlot path[data-model]')].every(e=>e.dataset.metric==='pearson')"
+        )
+        js("document.querySelector('#intensityMetrics input[value=pearson]').click()")
+        assert (
+            js("document.querySelectorAll('#intensityPlot path[data-model]').length")
+            == 0
+        )
+        assert "Select Spearman or Pearson" in js(
+            "document.querySelector('#intensityValues').textContent"
+        )
+        js("document.querySelector('#intensityMetrics input[value=spearman]').click()")
+        assert js("Number(document.querySelector('#frame').value)") == clicked_frame + 1
+        # Both plots stay aligned and each can seek the same synchronized videos.
+        assert js(
+            "(()=>{const a=document.querySelector('#widthSection').getBoundingClientRect(),b=document.querySelector('#intensitySection').getBoundingClientRect();return a.right<b.left&&Math.abs(a.top-b.top)<2})()"
+        )
+        assert js(
+            "Math.abs(document.querySelector('#widthPlot').getBoundingClientRect().top-document.querySelector('#intensityPlot').getBoundingClientRect().top)<2"
+        )
+        js("document.querySelector('#cumulativeToggle').click()")
+        assert (
+            js(
+                "document.querySelectorAll('#widthPlot polyline[data-series=cumulative]').length"
+            )
+            == 2
+        )
+        width_frame = js(
+            """(()=>{const svg=document.querySelector('#widthPlot'),hit=document.querySelector('#plotHit'),n=Number(document.querySelector('#frame').max),left=Number(hit.getAttribute('x')),width=Number(hit.getAttribute('width')),p=new DOMPoint(left+width*19/(n-1),100).matrixTransform(svg.getScreenCTM()),event=new MouseEvent('click',{clientX:p.x,clientY:p.y,bubbles:true}),actual=new DOMPoint(event.clientX,event.clientY).matrixTransform(svg.getScreenCTM().inverse()),frame=Math.max(0,Math.min(n-1,Math.round((actual.x-left)/width*(n-1))))+1;hit.dispatchEvent(event);return frame})()"""
+        )
+        wait_for(
+            f"Number(document.querySelector('#frame').value)==={width_frame}&&[...document.querySelectorAll('video')].every(v=>!v.seeking)"
+        )
+        assert "cumulative" in js("document.querySelector('#plotValues').textContent")
+        assert f"Frame {width_frame}" in js(
+            "document.querySelector('#intensityValues').textContent"
+        )
+        js("document.querySelector('.frame-plots').scrollIntoView()")
+        shot = call("Page.captureScreenshot", dict(format="png", fromSurface=True))
+        (work / "columns-desktop.png").write_bytes(base64.b64decode(shot["data"]))
+        call(
+            "Emulation.setDeviceMetricsOverride",
+            dict(width=390, height=844, deviceScaleFactor=1, mobile=True),
+        )
+        time.sleep(0.15)
+        assert js(
+            "(()=>{const a=document.querySelector('#widthSection').getBoundingClientRect(),b=document.querySelector('#intensitySection').getBoundingClientRect();return b.top>=a.bottom&&Math.abs(a.left-b.left)<2})()"
+        )
+        assert js("document.documentElement.scrollWidth<=innerWidth+1")
+        js("document.querySelector('#intensitySection').scrollIntoView()")
+        shot = call("Page.captureScreenshot", dict(format="png", fromSurface=True))
+        (work / "columns-mobile.png").write_bytes(base64.b64decode(shot["data"]))
+        call(
+            "Emulation.setDeviceMetricsOverride",
+            dict(width=1440, height=1100, deviceScaleFactor=1, mobile=False),
+        )
         agreement = json.loads((ROOT / "uncertainty_agreement.json").read_text())
 
         def assert_map_counts(selector, expected_row):
@@ -596,7 +678,7 @@ def main():
                 )
         assert not errors, errors
         print(
-            "PASS: 5 videos and 10 captures; exact correlations and pixel sets; moving synchronized overlays without sidecar downloads; playback toggles and speed; Exp4 error maps for all conditions and scene changes; 100-epoch learning curves and category checkboxes; desktop/mobile layout; no JavaScript errors."
+            "PASS: side-by-side aligned plots; Spearman/Pearson checkbox combinations; both plots seek correctly; mobile stacking; 5 videos and 10 captures; exact correlations and pixel sets; moving synchronized overlays without sidecar downloads; playback toggles and speed; Exp4 error maps for all conditions and scene changes; 100-epoch learning curves and category checkboxes; desktop/mobile layout; no JavaScript errors."
         )
     finally:
         if ws:

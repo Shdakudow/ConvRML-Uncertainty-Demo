@@ -194,7 +194,12 @@ function inspectFrame(index) {
 }
 function clearPixel() {pixelPoint = null; pixelInspector.clear();}
 function drawPlot() {
-  const svg = $('widthPlot'), left = 70, right = 970, top = 22, bottom = 275;
+  const svg = $('widthPlot');
+  const plotWidth = Math.max(360, Math.round(svg.getBoundingClientRect().width));
+  const small = plotWidth < 600;
+  const left = small ? 65 : 70, right = plotWidth - (small ? 20 : 30), top = 22, bottom = 275;
+  const tickFont = 12, axisFont = 13;
+  svg.setAttribute('viewBox', `0 0 ${plotWidth} 330`);
   const values = methods.flatMap(method => selected.models[method].per_frame.map(row => row.mean_interval_width));
   let minimum = 0, maximum = data.width_plot_range[1];
   if ($('zoom').checked) {
@@ -207,9 +212,9 @@ function drawPlot() {
   const ticks = $('zoom').checked ? 4 : 5;
   for (let tick = 0; tick <= ticks; tick++) {
     const value = minimum + tick / ticks * (maximum - minimum), position = y(value);
-    pieces.push(`<line x1="${left}" y1="${position}" x2="${right}" y2="${position}" stroke="#33455c"/><text x="${left - 9}" y="${position + 4}" text-anchor="end" fill="#bac7d6" font-size="12">${value.toFixed($('zoom').checked ? 4 : 2)}</text>`);
+    pieces.push(`<line x1="${left}" y1="${position}" x2="${right}" y2="${position}" stroke="#33455c"/><text x="${left - 9}" y="${position + 4}" text-anchor="end" fill="#bac7d6" font-size="${tickFont}">${value.toFixed($('zoom').checked ? 4 : 2)}</text>`);
     const index = Math.round(tick / ticks * (selected.frames - 1));
-    pieces.push(`<text x="${x(index)}" y="${bottom + 23}" text-anchor="middle" fill="#bac7d6" font-size="12">${index + 1}</text>`);
+    pieces.push(`<text x="${x(index)}" y="${bottom + 23}" text-anchor="middle" fill="#bac7d6" font-size="${tickFont}">${index + 1}</text>`);
   }
   methods.forEach(method => {
     const report = selected.models[method], points = report.per_frame.map((row, index) => `${x(index)},${y(row.mean_interval_width)}`).join(' ');
@@ -217,8 +222,8 @@ function drawPlot() {
     pieces.push(`<polyline data-model="${method}" data-series="frame" points="${points}" fill="none" stroke="${colors[method]}" stroke-width="1.1" opacity="${showCumulative() ? '.3' : '.85'}"/>`);
     if (showCumulative()) pieces.push(`<polyline data-model="${method}" data-series="cumulative" points="${cumulative}" fill="none" stroke="${colors[method]}" stroke-width="1.7"/>`);
   });
-  pieces.push('<text x="520" y="325" text-anchor="middle" fill="#bac7d6" font-size="13">Frame</text><text transform="translate(16,148) rotate(-90)" text-anchor="middle" fill="#bac7d6" font-size="13">Mean interval width</text>');
-  pieces.push('<line id="plotCursor" y1="22" y2="275" stroke="#e5edf5" opacity="0"/><rect id="plotHit" x="70" y="22" width="900" height="253" fill="transparent"/>');
+  pieces.push(`<text x="${(left + right) / 2}" y="325" text-anchor="middle" fill="#bac7d6" font-size="${axisFont}">Frame</text><text transform="translate(16,148) rotate(-90)" text-anchor="middle" fill="#bac7d6" font-size="${axisFont}">Mean interval width</text>`);
+  pieces.push(`<line id="plotCursor" y1="22" y2="275" stroke="#e5edf5" opacity="0"/><rect id="plotHit" x="${left}" y="22" width="${right - left}" height="253" fill="transparent"/>`);
   svg.innerHTML = pieces.join('');
   const frameAtPointer = event => {
     const point = new DOMPoint(event.clientX, event.clientY).matrixTransform(svg.getScreenCTM().inverse());
@@ -351,3 +356,5 @@ async function start() {
 }
 start();
 VideoIntensityPlot.init({onSeek: index => seekFrame(index)});
+
+window.addEventListener('resize', () => { if (selected) drawPlot(); });

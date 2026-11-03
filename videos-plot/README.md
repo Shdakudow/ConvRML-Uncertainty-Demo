@@ -82,6 +82,13 @@ fitting is performed. Existing correlation and rank-gap values are preserved.
 
 ## Brightness–uncertainty correlation per frame
 
+The mean-width and brightness-correlation plots appear in aligned columns on
+wide screens and stack on small screens. Spearman is selected by default.
+Checkboxes can display Spearman (solid), Pearson (dashed), or both; model colors
+stay the same. Hover values follow the visible measures, and clicking either
+plot seeks the synchronized videos. These controls do not recompute the metrics.
+
+
 The brightness plot measures spatial correlation **within each frame**, then
 plots those coefficients against frame number. Its two curves are QUTCC and
 Im2im. Spearman ρ is the default; Pearson r is an optional linear-association

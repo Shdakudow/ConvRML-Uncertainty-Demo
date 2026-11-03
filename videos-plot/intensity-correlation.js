@@ -1,15 +1,16 @@
-/* One spatial brightness/width coefficient per frame, computed before encoding. */
+/* Per-frame spatial correlations. Checkboxes control visibility, never the data. */
 window.VideoIntensityPlot = (() => {
   'use strict';
   const methods = ['qutcc', 'im2im'];
   const names = {qutcc: 'QUTCC', im2im: 'Im2im'};
   const colors = {qutcc: '#9ddfd2', im2im: '#f9ba77'};
+  const metricNames = {spearman: 'Spearman ρ', pearson: 'Pearson r'};
   const get = id => document.getElementById(id);
   const format = value => Number.isFinite(value) ? value.toFixed(4) : 'undefined';
+  const metrics = () => [...document.querySelectorAll('#intensityMetrics input:checked')].map(input => input.value);
   let data, selectedId, current = 0, onSeek, frameCount = 0;
-  const metric = () => get('intensityMetric').value;
   const rows = method => data?.videos[selectedId]?.models[method].rows;
-  let plotWidth = 1000, left = 80, right = 970;
+  let left = 65, right = 580;
   const x = index => left + (right - left) * index / Math.max(1, frameCount - 1);
   const y = value => 275 - (value + 1) * 126.5;
 
@@ -21,11 +22,14 @@ window.VideoIntensityPlot = (() => {
       cursor.setAttribute('x1', x(bounded));
       cursor.setAttribute('x2', x(bounded));
     }
-    const label = metric() === 'spearman' ? 'Spearman ρ' : 'Pearson r';
-    const values = methods.map(method => `${names[method]} ${format(rows(method)[bounded][metric()])}`);
-    const valid = rows('qutcc')[bounded].valid_pixels;
-    const total = rows('qutcc')[bounded].total_pixels;
-    get('intensityValues').textContent = `Frame ${bounded + 1} · ${label}: ${values.join(' · ')} · ${valid.toLocaleString()} / ${total.toLocaleString()} valid pixels`;
+    const checked = metrics();
+    if (!checked.length) {
+      get('intensityValues').textContent = 'Select Spearman or Pearson to display a measure.';
+      return;
+    }
+    const values = checked.map(metric => `${metricNames[metric]}: ${methods.map(method => `${names[method]} ${format(rows(method)[bounded][metric])}`).join(' · ')}`);
+    const {valid_pixels: valid, total_pixels: total} = rows('qutcc')[bounded];
+    get('intensityValues').textContent = `Frame ${bounded + 1}\n${values.join('\n')}\n${valid.toLocaleString()} / ${total.toLocaleString()} valid pixels`;
   }
 
   function draw() {
@@ -33,12 +37,12 @@ window.VideoIntensityPlot = (() => {
     if (!video) return;
     frameCount = video.frames;
     const svg = get('intensityPlot');
-    const small = window.innerWidth <= 650;
-    plotWidth = small ? 600 : 1000;
-    left = small ? 65 : 80;
+    const plotWidth = Math.max(360, Math.round(svg.getBoundingClientRect().width));
+    const small = plotWidth < 600;
+    left = small ? 65 : 70;
     right = plotWidth - (small ? 20 : 30);
-    const tickFont = small ? 16 : 12;
-    const axisFont = small ? 17 : 13;
+    const tickFont = 12;
+    const axisFont = 13;
     svg.setAttribute('viewBox', `0 0 ${plotWidth} 330`);
     let markup = '';
     for (let tick = 0; tick <= 4; tick++) {
@@ -48,19 +52,21 @@ window.VideoIntensityPlot = (() => {
       markup += `<text x="${left - 10}" y="${y(value) + 4}" text-anchor="end" fill="#bac7d6" font-size="${tickFont}">${value.toFixed(1)}</text>`;
       markup += `<text x="${x(frame)}" y="298" text-anchor="middle" fill="#bac7d6" font-size="${tickFont}">${frame + 1}</text>`;
     }
-    for (const method of methods) {
-      let path = '', connected = false;
-      rows(method).forEach((row, index) => {
-        const value = row[metric()];
-        if (Number.isFinite(value)) {
-          path += `${connected ? 'L' : 'M'}${x(index)},${y(value)}`;
-          connected = true;
-        } else connected = false;
-      });
-      markup += `<path data-model="${method}" d="${path}" fill="none" stroke="${colors[method]}" stroke-width="1.5"/>`;
+    for (const metric of metrics()) {
+      for (const method of methods) {
+        let path = '', connected = false;
+        rows(method).forEach((row, index) => {
+          const value = row[metric];
+          if (Number.isFinite(value)) {
+            path += `${connected ? 'L' : 'M'}${x(index)},${y(value)}`;
+            connected = true;
+          } else connected = false;
+        });
+        const dash = metric === 'pearson' ? ' stroke-dasharray="6 4"' : '';
+        markup += `<path data-model="${method}" data-metric="${metric}" d="${path}" fill="none" stroke="${colors[method]}" stroke-width="1.5"${dash}/>`;
+      }
     }
-    const label = metric() === 'spearman' ? 'Spearman ρ' : 'Pearson r';
-    markup += `<text x="${(left + right) / 2}" y="325" text-anchor="middle" fill="#bac7d6" font-size="${axisFont}">Frame</text><text transform="translate(20,148) rotate(-90)" text-anchor="middle" fill="#bac7d6" font-size="${axisFont}">${label} · brightness vs width</text>`;
+    markup += `<text x="${(left + right) / 2}" y="325" text-anchor="middle" fill="#bac7d6" font-size="${axisFont}">Frame</text><text transform="translate(20,148) rotate(-90)" text-anchor="middle" fill="#bac7d6" font-size="${axisFont}">Correlation</text>`;
     markup += `<line id="intensityCursor" y1="22" y2="275" stroke="#e5edf5" opacity=".6"/><rect id="intensityHit" x="${left}" y="22" width="${right - left}" height="253" fill="transparent"/>`;
     svg.innerHTML = markup;
     const indexAt = event => {
@@ -77,13 +83,13 @@ window.VideoIntensityPlot = (() => {
     };
     get('intensityCSV').href = `intensity/${selectedId}.csv`;
     get('intensityPNG').href = `intensity/${selectedId}.png`;
-    get('intensityMetric').disabled = false;
+    get('intensityMetrics').disabled = false;
     showFrame(current);
   }
 
   function init(options) {
     onSeek = options.onSeek;
-    get('intensityMetric').addEventListener('change', draw);
+    get('intensityMetrics').addEventListener('change', draw);
     window.addEventListener('resize', draw);
     fetch('intensity/data.json?v=20261102', {cache: 'no-store'})
       .then(response => {if (!response.ok) throw new Error(response.status); return response.json();})
