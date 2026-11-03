@@ -24,6 +24,34 @@ values. Plot selections do not change the displayed test scene.
 Category tabs load their own scene images when selected. Absolute errors remain
 visible below reconstructions; the uncertainty section starts collapsed.
 
+Reconstruction comparisons use one full-width row per model, with clean-trained
+and generalized results beside each other. Sensor inputs and ground truth are
+smaller reference thumbnails. “Uneven pixel response” is the display name for
+the existing `fixed_pattern` gain-and-offset modification; its parameters and
+stored condition ID are unchanged.
+
+Every graph has numeric axis ticks, a written scale, units, and a model key:
+QUTCC is solid; Im2im is dashed. Mobile graphs use a smaller coordinate system
+to keep tick labels readable. Uncheck “Zoom vertical scales” to use the full
+SSIM, coverage, and width ranges instead of fitting the selected curves.
+
+Below validation SSIM/PSNR, the same condition checkboxes control calibration
+interval width and independent test coverage against training epoch. Saved
+checkpoints are evaluated every 10 epochs. Each checkpoint has one global
+calibration fit targeting 90% on the original 3,000-scene mixture, shared by all
+conditions. Width is measured on that calibration split. Test coverage uses all
+2,000 separate test scenes per displayed condition. Exposure combines both gains
+equally; Average weights each of the ten training families equally.
+
+`interval-curves.json` contains verified results only and reports progress out
+of twenty model/checkpoint evaluations. Dots mark measured checkpoints; lines
+join adjacent completed 10-epoch measurements and leave gaps where evaluations
+are missing. Failed calibration targets remain marked rather than discarded.
+The 90% test-coverage reference does not imply guaranteed conditional or test
+coverage. Epoch-100 test results reuse the original exact-checkpoint evaluation;
+calibration-width audits are newly measured. Small floating-point audit
+differences are bounded by the export verifier.
+
 The histories logged exposure as one family mixing gains 0.50 and 1.50, so its
 learning curve combines them. The test-scene viewer displays the gains
 separately. Historical clean-trained baselines did not record the same
@@ -38,3 +66,8 @@ Reproduction tools in `../tools/`:
 - `build_exp4_learning.py`: history validation and learning-data export.
 - `test_exp4_learning.py`: cohort, completeness, and averaging checks.
 - `verify_video_intensity.py`: browser checks covering this page and the videos.
+- `evaluate_exp4_epoch_intervals.py`: frozen-checkpoint calibration and evaluation.
+- `build_exp4_interval_curves.py`: receipt, cohort, and weighting verification.
+- `test_exp4_interval_curves.py`: exposure weighting and calibration/test checks.
+- `publish_exp4_interval_curves.py`: collect results and publish just the interval
+  JSON from an isolated checkout, exiting after all measurements are live.

@@ -4,10 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Exp 4 · Generalized inputs · ConvRML</title>
-    <link rel="stylesheet" href="style.css?v=20261103-curves" />
+    <link rel="stylesheet" href="style.css?v=20261103-intervals" />
     <script src="../demo-navigation.js?v=20261103-tabs" defer></script>
-    <script src="learning-curves.js?v=20261103-curves" defer></script>
-    <script src="app.js?v=20261103-curves" defer></script>
+    <script src="learning-curves.js?v=20261103-intervals" defer></script>
+    <script src="app.js?v=20261103-intervals" defer></script>
   </head>
   <body>
     <header>
@@ -59,11 +59,43 @@
           <h2>Learning curves</h2>
           <p id="learningStatus" class="caption">Loading recorded validation history…</p>
           <fieldset id="learningConditions"><legend>Show conditions</legend></fieldset>
+          <label class="learning-zoom"><input id="learningZoom" type="checkbox" checked> Zoom vertical scales to the selected curves</label>
           <div class="learning-grid">
-            <figure><figcaption>Validation SSIM · higher is better</figcaption><svg id="learning-ssim" viewBox="0 0 600 340" role="img" aria-label="Validation SSIM by epoch"></svg><div id="learning-values-ssim" class="learning-values"></div></figure>
-            <figure><figcaption>Validation PSNR · higher is better</figcaption><svg id="learning-psnr" viewBox="0 0 600 340" role="img" aria-label="Validation PSNR by epoch"></svg><div id="learning-values-psnr" class="learning-values"></div></figure>
+            <figure>
+              <figcaption>Validation SSIM · higher is better</figcaption>
+              <div class="curve-model-key"><span class="solid">QUTCC · solid</span><span class="dashed">Im2im · dashed</span></div>
+              <p id="learning-scale-ssim" class="curve-scale"></p>
+              <svg id="learning-ssim" role="img" aria-label="Validation SSIM by training epoch"></svg>
+              <div id="learning-values-ssim" class="learning-values" aria-live="off"></div>
+            </figure>
+            <figure>
+              <figcaption>Validation PSNR · higher is better</figcaption>
+              <div class="curve-model-key"><span class="solid">QUTCC · solid</span><span class="dashed">Im2im · dashed</span></div>
+              <p id="learning-scale-psnr" class="curve-scale"></p>
+              <svg id="learning-psnr" role="img" aria-label="Validation PSNR in dB by training epoch"></svg>
+              <div id="learning-values-psnr" class="learning-values" aria-live="off"></div>
+            </figure>
           </div>
           <p class="caption">These curves show generalized training. The historical clean-trained models did not record the same per-corruption validation panel. Hover for exact values. <a href="learning-data.json">Download learning history</a>.</p>
+          <h3>Calibrated intervals across training</h3>
+          <p id="intervalStatus" class="caption">Loading checkpoint evaluations…</p>
+          <div class="learning-grid interval-grid">
+            <figure>
+              <figcaption>Calibration interval width · same 0–1 intensity units as the images</figcaption>
+              <div class="curve-model-key"><span class="solid">QUTCC · solid</span><span class="dashed">Im2im · dashed</span></div>
+              <p id="learning-scale-calibration_width" class="curve-scale"></p>
+              <svg id="learning-calibration_width" role="img" aria-label="Calibration interval width by training epoch"></svg>
+              <div id="learning-values-calibration_width" class="learning-values" aria-live="off"></div>
+            </figure>
+            <figure>
+              <figcaption>Test coverage · percent of target values inside the interval</figcaption>
+              <div class="curve-model-key"><span class="solid">QUTCC · solid</span><span class="dashed">Im2im · dashed</span></div>
+              <p id="learning-scale-test_coverage" class="curve-scale"></p>
+              <svg id="learning-test_coverage" role="img" aria-label="Test coverage in percent by training epoch"></svg>
+              <div id="learning-values-test_coverage" class="learning-values" aria-live="off"></div>
+            </figure>
+          </div>
+          <p class="caption">The same condition checkboxes control all four graphs. Intervals are evaluated every 10 epochs, using 3,000 calibration scenes and 2,000 separate test scenes per displayed condition. Only measured points are shown; missing epochs are not joined. The 90% line is a reference, not a guarantee for each condition. <a href="interval-curves.json">Download interval curves</a>.</p>
         </section>
         <div id="tab-panels"></div>
         <details class="methods">

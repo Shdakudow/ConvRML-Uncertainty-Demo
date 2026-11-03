@@ -30,7 +30,7 @@
     },
     {
       "id": "fixed_pattern",
-      "label": "Fixed-pattern noise"
+      "label": "Uneven pixel response"
     },
     {
       "id": "gaussian_blur",

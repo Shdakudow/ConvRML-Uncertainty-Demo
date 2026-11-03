@@ -1,0 +1,185 @@
+{
+  "schema": "exp4_interval_curves_v1",
+  "methods": {
+    "qutcc": {
+      "label": "QUTCC",
+      "history": [
+        {
+          "epoch": 100,
+          "mean": {
+            "calibration_width": 0.16369161724826942,
+            "calibration_coverage": 0.9004978257887517,
+            "test_coverage": 0.9000991249892861,
+            "test_width": 0.16518652913632104
+          },
+          "conditions": {
+            "clean": {
+              "calibration_width": 0.12036084977909922,
+              "calibration_coverage": 0.8835447959533608,
+              "test_coverage": 0.8861153232455253,
+              "test_width": 0.12166267518233508
+            },
+            "gaussian": {
+              "calibration_width": 0.15196238158270717,
+              "calibration_coverage": 0.912783573388203,
+              "test_coverage": 0.9078823429942131,
+              "test_width": 0.1518461378039792
+            },
+            "poisson": {
+              "calibration_width": 0.14547403727968533,
+              "calibration_coverage": 0.9042213906035665,
+              "test_coverage": 0.9024450644552707,
+              "test_width": 0.14774225133610888
+            },
+            "poisson_gaussian": {
+              "calibration_width": 0.1639461520438393,
+              "calibration_coverage": 0.9057212448559671,
+              "test_coverage": 0.9034400961995125,
+              "test_width": 0.1665018568178639
+            },
+            "exposure": {
+              "calibration_width": 0.12844534266740082,
+              "calibration_coverage": 0.8902028206447188,
+              "test_coverage": 0.8887533435039222,
+              "test_width": 0.12639658344734925
+            },
+            "dead_pixels": {
+              "calibration_width": 0.19106910437966387,
+              "calibration_coverage": 0.9118321673525377,
+              "test_coverage": 0.9121957458853721,
+              "test_width": 0.18446911515807732
+            },
+            "fixed_pattern": {
+              "calibration_width": 0.12188949895401796,
+              "calibration_coverage": 0.8806493998628258,
+              "test_coverage": 0.8837841634005308,
+              "test_width": 0.12628103613154962
+            },
+            "gaussian_blur": {
+              "calibration_width": 0.11854421162046493,
+              "calibration_coverage": 0.8958129886831275,
+              "test_coverage": 0.8931349523440003,
+              "test_width": 0.1219143049758859
+            },
+            "resolution": {
+              "calibration_width": 0.3153274404630065,
+              "calibration_coverage": 0.9164671896433471,
+              "test_coverage": 0.9155719899982214,
+              "test_width": 0.318232695652172
+            },
+            "jpeg": {
+              "calibration_width": 0.1798971537128091,
+              "calibration_coverage": 0.9037426868998628,
+              "test_coverage": 0.907668227866292,
+              "test_width": 0.18681863485788927
+            }
+          },
+          "calibration_status": "fitted",
+          "calibration_target_met": true,
+          "calibration_failure": null,
+          "checkpoint_sha256": "a8c8b4867999d565b79aecf7dcbb4f03de8ce1b7739f4a3dda8c869803592d6a"
+        }
+      ]
+    },
+    "im2im": {
+      "label": "Im2im",
+      "history": [
+        {
+          "epoch": 100,
+          "mean": {
+            "calibration_width": 0.14913004467481125,
+            "calibration_coverage": 0.9000009893689984,
+            "test_coverage": 0.8994426653083414,
+            "test_width": 0.1505103265079437
+          },
+          "conditions": {
+            "clean": {
+              "calibration_width": 0.10956163924808303,
+              "calibration_coverage": 0.8829516546639232,
+              "test_coverage": 0.886816087782383,
+              "test_width": 0.11131699880585075
+            },
+            "gaussian": {
+              "calibration_width": 0.14199328543618323,
+              "calibration_coverage": 0.9123090534979423,
+              "test_coverage": 0.9090879778712988,
+              "test_width": 0.1427520116204396
+            },
+            "poisson": {
+              "calibration_width": 0.1369655482408901,
+              "calibration_coverage": 0.9098294581618656,
+              "test_coverage": 0.908342902764678,
+              "test_width": 0.13863131502550094
+            },
+            "poisson_gaussian": {
+              "calibration_width": 0.15478927712887525,
+              "calibration_coverage": 0.914161908436214,
+              "test_coverage": 0.9145462983399629,
+              "test_width": 0.15837362840399147
+            },
+            "exposure": {
+              "calibration_width": 0.1184151360951364,
+              "calibration_coverage": 0.8861101766117969,
+              "test_coverage": 0.8841576885469258,
+              "test_width": 0.11611734041897581
+            },
+            "dead_pixels": {
+              "calibration_width": 0.16648862206687529,
+              "calibration_coverage": 0.9101301697530865,
+              "test_coverage": 0.9103988500833511,
+              "test_width": 0.1612796582034789
+            },
+            "fixed_pattern": {
+              "calibration_width": 0.11305692311997215,
+              "calibration_coverage": 0.8835324845679012,
+              "test_coverage": 0.8821814113259315,
+              "test_width": 0.11659822131507099
+            },
+            "gaussian_blur": {
+              "calibration_width": 0.10911247992577652,
+              "calibration_coverage": 0.8962986711248285,
+              "test_coverage": 0.8916945766881108,
+              "test_width": 0.11151162177789957
+            },
+            "resolution": {
+              "calibration_width": 0.2682173435886701,
+              "calibration_coverage": 0.8994562671467764,
+              "test_coverage": 0.8979031465947628,
+              "test_width": 0.26970092492131514
+            },
+            "jpeg": {
+              "calibration_width": 0.17270019189765057,
+              "calibration_coverage": 0.9052300497256516,
+              "test_coverage": 0.909297713086009,
+              "test_width": 0.17882154458691366
+            }
+          },
+          "calibration_status": "fitted",
+          "calibration_target_met": true,
+          "calibration_failure": null,
+          "checkpoint_sha256": "b1c6269732ba61e145de8ed3026bc995745eef56e85a1cb2597fbd791159bca6"
+        }
+      ]
+    }
+  },
+  "expected_epochs": [
+    10,
+    20,
+    30,
+    40,
+    50,
+    60,
+    70,
+    80,
+    90,
+    100
+  ],
+  "completed": 2,
+  "expected": 20,
+  "complete": false,
+  "calibration_count": 3000,
+  "test_count_per_condition": 2000,
+  "reference_sha256": "53b0e596b0e5f036684185e5fb2854cd436890e45e68eb3da226d46b8253b197",
+  "manifest_sha256": "155670232c27b3201582f5a1b67fb4196e8123e40f388d9c951df4418f7144fb",
+  "definition": "Each saved checkpoint is calibrated once on the same 3,000-scene mixture. Calibration width uses that split; test coverage uses all 2,000 independent test scenes per displayed condition. Average weights each of ten training families equally; exposure averages gains 0.50 and 1.50. Calibration is never fitted per condition or on test images."
+}

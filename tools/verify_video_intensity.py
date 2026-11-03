@@ -593,6 +593,34 @@ def main():
             "[...document.querySelectorAll('#learning-ssim polyline, #learning-psnr polyline')].every(e=>e.getAttribute('points').split(' ').length===100)"
         )
         learning = json.loads((ROOT / "experiment4/learning-data.json").read_text())
+        interval_data = json.loads(
+            (ROOT / "experiment4/interval-curves.json").read_text()
+        )
+        wait_for(
+            "document.querySelector('#intervalStatus').textContent.includes('checkpoint evaluations complete')"
+        )
+        for metric in ("ssim", "psnr", "calibration_width", "test_coverage"):
+            assert js(
+                f"document.querySelector('#learning-{metric}').textContent.includes('Training epoch')"
+            )
+            assert js(
+                f"document.querySelector('#learning-scale-{metric}').textContent.startsWith('Scale: ')"
+            )
+            assert js(
+                f"document.querySelector('#learning-{metric}').parentElement.querySelector('.curve-model-key').textContent.includes('Im2im · dashed')"
+            )
+        assert js(
+            "document.querySelector('#learning-scale-psnr').textContent.includes('dB')"
+        )
+        assert js(
+            "document.querySelector('#learning-scale-test_coverage').textContent.includes('%')"
+        )
+        assert (
+            js(
+                "document.querySelector('#learningConditions input[value=fixed_pattern]').parentElement.textContent"
+            )
+            == "Uneven pixel response"
+        )
         for method in ("qutcc", "im2im"):
             score = learning["methods"][method]["history"][-1]["mean"]["ssim"]
             assert f"{score:.4f}" in js(
@@ -602,8 +630,27 @@ def main():
             "document.querySelector('#learningConditions input[value=gaussian]').click()"
         )
         assert js("document.querySelectorAll('#learning-ssim polyline').length") == 4
+        for metric in ("calibration_width", "test_coverage"):
+            assert (
+                js(
+                    f"document.querySelectorAll('#learning-{metric} circle[data-epoch]').length"
+                )
+                == 2 * interval_data["completed"]
+            )
         js("document.querySelector('#learningConditions input[value=average]').click()")
         assert js("document.querySelectorAll('#learning-ssim polyline').length") == 2
+        for metric in ("calibration_width", "test_coverage"):
+            assert js(
+                f"[...document.querySelectorAll('#learning-{metric} circle[data-epoch]')].every(e=>e.dataset.condition==='gaussian')"
+            )
+        js("document.querySelector('#learningZoom').click()")
+        assert "0.000–1.000" in js(
+            "document.querySelector('#learning-scale-ssim').textContent"
+        )
+        assert "0.0–100.0%" in js(
+            "document.querySelector('#learning-scale-test_coverage').textContent"
+        )
+        js("document.querySelector('#learningZoom').click()")
         assert js(
             "[...document.querySelectorAll('#learning-ssim polyline')].every(e=>e.dataset.condition==='gaussian')"
         )
@@ -636,6 +683,9 @@ def main():
                 == 1
             )
         js("document.querySelector('#tab-gaussian').click()")
+        assert js(
+            "document.querySelector('#panel-gaussian .reconstructions img').getBoundingClientRect().width > document.querySelector('#panel-gaussian .inputs img').getBoundingClientRect().width * 1.2"
+        )
         js(
             "document.querySelector('#scene').value='1';document.querySelector('#scene').dispatchEvent(new Event('change'))"
         )
@@ -670,6 +720,14 @@ def main():
                 )
                 time.sleep(0.3)
                 assert js("document.documentElement.scrollWidth<=window.innerWidth+1")
+                if section == "learningCurves":
+                    assert js(
+                        "document.querySelector('#learning-ssim').getBoundingClientRect().width / document.querySelector('#learning-ssim').viewBox.baseVal.width * 14 >= 11"
+                    )
+                else:
+                    assert js(
+                        "document.querySelector('#panel-gaussian .reconstructions img').getBoundingClientRect().width > document.querySelector('#panel-gaussian .inputs img').getBoundingClientRect().width * 1.2"
+                    )
                 shot = call(
                     "Page.captureScreenshot", dict(format="png", fromSurface=True)
                 )

@@ -29,7 +29,7 @@
     exposure_050: "Half exposure",
     exposure_150: "Higher exposure",
     dead_pixels: "Dead pixels",
-    fixed_pattern: "Fixed pattern",
+    fixed_pattern: "Uneven pixel response",
     gaussian_blur: "Blur",
     resolution: "Resolution",
     jpeg: "JPEG",
@@ -76,7 +76,7 @@
   }
 
   function pairs(kind = "prediction") {
-    const grid = el("div", undefined, `model-grid${kind === "width" ? " maps" : kind === "error" ? " errors" : ""}`);
+    const grid = el("div", undefined, `model-grid${kind === "width" ? " maps" : kind === "error" ? " errors" : " reconstructions"}`);
     for (const method of ["qutcc", "im2im"]) {
       const pair = el("div", undefined, "pair");
       pair.append(el("h3", method === "qutcc" ? "QUTCC" : "Im2im"));
@@ -399,6 +399,10 @@
     if (!response.ok)
       throw new Error(`Results could not be loaded (${response.status})`);
     data = await response.json();
+    // Keep the stored condition ID and scientific results intact.
+    const pixelResponse = data.conditions.find(condition => condition.id === "fixed_pattern");
+    pixelResponse.title = "Uneven pixel response";
+    pixelResponse.description = "Make some pixels slightly more or less sensitive, with small brightness offsets.";
     const errorResponse = await fetch("error-maps.json");
     if (!errorResponse.ok) throw new Error("Absolute-error maps could not be loaded");
     errorData = await errorResponse.json();
