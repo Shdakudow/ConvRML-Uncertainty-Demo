@@ -671,8 +671,12 @@ def main():
         )
         assert js("document.querySelector('#scene').value") == "0"
         assert js("document.querySelectorAll('img[data-kind=error]').length") == 48
-        assert js(
-            "[...document.querySelectorAll('.uncertainty-details')].every(e=>!e.open)"
+        assert js("document.querySelectorAll('.uncertainty-details').length") == 0
+        assert (
+            js(
+                "document.querySelectorAll('.uncertainty-section img[data-kind=width]').length"
+            )
+            == 48
         )
         # The current layout loads assets only for the active category tab.
         results = json.loads((ROOT / "experiment4/data.json").read_text())
@@ -695,6 +699,12 @@ def main():
         assert js(
             "document.querySelector('#panel-gaussian .reconstructions img').getBoundingClientRect().width > document.querySelector('#panel-gaussian .inputs img').getBoundingClientRect().width * 1.2"
         )
+        assert js(
+            "document.querySelector('#panel-gaussian .maps img').getBoundingClientRect().width > document.querySelector('#panel-gaussian .reconstructions img').getBoundingClientRect().width"
+        )
+        assert js(
+            "document.querySelector('#panel-gaussian .errors img').getBoundingClientRect().width > document.querySelector('#panel-gaussian .reconstructions img').getBoundingClientRect().width"
+        )
         js(
             "document.querySelector('#scene').value='1';document.querySelector('#scene').dispatchEvent(new Event('change'))"
         )
@@ -704,7 +714,6 @@ def main():
         assert js(
             "[...document.querySelectorAll('#panel-gaussian img[data-kind=error]')].every(e=>e.src.endsWith('/001.png'))"
         )
-        js("document.querySelector('#panel-gaussian details').open=true")
         wait_for(
             "document.querySelectorAll('#panel-gaussian img[data-kind=width]').length===4"
         )
@@ -714,7 +723,123 @@ def main():
         wait_for(
             "[...document.querySelectorAll('#panel-gaussian img[data-kind=width]')].every(e=>e.complete && e.naturalWidth===480)"
         )
-        js("document.querySelector('#learningConditions input[value=average]').click()")
+        # All batch assets and scores must use each card's scene, rather than
+        # accidentally reusing the single-scene selection for every card.
+        js("document.querySelector('#batchToggle').click()")
+        wait_for("document.querySelectorAll('#batchScenes .batch-card').length===4")
+        assert js(
+            "!document.querySelector('#batchInspector').hidden && !document.querySelector('#batchControls').hidden"
+        )
+        assert js(
+            "[...document.querySelectorAll('#tab-panels > section')].every(e=>e.hidden)"
+        )
+        assert js(
+            "[...document.querySelectorAll('#batchScenes .batch-card')].map(e=>Number(e.dataset.scene))"
+        ) == [0, 1, 2, 3]
+        arms = [
+            "qutcc_clean50",
+            "qutcc_general100",
+            "im2im_clean50",
+            "im2im_general100",
+        ]
+        for scene_index in range(4):
+            assert results["ids"][scene_index] in js(
+                f"document.querySelector('#batchScenes [data-scene=\"{scene_index}\"] h3').textContent"
+            )
+            for row_index, arm in enumerate(arms):
+                actual = js(
+                    f"document.querySelector('#batchScenes [data-scene=\"{scene_index}\"] tbody').rows[{row_index}].cells[2].textContent"
+                )
+                assert (
+                    actual
+                    == f"{results['results']['gaussian']['arms'][arm]['examples'][scene_index]['ssim']:.4f}"
+                )
+        for kind in ("error", "width"):
+            js(
+                f"document.querySelector('#batchKind').value='{kind}';document.querySelector('#batchKind').dispatchEvent(new Event('change'))"
+            )
+            assert (
+                js(
+                    f"document.querySelectorAll('#batchScenes img[data-kind={kind}]').length"
+                )
+                == 16
+            )
+            js(
+                "document.querySelectorAll('#batchScenes img').forEach(e=>e.loading='eager')"
+            )
+            wait_for(
+                "[...document.querySelectorAll('#batchScenes img')].every(e=>e.complete && e.naturalWidth===480)"
+            )
+            assert js("!document.querySelector('#batchLegend').hidden")
+        js(
+            "document.querySelector('#batchSize').value='6';document.querySelector('#batchSize').dispatchEvent(new Event('change'));document.querySelector('#next').click()"
+        )
+        assert js(
+            "[...document.querySelectorAll('#batchScenes .batch-card')].map(e=>Number(e.dataset.scene))"
+        ) == list(range(6, 12))
+        js(
+            "document.querySelector('#scene').value='49';document.querySelector('#scene').dispatchEvent(new Event('change'))"
+        )
+        assert js(
+            "[...document.querySelectorAll('#batchScenes .batch-card')].map(e=>Number(e.dataset.scene))"
+        ) == [48, 49]
+        assert js("document.querySelector('#next').disabled")
+        assert js("document.querySelector('#counter').textContent") == "49–50 / 50"
+        js(
+            "document.querySelector('#previous').click();document.querySelector('#batchSize').value='2';document.querySelector('#batchSize').dispatchEvent(new Event('change'));document.querySelector('#tab-exposure_150').click()"
+        )
+        assert js(
+            "[...document.querySelectorAll('#batchScenes .batch-card')].map(e=>Number(e.dataset.scene))"
+        ) == [42, 43]
+        assert js(
+            "[...document.querySelectorAll('#batchScenes img[data-kind=width]')].every(e=>e.src.includes('/images/exposure_150/'))"
+        )
+        assert js("new URL(location.href).searchParams.get('view')") == "batch"
+        call("Page.reload")
+        wait_for(
+            "document.querySelectorAll('#batchScenes .batch-card').length===2 && !document.querySelector('#batchInspector').hidden"
+        )
+        assert js("document.querySelector('#batchKind').value") == "width"
+        assert js("document.querySelector('#batchSize').value") == "2"
+        for layout, width, height in [("desktop", 1440, 1100), ("mobile", 390, 844)]:
+            call(
+                "Emulation.setDeviceMetricsOverride",
+                dict(
+                    width=width, height=height, deviceScaleFactor=1, mobile=width < 500
+                ),
+            )
+            js(
+                "document.querySelectorAll('#batchScenes img').forEach(e=>e.loading='eager');document.querySelector('#batchInspector').scrollIntoView({behavior:'instant'})"
+            )
+            wait_for(
+                "[...document.querySelectorAll('#batchScenes img')].every(e=>e.complete && e.naturalWidth===480)"
+            )
+            assert js("document.documentElement.scrollWidth<=innerWidth+1")
+            assert js(
+                "document.querySelector('#batchTitle').getBoundingClientRect().top >= document.querySelector('.workspace-toolbar').getBoundingClientRect().bottom"
+            )
+            shot = call("Page.captureScreenshot", dict(format="png", fromSurface=True))
+            (work / f"exp4-batch-{layout}.png").write_bytes(
+                base64.b64decode(shot["data"])
+            )
+        js("document.querySelector('#batchScenes [data-scene=\"43\"] button').click()")
+        assert js(
+            "document.querySelector('#batchInspector').hidden && !document.querySelector('#panel-exposure_150').hidden"
+        )
+        assert js("document.querySelector('#scene').value") == "43"
+        assert js(
+            "[...document.querySelectorAll('#panel-exposure_150 img[data-kind=width]')].every(e=>e.src.endsWith('/043-width.png'))"
+        )
+        assert js("!new URL(location.href).searchParams.has('view')")
+        js("history.back()")
+        wait_for("!document.querySelector('#batchInspector').hidden")
+        assert js("document.querySelectorAll('#batchScenes .batch-card').length") == 2
+        js(
+            "document.querySelector('#batchToggle').click();document.querySelector('#tab-gaussian').click()"
+        )
+        js(
+            "for(const id of ['average','gaussian']){const input=document.querySelector('#learningConditions input[value='+id+']');input.checked=true;input.dispatchEvent(new Event('change'));}"
+        )
         for layout, width, height in [("desktop", 1440, 1100), ("mobile", 390, 844)]:
             call(
                 "Emulation.setDeviceMetricsOverride",
@@ -743,9 +868,22 @@ def main():
                 (work / f"exp4-{section}-{layout}.png").write_bytes(
                     base64.b64decode(shot["data"])
                 )
+                if section == "panel-gaussian":
+                    for class_name in ("errors", "uncertainty-section"):
+                        js(
+                            f"document.querySelector('#panel-gaussian .{class_name}').scrollIntoView({{behavior:'instant'}})"
+                        )
+                        time.sleep(0.15)
+                        shot = call(
+                            "Page.captureScreenshot",
+                            dict(format="png", fromSurface=True),
+                        )
+                        (work / f"exp4-{class_name}-{layout}.png").write_bytes(
+                            base64.b64decode(shot["data"])
+                        )
         assert not errors, errors
         print(
-            "PASS: side-by-side aligned plots; Spearman/Pearson checkbox combinations; both plots seek correctly; mobile stacking; 5 videos and 10 captures; exact correlations and pixel sets; moving synchronized overlays without sidecar downloads; playback toggles and speed; Exp4 error maps for all conditions and scene changes; 100-epoch learning curves and category checkboxes; desktop/mobile layout; no JavaScript errors."
+            "PASS: video plots and moving overlays; exact correlations and pixel sets; Exp4 scene-specific maps and metrics; learning/interval controls and scales; larger visible uncertainty/error maps; batch sizes 2/4/6, final-page bounds, category changes, map switching, scene opening, URL reload and browser back; desktop/mobile layout; no JavaScript errors."
         )
     finally:
         if ws:

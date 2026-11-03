@@ -4,10 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Exp 4 · Generalized inputs · ConvRML</title>
-    <link rel="stylesheet" href="style.css?v=20261103-intervals" />
+    <link rel="stylesheet" href="style.css?v=20261103-batches" />
     <script src="../demo-navigation.js?v=20261103-tabs" defer></script>
     <script src="learning-curves.js?v=20261103-intervals" defer></script>
-    <script src="app.js?v=20261103-intervals" defer></script>
+    <script src="app.js?v=20261103-batches" defer></script>
   </head>
   <body>
     <header>
@@ -51,6 +51,15 @@
             <div class="buttons">
               <button id="previous" aria-label="Previous scene">←</button
               ><button id="next" aria-label="Next scene">→</button>
+            </div>
+            <button id="batchToggle" type="button" aria-pressed="false" aria-controls="batchInspector">Inspect a batch</button>
+            <div id="batchControls" class="batch-controls" hidden>
+              <label>Scenes per batch
+                <select id="batchSize"><option value="2">2</option><option value="4" selected>4</option><option value="6">6</option></select>
+              </label>
+              <label>Show
+                <select id="batchKind"><option value="prediction">Reconstructions</option><option value="error">Absolute error</option><option value="width">Uncertainty maps</option></select>
+              </label>
             </div>
             <span id="counter"></span>
           </div>
@@ -96,6 +105,12 @@
             </figure>
           </div>
           <p class="caption">The same condition checkboxes control all four graphs. Intervals are evaluated every 10 epochs, using 3,000 calibration scenes and 2,000 separate test scenes per displayed condition. Only measured points are shown; missing epochs are not joined. The 90% line is a reference, not a guarantee for each condition. <a href="interval-curves.json">Download interval curves</a>.</p>
+        </section>
+        <section id="batchInspector" class="batch-inspector" role="tabpanel" hidden>
+          <h2 id="batchTitle">Inspect a batch</h2>
+          <p class="caption">Compare the same scenes across all four models. Category tabs change the input modification for the whole batch. Open any scene for the full comparison.</p>
+          <div id="batchLegend" class="legend" hidden></div>
+          <div id="batchScenes" class="batch-scenes"></div>
         </section>
         <div id="tab-panels"></div>
         <details class="methods">

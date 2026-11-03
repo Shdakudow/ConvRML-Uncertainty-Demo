@@ -3,7 +3,7 @@
 The scene viewer compares clean-trained epoch-50 and generalized epoch-100
 QUTCC and Im2im models on the same 50 displayed test scenes. Predictions and
 metrics in `data.json` retain their original export. Uncertainty maps and
-metrics load when their section is expanded.
+metrics are visible directly in the active category.
 
 Absolute-error maps show the RGB mean of `|clip(prediction, 0, 1) − target|`,
 computed before display quantization. Every map uses the same 0–1 color scale.
@@ -22,13 +22,24 @@ for QUTCC and orange for Im2im; category colors match their checkbox borders. Ho
 values. Plot selections do not change the displayed test scene.
 
 Category tabs load their own scene images when selected. Absolute errors remain
-visible below reconstructions; the uncertainty section starts collapsed.
+visible below reconstructions, followed by uncertainty maps and metrics.
 
-Reconstruction comparisons use one full-width row per model, with clean-trained
+Reconstruction comparisons use one row per model, with clean-trained
 and generalized results beside each other. Sensor inputs and ground truth are
-smaller reference thumbnails. “Uneven pixel response” is the display name for
+reference images. Uncertainty and absolute-error maps have wider rows than
+reconstructions. “Uneven pixel response” is the display name for
 the existing `fixed_pattern` gain-and-offset modification; its parameters and
 stored condition ID are unchanged.
+
+“Inspect a batch” browses 2, 4, or 6 adjacent exported scenes together, defaulting
+to four. Category tabs apply the same input condition to every card. The Show
+selector switches the entire batch between reconstructions, absolute error,
+and uncertainty. Each card includes its own scene metrics and an Open scene
+button for the full comparison. Previous/next buttons page through batches;
+the scene selector jumps to the batch containing that scene. Batch size,
+displayed map, category, and selected scene are preserved in the URL, including
+reload and browser back/forward. The final batch contains the remaining scenes
+rather than wrapping around. Overview batches use the clean reference.
 
 Every graph has numeric axis ticks, a written scale, units, and a model key:
 QUTCC is solid; Im2im is dashed. Mobile graphs use a smaller coordinate system
