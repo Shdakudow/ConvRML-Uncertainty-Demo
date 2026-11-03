@@ -751,142 +751,105 @@ def main():
         wait_for(
             "[...document.querySelectorAll('#panel-gaussian img[data-kind=width]')].every(e=>e.complete && e.naturalWidth===480)"
         )
-        # Patch inspection must select the same source pixels in every model,
-        # without cropping the lensless sensor inputs or changing scene metrics.
-        js("document.querySelector('#patchToggle').click()")
-        wait_for("!document.querySelector('#patchInspector').hidden")
-        assert js("document.querySelector('#batchToggle')===null")
+        # The existing square locator should mark a pixel without opening a
+        # panel, changing image dimensions, cropping, or altering the metrics.
+        assert js(
+            "document.querySelector('#patchToggle')===null && document.querySelector('#patchInspector')===null"
+        )
+        before_images = js(
+            "[...document.querySelectorAll('#panel-gaussian img')].map(e=>[e.src,e.getBoundingClientRect().width,e.getBoundingClientRect().height])"
+        )
+        before_metrics = js(
+            "document.querySelector('#panel-gaussian .scene-metrics').textContent"
+        )
+        js(
+            "document.querySelector('#panel-gaussian .reconstructions img').scrollIntoView({behavior:'instant',block:'center'})"
+        )
+        wait_for(
+            "document.querySelector('#panel-gaussian .reconstructions img').complete && document.querySelector('#panel-gaussian .reconstructions img').naturalWidth===480"
+        )
+
+        def click_image(selector, x, y):
+            js(
+                f"document.querySelector('{selector}').scrollIntoView({{behavior:'instant',block:'center'}})"
+            )
+            coordinates = js(
+                f"(()=>{{const b=document.querySelector('{selector}').getBoundingClientRect(),s=Math.min(b.width/480,b.height/270);return [b.left+(b.width-480*s)/2+({x}+.5)*s,b.top+(b.height-270*s)/2+({y}+.5)*s]}})()"
+            )
+            js(
+                "window.locatorExpected=null;document.addEventListener('click',event=>window.locatorExpected=HeatmapPixels.pointAt(event.target,event,480,270),{once:true,capture:true})"
+            )
+            call(
+                "Input.dispatchMouseEvent",
+                dict(
+                    type="mousePressed",
+                    x=coordinates[0],
+                    y=coordinates[1],
+                    button="left",
+                    buttons=1,
+                    clickCount=1,
+                ),
+            )
+            call(
+                "Input.dispatchMouseEvent",
+                dict(
+                    type="mouseReleased",
+                    x=coordinates[0],
+                    y=coordinates[1],
+                    button="left",
+                    buttons=0,
+                    clickCount=1,
+                ),
+            )
+            point = js("window.locatorExpected")
+            assert point is not None
+            return f"{point['x']},{point['y']}"
+
+        expected_point = click_image("#panel-gaussian .reconstructions img", 100, 90)
         assert (
-            js("document.querySelectorAll('#panel-gaussian .patch-cropped').length")
+            js(
+                "document.querySelectorAll('#panel-gaussian .image-locator-marker').length"
+            )
             == 13
         )
-        assert js("new URL(location.href).searchParams.get('patch')") == "192,87,96,96"
-        js(
-            "for(const [key,value] of Object.entries({x:100,y:60,width:80,height:48}))document.querySelector('[data-patch-field='+key+']').value=value;document.querySelector('[data-patch-field=width]').dispatchEvent(new Event('change'))"
-        )
-        assert js("new URL(location.href).searchParams.get('patch')") == "100,60,80,48"
-        assert js(
-            "[...document.querySelectorAll('#panel-gaussian .patch-cropped')].every(e=>e.dataset.patch==='100,60,80,48')"
-        )
-        geometry = """(()=>[...document.querySelectorAll('.condition:not([hidden]) .patch-cropped')].every(v=>{const a=v.getBoundingClientRect(),b=v.querySelector('img').getBoundingClientRect(),[x,y,w,h]=v.dataset.patch.split(',').map(Number);return Math.abs(b.width/(a.width-2*v.clientLeft)-480/w)<.02&&Math.abs(b.height/(a.height-2*v.clientTop)-270/h)<.02&&Math.abs(b.left+x/480*b.width-a.left-v.clientLeft)<1.5&&Math.abs(b.top+y/270*b.height-a.top-v.clientTop)<1.5}))()"""
-        assert js(geometry), js(
-            "[...document.querySelectorAll('.condition:not([hidden]) .patch-cropped')].map(v=>({kind:v.querySelector('img').dataset.kind,viewport:v.getBoundingClientRect().toJSON(),image:v.querySelector('img').getBoundingClientRect().toJSON(),patch:v.dataset.patch}))"
+        assert (
+            js(
+                "[...document.querySelectorAll('#panel-gaussian .image-locator-marker')].map(e=>e.dataset.point)"
+            )
+            == [expected_point] * 13
         )
         assert js(
-            "[...document.querySelectorAll('#panel-gaussian .inputs img')].filter(e=>['original','input'].includes(e.dataset.kind)).every(e=>!e.closest('.patch-viewport'))"
-        )
-        js(
-            "document.querySelector('#patchReferenceStage').scrollIntoView({behavior:'instant',block:'center'})"
-        )
-        coordinates = js(
-            "(()=>{const b=document.querySelector('#patchReference').getBoundingClientRect();return [b.left+20.5/480*b.width,b.top+30.5/270*b.height,b.left+140.5/480*b.width,b.top+90.5/270*b.height]})()"
-        )
-        call(
-            "Input.dispatchMouseEvent",
-            dict(
-                type="mousePressed",
-                x=coordinates[0],
-                y=coordinates[1],
-                button="left",
-                buttons=1,
-                clickCount=1,
-            ),
-        )
-        call(
-            "Input.dispatchMouseEvent",
-            dict(type="mouseMoved", x=coordinates[2], y=coordinates[3], buttons=1),
-        )
-        call(
-            "Input.dispatchMouseEvent",
-            dict(
-                type="mouseReleased",
-                x=coordinates[2],
-                y=coordinates[3],
-                button="left",
-                buttons=0,
-                clickCount=1,
-            ),
-        )
-        assert js("new URL(location.href).searchParams.get('patch')") == "20,30,121,61"
-        assert js(geometry)
-        js(
-            "document.querySelector('#patchReferenceStage').dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',shiftKey:true,bubbles:true}))"
-        )
-        assert js("new URL(location.href).searchParams.get('patch')") == "30,30,121,61"
-        js(
-            "for(const [key,value] of Object.entries({x:9999,y:9999,width:128,height:128}))document.querySelector('[data-patch-field='+key+']').value=value;document.querySelector('[data-patch-field=x]').dispatchEvent(new Event('change'))"
+            "[...document.querySelector('#panel-gaussian .image-locator-marker').children].map(e=>e.getAttribute('stroke'))"
+        ) == ["#ffffff", "#07111b", "#fff200"]
+        assert (
+            js(
+                "[...document.querySelectorAll('#panel-gaussian img')].map(e=>[e.src,e.getBoundingClientRect().width,e.getBoundingClientRect().height])"
+            )
+            == before_images
         )
         assert (
-            js("new URL(location.href).searchParams.get('patch')") == "352,142,128,128"
+            js("document.querySelector('#panel-gaussian .scene-metrics').textContent")
+            == before_metrics
         )
-        js(
-            "document.querySelector('#patchSize').value='64';document.querySelector('#patchSize').dispatchEvent(new Event('change'))"
-        )
-        assert js("new URL(location.href).searchParams.get('patch')") == "384,174,64,64"
-        js(
-            "document.querySelector('#patchSize').value='128';document.querySelector('#patchSize').dispatchEvent(new Event('change'))"
-        )
-        assert (
-            js("new URL(location.href).searchParams.get('patch')") == "352,142,128,128"
+        expected_point = click_image("#panel-gaussian .maps img", 470, 260)
+        assert js(
+            "[...document.querySelectorAll('#panel-gaussian .image-locator-marker')].every(e=>[...e.children].every(r=>Number(r.getAttribute('x'))>=0&&Number(r.getAttribute('y'))>=0&&Number(r.getAttribute('x'))+Number(r.getAttribute('width'))<=480.001&&Number(r.getAttribute('y'))+Number(r.getAttribute('height'))<=270.001))"
         )
         js(
             "document.querySelector('#scene').value='42';document.querySelector('#scene').dispatchEvent(new Event('change'));document.querySelector('#tab-exposure_150').click()"
         )
-        assert js(
-            "[...document.querySelectorAll('#panel-exposure_150 .patch-cropped')].every(e=>e.dataset.patch==='352,142,128,128')"
-        )
-        assert js(
-            "document.querySelector('#patchReference').src.endsWith('/042-target.png')"
-        )
-        call("Page.reload")
-        wait_for(
-            "document.querySelectorAll('#panel-exposure_150 .patch-cropped').length===13 && !document.querySelector('#patchInspector').hidden"
+        assert (
+            js(
+                "[...document.querySelectorAll('#panel-exposure_150 .image-locator-marker')].map(e=>e.dataset.point)"
+            )
+            == [expected_point] * 13
         )
         assert (
-            js("new URL(location.href).searchParams.get('patch')") == "352,142,128,128"
+            js(
+                "document.querySelectorAll('#panel-exposure_150 .inputs .image-locator-marker').length"
+            )
+            == 1
         )
-        js(
-            "document.querySelector('#patchReset').click();document.querySelector('#patchToggle').click()"
-        )
-        assert js(
-            "document.querySelector('#patchInspector').hidden && document.querySelectorAll('.patch-cropped').length===0"
-        )
-        assert js("!new URL(location.href).searchParams.has('patch')")
-        assert js(
-            "[...document.querySelectorAll('#panel-exposure_150 .patch-viewport img')].every(e=>e.style.width===''&&e.style.left==='')"
-        )
-        js(
-            "document.querySelector('#panel-exposure_150 .reconstructions img').scrollIntoView({behavior:'instant',block:'center'})"
-        )
-        wait_for(
-            "document.querySelector('#panel-exposure_150 .reconstructions img').complete && document.querySelector('#panel-exposure_150 .reconstructions img').naturalWidth===480"
-        )
-        click = js(
-            "(()=>{const b=document.querySelector('#panel-exposure_150 .reconstructions img').getBoundingClientRect();return [b.left+100.5/480*b.width,b.top+90.5/270*b.height]})()"
-        )
-        call(
-            "Input.dispatchMouseEvent",
-            dict(
-                type="mousePressed",
-                x=click[0],
-                y=click[1],
-                button="left",
-                buttons=1,
-                clickCount=1,
-            ),
-        )
-        call(
-            "Input.dispatchMouseEvent",
-            dict(
-                type="mouseReleased",
-                x=click[0],
-                y=click[1],
-                button="left",
-                buttons=0,
-                clickCount=1,
-            ),
-        )
-        assert js("new URL(location.href).searchParams.get('patch')") == "52,42,96,96"
         for layout, width, height in [("desktop", 1440, 1100), ("mobile", 390, 844)]:
             call(
                 "Emulation.setDeviceMetricsOverride",
@@ -894,35 +857,52 @@ def main():
                     width=width, height=height, deviceScaleFactor=1, mobile=width < 500
                 ),
             )
-            js(
-                "document.querySelectorAll('#panel-exposure_150 img').forEach(e=>e.loading='eager');document.querySelector('#patchInspector').scrollIntoView({behavior:'instant'})"
+            expected_point = click_image(
+                "#panel-exposure_150 .reconstructions img", 240, 135
             )
-            wait_for(
-                "[...document.querySelectorAll('#panel-exposure_150 img')].every(e=>e.complete && e.naturalWidth===480)"
+            assert (
+                js(
+                    "[...document.querySelectorAll('#panel-exposure_150 .image-locator-marker')].map(e=>e.dataset.point)"
+                )
+                == [expected_point] * 13
             )
-            assert js(geometry)
             assert js("document.documentElement.scrollWidth<=innerWidth+1")
+            assert js(
+                "(()=>{const r=document.querySelector('#panel-exposure_150 .image-locator-marker rect').getBoundingClientRect();return Math.abs(r.width-24)<1&&Math.abs(r.height-24)<1})()"
+            )
             shot = call("Page.captureScreenshot", dict(format="png", fromSurface=True))
-            (work / f"exp4-patch-{layout}.png").write_bytes(
+            (work / f"exp4-locator-{layout}.png").write_bytes(
                 base64.b64decode(shot["data"])
             )
         call("Emulation.setTouchEmulationEnabled", dict(enabled=True, maxTouchPoints=1))
-        js(
-            "document.querySelector('#patchReferenceStage').scrollIntoView({behavior:'instant',block:'center'})"
+        tap = js(
+            "(()=>{const b=document.querySelector('#panel-exposure_150 .reconstructions img').getBoundingClientRect(),s=Math.min(b.width/480,b.height/270);return {x:b.left+(b.width-480*s)/2+200.5*s,y:b.top+(b.height-270*s)/2+110.5*s}})()"
         )
-        touch = js(
-            "(()=>{const b=document.querySelector('#patchReference').getBoundingClientRect();return {x:b.left+250.5/480*b.width,y:b.top+120.5/270*b.height}})()"
+        js(
+            "window.locatorExpected=null;document.addEventListener('click',event=>window.locatorExpected=HeatmapPixels.pointAt(event.target,event,480,270),{once:true,capture:true})"
         )
         call(
             "Input.dispatchTouchEvent",
-            dict(type="touchStart", touchPoints=[dict(id=0, **touch)]),
+            dict(type="touchStart", touchPoints=[dict(id=0, **tap)]),
         )
         call("Input.dispatchTouchEvent", dict(type="touchEnd", touchPoints=[]))
-        assert js("new URL(location.href).searchParams.get('patch')") == "202,72,96,96"
+        wait_for("window.locatorExpected!==null")
+        point = js("window.locatorExpected")
+        assert (
+            js(
+                "[...document.querySelectorAll('#panel-exposure_150 .image-locator-marker')].map(e=>e.dataset.point)"
+            )
+            == [f"{point['x']},{point['y']}"] * 13
+        )
         call("Emulation.setTouchEmulationEnabled", dict(enabled=False))
         js(
-            "document.querySelector('#patchToggle').click();document.querySelector('#tab-gaussian').click()"
+            "document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}))"
         )
+        assert js("document.querySelectorAll('.image-locator-marker').length") == 0
+        assert js(
+            "[...document.querySelectorAll('#panel-exposure_150 img')].every(e=>e.style.width===''&&e.style.height===''&&e.style.left==='')"
+        )
+        js("document.querySelector('#tab-gaussian').click()")
         js(
             "for(const id of ['average','gaussian']){const input=document.querySelector('#learningConditions input[value='+id+']');input.checked=true;input.dispatchEvent(new Event('change'));}"
         )
@@ -969,7 +949,7 @@ def main():
                         )
         assert not errors, errors
         print(
-            "PASS: untinted reconstruction videos and synchronized overlap/rank/width-gap maps; exact correlations and pixel sets; Exp4 maps, metrics, and learning/interval controls; linked patch geometry across all four models; mouse drag/click, presets, bounds, keyboard/touch, scene/category changes, URL reload, and full-image reset; desktop/mobile layout; no JavaScript errors."
+            "PASS: existing video comparisons; Exp4 maps, metrics, and learning controls; the shared square locator matches previous experiments; image sizes/content and metrics stay unchanged; common positions, edge bounds, clearing, mouse/mobile taps; desktop/mobile layout; no JavaScript errors."
         )
     finally:
         if ws:

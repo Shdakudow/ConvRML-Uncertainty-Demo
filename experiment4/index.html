@@ -4,11 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Exp 4 · Generalized inputs · ConvRML</title>
-    <link rel="stylesheet" href="style.css?v=20261103-patches" />
+    <link rel="stylesheet" href="style.css?v=20261103-locator" />
+    <link rel="stylesheet" href="../heatmap-pixels.css?v=20261030selection" />
     <script src="../demo-navigation.js?v=20261103-tabs" defer></script>
     <script src="learning-curves.js?v=20261103-intervals" defer></script>
-    <script src="patch-inspector.js?v=20261103-patches" defer></script>
-    <script src="app.js?v=20261103-patches" defer></script>
+    <script src="../heatmap-pixels.js?v=20261030agreement" defer></script>
+    <script src="image-locator.js?v=20261103-locator" defer></script>
+    <script src="app.js?v=20261103-locator" defer></script>
   </head>
   <body>
     <header>
@@ -53,7 +55,6 @@
               <button id="previous" aria-label="Previous scene">←</button
               ><button id="next" aria-label="Next scene">→</button>
             </div>
-            <button id="patchToggle" type="button" aria-pressed="false" aria-controls="patchInspector">Inspect a patch</button>
             <span id="counter"></span>
           </div>
         </div>
@@ -98,31 +99,6 @@
             </figure>
           </div>
           <p class="caption">The same condition checkboxes control all four graphs. Intervals are evaluated every 10 epochs, using 3,000 calibration scenes and 2,000 separate test scenes per displayed condition. Only measured points are shown; missing epochs are not joined. The 90% line is a reference, not a guarantee for each condition. <a href="interval-curves.json">Download interval curves</a>.</p>
-        </section>
-        <section id="patchInspector" class="patch-inspector" aria-labelledby="patchTitle" hidden>
-          <h2 id="patchTitle">Inspect a patch</h2>
-          <p id="patchScene" class="caption"></p>
-          <p class="caption">Drag a box here or click an image below. The same patch is enlarged in the ground truth, reconstructions, error maps, and uncertainty maps. Sensor inputs and reported metrics stay full-scene.</p>
-          <div class="patch-selector">
-            <figure>
-              <figcaption>Full-scene reference · drag a box to focus</figcaption>
-              <div id="patchReferenceStage" class="patch-reference-stage" tabindex="0" aria-label="Select a patch. Arrow keys move it; Shift and arrow moves ten pixels.">
-                <img id="patchReference" width="480" height="270" alt="Full-scene ground truth with the selected patch outlined" draggable="false">
-              </div>
-            </figure>
-            <div>
-              <div class="patch-fields">
-                <label>Patch size<select id="patchSize"><option value="64">64 × 64</option><option value="96" selected>96 × 96</option><option value="128">128 × 128</option><option value="custom">Custom rectangle</option></select></label>
-                <label>X<input data-patch-field="x" type="number" min="0" max="384" step="1" value="192"></label>
-                <label>Y<input data-patch-field="y" type="number" min="0" max="174" step="1" value="87"></label>
-                <label>Width<input data-patch-field="width" type="number" min="8" max="480" step="1" value="96"></label>
-                <label>Height<input data-patch-field="height" type="number" min="8" max="270" step="1" value="96"></label>
-                <button id="patchReset" type="button">Reset patch</button>
-              </div>
-              <p id="patchCoordinates" class="caption" role="status"></p>
-              <p class="caption">Use arrow keys on the reference to move the box. Hold Shift for larger steps. Choose “Show full images” above to leave patch view.</p>
-            </div>
-          </div>
         </section>
         <div id="tab-panels"></div>
         <details class="methods">

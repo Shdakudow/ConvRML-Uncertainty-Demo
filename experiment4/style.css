@@ -278,21 +278,8 @@ img {
 }
 .uncertainty-section { margin-top: 28px; }
 .map-title { font-size: 16px; margin: 0 0 12px; }
-.patch-inspector { margin-top: 22px; padding: 20px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
-.patch-inspector h2 { margin: 0 0 6px; }
-.patch-selector { display: grid; grid-template-columns: minmax(220px, 420px) minmax(0, 1fr); gap: 24px; align-items: start; }
-.patch-fields { display: flex; align-items: end; flex-wrap: wrap; gap: 12px; }
-.patch-fields input { width: 78px; min-height: 40px; padding: 8px; font: inherit; color: var(--ink); background: var(--field); border: 1px solid var(--line); border-radius: 7px; }
-.patch-viewport, .patch-reference-stage { position: relative; overflow: hidden; aspect-ratio: 16 / 9; border: 1px solid #3f2c52; border-radius: 7px; background: #110b1b; }
-.patch-viewport img, .patch-reference-stage img { width: 100%; height: 100%; border: 0; border-radius: 0; }
-.patch-viewport { cursor: crosshair; touch-action: pan-y; }
-.patch-cropped img { position: absolute; max-width: none; }
-.patch-reference-stage, .patch-active .patch-viewport { touch-action: none; cursor: crosshair; }
-.patch-reference-stage:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-.patch-selection { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
-.patch-selection rect { fill: none; vector-effect: non-scaling-stroke; }
-.patch-outline { stroke: #160f23; stroke-width: 5px; }
-.patch-line { stroke: #ffe392; stroke-width: 2px; }
+.image-locator-stage { position: relative; overflow: hidden; aspect-ratio: 16 / 9; border: 1px solid #3f2c52; border-radius: 7px; background: #110b1b; }
+.image-locator-stage img { width: 100%; height: 100%; border: 0; border-radius: 0; }
 .pair h3 {
   font-size: 15px;
   margin: 0 0 10px;
@@ -470,7 +457,6 @@ a:focus-visible,
     grid-template-columns: 1fr;
     gap: 22px;
   }
-  .patch-selector { grid-template-columns: 1fr; }
 }
 @media (max-width: 540px) {
   header,
@@ -512,7 +498,6 @@ a:focus-visible,
     gap: 9px;
   }
   .condition > .errors .pair-images, .uncertainty-section .pair-images { grid-template-columns: 1fr; }
-  .patch-inspector { padding: 14px; }
   .overview-heading {
     align-items: start;
   }

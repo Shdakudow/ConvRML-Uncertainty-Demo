@@ -37,7 +37,7 @@
   let data, errorData,
     index = 0,
     activeTab = "overview";
-  let patchInspector;
+  let imageLocator;
   const cards = new Map();
   const buttons = new Map();
   const el = (tag, text, className) => {
@@ -76,11 +76,13 @@
     image.addEventListener("error", () => {
       image.alt = `${label} · image unavailable`;
     });
-    if (["target", "prediction", "error", "width"].includes(kind)) {
-      const viewport = el("div", undefined, "patch-viewport");
-      viewport.append(image);
-      node.append(viewport);
-    } else node.append(image);
+    image.draggable = false;
+    if (["original", "input"].includes(kind)) node.append(image);
+    else {
+      const stage = el("div", undefined, "pixel-stage image-locator-stage");
+      stage.append(image);
+      node.append(stage);
+    }
     return node;
   }
 
@@ -223,6 +225,7 @@
     card.append(
       el("h2", condition.title),
       el("p", condition.description, "explanation"),
+      el("p", "Click a reconstruction or map to mark the same position in every model. Press Esc to clear.", "caption locator-hint"),
     );
     const clean = condition.id === "clean";
     const inputs = el("div", undefined, `inputs${clean ? " two-inputs" : ""}`);
@@ -279,6 +282,7 @@
         "Clean input preview and results across every input category.",
         "explanation",
       ),
+      el("p", "Click a reconstruction or map to mark the same position in every model. Press Esc to clear.", "caption locator-hint"),
     );
     const inputs = el("div", undefined, "inputs two-inputs");
     inputs.append(
@@ -318,9 +322,7 @@
     const url = new URL(location.href);
     url.searchParams.set("example", String(index));
     url.searchParams.set("condition", activeTab);
-    for (const key of ["view", "batchSize", "batchKind"]) url.searchParams.delete(key);
-    if (patchInspector?.value) url.searchParams.set("patch", patchInspector.value);
-    else url.searchParams.delete("patch");
+    for (const key of ["view", "batchSize", "batchKind", "patch"]) url.searchParams.delete(key);
     url.hash = "";
     if (url.href !== location.href)
       history[push ? "pushState" : "replaceState"](null, "", url);
@@ -347,7 +349,7 @@
     const card = cards.get(activeTab);
     loadImages(card, condition);
     renderMetrics(card, condition);
-    patchInspector.setScene({card, reference: imageUrl("target", condition, index), title: `${condition.title} · ${data.ids[index]}`});
+    imageLocator.setScene(card);
   }
 
   function selectTab(id, push = false) {
@@ -370,7 +372,6 @@
     const candidate =
       url.searchParams.get("condition") || url.hash.slice(1) || "overview";
     activeTab = cards.has(candidate) ? candidate : "overview";
-    patchInspector.readURL(url.searchParams.get("patch"));
   }
 
   function addTab(id, label, card) {
@@ -425,7 +426,7 @@
     )
       throw new Error("Incomplete experiment data");
     const scenes = document.getElementById("scene");
-    patchInspector = new PatchInspector(document.getElementById("patchInspector"), () => updateURL());
+    imageLocator = new ImageLocator(document.getElementById("tab-panels"));
     data.ids.forEach((id, i) => {
       const option = el("option", `${i + 1} · ${id}`);
       option.value = String(i);

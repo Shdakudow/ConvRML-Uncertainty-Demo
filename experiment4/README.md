@@ -31,20 +31,14 @@ reconstructions. “Uneven pixel response” is the display name for
 the existing `fixed_pattern` gain-and-offset modification; its parameters and
 stored condition ID are unchanged.
 
-“Inspect a patch” opens a full-scene reference with a selection box. Drag a
-rectangle there, click or drag on a reconstruction/ground-truth/error/uncertainty
-image, choose a 64/96/128-pixel preset, or enter X/Y/width/height. All four models
-and the ground-truth view enlarge exactly the same source rectangle. The full
-reference remains available for moving the selection; arrow keys move it one
-pixel, or ten pixels with Shift. Touch selection is enabled in patch mode.
-
-The crop uses the original 480 × 270 display coordinates, stays inside image
-bounds, and persists across scene/category changes and URL reloads. “Show full
-images” restores the full views. Sensor inputs remain full-frame because a
-lensless sensor region does not correspond to the same spatial scene patch.
-Only display cropping changes: error/uncertainty palettes and saved full-scene
-metrics remain unchanged. No patch-level numerical metrics are inferred from
-8-bit display images.
+Click a reconstruction, ground truth, error map, or uncertainty map to mark
+the same image coordinate across all four models. This reuses the earlier
+experiments’ `HeatmapPixels.pointAt` and `HeatmapPixels.mark` helpers: the same
+24-screen-pixel square, with white/black/yellow outlines. Clicking elsewhere
+moves the marker; Escape clears it. The position persists across scene and
+category changes. Sensor inputs are unmarked, as in Exp 3. Images remain
+full-frame with their existing sizes and metrics; there are no zoom controls
+or inspection panels.
 
 Every graph has numeric axis ticks, a written scale, units, and a model key:
 QUTCC is solid; Im2im is dashed. Mobile graphs use a smaller coordinate system
