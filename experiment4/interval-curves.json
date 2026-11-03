@@ -385,6 +385,158 @@
           "checkpoint_sha256": "e2602713502e51f2c38027bc2bceb2719715af8b6dd9da9cdf4d6c5e795dd261"
         },
         {
+          "epoch": 70,
+          "mean": {
+            "calibration_width": 0.1637199098827938,
+            "calibration_coverage": 0.900739074931413,
+            "test_coverage": 0.9006788981481482,
+            "test_width": 0.16520229741324438
+          },
+          "conditions": {
+            "clean": {
+              "calibration_width": 0.12028625308846434,
+              "calibration_coverage": 0.8877520490397806,
+              "test_coverage": 0.8902354886831275,
+              "test_width": 0.1214941034829244
+            },
+            "gaussian": {
+              "calibration_width": 0.1509750562782089,
+              "calibration_coverage": 0.9075873456790123,
+              "test_coverage": 0.9032060120884774,
+              "test_width": 0.15113282841444015
+            },
+            "poisson": {
+              "calibration_width": 0.14534093073879678,
+              "calibration_coverage": 0.9011820730452675,
+              "test_coverage": 0.8996034259259259,
+              "test_width": 0.1472835622727871
+            },
+            "poisson_gaussian": {
+              "calibration_width": 0.16372523006051778,
+              "calibration_coverage": 0.8975140860768176,
+              "test_coverage": 0.8948331841563786,
+              "test_width": 0.166101092889905
+            },
+            "exposure": {
+              "calibration_width": 0.12740824970106285,
+              "calibration_coverage": 0.8937858882030179,
+              "test_coverage": 0.8932898752572016,
+              "test_width": 0.12561467422463465
+            },
+            "dead_pixels": {
+              "calibration_width": 0.18993825189769267,
+              "calibration_coverage": 0.9094056412894376,
+              "test_coverage": 0.9100512577160493,
+              "test_width": 0.1836837005787529
+            },
+            "fixed_pattern": {
+              "calibration_width": 0.12234373582527042,
+              "calibration_coverage": 0.884321116255144,
+              "test_coverage": 0.8882778639403293,
+              "test_width": 0.12679192510945722
+            },
+            "gaussian_blur": {
+              "calibration_width": 0.1166750223748386,
+              "calibration_coverage": 0.8974037465706447,
+              "test_coverage": 0.895802845936214,
+              "test_width": 0.12050113941682503
+            },
+            "resolution": {
+              "calibration_width": 0.3197859716787934,
+              "calibration_coverage": 0.9223821673525378,
+              "test_coverage": 0.9213913181584362,
+              "test_width": 0.32226384872058406
+            },
+            "jpeg": {
+              "calibration_width": 0.18072039718429248,
+              "calibration_coverage": 0.9060566358024691,
+              "test_coverage": 0.9100977096193416,
+              "test_width": 0.1871560990221333
+            }
+          },
+          "calibration_status": "fitted",
+          "calibration_target_met": true,
+          "calibration_fit_valid": true,
+          "calibration_failure": null,
+          "checkpoint_sha256": "aaec23025c798c33eb5e79257b63667bc3b2f7263aaf916e26b81db776bc9870"
+        },
+        {
+          "epoch": 80,
+          "mean": {
+            "calibration_width": 0.16282982430855436,
+            "calibration_coverage": 0.9007184687928669,
+            "test_coverage": 0.9002350987011317,
+            "test_width": 0.16434414974743267
+          },
+          "conditions": {
+            "clean": {
+              "calibration_width": 0.11872269118825594,
+              "calibration_coverage": 0.8839512517146776,
+              "test_coverage": 0.8869759246399177,
+              "test_width": 0.12004901475040242
+            },
+            "gaussian": {
+              "calibration_width": 0.14956968724727632,
+              "calibration_coverage": 0.9098987482853224,
+              "test_coverage": 0.9050284580761316,
+              "test_width": 0.1496152211120352
+            },
+            "poisson": {
+              "calibration_width": 0.1438157350383699,
+              "calibration_coverage": 0.9025168124142661,
+              "test_coverage": 0.9009946322016461,
+              "test_width": 0.14589675569860264
+            },
+            "poisson_gaussian": {
+              "calibration_width": 0.16256741259247065,
+              "calibration_coverage": 0.9021036865569273,
+              "test_coverage": 0.8996134915123457,
+              "test_width": 0.16489863272570074
+            },
+            "exposure": {
+              "calibration_width": 0.12786462347954514,
+              "calibration_coverage": 0.8877159379286694,
+              "test_coverage": 0.8859826331018519,
+              "test_width": 0.12595543984067625
+            },
+            "dead_pixels": {
+              "calibration_width": 0.1883470663179954,
+              "calibration_coverage": 0.9078900291495199,
+              "test_coverage": 0.907831941872428,
+              "test_width": 0.18204171734955163
+            },
+            "fixed_pattern": {
+              "calibration_width": 0.12030815231924255,
+              "calibration_coverage": 0.8818782321673525,
+              "test_coverage": 0.8847196875,
+              "test_width": 0.12467150572082028
+            },
+            "gaussian_blur": {
+              "calibration_width": 0.11674099893619617,
+              "calibration_coverage": 0.8959835219478738,
+              "test_coverage": 0.8936747569444444,
+              "test_width": 0.12023372810136061
+            },
+            "resolution": {
+              "calibration_width": 0.31999973914275565,
+              "calibration_coverage": 0.9268231052812071,
+              "test_coverage": 0.9250421746399177,
+              "test_width": 0.3228579103634693
+            },
+            "jpeg": {
+              "calibration_width": 0.18036213682343563,
+              "calibration_coverage": 0.9084233624828533,
+              "test_coverage": 0.9124872865226338,
+              "test_width": 0.18722157181170768
+            }
+          },
+          "calibration_status": "fitted",
+          "calibration_target_met": true,
+          "calibration_fit_valid": true,
+          "calibration_failure": null,
+          "checkpoint_sha256": "8103ce53b00914a90c8ce6cdf9fe06080892501e35af7106f1957e568442c21c"
+        },
+        {
           "epoch": 100,
           "mean": {
             "calibration_width": 0.16369161724826942,
@@ -846,6 +998,310 @@
           "checkpoint_sha256": "769bbfdabf22cdae19702f57ff962f5c76eb70bb606405b2ab1808ce0a523ace"
         },
         {
+          "epoch": 60,
+          "mean": {
+            "calibration_width": 0.14906601717416196,
+            "calibration_coverage": 0.9000003343621399,
+            "test_coverage": 0.8993386207561729,
+            "test_width": 0.1503857173238881
+          },
+          "conditions": {
+            "clean": {
+              "calibration_width": 0.10737383040909966,
+              "calibration_coverage": 0.8864067386831276,
+              "test_coverage": 0.8892949549897119,
+              "test_width": 0.108949162050616
+            },
+            "gaussian": {
+              "calibration_width": 0.13627218938122193,
+              "calibration_coverage": 0.9045332047325103,
+              "test_coverage": 0.9010702829218107,
+              "test_width": 0.1369614014523104
+            },
+            "poisson": {
+              "calibration_width": 0.1321401200070977,
+              "calibration_coverage": 0.9058667695473251,
+              "test_coverage": 0.9038090985082304,
+              "test_width": 0.13367333514383062
+            },
+            "poisson_gaussian": {
+              "calibration_width": 0.1483267152681947,
+              "calibration_coverage": 0.9028239540466392,
+              "test_coverage": 0.9026612512860083,
+              "test_width": 0.15138058082107456
+            },
+            "exposure": {
+              "calibration_width": 0.11630149560670058,
+              "calibration_coverage": 0.8867520576131687,
+              "test_coverage": 0.8838168068415637,
+              "test_width": 0.11401084696641192
+            },
+            "dead_pixels": {
+              "calibration_width": 0.16497594914088645,
+              "calibration_coverage": 0.9062466992455418,
+              "test_coverage": 0.9072123585390947,
+              "test_width": 0.15991134148510172
+            },
+            "fixed_pattern": {
+              "calibration_width": 0.1101536348524193,
+              "calibration_coverage": 0.8877825703017833,
+              "test_coverage": 0.886565625,
+              "test_width": 0.1137362535558641
+            },
+            "gaussian_blur": {
+              "calibration_width": 0.10742507679698368,
+              "calibration_coverage": 0.8935043981481482,
+              "test_coverage": 0.8903783050411522,
+              "test_width": 0.10986779838148504
+            },
+            "resolution": {
+              "calibration_width": 0.2982453633348147,
+              "calibration_coverage": 0.9196569015775035,
+              "test_coverage": 0.9195698765432099,
+              "test_width": 0.3009364579911344
+            },
+            "jpeg": {
+              "calibration_width": 0.169445796944201,
+              "calibration_coverage": 0.9064300497256516,
+              "test_coverage": 0.9090076478909465,
+              "test_width": 0.17442999539105222
+            }
+          },
+          "calibration_status": "fitted",
+          "calibration_target_met": true,
+          "calibration_fit_valid": true,
+          "calibration_failure": null,
+          "checkpoint_sha256": "d0ef0ff51b284e6bc28aab5ac896c958a88a330ba6e4926d3fe0abd2a7f9828e"
+        },
+        {
+          "epoch": 70,
+          "mean": {
+            "calibration_width": 0.15042619880288838,
+            "calibration_coverage": 0.9000003737997255,
+            "test_coverage": 0.8996377098122427,
+            "test_width": 0.15177173430731056
+          },
+          "conditions": {
+            "clean": {
+              "calibration_width": 0.1077462138980627,
+              "calibration_coverage": 0.8811964248971194,
+              "test_coverage": 0.8847844161522633,
+              "test_width": 0.1095055754086934
+            },
+            "gaussian": {
+              "calibration_width": 0.13979079065223535,
+              "calibration_coverage": 0.906541212277092,
+              "test_coverage": 0.9031672492283951,
+              "test_width": 0.1404889547554776
+            },
+            "poisson": {
+              "calibration_width": 0.13481498243287204,
+              "calibration_coverage": 0.9043974879972565,
+              "test_coverage": 0.9029072929526749,
+              "test_width": 0.1364433148102835
+            },
+            "poisson_gaussian": {
+              "calibration_width": 0.15270391523838042,
+              "calibration_coverage": 0.9072108624828532,
+              "test_coverage": 0.9074190226337449,
+              "test_width": 0.15608460223209114
+            },
+            "exposure": {
+              "calibration_width": 0.1160747050990661,
+              "calibration_coverage": 0.8854535751028807,
+              "test_coverage": 0.8843643679269547,
+              "test_width": 0.11366319338115863
+            },
+            "dead_pixels": {
+              "calibration_width": 0.16397070897122223,
+              "calibration_coverage": 0.9088986196844994,
+              "test_coverage": 0.9096458616255144,
+              "test_width": 0.15886846077442168
+            },
+            "fixed_pattern": {
+              "calibration_width": 0.11140832806006074,
+              "calibration_coverage": 0.8797260030864198,
+              "test_coverage": 0.8786759889403292,
+              "test_width": 0.11477903858805075
+            },
+            "gaussian_blur": {
+              "calibration_width": 0.10699554267028967,
+              "calibration_coverage": 0.895382853223594,
+              "test_coverage": 0.8912399125514403,
+              "test_width": 0.10951910223485901
+            },
+            "resolution": {
+              "calibration_width": 0.29710956327617166,
+              "calibration_coverage": 0.9248618827160494,
+              "test_coverage": 0.9244188554526749,
+              "test_width": 0.29924447429925205
+            },
+            "jpeg": {
+              "calibration_width": 0.17364723773052296,
+              "calibration_coverage": 0.9063348165294924,
+              "test_coverage": 0.9097541306584362,
+              "test_width": 0.1791206265888177
+            }
+          },
+          "calibration_status": "fitted",
+          "calibration_target_met": true,
+          "calibration_fit_valid": true,
+          "calibration_failure": null,
+          "checkpoint_sha256": "de335adda589b8065b0f13266ad9f1437b2c039f8a30e3551967b1bea57d2655"
+        },
+        {
+          "epoch": 80,
+          "mean": {
+            "calibration_width": 0.14818517876851062,
+            "calibration_coverage": 0.9000003789437585,
+            "test_coverage": 0.8995800171039094,
+            "test_width": 0.14958117475600446
+          },
+          "conditions": {
+            "clean": {
+              "calibration_width": 0.10718397047991554,
+              "calibration_coverage": 0.8831981395747599,
+              "test_coverage": 0.8867983654835391,
+              "test_width": 0.1089294957476668
+            },
+            "gaussian": {
+              "calibration_width": 0.13926197526976467,
+              "calibration_coverage": 0.9085201388888889,
+              "test_coverage": 0.9053585853909465,
+              "test_width": 0.14002351833786816
+            },
+            "poisson": {
+              "calibration_width": 0.13452127575253447,
+              "calibration_coverage": 0.907118115569273,
+              "test_coverage": 0.9054679848251029,
+              "test_width": 0.13606520166620611
+            },
+            "poisson_gaussian": {
+              "calibration_width": 0.15243347600102425,
+              "calibration_coverage": 0.9098005572702332,
+              "test_coverage": 0.9098401118827161,
+              "test_width": 0.15577172115724533
+            },
+            "exposure": {
+              "calibration_width": 0.11528798309465249,
+              "calibration_coverage": 0.8817057098765433,
+              "test_coverage": 0.8802035532407407,
+              "test_width": 0.11310671570291743
+            },
+            "dead_pixels": {
+              "calibration_width": 0.16244833455731472,
+              "calibration_coverage": 0.9035771690672154,
+              "test_coverage": 0.9039517592592593,
+              "test_width": 0.15738321801600977
+            },
+            "fixed_pattern": {
+              "calibration_width": 0.11064068698634703,
+              "calibration_coverage": 0.8837159122085048,
+              "test_coverage": 0.8825908474794238,
+              "test_width": 0.11412993902945891
+            },
+            "gaussian_blur": {
+              "calibration_width": 0.10685485991338889,
+              "calibration_coverage": 0.8950729423868313,
+              "test_coverage": 0.8911622993827161,
+              "test_width": 0.10925766955083237
+            },
+            "resolution": {
+              "calibration_width": 0.2812688245996833,
+              "calibration_coverage": 0.9193133487654321,
+              "test_coverage": 0.9184632613168724,
+              "test_width": 0.2832212323667482
+            },
+            "jpeg": {
+              "calibration_width": 0.17195040103048087,
+              "calibration_coverage": 0.9079817558299039,
+              "test_coverage": 0.9119634027777778,
+              "test_width": 0.1779230359850917
+            }
+          },
+          "calibration_status": "fitted",
+          "calibration_target_met": true,
+          "calibration_fit_valid": true,
+          "calibration_failure": null,
+          "checkpoint_sha256": "1df6b4322842e0e04d93c080c8e4545e94043e33d40ab61a725c5996f2cea6b8"
+        },
+        {
+          "epoch": 90,
+          "mean": {
+            "calibration_width": 0.1487254012891402,
+            "calibration_coverage": 0.9000003206447188,
+            "test_coverage": 0.8992029086934157,
+            "test_width": 0.15001017499656882
+          },
+          "conditions": {
+            "clean": {
+              "calibration_width": 0.10914865436032414,
+              "calibration_coverage": 0.8838759344993141,
+              "test_coverage": 0.887268978909465,
+              "test_width": 0.1109021528144367
+            },
+            "gaussian": {
+              "calibration_width": 0.14107297020033002,
+              "calibration_coverage": 0.9126983196159122,
+              "test_coverage": 0.9095969380144033,
+              "test_width": 0.14196981120016425
+            },
+            "poisson": {
+              "calibration_width": 0.1363922129260997,
+              "calibration_coverage": 0.9108746913580247,
+              "test_coverage": 0.9093221514917695,
+              "test_width": 0.13799327977141365
+            },
+            "poisson_gaussian": {
+              "calibration_width": 0.15412938834478457,
+              "calibration_coverage": 0.9144838906035665,
+              "test_coverage": 0.9146332021604938,
+              "test_width": 0.15764703929238022
+            },
+            "exposure": {
+              "calibration_width": 0.11794684244319797,
+              "calibration_coverage": 0.8848474537037037,
+              "test_coverage": 0.8819125025720165,
+              "test_width": 0.11566397257847712
+            },
+            "dead_pixels": {
+              "calibration_width": 0.1653824886555473,
+              "calibration_coverage": 0.9082978395061728,
+              "test_coverage": 0.9084360673868312,
+              "test_width": 0.16022108608763666
+            },
+            "fixed_pattern": {
+              "calibration_width": 0.11256103205184141,
+              "calibration_coverage": 0.8853167009602195,
+              "test_coverage": 0.8841027494855968,
+              "test_width": 0.1160878512756899
+            },
+            "gaussian_blur": {
+              "calibration_width": 0.10910394193604589,
+              "calibration_coverage": 0.8955778978052126,
+              "test_coverage": 0.890675005144033,
+              "test_width": 0.11140973904635758
+            },
+            "resolution": {
+              "calibration_width": 0.2697753122697274,
+              "calibration_coverage": 0.8985297582304527,
+              "test_coverage": 0.8972556455761317,
+              "test_width": 0.2705989670469426
+            },
+            "jpeg": {
+              "calibration_width": 0.17174116970350345,
+              "calibration_coverage": 0.905500720164609,
+              "test_coverage": 0.9088258461934157,
+              "test_width": 0.17760785085218958
+            }
+          },
+          "calibration_status": "fitted",
+          "calibration_target_met": true,
+          "calibration_fit_valid": true,
+          "calibration_failure": null,
+          "checkpoint_sha256": "91da493f085fe195ef96bdbffef490046c64539862067b5561051a3d448f23b6"
+        },
+        {
           "epoch": 100,
           "mean": {
             "calibration_width": 0.14913004467481125,
@@ -936,7 +1392,7 @@
     90,
     100
   ],
-  "completed": 12,
+  "completed": 18,
   "expected": 20,
   "complete": false,
   "calibration_count": 3000,
