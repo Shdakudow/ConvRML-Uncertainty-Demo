@@ -37,7 +37,9 @@ frame seeks; playback clears it. Sidecars are float32 values from the frozen
 models, fetched on demand through `../pixel_maps.json`, rather than inferred
 from compressed video colors. Coordinates follow the displayed 180° rotation.
 
-The model-agreement plot below mean width has a shared comparison selector:
+The selected-frame overlap viewer sits at the top between QUTCC and Im2im on
+wide screens; it moves above the two model views on narrow screens. All views
+share the same frame and playback controls. The model-agreement plot below mean width has a shared comparison selector:
 **Spearman correlation** or **Overlap · most uncertain 10% of pixels** (default).
 Changing either the graph selector or the selected-frame panel selector updates
 both. Each graph point compares QUTCC with Im2im at one frame. Frame seeking,
@@ -51,12 +53,14 @@ uncrossed pixels. Within each map, select widths at or above its 90th percentile
 100% means identical selected locations; 0% means no shared location. Cutoff ties
 are kept together, so selection can slightly exceed 10%; displayed counts show
 this. A constant map has no distinct high-uncertainty set and is undefined.
-The categorical map uses purple for both models, green for QUTCC only, orange for
-Im2im only, dark blue for neither, and magenta for excluded pixels.
+The categorical map uses white for both models, bright blue (#00beff) for QUTCC
+only, vivid orange (#ff7000) for Im2im only, dark background for neither, and
+magenta for excluded pixels. Exclusive selections use a stronger reconstruction
+overlay (70%) than shared selections (35%) to emphasize disagreements.
 
 During playback, this map moves with the videos. “Highlight top 10% on
 reconstructions” is checked initially: each model's selected pixels are tinted
-on its reconstruction, with purple marking shared selections. Uncheck it to
+on its reconstruction, with white marking shared selections. Uncheck it to
 view the original reconstructions. The uncertainty panels keep their original
 colors. Play, pause, speed, and frame seeking control all three videos together.
 Pausing restores the exact numerical map for pixel inspection.

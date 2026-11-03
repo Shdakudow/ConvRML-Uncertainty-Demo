@@ -2,27 +2,27 @@
   "schema": "overlap_playback_v1",
   "agreement_sha256": "3c5046c6b28e5d7d298ec1624b617c6604b391d46dc927dbe37c73476752af36",
   "pixel_manifest_sha256": "9a6d7991a0e779c4f5dd37597a59a0c8e823c20a30a950a9864eb4c0d8272c72",
-  "definition": "Precomputed top-10% selections from full-precision numerical width maps. Purple: both models; green: QUTCC only; orange: Im2im only. Only the reconstruction panel receives the highlight; statistical metrics are unchanged.",
+  "definition": "Precomputed top-10% selections from full-precision numerical width maps. White: both models; bright blue: QUTCC only; vivid orange: Im2im only. Only the reconstruction panel receives the highlight; statistical metrics are unchanged.",
   "videos": {
     "video1": {
       "frames": 226,
       "fps": 20.0,
       "models": {
         "qutcc": {
-          "video": "overlap-assets/video1/qutcc.mp4",
-          "poster": "overlap-assets/video1/qutcc.png",
-          "sha256": "764d3d774e6e8f6177f32bf9ca0a5e10ee27c09433d055554e8bf699e6086520"
+          "video": "overlap-assets/video1/qutcc.mp4?v=0cf8f7e6df96",
+          "poster": "overlap-assets/video1/qutcc.png?v=d0bbcb682388",
+          "sha256": "0cf8f7e6df9695d5684ebe6d44b458b12a2bd14396c2630c18ccb83ee58e7cc5"
         },
         "im2im": {
-          "video": "overlap-assets/video1/im2im.mp4",
-          "poster": "overlap-assets/video1/im2im.png",
-          "sha256": "df91a244539638f442e246525066c39abc7d91c7ff732acda2e497b00dee2990"
+          "video": "overlap-assets/video1/im2im.mp4?v=557884892c3a",
+          "poster": "overlap-assets/video1/im2im.png?v=76524d6cc59d",
+          "sha256": "557884892c3a7ad84e88c463b20a9a894ec3847af4e5b6c281e30c87da7d043c"
         }
       },
       "map": {
-        "video": "overlap-assets/video1/map.mp4",
-        "poster": "overlap-assets/video1/map.png",
-        "sha256": "7352e00f3bc7d9f7567a53ee1af3e92009dedd94f5f67836e298e84cf6e2af35"
+        "video": "overlap-assets/video1/map.mp4?v=e7fbe5c03a50",
+        "poster": "overlap-assets/video1/map.png?v=b3476faa7a4f",
+        "sha256": "e7fbe5c03a50ffb3992576541f7b92542725dd000d87a1fb7e63ebf2a6467135"
       }
     },
     "video4": {
@@ -30,20 +30,20 @@
       "fps": 20.0,
       "models": {
         "qutcc": {
-          "video": "overlap-assets/video4/qutcc.mp4",
-          "poster": "overlap-assets/video4/qutcc.png",
-          "sha256": "b471a3e921fa98845194070d0fb5e888c3205d2d0c2efbc525599208f0a8ce16"
+          "video": "overlap-assets/video4/qutcc.mp4?v=c14bcd749b77",
+          "poster": "overlap-assets/video4/qutcc.png?v=91c81b9b08f2",
+          "sha256": "c14bcd749b77b20886aa2c2eb3438466ffd10b7653a00f941cfd3b2b8cadb288"
         },
         "im2im": {
-          "video": "overlap-assets/video4/im2im.mp4",
-          "poster": "overlap-assets/video4/im2im.png",
-          "sha256": "96a9ff8ea8ac5084b6bda0590d7315682daa4874cdacdb33d38eb737adcb4482"
+          "video": "overlap-assets/video4/im2im.mp4?v=571e850253ac",
+          "poster": "overlap-assets/video4/im2im.png?v=39afc0a643a6",
+          "sha256": "571e850253ac28dbb1e66ea868f2667ae134d6105a58b7c8a4b6c6908f5e3b84"
         }
       },
       "map": {
-        "video": "overlap-assets/video4/map.mp4",
-        "poster": "overlap-assets/video4/map.png",
-        "sha256": "758ed506a8ba1827e4001595fc97e42d224cb0081bdfd23d35329d6ca9ac5317"
+        "video": "overlap-assets/video4/map.mp4?v=f43f8ad74691",
+        "poster": "overlap-assets/video4/map.png?v=154fbcec2126",
+        "sha256": "f43f8ad746918ef07062e4698865d0d00d30c95d318f04ec4f837f0e4dbdb53b"
       }
     },
     "video6": {
@@ -51,20 +51,20 @@
       "fps": 20.0,
       "models": {
         "qutcc": {
-          "video": "overlap-assets/video6/qutcc.mp4",
-          "poster": "overlap-assets/video6/qutcc.png",
-          "sha256": "58d3cc75e39a94084b9c7d41a2d063a34d6f5467778ae1bfdfc4eb5862b8d870"
+          "video": "overlap-assets/video6/qutcc.mp4?v=40765a160dd5",
+          "poster": "overlap-assets/video6/qutcc.png?v=2a471c51aafb",
+          "sha256": "40765a160dd5abafeae7ccc7ea9a21c15b9319daf9205a54a844b40ee2fcc9e6"
         },
         "im2im": {
-          "video": "overlap-assets/video6/im2im.mp4",
-          "poster": "overlap-assets/video6/im2im.png",
-          "sha256": "0069ada00a0143cf5ae0064902cadc1d317d263d99fe67220cb9db247a9cc190"
+          "video": "overlap-assets/video6/im2im.mp4?v=55495d7a04b4",
+          "poster": "overlap-assets/video6/im2im.png?v=e977d12661b0",
+          "sha256": "55495d7a04b42137ca49f83d42ec6c518ea33e58a71868ced4f423d6ba869238"
         }
       },
       "map": {
-        "video": "overlap-assets/video6/map.mp4",
-        "poster": "overlap-assets/video6/map.png",
-        "sha256": "fc1fea8d58fc97e867e3f2156773bf8484884122246289873160a07040e356a4"
+        "video": "overlap-assets/video6/map.mp4?v=f393a6a23491",
+        "poster": "overlap-assets/video6/map.png?v=c37ba36724c1",
+        "sha256": "f393a6a2349127e06931287f1798ef0348e3606cbf815f825b35e93a1670feaf"
       }
     },
     "video7": {
@@ -72,20 +72,20 @@
       "fps": 20.0,
       "models": {
         "qutcc": {
-          "video": "overlap-assets/video7/qutcc.mp4",
-          "poster": "overlap-assets/video7/qutcc.png",
-          "sha256": "516c804fb22504e4b98070a9e1647c2ec8ea5274ee0f375d75c149727f189cae"
+          "video": "overlap-assets/video7/qutcc.mp4?v=b0acc6015f6f",
+          "poster": "overlap-assets/video7/qutcc.png?v=05a7b6f8b503",
+          "sha256": "b0acc6015f6f85bf40f898dfd7c59f6e8eec450c0bb2c10320c09c2e796b6d21"
         },
         "im2im": {
-          "video": "overlap-assets/video7/im2im.mp4",
-          "poster": "overlap-assets/video7/im2im.png",
-          "sha256": "dcafbca881a7b43eb2f3ce9e4881e4cd5ae20d55f0306cc819d3e9afcd0212b1"
+          "video": "overlap-assets/video7/im2im.mp4?v=471b587e578a",
+          "poster": "overlap-assets/video7/im2im.png?v=f8ac2cde3b3e",
+          "sha256": "471b587e578a1730ed15c9607ade6b0adffd8c04b83dc1101cd9567b2b127780"
         }
       },
       "map": {
-        "video": "overlap-assets/video7/map.mp4",
-        "poster": "overlap-assets/video7/map.png",
-        "sha256": "9525d1068686faa7e74a2a03afb437793d75e2cd1105a0502706c2a7ec42ce94"
+        "video": "overlap-assets/video7/map.mp4?v=31f4c9a6393d",
+        "poster": "overlap-assets/video7/map.png?v=fc962ddae56b",
+        "sha256": "31f4c9a6393dd7bc024d5ffe08b0177dab895b820ff2deab61032f23e5a4aecc"
       }
     },
     "video10": {
@@ -93,20 +93,20 @@
       "fps": 20.0,
       "models": {
         "qutcc": {
-          "video": "overlap-assets/video10/qutcc.mp4",
-          "poster": "overlap-assets/video10/qutcc.png",
-          "sha256": "cb08ee5f6abe3f9f0c44ba9a5c9e2e5cda4fbc95b324004f590cf7d6be36d921"
+          "video": "overlap-assets/video10/qutcc.mp4?v=437f60916647",
+          "poster": "overlap-assets/video10/qutcc.png?v=82707fd29d0f",
+          "sha256": "437f6091664780d7fda9516f0a3c8ac3665954ff62664642d866e015c6efe90d"
         },
         "im2im": {
-          "video": "overlap-assets/video10/im2im.mp4",
-          "poster": "overlap-assets/video10/im2im.png",
-          "sha256": "26bcbe6159d05e26d7f03a2f59f7dc460bf1c3f9e41357402d12b449affcfdcd"
+          "video": "overlap-assets/video10/im2im.mp4?v=c2f328903c03",
+          "poster": "overlap-assets/video10/im2im.png?v=109c8ecfb85f",
+          "sha256": "c2f328903c0383fd430e513ba63c20059550f28b3001f4a63c9053326d6cb3aa"
         }
       },
       "map": {
-        "video": "overlap-assets/video10/map.mp4",
-        "poster": "overlap-assets/video10/map.png",
-        "sha256": "6854f72dc3d3152cdd1f3ec91a8f0f2366584bdcaac22e651b19c73d65c24b07"
+        "video": "overlap-assets/video10/map.mp4?v=0f5dc720a8b7",
+        "poster": "overlap-assets/video10/map.png?v=2cda952419d5",
+        "sha256": "0f5dc720a8b7716daf3798f0a27a209ce508cd804e2b3f249cebd2cd016ef23a"
       }
     }
   }

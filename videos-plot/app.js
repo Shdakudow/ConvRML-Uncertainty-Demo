@@ -329,13 +329,19 @@ async function start() {
   try {
     const [value, agreement, playback] = await Promise.all([
       json('data.json?v=20261030bluered'), UncertaintyAgreement.load().catch(() => null),
-      json('overlap-playback.json?v=20261103').catch(() => null)
+      json('overlap-playback.json?v=20261103-top10').catch(() => null)
     ]);
     data = value; agreementData = agreement; overlapPlayback = playback;
     if (agreementData) {
       agreementPanel = new UncertaintyAgreement.Panel($('videoDisagreement'), point => {
         stopTracking(); pixelPoint = point; seekFrame(frameIndex($('qutccVideo').currentTime));
       }, [$('inspectRankGapTop')]);
+      const explanation = $('videoDisagreement').querySelector('.agreement-explanation');
+      const details = document.createElement('details'); details.className = 'overlap-details';
+      const summary = document.createElement('summary'); summary.textContent = 'How overlap is measured';
+      explanation.before(details); details.append(summary, explanation);
+      const note = $('videoDisagreement').querySelector('.agreement-layout > div > p:last-child');
+      if (note && note !== explanation) details.append(note);
       agreementPanel.playbackVideo.addEventListener('click', event => {
         const point = HeatmapPixels.pointAt(agreementPanel.playbackVideo, event, 480, 270);
         stopTracking(); pixelPoint = point;

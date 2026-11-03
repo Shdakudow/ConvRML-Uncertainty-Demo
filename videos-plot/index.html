@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Videos plot · DiffuserCam</title>
   <link rel="stylesheet" href="../named-captures/style.css?v=20261030bluered">
-  <link rel="stylesheet" href="style.css?v=20261103-columns">
+  <link rel="stylesheet" href="style.css?v=20261103-top10">
   <script defer src="../demo-navigation.js?v=20261103-tabs"></script>
   <link rel="stylesheet" href="../heatmap-pixels.css?v=20261030selection">
   <script defer src="../heatmap-pixels.js?v=20261030agreement"></script>
-  <link rel="stylesheet" href="../uncertainty-agreement.css?v=20261103playback">
-  <script defer src="../uncertainty-agreement.js?v=20261103playback"></script>
+  <link rel="stylesheet" href="../uncertainty-agreement.css?v=20261103-top10">
+  <script defer src="../uncertainty-agreement.js?v=20261103-top10"></script>
   <script defer src="intensity-correlation.js?v=20261103-columns"></script>
-  <script defer src="app.js?v=20261103-columns"></script>
+  <script defer src="app.js?v=20261103-top10"></script>
 </head>
 <body>
 <header>
@@ -30,6 +30,7 @@
 <main>
   <div class="controls">
     <label>Sequence <select id="videoSelect" disabled></select></label>
+    <label>Comparison <select id="agreementMetric"><option value="spearman">Spearman correlation</option><option value="overlap" selected>Overlap · most uncertain 10% of pixels</option></select></label>
     <button id="play" disabled>Play</button>
     <button id="pause" disabled>Pause</button>
     <label><input id="showTop10" type="checkbox" checked disabled> Highlight top 10% on reconstructions</label>
@@ -39,13 +40,16 @@
     <span id="status" role="status">Loading videos…</span>
   </div>
   <p id="error" class="error" hidden></p>
-  <p class="hint">Moving highlights: purple = selected by both models; green = QUTCC only; orange = Im2im only. The uncertainty panels retain their original color scale. Pause for exact pixel inspection.</p>
-  <div class="video-grid">
-    <article class="card"><h2>QUTCC</h2><p id="qutccSummary"></p>
+  <div class="top10-key" aria-label="Top 10 percent uncertainty colors">
+    <span class="q-only">QUTCC only · disagree</span><span class="i-only">Im2im only · disagree</span><span class="both">Both models · agree</span><span class="neither">Neither selected</span>
+  </div>
+  <div class="video-grid comparison-stage">
+    <article class="card model-video-card"><h2>QUTCC</h2><p id="qutccSummary"></p>
       <video id="qutccVideo" playsinline muted preload="metadata" aria-label="QUTCC reconstruction and uncertainty"></video>
       <p><a id="qutccDownload" download>Download MP4</a></p>
     </article>
-    <article class="card"><h2>Im2im</h2><p id="im2imSummary"></p>
+    <section class="card agreement-card" id="videoDisagreement" aria-label="Synchronized uncertainty overlap"></section>
+    <article class="card model-video-card"><h2>Im2im</h2><p id="im2imSummary"></p>
       <video id="im2imVideo" playsinline muted preload="metadata" aria-label="Im2im reconstruction and uncertainty"></video>
       <p><a id="im2imDownload" download>Download MP4</a></p>
     </article>
@@ -81,7 +85,7 @@
   </section>
   </div>
   <section class="card plot-card" id="agreementSection">
-    <div class="plot-heading"><h2>Uncertainty agreement between models</h2><div class="plot-tools"><label>Comparison <select id="agreementMetric"><option value="spearman">Spearman correlation</option><option value="overlap" selected>Overlap · most uncertain 10% of pixels</option></select></label><label><input type="checkbox" id="agreementZoom"> Zoom to data</label></div></div>
+    <div class="plot-heading"><h2>Uncertainty agreement between models</h2><div class="plot-tools"><label><input type="checkbox" id="agreementZoom"> Zoom to data</label></div></div>
     <div class="agreement-legend"><span id="agreementLegend" style="color:#d7a3ff">Overlap of most uncertain 10% (IoU)</span></div>
     <p class="hint" id="agreementHelp">One overlap score per frame for the model pair. Click the graph to inspect the selected pixels.</p>
     <svg id="agreementPlot" viewBox="0 0 1000 330" role="img" aria-label="Selected uncertainty-map agreement measure versus frame"></svg>
@@ -90,7 +94,6 @@
     <div id="agreementJumps" class="agreement-jumps"></div>
     <p><a id="agreementCSV" download>Download per-frame agreement CSV</a> · <a id="agreementOverview" href="agreement/overlap-overview.png">All-video overview</a> <a id="agreementExamples" href="agreement/examples.png" hidden>· Rank-disagreement examples</a></p>
   </section>
-  <section class="card plot-card" id="videoDisagreement"></section>
   <section class="table-wrap"><h2>Temporal stability</h2>
     <table><thead><tr><th>Model</th><th>Mean width</th><th>Std. across frames</th><th>CV</th><th>Minimum</th><th>Maximum</th></tr></thead><tbody id="metricsRows"></tbody></table>
     <p class="hint">CV = standard deviation ÷ mean. A lower CV means a more constant mean width; it does not establish accurate uncertainty. The full spatial maps can still change.</p>
