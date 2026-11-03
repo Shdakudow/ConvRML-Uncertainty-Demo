@@ -1,7 +1,7 @@
 /* Preserve view state when moving between experiment pages. */
 (()=>{
  const script=document.currentScript,root=new URL('./',script.src);
- const routes={current:'corrected-epoch50/',brightness:'test-image-intensified-1/',earlier:'corrected-latest/',legacy:'./',raw:'raw-diffusercam/',captures:'named-captures/',videos:'videos-plot/'};
+ const routes={exp4:'experiment4/',current:'corrected-epoch50/',brightness:'test-image-intensified-1/',earlier:'corrected-latest/',legacy:'./',raw:'raw-diffusercam/',captures:'named-captures/',videos:'videos-plot/'};
  function sync(){
   const nav=document.querySelector('[data-demo-route="legacy"]')?.closest('nav');
   if(nav&&!nav.querySelector('[data-demo-route="captures"]')){
@@ -9,6 +9,9 @@
   }
   if(nav&&!nav.querySelector('[data-demo-route="videos"]')){
    const link=document.createElement('a');link.dataset.demoRoute='videos';link.textContent='Videos plot';nav.append(link);
+  }
+  if(nav&&!nav.querySelector('[data-demo-route="exp4"]')){
+   const link=document.createElement('a');link.dataset.demoRoute='exp4';link.textContent='4 · Generalized inputs';nav.append(link);
   }
   const state=new URLSearchParams(location.search);
   const camera=state.get('camera')||document.getElementById('camera')?.value;
