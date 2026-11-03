@@ -219,7 +219,7 @@ def main():
             "(()=>{const q=document.querySelector('#qutccVideo').getBoundingClientRect(),m=document.querySelector('#videoDisagreement').getBoundingClientRect(),i=document.querySelector('#im2imVideo').getBoundingClientRect(),plots=document.querySelector('.frame-plots').getBoundingClientRect();return q.left<m.left&&m.right<i.left&&m.bottom<plots.top})()"
         )
         assert js(
-            "document.querySelector('.top10-key .q-only').textContent.includes('disagree')"
+            "document.querySelector('.top10-key .q-only').textContent.includes('QUTCC top 10% only') && document.querySelector('.top10-key .i-only').textContent.includes('Im2im top 10% only')"
         )
         expected = json.loads((ROOT / "videos-plot/intensity/data.json").read_text())
         for name in ("video1", "video4", "video6", "video7", "video10"):
@@ -428,6 +428,9 @@ def main():
                 "document.querySelector('#videoDisagreement .agreement-comparison').value='overlap';document.querySelector('#videoDisagreement .agreement-comparison').dispatchEvent(new Event('change'))"
             )
             assert js("document.querySelector('#agreementMetric').value") == "overlap"
+            wait_for(
+                "document.querySelector('#videoDisagreement').getAttribute('aria-busy') === 'false'"
+            )
             assert_map_counts("#videoDisagreement canvas", row)
             # Frame seeking must recompute the displayed sets from the new maps.
             index = len(agreement["videos"][name]["rows"]) // 2
@@ -450,7 +453,9 @@ def main():
         # Playback uses three synchronized, pre-rendered videos. No numerical
         # width-map sidecars should be downloaded while frames advance.
         assert js("!document.querySelector('#showTop10')")
-        assert js("['qutcc','im2im'].every(m=>document.querySelector('#'+m+'Video').getAttribute('src')===selected.models[m].video)")
+        assert js(
+            "['qutcc','im2im'].every(m=>document.querySelector('#'+m+'Video').getAttribute('src')===selected.models[m].video)"
+        )
         js("seekFrame(20)")
         wait_for(
             "document.querySelector('#videoDisagreement').getAttribute('aria-busy') === 'false' && [...document.querySelectorAll('video')].every(v=>!v.seeking)"
@@ -475,23 +480,47 @@ def main():
         js(
             "document.querySelector('#agreementMetric').value='spearman';document.querySelector('#agreementMetric').dispatchEvent(new Event('change'))"
         )
-        wait_for("[...document.querySelectorAll('video')].every(v=>!v.paused && !v.seeking) && document.querySelector('.agreement-playback').src.includes('/rank.mp4')")
-        assert js("!document.querySelector('.agreement-playback').hidden && document.querySelector('#videoDisagreement canvas').hidden")
-        assert js("document.querySelector('#agreementPlot path').dataset.metric==='spearman'")
-        assert js("document.querySelector('#videoDisagreement .agreement-map-label').textContent.includes('percentile-rank')")
+        wait_for(
+            "[...document.querySelectorAll('video')].every(v=>!v.paused && !v.seeking) && document.querySelector('.agreement-playback').src.includes('/rank.mp4')"
+        )
+        assert js(
+            "!document.querySelector('.agreement-playback').hidden && document.querySelector('#videoDisagreement canvas').hidden"
+        )
+        assert js(
+            "document.querySelector('#agreementPlot path').dataset.metric==='spearman'"
+        )
+        assert js(
+            "document.querySelector('#videoDisagreement .agreement-map-label').textContent.includes('percentile-rank')"
+        )
         first = js(fingerprint)
         time.sleep(0.6)
         assert js(fingerprint) != first
-        assert js("[...document.querySelectorAll('video')].every(v=>Math.abs(v.currentTime-document.querySelector('#qutccVideo').currentTime)<.12)")
-        assert js("Math.abs(agreementPanel.row.spearman-agreementData.videos[selected.id].rows[Number(document.querySelector('#frame').value)-1].spearman)<1e-10")
+        assert js(
+            "[...document.querySelectorAll('video')].every(v=>Math.abs(v.currentTime-document.querySelector('#qutccVideo').currentTime)<.12)"
+        )
+        assert js(
+            "Math.abs(agreementPanel.row.spearman-agreementData.videos[selected.id].rows[Number(document.querySelector('#frame').value)-1].spearman)<1e-10"
+        )
         shot = call("Page.captureScreenshot", dict(format="png", fromSurface=True))
-        (work / "spearman-playback-desktop.png").write_bytes(base64.b64decode(shot["data"]))
-        js("document.querySelector('#videoDisagreement .agreement-mode').value='width';document.querySelector('#videoDisagreement .agreement-mode').dispatchEvent(new Event('change'))")
-        wait_for("[...document.querySelectorAll('video')].every(v=>!v.paused && !v.seeking) && document.querySelector('.agreement-playback').src.includes('/width_gap.mp4')")
+        (work / "spearman-playback-desktop.png").write_bytes(
+            base64.b64decode(shot["data"])
+        )
+        js(
+            "document.querySelector('#videoDisagreement .agreement-mode').value='width';document.querySelector('#videoDisagreement .agreement-mode').dispatchEvent(new Event('change'))"
+        )
+        wait_for(
+            "[...document.querySelectorAll('video')].every(v=>!v.paused && !v.seeking) && document.querySelector('.agreement-playback').src.includes('/width_gap.mp4')"
+        )
         assert js("!document.querySelector('.agreement-playback').hidden")
-        assert js("['qutcc','im2im'].every(m=>document.querySelector('#'+m+'Video').getAttribute('src')===selected.models[m].video)")
-        js("document.querySelector('#agreementMetric').value='overlap';document.querySelector('#agreementMetric').dispatchEvent(new Event('change'))")
-        wait_for("[...document.querySelectorAll('video')].every(v=>!v.paused && !v.seeking) && document.querySelector('.agreement-playback').src.includes('/map.mp4')")
+        assert js(
+            "['qutcc','im2im'].every(m=>document.querySelector('#'+m+'Video').getAttribute('src')===selected.models[m].video)"
+        )
+        js(
+            "document.querySelector('#agreementMetric').value='overlap';document.querySelector('#agreementMetric').dispatchEvent(new Event('change'))"
+        )
+        wait_for(
+            "[...document.querySelectorAll('video')].every(v=>!v.paused && !v.seeking) && document.querySelector('.agreement-playback').src.includes('/map.mp4')"
+        )
         assert js("!document.querySelector('.agreement-playback').hidden")
         js(
             "document.querySelector('#playbackSpeed').value='0.5';document.querySelector('#playbackSpeed').dispatchEvent(new Event('change'))"
