@@ -41,7 +41,13 @@ async function playAll(token = requestToken) {
 function assignComparisonVideo() {
   if (!agreementPanel || !selected) return;
   const source = overlapPlayback?.videos[selected.id];
-  const kind = UncertaintyAgreement.getMode() === 'overlap' ? 'map' : agreementPanel.mode.value === 'rank' ? 'rank' : 'width_gap';
+  agreementPanel.sharedOnly = $('sharedOnly').checked;
+  const overlap = UncertaintyAgreement.getMode() === 'overlap';
+  $('sharedOnlyControl').hidden = !overlap;
+  document.querySelector('.top10-key').hidden = !overlap;
+  document.querySelectorAll('.top10-key span:not(.both)').forEach(label => {label.hidden = agreementPanel.sharedOnly;});
+  $('sharedOnly').disabled = !source?.shared;
+  const kind = overlap ? (agreementPanel.sharedOnly ? 'shared' : 'map') : agreementPanel.mode.value === 'rank' ? 'rank' : 'width_gap';
   agreementPanel.setPlaybackSource(source?.[kind]);
   agreementPanel.playbackVideo.playbackRate = Number($('playbackSpeed').value);
 }
@@ -315,6 +321,7 @@ $('playbackSpeed').addEventListener('change', () => {
 });
 $('qutccVideo').addEventListener('timeupdate', () => {if (!selected) return; const first = $('qutccVideo'); setFrame(frameIndex(first.currentTime)); if (!first.paused) for (const other of playbackVideos().slice(1)) if (Math.abs(other.currentTime - first.currentTime) > .075) other.currentTime = first.currentTime;});
 $('qutccVideo').addEventListener('ended', () => {pause(); if (selected) showAgreementFrame(selected.frames - 1);});
+$('sharedOnly').addEventListener('change', changeComparisonVideo);
 $('agreementZoom').addEventListener('change', drawAgreementPlot);
 $('agreementMetric').addEventListener('change', () => UncertaintyAgreement.setMode($('agreementMetric').value));
 window.addEventListener('uncertaintycomparisonchange', () => {
@@ -339,7 +346,7 @@ async function start() {
   try {
     const [value, agreement, playback] = await Promise.all([
       json('data.json?v=20261030bluered'), UncertaintyAgreement.load().catch(() => null),
-      json('overlap-playback.json?v=20261103-spearman-fix').catch(() => null)
+      json('overlap-playback.json?v=20261104-shared-only').catch(() => null)
     ]);
     data = value; agreementData = agreement; overlapPlayback = playback;
     if (agreementData) {

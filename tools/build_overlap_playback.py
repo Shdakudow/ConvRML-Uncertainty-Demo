@@ -68,7 +68,9 @@ def comparison_maps(q, i, crossed_q, crossed_i, row):
             - ((second - 1) / denominator).astype(np.float32)
         )
     width_gap = np.abs(q - i)
+    shared = COLORS[np.where(valid & (codes == 3), 3, 0)].copy()
     return {
+        "shared": shared,
         "map": overlap,
         "rank": colorize(rank_gap, valid),
         "width_gap": colorize(width_gap, valid),
@@ -108,7 +110,7 @@ def render(task):
     destination.mkdir(parents=True, exist_ok=True)
     writers = {
         kind: writer(destination / (kind + ".partial.mp4"), video["fps"])
-        for kind in ("map", "rank", "width_gap")
+        for kind in ("map", "rank", "width_gap", "shared")
     }
     try:
         for index, row in enumerate(report["rows"], 1):
@@ -173,7 +175,7 @@ def main(args):
         schema="comparison_playback_v2",
         agreement_sha256=sha(ROOT / "uncertainty_agreement.json"),
         pixel_manifest_sha256=sha(args.assets / "manifest.json"),
-        definition="Comparison maps only. Original reconstruction videos remain untinted. White: shared top-10% selections; blue: QUTCC only; orange: Im2im only. Rank mode displays absolute percentile-rank differences; Spearman is one coefficient per frame. Width-gap mode displays absolute interval-width differences. All values come from the same saved numerical maps.",
+        definition="Comparison maps only. Shared-only view retains just the intersection of top-10% selections. Original reconstruction videos remain untinted. White: shared top-10% selections; blue: QUTCC only; orange: Im2im only. Rank mode displays absolute percentile-rank differences; Spearman is one coefficient per frame. Width-gap mode displays absolute interval-width differences. All values come from the same saved numerical maps.",
         videos=results,
     )
     (ROOT / "videos-plot/overlap-playback.json").write_text(

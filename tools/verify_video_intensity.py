@@ -123,7 +123,7 @@ def main():
         available.bind(("127.0.0.1", 0))
         port = available.getsockname()[1]
     profile = tempfile.mkdtemp(prefix="video-intensity-browser-")
-    work = Path.home() / ".local/share/convrml-video-clean-spearman-20261103"
+    work = Path.home() / ".local/share/convrml-video-shared-only-20261104"
     work.mkdir(parents=True, exist_ok=True)
     log = (work / "chrome.log").open("w")
     process = subprocess.Popen(
@@ -409,6 +409,30 @@ def main():
                 "document.querySelector('#agreementValues').textContent"
             )
             assert_map_counts("#videoDisagreement canvas", row)
+            js("document.querySelector('#sharedOnly').click()")
+            wait_for(
+                "document.querySelector('#videoDisagreement').getAttribute('aria-busy')==='false' && document.querySelector('.agreement-playback').src.includes('/shared.mp4')"
+            )
+            shared = dict(
+                row,
+                top10_qutcc_count=row["top10_intersection"],
+                top10_im2im_count=row["top10_intersection"],
+            )
+            assert_map_counts("#videoDisagreement canvas", shared)
+            assert js(
+                "getComputedStyle(document.querySelector('.top10-key .q-only')).display==='none'"
+            )
+            assert js(
+                "document.querySelector('.agreement-heading').textContent.includes('Shared')"
+            )
+            assert js(
+                "['qutcc','im2im'].every(m=>document.querySelector('#'+m+'Video').getAttribute('src')===selected.models[m].video)"
+            )
+            js("document.querySelector('#sharedOnly').click()")
+            wait_for(
+                "document.querySelector('#videoDisagreement').getAttribute('aria-busy')==='false' && document.querySelector('.agreement-playback').src.includes('/map.mp4')"
+            )
+            assert_map_counts("#videoDisagreement canvas", row)
             # Switching either dropdown updates both the graph and the map.
             js(
                 "document.querySelector('#agreementMetric').value='spearman';document.querySelector('#agreementMetric').dispatchEvent(new Event('change'))"
@@ -477,6 +501,25 @@ def main():
             "[...document.querySelectorAll('video')].every(v=>Math.abs(v.currentTime-document.querySelector('#qutccVideo').currentTime)<.12)"
         )
         assert len(map_requests) == before, (before, len(map_requests))
+        js("document.querySelector('#sharedOnly').click()")
+        wait_for(
+            "[...document.querySelectorAll('video')].every(v=>!v.paused && !v.seeking) && document.querySelector('.agreement-playback').src.includes('/shared.mp4')"
+        )
+        first = js(fingerprint)
+        time.sleep(0.4)
+        assert js(fingerprint) != first
+        assert js(
+            "[...document.querySelectorAll('video')].every(v=>Math.abs(v.currentTime-document.querySelector('#qutccVideo').currentTime)<.12)"
+        )
+        js(
+            "document.querySelector('#videoDisagreement').scrollIntoView({behavior:'instant'})"
+        )
+        shot = call("Page.captureScreenshot", dict(format="png", fromSurface=True))
+        (work / "shared-only-desktop.png").write_bytes(base64.b64decode(shot["data"]))
+        js("document.querySelector('#sharedOnly').click()")
+        wait_for(
+            "[...document.querySelectorAll('video')].every(v=>!v.paused && !v.seeking) && document.querySelector('.agreement-playback').src.includes('/map.mp4')"
+        )
         js(
             "document.querySelector('#agreementMetric').value='spearman';document.querySelector('#agreementMetric').dispatchEvent(new Event('change'))"
         )

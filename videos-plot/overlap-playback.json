@@ -2,7 +2,7 @@
   "schema": "comparison_playback_v2",
   "agreement_sha256": "3c5046c6b28e5d7d298ec1624b617c6604b391d46dc927dbe37c73476752af36",
   "pixel_manifest_sha256": "9a6d7991a0e779c4f5dd37597a59a0c8e823c20a30a950a9864eb4c0d8272c72",
-  "definition": "Comparison maps only. Original reconstruction videos remain untinted. White: shared top-10% selections; blue: QUTCC only; orange: Im2im only. Rank mode displays absolute percentile-rank differences; Spearman is one coefficient per frame. Width-gap mode displays absolute interval-width differences. All values come from the same saved numerical maps.",
+  "definition": "Comparison maps only. Shared-only view retains just the intersection of top-10% selections. Original reconstruction videos remain untinted. White: shared top-10% selections; blue: QUTCC only; orange: Im2im only. Rank mode displays absolute percentile-rank differences; Spearman is one coefficient per frame. Width-gap mode displays absolute interval-width differences. All values come from the same saved numerical maps.",
   "videos": {
     "video1": {
       "frames": 226,
@@ -21,6 +21,11 @@
         "video": "overlap-assets/video1/width_gap.mp4?v=cbf1b6a37f37",
         "poster": "overlap-assets/video1/width_gap.png?v=876d463a8404",
         "sha256": "cbf1b6a37f37d6a1d8bf2c6808f838f853cdf9d7aacffdb0bbbf7f9bcaffc534"
+      },
+      "shared": {
+        "video": "overlap-assets/video1/shared.mp4?v=b835092235c4",
+        "poster": "overlap-assets/video1/shared.png?v=3ed0747e5d39",
+        "sha256": "b835092235c40f5f83c3c320ad192d72fe4de4306af231a78b6454e21b2e3dd2"
       }
     },
     "video4": {
@@ -40,6 +45,11 @@
         "video": "overlap-assets/video4/width_gap.mp4?v=afdf3b16e891",
         "poster": "overlap-assets/video4/width_gap.png?v=f56614f5bf7b",
         "sha256": "afdf3b16e8918db1657067817500fb02e77506d43e2c582afb5594b1e6ad6f4e"
+      },
+      "shared": {
+        "video": "overlap-assets/video4/shared.mp4?v=6f8b11fbc9ff",
+        "poster": "overlap-assets/video4/shared.png?v=96433dd1e07b",
+        "sha256": "6f8b11fbc9ff8ca340d5c2778ff64685b30f425765a3887e6b929a19883262c3"
       }
     },
     "video6": {
@@ -59,6 +69,11 @@
         "video": "overlap-assets/video6/width_gap.mp4?v=ed23b3d67229",
         "poster": "overlap-assets/video6/width_gap.png?v=0a8add9fadb4",
         "sha256": "ed23b3d672299ba93d37739bdac3c0ab5b76217c6ae53a0a9869f4a407252ecc"
+      },
+      "shared": {
+        "video": "overlap-assets/video6/shared.mp4?v=e48b47dfb5ee",
+        "poster": "overlap-assets/video6/shared.png?v=c3a80a047c50",
+        "sha256": "e48b47dfb5ee57fec8da3ffaf9ee663fed6dfbee4fed9a2d184f2b7bb3fd2ee5"
       }
     },
     "video7": {
@@ -78,6 +93,11 @@
         "video": "overlap-assets/video7/width_gap.mp4?v=e0c910536822",
         "poster": "overlap-assets/video7/width_gap.png?v=5edc2232dbd6",
         "sha256": "e0c91053682294bc0e0774bcbf663646dbcc05221d051e7e5f5948003cab78e1"
+      },
+      "shared": {
+        "video": "overlap-assets/video7/shared.mp4?v=67f6ea0ad1d4",
+        "poster": "overlap-assets/video7/shared.png?v=4414ed1c296f",
+        "sha256": "67f6ea0ad1d4b1533a14c9c55fee7577e685a6cd49dade98572d3b4f1401f4c9"
       }
     },
     "video10": {
@@ -97,6 +117,11 @@
         "video": "overlap-assets/video10/width_gap.mp4?v=64e942abcc99",
         "poster": "overlap-assets/video10/width_gap.png?v=60ed5ef906d8",
         "sha256": "64e942abcc9949cd1a19c2f2890f06f62ccfc9f701d95dff8d6411db2381b198"
+      },
+      "shared": {
+        "video": "overlap-assets/video10/shared.mp4?v=a48dc18212a0",
+        "poster": "overlap-assets/video10/shared.png?v=ac2147d76e81",
+        "sha256": "a48dc18212a002db82797059c67ac02de0bff08e83301d02666b7a640fb97063"
       }
     }
   }

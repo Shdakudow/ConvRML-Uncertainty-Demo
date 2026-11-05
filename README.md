@@ -190,3 +190,8 @@ The live error and interval-width maps use a fixed normalized-intensity range of
 named captures, brightness examples and dropout-rate examples. Plot axes for
 learning curves retain their metric-specific ranges. Changing map colors does
 not change predictions, bounds, coverage, widths or correlation values.
+
+The video comparison offers **Show overlapping pixels only**: white marks pixels
+in both models’ top-10% uncertainty selections; all other pixels are hidden on
+the dark comparison background. The filter works during playback and paused
+inspection. It does not change the reported overlap statistics.

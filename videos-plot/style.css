@@ -74,3 +74,5 @@
   .top10-key { gap: 8px 14px; font-size: 11px; }
 }
 #videoDisagreement .agreement-playback { aspect-ratio: 16/9; max-height: none; object-fit: contain; }
+
+.top10-key[hidden], .top10-key span[hidden] { display: none; }

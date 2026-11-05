@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Videos plot · DiffuserCam</title>
   <link rel="stylesheet" href="../named-captures/style.css?v=20261030bluered">
-  <link rel="stylesheet" href="style.css?v=20261103-spearman-fix">
+  <link rel="stylesheet" href="style.css?v=20261104-shared-only">
   <script defer src="../demo-navigation.js?v=20261103-tabs"></script>
   <link rel="stylesheet" href="../heatmap-pixels.css?v=20261030selection">
   <script defer src="../heatmap-pixels.js?v=20261030agreement"></script>
   <link rel="stylesheet" href="../uncertainty-agreement.css?v=20261103-spearman-fix">
-  <script defer src="../uncertainty-agreement.js?v=20261103-top10-labels"></script>
+  <script defer src="../uncertainty-agreement.js?v=20261104-shared-only"></script>
   <script defer src="intensity-correlation.js?v=20261103-columns"></script>
-  <script defer src="app.js?v=20261103-spearman-fix"></script>
+  <script defer src="app.js?v=20261104-shared-only"></script>
 </head>
 <body>
 <header>
@@ -31,6 +31,7 @@
   <div class="controls">
     <label>Sequence <select id="videoSelect" disabled></select></label>
     <label>Comparison <select id="agreementMetric"><option value="spearman">Spearman correlation</option><option value="overlap" selected>Overlap · most uncertain 10% of pixels</option></select></label>
+    <label id="sharedOnlyControl"><input id="sharedOnly" type="checkbox" disabled> Show overlapping pixels only</label>
     <button id="play" disabled>Play</button>
     <button id="pause" disabled>Pause</button>
     <button id="inspectRankGapTop" type="button" disabled hidden>Inspect largest rank gap</button>

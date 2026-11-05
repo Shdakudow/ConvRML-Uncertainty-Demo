@@ -104,7 +104,7 @@
         </div></div>`;
       this.canvas = container.querySelector('canvas');
       this.playbackVideo = container.querySelector('.agreement-playback');
-      this.playing = false;
+      this.playing = false; this.sharedOnly = false;
       this.mode = container.querySelector('.agreement-mode');
       this.comparison = container.querySelector('.agreement-comparison');
       this.status = container.querySelector('.agreement-status');
@@ -145,16 +145,17 @@
       this.playbackVideo.hidden = !live;
       if (this.playing) this.container.setAttribute('aria-busy', live ? 'false' : 'true');
       this.comparison.value = getMode();
-      this.container.querySelector('.agreement-heading').textContent = overlap ? 'Most uncertain 10% of pixels' : 'Where uncertainty maps disagree';
+      this.container.querySelector('.agreement-heading').textContent = overlap ? (this.sharedOnly ? 'Shared top-10% uncertainty pixels' : 'Most uncertain 10% of pixels') : 'Where uncertainty maps disagree';
       this.container.querySelector('.agreement-difference-control').hidden = overlap;
       this.container.querySelector('.agreement-rank-key').hidden = overlap;
       this.container.querySelector('.agreement-overlap-key').hidden = !overlap;
+      this.container.querySelectorAll('.agreement-overlap-key span:not(.both)').forEach(label => {label.hidden = overlap && this.sharedOnly;});
       const headings = overlap ? ['Overlap (IoU)', 'Shared pixels', 'QUTCC selected', 'Im2im selected'] : ['Spearman ρ', 'Pearson r', 'Mean |width gap|'];
       this.container.querySelector('.agreement-metric-head').innerHTML = '<tr>'+headings.map(label => '<th>'+label+'</th>').join('')+'</tr>';
       const values = this.row ? (overlap ? [percent(this.row.top10_iou), this.row.top10_intersection.toLocaleString(), this.row.top10_qutcc_count.toLocaleString(), this.row.top10_im2im_count.toLocaleString()] : [format(this.row.spearman), format(this.row.pearson), format(this.row.mean_absolute_width_gap)]) : [];
       this.container.querySelector('.agreement-metrics').innerHTML = values.length ? '<tr>'+values.map(value => '<td>'+value+'</td>').join('')+'</tr>' : '';
       this.container.querySelector('.agreement-explanation').textContent = overlap ? 'Select values at or above each map’s 90th percentile. Overlap = shared pixels ÷ pixels selected by either model. 0% means no overlap; 100% means the same locations. Cutoff ties stay together, so the selected count can exceed 10%. Constant maps are undefined. Whole frame; no foreground mask is applied.' : 'Rank differences compare relative uncertainty ordering. Large rank changes can occur even when both widths are small.';
-      if (live) this.container.querySelector('.agreement-map-label').textContent = overlap ? 'Moving top-10% selections · white = shared by both models' : this.mode.value === 'rank' ? 'Moving absolute percentile-rank difference · 0–1; Spearman is reported below' : 'Moving absolute interval-width difference · 0–1';
+      if (live) this.container.querySelector('.agreement-map-label').textContent = overlap ? (this.sharedOnly ? 'White = both models in top 10%' : 'Moving top-10% selections · white = shared by both models') : this.mode.value === 'rank' ? 'Moving absolute percentile-rank difference · 0–1; Spearman is reported below' : 'Moving absolute interval-width difference · 0–1';
       this.enableRegionButtons(Boolean(this.row?.region) && this.container.getAttribute('aria-busy') !== 'true');
       if (this.row && this.container.getAttribute('aria-busy') !== 'true') this.status.textContent = `${this.row.valid_pixels.toLocaleString()} jointly valid pixels · ${overlap ? (this.row.top10_reason || 'higher overlap means the models select more of the same locations.') : 'lower correlation means less spatial agreement.'}`;
       if (this.playing && !live) this.status.textContent = 'Pause or select a frame to inspect the rank-difference map.';
@@ -229,7 +230,7 @@
       const context = this.canvas.getContext('2d'), image = context.createImageData(this.maps.width, this.maps.height);
       for (let p = 0; p < values.length; p++) {
         let rgb = [227,32,201];
-        if (overlap) rgb = overlapColors[this.maps.overlapClasses[p]] || rgb;
+        if (overlap) rgb = this.sharedOnly ? overlapColors[this.maps.overlapClasses[p] === 3 ? 3 : 0] : overlapColors[this.maps.overlapClasses[p]] || rgb;
         else if (Number.isFinite(values[p])) {
           const t = Math.min(1, Math.max(0, values[p])) * 4, k = Math.min(3, Math.floor(t)), weight = t - k;
           rgb = palette[k].map((a, c) => Math.round(a * (1 - weight) + palette[k+1][c] * weight));
@@ -238,7 +239,7 @@
         image.data[4*p+3] = 255;
       }
       context.putImageData(image, 0, 0);
-      this.container.querySelector('.agreement-map-label').textContent = overlap ? 'All selected high-uncertainty locations · white = shared by both models' : rank ? 'Difference in uncertainty percentile rank · 0–1' : '|QUTCC width − Im2im width| · normalized intensity';
+      this.container.querySelector('.agreement-map-label').textContent = overlap ? (this.sharedOnly ? 'White = both models in top 10%' : 'All selected high-uncertainty locations · white = shared by both models') : rank ? 'Difference in uncertainty percentile rank · 0–1' : '|QUTCC width − Im2im width| · normalized intensity';
       const output = this.container.querySelector('.agreement-pixel'); output.textContent = '';
       if (this.point) {
         HeatmapPixels.drawCanvas(this.canvas, this.point.x + .5, this.point.y + .5);
