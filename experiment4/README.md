@@ -81,3 +81,18 @@ Reproduction tools in `../tools/`:
 - `test_exp4_interval_curves.py`: exposure weighting and calibration/test checks.
 - `publish_exp4_interval_curves.py`: collect results and publish just the interval
   JSON from an isolated checkout, exiting after all measurements are live.
+
+## Gaussian specialists
+
+The Gaussian tab adds a third column on the right for the Gaussian-only,
+epoch-50 specialist of each method. Reconstruction, absolute error, uncertainty,
+scene metrics, mean test metrics and the shared position marker use the same
+presentation as the clean-50 and generalized-100 columns. The 50 scene IDs,
+Gaussian input images and targets are verified identical. All maps use 0–1.
+
+Specialists were calibrated on 3,000 Gaussian-only scenes; the other columns
+use the shared mixture. Each calibration cohort is labeled beside its result.
+All test means use 2,000 held-out scenes. This display reuses saved results;
+it does not refit calibration. `gaussian-specialists.json` records source report
+and checkpoint hashes and display-asset hashes. Rebuild with
+`tools/build_gaussian_specialists.py RESULTS_FOLDER EXISTING_EXP4_ASSETS`.

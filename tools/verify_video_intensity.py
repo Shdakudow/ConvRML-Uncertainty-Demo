@@ -123,7 +123,7 @@ def main():
         available.bind(("127.0.0.1", 0))
         port = available.getsockname()[1]
     profile = tempfile.mkdtemp(prefix="video-intensity-browser-")
-    work = Path.home() / ".local/share/convrml-video-shared-only-20261104"
+    work = Path.home() / ".local/share/convrml-gaussian-display-20261106"
     work.mkdir(parents=True, exist_ok=True)
     log = (work / "chrome.log").open("w")
     process = subprocess.Popen(
@@ -741,13 +741,13 @@ def main():
             "document.querySelector('#learning-values-ssim').textContent"
         )
         assert js("document.querySelector('#scene').value") == "0"
-        assert js("document.querySelectorAll('img[data-kind=error]').length") == 48
+        assert js("document.querySelectorAll('img[data-kind=error]').length") == 50
         assert js("document.querySelectorAll('.uncertainty-details').length") == 0
         assert (
             js(
                 "document.querySelectorAll('.uncertainty-section img[data-kind=width]').length"
             )
-            == 48
+            == 50
         )
         # The current layout loads assets only for the active category tab.
         results = json.loads((ROOT / "experiment4/data.json").read_text())
@@ -760,7 +760,7 @@ def main():
                 f"[...document.querySelectorAll('#panel-{key} img[data-kind=error]')].every(e=>e.complete && e.naturalWidth===480 && e.naturalHeight===270)"
             )
             assert js(
-                f"[...document.querySelectorAll('#panel-{key} img[data-kind=error]')].every(e=>new URL(e.src).pathname==='/_exp4_errors/errors/{key}/'+e.dataset.arm+'/000.png')"
+                f"[...document.querySelectorAll('#panel-{key} img[data-kind=error]')].every(e=>new URL(e.src).pathname===(e.dataset.arm.endsWith('_gaussian50')?'/experiment4/gaussian-specialists/'+e.dataset.arm+'/000-error.png':'/_exp4_errors/errors/{key}/'+e.dataset.arm+'/000.png'))"
             )
             assert (
                 js("document.querySelectorAll('#tab-panels > :not([hidden])').length")
@@ -768,13 +768,13 @@ def main():
             )
         js("document.querySelector('#tab-gaussian').click()")
         assert js(
-            "document.querySelector('#panel-gaussian .reconstructions img').getBoundingClientRect().width > document.querySelector('#panel-gaussian .inputs img').getBoundingClientRect().width * 1.2"
+            "[...document.querySelectorAll('#panel-gaussian .reconstructions .pair-images')].every(e=>e.querySelectorAll('img').length===3)"
         )
         assert js(
-            "document.querySelector('#panel-gaussian .maps img').getBoundingClientRect().width > document.querySelector('#panel-gaussian .reconstructions img').getBoundingClientRect().width"
+            "Math.abs(document.querySelector('#panel-gaussian .maps img').getBoundingClientRect().width - document.querySelector('#panel-gaussian .reconstructions img').getBoundingClientRect().width)<1"
         )
         assert js(
-            "document.querySelector('#panel-gaussian .errors img').getBoundingClientRect().width > document.querySelector('#panel-gaussian .reconstructions img').getBoundingClientRect().width"
+            "Math.abs(document.querySelector('#panel-gaussian .errors img').getBoundingClientRect().width - document.querySelector('#panel-gaussian .reconstructions img').getBoundingClientRect().width)<1"
         )
         js(
             "document.querySelector('#scene').value='1';document.querySelector('#scene').dispatchEvent(new Event('change'))"
@@ -783,10 +783,10 @@ def main():
             "[...document.querySelectorAll('#panel-gaussian img[data-kind=error]')].every(e=>e.complete && e.naturalWidth===480)"
         )
         assert js(
-            "[...document.querySelectorAll('#panel-gaussian img[data-kind=error]')].every(e=>e.src.endsWith('/001.png'))"
+            "[...document.querySelectorAll('#panel-gaussian img[data-kind=error]')].every(e=>e.src.endsWith(e.dataset.arm.endsWith('_gaussian50')?'/001-error.png':'/001.png'))"
         )
         wait_for(
-            "document.querySelectorAll('#panel-gaussian img[data-kind=width]').length===4"
+            "document.querySelectorAll('#panel-gaussian img[data-kind=width]').length===6"
         )
         js(
             "[...document.querySelectorAll('#panel-gaussian img[data-kind=width]')].forEach(e=>e.loading='eager')"
@@ -848,18 +848,42 @@ def main():
             assert point is not None
             return f"{point['x']},{point['y']}"
 
+        specialist = json.loads(
+            (ROOT / "experiment4/gaussian-specialists.json").read_text()
+        )
+        assert (
+            js(
+                "document.querySelectorAll('#panel-gaussian .scene-metrics table tbody tr').length"
+            )
+            == 12
+        )
+        for method, row_index in [("qutcc", 2), ("im2im", 5)]:
+            row = specialist["arms"][method + "_gaussian50"]["examples"][1]
+            cells = js(
+                f"[...document.querySelectorAll('#panel-gaussian .scene-metrics table')[0].tBodies[0].rows[{row_index}].cells].map(c=>c.textContent)"
+            )
+            assert cells[1] == f"{row['psnr']:.2f}"
+            assert cells[2] == f"{row['ssim']:.4f}"
+            assert cells[4] == f"{100*row['coverage']:.2f}%"
+            assert cells[5] == f"{row['width']:.4f}"
+        assert js(
+            "document.querySelector('#panel-gaussian .calibration').textContent.includes('Gaussian-only calibration')"
+        )
+        assert js(
+            "[...document.querySelectorAll('#panel-gaussian .pair-images')].every(e=>e.lastElementChild.querySelector('img').dataset.arm.endsWith('_gaussian50'))"
+        )
         expected_point = click_image("#panel-gaussian .reconstructions img", 100, 90)
         assert (
             js(
                 "document.querySelectorAll('#panel-gaussian .image-locator-marker').length"
             )
-            == 13
+            == 19
         )
         assert (
             js(
                 "[...document.querySelectorAll('#panel-gaussian .image-locator-marker')].map(e=>e.dataset.point)"
             )
-            == [expected_point] * 13
+            == [expected_point] * 19
         )
         assert js(
             "[...document.querySelector('#panel-gaussian .image-locator-marker').children].map(e=>e.getAttribute('stroke'))"
@@ -969,7 +993,7 @@ def main():
                     )
                 else:
                     assert js(
-                        "document.querySelector('#panel-gaussian .reconstructions img').getBoundingClientRect().width > document.querySelector('#panel-gaussian .inputs img').getBoundingClientRect().width * 1.2"
+                        "[...document.querySelectorAll('#panel-gaussian .reconstructions .pair-images')].every(e=>e.querySelectorAll('img').length===3)"
                     )
                 shot = call(
                     "Page.captureScreenshot", dict(format="png", fromSurface=True)

@@ -12,6 +12,8 @@
     qutcc_general100: "QUTCC · generalized · 100 epochs",
     im2im_clean50: "Im2im · clean · 50 epochs",
     im2im_general100: "Im2im · generalized · 100 epochs",
+    qutcc_gaussian50: "QUTCC · Gaussian specialist · 50 epochs",
+    im2im_gaussian50: "Im2im · Gaussian specialist · 50 epochs",
   };
   const metrics = [
     ["psnr", "PSNR (dB)"],
@@ -34,7 +36,7 @@
     resolution: "Resolution",
     jpeg: "JPEG",
   };
-  let data, errorData,
+  let data, errorData, specialistData,
     index = 0,
     activeTab = "overview";
   let imageLocator;
@@ -86,12 +88,15 @@
     return node;
   }
 
-  function pairs(kind = "prediction") {
+  const conditionArms = condition => condition.id === "gaussian"
+    ? ["qutcc_clean50", "qutcc_general100", "qutcc_gaussian50", "im2im_clean50", "im2im_general100", "im2im_gaussian50"] : arms;
+
+  function pairs(kind = "prediction", condition = null) {
     const grid = el("div", undefined, `model-grid${kind === "width" ? " maps" : kind === "error" ? " errors" : " reconstructions"}`);
     for (const method of ["qutcc", "im2im"]) {
       const pair = el("div", undefined, "pair");
       pair.append(el("h3", method === "qutcc" ? "QUTCC" : "Im2im"));
-      const images = el("div", undefined, "pair-images");
+      const images = el("div", undefined, `pair-images${condition?.id === "gaussian" ? " with-specialist" : ""}`);
       images.append(
         figure(
           "Clean-trained · 50 epochs",
@@ -106,6 +111,7 @@
           `${method}_general100`,
         ),
       );
+      if (condition?.id === "gaussian") images.append(figure("Gaussian specialist · 50 epochs", kind, `${method}_gaussian50`));
       pair.append(images);
       grid.append(pair);
     }
@@ -126,10 +132,10 @@
     head.append(tr);
     t.append(head);
     const body = el("tbody");
-    for (const arm of arms) {
+    for (const arm of conditionArms(condition)) {
       const row = el("tr");
       row.append(el("th", labels[arm]));
-      const results = data.results[condition.id].arms[arm];
+      const results = specialistData.arms[arm] || data.results[condition.id].arms[arm];
       const values = mean ? results.mean : results.examples[sceneIndex];
       for (const [key] of metrics)
         row.append(el("td", number(key, values[key])));
@@ -140,9 +146,9 @@
     return wrapper;
   }
 
-  function appendUncertainty(card) {
+  function appendUncertainty(card, condition = null) {
     const section = el("section", undefined, "uncertainty-section");
-    section.append(el("h3", "Uncertainty maps", "map-title"), pairs("width"));
+    section.append(el("h3", "Uncertainty maps", "map-title"), pairs("width", condition));
     const legend = el("div", undefined, "legend");
     legend.append(
       el("span", "Narrow 0"),
@@ -174,13 +180,14 @@
       table(condition, true),
     );
     content.append(
-      el("h4", "Calibration on the shared 3,000-scene mixture", "table-title"),
+      el("h4", condition.id === "gaussian" ? "Calibration · 3,000 scenes" : "Calibration on the shared 3,000-scene mixture", "table-title"),
     );
     const list = el("ul", undefined, "calibration");
-    for (const arm of arms) {
-      const fit = data.calibration[arm];
+    for (const arm of conditionArms(condition)) {
+      const fit = specialistData.arms[arm]?.calibration || data.calibration[arm];
       const failed = fit.status !== "fitted" || !fit.target_met;
-      const text = `${labels[arm]}: ${(100 * fit.calibration_coverage).toFixed(2)}% overall coverage${failed ? ` · ${fit.failure || "90% target not met"}` : ""}.`;
+      const cohort = condition.id === "gaussian" ? (specialistData.arms[arm] ? " · Gaussian-only calibration" : " · mixture calibration") : "";
+      const text = `${labels[arm]}${cohort}: ${(100 * fit.calibration_coverage).toFixed(2)}% overall coverage${failed ? ` · ${fit.failure || "90% target not met"}` : ""}.`;
       list.append(el("li", text, failed ? "failed" : ""));
     }
     content.append(list);
@@ -188,6 +195,7 @@
 
   function imageUrl(kind, condition, sceneIndex, arm) {
     const stem = String(sceneIndex).padStart(3, "0");
+    if (specialistData.arms[arm]) return new URL(`gaussian-specialists/${arm}/${stem}-${kind}.png`, location.href).href;
     let path;
     if (kind === "original" || kind === "target")
       path = `images/shared/${stem}-${kind}.png`;
@@ -208,12 +216,12 @@
     }
   }
 
-  function appendErrors(card) {
+  function appendErrors(card, condition = null) {
     const legend = el("div", undefined, "legend");
     legend.append(el("span", "Low error 0"), el("span", undefined, "gradient"), el("span", "High error 1"));
     card.append(
       el("h3", "Absolute reconstruction error", "error-title"),
-      pairs("error"),
+      pairs("error", condition),
       legend,
       el("p", "Mean RGB |reconstruction − ground truth|, computed before display quantization. The same 0–1 scale is used for every model and condition.", "caption"),
     );
@@ -232,9 +240,9 @@
     inputs.append(figure("Original sensor input", "original"));
     if (!clean) inputs.append(figure("Modified sensor input", "input"));
     inputs.append(figure("Ground truth · reference", "target"));
-    card.append(inputs, el("code", condition.formula, "formula"), pairs());
-    appendErrors(card);
-    appendUncertainty(card);
+    card.append(inputs, el("code", condition.formula, "formula"), pairs("prediction", condition));
+    appendErrors(card, condition);
+    appendUncertainty(card, condition);
     return card;
   }
 
@@ -343,6 +351,7 @@
       button.tabIndex = selected ? 0 : -1;
     }
     updateToolbarOffset();
+    document.getElementById("specialist-intro").hidden = activeTab !== "gaussian";
     const condition =
       data.conditions.find((item) => item.id === activeTab) ||
       data.conditions.find((item) => item.id === "clean");
@@ -410,6 +419,10 @@
     if (!response.ok)
       throw new Error(`Results could not be loaded (${response.status})`);
     data = await response.json();
+    const specialistResponse = await fetch("gaussian-specialists.json");
+    if (!specialistResponse.ok) throw new Error("Gaussian specialist results could not be loaded");
+    specialistData = await specialistResponse.json();
+    if (specialistData.schema !== "gaussian_specialists_v1" || JSON.stringify(specialistData.ids) !== JSON.stringify(data.ids)) throw new Error("Gaussian specialist scenes do not match");
     // Keep the stored condition ID and scientific results intact.
     const pixelResponse = data.conditions.find(condition => condition.id === "fixed_pattern");
     pixelResponse.title = "Uneven pixel response";
