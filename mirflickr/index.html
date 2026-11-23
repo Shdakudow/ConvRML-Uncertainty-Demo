@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MIRFLICKR · Model comparison</title><link rel="stylesheet" href="style.css"><script defer src="../demo-navigation.js"></script><script defer src="app.js"></script><link rel="stylesheet" href="../example-browser.css"><script src="../example-browser.js"></script><link rel="stylesheet" href="../experiment-ui.css"><script defer src="../experiment-ui.js"></script><script defer src="../metric-curves.js"></script><link rel="stylesheet" href="../heatmap-pixels.css"><script src="../heatmap-pixels.js"></script></head>
+<body>
+<header>
+<nav class="experiment-nav" aria-label="Experiments"><a data-demo-route="raw" href="../raw-diffusercam/">Raw DiffuserCam</a><a aria-current="page" data-demo-route="mirflickr" href="./">MIRFLICKR</a></nav>
+<p class="eyebrow">MIRFLICKR</p><h1>Reconstruction &amp; uncertainty</h1>
+</header>
+<main>
+<nav class="controls"><label>Image <select id="example"></select></label><button id="previous" aria-label="Previous image">←</button><button id="next" aria-label="Next image">→</button><button id="random">Random</button><span id="status" role="status" aria-live="polite">Loading…</span></nav>
+<p class="context" id="provenance" hidden></p>
+<section class="inputs" aria-label="Input and reference"><figure><figcaption>Camera input</figcaption><canvas id="measurement" width="480" height="270"></canvas></figure><figure><figcaption>Ground truth</figcaption><canvas id="target" width="480" height="270"></canvas></figure></section>
+<section aria-label="Model comparison">
+<div class="guide"><div><b>Error</b> = |ground truth − prediction| &nbsp; <b>Uncertainty</b> = upper − lower</div><div class="map-key"><span class="gradient" aria-hidden="true"></span><span id="mapScale">0 → 1 · normalized intensity</span></div><label class="bounds-toggle"><input type="checkbox" id="showBounds"> Show lower / upper bounds</label></div>
+<h3>This image · metrics</h3><div class="table-wrap"><table id="imageMetrics"><thead><tr><th>Model</th><th>Epoch</th><th>PSNR ↑</th><th>SSIM ↑</th><th>Coverage</th><th>Width ↓</th><th>MAE ↓</th></tr></thead><tbody id="imageMetricRows"></tbody></table></div>
+<div id="matrix" class="matrix"></div><p class="hint">Click an image pixel to inspect its prediction and bounds. <span class="badge">Display: clipped [0,1]</span></p>
+<details id="pixelInspector"><summary>Inspect a pixel</summary><div class="detail-body"><h2 id="pixelTitle">Selected pixel</h2><label>Channel <select id="channel"><option value="rgb">RGB average</option><option value="0">Red</option><option value="1">Green</option><option value="2">Blue</option></select></label><p id="pixelTruth"></p><div class="table-wrap"><table><thead><tr><th>Model</th><th>Prediction</th><th>Lower</th><th>Upper</th><th>Error</th><th>Width</th></tr></thead><tbody id="pixelRows"></tbody></table></div></div></details>
+</section>
+<section><h2 id="resultsTitle">Results across 2,000 test images</h2><p class="hint">Higher PSNR / SSIM is better. Compare interval width at similar coverage. Im2im uses K-RCPS with a 90%-confidence Hoeffding–Bentkus certificate.</p><div class="table-wrap"><table><thead><tr><th>Model</th><th>Epoch</th><th>PSNR ↑</th><th>SSIM ↑</th><th>Calibration coverage</th><th>Test coverage</th><th>Width ↓</th><th>LPIPS ↓</th></tr></thead><tbody id="aggregateRows"></tbody></table></div></section>
+
+<section><h2>Learning curves</h2><p class="context" id="curveNote"></p><div id="historyPlots" class="plots"></div><div id="intervalPlots" class="plots"></div></section>
+
+<details id="calibrationDetails"><summary>Calibration details</summary><div class="detail-body"><p>QUTCC trains a quantile function; calibration selects global lower and upper quantile inputs q. Im2im trains a center + bound predictor; calibration fits a per-pixel expansion map (K-RCPS) with a Hoeffding–Bentkus 90%-confidence certificate (α = 0.10, δ = 0.10).</p><p id="calibrationProtocol">3,000 calibration images are held out from the 2,000 test images. K-RCPS uses 10 images for optimization and the remaining 2,990 for the HB test.</p><div class="table-wrap"><table><thead><tr><th>Epoch</th><th>Model</th><th>Procedure</th><th>Parameter</th><th>Calibration coverage</th><th>Test coverage</th><th>Width ↓</th></tr></thead><tbody id="calibrationRows"></tbody></table></div></div></details>
+<details><summary>Training settings &amp; data</summary><div class="detail-body"><p id="settings"></p><p>RGB images are 270 × 480. The split is 25,000 training, 2,000 validation, 2,000 test and 3,000 calibration pairs. MIRFLICKR lensless images captured with a DiffuserCam.</p><a id="metricsDownload" href="data.json">Download metrics and settings</a></div></details>
+</main><footer>QUTCC / Im2im · MIRFLICKR</footer></body></html>

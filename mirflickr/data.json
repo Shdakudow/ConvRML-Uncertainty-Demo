@@ -1,0 +1,135 @@
+{
+  "studies": {
+    "mirflickr": {
+      "qutcc": {
+        "study": "mirflickr",
+        "method": "qutcc",
+        "epoch": 49,
+        "config": {
+          "camera": "mirflickr",
+          "method": "qutcc",
+          "optimizer": "AdamW",
+          "weight_decay": 0.0001,
+          "peak_lr": 0.0001,
+          "initial_scheduled_lr": 1e-05,
+          "schedule": "9-epoch linear warmup, cosine decay to 1e-9 across 50 epochs",
+          "loss": "pinball",
+          "counts": {
+            "train": 25000,
+            "val": 2000,
+            "test": 2000,
+            "calibration": 3000
+          }
+        },
+        "history": [],
+        "evaluations": [
+          {
+            "epoch": 49,
+            "status": "complete",
+            "metrics": {
+              "clipped": {
+                "psnr": 25.88077735900879,
+                "ssim": 0.8211246728897095,
+                "coverage": 0.899728515946502,
+                "width": 0.13012516392586163,
+                "mae": null
+              }
+            },
+            "calibration": {
+              "lower_q": 0.04150390625,
+              "upper_q": 0.976806640625,
+              "calibration_coverage": 0.9006237482853223
+            }
+          }
+        ],
+        "metrics": {
+          "clipped": {
+            "psnr": 25.88077735900879,
+            "ssim": 0.8211246728897095,
+            "coverage": 0.899728515946502,
+            "width": 0.13012516392586163,
+            "lpips": 0.25522108751535416
+          }
+        },
+        "calibration": {
+          "lower_q": 0.04150390625,
+          "upper_q": 0.976806640625,
+          "procedure": "QUTCC quantile search",
+          "calibration_coverage": 0.9006237482853223
+        },
+        "test_count": 2000,
+        "calibration_count": 3000,
+        "example_count": 0,
+        "refreshed": false
+      },
+      "im2im": {
+        "study": "mirflickr",
+        "method": "im2im",
+        "epoch": 50,
+        "config": {
+          "camera": "mirflickr",
+          "method": "im2im",
+          "optimizer": "AdamW",
+          "weight_decay": 0.0001,
+          "peak_lr": 0.0001,
+          "initial_scheduled_lr": 1e-05,
+          "schedule": "9-epoch linear warmup, cosine decay to 1e-9 across 50 epochs",
+          "loss": "MSE center + pinball bounds",
+          "counts": {
+            "train": 25000,
+            "val": 2000,
+            "test": 2000,
+            "calibration": 3000
+          }
+        },
+        "history": [],
+        "evaluations": [
+          {
+            "epoch": 50,
+            "status": "complete",
+            "metrics": {
+              "clipped": {
+                "psnr": 26.219430923461914,
+                "ssim": 0.8214802742004395,
+                "coverage": 0.9089483500514404,
+                "width": 0.11386360890078447,
+                "mae": null
+              }
+            },
+            "calibration": {
+              "procedure": "K-RCPS",
+              "lambda_mean": 0.008950182236731052,
+              "lambda_max": 0.017900366336107254,
+              "calibration_coverage": 0.9106992185115814,
+              "certificate_passed": true,
+              "hb_pvalue": 0.08162667340287963
+            }
+          }
+        ],
+        "metrics": {
+          "clipped": {
+            "psnr": 26.219430923461914,
+            "ssim": 0.8214802742004395,
+            "coverage": 0.9089483500514404,
+            "width": 0.11386360890078447,
+            "lpips": 0.2456264036297798
+          }
+        },
+        "calibration": {
+          "procedure": "K-RCPS with Hoeffding-Bentkus certificate",
+          "lambda_mean": 0.008950182236731052,
+          "lambda_max": 0.017900366336107254,
+          "alpha": 0.1,
+          "delta": 0.1,
+          "calibration_coverage": 0.9106992185115814,
+          "certificate_passed": true,
+          "hb_pvalue": 0.08162667340287963
+        },
+        "test_count": 2000,
+        "calibration_count": 3000,
+        "example_count": 0,
+        "refreshed": false
+      }
+    }
+  }
+}
