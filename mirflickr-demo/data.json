@@ -1,0 +1,140 @@
+{
+  "scenes": [
+    {
+      "id": "test_im830.png",
+      "objects": "Illustrated face with red and cream shapes",
+      "ssim": 0.6550857424736023,
+      "metrics": {
+        "qutcc": {
+          "ssim": 0.6459554433822632,
+          "psnr": 19.644620895385742,
+          "lpips": 0.37103429436683655
+        },
+        "im2im": {
+          "ssim": 0.6550856828689575,
+          "psnr": 19.998733520507812,
+          "lpips": 0.3682701289653778
+        },
+        "deepensemble": {
+          "ssim": 0.5589218139648438,
+          "psnr": 18.1024227142334,
+          "lpips": 0.5420826077461243
+        },
+        "mcdropout": {
+          "ssim": 0.6565613746643066,
+          "psnr": 19.988082885742188,
+          "lpips": 0.372257262468338
+        }
+      }
+    },
+    {
+      "id": "test_im843.png",
+      "objects": "Two people beside a tiled roof",
+      "ssim": 0.6652366518974304,
+      "metrics": {
+        "qutcc": {
+          "ssim": 0.6584026217460632,
+          "psnr": 18.61595344543457,
+          "lpips": 0.3417741060256958
+        },
+        "im2im": {
+          "ssim": 0.6652366518974304,
+          "psnr": 18.953916549682617,
+          "lpips": 0.343680739402771
+        },
+        "deepensemble": {
+          "ssim": 0.5835267901420593,
+          "psnr": 17.086868286132812,
+          "lpips": 0.5216574668884277
+        },
+        "mcdropout": {
+          "ssim": 0.6708138585090637,
+          "psnr": 19.152433395385742,
+          "lpips": 0.33736857771873474
+        }
+      }
+    },
+    {
+      "id": "test_im74.png",
+      "objects": "Blue glass panels and metal frames",
+      "ssim": 0.7187926173210144,
+      "metrics": {
+        "qutcc": {
+          "ssim": 0.7229637503623962,
+          "psnr": 22.414562225341797,
+          "lpips": 0.33453744649887085
+        },
+        "im2im": {
+          "ssim": 0.7187926173210144,
+          "psnr": 22.596622467041016,
+          "lpips": 0.32634907960891724
+        },
+        "deepensemble": {
+          "ssim": 0.6783437728881836,
+          "psnr": 20.937898635864258,
+          "lpips": 0.41507402062416077
+        },
+        "mcdropout": {
+          "ssim": 0.7151999473571777,
+          "psnr": 22.478595733642578,
+          "lpips": 0.33515194058418274
+        }
+      }
+    },
+    {
+      "id": "test_im324.png",
+      "objects": "Labeled tins on a shelf",
+      "ssim": 0.7194052338600159,
+      "metrics": {
+        "qutcc": {
+          "ssim": 0.7088314890861511,
+          "psnr": 20.70763397216797,
+          "lpips": 0.3789217472076416
+        },
+        "im2im": {
+          "ssim": 0.7194051146507263,
+          "psnr": 21.07755470275879,
+          "lpips": 0.3683736324310303
+        },
+        "deepensemble": {
+          "ssim": 0.6457638740539551,
+          "psnr": 19.464948654174805,
+          "lpips": 0.5183072090148926
+        },
+        "mcdropout": {
+          "ssim": 0.7151461839675903,
+          "psnr": 21.077289581298828,
+          "lpips": 0.3861559331417084
+        }
+      }
+    }
+  ],
+  "selection": {
+    "split": "test",
+    "sample_size": 32,
+    "seed": 777,
+    "ranked_by": "Ascending Im2im RGB SSIM, data_range=1",
+    "manifest_sha256": "92b12e510b1e81f78ad7103b28d8f7899763549224b88ce25454df398f5d2a9c"
+  },
+  "checkpoints": {
+    "qutcc": {
+      "epoch": 49,
+      "sha256": "cd0a33b0f28cc6439be52d392b4082b4e6d0d40b7a966c007db9f9a4527e9ef7"
+    },
+    "im2im": {
+      "epoch": 50,
+      "sha256": "fe2dde92411788efe48a41f6ef2be8ffe9a4126547df40937fed78b4c231ae6a"
+    },
+    "deepensemble": {
+      "epoch": 49,
+      "sha256": "9b2121bb7fd1005a00c6da0142a32139f38ff06a50f434c070a244f8bd72bf3a",
+      "interval_scale": 0.8908908367156982
+    },
+    "mcdropout": {
+      "stochastic_passes": 50,
+      "epoch": 44,
+      "sha256": "2b202e3e0448d82e8ad4efbbb1aa92757cadd9a34d5ec0fa61e18ff4e1ee1edd",
+      "interval_scale": 3.0015008449554443
+    }
+  }
+}

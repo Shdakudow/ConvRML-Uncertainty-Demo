@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MIRFLICKR · Reconstruction &amp; Uncertainty</title>
+<link rel="stylesheet" href="style.css?v=dc-im2im-unpaired-1">
+<link rel="stylesheet" href="heatmap-pixels.css">
+<link rel="stylesheet" href="example-browser.css">
+<script src="heatmap-pixels.js"></script>
+<script src="example-browser.js"></script>
+<script defer src="unpaired.js?v=q-width-1"></script>
+<script defer src="app.js?v=dc-im2im"></script>
+<script defer src="diffusercam.js"></script>
+</head>
+<body>
+<header>
+<p class="eyebrow">MIRFLICKR · LENSLESS IMAGING</p>
+<h1>MIRFLICKR reconstruction and uncertainty</h1>
+
+</header>
+<main>
+<nav class="page-tabs" role="tablist">
+  <button class="page-tab active" role="tab" data-tab="tab-with-gt">With ground truth</button>
+  <button class="page-tab" role="tab" data-tab="tab-without-gt">W/o ground truth</button>
+  <button class="page-tab" role="tab" data-tab="tab-diffusercam">DiffuserCam</button>
+</nav>
+<label class="width-mode"><input id="signedWidth" type="checkbox" role="switch" autocomplete="off"> Use signed QUTCC width (UB − LB)</label>
+
+<div id="tab-with-gt" class="tab-panel active">
+<p>Four held-out MIRFLICKR scenes with the lowest Im2im reconstruction SSIM among 32 randomly sampled test images (seed 777).</p>
+<nav class="controls">
+  <label>Objects <select id="example"></select></label>
+  <button id="previous" aria-label="Previous">←</button>
+  <button id="next" aria-label="Next">→</button>
+  <button id="random">Random</button>
+  <span id="status" role="status" aria-live="polite">Loading…</span>
+</nav>
+
+<section class="inputs" aria-label="Input and reference">
+  <figure><figcaption>Camera input</figcaption><canvas id="measurement" width="480" height="270"></canvas></figure>
+  <figure><figcaption>Ground truth</figcaption><canvas id="target" width="480" height="270"></canvas></figure>
+</section>
+
+<section aria-label="Model outputs">
+  <div class="guide">
+    <div><b>Absolute error</b> = |ground truth − prediction| &nbsp; <b>QUTCC width</b> = <span id="widthFormula">|upper − lower|</span><br>Both maps show the RGB mean.</div>
+    <div class="map-key">
+      <span class="gradient" aria-hidden="true"></span>
+      <span>0 → 1 (error and width)</span>
+    </div>
+    <label>Blur σ <select id="blur"><option value="0">0 px (no blur)</option><option value="1" selected>1 px</option><option value="1.5">1.5 px</option><option value="2">2 px</option><option value="2.5">2.5 px</option></select></label>
+    <button id="showBounds" class="bounds-toggle" aria-controls="matrix" aria-expanded="false">Show bounds</button>
+  </div>
+  <div class="matrix-scroll"><div id="matrix" class="matrix"></div></div>
+  <p class="hint">Deep ensemble bounds use the calibrated multiplier 0.890891. MC dropout bounds are the mean ± (3.001501 × 1.645 × SD) across 50 predictions per RGB channel. Click a pixel to inspect its unsmoothed values. <span class="badge">Display: clipped [0,1]</span></p>
+
+  <details id="pixelInspector">
+    <summary>Inspect a pixel</summary>
+    <div class="detail-body">
+      <h2 id="pixelTitle">Selected pixel</h2>
+      <label>Channel
+        <select id="channel">
+          <option value="rgb">RGB average</option>
+          <option value="0">Red</option>
+          <option value="1">Green</option>
+          <option value="2">Blue</option>
+        </select>
+      </label>
+      <p id="pixelTruth"></p>
+      <p id="pixelSpread"></p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Model</th><th>Prediction</th><th>Lower</th><th>Upper</th><th>Error</th><th>Width</th></tr></thead>
+          <tbody id="pixelRows"></tbody>
+        </table>
+      </div>
+    </div>
+  </details>
+</section>
+</div><!-- #tab-with-gt -->
+
+<div id="tab-without-gt" class="tab-panel">
+  <p>External DiffuserCam captures reconstructed with four MIRFLICKR-trained models. Uncertainty is the RGB mean interval width on a shared 0–1 color scale. In signed mode, magenta marks QUTCC pixels with crossed bounds.</p>
+  <div class="subtab-container">
+    <nav class="subtabs" role="tablist">
+      <button class="subtab active" role="tab" data-subtab="wgt-pictures">Pictures</button>
+      <button class="subtab" role="tab" data-subtab="wgt-video">Video</button>
+    </nav>
+
+    <div id="wgt-pictures" class="subtab-panel active">
+      <label>Picture <select id="capture-select"></select></label>
+      <button type="button" id="capture-next" disabled>Next</button>
+      <span id="capture-status" role="status"></span>
+      <section class="wgt-input-section">
+        <figure><figcaption>Camera input</figcaption><canvas id="wgt-measurement" width="480" height="270"></canvas></figure>
+      </section>
+      <div class="wgt-controls">
+        <label>Blur σ <select id="wgt-blur">
+          <option value="0">0 px (no blur)</option>
+          <option value="1">1 px</option>
+          <option value="1.5">1.5 px</option>
+          <option value="2" selected>2 px</option>
+          <option value="2.5">2.5 px</option>
+        </select></label>
+        <button id="wgt-show-bounds" class="bounds-toggle" aria-expanded="false">Show UB / LB</button>
+      </div>
+      <div id="wgt-grid" class="wgt-grid"></div>
+    </div>
+
+    <div id="wgt-video" class="subtab-panel">
+      <div class="vid-controls">
+        <label>Sequence <select id="sequence-select">
+          <option value="video1">Video 1</option><option value="video4">Video 4</option>
+          <option value="video6">Video 6</option><option value="video7">Video 7</option><option value="video10">Video 10</option>
+        </select></label>
+        <button type="button" id="sequence-next">Next</button>
+        <button id="vid-play" disabled>Play</button>
+        <span id="sequence-status" role="status"></span>
+        <button id="vid-show-bounds" class="bounds-toggle" aria-expanded="false">Show UB / LB</button>
+      </div>
+      <div id="vid-layout" class="vid-layout"></div>
+      <p class="hint">Playback uses 20 frames per second. Mean width is calculated from the original bounds for the displayed frame.</p>
+    </div>
+  </div>
+</div><!-- #tab-without-gt -->
+
+<div id="tab-diffusercam" class="tab-panel">
+<p>Held-out DiffuserCam scenes reconstructed by DiffuserCam-trained Im2im. Bounds use K-RCPS calibration.</p>
+<nav class="controls">
+  <label>Objects <select id="dc-example"></select></label>
+  <button id="dc-previous" aria-label="Previous">←</button>
+  <button id="dc-next" aria-label="Next">→</button>
+  <button id="dc-random">Random</button>
+  <span id="dc-status" role="status" aria-live="polite">Loading…</span>
+</nav>
+
+<section class="inputs" aria-label="Input and reference">
+  <figure><figcaption>Camera input</figcaption><canvas id="dc-measurement" width="480" height="270"></canvas></figure>
+  <figure><figcaption>Ground truth</figcaption><canvas id="dc-target" width="480" height="270"></canvas></figure>
+</section>
+
+<section aria-label="Model outputs">
+  <div class="guide">
+    <div><b>Absolute error</b> = |ground truth − prediction| &nbsp; <b>Uncertainty</b> = upper − lower<br>Both maps show the RGB mean.</div>
+    <div class="map-key">
+      <span class="gradient" aria-hidden="true"></span>
+      <span>0 → 1 (error and width)</span>
+    </div>
+    <label>Blur σ <select id="dc-blur"><option value="0">0 px (no blur)</option><option value="1" selected>1 px</option><option value="1.5">1.5 px</option><option value="2">2 px</option><option value="2.5">2.5 px</option></select></label>
+    <button id="dc-showBounds" class="bounds-toggle" aria-controls="dc-matrix" aria-expanded="false">Show bounds</button>
+  </div>
+  <div class="matrix-scroll"><div id="dc-matrix" class="matrix"></div></div>
+  <p class="hint">Click a pixel to inspect its unsmoothed values. <span class="badge">Display: clipped [0,1]</span></p>
+
+  <details id="dc-pixelInspector">
+    <summary>Inspect a pixel</summary>
+    <div class="detail-body">
+      <h2 id="dc-pixelTitle">Selected pixel</h2>
+      <label>Channel
+        <select id="dc-channel">
+          <option value="rgb">RGB average</option>
+          <option value="0">Red</option>
+          <option value="1">Green</option>
+          <option value="2">Blue</option>
+        </select>
+      </label>
+      <p id="dc-pixelTruth"></p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Model</th><th>Prediction</th><th>Lower</th><th>Upper</th><th>Error</th><th>Width</th></tr></thead>
+          <tbody id="dc-pixelRows"></tbody>
+        </table>
+      </div>
+    </div>
+  </details>
+</section>
+</div><!-- #tab-diffusercam -->
+</main>
+<footer>MIRFLICKR · QUTCC / Im2im / Deep ensemble / MC dropout</footer>
+</body>
+</html>
