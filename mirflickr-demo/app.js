@@ -350,6 +350,17 @@ function initVideoLayout() {
       history.replaceState(history.state, "", url);
     }
 
+    // Dataset switcher
+    document.querySelectorAll(".dataset-btn").forEach(btn => {
+      btn.onclick = () => {
+        document.querySelectorAll(".dataset-btn").forEach(b => b.classList.remove("active"));
+        document.querySelectorAll(".dataset-panel").forEach(p => p.classList.remove("active"));
+        btn.classList.add("active");
+        document.getElementById("dataset-" + btn.dataset.dataset).classList.add("active");
+        rememberTab("dataset", btn.dataset.dataset);
+      };
+    });
+
     // Page tab switching
     document.querySelectorAll(".page-tab").forEach(btn => {
       btn.onclick = () => {
@@ -389,13 +400,10 @@ function initVideoLayout() {
     initVideoLayout();
     initUnpaired();
     $("#signedWidth").addEventListener("change", () => {
-      const formula = $("#signedWidth").checked ? "upper − lower" : "|upper − lower|";
-      $("#widthFormula").textContent = formula;
-      const dcFormula = document.getElementById("dc-widthFormula");
-      if (dcFormula) dcFormula.textContent = formula;
+      $("#widthFormula").textContent = $("#signedWidth").checked ? "upper − lower" : "|upper − lower|";
       if (example) renderExample();
     });
-    for (const key of ["subtab", "tab"]) {
+    for (const key of ["dataset", "subtab", "tab"]) {
       const saved = params.get(key);
       if (saved) Array.from(document.querySelectorAll(`[data-${key}]`))
         .find(button => button.dataset[key] === saved)?.click();

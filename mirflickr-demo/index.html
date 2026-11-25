@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MIRFLICKR · Reconstruction &amp; Uncertainty</title>
+<title>Reconstruction &amp; Uncertainty</title>
 <link rel="stylesheet" href="style.css?v=dc-im2im-unpaired-1">
 <link rel="stylesheet" href="heatmap-pixels.css">
 <link rel="stylesheet" href="example-browser.css">
@@ -15,17 +15,29 @@
 </head>
 <body>
 <header>
-<p class="eyebrow">MIRFLICKR · LENSLESS IMAGING</p>
-<h1>MIRFLICKR reconstruction and uncertainty</h1>
-
+<p class="eyebrow">LENSLESS IMAGING · RECONSTRUCTION &amp; UNCERTAINTY</p>
+<h1>Reconstruction and uncertainty</h1>
 </header>
 <main>
+
+<nav class="dataset-nav" aria-label="Dataset">
+  <div class="dataset-entry">
+    <button class="dataset-btn active" data-dataset="mirflickr">MIRFLICKR</button>
+    <a class="paper-link" href="#" target="_blank" rel="noopener">dataset ↗</a>
+  </div>
+  <div class="dataset-entry">
+    <button class="dataset-btn" data-dataset="diffusercam">DiffuserCam</button>
+    <a class="paper-link" href="#" target="_blank" rel="noopener">paper ↗</a>
+  </div>
+</nav>
+
+<label class="width-mode"><input id="signedWidth" type="checkbox" role="switch" autocomplete="off"> Use signed QUTCC width (UB − LB)</label>
+
+<div id="dataset-mirflickr" class="dataset-panel active">
 <nav class="page-tabs" role="tablist">
   <button class="page-tab active" role="tab" data-tab="tab-with-gt">With ground truth</button>
   <button class="page-tab" role="tab" data-tab="tab-without-gt">W/o ground truth</button>
-  <button class="page-tab" role="tab" data-tab="tab-diffusercam">DiffuserCam</button>
 </nav>
-<label class="width-mode"><input id="signedWidth" type="checkbox" role="switch" autocomplete="off"> Use signed QUTCC width (UB − LB)</label>
 
 <div id="tab-with-gt" class="tab-panel active">
 <p>Four held-out MIRFLICKR scenes with the lowest Im2im reconstruction SSIM among 32 randomly sampled test images (seed 777).</p>
@@ -124,9 +136,10 @@
     </div>
   </div>
 </div><!-- #tab-without-gt -->
+</div><!-- #dataset-mirflickr -->
 
-<div id="tab-diffusercam" class="tab-panel">
-<p>Held-out DiffuserCam scenes reconstructed by DiffuserCam-trained Im2im. Bounds use K-RCPS calibration.</p>
+<div id="dataset-diffusercam" class="dataset-panel">
+<p>Held-out DiffuserCam scenes reconstructed by DiffuserCam-trained Im2im. Bounds use K-RCPS calibration. <span id="dc-calibration-result"></span></p>
 <nav class="controls">
   <label>Objects <select id="dc-example"></select></label>
   <button id="dc-previous" aria-label="Previous">←</button>
@@ -175,8 +188,9 @@
     </div>
   </details>
 </section>
-</div><!-- #tab-diffusercam -->
+</div><!-- #dataset-diffusercam -->
+
 </main>
-<footer>MIRFLICKR · QUTCC / Im2im / Deep ensemble / MC dropout</footer>
+<footer>MIRFLICKR · DiffuserCam · QUTCC / Im2im / Deep ensemble / MC dropout</footer>
 </body>
 </html>
