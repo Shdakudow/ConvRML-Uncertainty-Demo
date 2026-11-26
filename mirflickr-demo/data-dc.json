@@ -47,6 +47,198 @@
           "lpips": 0.2849692106246948
         }
       }
+    },
+    {
+      "id": "img_15231",
+      "objects": "Circular forms in blue and silver",
+      "ssim": 0.9469577074050903,
+      "metrics": {
+        "im2im": {
+          "ssim": 0.9469577074050903,
+          "psnr": 34.666805267333984,
+          "lpips": 0.09116873145103455
+        }
+      }
+    },
+    {
+      "id": "img_13623",
+      "objects": "Close-up of an eye",
+      "ssim": 0.9358412623405457,
+      "metrics": {
+        "im2im": {
+          "ssim": 0.9358412623405457,
+          "psnr": 37.86542510986328,
+          "lpips": 0.15622127056121826
+        }
+      }
+    },
+    {
+      "id": "img_97395",
+      "objects": "Colorful pennants over a building",
+      "ssim": 0.9227226972579956,
+      "metrics": {
+        "im2im": {
+          "ssim": 0.9227226972579956,
+          "psnr": 31.07160758972168,
+          "lpips": 0.13705509901046753
+        }
+      }
+    },
+    {
+      "id": "img_45318",
+      "objects": "Two people sitting together",
+      "ssim": 0.9073512554168701,
+      "metrics": {
+        "im2im": {
+          "ssim": 0.9073512554168701,
+          "psnr": 32.724769592285156,
+          "lpips": 0.17836086452007294
+        }
+      }
+    },
+    {
+      "id": "img_54414",
+      "objects": "Lettering above a street scene",
+      "ssim": 0.8570948243141174,
+      "metrics": {
+        "im2im": {
+          "ssim": 0.8570948243141174,
+          "psnr": 31.099952697753906,
+          "lpips": 0.21674340963363647
+        }
+      }
+    },
+    {
+      "id": "img_23243",
+      "objects": "Arched bridge in a garden",
+      "ssim": 0.8810429573059082,
+      "metrics": {
+        "im2im": {
+          "ssim": 0.8810429573059082,
+          "psnr": 31.34954261779785,
+          "lpips": 0.21770267188549042
+        }
+      }
+    },
+    {
+      "id": "img_39377",
+      "objects": "Red knitted cover on a post",
+      "ssim": 0.9342933893203735,
+      "metrics": {
+        "im2im": {
+          "ssim": 0.9342933893203735,
+          "psnr": 34.682472229003906,
+          "lpips": 0.13163629174232483
+        }
+      }
+    },
+    {
+      "id": "img_58969",
+      "objects": "Person in a knit cap",
+      "ssim": 0.9608367681503296,
+      "metrics": {
+        "im2im": {
+          "ssim": 0.9608367681503296,
+          "psnr": 39.47687530517578,
+          "lpips": 0.07673224806785583
+        }
+      }
+    },
+    {
+      "id": "img_26",
+      "objects": "Close-up of a sculpted face",
+      "ssim": 0.9442816376686096,
+      "metrics": {
+        "im2im": {
+          "ssim": 0.9442816376686096,
+          "psnr": 38.19879913330078,
+          "lpips": 0.10203155875205994
+        }
+      }
+    },
+    {
+      "id": "img_69831",
+      "objects": "Purple flower cluster",
+      "ssim": 0.9230119585990906,
+      "metrics": {
+        "im2im": {
+          "ssim": 0.9230119585990906,
+          "psnr": 33.521820068359375,
+          "lpips": 0.12645940482616425
+        }
+      }
+    },
+    {
+      "id": "img_1166",
+      "objects": "Sunlit trees",
+      "ssim": 0.8228471875190735,
+      "metrics": {
+        "im2im": {
+          "ssim": 0.8228471875190735,
+          "psnr": 28.24124526977539,
+          "lpips": 0.2295105755329132
+        }
+      }
+    },
+    {
+      "id": "img_26039",
+      "objects": "Airplane on a runway",
+      "ssim": 0.9159205555915833,
+      "metrics": {
+        "im2im": {
+          "ssim": 0.9159205555915833,
+          "psnr": 32.64899444580078,
+          "lpips": 0.17248889803886414
+        }
+      }
+    },
+    {
+      "id": "img_64455",
+      "objects": "Clouds over a dark horizon",
+      "ssim": 0.9776343703269958,
+      "metrics": {
+        "im2im": {
+          "ssim": 0.9776343703269958,
+          "psnr": 40.232215881347656,
+          "lpips": 0.07650378346443176
+        }
+      }
+    },
+    {
+      "id": "img_5186",
+      "objects": "Two people smiling",
+      "ssim": 0.897703230381012,
+      "metrics": {
+        "im2im": {
+          "ssim": 0.897703230381012,
+          "psnr": 32.99739456176758,
+          "lpips": 0.17524148523807526
+        }
+      }
+    },
+    {
+      "id": "img_5476",
+      "objects": "Water splash and droplets",
+      "ssim": 0.9184927344322205,
+      "metrics": {
+        "im2im": {
+          "ssim": 0.9184927344322205,
+          "psnr": 30.322010040283203,
+          "lpips": 0.12537294626235962
+        }
+      }
+    },
+    {
+      "id": "img_88616",
+      "objects": "Open landscape beneath a blue sky",
+      "ssim": 0.9618511199951172,
+      "metrics": {
+        "im2im": {
+          "ssim": 0.9618511199951172,
+          "psnr": 38.92574691772461,
+          "lpips": 0.12148560583591461
+        }
+      }
     }
   ],
   "split": "test",
@@ -76,5 +268,10 @@
     "calibration_coverage": 0.9372793212532997,
     "certificate_passed": true,
     "hb_pvalue": 4.50131842426971e-09
+  },
+  "example_selection": {
+    "original_count": 4,
+    "additional_random_test_images": 16,
+    "seed": 777
   }
 }
