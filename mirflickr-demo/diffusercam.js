@@ -149,6 +149,8 @@ async function dcLoadExample() {
         return r.json();
       })
     );
+    document.getElementById("dc-calibration-result").textContent =
+      `Epoch ${dcData.checkpoint_epoch} · Test pixel coverage ${(dcData.test.coverage * 100).toFixed(2)}% across ${dcData.test.n_images.toLocaleString("en-US")} images.`;
     const params = new URLSearchParams(location.search);
     dcIndex = Math.max(0, Math.min(dcData.scenes.length - 1, Math.trunc(Number(params.get("dc-example"))) || 0));
     const dcSel = document.getElementById("dc-example");
@@ -174,8 +176,8 @@ async function dcLoadExample() {
     const loadOnOpen = () => {
       if (!dcExample && !dcBusy) dcLoadExample();
     };
-    document.querySelector('[data-tab="tab-diffusercam"]').addEventListener("click", loadOnOpen);
-    if (document.getElementById("tab-diffusercam").classList.contains("active")) loadOnOpen();
+    document.querySelector('[data-dataset="diffusercam"]').addEventListener("click", loadOnOpen);
+    if (document.getElementById("dataset-diffusercam").classList.contains("active")) loadOnOpen();
   } catch (e) {
     document.getElementById("dc-status").textContent = "Could not load DiffuserCam results: " + e.message;
     console.error(e);

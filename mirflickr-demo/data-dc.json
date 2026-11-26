@@ -1,0 +1,80 @@
+{
+  "scenes": [
+    {
+      "id": "img_14214",
+      "objects": "Seated statue outdoors",
+      "ssim": 0.9352900385856628,
+      "metrics": {
+        "im2im": {
+          "ssim": 0.9352900385856628,
+          "psnr": 35.53773498535156,
+          "lpips": 0.14816543459892273
+        }
+      }
+    },
+    {
+      "id": "img_98470",
+      "objects": "Boat on the water beneath clouds",
+      "ssim": 0.9447988271713257,
+      "metrics": {
+        "im2im": {
+          "ssim": 0.9447988271713257,
+          "psnr": 35.92069625854492,
+          "lpips": 0.10067247599363327
+        }
+      }
+    },
+    {
+      "id": "img_79995",
+      "objects": "Field of yellow flowers",
+      "ssim": 0.8898096084594727,
+      "metrics": {
+        "im2im": {
+          "ssim": 0.8898096084594727,
+          "psnr": 30.91632080078125,
+          "lpips": 0.19794678688049316
+        }
+      }
+    },
+    {
+      "id": "img_53425",
+      "objects": "Banana peel on pavement",
+      "ssim": 0.8464575409889221,
+      "metrics": {
+        "im2im": {
+          "ssim": 0.8464575409889221,
+          "psnr": 32.46630859375,
+          "lpips": 0.2849692106246948
+        }
+      }
+    }
+  ],
+  "split": "test",
+  "models": [
+    "im2im"
+  ],
+  "checkpoint_epoch": 49,
+  "checkpoint_sha256": "e6d119b408e2419de73fb489aea10bf76dbda6c0cea5447607bf5cd6069e0ffc",
+  "manifest_sha256": "f20fd920c49160709a7fba779c1defe4dca3f1e1aad3d4d7480759839df5fbfd",
+  "calibration_method": "K-RCPS",
+  "test": {
+    "n_images": 5000,
+    "coverage": 0.9372978782407407,
+    "crossing": 0.0,
+    "mean_interval_width": 0.03364905554470486,
+    "mean_interval_width_in_image_range": 0.03364905554470486,
+    "psnr": 34.58381652832031,
+    "ssim": 0.9235367178916931,
+    "lpips": 0.13723604575395584
+  },
+  "calibration": {
+    "procedure": "K-RCPS with held-out Hoeffding-Bentkus calibration",
+    "target_coverage": 0.9,
+    "confidence": 0.9,
+    "n_optimization_images": 10,
+    "n_images": 2038,
+    "calibration_coverage": 0.9372793212532997,
+    "certificate_passed": true,
+    "hb_pvalue": 4.50131842426971e-09
+  }
+}
