@@ -90,7 +90,8 @@ function dcRenderExample() {
     }
     const figures = cols.map(([kind, label]) => {
       const dropoutBound = method === "mcdropout" && isBound(kind);
-      return `<figure class="${isBound(kind) ? "bound-image" : ""}"><figcaption class="panel-title${dropoutBound ? " dropout-bound" : ""}">${label}</figcaption><canvas class="image" aria-label="${NAMES[method]} ${label}" data-kind="${kind}" data-method="${method}"></canvas></figure>`;
+      const scaleSpan = (kind === "error" || kind === "width") ? '<span class="map-scale"></span>' : "";
+      return `<figure class="${isBound(kind) ? "bound-image" : ""}"><figcaption class="panel-title${dropoutBound ? " dropout-bound" : ""}">${label}${scaleSpan}</figcaption><canvas class="image" aria-label="${NAMES[method]} ${label}" data-kind="${kind}" data-method="${method}"></canvas></figure>`;
     }).join("");
     html += `<div class="method-row">${nameDiv}${figures}</div>`;
   }
@@ -149,8 +150,9 @@ async function dcLoadExample() {
         return r.json();
       })
     );
+    const test = dcData.test;
     document.getElementById("dc-calibration-result").textContent =
-      `Epoch ${dcData.checkpoint_epoch} · Test pixel coverage ${(dcData.test.coverage * 100).toFixed(2)}% across ${dcData.test.n_images.toLocaleString("en-US")} images.`;
+      `Epoch ${dcData.checkpoint_epoch} · Test pixel coverage ${(100 * test.coverage).toFixed(2)}% across ${test.n_images.toLocaleString("en-US")} images.`;
     const params = new URLSearchParams(location.search);
     dcIndex = Math.max(0, Math.min(dcData.scenes.length - 1, Math.trunc(Number(params.get("dc-example"))) || 0));
     const dcSel = document.getElementById("dc-example");
@@ -176,8 +178,8 @@ async function dcLoadExample() {
     const loadOnOpen = () => {
       if (!dcExample && !dcBusy) dcLoadExample();
     };
-    document.querySelector('[data-dataset="diffusercam"]').addEventListener("click", loadOnOpen);
-    if (document.getElementById("dataset-diffusercam").classList.contains("active")) loadOnOpen();
+    document.querySelector('[data-tab="tab-diffusercam"]').addEventListener("click", loadOnOpen);
+    if (document.getElementById("tab-diffusercam").classList.contains("active")) loadOnOpen();
   } catch (e) {
     document.getElementById("dc-status").textContent = "Could not load DiffuserCam results: " + e.message;
     console.error(e);

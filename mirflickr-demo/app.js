@@ -127,10 +127,16 @@ function paint(canvas, kind, model, pctx) {
   else arr = ex.models[model][kind];
   const markCrossing = kind === "width" && model === "qutcc" && $("#signedWidth").checked;
   const qModel = ex.models.qutcc;
+  const isHeatmap = kind === "error" || kind === "width";
+  const mapMax = isHeatmap ? (arr.reduce((m, v) => v > m ? v : m, 0) || 1) : 1;
+  if (isHeatmap) {
+    const scaleEl = canvas.closest("figure")?.querySelector(".map-scale");
+    if (scaleEl) scaleEl.textContent = ` · 0–${mapMax.toFixed(3)}`;
+  }
   for (let i = 0; i < N; i++) {
     let rgb;
-    if (kind === "error" || kind === "width") {
-      rgb = heat(arr[i]);
+    if (isHeatmap) {
+      rgb = heat(arr[i] / mapMax);
       if (markCrossing && (qModel.lower[i] > qModel.upper[i] ||
           qModel.lower[N+i] > qModel.upper[N+i] || qModel.lower[2*N+i] > qModel.upper[2*N+i]))
         rgb = [227,32,201];
@@ -220,7 +226,8 @@ function renderExample() {
     }
     const figures = cols.map(([kind, label]) => {
       const dropoutBound = method === "mcdropout" && isBound(kind);
-      return `<figure class="${isBound(kind) ? "bound-image" : ""}"><figcaption class="panel-title${dropoutBound ? " dropout-bound" : ""}">${label}</figcaption><canvas class="image" aria-label="${NAMES[method]} ${label}" data-kind="${kind}" data-method="${method}"></canvas></figure>`;
+      const scaleSpan = (kind === "error" || kind === "width") ? '<span class="map-scale"></span>' : "";
+      return `<figure class="${isBound(kind) ? "bound-image" : ""}"><figcaption class="panel-title${dropoutBound ? " dropout-bound" : ""}">${label}${scaleSpan}</figcaption><canvas class="image" aria-label="${NAMES[method]} ${label}" data-kind="${kind}" data-method="${method}"></canvas></figure>`;
     }).join("");
     html += `<div class="method-row">${nameDiv}${figures}</div>`;
   }

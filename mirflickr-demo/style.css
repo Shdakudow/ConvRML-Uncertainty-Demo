@@ -15,6 +15,7 @@ footer{color:#8c9fb5;font-size:13px;padding-top:12px}
 
 
 .mean-width { display: block; margin-top: 3px; font-size: 12px; font-weight: 400; color: #c1d2e3; font-variant-numeric: tabular-nums; }
+.map-scale { font-size: 11px; color: #9cb0c5; font-variant-numeric: tabular-nums; }
 .panel-title { display: none; }
 figure:has(.dropout-bound) canvas { outline: 1px solid #718297; outline-offset: -1px; }
 @media (max-width: 900px) {
