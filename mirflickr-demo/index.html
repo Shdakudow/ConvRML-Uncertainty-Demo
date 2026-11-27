@@ -58,9 +58,10 @@
 <section aria-label="Model outputs">
   <div class="guide">
     <div><b>Absolute error</b> = |ground truth − prediction| &nbsp; <b>QUTCC width</b> = <span id="widthFormula">|upper − lower|</span><br>Both maps show the RGB mean.</div>
-    <div class="map-keys">
-      <div class="map-key"><span class="scale-label">error</span><span class="scale-tick">0</span><span class="gradient" aria-hidden="true"></span><span class="scale-tick" id="scaleE">…</span></div>
-      <div class="map-key"><span class="scale-label">width</span><span class="scale-tick">0</span><span class="gradient" aria-hidden="true"></span><span class="scale-tick" id="scaleW">…</span></div>
+    <div class="map-key">
+      <span class="scale-tick">0</span>
+      <span class="gradient" aria-hidden="true"></span>
+      <span class="scale-tick" id="scaleE">…</span>
     </div>
     <label>Blur σ <select id="blur"><option value="0">0 px (no blur)</option><option value="1" selected>1 px</option><option value="1.5">1.5 px</option><option value="2">2 px</option><option value="2.5">2.5 px</option></select></label>
     <button id="showBounds" class="bounds-toggle" aria-controls="matrix" aria-expanded="false">Show bounds</button>
@@ -166,9 +167,10 @@
 <section aria-label="Model outputs">
   <div class="guide">
     <div><b>Absolute error</b> = |ground truth − prediction| &nbsp; <b>Uncertainty</b> = upper − lower<br>Both maps show the RGB mean.</div>
-    <div class="map-keys">
-      <div class="map-key"><span class="scale-label">error</span><span class="scale-tick">0</span><span class="gradient" aria-hidden="true"></span><span class="scale-tick" id="dc-scaleE">…</span></div>
-      <div class="map-key"><span class="scale-label">width</span><span class="scale-tick">0</span><span class="gradient" aria-hidden="true"></span><span class="scale-tick" id="dc-scaleW">…</span></div>
+    <div class="map-key">
+      <span class="scale-tick">0</span>
+      <span class="gradient" aria-hidden="true"></span>
+      <span class="scale-tick" id="dc-scaleE">…</span>
     </div>
     <label>Blur σ <select id="dc-blur"><option value="0">0 px (no blur)</option><option value="1" selected>1 px</option><option value="1.5">1.5 px</option><option value="2">2 px</option><option value="2.5">2.5 px</option></select></label>
     <button id="dc-showBounds" class="bounds-toggle" aria-controls="dc-matrix" aria-expanded="false">Show bounds</button>

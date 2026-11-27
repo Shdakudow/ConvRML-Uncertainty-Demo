@@ -32,27 +32,26 @@ function dcControls(disabled) {
 
 function dcSharedScale() {
   const arrMax = arr => arr.reduce((m, v) => v > m ? v : m, 0);
-  let scaleE = 1e-9, scaleW = 1e-9;
+  let s = 1e-9;
   for (const method of dcData.models) {
     const m = dcExample?.models[method];
     if (!m) continue;
-    scaleE = Math.max(scaleE, arrMax(rawMap(m, "error", dcExample)));
-    scaleW = Math.max(scaleW, arrMax(rawMap(m, "width", dcExample)));
+    s = Math.max(s, arrMax(rawMap(m, "error", dcExample)), arrMax(rawMap(m, "width", dcExample)));
   }
-  return { scaleE, scaleW };
+  return s;
 }
 
 function dcDrawImages() {
   if (!dcExample) return;
-  const { scaleE, scaleW } = dcSharedScale();
+  const scale = dcSharedScale();
   const eEl = document.getElementById("dc-scaleE");
   const wEl = document.getElementById("dc-scaleW");
-  if (eEl) eEl.textContent = scaleE.toFixed(3);
-  if (wEl) wEl.textContent = scaleW.toFixed(3);
+  if (eEl) eEl.textContent = scale.toFixed(3);
+  if (wEl) wEl.textContent = scale.toFixed(3);
   paint(document.getElementById("dc-measurement"), "measurement", null, DC_CTX);
   paint(document.getElementById("dc-target"), "target", null, DC_CTX);
   for (const c of document.querySelectorAll("#dc-matrix canvas"))
-    paint(c, c.dataset.kind, c.dataset.method, DC_CTX, c.dataset.kind === "error" ? scaleE : scaleW);
+    paint(c, c.dataset.kind, c.dataset.method, DC_CTX, scale);
   dcRenderPixel();
 }
 
@@ -183,9 +182,9 @@ async function dcLoadExample() {
     document.getElementById("dc-pixelInspector").ontoggle = dcDrawImages;
     document.getElementById("dc-blur").onchange = () => {
       if (dcExample) {
-        const { scaleE, scaleW } = dcSharedScale();
+        const scale = dcSharedScale();
         for (const c of document.querySelectorAll('#dc-matrix [data-kind="width"], #dc-matrix [data-kind="error"]'))
-          paint(c, c.dataset.kind, c.dataset.method, DC_CTX, c.dataset.kind === "error" ? scaleE : scaleW);
+          paint(c, c.dataset.kind, c.dataset.method, DC_CTX, scale);
       }
     };
     document.getElementById("dc-showBounds").onclick = () => {
