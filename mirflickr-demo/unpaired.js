@@ -87,6 +87,13 @@ function initUnpaired() {
       const id = sequence.value;
       const meta = await manifest(id);
       if (request !== videoRequest) return;
+      // Global max width across all frames and models for a stable scale bar.
+      let globalMax = 0;
+      for (let f = 0; f < meta.names.length; f++)
+        for (let mi = 0; mi < meta.models.length; mi++)
+          globalMax = Math.max(globalMax, meanWidth(meta, f, mi));
+      const vidScaleEl = videos.querySelector("#vid-scale-max");
+      if (vidScaleEl) vidScaleEl.textContent = globalMax.toFixed(4);
       const tiles = [...videos.querySelectorAll("canvas")].map(canvas => {
         const {method,kind} = canvas.dataset;
         const column = method ? ["prediction","width","upper","lower"].indexOf(kind) : 0;

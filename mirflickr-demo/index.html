@@ -109,13 +109,6 @@
       <section class="wgt-input-section">
         <figure><figcaption>Camera input</figcaption><canvas id="wgt-measurement" width="480" height="270"></canvas></figure>
       </section>
-      <div class="wgt-scale-bar">
-        <span class="scale-label">width</span>
-        <span class="scale-tick">0</span>
-        <span class="gradient" aria-hidden="true"></span>
-        <span class="scale-tick">max</span>
-        <span class="scale-label">(pre-rendered 0–1 scale)</span>
-      </div>
       <div class="wgt-controls">
         <label>Blur σ <select id="wgt-blur">
           <option value="0">0 px (no blur)</option>
@@ -139,6 +132,13 @@
         <button id="vid-play" disabled>Play</button>
         <span id="sequence-status" role="status"></span>
         <button id="vid-show-bounds" class="bounds-toggle" aria-expanded="false">Show UB / LB</button>
+      </div>
+      <div class="wgt-scale-bar">
+        <span class="scale-label">width</span>
+        <span class="scale-tick">0</span>
+        <span class="gradient" aria-hidden="true"></span>
+        <span class="scale-tick" id="vid-scale-max">…</span>
+        <span class="scale-label">(global max across all frames)</span>
       </div>
       <div id="vid-layout" class="vid-layout"></div>
       <p class="hint">Playback uses 20 frames per second. Mean width is calculated from the original bounds for the displayed frame.</p>
