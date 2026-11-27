@@ -90,8 +90,7 @@ function dcRenderExample() {
     }
     const figures = cols.map(([kind, label]) => {
       const dropoutBound = method === "mcdropout" && isBound(kind);
-      const scaleSpan = (kind === "error" || kind === "width") ? '<span class="map-scale"></span>' : "";
-      return `<figure class="${isBound(kind) ? "bound-image" : ""}"><figcaption class="panel-title${dropoutBound ? " dropout-bound" : ""}">${label}${scaleSpan}</figcaption><canvas class="image" aria-label="${NAMES[method]} ${label}" data-kind="${kind}" data-method="${method}"></canvas></figure>`;
+      return `<figure class="${isBound(kind) ? "bound-image" : ""}"><figcaption class="panel-title${dropoutBound ? " dropout-bound" : ""}">${label}</figcaption><canvas class="image" aria-label="${NAMES[method]} ${label}" data-kind="${kind}" data-method="${method}"></canvas></figure>`;
     }).join("");
     html += `<div class="method-row">${nameDiv}${figures}</div>`;
   }

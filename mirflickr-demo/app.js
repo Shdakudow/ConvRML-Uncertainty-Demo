@@ -127,16 +127,10 @@ function paint(canvas, kind, model, pctx) {
   else arr = ex.models[model][kind];
   const markCrossing = kind === "width" && model === "qutcc" && $("#signedWidth").checked;
   const qModel = ex.models.qutcc;
-  const isHeatmap = kind === "error" || kind === "width";
-  const mapMax = isHeatmap ? (arr.reduce((m, v) => v > m ? v : m, 0) || 1) : 1;
-  if (isHeatmap) {
-    const scaleEl = canvas.closest("figure")?.querySelector(".map-scale");
-    if (scaleEl) scaleEl.textContent = ` · 0–${mapMax.toFixed(3)}`;
-  }
   for (let i = 0; i < N; i++) {
     let rgb;
-    if (isHeatmap) {
-      rgb = heat(arr[i] / mapMax);
+    if (kind === "error" || kind === "width") {
+      rgb = heat(arr[i]);
       if (markCrossing && (qModel.lower[i] > qModel.upper[i] ||
           qModel.lower[N+i] > qModel.upper[N+i] || qModel.lower[2*N+i] > qModel.upper[2*N+i]))
         rgb = [227,32,201];
@@ -226,8 +220,7 @@ function renderExample() {
     }
     const figures = cols.map(([kind, label]) => {
       const dropoutBound = method === "mcdropout" && isBound(kind);
-      const scaleSpan = (kind === "error" || kind === "width") ? '<span class="map-scale"></span>' : "";
-      return `<figure class="${isBound(kind) ? "bound-image" : ""}"><figcaption class="panel-title${dropoutBound ? " dropout-bound" : ""}">${label}${scaleSpan}</figcaption><canvas class="image" aria-label="${NAMES[method]} ${label}" data-kind="${kind}" data-method="${method}"></canvas></figure>`;
+      return `<figure class="${isBound(kind) ? "bound-image" : ""}"><figcaption class="panel-title${dropoutBound ? " dropout-bound" : ""}">${label}</figcaption><canvas class="image" aria-label="${NAMES[method]} ${label}" data-kind="${kind}" data-method="${method}"></canvas></figure>`;
     }).join("");
     html += `<div class="method-row">${nameDiv}${figures}</div>`;
   }
@@ -357,17 +350,6 @@ function initVideoLayout() {
       history.replaceState(history.state, "", url);
     }
 
-    // Dataset switcher
-    document.querySelectorAll(".dataset-btn").forEach(btn => {
-      btn.onclick = () => {
-        document.querySelectorAll(".dataset-btn").forEach(b => b.classList.remove("active"));
-        document.querySelectorAll(".dataset-panel").forEach(p => p.classList.remove("active"));
-        btn.classList.add("active");
-        document.getElementById("dataset-" + btn.dataset.dataset).classList.add("active");
-        rememberTab("dataset", btn.dataset.dataset);
-      };
-    });
-
     // Page tab switching
     document.querySelectorAll(".page-tab").forEach(btn => {
       btn.onclick = () => {
@@ -407,10 +389,13 @@ function initVideoLayout() {
     initVideoLayout();
     initUnpaired();
     $("#signedWidth").addEventListener("change", () => {
-      $("#widthFormula").textContent = $("#signedWidth").checked ? "upper − lower" : "|upper − lower|";
+      const formula = $("#signedWidth").checked ? "upper − lower" : "|upper − lower|";
+      $("#widthFormula").textContent = formula;
+      const dcFormula = document.getElementById("dc-widthFormula");
+      if (dcFormula) dcFormula.textContent = formula;
       if (example) renderExample();
     });
-    for (const key of ["dataset", "subtab", "tab"]) {
+    for (const key of ["subtab", "tab"]) {
       const saved = params.get(key);
       if (saved) Array.from(document.querySelectorAll(`[data-${key}]`))
         .find(button => button.dataset[key] === saved)?.click();

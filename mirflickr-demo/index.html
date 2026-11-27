@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Reconstruction &amp; Uncertainty</title>
+<title>MIRFLICKR · Reconstruction &amp; Uncertainty</title>
 <link rel="stylesheet" href="style.css?v=dc-im2im-unpaired-1">
 <link rel="stylesheet" href="heatmap-pixels.css">
 <link rel="stylesheet" href="example-browser.css">
@@ -15,29 +15,17 @@
 </head>
 <body>
 <header>
-<p class="eyebrow">LENSLESS IMAGING · RECONSTRUCTION &amp; UNCERTAINTY</p>
-<h1>Reconstruction and uncertainty</h1>
+<p class="eyebrow">MIRFLICKR · LENSLESS IMAGING</p>
+<h1>MIRFLICKR reconstruction and uncertainty</h1>
+
 </header>
 <main>
-
-<nav class="dataset-nav" aria-label="Dataset">
-  <div class="dataset-entry">
-    <button class="dataset-btn active" data-dataset="mirflickr">MIRFLICKR</button>
-    <a class="paper-link" href="https://waller-lab.github.io/LenslessLearning/dataset.html" target="_blank" rel="noopener">dataset ↗</a>
-  </div>
-  <div class="dataset-entry">
-    <button class="dataset-btn" data-dataset="diffusercam">Parallel Lensless Dataset</button>
-    <a class="paper-link" href="https://lakabuli.github.io/ConvRML/" target="_blank" rel="noopener">paper ↗</a>
-  </div>
-</nav>
-
-<label class="width-mode"><input id="signedWidth" type="checkbox" role="switch" autocomplete="off"> Use signed QUTCC width (UB − LB)</label>
-
-<div id="dataset-mirflickr" class="dataset-panel active">
 <nav class="page-tabs" role="tablist">
   <button class="page-tab active" role="tab" data-tab="tab-with-gt">With ground truth</button>
   <button class="page-tab" role="tab" data-tab="tab-without-gt">W/o ground truth</button>
+  <button class="page-tab" role="tab" data-tab="tab-diffusercam">DiffuserCam</button>
 </nav>
+<label class="width-mode"><input id="signedWidth" type="checkbox" role="switch" autocomplete="off"> Use signed QUTCC width (UB − LB)</label>
 
 <div id="tab-with-gt" class="tab-panel active">
 <p>Four held-out MIRFLICKR scenes with the lowest Im2im reconstruction SSIM among 32 randomly sampled test images (seed 777).</p>
@@ -59,7 +47,7 @@
     <div><b>Absolute error</b> = |ground truth − prediction| &nbsp; <b>QUTCC width</b> = <span id="widthFormula">|upper − lower|</span><br>Both maps show the RGB mean.</div>
     <div class="map-key">
       <span class="gradient" aria-hidden="true"></span>
-      <span>0 → max (per map)</span>
+      <span>0 → 1 (error and width)</span>
     </div>
     <label>Blur σ <select id="blur"><option value="0">0 px (no blur)</option><option value="1" selected>1 px</option><option value="1.5">1.5 px</option><option value="2">2 px</option><option value="2.5">2.5 px</option></select></label>
     <button id="showBounds" class="bounds-toggle" aria-controls="matrix" aria-expanded="false">Show bounds</button>
@@ -136,9 +124,8 @@
     </div>
   </div>
 </div><!-- #tab-without-gt -->
-</div><!-- #dataset-mirflickr -->
 
-<div id="dataset-diffusercam" class="dataset-panel">
+<div id="tab-diffusercam" class="tab-panel">
 <p>Held-out DiffuserCam scenes reconstructed by DiffuserCam-trained Im2im. Bounds use K-RCPS calibration. <span id="dc-calibration-result"></span></p>
 <nav class="controls">
   <label>Objects <select id="dc-example"></select></label>
@@ -158,7 +145,7 @@
     <div><b>Absolute error</b> = |ground truth − prediction| &nbsp; <b>Uncertainty</b> = upper − lower<br>Both maps show the RGB mean.</div>
     <div class="map-key">
       <span class="gradient" aria-hidden="true"></span>
-      <span>0 → max (per map)</span>
+      <span>0 → 1 (error and width)</span>
     </div>
     <label>Blur σ <select id="dc-blur"><option value="0">0 px (no blur)</option><option value="1" selected>1 px</option><option value="1.5">1.5 px</option><option value="2">2 px</option><option value="2.5">2.5 px</option></select></label>
     <button id="dc-showBounds" class="bounds-toggle" aria-controls="dc-matrix" aria-expanded="false">Show bounds</button>
@@ -188,9 +175,8 @@
     </div>
   </details>
 </section>
-</div><!-- #dataset-diffusercam -->
-
+</div><!-- #tab-diffusercam -->
 </main>
-<footer>MIRFLICKR · DiffuserCam · QUTCC / Im2im / Deep ensemble / MC dropout</footer>
+<footer>MIRFLICKR · QUTCC / Im2im / Deep ensemble / MC dropout</footer>
 </body>
 </html>
