@@ -32,24 +32,27 @@ function dcControls(disabled) {
 
 function dcSharedScale() {
   const arrMax = arr => arr.reduce((m, v) => v > m ? v : m, 0);
-  let s = 1e-9;
+  let scaleE = 1e-9, scaleW = 1e-9;
   for (const method of dcData.models) {
     const m = dcExample?.models[method];
     if (!m) continue;
-    s = Math.max(s, arrMax(rawMap(m, "error", dcExample)), arrMax(rawMap(m, "width", dcExample)));
+    scaleE = Math.max(scaleE, arrMax(rawMap(m, "error", dcExample)));
+    scaleW = Math.max(scaleW, arrMax(rawMap(m, "width", dcExample)));
   }
-  return s;
+  return { scaleE, scaleW };
 }
 
 function dcDrawImages() {
   if (!dcExample) return;
-  const scale = dcSharedScale();
-  const el = document.getElementById("dc-scaleMax");
-  if (el) el.textContent = scale.toFixed(3);
+  const { scaleE, scaleW } = dcSharedScale();
+  const eEl = document.getElementById("dc-scaleE");
+  const wEl = document.getElementById("dc-scaleW");
+  if (eEl) eEl.textContent = scaleE.toFixed(3);
+  if (wEl) wEl.textContent = scaleW.toFixed(3);
   paint(document.getElementById("dc-measurement"), "measurement", null, DC_CTX);
   paint(document.getElementById("dc-target"), "target", null, DC_CTX);
   for (const c of document.querySelectorAll("#dc-matrix canvas"))
-    paint(c, c.dataset.kind, c.dataset.method, DC_CTX, scale);
+    paint(c, c.dataset.kind, c.dataset.method, DC_CTX, c.dataset.kind === "error" ? scaleE : scaleW);
   dcRenderPixel();
 }
 
@@ -180,9 +183,9 @@ async function dcLoadExample() {
     document.getElementById("dc-pixelInspector").ontoggle = dcDrawImages;
     document.getElementById("dc-blur").onchange = () => {
       if (dcExample) {
-        const scale = dcSharedScale();
+        const { scaleE, scaleW } = dcSharedScale();
         for (const c of document.querySelectorAll('#dc-matrix [data-kind="width"], #dc-matrix [data-kind="error"]'))
-          paint(c, c.dataset.kind, c.dataset.method, DC_CTX, scale);
+          paint(c, c.dataset.kind, c.dataset.method, DC_CTX, c.dataset.kind === "error" ? scaleE : scaleW);
       }
     };
     document.getElementById("dc-showBounds").onclick = () => {

@@ -88,5 +88,7 @@ figure:has(.dropout-bound) canvas { outline: 1px solid #718297; outline-offset: 
 }
 
 .width-mode { display: inline-flex; align-items: center; gap: .45rem; cursor: pointer; }
-.scale-tick { font-size: 11px; color: #c1d2e3; font-variant-numeric: tabular-nums; min-width: 2.5em; }
-.scale-tick:last-child { text-align: left; }
+.map-keys { display: flex; flex-direction: column; gap: 4px; }
+.scale-tick { font-size: 11px; color: #c1d2e3; font-variant-numeric: tabular-nums; min-width: 2.8em; }
+.scale-label { font-size: 11px; color: #9cb0c5; min-width: 3em; }
+.wgt-scale-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }

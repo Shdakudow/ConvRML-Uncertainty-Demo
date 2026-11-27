@@ -184,24 +184,27 @@ function renderPixel() {
 
 function mirflickrScale() {
   const arrMax = arr => arr.reduce((m, v) => v > m ? v : m, 0);
-  let s = 1e-9;
+  let scaleE = 1e-9, scaleW = 1e-9;
   for (const method of METHODS) {
     const m = example?.models[method];
     if (!m) continue;
-    s = Math.max(s, arrMax(rawMap(m, "error")), arrMax(rawMap(m, "width")));
+    scaleE = Math.max(scaleE, arrMax(rawMap(m, "error")));
+    scaleW = Math.max(scaleW, arrMax(rawMap(m, "width")));
   }
-  return s;
+  return { scaleE, scaleW };
 }
 
 function drawImages() {
   if (!example) return;
-  const scale = mirflickrScale();
-  const el = document.getElementById("scaleMax");
-  if (el) el.textContent = scale.toFixed(3);
+  const { scaleE, scaleW } = mirflickrScale();
+  const eEl = document.getElementById("scaleE");
+  const wEl = document.getElementById("scaleW");
+  if (eEl) eEl.textContent = scaleE.toFixed(3);
+  if (wEl) wEl.textContent = scaleW.toFixed(3);
   paint($("#measurement"), "measurement");
   paint($("#target"), "target");
   for (const c of document.querySelectorAll("#matrix canvas"))
-    paint(c, c.dataset.kind, c.dataset.method, null, scale);
+    paint(c, c.dataset.kind, c.dataset.method, null, c.dataset.kind === "error" ? scaleE : scaleW);
   renderPixel();
 }
 
@@ -353,9 +356,9 @@ function initVideoLayout() {
     $("#pixelInspector").ontoggle = drawImages;
     $("#blur").onchange = () => {
       if (example) {
-        const scale = mirflickrScale();
+        const { scaleE, scaleW } = mirflickrScale();
         for (const canvas of document.querySelectorAll('#matrix [data-kind="width"], #matrix [data-kind="error"]'))
-          paint(canvas, canvas.dataset.kind, canvas.dataset.method, null, scale);
+          paint(canvas, canvas.dataset.kind, canvas.dataset.method, null, canvas.dataset.kind === "error" ? scaleE : scaleW);
       }
     };
     $("#showBounds").onclick = () => { const on = $("#matrix").classList.toggle("show-bounds"); $("#showBounds").setAttribute("aria-expanded", on); $("#showBounds").textContent = on ? "Hide bounds" : "Show bounds"; };
