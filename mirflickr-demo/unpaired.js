@@ -15,7 +15,21 @@ function initUnpaired() {
   const pictureStatus = pictures.querySelector("[role=status]");
   const videoStatus = videos.querySelector("[role=status]");
   const signed = document.querySelector("#signedWidth");
-  let redrawVideo, stills, player, pictureRequest = 0, videoRequest = 0;
+  const excludeEnsemble = document.querySelector("#excludeEnsemble");
+  let redrawVideo, stills, player, currentVideoMeta = null, pictureRequest = 0, videoRequest = 0;
+
+  function updateVideoScale() {
+    if (!currentVideoMeta) return;
+    const meta = currentVideoMeta;
+    let globalMax = 0;
+    for (let f = 0; f < meta.names.length; f++)
+      for (let mi = 0; mi < meta.models.length; mi++) {
+        if (excludeEnsemble?.checked && meta.models[mi] === "deepensemble") continue;
+        globalMax = Math.max(globalMax, meanWidth(meta, f, mi));
+      }
+    const el = videos.querySelector("#vid-scale-max");
+    if (el) el.textContent = globalMax.toFixed(4);
+  }
 
   async function manifest(name) {
     const response = await fetch(base + "/" + name + ".json?v=q-width-1");
@@ -87,13 +101,8 @@ function initUnpaired() {
       const id = sequence.value;
       const meta = await manifest(id);
       if (request !== videoRequest) return;
-      // Global max width across all frames and models for a stable scale bar.
-      let globalMax = 0;
-      for (let f = 0; f < meta.names.length; f++)
-        for (let mi = 0; mi < meta.models.length; mi++)
-          globalMax = Math.max(globalMax, meanWidth(meta, f, mi));
-      const vidScaleEl = videos.querySelector("#vid-scale-max");
-      if (vidScaleEl) vidScaleEl.textContent = globalMax.toFixed(4);
+      currentVideoMeta = meta;
+      updateVideoScale();
       const tiles = [...videos.querySelectorAll("canvas")].map(canvas => {
         const {method,kind} = canvas.dataset;
         const column = method ? ["prediction","width","upper","lower"].indexOf(kind) : 0;
@@ -174,6 +183,9 @@ function initUnpaired() {
   signed.addEventListener("change", () => {
     if (stills || pictureRequest) showPicture();
     redrawVideo?.();
+  });
+  excludeEnsemble?.addEventListener("change", () => {
+    updateVideoScale();
   });
   capture.onchange = sigma.onchange = showPicture;
   videos.querySelector("#vid-show-bounds").addEventListener("click", () => redrawVideo?.());

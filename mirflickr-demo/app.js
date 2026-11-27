@@ -184,8 +184,10 @@ function renderPixel() {
 
 function mirflickrScale() {
   const arrMax = arr => arr.reduce((m, v) => v > m ? v : m, 0);
+  const exclude = document.getElementById("excludeEnsemble")?.checked;
   let s = 1e-9;
   for (const method of METHODS) {
+    if (exclude && method === "deepensemble") continue;
     const m = example?.models[method];
     if (!m) continue;
     s = Math.max(s, arrMax(rawMap(m, "error")), arrMax(rawMap(m, "width")));
@@ -417,6 +419,9 @@ function initVideoLayout() {
     initWGTPictures();
     initVideoLayout();
     initUnpaired();
+    document.getElementById("excludeEnsemble").addEventListener("change", () => {
+      if (example) drawImages();
+    });
     $("#signedWidth").addEventListener("change", () => {
       const formula = $("#signedWidth").checked ? "upper − lower" : "|upper − lower|";
       $("#widthFormula").textContent = formula;

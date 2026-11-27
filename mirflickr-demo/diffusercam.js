@@ -32,8 +32,10 @@ function dcControls(disabled) {
 
 function dcSharedScale() {
   const arrMax = arr => arr.reduce((m, v) => v > m ? v : m, 0);
+  const exclude = document.getElementById("excludeEnsemble")?.checked;
   let s = 1e-9;
   for (const method of dcData.models) {
+    if (exclude && method === "deepensemble") continue;
     const m = dcExample?.models[method];
     if (!m) continue;
     s = Math.max(s, arrMax(rawMap(m, "error", dcExample)), arrMax(rawMap(m, "width", dcExample)));
@@ -187,6 +189,9 @@ async function dcLoadExample() {
           paint(c, c.dataset.kind, c.dataset.method, DC_CTX, scale);
       }
     };
+    document.getElementById("excludeEnsemble")?.addEventListener("change", () => {
+      if (dcExample) dcDrawImages();
+    });
     document.getElementById("dc-showBounds").onclick = () => {
       const on = document.getElementById("dc-matrix").classList.toggle("show-bounds");
       document.getElementById("dc-showBounds").setAttribute("aria-expanded", on);
