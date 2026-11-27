@@ -88,3 +88,5 @@ figure:has(.dropout-bound) canvas { outline: 1px solid #718297; outline-offset: 
 }
 
 .width-mode { display: inline-flex; align-items: center; gap: .45rem; cursor: pointer; }
+#scaleMax, #dc-scaleMax { font-variant-numeric: tabular-nums; }
+.scale-label { color: #9cb0c5; font-size: 11px; }

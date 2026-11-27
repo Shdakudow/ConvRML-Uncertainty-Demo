@@ -30,12 +30,26 @@ function dcControls(disabled) {
     document.getElementById(id).disabled = disabled;
 }
 
+function dcSharedScale() {
+  const arrMax = arr => arr.reduce((m, v) => v > m ? v : m, 0);
+  let s = 1e-9;
+  for (const method of dcData.models) {
+    const m = dcExample?.models[method];
+    if (!m) continue;
+    s = Math.max(s, arrMax(rawMap(m, "error", dcExample)), arrMax(rawMap(m, "width", dcExample)));
+  }
+  return s;
+}
+
 function dcDrawImages() {
   if (!dcExample) return;
+  const scale = dcSharedScale();
+  const el = document.getElementById("dc-scaleMax");
+  if (el) el.textContent = scale.toFixed(3);
   paint(document.getElementById("dc-measurement"), "measurement", null, DC_CTX);
   paint(document.getElementById("dc-target"), "target", null, DC_CTX);
   for (const c of document.querySelectorAll("#dc-matrix canvas"))
-    paint(c, c.dataset.kind, c.dataset.method, DC_CTX);
+    paint(c, c.dataset.kind, c.dataset.method, DC_CTX, scale);
   dcRenderPixel();
 }
 
@@ -165,9 +179,11 @@ async function dcLoadExample() {
     document.getElementById("dc-channel").onchange = dcRenderPixel;
     document.getElementById("dc-pixelInspector").ontoggle = dcDrawImages;
     document.getElementById("dc-blur").onchange = () => {
-      if (dcExample)
+      if (dcExample) {
+        const scale = dcSharedScale();
         for (const c of document.querySelectorAll('#dc-matrix [data-kind="width"], #dc-matrix [data-kind="error"]'))
-          paint(c, c.dataset.kind, c.dataset.method, DC_CTX);
+          paint(c, c.dataset.kind, c.dataset.method, DC_CTX, scale);
+      }
     };
     document.getElementById("dc-showBounds").onclick = () => {
       const on = document.getElementById("dc-matrix").classList.toggle("show-bounds");

@@ -111,7 +111,7 @@ function displayMap(model, kind, ex, blurEl) {
   return model.smoothed[sigma][widthKey(model, kind, ex)] ??= smoothMap(raw, sigma, ex.width, ex.height);
 }
 
-function paint(canvas, kind, model, pctx) {
+function paint(canvas, kind, model, pctx, scale = 1) {
   const ex = pctx?.ex ?? example;
   const blurEl = pctx?.blurEl ?? null;
   const inspectorEl = pctx?.inspectorEl ?? $("#pixelInspector");
@@ -130,7 +130,7 @@ function paint(canvas, kind, model, pctx) {
   for (let i = 0; i < N; i++) {
     let rgb;
     if (kind === "error" || kind === "width") {
-      rgb = heat(arr[i]);
+      rgb = heat(arr[i] / scale);
       if (markCrossing && (qModel.lower[i] > qModel.upper[i] ||
           qModel.lower[N+i] > qModel.upper[N+i] || qModel.lower[2*N+i] > qModel.upper[2*N+i]))
         rgb = [227,32,201];
@@ -182,12 +182,26 @@ function renderPixel() {
   }).join("");
 }
 
+function mirflickrScale() {
+  const arrMax = arr => arr.reduce((m, v) => v > m ? v : m, 0);
+  let s = 1e-9;
+  for (const method of METHODS) {
+    const m = example?.models[method];
+    if (!m) continue;
+    s = Math.max(s, arrMax(rawMap(m, "error")), arrMax(rawMap(m, "width")));
+  }
+  return s;
+}
+
 function drawImages() {
   if (!example) return;
+  const scale = mirflickrScale();
+  const el = document.getElementById("scaleMax");
+  if (el) el.textContent = scale.toFixed(3);
   paint($("#measurement"), "measurement");
   paint($("#target"), "target");
   for (const c of document.querySelectorAll("#matrix canvas"))
-    paint(c, c.dataset.kind, c.dataset.method);
+    paint(c, c.dataset.kind, c.dataset.method, null, scale);
   renderPixel();
 }
 
@@ -338,9 +352,11 @@ function initVideoLayout() {
     $("#channel").onchange = renderPixel;
     $("#pixelInspector").ontoggle = drawImages;
     $("#blur").onchange = () => {
-      if (example)
+      if (example) {
+        const scale = mirflickrScale();
         for (const canvas of document.querySelectorAll('#matrix [data-kind="width"], #matrix [data-kind="error"]'))
-          paint(canvas, canvas.dataset.kind, canvas.dataset.method);
+          paint(canvas, canvas.dataset.kind, canvas.dataset.method, null, scale);
+      }
     };
     $("#showBounds").onclick = () => { const on = $("#matrix").classList.toggle("show-bounds"); $("#showBounds").setAttribute("aria-expanded", on); $("#showBounds").textContent = on ? "Hide bounds" : "Show bounds"; };
 
