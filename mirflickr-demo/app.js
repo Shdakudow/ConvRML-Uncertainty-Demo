@@ -76,6 +76,40 @@ function smoothMap(values, sigma, width, height) {
   return result;
 }
 
+function spearmanCorr(a, b) {
+  const n = a.length;
+  const rank = arr => {
+    const idx = Array.from({length: n}, (_, i) => i).sort((x, y) => arr[x] - arr[y]);
+    const r = new Float32Array(n);
+    for (let i = 0; i < n; i++) r[idx[i]] = i;
+    return r;
+  };
+  const rA = rank(a), rB = rank(b), m = (n - 1) / 2;
+  let num = 0, dA = 0, dB = 0;
+  for (let i = 0; i < n; i++) {
+    const ea = rA[i] - m, eb = rB[i] - m;
+    num += ea * eb; dA += ea * ea; dB += eb * eb;
+  }
+  return num / Math.sqrt(dA * dB);
+}
+
+function computeAUSE(error, width) {
+  const n = error.length;
+  const idxU = Array.from({length: n}, (_, i) => i).sort((a, b) => width[b] - width[a]);
+  const idxO = Array.from({length: n}, (_, i) => i).sort((a, b) => error[b] - error[a]);
+  const steps = 50;
+  let sArea = 0, oArea = 0, sPrev = 0, oPrev = 0;
+  for (let s = 0; s <= steps; s++) {
+    const keep = Math.max(1, Math.floor(n * (1 - s / steps)));
+    let sSum = 0, oSum = 0;
+    for (let i = n - keep; i < n; i++) { sSum += error[idxU[i]]; oSum += error[idxO[i]]; }
+    const sMean = sSum / keep, oMean = oSum / keep;
+    if (s > 0) { sArea += (sPrev + sMean) / 2; oArea += (oPrev + oMean) / 2; }
+    sPrev = sMean; oPrev = oMean;
+  }
+  return (sArea - oArea) / steps;
+}
+
 function widthKey(model, kind, ex) {
   ex ??= example;
   return kind === "width" && model === ex.models.qutcc && !$("#signedWidth").checked
@@ -227,9 +261,13 @@ function renderExample() {
       const mean = widths.reduce((sum, width) => sum + width, 0) / widths.length;
       widthLabel = `<small class="mean-width" title="Mean width across all pixels and RGB channels">Mean width ${mean.toFixed(4)}</small>`;
       const { ssim, psnr, lpips } = data.scenes[index].metrics[method];
-      widthLabel += `<small class="mean-width">SSIM ${ssim.toFixed(4)}</small>
-        <small class="mean-width">PSNR ${psnr.toFixed(2)} dB</small>
-        <small class="mean-width">LPIPS ${lpips.toFixed(4)}</small>`;
+      m._spearman ??= spearmanCorr(rawMap(m, "error"), rawMap(m, "absoluteWidth"));
+      m._ause ??= computeAUSE(rawMap(m, "error"), rawMap(m, "absoluteWidth"));
+      widthLabel += `<small class="mean-width">SSIM ${ssim.toFixed(4)}</small>` +
+        `<small class="mean-width">PSNR ${psnr.toFixed(2)} dB</small>` +
+        `<small class="mean-width">LPIPS ${lpips.toFixed(4)}</small>` +
+        `<small class="mean-width metric-gap">Spearman ${m._spearman.toFixed(4)}</small>` +
+        `<small class="mean-width">AUSE ${m._ause.toFixed(4)}</small>`;
     }
     const nameDiv = `<div class="method-label" style="color:${COLORS[method]}">${NAMES[method]}${widthLabel}</div>`;
     if (!m) {

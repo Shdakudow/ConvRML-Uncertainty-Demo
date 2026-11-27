@@ -100,6 +100,10 @@ function dcRenderExample() {
         `<small class="mean-width">SSIM ${metrics.ssim.toFixed(4)}</small>` +
         `<small class="mean-width">PSNR ${metrics.psnr.toFixed(2)} dB</small>` +
         `<small class="mean-width">LPIPS ${metrics.lpips.toFixed(4)}</small>`;
+      m._spearman ??= spearmanCorr(rawMap(m, "error", dcExample), rawMap(m, "absoluteWidth", dcExample));
+      m._ause ??= computeAUSE(rawMap(m, "error", dcExample), rawMap(m, "absoluteWidth", dcExample));
+      widthLabel += `<small class="mean-width metric-gap">Spearman ${m._spearman.toFixed(4)}</small>` +
+        `<small class="mean-width">AUSE ${m._ause.toFixed(4)}</small>`;
     }
     const nameDiv = `<div class="method-label" style="color:${COLORS[method]}">${NAMES[method]}${widthLabel}</div>`;
     if (!m) {
