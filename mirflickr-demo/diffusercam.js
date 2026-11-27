@@ -177,8 +177,8 @@ async function dcLoadExample() {
     const loadOnOpen = () => {
       if (!dcExample && !dcBusy) dcLoadExample();
     };
-    document.querySelector('[data-tab="tab-diffusercam"]').addEventListener("click", loadOnOpen);
-    if (document.getElementById("tab-diffusercam").classList.contains("active")) loadOnOpen();
+    document.querySelector('[data-dataset="pld"]').addEventListener("click", loadOnOpen);
+    if (document.getElementById("dataset-pld").classList.contains("active")) loadOnOpen();
   } catch (e) {
     document.getElementById("dc-status").textContent = "Could not load DiffuserCam results: " + e.message;
     console.error(e);

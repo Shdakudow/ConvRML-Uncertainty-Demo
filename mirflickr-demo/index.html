@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MIRFLICKR · Reconstruction &amp; Uncertainty</title>
+<title>Reconstruction &amp; Uncertainty</title>
 <link rel="stylesheet" href="style.css?v=dc-im2im-unpaired-1">
 <link rel="stylesheet" href="heatmap-pixels.css">
 <link rel="stylesheet" href="example-browser.css">
@@ -15,21 +15,30 @@
 </head>
 <body>
 <header>
-<p class="eyebrow">MIRFLICKR · LENSLESS IMAGING</p>
-<h1>MIRFLICKR reconstruction and uncertainty</h1>
-<p class="header-links">
-  <a href="https://waller-lab.github.io/LenslessLearning/dataset.html" target="_blank" rel="noopener">MIRFLICKR dataset ↗</a>
-  &nbsp;·&nbsp;
-  <a href="https://lakabuli.github.io/ConvRML/" target="_blank" rel="noopener">Parallel Lensless Dataset paper ↗</a>
-</p>
+<p class="eyebrow">LENSLESS IMAGING · RECONSTRUCTION &amp; UNCERTAINTY</p>
+<h1>Reconstruction and uncertainty</h1>
 </header>
 <main>
+
+<nav class="dataset-tabs" role="tablist" aria-label="Dataset">
+  <div class="dataset-tab-item">
+    <button class="dataset-tab active" role="tab" data-dataset="mirflickr">MIRFLICKR</button>
+    <a class="dataset-link" href="https://waller-lab.github.io/LenslessLearning/dataset.html" target="_blank" rel="noopener">dataset ↗</a>
+  </div>
+  <div class="dataset-tab-item">
+    <button class="dataset-tab" role="tab" data-dataset="pld">Parallel Lensless Dataset</button>
+    <a class="dataset-link" href="https://lakabuli.github.io/ConvRML/" target="_blank" rel="noopener">paper ↗</a>
+  </div>
+</nav>
+
+<label class="width-mode"><input id="signedWidth" type="checkbox" role="switch" autocomplete="off"> Use signed QUTCC width (UB − LB)</label>
+
+<div id="dataset-mirflickr" class="dataset-panel active">
+<p class="split-info">Train 17,999 · Val 2,000 · Test 2,000 · Calibration 3,000</p>
 <nav class="page-tabs" role="tablist">
   <button class="page-tab active" role="tab" data-tab="tab-with-gt">With ground truth</button>
   <button class="page-tab" role="tab" data-tab="tab-without-gt">W/o ground truth</button>
-  <button class="page-tab" role="tab" data-tab="tab-diffusercam">Parallel Lensless Dataset</button>
 </nav>
-<label class="width-mode"><input id="signedWidth" type="checkbox" role="switch" autocomplete="off"> Use signed QUTCC width (UB − LB)</label>
 
 <div id="tab-with-gt" class="tab-panel active">
 <p>Four held-out MIRFLICKR scenes with the lowest Im2im reconstruction SSIM among 32 randomly sampled test images (seed 777).</p>
@@ -129,8 +138,11 @@
   </div>
 </div><!-- #tab-without-gt -->
 
-<div id="tab-diffusercam" class="tab-panel">
-<p>Held-out DiffuserCam scenes reconstructed by DiffuserCam-trained Im2im. Bounds use K-RCPS calibration. <span id="dc-calibration-result"></span></p>
+</div><!-- #dataset-mirflickr -->
+
+<div id="dataset-pld" class="dataset-panel">
+<p class="split-info">Train 60,000 · Val 5,000 · Test 5,000 · Calibration 2,048</p>
+<p>Held-out scenes reconstructed by PLD-trained Im2im. Bounds use K-RCPS calibration. <span id="dc-calibration-result"></span></p>
 <nav class="controls">
   <label>Objects <select id="dc-example"></select></label>
   <button id="dc-previous" aria-label="Previous">←</button>
@@ -179,8 +191,9 @@
     </div>
   </details>
 </section>
-</div><!-- #tab-diffusercam -->
+</div><!-- #dataset-pld -->
+
 </main>
-<footer>MIRFLICKR · QUTCC / Im2im / Deep ensemble / MC dropout</footer>
+<footer>MIRFLICKR · Parallel Lensless Dataset · QUTCC / Im2im / Deep ensemble / MC dropout</footer>
 </body>
 </html>
