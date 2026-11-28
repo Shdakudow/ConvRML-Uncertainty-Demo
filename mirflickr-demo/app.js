@@ -97,7 +97,7 @@ function computeAUSE(error, width) {
   const n = error.length;
   const idxU = Array.from({length: n}, (_, i) => i).sort((a, b) => width[b] - width[a]);
   const idxO = Array.from({length: n}, (_, i) => i).sort((a, b) => error[b] - error[a]);
-  const steps = 50;
+  const steps = 100;
   let sArea = 0, oArea = 0, sPrev = 0, oPrev = 0;
   for (let s = 0; s <= steps; s++) {
     const keep = Math.max(1, Math.floor(n * (1 - s / steps)));
